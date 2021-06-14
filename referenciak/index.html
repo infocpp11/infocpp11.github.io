@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Referenciák</title>
+<meta property="og:title" content="TEST InfoC++11 :: Referenciák">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Röviden a referenciákról és a pointerekkel való kapcsolatukról.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Röviden a referenciákról és a pointerekkel való kapcsolatukról.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Referenciák">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Referenciák</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Röviden a referenciákról és a pointerekkel való kapcsolatukról.</p>
+</div>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+<p>Röviden a referenciákról és a pointerekkel való kapcsolatukról.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Bevezetés</a>
+                      <li><a href="index.html#2" class="">Referenciák</a>
+                      <li><a href="index.html#3" class="">A referenciák használata</a>
+                      <li><a href="index.html#4" class="">Referenciák vs. pointerek</a>
+                      <li><a href="index.html#5" class="">Néhány gyakorlati tudnivaló</a>
+                      <li><a href="index.html#6" class="">A referenciák és az öröklés</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Bevezetés">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Bevezetés<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A referenciákat a következő példával szokták bevezetni: írjunk egy függvényt, amelyik két szám szorzatát és összegét adja vissza. Ezt nyilván sima visszatérési értékkel nem tudjuk megtenni, mert abból csak egy van, ezért C-ben a következőt írjuk:</p>
+<pre   ><code class="language-c">void szamol(int egyik, int masik, int *osszeg, int *szorzat) {
+  *osszeg = egyik+masik;
+  *szorzat = egyik*masik;
+}</code></pre>
+<p>A C nyelv csak az <em>érték szerinti</em> paraméterátadást ismeri, ami azt jelenti, hogy a függvény hívásakor a paraméterben megadott kifejezés kiértékelődik, és a kiértékelődés eredményét kapja csak meg a függvény. A következő <code>szamol()</code> függvény ezért a két hívás között nem lát különbséget:
+<pre   ><code class="language-c">int o, sz;
+int a = 5, b = 9;
+szamol(5, 9, &amp;o, &amp;sz);
+szamol(a, b, &amp;o, &amp;sz);</code></pre>
+<p>Akár egy számot, akár egy változót kap a paraméterben, mindkettőnek csak az értékét fogja látni. Ezért kényszerültünk rá, hogy a második két paraméterben ne <code>o</code>-t és <code>sz</code>-et adjuk át neki, hanem <code>o</code>-ra mutató pointert és <code>sz</code>-re mutató pointert; különben csak <code>o</code>-nak és <code>sz</code>-nek az értékét látná, a változókat, ahova írnia kell, egyáltalán nem.</p>
+<p>A paraméterként kapott változók a függvény lokális változóinak számítanak, és azokat akár meg is változtathatja. A fenti példában a <code>szamol()</code> függvény az <code>egyik</code> és a <code>masik</code> változót megváltoztathatná, de arról a hívó nem értesülne. Ami egyébként logikus is, hiszen az 5-ös és a 9-es literális konstans nem változhat meg. A két pointert is átállíthatná máshova, attól pedig az <code>o</code> és az <code>sz</code> változó helye a memóriában értelemszerűen nem változna meg. Ezt gyakran használják is. Például egy sztring hosszát megszámoló függvény ilyen is lehet:</p>
+<pre   ><code class="language-c">int strlen(const char *sztring) {
+    int hossz = 0;
+    while (*sztring != '\0') {
+        sztring++;
+        hossz++;
+    }
+    return hossz;
+}</code></pre>
+<p>Amíg meg nem találjuk a sztring lezáró nulláját, a hosszhoz hozzáadunk egyet; illetve a pointert átállítjuk a következő karakterre. A <code>sztring</code> nevű pointer a függvény lokális változója (a paraméterként kapott sztring memóriacímének másolata); a függvény azt csinál vele, amit akar. (A <code>const</code> itt nem a pointerre, hanem az általa mutatott karakterekre vonatkozik.)
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Referenciák">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Referenciák<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Innen megyünk tovább a referenciákhoz, mondván, hogy kényelmetlen minden függvényhívásnál kitenni a címképző operátort, és a számol függvény belsejében is kényelmetlen a sok csillagozás:</p>
+<pre   ><code class="language-c">void szamol(int egyik, int masik, int&amp; osszeg, int&amp; szorzat) {
+    osszeg = egyik+masik;
+    szorzat = egyik*masik;
+}
+ 
+int o, sz;
+szamol(5, 9, o, sz);</code></pre>
+<p>A C++ bevezette az érték szerinti paraméterátadás mellé a <em>cím szerinti paraméterátadást</em>. Ezt referenciákkal oldja meg, amelyeket a <code>&amp;</code> karakter jelöl. A függvényhívás helyén látja a fordító, hogy a függvény nem <code>o</code> és <code>sz</code> változóknak a tartalmát szeretné látni, hanem magukat a változókat, ezért automatikusan képezi a címüket. A függvény belsejében pedig látja, hogy nem lokális integerekről van szó, hanem memóriahelyeket kapott, ahova az összeadás és a szorzás eredményét végül írni kell.</p>
+<p>Ha arra gondolunk, hogy a referencia háttérben egy pointerként is lehet megvalósítva, akkor az összes kérdésre válaszolni tudunk egyből, amelyek arra irányulnak, hogy mit szabad referenciákkal csinálni és mit nem. Nem térhet vissza például egy függvény a lokális változójának a referenciájával, ahogy nem térhetett vissza a lokális változójára mutató pointerrel sem, mivel a változó megszűnik a függvényből visszatéréskor. Ennek ellenére jobb nem úgy gondolni a referenciákra, mint memóriacímekre. A referencia nem memóriacím, hanem <em>maga a változó</em>. A fenti <code>szamol()</code> függvény megkapja paraméterben két változónak a másolatát, amelyeket össze kell adni és szorozni, és kap két másik változót, ahova az eredményeket kell tennie. Az első helyen jó az érték szerinti átadás, mivel csak a számok érdeklik a függvényt, az nem, hogy azok honnan lettek. A második helyen pedig ténylegesen, <em>pontosan azokat a változókat</em> kellett megadni, ahova az eredményt kell írnia. A referencia ezért maga a változó, azzal mindenben teljesen egyenértékű. Mintha az eredeti változónak lenne egy másik neve. Ha <code>osszeg</code> változóba ír a függvény, akkor a hívás helyén megadott <code>o</code>-t változtatja meg. Ha <code>osszeg</code> címét képezi, akkor <code>o</code> címét fogja megkapni.
+<p>A függvény egyébként a harmadik és a negyedik paraméterében egy egész típusú változót vár; vagyis ott nem fogja engedni a fordító, hogy például <code>o+sz</code>-t írjunk, mert az nem balérték. Ez kevésbé látványos, mint pointerekkel. C-ben, ahol kézzel ki kellett írni a címképző operátort. Ott látványosabb volt: senkinek nem jut eszébe azt írni, hogy <code>&amp;(o+sz)</code>.
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A referenciák használata">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A referenciák használata<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az objektum-orientált  C++ nyelvben az érték és referencia szerinti paraméterátadás még a másoló konstruktorok gondolatával egészül ki. A referencia szerint adunk át valamelyik függvénynek egy objektumot, akkor magát az objektumot kapja meg (<em>pontosan azt</em> az objektumot, amelyiket paraméterben adtuk neki); ha érték szerint, akkor az objektumnak csak a másolatát. Hogyan képződik egy objektumnak a másolata? Természetesen annak másoló konstruktorával. A függvény végén pedig megszűnnek annak lokális objektumai. Érték szerinti paraméterátadás esetén ez azt jelenti, hogy az objektum másolata megszűnik, vagyis a destruktora le fog futni. Referencia szerinti átadásnál ilyenkor nem történik vele semmi, mert nem lokális változója volt, továbbra is léteznie kell majd.</p>
+<p>Hogy egy függvénynek egy objektumot másolatként vagy referenciaként adunk át, az attól függ, mit szeretnénk csinálni vele:</p>
+<ul>
+	<li>Ha <em>érték szerint</em> veszi át a függvény, akkor akár meg is változtathatja, azzal az eredeti objektumra nem lesz hatással. Ez például egy munkamásolat lehet. Ha ilyenre van szükség, akkor mindenképpen értékként kell átvenni az objektumot.
+	<li>Ha <em>referencia szerinti</em> a függvény paramétere, akkor az eredetit látja, és azon tud dolgozni, ilyenkor viszont az eredeti objektum is megváltozhat. Ha erre van szükség, akkor mindenképpen a referencia szerint átadást kell választani.
+	<li>Ha nem szeretnénk se megváltoztatni, se lemásolni az objektumot, akkor általában <em>konstans referenciával</em> vesszük át.
+</ul>
+<p>Az érték szerinti átadás esetén az objektumnak a másoló konstruktora és a destruktora futni fog. Ez hosszú idő lehet. Ha a másolás számunkra fölösleges, akkor érdemes inkább referencia szerint átvenni az objektumot, mert sokkal gyorsabb lehet a program. Ha referencia szerint vesszük át, akkor vigyázni kell, nehogy szándékolatlanul megváltoztassuk annak állapotát. Ezért objektumokat gyakran <em>konstans referenciával</em> kell átvenni; a konstans kulcsszó hatására a fordító ellenőrizni fogja, hogy változtatást biztos ne végezzünk rajta. Mivel a beépített típusok (pl. <code>char</code>, <code>int</code>) kicsik, ezért azokat, ha nem szükséges a függvénynek megváltoztatnia az eredeti változókat, érték szerint szokás átvenni – mert a másolásuk gyors, destruktoruk nincs.</p>
+
+<img src="referencia.svg" style="width: 32em;" class="kozep">
+
+<p>Előfordulhat néhány eset, amikor pedig egy objektumot csak referencia szerint tudunk átvenni – névlegesen, amikor az objektumnak nincs másoló konstruktora. Ilyen osztály például az <code>std::ostream</code>, amelyik egy nyitott fájlt jelképez. Ennek nincs másoló konstruktora, mivel értelmetlen lenne. Ezért az <code>std::cout</code>-ot mindig referenciaként tudjuk csak átvenni. Másik ilyen eset az pedig az osztályok másoló konstruktora maga. Ezeknek a lemásolandó objektumot muszáj referencia szerint átvenniük, mivel ha érték szerint vennék át, akkor ahhoz pont a másoló konstruktorra lenne szükség, vagyis végtelen ciklus keletkezne.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Referenciák vs. pointerek">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Referenciák vs. pointerek<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A referenciákra gyakran címként gondol az ember. A pointerek is memóriacímek; amit meg lehet csinálni referenciával, azt meg lehet csinálni pointerrel is.</p>
+<p>A különbség az, hogy a referencia mindig pontosan egy objektumra mutat, és létezése során mindig pontosan ugyanarra az objektumra. Ha létrejön egy referencia, az egy lesz valamelyik objektummal; nem is lehet átállítani másik objektumra. Ezzel szemben egy pointert át lehet állítani másikra, sőt egy pointer akár lehet 0 is, vagyis azt is megteheti, hogy nem mutat sehova.</p>
+<p>A referencia egyetlen objektumra mutat, a pointer mutathat objektumok tömbjére is. Ezért kell vigyázni a pointerekkel, mert alapvetően egy pointeren nem látszik, hogy hány elemre mutat. Helyes használat esetén pont ez teszi megkülönböztethetővé, hogy egy függvény egy objektumot vár, amit meg akar változtatni, vagy egy tömböt:</p>
+<pre   ><code class="language-c">void fv(char&amp; c);		/* egy szám, amibe beleírna */
+void fv(char* c);		/* karakterek tömbje */</code></pre>
+<p>A fentiek alapján: <em>referenciát használunk, ahol lehet; pointert használunk, ahol muszáj</em>. A „muszáj” pedig háromféle eset lehet:</p>
+<ol>
+	<li>tömbről van szó,</li>
+	<li>át kell állítani máshova,</li>
+	<li>lehetséges, hogy nem mutat sehova,</li>
+	<li>(a ráadás: C-ben függvényt kell hívnunk, amelyik csak a pointereket érti.)</li>
+</ol>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Néhány gyakorlati tudnivaló">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Néhány gyakorlati tudnivaló<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha referenciaként veszünk át egy objektumot, akkor még konstans esetén is gondolnunk kell arra, hogy a paraméterben az eredeti objektumot látjuk. Ez például akkor válhat érdekessé, amikor egy osztály tagfüggvénye saját típusú objektumot vár paraméterben. Leggyakoribb példa erre az osztályok értékadó operátora:</p>
+<pre   ><code class="language-c">class Sztring {
+    char *szo;
+  public:
+    Sztring&amp; operator=(const Sztring&amp; s) {
+        if (this != &amp;s) {
+            delete[] szo;
+            szo = new char[strlen(s.szo)+1];
+            strcpy(szo, s.szo);
+        }
+        return *this;
+    }
+};
+Sztring x;
+x = x;</code></pre>
+<p>Mivel a függvény a paraméterben olyan fajta objektumot vár, mint saját maga, előfordulhat az, hogy pontosan saját magát kapja meg. Ilyenkor a <code>this</code> ugyanarra az objektumra mutat, mint ami paraméterként <code>s</code>-ben jött, vagyis a <code>delete[] szo</code> sorral igazából <code>s</code>-nek a <code>szo</code> tömbjét „is” felszabadítjuk. Ezért van szükség annak ellenőrzésére, hogy a <code>this</code> ugyanaz az objektum-e, mint a paraméterben kapott – nem csak hogy egyformák-e, hanem <em>ugyanazok-e</em>. A másoló konstruktorban erre azért nem volt szükség, mert az éppen létrehozott objektum úgysem <em>ugyanaz</em>, mint bármelyik eddigi. Az értékadó operátor is átvehetné másolatként az egyenlőség jel jobb oldalán álló objektumot (feltéve persze, hogy a másoló konstruktort nem erre vezettük vissza):</p>
+<pre   ><code class="language-c">Sztring&amp; operator=(Sztring s);</code></pre>
+<p>Ez egy tulajdonképpen működő, de hatékonyság szempontjából <em>nem túl jó megoldás</em>. Ugyanis ilyenkor a lemásolandó sztring először lemásolódik (mivel az értékparaméter másolatként kerül a függvényhez); utána a függvény a lemásolt sztringből másolná át saját magához a tartalmat, végül a másolat megszűnik a destruktorával. Ugyan ilyenkor nem kellene a <code>this != &amp;s</code> ellenőrzés (mivel a másolat úgysem ugyanaz, mint saját maga), de az objektum létrehozása és törlése sok ideig tarthat.</p>
+
+<blockquote class="megjegyzes">
+<p>Mindez egyébként a pointerekre is igaz. A következő problémára futottam rá egyszer C-ben:
+<pre   ><code class="language-cbub">char *legutobbi_fajl = NULL;
+
+void legutobbi_fajl_beallit(const char *nev) {
+  if (legutobbi_fajl) {
+    free(legutobbi_fajl); // 1
+  }
+  legutobbi_fajl = malloc(strlen(nev)+1);
+  strcpy(legutobbi_fajl, nev);
+}
+
+void fajl_beolvas(const char *nev) {
+  ...
+  legutobbi_fajl_beallit(nev);
+}
+...
+fajl_beolvas(legutobbi_fajl); // 2</code></pre>
+<p>A hiba helye nem volt triviális, mivel a lefagyást közvetetten kiváltó programrész távol volt a lefagyás tényleges helyétől (ráadásul más forrás fájlban). Az 1-es sor felel meg a sztringes példa <code>delete[] szo</code> sorának, a 2-es sor pedig az <code>x=x</code> önértékadásnak. Látszik, hogy az egész kód célja, hogy a  sort be lehessen írni, azt a magától értetődő feladatot elvégezni vele, hogy megnyitja a legutóbb használt fájlt. A sztring érték szerinti átadására persze C-ben esély sincs.</p>
+</blockquote>
+
+<p>A visszatérési értékek referencia vagy másolat szerinti átadása is eldönthető egyszerűen. A „lokális változóra nem lehet pointert adni” szabály helyett sokkal szemléletesebb arra gondolni, hogy a visszaadott objektum új, vagy már eddig is létezett:</p>
+<pre   ><code class="language-c">class Komplex { 
+    double re, im;
+    ...
+};
+ 
+Komplex Komplex::operator+(const Komplex&amp; rhs) const { 
+    Komplex osszeg; 
+    osszeg.re = this-&gt;re+rhs.re; 
+    osszeg.im = this-&gt;im+rhs.im; 
+    return osszeg; 
+} 
+
+Komplex&amp; Komplex::operator+=(const Komplex&amp; rhs)  { 
+    this-&gt;re += rhs.re; 
+    this-&gt;im += lhs.im; 
+    return *this; 
+} </code></pre>
+<p>Az összeadásnál egy új szám keletkezik. A növelésnél az operátor bal oldalán álló szám megváltozik, visszatérni pedig pont azzal kell, új objektum értelemszerűen nem keletkezik.</p>
+
+<img src="visszateres.svg" style="width: 32em;" class="kozep">
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A referenciák és az öröklés">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A referenciák és az öröklés<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A referenciák nagyon fontosak az öröklés, a leszármazott osztályok kezelése esetén is. Ha van egy alaposztályunk: <code>class Alap</code>, és egy leszármazott osztályunk: <code>class Leszarmazott: public Alap</code>, akkor a lenti két függvény között elvi különbség van:
+<pre   ><code class="language-c">void fv1(Alap a);
+void fv2(Alap&amp; a);</code></pre>
+<p>Ha ezt a két függvényt meghívjuk a leszármazott osztály egy példányával: <code>Leszarmazott x; fv1(x);</code>, akkor már nem csak az lesz a különbség, hogy lemásolódik-e az objektum vagy nem. Az első függvénynek átadva ugyanis a leszármazott objektumból létrejön egy alap objektum, vagyis <em>csak az alaposztályra jellemző adatai adódnak át!</em> Ezzel szemben, a referenciát használva – amely hasonló ahhoz, mintha pointert használnánk – az eredeti objektumot fogja látni az <code>fv2()</code> függvény, vagyis a leszármazottra jellemző adatokat is (ha közvetlenül nem is, de annak virtuális függvényein keresztül biztosan.)</p>
+
+<p>Ugyanezért szokás a kivételeket is <code>catch(std::exception&amp; e)</code> referenciával elkapni. Ha nem referenciával tesszük, akkor elveszítjük a leszármazottakra jellemző adattagokat.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

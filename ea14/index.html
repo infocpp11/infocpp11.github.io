@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Nyelvi elemzők</title>
+<meta property="og:title" content="TEST InfoC++11 :: Nyelvi elemzők">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Nyelvi elemzők írása és egy nyelvi elemző keretrendszer">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Nyelvi elemzők írása és egy nyelvi elemző keretrendszer">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Nyelvi elemzők">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Nyelvi elemzők</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Nagy Gergely · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Nyelvi elemzők írása és egy nyelvi elemző keretrendszer</p>
+</div>
+
+
+<p>
+A programozás során nagyon gyakran kell formális szöveges tartalmat feldolgoznunk: egy cím bekérésétől kezdve,
+egy algebrai kifejezés kiértékelésén át egy adott program nyelven írt kód értelmezéséig. A feladat ezekben az
+esetekben mind azonos:
+</p>
+
+<ol>
+    <li>Meg kell vizsgálni, hogy egy adott szabályrendszernek megfelel-e a szöveg.
+    <li>Ha igen, akkor könnyen kezelhető, a szöveg logikáját tükröző adatszerkezetet kell építeni.
+    <li>Ha nem, akkor jól használható hibaüzenetet kell előállítani, ami segít az elírás megtalálásában.
+</ol>
+
+<p>
+Bár a manapság használt programnyelvekhez mindig tartozik egy jelentős méretű
+könyvtár, ami a feladatok nagyon széles köréhez nyújt segítséget a
+programozóknak, a nyelvi elemzés könyvtárszinten csak nagyon kevés nyelvben
+támogatott (pl. Python pyparse). 
+</p>
+
+<p>
+Ugyanakkor szabadon letölthető eszközök léteznek erre a célra. A legtöbb ilyen program úgy működik, hogy egy
+bemeneti fájlban le kell írni a megfeleltető szabályrendszert (nyelvtant) és az sikeres illeszkedés esetén
+végrehajtandó kódrészleteket is. Ezekből generál egy adott programnyelvű kódot, ami tartalmazza az elemzőt. Így
+működik például a yacc, a lex, a Flex, a Bison.
+</p>
+
+<p>
+A probléma ezekkel a programokkal az, hogy a bemenetük egy kevert nyelvű, nehezen áttekinthető fájl, a
+kimenetük pedig egy olyan program, ami generált, tehát szintén nehezen áttekinthető, ugyanakkor be kell
+illesztenünk a saját projektünkbe. Egész biztos, hogy nem lesz megegyező a kódolási, elnevezési stílus, ami
+megnehezíti a fenntartást és a hibakeresést.
+</p>
+
+<p>
+Létezik olyan elemző-könyvtár is, amiben a nyelvtant azon a programnyelven adhatjuk meg, amiben a program
+többi részét is írjuk. Nincsen generált kód és az elemző teljes egészében szervesen illeszkedik a
+projektünkbe. Ilyen pl. a Boost csomag Spirit könyvtára illetve a pyparse is.
+</p>
+
+<p>
+A Spiritet sablon metaprogramozási eszközökkel írták meg, ma egy olyan elemző könyvtár alapjait nézzük át, ami
+egy osztályhierarchiára építkezik és kihasználja a C++11 új nyelvi és könyvtári elemeit.
+</p> 
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az EBNF és a rekurzív alászálló elemzők</a>
+                      <li><a href="index.html#2" class="">A rekurzív alászálló elemzés megvalósítása</a>
+                      <li><a href="index.html#3" class="">Az elemző keretrendszer</a>
+                      <li><a href="index.html#4" class="">Az elemző keretrendszer belső felépítése</a>
+                      <li><a href="index.html#5" class="">A keretrendszer használata</a>
+                      <li><a href="index.html#6" class="">A folytatás...</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az EBNF és a rekurzív alászálló elemzők">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az EBNF és a rekurzív alászálló elemzők<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <p>
+Programozás alapjai I-ben már találkoztunk az EBNF-fel, ami egy formális módja nyelvtanok leírásának. Gyorsan
+elevenítsük fel az EBNF jelölésrendszerét a nyelvtanok örök "helló világjával", az alapműveleteket tartalmazó
+algebrai kifejezésekkel:
+</p>
+
+<pre>
+kifejezés ::= összeg
+összeg    ::= szorzat (('+' | '-') szorzat)*
+szorzat   ::= tényező (('*' | '/') tényező)*
+tényező   ::= szám | zárójeles
+zárójeles ::= '(' kifejezés ')'
+</pre>
+
+<p>
+Egy nyelvtannak mindig van egy kiinduló szabálya, amelynek a teljes elemzendő szöveget le kell írnia. Ez a
+szabály itt a <code>kifejezés</code>.  Ez azt jelenti, hogy amikor egy szöveget megkapunk és megpróbáljuk
+megállapítani, hogy az egy helyes algebrai kifejezés-e a fenti nyelvtan alapján, akkor azt a kérdést tesszük
+fel, hogy az szöveg megfelel-e a <code>kifejezés</code> szabálynak. Természetesen innen kiindulva, a szabály egyes
+elemeit vizsgálva eljutunk az elemzés során az összes többi szabályhoz is.
+</p>
+
+<p>
+Nézzünk egy példát! Vizsgáljuk meg az alábbi kifejezést:
+</p>
+
+<pre class="screenshot">
+4 * ( 3 + 8 )
+</pre>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+^
+</pre>
+
+<p>
+A fenti kifejezésre tehát teljesülnie kell, hogy ő egy <code>kifejezés</code>. Ez azt jelenti, hogy ő egy
+<code>összeg</code>. Egy <code>összeg</code> egy <code>szorzattal</code> kezdődik, ami egy <code>tényezővel</code>, ami lehet
+egy <code>szám</code> vagy egy <code>zárójeles</code> (kifejezés). Nézzük először a <code>szám</code>ot. A '4' pont egy
+<code>szám</code>. Ez a szabály itt nincs kifejtve, de tegyük fel, hogy ez egy alaptípusa az elemzőnknek, amire
+támaszkodhatunk, illetve akár könnyedén le is írhatnánk EBNF-ben, de itt most ezzel már nem növeljük a
+nyelvtanunkat.
+</p>
+
+<p>
+Tehát a '4'-es karaktert sikerült felismernünk és ott tartunk, hogy a <code>szám</code> szabály teljesült a
+szövegünk elejére. Ekkor továbbléphetünk a következő elemre, ami itt a következő karaktert jelenti. A
+szabályaink hívási láncában ilyenkor visszalépünk egyet: ott tartottunk, hogy a <code>szorzat</code> szabályt
+próbáltuk illeszteni a szövegre és ennek kezdeteként a <code>tényező</code> szabálynak kellett teljesülnie. Ez
+megtörtént, tehát továbbmehetünk.
+</p>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+  &uarr;
+</pre>
+
+<p>
+A <code>szorzat</code> szabályban ezután egy opcionális rész következik. Tehát, ha a szabály ezutáni részei nem
+teljesülnének a szövegünkre, a <code>szorzat</code> már akkor is illeszkedett volna. Ez történik például olyankor,
+ha a kifejezésünk egyetlen számjegyből áll. Itt azonban további karaktereink is vannak. Az opcionális rész
+első eleme egy VAGY-kapcsolat: egy '*' vagy egy '/' kell, hogy következzen. Ebből a '*' teljesül, tehát
+továbbléphetünk.
+</p>
+
+<p>
+A műveleti jel után ismét egy <code>tényező</code> következik és mivel a soronkövetkező karakter nem
+<code>szám</code>, ezért a <code>zárójeles</code> kifejezés illesztésével megyünk tovább:</p>
+
+<pre>
+tényező   ::= szám | zárójeles
+</pre>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+    &uarr;
+</pre>
+
+<p>A <code>zárójeles</code> szabály egy zárójelpár között egy <code>kifejezést</code> vár. Itt látható az, hogy a nyelvtanunk 
+rekurzív: egy <code>kifejezés</code>, ami a kiinduló szabályunk, további <code>kifejezéseket</code> tartalmazhat. Emiatt lehetnek 
+az algebrai kifejezéseink tetszőlegesen bonyolultak, így tudjuk leírni a végtelen egymásba ágyazhatóságot. Természetesen a végtelen 
+itt lehetőséget jelent, egy tényleges kifejezésnél az egymásbaágyazott elemeknek egyszer a végére jutunk és hívási láncunk is 
+visszajut a kezdeti szabályhoz, és ezzel befejeződik az elemzés. </p>
+
+<p>
+Ott tartunk tehát, hogy felismerjük, hogy a <code>szorzat</code> második tényezője egy <code>zárójeles</code>
+kifejezés, hiszen egy nyitó zárójellel kezdődik. Ezután visszaugrunk a <code>kifejezés</code> szabályra és a
+további karaktereket eszerint próbáljuk meg elemezni.
+</p>
+
+<pre>
+zárójeles ::= '(' kifejezés ')'
+</pre>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+      &uarr;
+</pre>
+
+<p>
+A soronkövetkező karakternek tehát egy <code>összegnek</code> kell lennie, ami a <code>szorzat</code> szabályt kell,
+hogy kielégítse, ami vagy egy <code>szám</code> vagy egy <code>zárójeles</code> kifejezés. A soronkövetkező elem a
+'3', ami egy szám, tehát egy <code>tényező</code>. Most a <code>szorzat</code> szabály illesztése folytatódik, ami
+szerint egy '*'-nak vagy egy '/'-nek kéne következnie. Csakhogy nem ez a helyzet. Ugyanakkor, ahogy
+említettük, a <code>szorzat</code> szabálynak ez a része opcionális, tehát ennek nem teljesülése esetén is
+illeszkedik a szabály.
+</p>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+        &uarr;
+</pre>
+
+<p>
+Ez azt jelenti tehát, hogy a '3'-ra teljesül, hogy ő egy <code>szorzat</code> (egy egytényezős szorzat) és így
+visszajutunk az <code>összeg</code> szabályhoz. A '+' karakter teljesíteni fogja a szabály következő előírását,
+majd következik egy újabb számjegy, aminél megint azt kapjuk, hogy ő egy egytényezős <code>szorzat</code>.
+</p>
+
+<pre class="float screenshot">
+4 * ( 3 + 8 )
+            &uarr;
+</pre>
+
+<p>
+Ezzel teljesült a második <code>kifejezés</code> szabályunk, ami a <code>zárójelesből</code> indult, és mivel a
+kifejezésünk utolsó karaktere egy ')', ezért a <code>zárójeles</code> is sikeresen illeszkedett. Ez azt jelenti,
+hogy a kezdeti <code>kifejezés</code> vizsgálatunk sikeresen zárult, hiszen a kifejezésről bebizonyítottuk, hogy ő
+egy olyan <code>összeg</code>, ami egy <code>szorzat</code>, amelynek első <code>tényezője</code> egy <code>szám</code>, a
+második pedig egy <code>zárójeles</code> kifejezés, ami egy <code>összeg</code>.
+</p>
+
+<p>
+Végigelemeztük tehát a kifejezésünket úgy, hogy a szöveg minden egyes elemére feltettük a kérdést, hogy
+megfelel-e az aktuális szabály soronkövetkező előírásának. Tulajdonképpen felfoghatjuk ezt a folyamatot úgy,
+hogy egy szabály az egy logikai visszatérési értékű függvény, aminek átadjuk a szöveget az aktuális pozíciótól
+kezdve és ő megmondja, hogy teljesíti-e a szöveg az általa támasztott elvárásokat és, ha igen, akkor
+továbblépteti a pozíciót is. Az elemzéshez pedig segítségül hívhat további szabályokat, vagy meghívhat
+további, azonos aláírású függvényeket.
+</p>
+
+<p>
+Ezt az elemző módszert hívják <em>rekurzív alászálló elemzésnek</em> (recursive descent parser). Ez csak egy a számos
+elemző módszer közül, ám egyszerű megvalósíthatósága és a C illetve C++ nyelvekben való hatékony
+függvényhívási mechanizmusnak köszönhetően igen népszerű és elterjedt. Az itt bemutatott elemzőkönyvtár is ezen
+az elven működik.
+</p>
+
+<div class="megjegyzes">
+<h3>A tokenek fogalma</h3>
+<p>
+Mielőtt továbbhaladnánk, egy apró pontosítást teszünk. A fentiekben vegyesen beszéltünk az elemzendő szöveg
+soronkövetkező karakteréről és eleméről. A formális nyelvi elemzők nagyon gyakran két részre bontják az
+elemzési feladatot. Az első az úgynevezett <em>tokenizálás</em>, amelynek során a szöveget karakterszinten
+elemzik és megpróbálják a nyelv egyes elemeit felismerni. Jelen esetben ilyenek a számok, a műveleti jelek és
+a zárójelek. Ez a lépés tartalmazza a szóközkarakterek elnyelését is. Siker esetén előáll egy olyan lista, ami
+már egy absztrakt reprezentációja a szövegnek és a nyelv legalacsonyabb szintű, ún. <em>terminális
+szimbólumait</em> tartalmazza.
+</p>
+
+<p>
+Az elemzésnek az a fázisa, ami azt vizsgálja meg, hogy a szöveg teljesíti a megadott nyelvtant, ezt a listát
+kapja a bemenetén és már nem megy le karakterszintre. Az alábbiakban bemutatott elemző nem teszi meg ezt
+szétválasztást és rögtön karakterszinten elkezdi a nyelvtani elemzést. Ennek következménye, hogy a
+hibaüzenetei is karakterszintűek (bár van lehetőség benne magasabbszintű hibajelzésre is). Ugyanakkor a
+nyelvtan nem válik szét két részre, egységesen kezelhető.
+</p>
+</div>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A rekurzív alászálló elemzés megvalósítása">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A rekurzív alászálló elemzés megvalósítása<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <p>
+Mielőtt a keretrendszerrel való ismerkedésbe belefognánk, nézzük meg, hogy miként lehet megvalósítani egy
+konkrét rekurzív alászálló elemzőt. A keretrendszer segítségével tetszőleges nyelvtanra néhány sorban
+előállítható egy ilyen elemző, azonban az abban található mechanizmusok megértéséhez látni kell, hogy hogyan
+lehet "kézzel" megvalósítani egy ilyen elemzőt.
+</p>
+
+<p>
+Az elemzést <code>std::string</code>-eken fogjuk végezni, és a pozíció nyilvántartásához a típus konstans
+iterátorát használjuk. Mind az elemzendő szöveg, mind az elemzés egy részeként felismert szövegrészlet
+azonsítható egy iterátorokkal megadott intervallummal, amit az alábbi típus ír le:
+</p>
+
+<pre   ><code class="language-c">using match_range = std::pair&lt; std::string::const_iterator, std::string::const_iterator &gt;; </code></pre>
+
+<p>
+Nézzünk meg egy nagyon egyszerű szabályt a kód szintjén! A szabály egy karaktert próbál felismerni. Az általa
+elfogadott karakterek halmazát egy <code>std::string</code>-ben adhatjuk meg.
+</p>
+
+<div class="megjegyzes">
+<p>
+Természetesen a sztring típus nem halmazként viselkedik, elhelyezhetjük benne ugyanazt a karaktert
+többször is. Az egyszerűség és hatékonyság kedvéért választjuk ezt a megoldást. A karakterismétlés hibás
+működéshez nem vezet, csupán lassítja az elemzést.
+</p>
+</div>
+
+<p>
+A lenti függvényünk átveszi az elemzendő intervallumot (<code>context</code>), amelynek az eleje a soronkövetkező
+karakter, a vége pedig a szöveg vége, továbbá a megengedett karakterek halmazát (<code>values</code>) és egy
+karakter-referenciát (<code>result</code>), amelyben elhelyezi a felismert karaktert.
+</p>
+
+<div class="megjegyzes">
+<p>
+Ez utóbbit azért teszi, mert a kézzel írt elemzőkben általában összekeveredik
+az elemzési feladat megoldása a szöveg feldolgozásával, tehát jelen esetben
+például az algebrai kifejezés értékének kiszámításával.  Pontosan ez az egyik
+tényező, ami egy keretrendszer megírását motiválja. A kézzel írt elemzők
+ugyanis nem újrahasznosíthatóak, még akkor is újra kell őket írni, ha ugyanazt
+a nyelvtant alkalmazzuk, de máshogyan kell a szöveget feldolgoznunk.
+</p>
+</div>
+
+<pre   ><code class="language-c">bool character(match_range &amp;context, std::string const &amp;values, char &amp;result) {
+    if (context.first == context.second) return false;
+
+    for (char c : values) {
+        if (c == *context.first) {
+            result = c;
+            ++context.first;
+            return true;
+        }
+    }
+
+    return false;
+}</code></pre>
+
+<p>
+Elemezzük röviden a fenti függvényt! Az első feladat az, hogy megvizsgáljuk, hogy nem értünk-e a szöveg
+végére. Hibás bemenet esetén előfordulhat, hogy még várunk egy karaktert, de az már nem található a szövegben.
+Opcionális elemek esetén pedig ez még egy helyes bemenet esetén is megtörténhet. A szöveg vége után olvasni
+viszont programozási hiba, ezért ezt az esetet mindenképpen le kell kezelni. Természetesen, ha a szöveg végén
+állunk és egy karaktert kerestünk, akkor ez a szabály illesztésének a sikertelenségét jelenti, tehát ilyenkor
+HAMIS értékkel kell visszatérnünk.
+</p>
+
+<p>
+Ezek után végiglépdelünk a megengedett karakterek halmazán és amennyiben megtaláljuk az aktuális karaktert
+(<code>*context.first</code>), akkor három dolgot teszünk:
+</p>
+
+<ol>
+    <li>az eredményt tároló változóban elhelyezzük a megtalált karaktert,
+    <li>az elemzendő intervallum elejét léptetjük, hogy a következő szabály már az új pozíciótól kezdve
+    folytassa az elemzést,
+    <li>IGAZ értékkel térünk vissza, hiszen sikeres volt a szabály illesztése.
+</ol>
+
+<p>
+Amennyiben sikertelen volt a szabály illesztése, akkor HAMIS értékkel térünk vissza. Nagyon fontos, hogy
+ilyenkor nem szabad elállítani az elemző intervallumot, hiszen előfordulhat, hogy az adott szabály
+sikertelensége még nem jelenti azt, hogy a bemenetünk hibás. Ugyanakkor a következő függvénynek ilyenkor arról
+a pozícióról kell folytatnia a vizsgálatot, amin ez a függvény is kezdett. Bonyolultabb szabályokat
+megvalósító függvényekben ezért az elemzendő intervallumról mindig készítünk egy másolatot és azon dolgozunk.
+Siker esetén pedig frissítjük az eredeti változó értékét.
+</p>
+
+<p>
+Nézzük meg még egy összetett szabálynak a kódját is! Ez a korábban látott EBNF nyelvtanunk
+<code>zárójeles</code> szabályát valósítja meg részben az imént látott <code>character</code> szabály
+segítségével.
+</p>
+
+<pre   ><code class="language-c">bool brace(match_range &amp;context, int &amp;result) {
+    match_range local = context;
+    int tmp;
+    char c;
+
+    if (character(local, &quot;(&quot;, c) &amp;&amp; expression(local, tmp) &amp;&amp; character(local, &quot;)&quot;, c)) {
+        context = local;
+        result = tmp;
+        return true;
+    }
+
+    return false;
+}</code></pre>
+
+<p>
+Látható, hogy a függvény első dolga, hogy lemásolja az intervallumot, amin dolgozunk. Erre azért van szükség,
+mert a későbbiekben átadja ezt a másolatot további elemzőfüggvényeknek, amelyek sikeres illesztés esetén
+megváltoztatják azt. Előfordulható azonban, hogy valahol az elemzés közepén találunk egy hibát. Ekkor lehet,
+hogy egy elemző függvény már odébb állította a pozíciót. Ilyenkor, ha a közösen használt pozíciót állítanánk
+el, majd HAMIS értékkel visszatérnénk, akkor az elemző rossz pozícióról próbálkozna tovább és ezzel biztosan
+hibára ítélné az vizsgálatot.
+</p>
+
+<p>
+Figyeljük meg, hogy hogyan valósítja meg a függvény az egymásra következés
+vizsgálatát! A logikai ÉS kapcsolat, a C nyelv szabályai szerint logikai
+rövidzárral értékelődik ki. Ez azt jelenti, hogy a kiértékelés kötelezően
+balról jobbra halad és csak akkor próbáljuk meg kiértékelni a soron következő
+elemet, ha az aktuális sikeres volt, vagyis IGAZ értékkel tért vissza.
+Ugyanakkor a sikeresen futó szabályok továbbállítják a kontextust, tehát a második szabály onnan kezdi az
+elemzést, ahol az első abbahagyta, a harmadik pedig onnan, ahol a második megállt.
+</p>
+
+<p>
+Siker esetén kontextust frissítjük a lokális másolat értékével, beállítjuk az eredményt tároló változó értékét
+és IGAZ-zal térünk vissza, ellenkező esetben pedig egyszerűen HAMIS értéket adunk és a kontextus értékét nem
+változtatjuk meg.
+</p>
+
+<p>
+Azt is figyeljük meg, hogy a <code>brace</code> függvény nem vizsgálta az intervallum határát. Ez azért van
+így, mert ő nem karakterszintű, hanem magasabb, ún. <em>nem-terminális szabály</em>. Azért nem szükséges itt
+határellenőrzést végezni, mert egészen biztos, hogy az itt meghívott szabályok vagy közvetlenül
+karakterszinten dolgoznak (mint a <code>character</code>), vagy önmaguk is magasszintűek és belül ők hívnak
+terminális szabályokat (mint az <code>expression</code>). Így tehát valójában megtörténik a szükséges vizsgálat,
+csak azt egy karakterszintű szabály végzi el.
+</p>
+
+<p>
+Általánosan azt mondhatjuk, hogy az intervallum határainak elemzését csak a karakterszintű szabályokat
+megvalósító függvényekben kell elvégeznünk.
+</p>
+
+<div class="megjegyzes">
+<p>
+Az elemző további részeit nem tekintjük át, de még egy megjegyzést szeretnénk tenni a logikai kifejezésekkel
+kapcsolatban. A logikai VAGY kapcsolat alkalmazható a nyelvtan alternatíváinak vizsgálatára, a logikai
+rövidzár itt is a segítségünkre van. Ugyanakkor vigyázni kell, hogy vegyes kifejezéseket (ÉS-t és VAGY-ot is
+tartalmazó kifejezést) ne írjunk, ugyanis ebben az esetben rossz pozícióra kerülhet az elemzés a szabályok
+sikertelensége esetén. Erről bővebb információ található a Programozás alapjai I. tárgy 14. előadásában.
+</p>
+</div>
+
+<p>A teljes elemző kódja letölthető: <a href="recursive_descent_parser.cc">recursive_descent_parser.cc</a>.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az elemző keretrendszer">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Az elemző keretrendszer<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Az elemző keretrendszer megvalósításával az a célunk, hogy a fentiekben megismert elemző kódrészleteket,
+amelyek egy adott nyelvtan megvalósításánál rengeteg, lényegében azonos kód ismétlődő leírásával járnak, ne
+nekünk kelljen megírni. Ehelyett egy objektum-orientált keretrendszer osztályaira bízzuk a feladatot.
+</p>
+
+<p>
+A keretrendszer természetesen bővíthető, de jelenlegi formájában már annyi beépített szabályt ismer, amivel a
+legtöbb nyelvtan kényelmesen leírható anélkül, hogy a rendszer belső működését megismerve bővítenünk kéne azt.
+</p>
+
+<p>
+Van két további elvárásunk is:
+</p>
+
+<ol>
+    <li>a nyelvtanok megadása C++-ban történjen egyegyszerűen átlátható módon, ami lehetőleg hasonlít a
+    szabványos leírásokra (pl. EBNF),
+    <li>válasszuk külön a szöveg elemzését és a szöveg feldolgozását!
+</ol>
+
+<p>
+Az előbbit megfelelő C++ operátorok újraértelmezésével fogjuk megoldani. Az utóbbi elvárás tulajdonképpen
+természetszerű, hiszen, ha nem tudnánk a két feladatot különválasztani, akkor nem is lennénk képesek egy olyan
+keretrendszert létrehozni, amely módosítás nélkül felhasználható a legkülönfélébb feladatokra.
+</p>
+
+<p>
+A második pontra a keretrendszer kétféle megoldást is ad:
+</p>
+
+<ol>
+    <li> az egyes szabályokhoz hozzárendelhető ún. szemantikai eseménykezelőket, ami annyit tesz, hogy
+    illeszkedés esetén egy adott függvényt (vagy bármilyen függvényként hívható entitást) lefuttat a rendszer
+    átadva neki az illeszkedő szövegrészletet,
+    <li> a rendszer képes egy <em>absztrakt elemzőfa</em> (ast, abstract syntax tree) automatikus előállítására.
+</ol>
+
+<p>
+Itt csak az 1. pontnak megfelelő megoldást tekintjük át.
+</p>
+
+<p>
+A cél tehát az, hogy az alábbi kódrészlet egy nyelvtant írjon le, és felépítse a nyelvtannak megfelelő
+elemzőt, amelynek aztán odaadhatóak elemzendő szövegek. C++-ban:
+</p>
+
+<pre   ><code class="language-c">rule addition, addend, expression;
+
+addition   &lt;&lt;= addend &lt;&lt; *(character(&quot;+&quot;) &lt;&lt; addend);
+addend     &lt;&lt;= range('0', '9')(write_number) | expression;
+expression &lt;&lt;= character(&quot;(&quot;) &lt;&lt; addition &lt;&lt; character(&quot;)&quot;);</code></pre>
+
+<p>
+A kódban három szabályt hozunk létre – ezek típusa <code>rule</code>. Ezután adjuk meg a háromsoros, egyszerű
+nyelvtanunkat, amely egyjegyű számok tetszőlegesen mélyen zárójelezett összeadását írja le.
+</p>
+
+<p>
+A szabályoknak való értékadást a <code>&lt;&lt;=</code> operátor végzi, az egymásra következést a
+<code>&lt;&lt;</code> jelenti. További operátorok:
+</p>
+
+<ul>
+    <li><code>*</code>: tetszőleges számú ismétlődés
+    <li><code>|</code>: alternatíva
+    <li><code>()</code>: szemantikai eseménykezelő hozzáadása (a <code>write_number</code> egy függvény címe)
+</ul>
+
+<p>
+Vegyük észre, hogy a <code>*</code> az egyoperandusú, dereferáló operátor, ami C++-ban
+prefix operátor, EBNF-ben ugyanakkor postfix. Mivel a C++-ban csak egy postfix, egyoperandusú operátor van (a
+<code>++</code>), ezért prefix operátorokat használunk.
+</p>
+
+<p>
+További különbségeket találunk az EBNF-hez képest: ott az egymásra következést az egyes nyelvi elemek egymásután
+írásával jelöljük. Ez azonban nem lehetséges C++-ban, mindenképpen szükség volt egy operátorra, amellyel
+jelölhetjük ezt a funkciót. Azért esett a választás a <code>&lt;&lt;</code> operátorra, mert az adatfolyamokba
+való írásnál is jelöl egyfajta egymásutániságot ez az operátor, így a C++ programozó számára ismerős ez a
+jelentéstartalom.
+</p>
+
+<p>
+Az értékadás operátora EBNF-ben a <code>::=</code>. Itt megintcsak kellett egy C++-ban létező operátort
+választani. Itt ez úgy történt, hogy minél jobban illeszkedjen a már felüldefiniált operátorok közé.
+</p>
+
+<p>
+A fenti kódrészletben láthatunk két beépített szabályt is: a <code>character</code> a már megismert, adott
+a halmazban megtalálható, egy darab karakterre illeszkedik (és a kódja, ahogy azt nemsokára meglátjuk, nagyon
+hasonlít a már látott <code>character</code> függvényéhez), a <code>range</code> pedig egy adott
+karakterintervallum egy elemét próbálja megtalálni.
+</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az elemző keretrendszer belső felépítése">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Az elemző keretrendszer belső felépítése<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Kezdjük el elemezni a keretrendszer kódját! Először is álljon itt egy új típus, ami az eseménykezelőket írja
+le:
+</p>
+
+<pre   ><code class="language-c">using semantic_action = std::function&lt; void(std::string const &amp;) &gt;;</code></pre>
+
+<p>
+Tetszőleges függvényszerű "dolgot" megadhatunk tehát, hiszen a <code>std::function</code> képes becsomagolni
+egy globális függvénytől kezdve egy metóduson vagy funktoron át egy lambdáig bármit. A C++11 könyvtárának ez
+az új eleme nagyon hatékonyan segíti az eseménykezelés megvalósítását C++-ban.
+</p>
+
+<p>
+A rendszer egy <code>std::string</code> objektumban adja át az adott szabály által illesztett szövegrészletet, hogy
+azt egyszerű legyen feldolgozni.
+</p>
+
+<p>
+Egy további típusdefiníciót is használni fogunk: ez a korábban már megismert <code>match_range</code>.
+</p>
+
+<p>
+Nézzük meg először a szabályokat leíró osztályok ősének a kódját! Ennek feladata lesz az összes olyan
+funkcionalitás megvalósítása, ami közös a szabályokban. Ez három dolgot fog jelenteni:
+</p>
+
+<ol>
+    <li><code>match</code>: az illesztéssel kapcsolatos általános és adminisztratív teendők elvégzése és az egyedi illeszkedést
+    vizsgáló függvény meghívása,
+    <li><code>operator ()</code>: szemantikai eseménykezelő hozzáadása a szabályhoz,
+    <li><code>clone</code>: szükségünk lesz a szabályok klónozására – erről később beszélünk majd.
+</ol>
+
+<pre   ><code class="language-c">class base_rule {
+    protected:
+        semantic_action the_semantic_action;
+
+    public:
+        virtual ~base_rule() {}
+
+        virtual bool test(match_range &amp;context) = 0;
+
+        bool match(match_range &amp;context, match_range &amp;the_match_range) {
+            match_range local = context;
+
+            if (test(local)) {
+                the_match_range = { context.first, local.first };
+                if (the_semantic_action) {
+                    the_semantic_action(std::string(the_match_range.first, the_match_range.second));
+                }
+
+                context = local;
+                return true;
+            }
+
+            return false;
+        }
+
+        base_rule &amp;operator() (semantic_action const &amp;an_action) {
+            the_semantic_action = an_action;
+            return *this;
+        }
+
+        virtual std::shared_ptr&lt;base_rule&gt; clone() const = 0;
+};</code></pre>
+
+<p>
+Igazából a fenti kódrészletből egyedül a <code>match</code> függvény kódjáról érdemes néhány szót ejteni.
+A függvény átveszi az elemzendő szöveget megadó intervallumot (<code>context</code>) és egy másik
+<code>match_range</code>-et, amiben pedig sikeresen illeszkedés esetén elhelyezi a megtalált szövegrészlet
+határait. Siker esetén IGAZ-at, különben HAMIS értéket ad vissza.
+</p>
+
+<p>
+Ezután készít egy másolatot a kontextusról – ennek szükségességéről már beszéltünk a <code>brace</code>
+függvény elemzésekor, illetve definiál egy változót az eredmény számára is.
+</p>
+
+<p>
+Ezt követően meghívja a <code>test</code> nevű, tisztán virtuális függvényét. Az egyes szabályok ezt
+definiálják felül a saját egyedi illesztési algoritmusokat megadva. Amennyiben ez IGAZ értékkel tér vissza,
+három teendő van:
+</p>
+
+<ol>
+    <li>az aktuális pozíciót tároló <code>context</code> értékét frissíteni a <code>test</code> által
+    módosítottal,
+    <li>az illeszkedő szövegrészlet határait (<code>result</code>) elmenteni a
+    <code>the_match_range</code>-ben,
+    <li>amennyiben van a szabályhoz rendelt eseménykezelő, akkor az meghívni és átadni neki az illesztett
+    szövegrészletből készített <code>std::string</code>-et.
+</ol>
+
+<p>
+Most nézzük meg, hogy egy konkrét szabályt hogyan lehet beilleszteni a keretrendszerbe! Legyen ez a korábban
+már látott, karaktereket kereső szabály:
+</p>
+
+<pre   ><code class="language-c">class character : public base_rule {
+    private:
+        std::string values;
+
+    public:
+        character(std::string const &amp;values) : values(values) {}
+
+        virtual bool test(match_range &amp;context) override {
+            if (context.first == context.second) return false;
+
+            for (auto c : values) {
+                if (*context.first == c) {
+                    ++context.first;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        virtual std::shared_ptr&lt;base_rule&gt; clone() const override {
+            return std::make_shared&lt;character&gt;(*this);
+        }
+};</code></pre>
+
+<p>
+Az osztály kódja nagyon hasonlít a <code>character</code> függvényre. Itt a konstruktorban adjuk át a
+megengedett karaktereket megadó halmazt egy <code>std::string</code> formájában.
+</p>
+
+<p>
+Maga az illesztés a <code>test</code> függvényben történik. Mivel ez egy karakterszintű szabály, az első
+lépés a string határainak ellenőrzése. Ezután egy ciklusban végigvizsgáljuk a "halmaz" elemeit és
+összehasonlítjuk őket az aktuális karakterrel. Amennyiben találat van, akkor továbbléptetjük a kontextust
+és IGAZ értékkel térünk vissza. Ha nincs találat, akkor pedig HAMIS-sal.
+</p>
+
+<p>
+Most nézzük meg azt, hogy hogyan tudunk egy EBNF-operátort megvalósítani!
+Természetesen, önmagában egy operátor felüldefiniálása nem elég, hiszen a
+nyelvtan definíciója és egy adott szöveg feldolgozása teljesen eltérő helyen
+lehetnek. Tehát az operátor feladata nem az lesz, hogy végrehajtson egy adott
+elemzési feladatot, hanem az, hogy létrehozzon egy olyan adatszerkezetet, ami
+képes a feladat végrehajtására. Tulajdonképpen az operátorok segítségével egy
+olyan többszörösen összetett adatszerkezet generálódik le automatikusan, ami
+reprezentálja a nyelvtan szerkezetét.
+</p>
+
+<p>
+Tulajdonképpen egy operátor is egy nyelvtani szabály, tehát őt is leszármaztathatjuk a
+<code>base_rule</code>-ból. Ennek az az előnye is meglesz, hogy egységesen tudjuk kezelni őket a beépített és
+a felhasználó által definiált szabályokkal.
+</p>
+
+<p>
+Vizsgáljuk meg az egymásra következés megvalósítását! Láthattuk korábban, hogy ennek alapja az <code>&amp;&amp;</code>
+logikai operátor lesz, amit szabályokon alkalmazunk. Ez figyelhető meg az alábbi osztály kódjában is: 
+</p>
+
+<pre   ><code class="language-c">class succession : public base_rule {
+    private:
+        std::shared_ptr&lt;base_rule&gt; first_rule;
+        std::shared_ptr&lt;base_rule&gt; second_rule;
+
+    public:
+        succession(std::shared_ptr&lt;base_rule&gt; first_rule, std::shared_ptr&lt;base_rule&gt; second_rule) :
+            first_rule(first_rule),
+            second_rule(second_rule) {}
+
+        virtual bool test(match_range &amp;context) override {
+            match_range the_match_range;
+            return first_rule-&gt;match(context, the_match_range) &amp;&amp; second_rule-&gt;match(context, the_match_range);
+        }
+
+        virtual std::shared_ptr&lt;base_rule&gt; clone() const override {
+            return std::make_shared&lt;succession&gt;(*this);
+        }
+};</code></pre>
+
+<p>
+Látható, hogy az egymásra következést reprezentáló osztály eltárolja az
+operandusait. Így valósul meg az, hogy a nyelvtan definíciója és az elemzés
+különválik egymástól. Minden operátor hasonlóképpen fog eljárni, és így alakul
+ki az adatszerkezetünk: egy operátort megvalósító osztály tartalmazza az
+operandusait, amelyek lehetnek egyszerű szabályok (pl. <code>character</code>),
+de lehetnek összetett osztályok is (pl. <code>succession</code>) tetszőleges
+mélységben egymásbaágyazva.  Az osztály a konstruktorában okos mutatókba
+csomagolva kapja meg a két operátorandusát. Arról, hogy erre miért van szükség,
+egy kicsit később beszélünk.
+</p>
+
+<p> Maga az egymásra következés vizsgálata a <code>test</code> függvényben található. Maga a tényleges vizsgálat pedig a 
+paraméterként átvett szabályokra van bízva: meghívjuk az ő <code>match</code> függvényeiket és képezzük ezeknek ÉS-kapcsolatát. Az 
+ezzel kapcsolatban korábban leírtak itt is igazak, tehát az első által léptetett kontextust kapja meg a 
+második függvény – így valósul meg az egymásutániság ellenőrzése. </p>
+
+<p>
+Eddig nem beszéltünk arról, hogy miért mutatókat vesz át a <code>succession</code> szabály és miért van
+szükség a <code>clone</code> metódusra. Ennek megértéséhez nézzünk meg egy tipikus nyelvtanrészletet:
+</p>
+
+<pre   ><code class="language-c">some_rule &lt;&lt;= character(&quot;abcd&quot;) &lt;&lt; character(&quot;efgh&quot;);</code></pre>
+
+<p>
+Ha egy pillanatra elfeledkezünk arról, hogy egy EBNF nyelvtani szabályt ír le és pusztán a kód szintjén
+tekintjük a sort, akkor azt láthatjuk, hogy itt három ideiglenes változó jön létre:
+</p>
+
+<ul>
+    <li>két <code>character</code> példány
+    <li>egy <code>succession</code>.
+</ul>
+
+<p>
+Létrehozhatnánk ezeket az elemeket dinamikusan is, de akkor tele lenne a kódunk <code>new</code>
+kulcsszavakkal vagy gyártófüggvényt kéne írni minden szabályhoz. Mindkét megoldás kényelmetlenné tenné a
+keretrendszer használatát.
+</p>
+
+<p>
+Ezzel azonban így első látásra van egy probléma: a létrehozott <code>character</code> példányok a
+soronkövetkező kiértékelési pontnál megszűnnek. A <code>succession</code> viszont el kell, hogy tárolja őket,
+majd végül a <code>some_rule</code> is, hiszen a szabályok végrehajtása jóval a létrehozásuk után történik.
+</p>
+
+<p>
+További problémát jelent, hogy a <code>succession</code> kénytelen <code>base_rule</code> referenciaként
+átvenni az operandusait, hiszen tetszőleges (akár a felhasználó által definiált) szabályt is fel kell tudnia
+dolgozni. Így viszont nem ismeri a konkrét típust, tehát a változó lemásolása nem történhet meg a triviális
+módon, az adott típus másoló konstruktorának felhasználásával.
+</p>
+
+<p>
+Ezért van szükség a <code>clone</code> függvényre, amit szoktak virtuális másoló konstruktornak is hívni,
+hiszen pont ez a feladat: úgy készít másolatot egy adott objektumról, hogy annak pontos típusát nem, csak az
+ősét ismeri.
+</p>
+
+<p>
+Az itt használt <code>clone</code> pedig egy <code>std::shared_ptr</code>-be csomagolja a dinamikusan
+létrehozott másolatot, hogy a memóriaszivárgás elkerülhető legyen.
+</p>
+
+<p>
+Nézzük meg, hogy ezek után, hogyan tudjuk megvalósítani a <code>&lt;&lt;</code> operátort:
+</p>
+
+<pre   ><code class="language-c">succession operator &lt;&lt;(base_rule const &amp;first_rule, base_rule const &amp;second_rule) {
+    return succession(first_rule.clone(), second_rule.clone());
+}</code></pre>
+
+<p>
+Van egy további problémánk is. Vizsgáljuk meg az alábbi példát:
+</p>
+
+<pre   ><code class="language-c">rule addition, addend, expression;
+
+addition   &lt;&lt;= addend &lt;&lt; *( character(&quot;+&quot;) &lt;&lt; addend );
+addend     &lt;&lt;= range('0','9') | expression;
+expression &lt;&lt;= character(&quot;(&quot;) &lt;&lt; addition &lt;&lt; character(&quot;)&quot;);</code></pre>
+
+<p>
+Azt láthatjuk, hogy egy összeg (<code>addition</code>) tetszőleges számú összeadásból áll, amely tagok
+(<code>addend</code>) sorozata, amelyek között '+' jelek találhatóak. Egy tag vagy egy egyszámjegyű szám vagy
+egy kifejezés (<code>expression</code>), ami pedig egy összeg zárójelek között. Ez tehát egy rekurzív
+nyelvtan, ahol az egymásra hivatkozó szabályok láncában kör van. Így tehát nem tudjuk a szabályokat olyan
+sorrendben definiálni, hogy ne legyen legalább egy olyan, amely hivatkozik egy még nem definiált másik szabályra.
+</p>
+
+<p>
+Jelen példában az <code>addition</code> definíciójában hivatkozunk az <code>addend</code>-re, amelyet csak a
+következő sorban definiálunk – és amely ugyanígy tesz az <code>expression</code>-nel.
+</p>
+
+<p>
+Ezzel semmi probléma nem lenne, ha ezeknek a szabályoknak a referenciáit tudnánk eltárolni. Csakhogy az imént
+láttuk, hogy a beépített szabályokat (mint pl. a <code>character</code>) temporális objektumként hozzuk létre
+és azokat muszáj lemásolnunk. Mivel a szabályok <code>base_rule const &amp;</code>-t vesznek át, nem
+tudják kitalálni, hogy mely szabályok referenciáit lehet egyszerűen eltárolni és melyeket kell lemásolni.
+Ezért mindig másolnak.
+</p>
+
+<p>
+Csakhogy ha az <code>addition</code> készít az első sorban egy másolatat az <code>addend</code>-ről, akkor az
+még egy üres, definiálatlan szabály másolata lesz, hiszen az <code>addend</code> csak a soronkövetkező
+értékadásban kap tartalmat.
+</p>
+
+<p>
+Kéne egy olyan szabály típus, ami nem változik meg attól, hogy tartalmat kap. Tehát ha az üres szabályt
+lemásoljuk, akkor az ekvivalens lesz azzal a változattal, ami már tartalmat kapott.
+</p>
+
+<p>
+Ez első hallásra lehetetlen előírásnak tűnik, azonban valójában nem túl bonyolult a megoldás. A
+szoftverfejlesztés (nemhivatalos) alaptétele szerint minden problémára megoldás egy újabb indirekció. Ha nem is teljesen
+általános ez a kijelentés, mindenesetre nekünk itt most pontosan erre van szükségünk: egy olyan osztályt kell
+definiálni, ami eltárolja egy szabályra mutató pointer címét. Maga a pointer értéke természetesen változhat,
+amikor tartalmat kap a szabály, de a pointer címe ettől nem változik meg. Ha tehát a <code>rule</code>
+osztályunk egy ilyen címet tárol, akkor az ő értéke ténylegesen nem fog megváltozni a kezdeti, tartalalom
+nélküli állapothoz képest.
+</p>
+
+<pre   ><code class="language-c">class rule : public base_rule {
+    private:
+        std::shared_ptr&lt; std::shared_ptr&lt;base_rule&gt; &gt; the_rule;
+
+        virtual bool test(match_range &amp;context) override {
+            if (!(*the_rule)) throw &quot;Undefined rule&quot;;
+            match_range the_match_range;
+            return (*the_rule)-&gt;match(context, the_match_range);
+        }
+
+    public:
+        rule(std::shared_ptr&lt;base_rule&gt; a_rule = nullptr) :
+            the_rule(std::make_shared&lt;std::shared_ptr&lt;base_rule&gt;&gt;(a_rule)) {}
+
+        void set_rule(std::shared_ptr&lt;base_rule&gt; a_rule) {
+            *the_rule = a_rule;
+        }
+
+        rule &amp;operator&lt;&lt;=(base_rule const &amp;a_rule) {
+            set_rule(a_rule.clone());
+            return *this;
+        }
+
+        virtual std::shared_ptr&lt;base_rule&gt; clone() const override {
+            return std::make_shared&lt;rule&gt;(*this);
+        }
+};</code></pre>
+
+<p>
+Látható, hogy az eltárolt tartalom (<code>the_rule</code>) kettős indirekció mögött található. Maga a
+<code>rule</code> osztály amúgy pedig nem tesz mást a <code>test()</code> függvényében, mint hogy delegálja az illesztési
+feladatot az általa eltárolt osztálynak. Ha pedig elfelejtenénk egy szabályt definiálni, akkor kivételt dob (a keretrendszer
+valódi megvalósításában egy egyedi típusút és nem sztringet).
+</p>
+
+<p>
+Az osztály másolása is triviális feladat, hiszen pontosan azért vezettük be a kettős indirekciót, hogy
+elegendő legyen sekély másolatot készíteni.
+</p>
+
+<p>Az eddigi osztályok áttekintését adja az alábbi diagram, amin a szmájli végű nyíl a kétszeres indirekciót
+reprezentálja.</p>
+
+<img src="uml.svg" class="kozep" style="width: 32em;">
+
+<p>
+Látható, hogy a <code>rule</code> osztály ugyanúgy leszármazottja is a <code>base_rule</code> osztálynak, mint az összes
+többi. Tulajdonképp a szerepe csak annyi, hogy utólag definiálható szabályként viselkedjen. Egyfajta helyettesítő (proxy pattern)
+objektumként viselkedik a tartalmazott szabály számára, ahol a tartalmazott szabály utólag megadható.
+</p>
+
+<div class="megjegyzes csik">
+<h3>Egy apró megjegyzés</h3>
+
+<p>Valójában a <code>rule</code> osztály <code>base_rule</code>-ból való származtatása nem teljesen korrekt. A 
+<code>base_rule</code>-nak van <code>semantic_action</code> adattagja, amely azonban a <code>rule</code> esetében
+felesleges, hiszen az általa tartalmazott <code>base_rule</code>-é a lényeges, és nincsen szükség két külön függvényre
+(sőt zavaró is, ha kettő van). A helyes hierarchia így fest:</p>
+
+<img src="uml2.svg" class="kozep" style="width: 32em;">
+
+<p>Az egyszerűség kedvéért a letölthető változat a kicsit hibás, de sokkal rövidebb kódot tartalmazza. Ebben
+a <code>semantic_action</code>-t beállító függvény is virtuális, és delegálja a feladatot a tartalmazott
+<code>base_rule</code>-nak; a feleslegesen megörökölt <code>semantic_action</code> pedig nincs használva semmire.</p>
+</div>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A keretrendszer használata">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A keretrendszer használata<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Nézzünk meg végül egy teljes példát, amely az eddigiekben létrehozott könyvtári elemeket használja:
+</p>
+
+<pre   ><code class="language-c">int main() {
+    std::string text = &quot;abc&quot;;
+    match_range context(text.begin(), text.end()), result;
+    rule sentence, ending;
+
+    sentence &lt;&lt;= character(&quot;jkhkljqa&quot;) &lt;&lt; ending;
+    ending &lt;&lt;= character(&quot;bjklpqwd&quot;) &lt;&lt; character(&quot;iuopuc&quot;);
+
+    if (sentence.match(context, result)) {
+        std::cout &lt;&lt; std::string(result.first, result.second) &lt;&lt; std::endl;
+    }
+    else std::cout &lt;&lt; &quot;Didn't match&quot; &lt;&lt; std::endl;
+
+    return 0;
+}</code></pre>
+
+<p>
+Látható, hogy két nagyon egyszerű szabályunk van. A bemeneti string alapján elkészítjük a kontextust és ezt a
+legmagasabb szintű szabálynak (<code>sentence</code>) adjuk át. Nagyon fontos, hogy mindig abból a szabályból
+kiindulva kezdjük el az elemzést, amely a teljes szöveget leírja.
+</p>
+
+<p>
+Természetesen a keretrendszer még egyáltalán nincsen kész. Van rengeteg olyan feladat, ami többé-kevésbé
+mechanikusan megvalósítható a fentiek ismeretében: el kell készíteni az összes fontos EBNF szabálynak megfelelő
+operátort és a hozzá tartozó <code>base_rule</code> leszármazottat (pl. ismétlődés, opcionalitás, alternatíva,
+stb.) és érdemes készíteni olyan beépített szabályokat, amelyek gyakran kellenek és fáradságos lenne őket
+mindig karakterszinten definiálni (pl. egész szám, valós szám, azonosító, string, stb.).
+</p>
+
+<p>
+A fentieken túl van még két feladatunk, ha igazán használható rendszert akarunk létrehozni. Ezeket már
+megemlítettük az elején. Egyfelől biztosítani kell valamilyen adatszerkezet (jellemzően egy elemzőfa) automatikus
+létrejöttét, amelyet bejárva azután a felhasználó könnyen feldolgozhatja a szöveget. Másrészt elő kell állítani egy
+hatékony hibajelző mechanizmust, hiszen egy bonyolult nyelvtan alapján készült hosszú szöveg esetén, ha csak
+annyi információnk van, hogy nem történt illeszkedés, akkor igen nehéz kitalálni, hogy vajon a nyelvtan
+megadásakor vétettünk el valamit, vagy szintaktikai hibánk van valahol a szövegben.
+</p>
+
+<p>
+A keretrendszer szabadon elérhető verziója ezeket a funkciókat tartalmazza. A neve Syntx és megtalálható a
+<a href="https://gitlab.com/nagygr/syntx">gitlab.com nyilvános felületén</a>.
+Az itt tárgyalt elemek pedig fordítható, teljes programként innen tölthetőek le: <a href="parsing_framework.cc">parsing_framework.cc</a>.
+</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A folytatás...">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A folytatás...<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előadás további része diák formájában érhető el (sok magyarázatot tartalmaz). Letölthető innen:
+<a href="syntx_cpp11.pdf">syntx_cpp11.pdf</a>.</p>
+
+<p>Példaprogramok: <a href="syntx_example_code.zip">syntx_example_code.zip</a>.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

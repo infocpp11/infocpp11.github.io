@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Kivételek</title>
+<meta property="og:title" content="TEST InfoC++11 :: Kivételek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Kivételkezelés">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Kivételkezelés">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Kivételek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Kivételek</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.02.08.</p>
+<p class="kivonat">Kivételkezelés</p>
+</div>
+
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első két feladatot meg kell oldani.</p>
+<ol>
+    <li>Rejtett komplexitás: a megoldásokat kommentben írd a kód mellé, magyarázatokkal.</li>
+    <li>Kivételek a veremben: a kódot ne add be teszteletlenül! Figyelj arra, hogy a sablon kódnak
+        csak a használt része példányosodik; hívd meg a tesztben mindegyik függvényt! Előbb dolgozatsz egész számokkal,
+        de később próbáld ki a vermet úgy is, hogy „igazi” munkát is végez a beszúrás és a törlés;
+        konstruktorral, destruktorral rendelkező osztállyal példányosítsd a vermet! Lehet ez <code>std::string</code>,
+        vagy az extrák alatt elérhető SuperNoisy.</li>
+    <li>Bináris fa: tesztelj is, mint az előzőnél!</li>
+</ol>
+</blockquote>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Rejtett komplexitás</a>
+                      <li><a href="index.html#2" class="">Kivételek a verem osztályban</a>
+                      <li><a href="index.html#3" class="">Bináris fa másolása</a>
+                      <li><a href="index.html#4" class="">További feladatok</a>
+                      <li><a href="index.html#5" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Rejtett komplexitás">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Rejtett komplexitás<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi kódrészlet. Minden további információ nélkül (csak ezt a részét ismerjük a programnak),
+a kérdés: a végrehajtása hány különböző vezérlési utat eredményezhet?</p>
+
+<pre   ><code class="language-c">String EvaluateSalaryAndReturnName(Employee e) {
+    if (e.Title() == &quot;CEO&quot; || e.Salary() &gt; 100000) {
+        cout &lt;&lt; e.First() &lt;&lt; &quot; &quot; &lt;&lt; e.Last()
+             &lt;&lt; &quot; is overpaid&quot; &lt;&lt; endl;
+    }
+    return e.First() + &quot; &quot; + e.Last();
+}</code></pre>
+
+<p>A legszembetűnőbb természetesen az <code>if()</code> utasítás: vagy végrehajtódik
+a kiírás, vagy nem – ez az elágazás eleve két lehetséges végrehajtási utat ad. Hol van a többi
+lehetséges út, ha nem keletkezik kivétel, és akkor, ha igen?</p>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Az alábbiakra gondolj:</p>
+<ul>
+    <li>Vezérlési utasítással megadott utak.</li>
+    <li>Rövidzár tulajdonsággal rendelkező operátorok.</li>
+    <li>A programozó által definiált operátorok.</li>
+    <li>Sikertelen konstruktorhívások (pl. érték szerinti visszatérés).</li>
+    <li>Sikertelen I/O műveletek.</li>
+</ul>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Ez a feladat a <a href="index.html#gotw20">GotW #20</a> fordítása.</p>
+
+<h4>Ha nem dobódik kivétel:</h4>
+
+<p>
+1. Ha <code>e.Title() == "CEO"</code>, akkor a kifejezés második fele nem értékelődik ki, azaz <code>e.Salary()</code> sosem
+hívódik meg, a <code>||</code> operátor rövidzár-tulajdonsága miatt.
+<br>
+2. Ha <code>e.Title() != "CEO"</code>, de <code>e.Salary() &gt; 100000</code>, akkor mindkét részkifejezés kiértékelődik, és a kiírás
+végrehajtódik.
+<br>
+3. Ha <code>e.Title() != "CEO"</code> és <code>e.Salary() &lt;= 100000</code>, a kiírás nem hajtódik végre.
+</p>
+
+<h4>A többi végrehajtási út a kivételek miatt jöhet létre:</h4>
+
+<p>
+*. Az argumentumot érték szerint kapja a függvény. Ehhez egy másolásra van szükség; a másoló konstruktor kivételt dobhat, bár ez 
+még a függvényen kívül történik. (Megj.: az eredeti írásban ez hibásan szerepel. Nem a hívott hozza létre ezt a másolatot, hanem a 
+hívó. Lásd a szabványt: <em>8.5.1.2(4) When a function is called, each parameter shall be initialized with its corresponding 
+argument. [...] The initialization and destruction of each parameter occurs within the context of the calling function.</em>)
+<br>
+4. A visszatérési érték létrehozásához egy konstruktorhívásra van szükség. A <code>String</code> konstruktora kivételt
+dobhat, amelyik egy másik úton jelent visszatérést.
+<br>
+5. A <code>Title()</code> tagfüggvény kivételt dobhat (semmit nem tudunk róla), vagy érték szerint adhat vissza objektumot (pl.
+<code>String</code>), amely létrehozása kivételt eredményezhet.
+<br>
+6. Az <code>operator==</code> hívásához előfordulhat, hogy a <code>"CEO"</code> sztring literálist ideiglenes objektummá kell alakítani (pl. <code>operator==(String, String)</code> esetén <code>operator==(String, String(char const*))</code>). A temporális objektum létrehozása kivételt eredményezhet.
+<br>
+7. Az <code>operator==</code> maga is dobhat kivételt, ha nem beépített operátorról, hanem egy függvényről
+van szó. (Fura helyzet lenne, de az elvi lehetőség megvan.)
+<br>
+8. Az 5-öshöz hasonlóan, a <code>Salary()</code> hívás kivételt eredményezhet.
+<br>
+9. A 6-oshoz hasonlóan temporális objektum keletkezhet, hogy megfelelő <code>operator&gt;</code>-t lehessen találni.
+<br>
+10. Szintén extrém eset, ha az <code>operator&gt;</code> furcsa működésű, programozó által írt függvény, kivételt
+dobhat.
+<br>
+11. A <code>||</code> operátor is lehet olyan, amit a programozó írt (nem a beépített), és ez is dobhat kivételt.
+<br>
+12-16. Mind az öt <code>&lt;&lt;</code> kiírás operátor dobhat kivételt.
+<br>
+17-18. A <code>First()</code> és <code>Last()</code> függvények kivételt dobhatnak a kiírás előtt.
+<br>
+19-20. Az 5-öshöz hasonlóan, a <code>return</code> utasításnál a <code>First()</code> és <code>Last()</code> függvények, vagy az azokból való visszatérés kivételt eredményezhet.
+<br>
+21. A sztringek összeadásához a <code>" "</code> literálist objektummá kellhet alakítani (pl. <code>operator+(String, String)</code> esetén).
+<br>
+22-23. Az <code>operator+</code>-ok is dobhatnak kivételt, az utolsó sorban.
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kivételek a verem osztályban">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="labor_verem_kivetel" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Kivételek a verem osztályban<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi törzzsel rendelkező verem osztály, amelynek teljes kódját töltsd le
+a feladat megoldásához: <a href="stack.cpp">stack.cpp</a>!</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Stack {
+  public:
+    explicit Stack(size_t max_size);
+    Stack(Stack const &amp;orig);
+    Stack &amp; operator=(Stack const &amp;orig) = delete;
+    ~Stack();
+    void push(T const &amp;what);
+    T pop();
+    bool empty() const;
+  private:
+    size_t size_;
+    size_t max_size_;
+    T *pData_;
+};</code></pre>
+
+<p>Ez egy régebbi laborfeladat megoldása; egy egyszerű vermet valósít meg, <em>placement new</em>-s memóriakezeléssel,
+konstruktorban megadott méretű tömbbel.</p>
+
+<p>Figyeld meg kivételkezelés szempontjából a kódot! Haladj sorban a függvényeken, és javítsd ki úgy őket, hogy
+a hibajelzésre kivételeket használjanak, és kivételek esetén pedig minél erősebb garanciát adjanak a helyes működésre!
+Vajon mit kell változtatni a...</p>
+
+<ul>
+    <li>Konstruktoron?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A mostani változat nem kezeli a memóriafoglalási hibát (<code>malloc()</code> null pointert ad). Ezt
+kezelni kell a visszaadott érték ellenőrzésével, vagy <code>::operator new(size_t)</code> használatával. Az
+utóbbi esetben az összes helyen át kell térni a <code>malloc()</code>/<code>free()</code> párosról az
+<code>::operator new()</code>/<code>::operator delete()</code> párosra!</p>
+</div>
+</details>
+
+    <li>Másoló konstruktoron?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>malloc()</code> mint az előző esetben. Ezen felül, bármelyik <code>T</code> konstruktor kivételt dobhat.
+A másoló konstruktor megoldható konstruktor delegálással is, a mintamegoldásban egy ilyen verzió is van.</p>
+</div>
+</details>
+
+    <li>Destruktoron?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Remélhetőleg semmit. A <code>T</code>-k destruktora ne dobjon kivételt.</p>
+</div>
+</details>
+
+    <li>A <code>push()</code> függvényen?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Először is, ha megtelt a verem, dobjon kivételt, ahelyett, hogy túlírná a foglalt memóriaterületet.
+Másodszor, a <code>size_</code> tagváltozót csak azután növeljük meg, miután már sikerült a kapott elemet
+bemásolni a verembe! Így automatikusan változatlan marad majd a számláló (és ezzel együtt a verem is),
+ha a <code>T</code> másolása nem sikerült.</p>
+</div>
+</details>
+
+    <li>A <code>pop()</code> függvényen? Vigyázat, ez kemény dió.
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Első körben megcsinálhatjuk ugyanazokat a változtatásokat, mint a <code>push()</code> függvényen.
+A <code>saved</code> változóba akár mozgathatjuk is az adatot, mivel a következő sorban úgyis
+a destruktort hívjuk, egy garantáltan sikeres függvényt.</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+T Stack&lt;T&gt;::pop() {
+    if (size_ == 0)
+        throw std::length_error(&quot;stack ures&quot;);
+    T saved(std::move(pData_[size_-1]));
+    pData_[size_-1].~T();
+    size_--;
+    return saved;
+}</code></pre>
+
+<p>Ez nem rossz, de ilyen formán ez csak alap garanciát <em>(basic guarantee)</em> tud adni a hívónak. Miután a tömbből már 
+kitörlődött az adat (a <code>pData_</code>-n belüli példány destruktora lefutott), kezelt elemről még egy másolatot (vagy mozgatott 
+példányt) kell készíteni. Ez lesz a visszatérési érték. Ha ennek a létrehozása nem sikerül a <code>return saved</code> sorban, 
+akkor kivétel fog keletkezni. A verem ilyenkor ugyan konzisztens állapotban van, de a kivett elemet a hívó nem kapja meg.</p>
+
+<p>Ezt a problémát sajnos <a href="index.html#gotw08">lehetetlen megoldani</a>. Nem lehetséges az, hogy a függvény ki is veszi az elemet a 
+veremből, vissza és adja, és közben még erős garanciát is ad a művelet elvégzésére. Úgy lehetséges csak erős garanciát adni, ha két 
+külön függvényt írunk: a <code>top()</code> visszaadja a legfölső elemet (akár referencia szerint), de nem szedi ki a veremből; a 
+<code>pop()</code> eldobja a legfölső elemet, de nem tér vissza vele. Nem véletlen, hogy az <code>std::stack</code> 
+<code>top()</code> és <code>pop()</code> függvénye is ilyen.</p>
+
+</div>
+</details>
+
+    <li>Az <code>empty()</code> függvényen?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Semmit, nincs benne kritikus művelet, csak egy <code>int</code> vizsgálata és egy <code>bool</code> visszatérési
+érték másolása.</p>
+</div>
+</details>
+
+    <li>A főprogramon?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Kapjuk el a kivételt.</p>
+</div>
+</details>
+
+    <li>Mit kell ahhoz csinálni, hogy legyen másoló értékadó operátor?
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Legegyszerűbb copy-and-swap-et használni, az jól kezeli a kivételeket is.</p>
+</div>
+</details>
+</ul>
+
+<details >
+<summary>A teljes megoldás</summary>
+<div>
+<p>A teljes megoldás: <a href="stack_megoldas.cpp">stack_megoldas.cpp</a>.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Bináris fa másolása">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Bináris fa másolása<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott egy bináris fát megvalósító osztály, az alábbi kódrészlettel:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Node {
+  private:
+    T data;
+    Node* left = nullptr;
+    Node* right = nullptr;
+  public:
+    Node(Node const&amp; original) : data(original.data) {
+        left = new Node(*original.left);
+        right = new Node(*original.right);
+    }
+};</code></pre>
+
+<p>Mi a probléma ezzel a másoló konstruktorral? Javítsd meg! Írd meg a mozgató konstruktort is, továbbá
+a kétféle értékadó operátort és a destruktort! Figyelj arra, mikor, milyen kivételek keletkezhetnek!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Először is, <code>nullptr</code>-t nem szabadna dereferálni, kell báziskritérium a rekurzióhoz.</p>
+<p>Az adattag másolása az inicializáló listán atomi művelet. Ha az létrejött, és utána
+kivétel dobódik, akkor az adattag destruktora meg fog hívódni automatikusan.</p>
+<p>Ezért mi csak a dinamikus részért felelünk. Az egyes részfák másolása szintén atomi
+művelet; <code>new Node(...)</code> vagy sikerül, és akkor létrejött a részfa, vagy nem, akkor
+pedig a megfelelő destruktorok már hívódtak. Gond csak ott lehet, ha a bal részfa már megvan, és a jobb
+oldali másolása sikertelen. Ezért ott el kell kapni a kivételt:</p>
+<pre   ><code class="language-c">Node::Node(Node const&amp; original) : data(original.data) {
+    if (original.left)
+        left = new Node(*original.left);
+    try {
+        if (original.right)
+            right = new Node(*original.right);
+    } catch (...) {
+        delete left;
+        throw;
+    }
+}</code></pre>
+<p>Persze az sem lenne baj, ha mindkét <code>new</code> bekerülne a <code>try</code> blokkba,
+és a <code>catch</code>-ben pedig két <code>delete</code> is szerepelne. A pointerek a fenti
+osztálydeklarációban külön is inicializálva vannak, <code>nullptr</code> értékűek.</p>
+<p>Nagyban megkönnyítjük a dolgunkat, ha nyers pointerek helyett okos pointereket használunk.
+Ilyenkor ha valamelyik <code>make_unique</code>-on belüli <code>new</code> kivételt dob,
+a <code>unique_ptr</code>-ek destruktora futni fog, ahogy a <code>data</code>-é is:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Node {
+  private:
+    T data;
+    std::unique_ptr&lt;Node&gt; left, right;
+  public:
+    Node(Node const&amp; original) : data(original.data) {
+        if (original.left)
+            left = std::make_unique&lt;Node&gt;(*original.left);
+        if (original.right)
+            right = std::make_unique&lt;Node&gt;(*original.right);
+    }
+};</code></pre>
+<p>A mozgató konstruktor a <code>unique_ptr</code>-es esetben:</p>
+<pre   ><code class="language-c">Node::Node(Node &amp;&amp; original)
+    : data(std::move(original.data))
+    , left(std::move(original.left))
+    , right(std::move(original.right))
+{
+}</code></pre>
+<p>Tehát igazából csak ennyi:</p>
+<pre   ><code class="language-c">Node::Node(Node &amp;&amp; original) = default;</code></pre>
+<p>Nyers pointerek esetén ez sem lenne ilyen egyszerű.</p>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f08/index.html#feladat_kivetelbiztos">a feladatgyűjteményt</a>.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <ol>
+    <li id="gotw20"><a href="http://www.gotw.ca/gotw/020.htm">GotW #20</a> – Guru of the Week, #20, Code Complexity - Part I.
+    <li id="gotw66"><a href="http://www.gotw.ca/gotw/066.htm">GotW #66</a> – Guru of the Week, #66, Constructor Failures
+    <li id="gotw08"><a href="http://www.gotw.ca/gotw/008.htm">GotW #08</a> – Guru of the Week, #08, Exception Safety
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

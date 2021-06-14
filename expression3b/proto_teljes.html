@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Expression</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    
+<h1>Expression</h1>
+
+<script>
+
+/* hierarchia */
+var expression = Object.create(null);
+
+var constant = Object.create(expression);
+constant.create = function(c) {
+    var obj = Object.create(constant);
+    obj.c = c;
+    return obj;
+};
+
+var variable = Object.create(expression);
+variable.create = function() {
+    return Object.create(variable);
+};
+
+var twooperand = Object.create(expression);
+
+var sum = Object.create(twooperand);
+sum.create = function(lhs, rhs) {
+    var obj = Object.create(sum);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+};
+
+var product = Object.create(twooperand);
+product.create = function(lhs, rhs) {
+    var obj = Object.create(product);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+}
+
+/* eval művelet */
+constant.eval = function(x) { return this.c; };
+variable.eval = function(x) { return x; };
+sum.eval = function(x) { return this.lhs.eval(x) + this.rhs.eval(x); };
+product.eval = function(x) { return this.lhs.eval(x) * this.rhs.eval(x); };
+
+/* print művelet */
+constant.str = function() { return ''+this.c; };
+variable.str = function() { return 'x'; };
+twooperand.str_helper = function(op) {
+    return '(' + this.lhs.str() + op + this.rhs.str() + ')';
+};
+sum.str = function() { return this.str_helper('+'); };
+product.str = function() { return this.str_helper('*'); };
+
+</script>
+
+<script>
+/* használat */
+function create_expression(str) {
+    var s = [];
+    var exprs = str.trim().split(/\s+/);
+    var e, lhs, rhs;
+    while (e = exprs.shift()) {
+        switch (e) {
+            case '+':
+                rhs = s.pop();
+                lhs = s.pop();
+                s.push(sum.create(lhs, rhs));
+                break;
+            case '*':
+                rhs = s.pop();
+                lhs = s.pop();
+                s.push(product.create(lhs, rhs));
+                break;
+            case 'x':
+                s.push(variable.create());
+                break;
+            default:
+                s.push(constant.create(+e));
+                break;
+        }
+    }
+    return s.pop();
+}
+
+function process_expression(str, result) {
+    try {
+        var e = create_expression(str);
+        var p = "f(x) = " + e.str();
+        var v = "f(10) = " + e.eval(10);
+        result.value = p + "\n" + v;
+    } catch (err) {
+        result.value = "Hibás a kifejezés?";
+    }
+}
+</script>
+
+
+<form>
+<p>
+Írj be egy <a href="https://hu.wikipedia.org/wiki/Ford%C3%ADtott_lengyel_jel%C3%B6l%C3%A9s">RPN</a> kifejezést! Pl. <code>3 x + 5 *</code>
+</p>
+<p>
+<label>Kifejezés</label>
+<input type="text" name="expression"> 
+</p>
+<p>
+<button type="button" onclick="process_expression(this.form.elements.expression.value, this.form.elements.result);">Megjelenít</button>
+</p>
+<textarea name="result" cols="80" readonly>
+</textarea>
+</form>
+
+<p>Lásd a HTML forrását!</p>
+
+</body>
+
+</html>

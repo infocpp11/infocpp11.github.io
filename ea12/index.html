@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Concepts</title>
+<meta property="og:title" content="TEST InfoC++11 :: Concepts">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Kitekintés: a concept nyelvi elem, amely a következő C++ szabvány, a C++20 része lesz.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Kitekintés: a concept nyelvi elem, amely a következő C++ szabvány, a C++20 része lesz.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Concepts">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Concepts</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Kitekintés: a concept nyelvi elem, amely a következő C++ szabvány, a C++20 része lesz.</p>
+</div>
+
+<p><code>Serializable</code>, <code>Comparable</code>, <code>Iterable</code> – ezek az interfészek nagyon sok OOP nyelvben akár 
+beépítetten megjelennek. C++-ban azonban gyakran nem tűnik helyénvalónak ilyen osztályokat definiálni, ilyenekből származtatni a 
+konkrét osztályainkat. Miért akarnánk <code>Serializable</code> interfészből származtatni, miért nem használjuk csak simán a kiíró 
+operátort? Miért akarnánk egy tárolóban <code>Serializable*</code> pointereket tárolni, olyan objektumokra, amelyekről aztán azt se 
+tudjuk, hogy mik azok, és elárasztják a <code>dynamic_cast</code>-ok a kódunkat? Érezzük, hogy a nyelv ellenkezik. Ezt 
+<code>template</code>-ekkel kell csinálni, azaz fordítási idejű polimorfizmussal, nem pedig klasszikus örökléssel, futási idejű 
+polimorfizmussal.</p>
+
+<p>A C++20-ban egy új nyelvi elemet fognak bevezetni, amelyik épp ilyen jellegű fogalmakat hivatott kifejezni a 
+<code>template</code>-ekre a forráskódban is. A <code>requires</code> és a <code>concept</code> kulcsszavakkal sablon függvényekre, 
+sablon osztályokra fejezhetjük <em>majd</em> ki, milyen elvárásaink vannak a példányosító típusokkal kapcsolatban. Legyen 
+szerializálható a <code>&lt;&lt;</code> és <code>&gt;&gt;</code> operátorokkal, legyen összehasonlítható az <code>==</code> és 
+<code>!=</code> operátorokkal, és így tovább. Ezek az elvárások amúgy is ott vannak, hiszen ha hiányzik egy operátor, fordítási 
+hibát fogunk kapni – de ha a fordító érti, hogy épp mit csinálunk, akkor hasznosabb hibaüzenetet tud majd adni. A sablon 
+metaprogramozás ugyanis egyik legnagyobb problémája az, hogy trükkökből áll az egész kódunk.</p>
+
+<p>A <strong>concept</strong> nevű nyelvi eszközön – aminek ez a jegyzet nem próbál meg magyar nevet adni – már egy bő évtizede 
+dolgoznak, azonban a szabványosítási bizottság végül mégsem szavazta be a C++17 szabványba a specifikációt. Legtöbben úgy érezték, 
+várni kell egy kicsit, amíg több tapasztalat gyűlik össze. 2020-ra viszont már bekerült ez a nyelvbe.</p>
+
+<p>Ez az előadás felvezetésképp néhány ismert kódrészlettel, és azoknak szokványos sablon metaprogramozós megoldásával indít. Majd 
+a leendő nyelvi eszköz bemutatása után megmutatja azt, mennyire leegyszerűsödik ezek kódolása.</p>
+
+<blockquote style="overflow: hidden;">
+<img src="bttf.png" class="float">
+<h3>Alert: science fiction!</h3>
+<p>Minden, ami ebben az írásban szerepel, egyelőre még messze nem elterjedt az iparban, nincs kitaposott út.</p>
+<p>A jegyzetben bemutatott példák, ötletek nagyrészt az irodalomjegyzékben szereplő
+írásokból származnak; főként Bjarne Stroustrup és Andrew Sutton cikkeiből.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">std::advance</a>
+                      <li><a href="index.html#2" class="">Concepts: alapok</a>
+                      <li><a href="index.html#3" class="">Sablonok és megkötések</a>
+                      <li><a href="index.html#4" class="">A concept-ek jelentése</a>
+                      <li><a href="index.html#5" class="">Overload concept-ek segítségével</a>
+                      <li><a href="index.html#6" class="">Specializáció concept-ek segítségével</a>
+                      <li><a href="index.html#7" class="">Szemantikai pontosítás</a>
+                      <li><a href="index.html#8" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::advance">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="conceptsadvance" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        std::advance<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Sok sablon metaprogramozással kapcsolatos probléma bemutatható iterátorokon. Nézzünk egy ilyet bevezetésképp!</p>
+
+<p>Tudjuk, hogy nem minden tárolóban ugrálhatunk szabadon ide-oda. Egy vektorban bármekkora ugrás megtehető <code>O(1)</code> időben, míg egy láncolt listában előre-hátra lépni csak egyesével, emiatt <code>O(n)</code> időben lehet. Nyelvileg ez úgy jelenik meg, hogy a vektor iterátoránál értelmezhető az <code>iter + int</code> alakú kifejezés (random access iterator), míg a listánál csak az <code>iter++</code> operátor létezik (forward iterator).</p>
+
+<p>Az <code>std::advance(iterator &amp;, int)</code> függvény, melynek feladata egy iterátor léptetése, éppen ez alapján csinál esetszétválasztást. Véletlen elérésű iterátorokra konstans a futási ideje, a lépés nagyságától függetlenül. Ha nincs <code>+=</code> operátor, akkor viszont lineáris a futási idő.</p>
+
+<p>Nézzük meg ennek egy lehetséges megvalósítását! A problémát, és a <a href="../ea10/index.html#dispatch">klasszikus megoldását</a> ismerjük: viselkedésleíró osztályt kell használni (trait class), és egy segédfüggvényt, amely az iterátor tulajdonságai alapján kiválasztja a megfelelő algoritmust:</p>
+
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+void advance(IT &amp; it, int n, std::random_access_iterator_tag) {
+    it += n;
+}
+
+template &lt;typename IT&gt;
+void advance(IT &amp; it, int n, std::forward_iterator_tag) {
+    for (int i = 0; i &lt; n; ++i)
+        ++it;
+}
+
+template &lt;typename IT&gt;
+void advance(IT &amp; it, int n) {
+    using iter_categ = typename std::iterator_traits&lt;IT&gt;::iterator_category;
+    advance(it, n, iter_categ());
+}</code></pre>
+
+<h3>A típus tulajdonsága: van-e olyan operátora?</h3>
+
+<p>A tulajdonság lekérdezésének új elvű megvalósításához ismerkedjünk meg egy új segédeszközzel, a C++17-es <code>std::void_t</code>-vel. Ez egy sablon típus, amelynek a definíciója mindössze ennyi:</p>
+
+<pre   ><code class="language-c">template &lt;typename...&gt;
+using void_t = void;</code></pre>
+
+<p>Ez önmagában eléggé haszontalannak tűnik. Bármivel példányosítjuk, <code>void</code>-ot kapunk: a <code>void_t&lt;&gt;</code> is <code>void</code>, a <code>void_t&lt;int, double&gt;</code> is <code>void</code>, bármilyen sablonparaméterek esetén <code>void</code>. A létezése egyfajta <a href="../void_t/index.html">történelmi baleset</a>: véletlenül jöttek rá, hogy a nyelv szabályai miatt igen meglepő dolgokra képes ez a segédtípus. A sablonparamétereket ugyanis adhatják <code>decltype</code>-os kifejezések, és ezért SFINAE-s környezetekben nagyon jól használható.</p>
+
+<p>Tegyük fel, hogy kíváncsiak vagyunk egy bizonyos típusnál arra, hogy használható-e rajta a <code>valami + int</code> művelet! Ezt a <code>void_t</code> segítségével így kell csinálni:</p>
+
+<pre   ><code class="language-c">template &lt;typename T, typename SFINAE = void&gt;
+struct has_plus_operator : std::false_type {};
+
+template &lt;typename T&gt;
+struct has_plus_operator&lt;T, std::void_t&lt;decltype(T()+0)&gt;&gt; : std::true_type {};
+
+
+int main() {
+    std::cout &lt;&lt; has_plus_operator&lt;std::list&lt;int&gt;::iterator&gt;::value;
+    std::cout &lt;&lt; has_plus_operator&lt;std::vector&lt;int&gt;::iterator&gt;::value;
+}</code></pre>
+
+<pre class="screenshot">
+0
+1
+</pre>
+
+<p>Hogy működik ez a kód? Mindkét példányosítás esetén a fordító megvizsgálja <em>mind a két</em> osztály deklarációját, hogy eldöntse, az alap sablont (fenti), vagy a specializációt (lenti) kell használnia.</p>
+
+<ul>
+    <li>Az első esetben egy lista iterátorával kíséreljük meg a példányosítást. Ilyenkor a <code>T()+0</code> kifejezés érvénytelen, mivel ez nem véletlen elérésű iterátor, nem adható hozzá egy egész szám. Ezért a specializáció nem használható (SFINAE szabály miatt, a sablonparaméter neve is erre hívja fel a figyelmet), marad helyette az osztály alapdefiníciója. Az pedig az <code>std::false_type</code>-ból öröklődve hamisat ad.</li>
+    <li>A második esetben viszont egy vektor iterátora a vizsgált típus. Ebben az esetben a <code>T()+0</code> kifejezés érvényes, annak típusa lesz a <code>void_t</code> sablonparamétere a <code>decltype</code> miatt. Így a <code>true_type</code>-ból öröklődő specializáció is használható, <code>&lt;vektor_iterátora, void&gt;</code> sablonparaméterekkel példányosítva. Bár ez pontosan megegyezik az alapdefiníció paramétereivel (<code>SFINAE = void</code> az alapértelmezett), mégis ilyenkor a specializációnak van elsőbbsége. Szimplán azért, mert specializáció.</li>
+</ul>
+
+<p>Eddig van egy metafüggvényünk, amelyik az iterátorról meg tudja mondani, biztosít-e véletlen elérést vagy nem. Folytassuk ezen az úton! Tegyük fel, hogy ha van az iterátornak <code>+ int</code> művelete, akkor van <code>+= int</code> művelete is. (Később látni fogjuk, ez jogos feltételezés.) A metafüggvény értékének felhasználásával létrehozhatunk két <code>advance()</code> függvényt, amelyeket egymást kölcsönösen kizáró módon engedünk csak példányosodni.</p>
+
+<p>Ez egy újabb SFINAE lesz. Hogy a szokásos <code>std::enable_if</code>-es történetet kicsit lerövidítjük, bevezetünk egy új típust, az <code>enable_if_t</code>-t:</p>
+
+<pre   ><code class="language-c">template &lt;bool B, class T = void&gt;
+using enable_if_t = typename std::enable_if&lt;B, T&gt;::type;</code></pre>
+
+<p>Így nem kell majd kiírni mindig a <code>typename</code>-et és a <code>::type</code>-ot. Ugyanez létezik egyébként szabványosan is, C++14 óta. Végül az eddigi segédfüggvényre egyáltalán nincs szükségünk:</p>
+
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+void advance(IT &amp; it, int n, std::enable_if_t&lt;has_plus_operator&lt;IT&gt;::value&gt; * = nullptr) {
+    std::cout &lt;&lt; &quot;+= advance&quot; &lt;&lt; std::endl;
+    it += n;
+}
+
+
+template &lt;typename IT&gt;
+void advance(IT &amp; it, int n, std::enable_if_t&lt;!has_plus_operator&lt;IT&gt;::value&gt; * = nullptr) {
+    std::cout &lt;&lt; &quot;for ++ advance&quot; &lt;&lt; std::endl;
+    for (int i = 0; i &lt; n; ++i)
+        ++it;
+}
+
+
+int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    auto vi = v.begin();
+    advance(vi, 2);
+
+    std::list&lt;int&gt; l = { 1, 2, 3 };
+    auto li = l.begin();
+    advance(li, 2);
+}</code></pre>
+
+<p>És kész.</p>
+
+<h3>Esetszétválasztás: ha van olyan operátora...</h3>
+
+<p>Nézzünk meg a folytatást, a még C++17-esebb megoldást! A fenti kódban <code>+</code> operátor lekérdezése viszonylag egyszerű volt, de az <code>enable_if</code>-es rész még mindig elég fájdalmasan néz ki. Ha tudjuk előre, hogy csak a fenti két esetet kell szétválasztani (van/nincs <code>+=</code> operátor), akkor leginkább ezt szeretnénk írni:</p>
+
+<div class="sticky">Hibás</div>
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+void advance(IT &amp; it, int n) {
+    if (has_plus_operator&lt;IT&gt;::value) {
+        it += n;
+    } else {
+        for (int i = 0; i &lt; n; ++i)
+            ++it;
+    }
+}</code></pre>
+
+<p>De mint ismeretes, ez így nem működik; hiába fordítási idejű konstans alapján ágaztatjuk el vezérlést, a fordító mégis mindkét ágat meg fogja próbálni lefordítani. <a href="../cpp1417/index.html#cpp14template">C++17 óta azonban nem:</a> az <code>if constexpr</code> kulcsszópárossal jelezhetjük azt, hogy egy elágazás feltételét fordítási időben ki kell tudni értékelni. És itt jön a lényeg: ha a feltétel értékét már fordítási időben ismerjük, akkor már ilyenkor tudjuk azt is, a vezérlés melyik ágra fog kerülni. A másik ág pedig <em>teljesen elhagyható:</em> még akár hibás is lehet, legalábbis a hiányzó operátor erejéig. Az esetszétválasztás tehát:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename IT&gt;
+void advance(IT &amp; it, int n) {
+    if constexpr (has_plus_operator&lt;IT&gt;::value) { // if constexpr
+        it += n;
+    } else {
+        for (int i = 0; i &lt; n; ++i)
+            ++it;
+    }
+}</code></pre>
+
+<h3>Tanulságok</h3>
+
+<p>A fenti feladatban két problémát kellett megoldani:</p>
+
+<ul>
+    <li>Le kellett tudni kérdezni egy típusról annak valamely tulajdonságát, amelyik amúgy a fordító számára amúgy is ismert volt.</li>
+    <li>Esetszétválasztást kellett tudni csinálni a típus valamely tulajdonsága alapján.</li>
+</ul>
+
+<p>Mindkettő olvashatóbb formában megoldható az új eszközökkel, mint ahogyan a régebben bemutatottakkal lehetett volna. De 
+elégedettek nem lehetünk igazán. A <code>void_t</code>-s megoldás továbbra is egy trükk. Bár viszonylag olvasható, mégis azt 
+érezzük, jobb lenne az ilyen tulajdonságok lekérdezéséhez nyelvi támogatás.</p>
+
+<p>Az esetszétválasztás megvalósításához az <code>if constexpr</code> is nagyon frappáns megoldás. De azt észre kell vennünk,
+hogy egyfajta <strong>type switch</strong> lévén tervezési szempontból rosszabb, mint az <em>overloados</em> változat. Jelenleg
+csak 1-2 soros algoritmusaink vannak, és azokból is csak kettő (az iterátorok léptetése), így elférnek ezek egy függvényben. De ha
+kettőnél több típusra kellene elkészíteni a függvényt, és összetettebb algoritmusokról lenne szó, ez kényelmetlenné válhatna.
+Főleg, hogy egy új típus hozzáadásánál egyszerűbb lenne egy új <em>overloadot</em> írni, mint egy meglévő függvényt kiegészíteni.
+Ideális esetben a fordító úgyis választani fog közülük, nem kellene a mi feladatunk legyen megírni a kiválasztás logikáját.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Concepts: alapok">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="eaconcepts" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Concepts: alapok<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tudjuk, hogy a sablonok a C++ kódban az ún. <a href="../ea10/index.html#ducktyping">duck typing</a> típusszemlélettel működnek: ami úszik és hápog, az kacsa. Ha szeretnénk egy olyan függvényt írni, ami <em>bármit</em> ki tud írni a képernyőre, ahhoz sablont írunk:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}</code></pre>
+
+<p><em>Bármilyen típusú</em> objektum, amely esetén értelmezhető egy <code>ostream &lt;&lt; obj</code> kifejezés, használható a fenti függvény paramétereként – szoktuk mondani. De ez a típusszemlélet fájdalmas is tud lenni, amikor elrontjuk a sablon kódot. Tegyük fel, hogy ki szeretnénk írni egy nem szerializálható objektumot. Legyen ez most egy egészekből álló vektor, amelyről akár feltételezhetnénk is, hogy van kiíró operátora:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+template &lt;typename T&gt;
+void print(T obj) {
+    std::cout &lt;&lt; obj;   // itt derül ki a hiba
+}
+
+int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    print(v);           // ez a hibás hívás
+}</code></pre>
+
+<p>Erre természetesen fordítási hibát kapunk. Na de mennyit?! GNU g++ 7.0.1-es verzióval próbálva összesen 230 sort:</p>
+
+<pre class="screenshot">
+$ g++ -std=c++17 print.cpp  2>&amp;1 | wc -l
+230
+</pre>
+
+<p>Pedig ez egyetlen egy apró hiba volt. Komolyabb sablon kódoknál, rekurzív példányosításoknál még rosszabb a helyzet.</p>
+
+<p>Ha valahogyan tudnánk jelezni a fordítónak, hogy itt az <code>std::cout &lt;&lt; obj</code>  kifejezésbe behelyettesíthető paramétert várunk, akkor már a hívás helyén jelezni tudná a hibát. A hibaüzenet pedig nem arról szólna, hogy „nincs ilyen operátor, mellesleg ilyeneket találtam: ... ” (és bumm, egy 100 elemű lista mindenféle szabványos fejlécfájlok belsejébe hivatkozással), hanem arról, hogy „a paraméter szerializálható objektum kellene legyen”.</p>
+
+<p>Erre valók a <strong>concept</strong>-ek. A <strong>concept</strong> olyasmi, mint egy interfész az OOP-ben, csak sablonokra értelmezve. A függvény paramétere legyen szerializálható, ezt így írjuk:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+    requires Serializable&lt;T&gt;()     // concept
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}</code></pre>
+
+<p>Ha így teszünk, a 230 soros hibaüzenet 13 sorra rövidül, amikből a lényeg ez:</p>
+
+<pre class="screenshot">
+$ g++ -fconcepts -std=c++17 print.cpp
+print.cpp: In function ‘int main()’:
+print.cpp:17:20: error: cannot call function ‘void print(T) [with T = std::vector&lt;int&gt;]’
+[...]
+print.cpp:12:6: note:   constraints not satisfied
+[...]
+print.cpp:4:14: note: the required expression ‘(stream &lt;&lt; obj)’ would be ill-formed
+</pre>
+
+<p>Így már érthetőbb. Ez tényleg azt mondja, a <code>main()</code>-ben lévő <code>print()</code> hívás helytelen, mert a paraméterre adott megkötések (constraint) nem teljesíthetők – a <code>stream &lt;&lt; obj</code> alakú kifejezés hibás lenne.</p>
+
+<p>A fenti kódban használt <code>Serializable</code> egy ún. <strong>concept</strong>. Ez egy kifejezetten erre a célra létrehozott függvény, aminek természetesen fordítási időben kiértékelhetőnek kell lennie. A sablonparamétere a vizsgálandó típus, amelyről tudni szeretnénk, szerializálható-e vagy nem; például <code>Serializable&lt;int&gt;()</code> igazat kell adjon, <code>Serializable&lt;std::vector&lt;int&gt;&gt;()</code> pedig hamisat. Ezt az értéket fogja megvizsgálni a fordító a függvényhívás lefordítása előtt a <code>requires</code> jelzés hatására. Hamis érték esetén meg sem próbálkozik majd a függvénytörzs fordításával, mert a programozó jelezte, hogy amúgy is értelmetlen lenne. Így tűnik el a 230 sornyi hibaüzenet, és lesz helyette a néhány sornyi könnyen érthető jelzés.</p>
+
+<p>A <code>Serializable</code> függvény definíciója pedig a következő:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+concept bool Serializable() {
+    return requires (std::ostream &amp; os, std::istream &amp; is, T obj) {
+        { os &lt;&lt; obj } -&gt; std::ostream &amp;;
+        { is &gt;&gt; obj } -&gt; std::istream &amp;;
+    };
+}</code></pre>
+
+<p>A fenti függvényben több új nyelvi elem is van, amelyeket a következő szakasz részletesebben is kifejt majd. A két legfontosabb a <code>concept</code> és a <code>requires</code> kulcsszavak megjelenése.</p>
+
+<p>A <code>concept</code> kulcsszó jelöli meg azokat a metafüggvényeket, amelyeket a fordító a sablonok példányosításánál használ majd az interfészek ellenőrzésére. Ennek paramétere igazából a <code>T</code> típus, visszatérési értéke pedig értelemszerűen a <code>bool</code>.</p>
+
+<p>A <code>requires</code> kifejezés (requires expression) a <code>requires</code> kulcsszónál kezdődik, és a <code>return</code> utasítással egy vonalban lévő bezáró kapcsos zárójelig tart. Ebben adjuk meg, hogy a megadott típussal rendelkező <code>os</code>, <code>is</code> és <code>obj</code> paraméterek mellett milyen kifejezéseket kellene tudni kiértékelni. Ennek a hatására fordító megvizsgálja, hogy használhatóak-e a kiíró, beolvasó operátorok, és azok láncolhatóak-e. Ha bármelyik nem teljesül, a <code>requires</code> kifejezés értéke hamis lesz.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sablonok és megkötések">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Sablonok és megkötések<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>A sablonfüggvények definíciója</h3>
+
+<p>Nézzük meg jobban a szintaktikai elemeket! Előbb azt a részt, ahol használjuk a létrehozott <strong>concept</strong>-et. A fenti példában a <code>print()</code> függvény jelzi, hogy a sablonparaméterének valamilyen elvárásoknak meg kell felelnie. Itt nem csak a fent bemutatott szintaxist használhatjuk, hanem két lehetőségünk van:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;          // 1
+    requires Serializable&lt;T&gt;()
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}
+
+
+template &lt;Serializable T&gt;      // 2
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}
+
+/*
+ * void print(Serializable obj) {
+ *     std::cout &lt;&lt; obj;
+ * }
+ */</code></pre>
+
+<p>Az első változat a legbőbeszédűbb, a szokásos sablon szintaxis kiegészítése egy megkötéssel (constrained template).</p>
+
+<p>A másodiknál a <code>typename</code> kulcsszót a <strong>concept</strong> neve helyettesíti. Ez egyben automatikusan azt is jelenti, hogy a példányosító típus meg kell feleljen a <code>Serializable</code> <strong>concept</strong> elvárásainak. Ezen a szintaxison ugyan nem látszik közvetlenül, de a fordító ilyenkor is meghívja a <code>Serializable&lt;T&gt;()</code> függvényt, és megvizsgálja az értékét. Viszont ez a forma csak olyankor használható, ha a <strong>concept</strong>-ünknek pontosan egy paramétere van.</p>
+
+<p>A harmadik forma csak a történeti érdekesség miatt szerepel, de nem véletlenül van elrejtve. Egykor jó ötletnek tűnt, hogy így
+is lehessen definiálni függvényeket (hiszen ha <code>Serializable</code> egy <strong>concept</strong>, nem pedig egy típus neve, akkor
+ez csak sablon lehet). De aztán később rájöttek, hogy ez nem kifizetődő, mert sok félreértésre ad lehetőséget, és nehezíti a munkát. Leginkább azért, mert nem látszik rajta, hogy ez <code>template</code>-es függvény.</p>
+
+<h3>A <strong>concept</strong> mint függvény és mint változó</h3>
+
+<p>Az eddigi példákban a <strong>concept</strong>-eket függvényként fogalmaztuk meg. Szemlélet szerint ez a helyes: a <strong>concept</strong> végülis egy függvény, amelynek paramétere a vizsgált típus, értéke pedig a megfelelőséget adja meg. Használhatunk azonban sablon változókat is. Ebben az esetben nincsen szükség függvénytörzsre és <code>return</code> utasításra, hanem a <code>concept bool név = ...</code> változódefiníció után rögtön írhatjuk is a <code>requires</code> kifejezést. A <code>concept</code> kulcsszó ilyenkor is fordítási idejű konstanst jelent:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+concept bool Serializable =
+    requires (std::ostream &amp; os, std::istream &amp; is, T obj) {
+        { os &lt;&lt; obj } -&gt; std::ostream &amp;;
+        { is &gt;&gt; obj } -&gt; std::istream &amp;;
+    };</code></pre>
+
+<p>Természetesen ebben az esetben a használat helyén sincsen szükség a függvényhívó operátorra. Ha a rövidített formát használjuk, azt ugyanúgy felismeri a fordító:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+    requires Serializable&lt;T&gt; // nincs ( ), ha változó
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}
+
+template &lt;Serializable T&gt;
+void print(T obj) {
+    std::cout &lt;&lt; obj;
+}</code></pre>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A concept-ek jelentése">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A concept-ek jelentése<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Concept-ek, mint alapfogalmak</h3>
+
+<p>A sablon kódokat sokáig úgy írtuk, hogy ügyeltünk rá, a lehető legkevesebb műveletet várjuk el a példányosító típustól. De ez hibás megközelítés, a <strong>concept</strong>-ek használatához szintet kell lépnünk.</p>
+
+<p>Lássunk egy példát, miért! Ha az <code>a == b</code> kifejezés szabályos és értelmes, akkor az <code>a != b</code>-nek is annak kell lennie. Nem várhatjuk el a programozótól, hogy mindenhol a körülményes <code>!(a == b)</code> formát használja. Az összehasonlíthatóság egy <em>axióma</em>, nem csak szintaktikai elem. Ezért az <em>egyenlőségre vizsgálhatóság</em> definíciója elő kell írja mindkét műveletet:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+concept bool Equality_comparable =
+    requires (T a, T b) {
+        { a == b } -&gt; bool;
+        { a != b } -&gt; bool;
+    };</code></pre>
+
+<p>Vagy ha még pontosabban ki szeretnénk ezt fejezni, megadhatunk egy kétparaméterű <strong>concept</strong>-et is. Ezzel különböző típusok összehasonlíthatósága is vizsgálható, pl. <code>int</code> és <code>double</code>, vagy <code>std::string</code> és <code>char*</code>. Ilyenkor fontos, hogy mindkét irányban megvizsgáljuk a kifejezést; ha <code>a == b</code> működik, akkor <code>b == a</code>-nak is működnie kell:</p>
+
+<pre   ><code class="language-c">template &lt;typename T, typename U&gt;
+concept bool Equality_comparable =
+    requires (T a, U b) {
+        { a == b } -&gt; bool;
+        { a != b } -&gt; bool;
+        { b == a } -&gt; bool;
+        { b != a } -&gt; bool;
+    };</code></pre>
+
+<p>Ugyanígy, ha van <code>+</code>, akkor jogosan elvárhatjuk a <code>+=</code> operátort is, mert a <strong>concept</strong>-ek nem csak szintaktikai, hanem szemantikai elvárásokat is megfogalmaznak. Jelentésük is kell legyen, a kódunkban kezelt problémának egy alapfogalmához kell igazodjanak. Mivel nagyon absztrakt dologról van szó, ezt talán úgy legkönnyebb megérteni, ha ellenpéldát mutatunk rá: ha megmutatjuk azt, hogy mi az, ami <em>nem</em> <strong>concept</strong>. Például hibás megközelítés az összeadhatóságot axiómának tekinteni:</p>
+
+<div class="sticky">Hibás<br>megközelítés</div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+concept bool Addable =
+    requires (T a, T b) {
+        { a + b } -&gt; T;
+    };</code></pre>
+
+<p>Ez nem alapfogalom a programunkban, csak egy művelet. Összeadhatunk például két számot, ugyanakkor két sztring között is használhatjuk a <code>+</code> operátort. Csak ott nem összeadást, hanem összefűzést jelöl, ami az összeadástól különbözik. Ha két sztring összeadható, és sztringet kapunk, akkor miért nem kivonhatóak? Ha ezt a szemléletet követjük, az <code>int*</code> típus is meglepetést fog okozni; <code>int* - int*</code> létezik, de <code>int* + int*</code> nem.</p>
+
+<p>Az összeadás kapcsán jobb ötlet, ha inkább a <em>szám</em> fogalmát próbáljuk meg megfogni:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+concept bool Number =
+    requires (T a, T b) {
+        { a + b } -&gt; T; // alapműveletek
+        { a - b } -&gt; T;
+        { a * b } -&gt; T;
+        { a / b } -&gt; T;
+        { -a } -&gt; T;    // ellentett
+          /* ... */
+        { a += b } -&gt; T&amp;;
+        { a -= b } -&gt; T&amp;;
+          /* ... */
+        { T(0) };       // nulla
+    };</code></pre>
+
+<p>Ez általánosítja, az egész, valós, racionális, komplex, stb. szám típusokat.</p>
+
+<p>Nem véletlen, hogy a <code>Serializable</code> <strong>concept</strong>-ünk sem <code>Printable</code> néven futott: nem csak a kiírást, hanem a beolvasást is ellenőrzi, hiszen ezek együtt jelentik azt, hogy egy objektum szerializálható (karaktersorozatként reprezentálható). Sőt igazából az ok-okozati összefüggés fordítva van: a szerializálhatóságból következik az, hogy kiírható és beolvasható.</p>
+
+<p>Ha túlzottan elapróznánk a megkötéseket, akkor minden algoritmus kedvéért egyedi elvárásokat írnánk, és az algoritmus változtatásakor folyamatosan frissítenünk kellene az elvárásokat is. A <strong>concept</strong>-ek általánosságokat, alapfogalmakat kell megfogjanak. Míg régen úgy gondoltunk egy összegzésre, hogy ahhoz <code>+=</code> operátorra van szükség:</p>
+
+<div class="sticky">Hibás<br>megközelítés</div>
+<pre   ><code class="language-cbub">/* VAL növelhető az ITER által adott értékkel */
+template &lt;Forward_iterator ITER, typename VAL&gt;
+    requires Incrementable&lt;VAL, Value_type&lt;ITER&gt;&gt;
+VAL sum(ITER first, ITER last, VAL acc) {
+    /* ... */
+}</code></pre>
+
+<p>Manapság már inkább úgy fogalmazunk a kódban is, hogy összegezni számokat lehet:</p>
+
+<pre   ><code class="language-cbub">/* VAL egy szám típus */
+template &lt;Forward_iterator ITER, Number VAL&gt;
+    requires Number&lt;Value_type&lt;ITER&gt;&gt;
+VAL sum(ITER first, ITER last, VAL acc) {
+    /* ... */
+}</code></pre>
+
+<p>Gondoljunk csak bele, az első változattal csak a <code>+=</code> operátor létezését írjuk elő („incrementable”), de nem mondunk arról semmit, hogy ez mit szeretne jelenteni. Ezért aztán egy <code>char*</code> típusú akkumulátor mellett pointer aritmetika műveletekkel lépkedhetnénk egy vektorban tárolt <code>int</code> értékek szerint. Ez nem összegzés lenne, hanem inkább csak egy szintaktikai baleset.</p>
+
+<h3>Összetett példa, <code>requires</code>-kifejezés</h3>
+
+<p>Nézzük meg a fentiek alapján egy összetettebb példát, amely egyben a <code>requires</code> kifejezésekben használható eszközöket is bemutatja! A példa a tartomány fogalmának definíciója a <a href="index.html#suttondefining">hivatkozott irodalom</a> alapján. Tartománynak (range) nevezzük azt, amin a <strong>range-based for</strong> ciklus használható, <code>for (auto x : r)</code> alakban.</p>
+
+<pre   ><code class="language-c">template &lt;typename R&gt;
+concept bool Range =
+    requires (R &amp; range) {
+        typename Value_type&lt;R&gt;;
+        typename Iterator_of&lt;R&gt;;
+
+        { std::begin(range) } -&gt; Iterator_of&lt;R&gt;;
+        { std::end(range) } -&gt; Iterator_of&lt;R&gt;;
+
+        requires Input_iterator&lt;Iterator_of&lt;R&gt;&gt;;
+        requires Same_type&lt;Value_type&lt;R&gt;, Value_type&lt;Iterator_of&lt;R&gt;&gt;&gt;;
+    };</code></pre>
+
+<p>A <code>requires</code> kulcsszó vezeti be a vizsgálatot. Ennek kerek zárójelekben megadhatunk fiktív paramétereket, amelyeket majd az operátorok, kifejezések érvényességének ellenőrzésekor használhatunk. Ezek igazából nem jönnek létre változóként, viszont a függvényparamétereknél megszokott szabályok szerint transzformálódnak (pl. tömb &rarr; pointer). A kifejezés törzsében az alábbi vizsgálatfajtákat használhatjuk:</p>
+<ul>
+    <li>A <code>typename</code> kulcsszóval egy típus létezését írhatjuk elő.</li>
+    <li>A kapcsos zárójelek között kifejezéseket adunk meg, amelyeknek kiértékelhetőnek kell lenniük. A kifejezés értékének típusa – jelen esetben ez a függvények visszatérési típusa – a nyíl után adható meg opcionálisan.
+    <li>A <code>requires</code> kulcsszavak után pedig további <strong>concept</strong>-ek hivatkozhatóak.</li>
+</ul>
+
+<p>A nagy <code>requires</code> kifejezésben megadott megkötéseket a fordító fentről lefelé, deklarációjuk sorrendjében ellenőrzi. Ezért is érdemes a fenti sorrendet használni: előbb a típusokat, utána kifejezéseket, végül pedig a beágyazott megkötéseket ellenőrizni. (A hibák így hamarabb kiderülnek.) Ebben a példában: az összes előírásnak teljesülnie kell ahhoz, hogy egy típust tartománynak nevezhessünk. Nevezetesen:</p>
+
+<ul>
+    <li>Meg kell tudni mondani a <code>Value_type&lt;R&gt;</code> segédtípus segítségével, milyen típusú adatokat tartalmaz a tartomány.</li>
+    <li>Léteznie kell a tartományhoz rendelt iterátornak: <code>Iterator_of&lt;R&gt;</code>.</li>
+    <li>Működnie kell rá a <code>std::begin</code> és <code>std::end</code> függvényeknek, és ezek olyan típusú iterátort kell visszaadjanak, mint ami ehhez a tartományhoz tartozik.</li>
+    <li>A visszaadott iterátornak <strong>input iterator</strong>-nak kell lennie, azaz legalább egyszer végig kell tudnunk menni a tartományon.</li>
+    <li>A tartomány elemei, és az iterátoron keresztül látott elemek pedig ugyanolyan típusúak kell legyenek.</li>
+</ul>
+
+<p>A fenti definíció sok külső segédtípust és <strong>concept</strong>-et használt: <code>Value_type</code>, <code>Iterator_of</code>, <code>Input_iterator</code>, <code>Same_type</code>. Ezeket nem kell majd magunknak megírnunk. A Ranges TS munkacsoport tagjai azon dolgoznak, hogy ezeket kidolgozzák, és a teljes STL-t <strong>concept</strong>-képessé tegyék. A tervezet itt elérhető: <a href="index.html#n4651">Ranges TS</a>.</p>
+
+<div class="megjegyzes">
+<p>A program, amelyik a <code>Range</code> <strong>concept</strong>-et használja, és az összes szükséges definíciót is tartalmazza: <a href="print_range.cpp">print_range.cpp</a>. Ez hosszúnak tűnik nulláról megírva, de az STL tartalmazni fogja a segédosztályokat!</p>
+</div>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Overload concept-ek segítségével">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Overload concept-ek segítségével<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A <strong>concept</strong>-ek nem csak interfészek ellenőrzésére jók.</p>
+
+<p>Tekintsük az alábbi függvényt. Ennek feladata, hogy egy tartományban (<code>Range</code>) megkeressen egy elemet. Ehhez azt igényli, hogy egyenlőségre vizsgálható típusú adatokról legyen szó, és ilyeneket tartalmazzon a tartomány:</p>
+
+<pre   ><code class="language-c">template &lt;Range R, Equality_comparable T&gt;
+  requires Same_type&lt;T, Value_type&lt;R&gt;&gt;
+bool in(const R &amp; range, const T &amp; value) {
+    for (const auto &amp; x : range)
+        if (x == value)
+            return true;
+    return false;
+}</code></pre>
+
+<p>Ez jól is működik, azonban egyes tárolókra nem túl hatékony. Egy vektorban az <code>O(n)</code> lépésszámú lineáris keresésnél az nincs jobb megoldás, egy halmaznál viszont jobb lenne annak <code>.find()</code> tagfüggvényét használni, mivel az <code>O(log n)</code> időben tud megkeresni egy elemet.</p>
+
+<p>A halmaz és a vektor egymástól abban különböznek fundamentálisan – és egyben a fenti algoritmus szempontjából lényeges módon –, hogy míg a vektor sorozat-, addig a halmaz asszociatív tároló. A sorozat (sequence) megőrzi a betett elemek sorrendjét, van első és utolsó eleme. Az asszociatív tárolóra ez nem igaz, viszont abban érték alapján gyorsan tudunk keresni.</p>
+
+<img src="range_sequence_associative.svg" style="width: 20em;" class="kozep">
+
+<p>Lássuk ezek leírását <strong>concept</strong>-ek segítségével!</p>
+
+<pre   ><code class="language-cbub">template &lt;typename S&gt;
+concept bool Sequence = // sorozat
+    Range&lt;S&gt;
+    &amp;&amp; requires (S &amp; seq) {
+        { seq.front() } -&gt; Value_type&lt;S&gt; &amp;;
+        { seq.back() } -&gt; Value_type&lt;S&gt; &amp;;
+    };
+
+template &lt;typename AC&gt;
+concept bool Associative_container = // asszociatív tároló
+    Range&lt;AC&gt;
+    &amp;&amp; requires (AC &amp; ac, Key_type&lt;AC&gt; &amp; key ) {
+        { ac.find(key) } -&gt; Iterator_of&lt;AC&gt;;
+        { ac.count(key) } -&gt; int;
+    };</code></pre>
+
+<p>Mindkét esetben tárolókról van szó (ezt mondja az első sorukban a <code>Range</code>), de ezen felül további szolgáltatásokat is biztosítanak.</p>
+
+<p>A két tárolóhoz különféle működésű „eleme-e?” eldöntő függvényt adhatunk. A főprogram <code>in()</code> függvényhívásai egy vektorra automatikusan a lineáris keresést, egy halmazra pedig a <code>.find()</code> tagfüggvényt hívó változatot választják ki. A kettő közül az argumentum, azaz a tároló típusa jelöli ki a megfelelőt, ahogy azt a szokványos <strong>overload resolution</strong> esetén is megismertük.</p>
+
+<pre   ><code class="language-cbub">template &lt;Sequence S, Equality_comparable T&gt; // sorozathoz
+  requires Same_type&lt;T, Value_type&lt;S&gt;&gt;
+bool in(const S &amp; seq, const T &amp; value) {
+    for (const auto &amp; x : seq)
+        if (x == value)
+            return true;
+    return false;
+}
+
+template &lt;Associative_container AC, Equality_comparable T&gt; // asszociatív tárolóhoz
+  requires Same_type&lt;T, Value_type&lt;AC&gt;&gt;
+bool in(const AC &amp; assoc, const T &amp; value) {
+    return assoc.find(value) != assoc.end();
+}
+
+int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    std::cout &lt;&lt; in(v, 2) &lt;&lt; std::endl;
+
+    std::set&lt;int&gt; s = { 1, 2, 3 };
+    std::cout &lt;&lt; in(s, 2) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A sablonparaméterek levezetése mindkét függvény esetén sikeres. Ha csak ezen múlna, mindkét függvényhívás kétértelmű (<strong>ambiguous</strong>) lenne a fordító számára. Itt jelenik meg viszont újdonságként a megkötések szerepe. A sablonparaméterek levezetése után a megadott <strong>concept</strong>-ek is példányosodnak. Ha valamelyik hamis értéket jelez az ilyenkorra már ismert sablonparaméterre, akkor az ahhoz tartozó <code>in()</code> függvényt eldobja a fordító.</p>
+
+<p>Lássuk részletesen a két esetet! Az elsőnél a sablonparaméterek <code>std::vector&lt;int&gt;</code> és <code>int</code> lesznek. A vektor teljesíti a <code>Sequence</code> megkötéseit, de nem teljesíti az <code>Associative_container</code> előírásait. A második hívásnál a helyzet fordított, az <code>std::set&lt;int&gt;</code>-re a <code>Sequence</code> megkötés ad hamisat (a halmaz nem sorozat), az <code>Associative_container</code> viszont igaz értékű. Emiatt egyértelmű mindkét esetben a választás. Mindez ismerős lehet az <code>std::enable_if</code> kapcsán megismert technikához, csak most már nem kell a <code>template</code>-mágia, és sokkal tisztább a szintaxis.</p>
+
+<div class="kozep">
+    <img src="range_fv.svg" style="width: 18em">
+    <div>A sorozatok és az asszociatív tárolók tagfüggvényei</div>
+</div>
+
+<p>A függvényeket tehát akkor tekintjük használhatónak, ha nem történt behelyettesítési hiba, <em>és</em> a megadott <strong>concept</strong>-ek is mindent helyénvalónak találtak. A megkötések ebben a példában kellő mértékben kizárják egymást ahhoz, hogy ne legyen olyan tároló, amely mindkettőt teljesíti. Bár a lineárisan kereső <code>in()</code> függvény konkrétan nem igényli a sorozatok által biztosított <code>.front()</code> és <code>.back()</code> műveleteket, mégis jobb sorozat típust előírni paraméterként – így kisebb a valószínűsége, hogy a két függvény ütközni fog.</p>
+
+<div class="megjegyzes">
+<p>A keresések programkódja: <a href="in.cpp">in.cpp</a>. Ez tartalmazza a <code>Sequence</code> és az <code>Associative_container</code> <strong>concept</strong>-eket is.</p>
+</div>
+
+<div class="megjegyzes">
+<h3>Osztályok specializációja <strong>concept</strong>-ek segítségével</h3>
+<p>A fentiekkel könnyen érthetővé válik pl. egy <code>Iterator_of&lt;&gt;</code> segédtípus működése. Annak definíciója ehhez hasonló:</p>
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+struct iterator_of_helper; // 1
+
+template &lt;typename T, size_t N&gt;
+struct iterator_of_helper&lt;T[N]&gt; { // 2
+    using type = T*;
+};
+
+template &lt;typename T&gt;
+  requires requires { typename T::iterator; } // 3
+struct iterator_of_helper&lt;T&gt; {
+    using type = typename T::iterator;
+};
+
+template &lt;typename T&gt;
+  using Iterator_of = typename iterator_of_helper&lt;T&gt;::type; // 4</code></pre>
+<p>A 4-es kódrészlet a típus definíciója, ez egyszerűen delegálja a feladatot, az iterátor típusának meghatározását, az <code>iterator_of_helper</code> segédosztálynak. Ez azért praktikus, mert az osztály specializálható.</p>
+<p>Az 1-es deklaráció csak megadja a segédosztály nevét és sablonparamétereit. A 2-es részleges specializáció mondja azt, hogy a tömbök iterátora a pointer, ez is a szokásos formát ölti. A 3-as kódrészlet az, amelyik egy újfajta elemként jelenik meg. Ez a sablonparamétereket ugyan nem specializálja, de az 1-es alap sablonnál kötöttebb, ugyanis a példányosításnak feltétele van. A feltétel pedig az, hogy a <code>T</code> típusnak legyen <code>iterator</code> nevű belső típusa. Ha nincs se belső típus, se nem tömb a paraméter, akkor az iterátor nem határozható meg – de természetesen a segédosztályhoz bármikor hozzáadható egy újabb specializáció.</p>
+<p>A 3-as kódrészletben a kétszeri <code>requires</code> nem elírás. Az első adja meg azt, hogy egy megkötéssel rendelkező sablonról van szó, a második pedig a <code>requires</code>-kifejezést vezeti be. Olyan rövid kifejezésről van szó, hogy egyszerűbb helyben megadni, ad-hoc megkötésként.</p>
+</div>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Specializáció concept-ek segítségével">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Specializáció concept-ek segítségével<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Vegyük elő újra az iterátorokat egy példa kedvéért. Az <code>std::advance</code> függvényt vizsgáltunk fentebb. Azt mondtuk, ha véletlen elérésű iterátorunk van <code>+ int</code> művelettel, akkor az előrelépés egyetlen egy lépésben megvalósítható; ha pedig nincs, akkor egyesével, a <code>++</code> operátorral kell lépkedni.</p>
+
+<p>Miután a megfelelő <strong>concept</strong>-ek definiálva lettek (<code>Forward_iterator</code> és <code>Random_access_iterator</code>), az <code>advance()</code> függvény könnyen felírható <strong>overload</strong>-ok formájában:</p>
+
+<pre   ><code class="language-c">template &lt;typename IT&gt; concept bool Forward_iterator = /* ... */;
+template &lt;typename IT&gt; concept bool Random_access_iterator = /* ... */;
+
+template &lt;typename IT&gt;
+    requires Forward_iterator&lt;IT&gt;
+void advance(IT &amp; it, int n) {
+    for (int i = 0; i &lt; n; ++i)
+        ++it;
+}
+
+template &lt;typename IT&gt;
+    requires Random_access_iterator&lt;IT&gt;
+void advance(IT &amp; it, int n) {
+    it += n;
+}</code></pre>
+
+<p>Az algoritmusok specializálásának lehetősége az egyik legfontosabb eleme a generikus programozásnak. Éppen ezért is előnyös, hogy a <strong>concept</strong>-ek ennyire egyszerűvé teszik ezt; nem kell többé <code>void_t</code>-kkel és <code>enable_if</code>-ekkel, meg mindenféle rejtett sablonparaméterekkel bíbelődni. Írunk egy <strong>overload</strong>-ot a speciálisabb típusra és kész, a fordító automatikusan kiválasztja a legalkalmasabb függvényt.</p>
+
+<p>Vizsgáljuk meg az iterátortípusok definícióit! Itt most lecsupaszítva szerepel a lényeges részük:</p>
+
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+concept bool Forward_iterator =
+    requires (IT it) {
+        typename Value_type&lt;IT&gt;;
+        { *it } -&gt; Value_type&lt;IT&gt;;
+        { ++it } -&gt; IT &amp;;
+    };
+
+template &lt;typename IT&gt;
+concept bool Random_access_iterator =
+    Forward_iterator&lt;IT&gt;
+    &amp;&amp; requires (IT it, int n) {
+        { it + n } -&gt; IT;
+        { it - it } -&gt; int;
+        { it += n } -&gt; IT &amp;;
+    };</code></pre>
+
+<p>Észrevehetjük, hogy a két iterátor típus között halmaz-részhalmaz kapcsolat van. Ami véletlen elérésű iterátor, az egyben az egyirányú iterátorral szemben támasztott követelményeket is teljesíti. Tehát amire <code>Random_access_iterator&lt;T&gt;</code> igaz, arra automatikusan <code>Forward_iterator&lt;T&gt;</code> is igaz lesz. Másképp fogalmazva, a véletlen elérésű iterátorokkal szembeni elvárások <em>magukba foglalják</em> (subsume) az egyirányú iterátorok elvárásait. Vagy megint másképp, a véletlen elérésű iterátor fogalma <em>finomítja, pontosítja</em> (refine) az iterátorok fogalmát.</p>
+
+<div class="kozep">
+    <img src="iterator_fv.svg" style="width: 15em">
+    <div>Az egyirányú és a véletlen elérésű iterátorok kapcsolata</div>
+</div>
+
+<p>Vajon honnan tudja a fordító, hogy melyiket kell kiválasztani a kettő közül? Az előző rész <code>in()</code> függvényében a sorozat és az asszociatív tároló fogalmak kizárták egymást. Itt viszont a halmaz-részhalmaz kapcsolat miatt előfordul olyan eset, hogy mindkét algoritmus használható. Egy vektor iterátora esetén a ciklust tartalmazó <code>advance()</code> is működik, csak rosszabb megoldás, mint a <code>+=</code> operátoros változat.</p>
+
+<p>A helyzet kezeléséhez a függvénykiválasztási szabályokat módosítani kellett. Az eddig megismert szabályok szemlélete a következő volt:</p>
+
+<ul>
+    <li>Előnyben részesítjük azt a függvényt, amelyikhez nem kell konverzió a paraméterátadásnál, vagy egyszerűbb konverzió kell.</li>
+    <li>Jobbnak számítanak a konkrét függvények, mint a sablonból generált függvények.</li>
+    <li>Sablonok esetén jobbnak számítanak a specializált változatok.</li>
+</ul>
+
+<p>A <strong>concept</strong>-ek egy új, negyedik szabályt vezetnek be:</p>
+
+<ul>
+    <li>Ha a fenti szabályok alapján nem dönthető el, melyik függvényt kell kiválasztani, akkor az részesül előnyben, <em>amelyikre erősebb megkötések vonatkoznak.</em></li>
+</ul>
+
+<p>Emellett már csak az a kérdés, hogy mitől lesz erősebb vagy gyengébb egy megkötés. Ennek eldöntéséhez a fordító a <strong>concept</strong>-eket felbontja atomi megkötésekre, mint pl. a megadott <strong>type trait</strong> osztályok, vagy a <code>requires</code> kifejezésekben megadott kódrészletek. Utána pedig ezeket hasonlítja össze. A <code>Forward_iterator</code> példájában atominak számítanak a következők:</p>
+
+<ul>
+    <li>a <code>Value_type&lt;IT&gt;</code> típus létezése,</li>
+    <li>a <code>*it</code> kifejezés kiértékelhetősége,</li>
+    <li>és a <code>++it</code> kifejezés kiértékelhetősége.</li>
+</ul>
+
+<div class="megjegyzes">
+<p>Az új <code>advance()</code> függvényt tartalmazó program: <a href="advance_concept.cpp">advance_concept.cpp</a>.
+Ez tartalmazza a két iterátor típushoz tartalmazó <strong>concept</strong>-et is. Később ezek az STL-ben is benne lesznek már.</p>
+</div>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szemantikai pontosítás">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Szemantikai pontosítás<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Előfordul, hogy két különböző objektum pontosan ugyanolyan műveletekkel rendelkezik, azonban szemantikailag kicsit másképp viselkednek. Pontosan ilyen különbség van az <strong>input</strong> iterátorok és a <strong>forward</strong> iterátorok között. Az <strong>input</strong> iterátorok esetén csak egyszer mehetünk végig a tartományon, többször nem. A <strong>forward</strong> iterátorok viszont lehetővé teszik a tartomány többszöri bejárását is. Fájlból olvasáskor <strong>input</strong> iterátorokat tudunk használni, egy egyszeresen láncolt listának pedig <strong>forward</strong> iterátorai vannak.</p>
+
+<p>Bár a két iterátor nagyon más működésű, az interfészük mégis tökéletesen megegyezik: mindkettő <code>*</code> és <code>++</code> operátort biztosít. A tartomány többszöri bejárásának lehetősége viszont optimalizálási lehetőséget jelent bizonyos helyzetekben. Gondoljunk az <code>std::vector</code> osztály konstruktoraira, amelyek iterátorokat vesznek át paraméterként:</p>
+
+<pre   ><code class="language-cbub">template &lt;Object_type T&gt;
+class vector {
+    template &lt;Input_iterator IT&gt;
+    vector(IT begin, IT end) : vector() {
+        while (begin != end) {
+            push_back(*begin);
+            ++begin;
+        }
+    }
+
+    template &lt;Forward_iterator IT&gt;
+    vector(IT begin, IT end) : vector() {
+        size_t num_elements = distance(begin, end);
+        reserve(num_elements);  // !
+        while (begin != end) {
+            push_back(*begin);
+            ++begin;
+        }
+    }
+};</code></pre>
+
+<p>Ha csak egyszer járhatjuk be a tartományt, akkor nem ismerjük előre a méretét. Jobb híján egyesével bemásoljuk az elemeket, tudva, hogy közben a <code>push_back</code> kénytelen lesz többször is átméretezni a memóriaterületet, és mozgatni az adatokat. Ellenben ha többször is végigmehetünk, akkor csinálhatunk egymás után <em>két bejárást</em>. Az elsőt arra használjuk, hogy megszámoljuk az elemeket; az <code>std::distance</code> függvény megadja, hányat kell lépni <code>begin</code>-től <code>end</code>-ig. Utána pedig előfoglalhatjuk a helyet a <code>reserve</code> tagfüggvénnyel, hogy a beszúrások közben egyáltalán ne legyen szükség a tömb átméretezésére.</p>
+
+<p>Hogy definiáljuk a <code>Forward_iterator</code> <strong>concept</strong>-et? Nyilvánvalóan ez visszavezethető az <code>Input_iterator</code>-ra:</p>
+
+<div class="sticky">Hibás</div>
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+concept bool Forward_iterator =
+    Input_iterator&lt;IT&gt;;</code></pre>
+
+<p>Azonban ha csak a fenti kódot írjuk, akkor a két <strong>concept</strong> atomi megkötései teljesen meg fognak egyezni egymással. Emiatt pedig a fenti két függvény közül sosem tudna választani a fordító, hiszen nem térnek el se nevükben, se paraméterezésükben, se megkötéseikben.</p>
+
+<p>Be kell tehát vezetnünk egy újabb megkötést, amitől a <code>Forward_iterator</code> erősebb lesz, mint az <code>Input_iterator</code>. Itt segítségül hívhatjuk a jól ismert <strong>type trait</strong> osztályokat:</p>
+
+
+<pre   ><code class="language-c">template &lt;typename IT&gt;
+concept bool Forward_iterator =
+    Input_iterator&lt;IT&gt;
+    &amp;&amp; requires {
+        typename Iterator_category&lt;IT&gt;;
+        requires Derived_from&lt;Iterator_category&lt;IT&gt;, std::forward_iterator_tag&gt;;
+    };</code></pre>
+
+<p>Így az újabb megkötések miatt már erősebb a <code>Forward_iterator</code>. Körbeértünk tehát: a <strong>type trait</strong> osztályok nem szűnnek majd meg, csak másképp fogjuk használni őket, mint eddig.</p>
+
+<div class="megjegyzes">
+<p>A teljes program: <a href="create_vector.cpp">create_vector.cpp</a>.</p>
+</div>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="n4641"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/n4641.pdf">N4641: Working Draft, C++ extensions for Concepts</a>.</li>
+    <li id="n4651"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/n4651.pdf">N4651: Working Draft, C++ Extensions for Ranges</a>.</li>
+    <li id="stroustrupconcepts"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0557r0.pdf">Bjarne Stroustrup: Concepts: The Future of Generic Programming</a></li>
+    <li id="suttonintroducing"><a href="https://accu.org/index.php/journals/2157">Andrew Sutton: Introducing Concepts</a>.</li>
+    <li id="suttondefining"><a href="https://accu.org/index.php/journals/2198">Andrew Sutton: Defining Concepts</a>.</li>
+    <li id="suttonoverloading"><a href="https://accu.org/index.php/journals/2316">Andrew Sutton: Overloading with Concepts</a>.</li>
+    <li id="dest98"><a href="http://stepanovpapers.com/DeSt98.pdf">James C. Dehnert and Alexander Stepanov: Fundamentals of Generic Programming</a></li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

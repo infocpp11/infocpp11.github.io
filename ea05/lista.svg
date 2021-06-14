@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="339 99 362 51.25276" height="3.2541cm" width="19cm" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata72">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="g4" transform="translate(0 -5.3736)">
+  <path id="rect6" fill="#fff" d="m400 100h60v60h-60z"/>
+  <path id="rect8" d="m400 100h60v60h-60z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g10" transform="translate(0 -5.3736)">
+  <path id="rect12" fill="#fff" d="m520 100h60v60h-60z"/>
+  <path id="rect14" d="m520 100h60v60h-60z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g16" transform="translate(0 -5.3736)">
+  <path id="rect18" fill="#fff" d="m640 100h60v60h-60z"/>
+  <path id="rect20" d="m640 100h60v60h-60z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g22" transform="translate(0 -5.3736)">
+  <path id="rect24" fill="#fff" d="m340 120h20v20h-20z"/>
+  <path id="rect26" d="m340 120h20v20h-20z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g28" transform="translate(0 -5.3736)">
+  <path id="path30" d="m360.98 130h28.31" stroke="#000" stroke-width="2" fill="none"/>
+  <path id="polygon32" d="m386.79 135 2.5-5-2.5-5 10 5z"/>
+  <path id="polygon34" d="m386.79 135 2.5-5-2.5-5 10 5z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g36" transform="translate(0 -5.3736)">
+  <path id="path38" d="m460.96 119.68c30-10 28.076-10 48.84-3.078" stroke="#000" stroke-width="2" fill="none"/>
+  <path id="polygon40" d="m505.85 120.55 3.953-3.952-0.791-5.534 7.906 7.905z"/>
+  <path id="polygon42" d="m505.85 120.55 3.953-3.952-0.791-5.534 7.906 7.905z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g44" transform="translate(0 -5.3736)">
+  <path id="path46" d="m580.96 119.68c30-10 28.076-10 48.84-3.078" stroke="#000" stroke-width="2" fill="none"/>
+  <path id="polygon48" d="m625.85 120.55 3.953-3.952-0.791-5.534 7.906 7.905z"/>
+  <path id="polygon50" d="m625.85 120.55 3.953-3.952-0.791-5.534 7.906 7.905z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g52" transform="translate(0 -5.3736)">
+  <path id="path54" d="m639.04 140.32c-30 10-28.076 10-48.84 3.078" stroke="#000" stroke-width="2" fill="none"/>
+  <path id="polygon56" d="m594.15 139.45-3.953 3.952 0.791 5.534-7.906-7.905z"/>
+  <path id="polygon58" d="m594.15 139.45-3.953 3.952 0.791 5.534-7.906-7.905z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+ <g id="g60" transform="translate(0 -5.3736)">
+  <path id="path62" d="m519.04 140.32c-30 10-28.076 10-48.84 3.078" stroke="#000" stroke-width="2" fill="none"/>
+  <path id="polygon64" d="m474.15 139.45-3.953 3.952 0.791 5.534-7.906-7.905z"/>
+  <path id="polygon66" d="m474.15 139.45-3.953 3.952 0.791 5.534-7.906-7.905z" stroke="#000" stroke-width="2" fill="none"/>
+ </g>
+</svg>

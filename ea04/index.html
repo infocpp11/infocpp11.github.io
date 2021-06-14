@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Tároló osztályok</title>
+<meta property="og:title" content="TEST InfoC++11 :: Tároló osztályok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Alacsony szintű memóriakezelés. New operátorok, tároló osztályok, iterátorok. Tömbök és referenciák. Inicializáló listák, az auto és a decltype kulcsszavak. Az std::begin és az std::end függvények. Paraméterátadási szabályok, tömbök referenciái.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Alacsony szintű memóriakezelés. New operátorok, tároló osztályok, iterátorok. Tömbök és referenciák. Inicializáló listák, az auto és a decltype kulcsszavak. Az std::begin és az std::end függvények. Paraméterátadási szabályok, tömbök referenciái.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Tároló osztályok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Tároló osztályok</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Alacsony szintű memóriakezelés. New operátorok, tároló osztályok, iterátorok. Tömbök és referenciák. Inicializáló listák, az auto és a decltype kulcsszavak. Az std::begin és az std::end függvények. Paraméterátadási szabályok, tömbök referenciái.</p>
+</div>
+
+
+<p>A C++ nyelv nem csak nyelvtani szabályokból áll. A nyelv része egy nagy
+osztálygyűjtemény is, ide értve a mindenféle <code>stream</code> osztályokat,
+az STL tárolóit és algoritmusait, és sok egyebet is.</p>
+
+<p>Ezeket az osztályokat a C++ nyelv szabványosítási bizottsága tervezi,
+akik a nyelv alapjait, nyelvtanát is kitalálják. Sokat lehet tanulni a
+nyelvről ezen osztályok belső működését tanulmányozva. Ez a jegyzet
+az <code>std::vector</code> működése kapcsán mutatja be a haladó memóriakezelést,
+és olyan C++11 nyelvi elemeket, amelyekkel a tárolók használata leegyszerűsíthető.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A kiabálós osztály</a>
+                      <li><a href="index.html#2" class="">Hányféle new operátor van?</a>
+                      <li><a href="index.html#3" class="">Az std::vector megvalósítása</a>
+                      <li><a href="index.html#4" class="">Az inicializáló listák: std::initializer_list</a>
+                      <li><a href="index.html#5" class="">Az iterátorok és az auto kulcsszó</a>
+                      <li><a href="index.html#6" class="">A „range-based for” ciklus</a>
+                      <li><a href="index.html#7" class="">A tömbök std::begin() és std::end() függvényei</a>
+                      <li><a href="index.html#8" class="">Mindenhova lehet auto-t írni? A decltype kulcsszó</a>
+                      <li><a href="index.html#9" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A kiabálós osztály">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="noisyvector" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A kiabálós osztály<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi osztályt!</p>
+
+<pre   ><code class="language-c">class Noisy {
+  public:
+    Noisy(): i_{0} {
+        std::cout &lt;&lt; &quot;Noisy default ctor\n&quot;; count++;
+    }
+    explicit Noisy(int i) : i_{i} {
+        std::cout &lt;&lt; &quot;Noisy{&quot; &lt;&lt; i &lt;&lt; &quot;} ctor\n&quot;; count++;
+    }
+    Noisy(Noisy const &amp;o) : i_{o.i_} {
+        std::cout &lt;&lt; &quot;Noisy copy ctor &quot; &lt;&lt; i_ &lt;&lt; &quot;\n&quot;; count++;
+    }
+    Noisy&amp; operator=(Noisy const &amp;o) {
+        i_ = o.i_; std::cout &lt;&lt; &quot;Noisy copy assignment &quot; &lt;&lt; i_ &lt;&lt; &quot;\n&quot;;
+        return *this;
+    }
+    ~Noisy() {
+        std::cout &lt;&lt; &quot;Noisy dtor &quot; &lt;&lt; i_ &lt;&lt; &quot;\n&quot;; count--;
+    }
+    static void report() {
+        std::cout &lt;&lt; count &lt;&lt; &quot; instance(s).\n&quot;;
+    }
+  private:
+    int i_;
+    static int count;
+};
+
+int Noisy::count = 0;</code></pre>
+
+<p>Ez mindenért szól, ami az objektumaival történik. Az összes
+konstruktor és a destruktor jelzi a létrejött objektumokat, jelzi az értékadást is.
+Bármikor lekérdezhető, hogy hány példány van belőle. Például:</p>
+
+<pre   ><code class="language-c">int main() {
+    Noisy::report();
+    {
+        Noisy y;
+        Noisy::report();
+    }
+    Noisy::report();
+}</code></pre>
+
+<pre class="screenshot">
+0 instance(s).
+Noisy default ctor
+1 instance(s).
+Noisy dtor 0
+0 instance(s).
+</pre>
+
+<p>Ebben a kódban (<a href="noisy1.cpp">noisy1.cpp</a>) a külön utasításblokk belsejében létrejön, és meg is szűnik egy
+példány. Ezért a blokkon belül lekérdezve 1 példányt látunk, utána pedig már csak
+nullát, és látszik a konstruktor és a destruktor is, amiket a fordító automatikusan
+meghívott.</p>
+
+<p>Ezt az osztályt fogjuk használni az <code>std::vector</code> megismeréséhez.
+Példányosítsuk az <code>std::vector</code> tárolót a kiabálós osztályunkkal, és
+figyeljük meg, mi történik!</p>
+
+<pre   ><code class="language-c">int main() {
+    std::vector&lt;Noisy&gt; v(3);
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+}</code></pre>
+
+<pre class="screenshot">
+Noisy default ctor
+Noisy default ctor
+Noisy default ctor
+=====
+Noisy dtor 0
+Noisy dtor 0
+Noisy dtor 0
+</pre>
+
+<p>A <code>v(3)</code> konstruktorhívás hatására létrejön egy három elemű vektor. Ez
+három konstruktorhívást jelent, és természetesen három destruktort is látunk, amikor a vektor
+megszűnik.</p>
+
+<p>Tegyünk be egy új elemet a vektorba! A <code>push_back()</code> tagfüggvény feladata, hogy a vektor végéhez egy új
+elemet fűzzön, előtte pedig szükség szerint a vektort át is méretezze.</p>
+
+<pre   ><code class="language-c">v.push_back(Noisy{5});
+std::cout &lt;&lt; &quot;=====\n&quot;;</code></pre>
+
+<pre class="screenshot">
+Noisy{5} ctor    <span class="bubble">1</span>
+Noisy copy ctor 5    <span class="bubble">2</span>
+Noisy copy ctor 0
+Noisy copy ctor 0    <span class="bubble">3</span>
+Noisy copy ctor 0
+Noisy dtor 0
+Noisy dtor 0         <span class="bubble">4</span>
+Noisy dtor 0
+Noisy dtor 5     <span class="bubble">5</span>
+=====
+</pre>
+
+<p>A fenti kódsor hatására a következő dolgok történnek:</p>
+
+<ol>
+    <li>A <code>push_back()</code> hívás előtt létrejön egy ideiglenes Noisy objektum, az <code>int</code>
+    paraméterű konstruktorával.
+    <li>A vektor rájön, hogy eddig 3 elemnek foglalt helyet, de most egy negyediket is el kell tárolni.
+    Ezért átméretezésbe kezd. Foglal egy új memóriaterületet. Az új memóriaterületre bemásolja a paraméterként kapott Noisy-t.
+    <li>Átmásolja az eddigi 3 Noisy objektumot is. (Vajon miért az új adatot másolja a vektor előbb, és csak utána a régieket?
+    Erről egy külön írásban lehet olvasni: <a href="../pushback1/index.html">push_back, 1. rész</a>.)
+    <li>A régi memóriaterületet fel lehet szabadítani, ezért a lemásolt három Noisy eredeti példánya megszűnik.
+    <li>A függvényből visszatérés után az ideiglenes objektum is megszűnhet.
+</ol>
+
+<p>Az STL tervezésekor mindvégig figyeltek arra, hogy hatékonyak maradhassanak
+az osztályok. A <code>push_back()</code> függvény is okosítva van, megoldja, hogy
+ne kelljen mindig átméretezni és másolni a tárolót. (Rakjuk csak be ciklusba a
+beszúrást, látszani fog!) Azonban néha nem árt neki segíteni. Ha tudjuk előre, hogy
+hány elem lesz, akkor a <code>reserve()</code> függvénnyel lefoglalhatjuk előre
+a helyüket. Így az újrafoglalás és a másolások is elmaradhatnak:</p>
+
+<pre   ><code class="language-c">std::vector&lt;Noisy&gt; v2;
+v2.reserve(100);
+v2.push_back(Noisy{6});
+v2.push_back(Noisy{7});
+Noisy::report();
+std::cout &lt;&lt; &quot;=====\n&quot;;</code></pre>
+
+<pre class="screenshot">
+Noisy{6} ctor
+Noisy copy ctor 6
+Noisy dtor 6
+Noisy{7} ctor
+Noisy copy ctor 7
+Noisy dtor 7
+2 instance(s).
+=====
+</pre>
+
+<p>A <code>reserve(100)</code> hívással szóltunk a vektornak, hogy sok
+<code>push_back()</code> lesz, ezért előre le kellene foglalni a helyett 100 elem
+számára. Ezt meg is teszi. A következő két <code>push_back()</code>-nél
+átméretezést nem látunk, csak az ideiglenes Noisy-k létrehozását, bemásolását és
+megszűntét (<a href="noisy2.cpp">noisy2.cpp</a>).</p>
+
+<p>Vegyük észre: a <code>reserve()</code> híváskor a vektor a 100 objektumnak való
+helyet előre le tudta foglalni. Hogy látszik ez a kimenetből? Nem lehetett
+memóriafoglalás a <code>push_back()</code>-ekben, mert ha lettek volna, akkor új memóriaterületet kapott
+volna a vektor, ahova a meglévő Noisy objektumokat át kellett volna másolnia. A másolást
+viszont nem látjuk, mindig csak az új elem létrehozását.</p>
+
+<p>Hogyan lehetséges ez? Ha ilyet tartalmazna a <code>reserve()</code> belseje...</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void SomeVector&lt;Noisy&gt;::reserve(size_t how_many) {
+    /* ... */
+    pData = new Noisy[how_many]; // NEM így működik
+    /* ... */
+}</code></pre>
+
+<p>... akkor a <code>reserve(100)</code> hívásnál a 100 darab Noisy objektum az <em>alapértelmezett konstruktorával</em> jönne 
+létre, amit látnunk kellene – a Noisy szólna. Szemfüleseknek feltűnhetett, hogy ez a kérdés már a <code>push_back()</code> kapcsán 
+is felmerülhet. Ott meg lehetett figyelni egy másik érdekességet is: nevezetesen azt, hogy a vektor osztály nem használta az 
+objektumok értékadó operátorát (copy assignment operator). Bár az átméretezést első körben így képzelhetnénk el:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void SomeVector&lt;Noisy&gt;::push_back(Noisy const &amp;what) {
+    /* ... */
+    Noisy *newPData = new Noisy[size + 1];  // NEM így működik
+    for (size_t i = 0; i != size; ++i)
+        newPData[i] = pData[i];             // NEM így működik
+    /* ... */
+}</code></pre>
+
+<p>De sem az alapértelmezett konstruktor, sem az értékadó operátor meghívódását nem látjuk.</p>
+
+<p>Menjünk egy kicsit tovább! A vektor C++11 óta létező <code>emplace_back()</code>
+tagfüggvénye új elemet hoz létre a tároló végén. De nem úgy, hogy egy meglévő objektumot
+másol a végére, mint a <code>push_back()</code>, hanem az objektum ott jön létre először, a vektor
+belsejében. Az <code>emplace_back()</code> a saját paramétereit közvetlenül a Noisy
+konstruktorának adja át:</p>
+
+<pre   ><code class="language-cbub">std::vector&lt;Noisy&gt; v2;
+v2.reserve(100);
+v2.emplace_back(8);     // Noisy(8) jön létre a vektor végén
+v2.emplace_back(9);
+Noisy::report();
+std::cout &lt;&lt; &quot;=====\n&quot;;</code></pre>
+
+<pre class="screenshot">
+Noisy{8} ctor
+Noisy{9} ctor
+2 instance(s).
+=====
+</pre>
+
+<p>Mi kell ehhez? Az, hogy a memóriaterület foglalását és az objektumok létrehozását külön-külön tudjuk elvégezni. Biztosan nem az 
+eddig tanult <code>new Noisy[]</code> kifejezéssel, mert az mindkét műveletet elvégzné. Pedig ha hatékony 
+<code>push_back()</code>-et és <code>reserve()</code> függvényt szeretnénk – vagy egyáltalán azt, hogy létezhessen 
+<code>reserve()</code> –, akkor a memóriafoglalást és az inicializálást szét kell választani egymástól.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hányféle new operátor van?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="placementnew" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Hányféle new operátor van?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++ dinamikus memóriakezelése sokkal fejlettebb, mint a C-ben volt. Ott be kellett érnünk egy 
+<code>malloc()</code>–<code>free()</code> párossal, itt viszont saját memóriakezelést is definiálhatunk. Ez leginkább a globális 
+<code>operator new(size_t)</code> függvényen, és annak <em>overload</em> társain keresztül valósul meg.</p>
+
+<h3>Memóriafoglalás: a globális <code>operator new(size_t)</code> függvény</h3>
+
+<p>A C++ nyelvi szinten biztosít egy dinamikus memóriát foglaló függvényt. Ennek paraméterezése és működése megegyezik a <code>
+malloc()</code>-éval: minden hívása egy új memóriaterületet ad a kupacról (heap), vagy C++-os szóhasználattal élve, a „free
+store”-ból. A függvény egy implicit deklarált függvény, azaz ennek deklarációját minden forrásfájl elejére odaképzeli a fordító,
+akkor is, ha nem írjuk ki az <code>#include &lt;new&gt;</code>-t:</p>
+
+<pre   ><code class="language-c">/* globális függvények */
+
+void * operator new(size_t);
+void operator delete(void *) noexcept;</code></pre>
+
+<p class="megjegyzes">A <code>delete</code>-nél a <code>noexcept</code> azt jelenti,
+hogy nem dobhat kivételt – erről majd <a href="../ea08/index.html#noexcept">később lesz szó</a>.</p>
+
+<p>A C-től ez abban különbözik, hogy a <code>nullptr</code> visszatérési érték helyett <code>std::bad_alloc</code> típusú hibát 
+kapunk, ha sikertelen a foglalás. Lényegében azonban ugyanúgy kell használni ezt a két függvényt, mint C-ben. Mivel az egyes 
+osztályok saját <code>new</code> operátorokat definiálhatnak, ennél a függvénynél ki szoktuk írni a globális névteret jelző 
+<code>::</code> jelölést, hogy biztosan a globális függvényt értse alatta a fordító:</p>
+
+<div class="sticky"><code>malloc()</code>-szerű<br><code>new</code> és <code>delete</code></div>
+<pre   ><code class="language-cbub">void * memory = ::operator new(sizeof(int) * 45); // int[45]
+int * my_ints = static_cast&lt;int *&gt;(memory);
+
+my_ints[19] = 75;
+
+::operator delete(memory);</code></pre>
+
+<p>Ez a függvény csakis és kizárólag memóriafoglalást végez, inicializálást nem.
+Tehát ez lesz az okos vektor megvalósításának egyik eleme.</p>
+
+<div class="megjegyzes csik">
+<h3>Operator new, akár több paraméterrel</h3>
+<p>A fenti két függvényt át is definiálhatjuk. Például
+megírhatjuk őket úgy, hogy a könyvtári, C-s <code>malloc()</code> és
+<code>free()</code> függvényeket hívják, esetleg úgy, hogy tartsák nyilván a
+lefoglalt területek darabszámát.</p>
+<p>Megírhatjuk őket úgy is, hogy további paramétereket
+vegyenek át, és azokat akár az explicit hívásukkor, akár a
+szokásos <code>new T</code> alakú hívásokban használni lehet majd.
+A paraméterezett <code>new</code> operátorok első paramétere mindig
+kötelezően a méret, a többi paraméter viszont már az, amit a zárójelek között megadunk:</p>
+<pre   ><code class="language-c">void *operator new(size_t size);
+void *operator new(size_t size, int a, char b);
+
+int *a1 = new int;              /* ::operator new(sizeof(int)) */
+int *a2 = new (8, 'x') int;     /* ::operator new(sizeof(int), 8, 'x') */</code></pre>
+<p>A <code>new</code> operátort általában azért szokták paraméterezni, hogy
+egyszerre több, különféle, egymástól független memóriakezelést is lehessen
+használni. Erről a laboron még lesz szó.</p>
+</div>
+
+<h3>Konstruktor hívása: a „placement new”</h3>
+
+<p>A <code>new</code> operátornak van egy olyan változata is, amely
+<em>memóriafoglalást nem végez,</em> csak egy objektum konstruktorát hívja meg.
+Ezt <em>placement new</em>-nak nevezzük, és onnan lehet megismerni, hogy a
+<code>new</code> kulcsszó után zárójelben egy <code>void *</code> pointer van megadva.
+Ez a pointer mutat arra a lefoglalt memóriaterületre, ahol az objektumot létre
+kell hozni. A hívás előtt ott memóriaszemét van; éppen az objektum
+konstruktorának a feladata az, hogy a memóriaterületet értelmes adatokkal töltse
+fel. Valahogy így:</p>
+
+<pre   ><code class="language-c">void *noisy_mem = malloc(sizeof(Noisy));        /* memóriafoglalás */
+Noisy *noisy_ptr = new (noisy_mem) Noisy{5};    /* konstruktorhívás */</code></pre>
+
+<p>Az első sorban egy szokásos <em>memóriafoglalás</em> történik, akár írhattuk volna
+C++-osan, <code>::operator new</code>-ként is. A placement <code>new</code> a
+második sorban van. Ennek odaadjuk a <code>void *</code> típusú pointert, és
+meghívja ott a <code>Noisy{5}</code> <em>konstruktort</em>. Vagyis konstruktorban a
+<code>this</code> pointer egyenlő lesz a <code>void *</code> pointerrel. Az egész kifejezés értéke egy
+<code>Noisy *</code> típusú pointer, és ehhez nincsen szükség konverzióra: logikus
+is, hiszen a memóriaterületet a konstruktor kitöltötte úgy, hogy ott már egy Noisy
+objektumként értelmezhető bájtsorozat van.</p>
+
+<p>Erre a különleges szintaxisra azért van szükség, mert a konstruktorokat
+tagfüggvényként nem lehet meghívni. Nem így a destruktoroknál: a destruktor, bár
+sok helyen automatikusan hívódik, egy teljesen szokványos függvény, amit
+tagfüggvény szintaxissal meg is lehet hívni. Mivel a placement <code>new</code> használatával azt
+jeleztük a fordítónak, hogy mi magunk szeretnénk megmondani, mikor és milyen
+címen hívódjon a konstruktor, ezért az így inicializált objektumok
+<em>destruktorának hívásáért mi felelünk.</em> Valahogy így:</p>
+
+<pre   ><code class="language-c">noisy_ptr-&gt;~Noisy();
+free(noisy_mem);</code></pre>
+
+<p>Az első sor a destruktor hívása. A furcsa <code>-&gt;~</code> szintaxis csak
+azért van, mert a meghívott függvény neve <code>~Noisy()</code>. Egyébként az ott
+egy sima nyíl operátor, amelyen keresztül a mutatott objektum tagfüggvénye
+hívódik. Természetesen azt figyelembe véve, hogy virtuális-e a destruktor,
+hiszen egy tagfüggvény hívásáról van szó.</p>
+
+<p>Eltekintve a patologikus esettől, amikor kivétel keletkezik az objektum
+létrehozása közben, egy szokványos <code>new T{xyz}</code> kifejezés
+lényegében ezzel egyenértékű:</p>
+
+<div class="sticky">A <code>new T{xyz}</code><br>működése</div>
+<pre   ><code class="language-c">void *mem = ::operator new(sizeof(T)); /* foglalás */
+obj = new (mem) T{xyz};                /* konstruktor */</code></pre>
+
+<p>A <code>delete ptr</code> pedig nagyjából ezzel:</p>
+
+<div class="sticky">A <code>delete ptr</code><br>működése</div>
+<pre   ><code class="language-c">obj-&gt;~T();              /* destruktor */
+::operator delete(mem); /* felszabadítás */</code></pre>
+
+<p>Mindezek egyébként már a C++98-ban is megvoltak.</p>
+
+
+<div class="megjegyzes csik">
+
+<h3>Hányféle placement new van?</h3>
+
+<p>A <code>new (memptr) T</code> kifejezés működése mögött az van, hogy a fordító a szokásos módon előbb meghívja az
+<code>::operator new(sizeof(T), memptr)</code> függvényt. Tehát első paraméter a méret, a zárójelben megadottakból lesz a többi
+paraméter. Vagyis ilyenkor is van egy függvényhívás – csak a hívott <code>::operator new(size_t, void*)</code> függvény
+direkt úgy van megírva, hogy ne csináljon semmit:</p>
+
+<pre   ><code class="language-c">void *operator new(size_t s, void *ptr) noexcept {
+    return ptr;
+}</code></pre>
+
+<p>Emiatt történik csak a <code>new (void_memptr) T</code> kifejezésben, memóriafoglalás nélkül.</p>
+
+<p>A paraméterezhető <code>new</code> operátorok tehát úgy vannak kitalálva, hogy egyszerre két problémát is megoldjanak: 1)
+adott helyen történő objektumlétrehozás, 2) parametrizált memóriakezelés. Így csak <a href="index.html#dne">egy új nyelvi elemet kellett bevezetni</a>,
+egyféle placement <code>new</code> létezik, amely azonban többféle feladat megoldására alkalmas, csak megfelelő
+overloadok kellenek hozzá.</p>
+
+<p>Ha már az elnevezésekről van szó: <strong>operator new</strong>-nak szokás nevezni a memóriafoglaló függvényeket,
+<strong>new operator</strong>-nak pedig azt az operátort, amely ezeket és a konstruktorokat meghívja. Innen szép nyerni.</p>
+
+</div>
+
+<div class="megjegyzes csik">
+
+<h3>Összefoglaló táblázat</h3>
+
+<p>Az alábbi táblázat áttekintést ad a használható műveletekről. Sajnos a szintaxis sok helyen nem túl intuitív
+– meg kell tanulni, melyik mit jelent, és figyelmesen kezelni ezeket a kódban.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Művelet</th>
+            <th>Visszafelé</th>
+            <th>Magyarázat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>p = new T()</code></td>
+            <td><code>delete p</code></td>
+            <td>Egy objektumnak foglal helyet, és hívja a konstruktorát</td>
+        </tr>
+        <tr>
+            <td><code>p = new T[100]</code></td>
+            <td><code>delete[] p</code></td>
+            <td>Tömbnek foglal helyet, mindegyik elem konstruktorát hívja</td>
+        </tr>
+        <tr>
+            <td><code>p = malloc(sizeof(T))</code></td>
+            <td><code>free(p)</code></td>
+            <td>Csak memóriafoglalás, konstruktor nélkül</td>
+        </tr>
+        <tr>
+            <td><code>p = operator new(sizeof(T))</code></td>
+            <td><code>operator delete(p)</code></td>
+            <td>Csak memóriafoglalás, konstruktor nélkül</td>
+        </tr>
+        <tr>
+            <td><code>new (p) T()</code></td>
+            <td><code>p-&gt;~T()</code></td>
+            <td>Csak konstruktor, memóriafoglalás nélkül</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Fontos, hogy egy adott műveletet és annak párját mindig együtt kell használni; soha nem szabad ezeket keverni. Tehát pl. 
+<code>new T[100]</code> által adott pointeren nem használható <code>delete</code> operátor, <code>malloc()</code> által foglalt 
+terület nem szabadítható fel <code>operator delete()</code> függvénnyel, és így tovább.</p>
+
+</div>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::vector megvalósítása">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="myvector" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Az std::vector megvalósítása<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <code>std::vector</code> azt ígéri, hogy egy olyan tömbként használható
+objektumot ad, amely hatékonyan kezeli a tömb végéhez új elem hozzáfűzését is.
+Az ilyet nyújtózkodó tömbnek nevezik.</p>
+
+<p>Különválasztva a memóriaterület foglalását és az objektumok inicializálását,
+a megvalósítás már egyszerű. Három tagváltozóra van szükségünk:</p>
+
+<ol>
+    <li>Egy pointerre, amely a lefoglalt memóriaterület elejére mutat.
+    <li>Egy egészre, amely az elemek számát mutatja. Ez a méret.
+    <li>Még egy egészre, amely a foglalt terület nagyságát mutatja. Ez a kapacitás.
+</ol>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class MyVector {
+  private:
+    T *pData_;
+    size_t size_;
+    size_t capacity_;
+};</code></pre>
+
+<img src="vektor.svg" class="kozep" style="width: 30em;">
+
+<p>A lefoglalt terület elején, <code>0</code>-tól <code>size-1</code> indexig
+az inicializált objektumok vannak, efölött a kapacitásig pedig memóriaszemét. Ide
+kerülhetnek a <code>push_back()</code>-elt elemek, egészen addig, amíg a
+területet ki nem töltik. Ha az megtörtént, akkor kell majd újrafoglalni és
+másolni. Értelemszerűen a <code>size &le; capacity</code> kifejezésnek minden
+pillanatban igaznak kell lennie.</p>
+
+<p>A konstruktor:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+MyVector&lt;T&gt;::MyVector(size_t size) {
+    size_ = size;
+    capacity_ = size;
+    pData_ = static_cast&lt;T*&gt;(::operator new(sizeof(T) * capacity_)); // 1
+    for (size_t i = 0; i != size_; ++i)
+        new (&amp;pData_[i]) T(); // 2
+}</code></pre>
+
+<p>Ez egyelőre nem foglal nagyobb helyet, mint amennyi feltétlenül szükséges, ezért
+a méretet és a kapacitást is egyformára állítja. Az 1-essel jelölt sorban csak a
+memóriafoglalás történik meg, míg a 2-essel jelöltben a lefoglalt területen
+inicializálódnak az objektumok. A pointert az 1-es sor azért konvertálja <code>T*</code>
+típusúvá, hogy a 2-es sorban kényelmes legyen a címaritmetika, de ezt természetesen
+másképp is meg lehetne oldani.</p>
+
+<p>A <code>reserve()</code> függvény működése jól mutatja az egész megvalósítás lényegét:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void MyVector&lt;T&gt;::reserve(size_t newcapacity) {
+    if (newcapacity &lt; size_)
+        return;
+
+    T *newPData = static_cast&lt;T*&gt;(::operator new(sizeof(T) * newcapacity)); // 1
+    for (size_t i = 0; i != size_; ++i)
+        new (&amp;newPData[i]) T(pData_[i]); // 2
+
+    for (size_t i = 0; i != size_; ++i)
+        pData_[i].~T(); // 3
+    ::operator delete(pData_); // 4
+
+    capacity_ = newcapacity;
+    pData_ = newPData;
+}</code></pre>
+
+<p>Ez először megnézi, hogy nem kisebb kapacitást adott-e meg a hívó, mint ahány elem
+van. Ha kisebb, akkor a kérést figyelmen kívül hagyja. (Ezt megteheti, mert a vektor
+kapacitása nem kívülről érzékelhető tulajdonság. A hívó által tárolt adatok nem fognak
+elveszni.) Az 1-essel jelölt sor foglalja le az új memóriaterületet. A 2-essel jelölt
+sor végzi a meglévő objektumok másolását. A konstruktorok a <code>pData_[i]</code>
+kifejezés által a régi objektumokat kapják, így a fordító a másoló konstruktort
+fogja kiválasztani. Épp ez kell! Itt nem használhatnánk értékadó operátort, mert
+az csak inicializált objektumon működik, a <code>newPData[i]</code> helyen viszont egyelőre csak memóriaszemét van.</p>
+
+<p>Miután a másolás megtörtént, a régi objektumok felszabadíthatóak. Ezek destruktorát
+is külön meg kell hívni a 3-assal jelölt sorban, mert a 4-essel jelölt <code>delete</code>
+csak a memóriaterület felszabadításáért felel, a destruktorok hívásáért nem. A sablont
+példányosító osztály neve <code>T</code>, ezért a destruktorát <code>~T</code>-ként
+tudjuk megnevezni – sablon kód lévén, a fordító tudni fogja, miről beszélünk.</p>
+
+<p>A <code>push_back()</code> előbb ellenőrzi, hogy van-e hely, és ha kell, a
+<code>reserve()</code> hívásával megnyújtja a memóriaterületet. Ha ez megvolt, az
+új elem létrehozható a paraméter lemásolásával:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void MyVector&lt;T&gt;::push_back(T const &amp;what) {
+    if (size_ + 1 &gt; capacity_)
+        reserve(size_ + 10);
+    new (&amp;pData_[size_]) T(what);
+    ++size_;
+}</code></pre>
+
+<p class="megjegyzes">A vektor méretét nem érdemes lineárisan növelni, mondjuk 10-esével,
+mint a fenti példában. Ez még mindig O(n<sup>2</sup>) átméretezést és másolást eredményez,
+hiába csak minden tizedik esetben történik meg. Helyette exponenciálisan kell, 2-szeres, vagy
+még inkább 1,5-szeres szorzóval. Lásd az <a href="index.html#vector-growth-rate">irodalomjegyzékben hivatkozott cikket</a>.</p>
+
+<p>A destruktor, másoló konstruktor és másoló értékadó operátor a szokásos módon
+működik. Természetesen mindegyikben figyelni kell arra, hogy bár a foglalt
+terület a kapacitásig tart, inicializált objektumok csak a méret tagváltozóban
+megadott indexig vannak. A destruktort csak az utóbbiakon szabad hívni.</p>
+
+<p>A saját vektor letölthető innen: <a href="myvector.cpp">myvector.cpp</a>. Ez már tudja azt, amit a beépített <code>std::vector</code>:</p>
+
+<pre   ><code class="language-c">int main() {
+    MyVector&lt;Noisy&gt; s;
+    s.reserve(10);
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    s.push_back(Noisy{5});
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    s.push_back(Noisy{6});
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+}</code></pre>
+
+<pre class="screenshot">
+=====
+Noisy{5} ctor
+Noisy copy ctor 5
+Noisy dtor 5
+=====
+Noisy{6} ctor
+Noisy copy ctor 6
+Noisy dtor 6
+=====
+Noisy dtor 5
+Noisy dtor 6
+</pre>
+
+
+
+
+<h3>Összefoglalásként</h3>
+
+<p>A saját vektorunkban az <code>std::vector</code>-hoz hasonlóan kihasználtuk azt, hogy
+a <em>memóriafoglalás</em> és az <em>objektumok létrehozása</em> elválasztható egymástól.
+A szokásos <code>new T[]</code> kifejezés helyett, amelyik előbb memóriát foglal, utána
+konstruktorokat hív, két lépésben végeztük el ezeket a műveleteket: az <code>operator new()</code>
+függvénnyel előbb memóriát foglaltunk, utána <em>placement new</em> segítségével objektumot
+tettünk oda. Visszafelé pedig ugyanígy: külön a destruktor és külön a memóriaterület felszabadítása.
+Mindezt az alábbi állapotgráf foglalja össze:</p>
+
+<img src="elettartam_mem.svg" class="kozep" style="width: 42em;" alt="Memóriakezelés: a semmi, a memóriaszemét és az objektum">
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az inicializáló listák: std::initializer_list">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Az inicializáló listák: std::initializer_list<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C-s tömböket könnyedén lehetett inicializálni:</p>
+
+<pre   ><code class="language-c">int arr[] = { 1, 2, 3, 4, 5 };</code></pre>
+
+<p>A C++98-ban sajnos a tároló osztályoknál már
+nem volt lehetőség ennek megvalósítására. A C++11-ben ezt a hiányosságot pótolták,
+ebben már bármelyik tároló osztály rendelkezhet ilyen konstruktorral:</p>
+
+<div class="sticky">C++11 initializer list</div>
+<pre   ><code class="language-c">std::vector&lt;int&gt; v = { 1, 2, 3, 4, 5 };
+std::set&lt;std::string&gt; s = { &quot;hello&quot;, &quot;world&quot; };</code></pre>
+
+<p>A cél természetesen az volt, hogy ez ne a beépített típusok (tömb, struktúra) privilégiumaként
+jelenjen meg, hanem bármelyik, akár saját osztályunkat inicializálhassuk így.</p>
+
+<p>A működés egy speciális, könyvtári osztálysablonon alapszik. Ez az <code>#include &lt;initializer_list&gt;</code> fejlécfájlban 
+definiált <code>std::initializer_list</code> osztálysablon. A saját osztályunk konstruktorának egy ilyen objektumot kell 
+átvennie:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class MyVector {
+  public:
+    MyVector(std::initializer_list&lt;T&gt; list);
+};</code></pre>
+
+<p>Az inicializáló lista objektum tárolja a listában megadott értékeket. Ez
+szokványos tárolóként használható; a <code>size()</code> tagfüggvénnyel
+lekérdezhető az elemszám, a <code>begin()</code> és <code>end()</code>
+tagfüggvényei iterátorokat adnak. Az inicializáló lista objektumot
+átvevő konstruktorunkban így semmi egyéb dolgunk nincs, mint lemásolni
+ezeket az elemeket:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+MyVector&lt;T&gt;::MyVector(std::initializer_list&lt;T&gt; list)
+  : MyVector() {
+    reserve(list.size());
+    for (auto it = list.begin(); it != list.end(); ++it)
+        push_back(*it);
+}</code></pre>
+
+<div class="megjegyzes">
+<p>A C++11 óta egy konstruktor inicializáló listáján meghívhatjuk ugyanazon
+osztály (és értelemszerűen ugyanazon objektum) más paraméterezésű konstruktorát.
+Ez az ún. konstruktordelegálás, amely nem csak kényelmi funkció, hanem további
+szerepe is van. Erről <a href="../ea08/index.html#konstruktordelegalas">később lesz szó</a>.</p>
+</div>
+
+<p>Ehhez tehát először is inicializáljuk a vektort üresen (meghívva a vektor
+saját alapértelmezett konstruktorát). Erre létrejön a vektor üresen.
+Aztán előre lefoglalunk annyi helyet az előbb megírt <code>reserve()</code>
+függvénnyel, ahány elem a kapott inicializáló listában van. Végül pedig,
+bemásoljuk az előfoglalt helyre a lista elemeit.</p>
+
+<p>Ha ez megvolt, már működik is a vektorunk listával inicializálása:</p>
+
+<pre   ><code class="language-c">MyVector&lt;int&gt; v = { 1, 2, 3 };
+
+for (auto it = v.begin(); it != v.end(); ++it)
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;</code></pre>
+
+<pre class="screenshot">
+1
+2
+3
+</pre>
+
+
+<h3>Az inicializáló listák – tudnivalók</h3>
+<p>Az inicializáló lista speciális beépített osztály. De csak egyetlen különlegessége
+van: az, hogy a fordító hívja meg a konstruktorát, amikor
+egy kapcsos zárójeles listával találkozik. A lista
+típusát, azaz az <code>std::initializer_list</code> sablonparaméterét a
+használat módja által igényelt típusból vezeti le.</p>
+<p>Az inicializáló listában tárolt objektumok temporálisok, az adott blokk
+vagy kifejezés végére érve megszűnnek. Ha tárolót inicializálunk ezekkel, akkor
+le kell másolni azokat.</p>
+<p>Maga az inicializáló lista objektum kicsi, ezért átvehetjük érték szerint.
+A „benne” lévő adatok igazából a lista objektumon kívül tárolódnak egy tömbben,
+maga az objektum csak két pointerből áll (a tömb eleje és vége).</p>
+<p>Az inicializáló lista nem számít kifejezésnek, ezért nem használható
+úgy, mint bármelyik objektum. Például ez hibás:</p>
+<pre   ><code class="language-c">i = { 1, 2, 3, 4 }.size();     /* FORDÍTÁSI HIBA: nem kifejezés */</code></pre>
+<p>Egy-két helyen azért megengedett a használatuk a konstruktorhívásokon kívül
+is. Ezeket a helyzeteket egyedi szintaktikai szabályok írják le.
+Példákat a lenti kód mutat.</p>
+<pre   ><code class="language-c">auto list = { 1, 2, 3, 4, 5, 6, 7 };                /* OK */
+for (auto i : { 1, 2, 3, 4 })                       /* OK */
+    std::cout &lt;&lt; i &lt;&lt; std::endl;</code></pre>
+<p>Ahhoz, hogy a fordító ki tudja találni a lista
+típusát, az inicializáló elemeknek egyformáknak kell lenniük:</p>
+<pre   ><code class="language-c">auto list2 = { 1, 'a' };                            /* FORDÍTÁSI HIBA */
+std::initializer_list&lt;int&gt; list3 = { 1, 'a' };      /* OK */</code></pre>
+<p>Mint azt láttuk, C++11-ben a konstruktorokat a kapcsos zárójelekkel <code>{}</code>
+is meg lehet hívni. Ennek célja az volt, hogy a szintaktikai kétértelműséget
+elkerüljük: <code>int f()</code> egy függvénydeklaráció, <code>int f{}</code> változódefiníció.
+Sajnos ez a kapcsos zárójeles jelölés ütközik az inicializáló listákkal, ezért
+újabb kétértelműség került a szintaxisba, még ha kisebb is, mint a függvényes
+probléma. Előfordulhat ugyanis, hogy egy inicializáló listában pont olyan értékeket
+szeretnénk megadni, amik konstruktorparaméterek is lehetnek. Ilyenkor a kapcsos
+zárójeles szintaxis inicializáló listának számít, és ha mégis a másik konstruktort
+szeretnénk hívni, a kerek zárójelet kell használnunk:</p>
+<pre   ><code class="language-c">std::vector&lt;int&gt; v{3};  /* initializer_list&lt;int&gt; ctor, 1 elem, értéke: 3 */
+std::vector&lt;int&gt; v(3);  /* size_t ctor, 3 elem, értékük: 0, 0, 0 */</code></pre>
+<p>Úgy látszik, bármennyiféle zárójel van: <code>()</code>, <code>[]</code>, <code>{}</code>, <code>&lt;&gt;</code>,
+a programozási nyelvek képesek elhasználni mindet. Akár többféle célra is.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az iterátorok és az auto kulcsszó">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Az iterátorok és az auto kulcsszó<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Figyeljük meg az előző részben használt <code>auto</code> kulcsszót! Az
+ilyen ciklusokat, amelyek egy tároló iterátoraival dolgoztak, eddig
+nem pont így írtuk.</p>
+
+<p><a href="../iterator/index.html">Miről is volt itt szó?</a> A vektor
+ad egy iterátor típust, amely segítségével az elemei bejárhatóak. Ezt az iterátort a
+pointerekhez hasonlóan lehet használni, főként a <code>++</code> és <code>*</code>
+operátorokkal. Eddig ezt írtuk:</p>
+
+<pre   ><code class="language-c">std::vector&lt;int&gt; v = { 4, 5, 6 };
+
+for (std::vector&lt;int&gt;::iterator it = v.begin(); it != v.end(); ++it) {
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}</code></pre>
+
+<pre class="screenshot">
+4
+5
+6
+</pre>
+
+<p>A bonyolult típusnévvel rendelkező iterátorok használata kényelmetlen lehet,
+ezért a C-ből örökölt <code>auto</code> kulcsszót egy új szereppel ruházták fel a
+C++11-ben. Azokban a változódefiníciókban, ahol rögtön értéket is kap egy
+változó, a típus helyén az <code>auto</code> kulcsszót használhatjuk, és ilyenkor
+a típust a fordító automatikusan kitalálja, figyelembe véve a megadott módosítókat:</p>
+
+<div class="sticky">C++11 <code>auto</code></div>
+<pre   ><code class="language-cbub">auto x = 5;         // x = int lesz
+
+int i;
+auto &amp;j = i;        // int &amp;j = i;
+
+int *foo();
+auto *k = foo();    // int *k = foo();
+
+auto const l = 5;   // int const l = 5;</code></pre>
+
+<p>Természetesen az <code>auto</code>-t ennél bonyolultabb típusoknál szoktuk
+használni. De épp arra való! A fenti iterátoros bejárásokat így írhatjuk
+az <code>auto</code> segítségével:</p>
+
+<pre   ><code class="language-cbub">for (auto it = v.begin(); it != v.end(); ++it) {    // C++11
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Ha <a href="../iterator/index.html">konstans iterátort</a> szeretnénk,
+akkor figyelembe kell venni azt,
+hogy eddig az <code>it</code> változó típusának megadása miatt lett az iterátor
+konstans, nem pedig a hívott tagfüggvény miatt. Most pedig az iterátor változó
+típusát pont a függvény visszatérési értékének típusából fogja majd meghatározni
+a fordító! Ezért C++11-ben a beépített tárolók új tagfüggvényeket kaptak,
+<code>cbegin()</code> és <code>cend()</code>. Ezek <code>const_iterator</code>-okkal
+térnek vissza:</p>
+
+<pre   ><code class="language-c">for (auto it = v.cbegin(); it != v.cend(); ++it) {
+    *it += 1;                        /* FORDÍTÁSI HIBA */
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;   /* OK */
+}</code></pre>
+
+<p>Az <code>auto</code> kulcsszónak sokkal nagyobb szerepe van annál, minthogy kényelmesen
+megadhatjuk vele a változók típusát. Sokszor <code>template</code> kódban előfordul,
+hogy nem is ismerjük pontosan a típust. Tegyük fel, hogy adott a lenti függvényünk.
+Ez az egyszerűség kedvéért csak annyit csinál, hogy összead két értéket, pl.
+<code>2+3 = 5</code> (egészek) és <code>2.2+3.3 = 5.5</code> (valósak).</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+T add(T a, T b) {
+    return a+b;
+}</code></pre>
+
+<p>A probléma csak az, hogy ezzel nem adható össze két eltérő típusú érték.
+Az <code>add(2, 2.3)</code> és <code>add(2.3, 2)</code> kifejezéseknél a fordító
+nem tudja levezetni a sablonparaméter típusát, mivel a két paraméter típusa nem egyforma.
+Ezek a függvényhívások fordítási hibához vezetnek.</p>
+
+<p>Ha két sablonparaméterünk van a két paraméterhez, akkor vajon abból hogyan mondjuk
+meg a visszatérési érték típusát? <code>int+double</code> &rarr; <code>double</code>-t ad,
+és fordítva, <code>double+int</code> &rarr; <code>double</code> eredmény áll elő.
+Ha elképzeljük ugyanezt kivonással, ott például létezik egy <code>pointer-pointer</code> &rarr;
+<code>egész szám</code> eset is... Legszívesebben a visszatérési értékhez is <code>auto</code>-t
+írnánk. Határozza meg azt az operátor, amelyik az <code>a+b</code> kifejezés értékét adja!</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">template &lt;typename T1, typename T2&gt;
+auto add(T1 a, T2 b) {
+    return a+b;
+}</code></pre>
+
+<p>Ez <a href="../cpp1417/index.html#cpp14auto">C++14 óta</a> jó is. Sőt C++17-ben
+már a paraméterek típusaihoz is írhatunk <code>auto</code>-t! Bár első ránézésre nem tűnik úgy,
+a lenti kódban egy sablonfüggvény látható, hiszen az <code>auto</code> helyére bármi kerülhet.
+Meg kell szoknunk, hogy nem csak az a kód sablon, ahol látjuk a <code>template</code> kulcsszót,
+hanem egy ilyen is:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-cbub">auto add(auto a, auto b) {
+    return a+b;
+}</code></pre>
+
+<div class="megjegyzes">
+<h3>Egy kis történelem</h3>
+<p>Az <code>auto</code> kulcsszó a C-ben az automatikus
+memóriakezelésű változókra vonatkozott, mint tárolási osztály megnevezése.
+Azért nem találkozni vele soha, mert semmilyen többletjelentése nincs:
+ha elhagyjuk, ugyanúgy automatikus memóriakezelésű lokális változókat kapunk.
+Csak a többi tárolási osztály nevét kellett kötelezően kiírni, pl. <code>static</code>,
+<code>extern</code> vagy <code>register</code>.</p>
+<p>A C++11-ben ezért az <code>auto</code> kulcsszót az eredeti jelentésétől teljesen
+megfosztották, helyette az „automatikusan kitalált típusú változó” jelentést kapta.
+Mennyire jó ez? Arról a vélemények megoszlanak. Sokszor rövidebbé, áttekinthetőbbé
+teszi a kódot: egy <code>auto iter = valami.begin()</code> változót látva egyből
+tudjuk, hogy egy iterátorral van dolgunk. Máskor viszont elrejti az információt,
+hogy milyen típusú objektumokkal dolgozunk épp, és megnehezíti a kód olvasását.
+Ezt mindenképp mérlegelni kell a használatakor.</p>
+</div>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A „range-based for” ciklus">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A „range-based for” ciklus<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A tárolók bejárását még egyszerűbbé teszi az ún. <em>range-based for</em>
+szintaxis. Ez ennyire egyszerű:</p>
+
+<div class="sticky">C++11<br>range-based for</div>
+<pre   ><code class="language-c">std::vector&lt;int&gt; v = { 3, 4, 5 };
+
+for (int i : v)
+    std::cout &lt;&lt; i &lt;&lt; std::endl;</code></pre>
+
+<p>A „range-based for” ciklusban kötelező egy változót deklarálni. Ez
+a változó fogja felvenni a tároló értékeit. A típust nem kötelező megadni,
+lehet <code>auto</code> is:</p>
+
+<pre   ><code class="language-c">for (auto i : v)
+    std::cout &lt;&lt; i &lt;&lt; std::endl;</code></pre>
+
+<p>Tudni kell azt, hogy ez a változó érték szerint fogja felvenni a tároló által
+tárolt elemeket, tehát ebbe másoló konstruktoraikkal bemásolódnak a tároló elemei.
+Ha ezt el szeretnénk kerülni, akkor referencia típust kell megadni. Ilyen
+esetben a tároló elemeinek referenciáját látjuk, és módosítani is tudjuk az elemeket:</p>
+
+<pre   ><code class="language-c">for (auto &amp; i : v)
+    i *= 2;</code></pre>
+
+<p>Az ilyen módon használt <code>for()</code> ciklus nagy bravúrja, hogy
+nem csak az STL tárolóin, hanem saját tárolóinkon, és akár tömbökön is működik.
+Ezeket a ciklusokat a fordító a háttérben mindig átírja egy olyan változatra, amely a C++11-ben
+új, globális <code>std::begin()</code> és <code>std::end()</code> függvényt használja
+(<code>#include &lt;iterator&gt;</code>) a tartomány elejének és végének lekérdezésére.
+Az előző ciklust például így fejti ki magának a fordító:</p>
+
+<pre   ><code class="language-c">for (auto it = std::begin(v); it != std::end(v); ++it) {
+    auto &amp;i = *it;
+    std::cout &lt;&lt; i &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A globális <code>std::begin()</code> és <code>std::end()</code> függvénysablon
+úgy van megírva, hogy az adott tároló <code>begin()</code> és <code>end()</code>
+tagfüggvényét hívva kérdezze le a tartomány két szélét mutató iterátorokat.
+<a href="../cpp1417/index.html#cpp14std">C++14-ben</a> további kényelmi függvények lettek.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A tömbök std::begin() és std::end() függvényei">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        A tömbök std::begin() és std::end() függvényei<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A tömb típusokra a globális <code>std::begin()</code> és <code>std::end()</code>
+függvénysablon úgy van specializálva, hogy pointert adjon azok elejére és végére. Emiatt
+a tárolót bejáró <code>for()</code> ciklus a tömbökre is működik:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+
+int main() {
+    int arr[] = { 3, 4, 5, 6 };
+
+    for (auto i : arr)
+        std::cout &lt;&lt; i &lt;&lt; ' ';
+}</code></pre>
+
+<pre class="screenshot">
+3 4 5 6
+</pre>
+
+<p>Mindez azért lehetséges – akármennyire hihetetlennek tűnik a C tanulmányok
+után! –, mert a C++-ban lehet olyan függvényt írni, amely megadja egy tömb méretét.
+Egészen pontosan függvénysablont, nem pedig függvényt. Ennek megértéséhez kicsit
+jobban meg kell vizsgálni a C/C++ paraméterátadás szabályait.</p>
+
+<p>Tudjuk, hogy C-ben a tömböket függvénynek csak a rájuk mutató pointerrel tudtuk
+átadni. Erre azért volt szükség, mert a paraméter mérete, azaz a verembe bemásolt
+adat mérete fix kell legyen. Egy emiatt kitalált szintaktikai szabály kimondta,
+hogy egy függvény fejlécében akár tömb típust, akár pointert adtunk meg, azt a
+fordító pointerként értette. Formálisan: egy függvény fejlécében adott
+<code>T[]</code> típus automatikusan <code>T*</code>-ként értendő. Az alábbi két
+deklaráció így ekvivalens, és az alsó felel meg a tényleges működésnek.</p>
+
+<pre   ><code class="language-c">void func(int arr[]);
+void func(int *arr);</code></pre>
+
+<p>A híváskor átadott változó ennek ellenére nem csak pointer típusú lehet, hanem
+tömb is. Ha tömböt adunk át, akkor a hívás helyén két újabb szabály aktiválódik.
+Nézzük meg ezeket részletesebben!</p>
+
+<ul>
+
+<li>Az egyik az, hogy C-ben érték szerinti paraméterátadás van, és a híváskor megadott
+érték egy új változóba kerül (a függvény paraméterébe). Ha látszólag egy változót adunk meg
+a függvényhívás kifejezésben, akkor igazából nem azt a változót adjuk át, hanem
+csak annak értékét. Vagy az értékének valamilyen más típussá konvertált
+változatát. Pl. ha <code>int i=2</code>, akkor a <code>sin(i)</code> kifejezésben
+az <code>i</code> változó értéke kiolvasódik: <code>2</code>, aztán valóssá
+konvertálódik: <code>2.0</code>, és ezt kapja a <code>sin()</code> függvény.
+
+<li>A másik szabály, a tömbökre értelmezett konverziók miatt a tömb átadásakor
+ugyanaz történik, mint a <code>sin()</code> példában. Mivel a tömb típusú érték
+nem tehető be egy pointer típusú változóba, konverziót keres a fordító; a
+<code>T[]</code> típusú értéket automatikusan <code>T*</code> típusúvá alakítja,
+kiszámolva a tömb címét. Az alábbi két hívás megint csak ekvivalens, és az
+alsó mutatja pontosan a tényleges működést. A konverzió miatt elveszítjük a tömb
+mérete információt – tehát ez az információvesztés pillanata.
+
+<pre   ><code class="language-c">int arr[100];
+
+func(arr);
+func((int *) arr);</code></pre>
+</ul>
+
+<p>C++-ban a helyzet ennél árnyaltabb. A függvények már nem csak érték típusú
+paramétereket tudnak átvenni, hanem értéket, konstans értéket (ez most lényegtelen),
+referenciát és konstans referenciát is. Tekintsünk egy egyszerű <code>int</code>-et!</p>
+
+<pre   ><code class="language-c">void func_val(int i);
+void func_ref(int &amp;i);
+void func_constref(int const &amp;i);</code></pre>
+
+<p>Az értékparaméterű függvények ugyanúgy működnek, mint C-ben. A hívás helyén
+megadhatunk változót (amely lemásolódik), vagy megadhatjuk egy kifejezés értékét
+is. Mivel egy új változóról van szó, akár konverzióval is előállhat az érték. Az
+alábbiak mind működnek:</p>
+
+<pre   ><code class="language-c">void func_val(int i);
+
+int x;
+func_val(x);
+func_val(2);
+func_val(x + 3);
+func_val(5.7);</code></pre>
+
+<p>Ugyanez a helyzet a konstans referenciákkal. Azok vehetnek át változót,
+de ígéretet tesznek arra, hogy nem változtatják. De vehetnek át
+értéket is, mivel a C++ tervezésekor úgy döntöttek, hogy a konstansok esetén
+az átvétel módja a hívott függvény megíróit érdekli inkább, nem pedig azt,
+aki meghívja a függvényt.
+Ilyenkor a fordító ideiglenesen egy névtelen objektumba teszi az értéket,
+hogy a függvény kérése szerint referenciaként adhassa át. Így minden, ami
+működött az érték típusú paraméternél, működik konstans referencia paraméterrel
+is:</p>
+
+<pre   ><code class="language-c">void func_constref(int const &amp;i);
+
+int x;
+func_constref(x);       /* OK, az x változót látja */
+func_constref(2);       /* OK, egy ideiglenes objektumot lát */
+func_constref(x + 3);   /* OK, egy ideiglenes objektumot lát */
+func_constref(5.7);     /* OK, egy ideiglenes objektumot lát */</code></pre>
+
+<p>Ami pedig a tömbös problémánk megoldásához elvezet, az az, hogy a nem konstans
+referencia nem ilyen. A sima referencia nem inicializálható semmi mással, csakis
+balértékkel, azaz változóval. Ez a függvények paramétereire is igaz:
+referencia formális paraméterű függvénynek a híváskor csak változót kaphatnak,
+semmi mást. Ez a konverziót is tiltja, mert a konverzió közben egy másik érték
+keletkezne, amely már nem azonos a változóval. És amely mellesleg jobbérték, mert temporális.
+Temporális objektumot pedig értelmetlen lenne átadni – ha úgyis megszűnik, akkor miért hívnánk olyan függvényt,
+amely változtatni akarja?</p>
+
+<pre   ><code class="language-c">void func_ref(int &amp;i);
+
+int x;
+func_ref(x);       /* OK */
+func_ref(2);       /* FORDÍTÁSI HIBA */
+func_ref(x + 3);   /* FORDÍTÁSI HIBA */
+func_ref(5.7);     /* FORDÍTÁSI HIBA */</code></pre>
+
+<p>Tehát a referencia letiltja a konverziókat. Most emlékezzünk vissza megint a
+C-re! C-ben a függvények azért vették át a tömböket pointerként, mert 1) a
+formális paraméterként adott tömb típust pointerként kell értelmezni, 2) a pointer
+értékparaméter, ezért konverzió lehetséges a hívás helyén a paraméter
+inicializálása érdekében. Ha C++-ban a tömb típusú paraméter helyett tömb referenciája
+típust használunk, akkor egyszerre kiiktatjuk mindkét szabályt:</p>
+
+<pre   ><code class="language-c">void func(int (&amp;arr)[100]);</code></pre>
+
+<p>Az 1-es szabály kikapcsol, mert a megadott típus nem tömb, hanem valaminek a
+referenciája. A 2-es szabály is kikapcsol, mert ennek a függvénynek a referencia
+paraméter miatt már nem adhatunk akármilyen értéket, csakis pont ugyanilyen
+típusú balértéket. Ez a függvény csak <code>int[100]</code> típusú paraméterrel
+hívható, semmi mással. (A zárójelezésre a precedenciaszabályok miatt van szükség,
+hogy a referencia <code>&amp;</code> jelét az <code>arr</code> paraméternévhez
+tapadónak vegye a fordító, ne az <code>int</code>-hez. Azaz tömb referenciája,
+nem pedig referenciák tömbje legyen deklarálva itt – mondjuk az utóbbi amúgy sem létezhet.)</p>
+
+<p>Ezek alapján, az alábbi függvénysablon egy igazi varázsfüggvény: megmondja egy
+tömb méretét! Ráadásul azokban az esetekben, ahol nem tudná megmondani (tömbre
+mutató pointer, dinamikus tömb), fordítási hibát kapunk, mivel ott a híváshoz
+<code>T*</code>&rarr;<code>T[]</code> típuskonverzióra lenne szükség.</p>
+
+<pre   ><code class="language-c">template &lt;typename T, size_t SIZE&gt;
+constexpr size_t arrsize(T (&amp;array)[SIZE]) {
+    return SIZE;
+}
+
+int main() {
+    int arr[100];
+    std::cout &lt;&lt; arrsize(arr);
+}</code></pre>
+
+<p>A tömbökkel használt <code>std::begin()</code> és <code>std::end()</code>
+sablonfüggvények pedig ilyen egyszerűen működnek:</p>
+
+<pre   ><code class="language-c">template &lt;typename T, size_t SIZE&gt;
+T * mybegin(T (&amp;array)[SIZE]) {
+    return array;
+}
+
+template &lt;typename T, size_t SIZE&gt;
+T * myend(T (&amp;array)[SIZE]) {
+    return array + SIZE;
+}</code></pre>
+
+<p>És mindezt már C++98-ban is meg lehetett csinálni!</p>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mindenhova lehet auto-t írni? A decltype kulcsszó">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+    <a id="decltype" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Mindenhova lehet auto-t írni? A decltype kulcsszó<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <code>auto</code> kulcsszónak a kényelmes változómegadásnál fontosabb
+szerepe is van, de ennek megértéséhez előbb meg kell vizsgálni a C++11 egy újabb
+kulcsszavát, a <code>decltype</code>-ot.</p>
+
+<p>Térjünk vissza az <code>add(a, b) = a+b</code> függvényhez. Gondolkodjunk el azon
+egy pillanatra, mi a helyzet akkor, ha a fordító nem látja a függvény törzsét! Helyette csak a deklarációt ismeri
+egy adott fordítási egységben, és úgy kellene lefordítsa az <code>add(1, 2.3)</code> függvényhívást:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T1, typename T2&gt;
+auto add(T1 a, T2 b);   /* ??? */</code></pre>
+
+<p>Ez így egyszerűen nem működhet. Azért, mert a visszatérési típus csak a függvény törzséből, definíciójából
+derül ki, abból a függvénytörzsből, amely a deklarációból még nem látszik.  Ennél tehát több információra van
+szüksége a fordítónak. A sablonparamétereket le tudja vezetni a hívásból, nekünk azt kell még megadnunk, hogy
+a visszatérési érték típusát hogyan lehet levezetni. Itt jöhet jól a <code>decltype</code> kulcsszó.</p>
+
+<div class="csik">
+<h3>A <code>decltype</code> működése: deklarált típus és effektív típus</h3>
+<p>A <code>decltype</code> kulcsszó arra való, hogy egy kifejezés típusát kérdezzük
+le a fordítótól. Ezt operandusként zárójelben kell megadni, és a lekérdezett típus,
+azaz az egész <code>decltype</code> szerkezet bárhol használható, ahova szintaktikailag
+egy típus neve illik. A levezetés egyszerűsített szabályai az alábbiak:</p>
+<ul>
+    <li>Ha az operandus zárójelezés nélkül van megadva, akkor az eredmény az a
+    típus, ahogy a hivatkozott változót vagy értéket deklaráltuk.
+    <li>Egyébként pedig az eredmény az, ahogyan az adott környezetben látszik.
+</ul>
+<p>Ezek homályosnak tűnnek, de majd mindjárt meglátjuk, úgy vannak kitalálva, hogy könnyű legyen
+használni őket. A megértésükhöz észre kell vennünk azt, hogy általában
+<em>a változók a kifejezésekben nem olyan típusúként látszanak, mint ahogyan
+deklaráljuk őket.</em> Ezért meg kell különböztetnük a <em>deklarált típust</em>
+(declared type) és az <em>effektív típust</em> (effective type). Vegyük az alábbi,
+egyszerű példát:</p>
+<pre   ><code class="language-c">struct X {
+    int i;
+};
+
+X first;
+first.i;    /* nem konstans, nem úgy deklaráltuk */
+X const second;
+second.i;   /* konstans, pedig nem konstansként deklaráltuk */</code></pre>
+<p>Az <code>X</code> osztály tagváltozóját, az <code>i</code>-t nem konstans
+egésznek deklaráltuk. Ez a tagváltozó deklarált típusa. Ehhez képest, a használattól
+függően, egy objektum <code>i</code> tagváltozója lehet konstans vagy nem konstans is.
+A <code>second.i</code> például konstans; ez a kifejezés típusához, azaz az effektív típushoz tartozik.</p>
+<p>Egy ravaszabb, de annál fontosabb példa:</p>
+<pre   ><code class="language-c">int a;       /* deklarált: int,  effektív: int&amp; */
+int &amp;b = a;  /* deklarált: int&amp;, effektív: int&amp; */</code></pre>
+<p>Itt mindkét kifejezés, <code>a</code> és <code>b</code> effektív típusa
+<code>int &amp;</code>, azaz egész referenciája (egész balérték, integer lvalue),
+annak ellenére, hogy az első változó nem referenciának lett deklarálva. Az <code>int a</code> sorral azt mondjuk,
+hogy szeretnénk foglalni egy egész számnyi helyet a memóriából, és szeretnénk egy
+<code>a</code> nevet is létrehozni, amelyik hivatkozza ezt a létrehozott helyet,
+azaz ennek a helynek a referenciája. Az <code>int &amp;b</code> sorral pedig azt,
+hogy helyet foglalni nem szeretnénk, de az előzőhöz hasonlóan egy nevet szeretnénk
+adni egy helynek. Mindkét esetben egy helyről van szó, amelynek címe képezhető,
+ezért referencia is hivatkozhat rá – vagyis mindkettő balértékként, <code>int &amp;</code> típusként
+látszik kifejezésekben.</p>
+<p>A <code>decltype</code> kulcsszó szabályai eszerint újrafogalmazva, könnyen
+emészthető és megjegyezhető formában:</p>
+<ul>
+    <li><code>decltype(e)</code> &rarr; deklarált típus (deklarációban megadott típus)
+    <li><code>decltype((e))</code> &rarr; effektív típus (konkrét kifejezésben látszó típus)
+</ul>
+<p>Példák:</p>
+<pre   ><code class="language-c">struct X {
+    int i;
+};
+
+X first;
+X const second;
+    decltype(first.i)    /* int */
+    decltype((first.i))  /* int &amp; */
+    decltype(second.i)   /* int */
+    decltype((second.i)) /* int const &amp; */
+
+int foo();
+    decltype(foo())      /* int */
+    decltype((foo()))    /* int, mert nem balérték! */
+
+int a;
+    decltype(a) b = 5;   /* int b = 5; */
+    decltype((a)) c;     /* HIBA: inicializálatlan int &amp; referencia */
+    decltype((a)) d = a; /* int &amp;d = a; */</code></pre>
+<p>A <code>decltype</code> belseje egyébként a <code>sizeof</code> operátorhoz
+hasonlóan kiértékeletlen környezet (unevaluated context). A benne lévő kifejezést
+a fordító megvizsgálja, hogy milyen értéket eredményezne, de a kiértékelése nem
+történik meg, a lefordított kódba nem épül be. Például ha valahol
+<code>decltype(i++)</code>-t írunk, akkor azzal a kifejezés típusára
+hivatkozhatunk, de az <code>i</code> változó nem lesz megnövelve.</p>
+</div>
+
+<p>A függvény visszatérési típusát a <code>decltype</code>-pal már
+meghatározhatjuk: ha a paraméter <code>a</code> és <code>b</code>, a visszatérési
+érték típusa <code>decltype(a+b)</code>. Ilyen módon mutatnánk meg a fordító számára,
+hogy a paraméterből hogyan kell levezetni a visszatérési érték típusát. Valami ilyesmi,
+bár ez még mindig nem  jó:</p>
+
+<div class="sticky">Még mindig<br>nem jó</div>
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+decltype(a+b) add(T1 a, T2 b);   /* FORDÍTÁSI HIBA */</code></pre>
+
+<p>A gond itt még az, hogy a függvény fejléce nem része a függvény törzsének,
+ezért a fordító nem tudja, milyen <code>a</code>-ról és <code>b</code>-ről beszélünk. Az
+<code>a</code> és <code>b</code> változók létezni fognak, de csak a függvényen belül. Ahol a
+visszatérési értéket adjuk meg, az még a függvényen kívülinek számít, és itt még
+a függvényen kívüli nevek között keresgél a fordító. (Ha nincs szerencsénk, van
+ <code>a</code> és <code>b</code> nevű globális változónk, és megtalálja azt.)</p>
+
+<p>Különbséget kell tenni a függvényen kívüli és a függvényen belüli nevek között.
+Ezért még egy olyan szintaktikai elem kellett, amellyel egy függvény visszatérési
+értékének típusa a paraméterei után adható meg. Ez az ún. trailing return type
+szintaxis. Ebben a visszatérési típus megszokott helyére az <code>auto</code> kulcsszót
+kell írni (mert a függvény deklarációját egy típusnévvel kell kezdeni), a típust pedig
+egy nyíl után a fejléc végére:</p>
+
+<div class="sticky">C++11<br>trailing return type</div>
+<pre   ><code class="language-c">auto foo() -&gt; type;</code></pre>
+
+<p>Az <code>add()</code> függvénysablon deklarációja és definíciója, ha ezeket el akarjuk
+választani, tehát így írható:</p>
+
+<div class="sticky">C++11 <code>decltype</code></div>
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+auto add(T1 a, T2 b) -&gt; decltype(a+b);
+
+template &lt;typename T1, typename T2&gt;
+auto add(T1 a, T2 b) -&gt; decltype(a+b) {
+    return a+b;
+}</code></pre>
+
+<p>És ez már a jó megoldás. Így minden típusra fog működni;
+például <code>add(std::string, char)</code> és <code>add(char, std::string)</code>
+típusa is <code>std::string</code> lesz, mivel a megfelelő <code>operator+</code> függvényt
+a hívás helyén is megkeresi a fordító.</p>
+
+
+<div class="megjegyzes">
+<p>A „trailing return type” szintaxis bárhol használható:</p>
+<pre   ><code class="language-c">auto main() -&gt; int {
+    /* ... */
+}</code></pre>
+<p>Néha a nevek láthatósági köre miatti zűrzavar kivédésére is jól jön. Például
+az iterátoroknál, ahol az osztály tagfüggvény egy belső típussal tér vissza:</p>
+<pre   ><code class="language-c">class MyVector {
+    using iterator = int *;
+    auto begin() -&gt; iterator;
+};
+
+auto MyVector::begin() -&gt; iterator {    /* MyVector::iterator, nem pedig ::iterator */
+    /* ... */
+}</code></pre>
+</div>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_9">
+
+<a id="9" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">9</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#9"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li><a href="http://www.parashift.com/c++-faq/placement-new.html">What is "placement new" and why would I use it? </a> (C++ FAQ).
+    <li><a href="http://www.stroustrup.com/C++11FAQ.html#for">Bjarne Stroustrup: C++11 FAQ: Range-for statement</a>.
+    <li>Herb Sutter, and Andrei Alexandrescu. C++ coding standards: 101 rules, guidelines, and best practices. Pearson Education, 2004.
+    <li id="dne">Bjarne Stroustrup: The Design and Evolution of C++. Addison-Wesley, 1994.
+    <li id="vector-growth-rate">A kapacitás növeléséről: <a href="http://stackoverflow.com/questions/1100311/what-is-the-ideal-growth-rate-for-a-dynamically-allocated-array">What is the ideal growth rate for a dynamically allocated array?</a>.
+    <li><a href="http://www.parashift.com/c++-faq/memory-pools.html">Is there a way to force new to allocate memory from a specific memory area?</a> (C++ FAQ).
+    <li><a href="http://en.wikipedia.org/wiki/Slab_allocation">Slab allocation</a> (Wikipedia).
+    <li><a href="https://developer.gnome.org/glib/unstable/glib-Memory-Slices.html">Memory Slices — efficient way to allocate groups of equal-sized chunks of memory</a> (GLib Reference Manual).
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

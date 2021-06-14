@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Operátorok</title>
+<meta property="og:title" content="TEST InfoC++11 :: Operátorok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Operator overloading">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Operator overloading">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Operátorok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Operátorok</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Operator overloading</p>
+</div>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+<p>
+A C++ lehetőséget ad arra, hogy a saját típusú objektumainkra megadjuk, az
+egyes operátorok, pl. összeadás, kivonás stb. mit jelentsenek.
+Ez nagyon kényelmes lehet az osztály használói számára. Ha írunk egy sztring osztályt, akkor a sima 
+<code>=</code> értékadó operátort használhatjuk a sztringek másolására, az 
+<code>==</code> összehasonlító operátort pedig két sztring összehasonlítására.
+Nem kell majd egyik művelet helyett sem egy hosszan részletezett, a függvény
+nevét megadó írásmódot használni. Az egész számoknál is elég kényelmetlen
+lenne, ha egy <code>i=5*6+7</code> helyett azt kellene írni, hogy
+<code>beallit(i, osszead(szoroz(5, 6), 7))</code>. Ha helyesen használjuk,
+akkor nagyon leegyszerűsítheti a megírt osztályok használatát.
+</p>
+
+<img src="macska.jpg" class="arnyek kozep">
+
+<p class="kozep">(Kép: <a href="https://www.facebook.com/IFeakingLoveScience/">IFLScience</a>)</p>
+
+<pre class="bentebb"  ><code class="language-c">box&amp; operator&lt;&lt;(box&amp;, cat const&amp;);
+box&amp; operator&lt;&lt;(box&amp;, box const&amp;);
+
+box1 &lt;&lt; cat1 &lt;&lt; (box2 &lt;&lt; cat2);
+
+operator&lt;&lt;(operator&lt;&lt;(box1, cat1), operator&lt;&lt;(box2, cat2));</code></pre>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A helyes használatról</a>
+                      <li><a href="index.html#2" class="">A függvényhívás forma</a>
+                      <li><a href="index.html#3" class="">Példák</a>
+                      <li><a href="index.html#4" class="">A kiíró, beolvasó operátorok</a>
+                      <li><a href="index.html#5" class="">Konverziós operátorok</a>
+                      <li><a href="index.html#6" class="">A teljes kód</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A helyes használatról">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A helyes használatról<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Saját osztályhoz egy operátort akkor és <em>csak akkor</em> érdemes átdefiniálni,
+ha az átdefiniált jelentés intuitív és magától értetődő. Amiatt, hogy kevesebbet
+kelljen gépelni, semmiképpen nem szabad. Az csak arra lenne jó, hogy megtévesztő
+legyen a leírt programrész.
+</p>
+<ul>
+    <li>Helyes használat például az <code>operator+</code> átdefiniálása sztringek esetén.
+    Ha az <code>s1</code> sztring az <em>alma</em> szót tárolja, az <code>s2</code> tartalma pedig <em>fa</em>,
+    akkor elég egyértelmű, hogy <code>s1+s2</code> értéke <em>almafa</em> kell legyen.
+    És ilyenkor kényelmes azt írni, hogy <code>s1+s2</code>, az <code>osszefuz(s1,s2)</code>
+    vagy esetleg az <code>s1.osszefuz(s2)</code> helyett.
+
+    <li>Nincs értelme viszont például tömbök esetén átdefiniálni a <code>+</code> operátort.
+    Mit jelent két <code>double</code> tömb összege? Hogy az egyes elemeket külön
+    összeadjuk, vagy hogy egymás után írjuk a két tömböt? Ha egyesével adjuk őket össze,
+    mi van akkor, ha nem egyforma méretűek? Értelmetlen.
+    
+    <li>Megint csak értelmes akkor, ha egy Vektor3D osztályt írunk, amelynél két
+    vektor összeadása ugyanazt fogja jelenteni, amit matematikából is jelent. Igen,
+    a Vektor3D belül egy háromdimenziós <code>double</code> tömb. De a <em>célja</em>
+    teljesen más, mint az előző példa általános <code>double</code> tömbje, amelyben
+    a számok jelentéséről nem tudunk semmit.
+    
+    <li>Általában véve a józan ész diktálta utat érdemes követni.
+    Helyes lehet megadni egy kivonás műveletet két dátumhoz; nov.11-nov.2
+    nyilvánvalóan 9-re kell kiértékelődjön, hiszen 9 nap telik el közöttük.
+    Esetleg dátum+int-et lehet értelme írni; mert nov.2+9=nov.11.
+    Ezzel ellentétben összeadni két dátumot már értelmetlen, ezért a
+    dátum osztály ne adjon meg dátum+dátum operátort!
+</ul>
+<p>
+A helyesen átdefiniált operátorok szemantikája is teljesen szokványos
+kell legyen. Ehhez jó iránymutató az, hogy egy adott operátor hatására a sima,
+egyszerű, beépített <code>int</code> számok hogyan működnek. A <code>*</code>
+összeszoroz két számot, létrehoz egy harmadikat, amely a szorzat. De a két szám
+nem változik meg. A <code>*=</code> viszont megváltoztatja a bal oldalán álló változót:
+</p>
+<pre   ><code class="language-c">int a, b, c;
+a = 2; b = 3;
+c = a*b;
+std::cout &lt;&lt; a &lt;&lt; b;        /* még mindig 2 és 3! */
+a *= b;
+std::cout &lt;&lt; a &lt;&lt; b;        /* &quot;a&quot; most 6! b marad 3. */</code></pre>
+<p>
+A helyes szemantikához tartozik az is, hogy – ha úgy értelmes – jelentse
+<code>a+b</code> és <code>b+a</code> ugyanazt; vagyis ha a művelet, amit modellezni
+szeretnénk, kommutatív, akkor a programban is írhassuk felcserélve a tagokat.
+(Sztringekre ez nyilván pont nem igaz; <em>alma</em>+<em>fa</em> nem ugyanaz, mint
+<em>fa</em>+<em>alma</em>.) Az is, hogy <code>a=a+b</code>-nek legyen ugyanaz
+a hatása, mint <code>a+=b</code>-nek; ezt nekünk kell megoldanunk.
+Ha írunk <code>++</code> vagy <code>--</code> operátort, akkor azok prefix és postfix
+alakban is működjenek a szokásos módon. És még lehetne sorolni.
+</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A függvényhívás forma">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A függvényhívás forma<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Minden operátort használó műveletet fel lehet írni függvényhívás formájában.
+Ezt objektumok esetén engedi is a fordító, csak ritkán szokás használni; inkább
+azért érdemes megvizsgálni, mert ebből látszik az, hogy az átdefiniált operátorokat
+megvalósító függvények hogyan kapják meg a műveletek operandusait paraméterként.
+Legyen a példa egy racionális számokat (törtet) megvalósító osztály.
+</p>
+<pre   ><code class="language-c">Tort t1, t2;
+
+// kétoperandusú
+t1 - t2                     /* kivonás */
+operator-(t1, t2)           /* mínusz operátor két paraméterrel */
+t1.operator-(t2)            /* tagfüggvényként ugyanaz */
+
+// egyoperandusú
+-t1                         /* negálás */
+operator-(t1)               /* globális függvénnyel */
+t1.operator-()              /* tagfüggvényként */
+
+// értékadó
+t1 = t2                     /* értékadás */
+t1.operator=(t2)            /* tagfüggvényként */
+
+// kiíró, beolvasó
+std::cout &lt;&lt; t1             /* kiírás */
+operator&lt;&lt;(std::cout, t1)   /* globális függvényként */</code></pre>
+<p>
+Az operátorokhoz megadott függvényeket többféleképpen is megadhatjuk.
+A normál, <em>kétoperandusú operátorokat</em> megírhatjuk globális függvényként,
+pl. a <code>t1-t2</code> kifejezés ekvivalens lesz a <code>operator-(t1,t2)</code>
+függvényhívással, ha ezt írjuk meg. Ilyenkor a bal oldali operandusból
+lesz az első paraméter, a jobb oldaliból pedig a második.
+De megírhatjuk tagfüggvényként is: a <code>Tort</code> osztály metódusa
+lehet az <code>operator-</code>. Ilyenkor a t1 objektumon fog futni
+a tagfüggvény, vagyis a <code>this</code> a t1-re, a bal oldali
+operandusra mutat; a jobb oldali operandust, t2-t pedig paraméterként kapja.
+</p>
+<p>
+Az <em>egyoperandusú operátoroknál</em> hasonló a helyzet. Ha globális
+függvényként szerepelnek, akkor egy paraméterük van. Ha tagfüggvényként
+implementáljuk, akkor pedig egy sem, mert az egyetlen operandus a <code>this</code>-en
+keresztül fog látszani. Fontos a paraméterek száma, mert esetleg ez
+különböztetheti meg az operátorokat! Az <code>a-b</code> kifejezés esetén
+a két operandusú <code>operator-</code> az, amiről szó van, vagyis egy
+kivonásról. A <code>-b</code> kifejezés esetén pedig az egy operandusú,
+ellentett operátorról. 
+</p>
+<p>
+Az <em>értékadó operátor</em>, bár technikailag két paraméterű, csakis
+tagfüggvényként valósítható meg. Ennek az az oka, hogy a fordító ilyet ír
+magától is, ha nincs deklarálva. Erről eleget van szó a másoló konstruktor,
+destruktor témakörében máshol, úgyhogy itt nem részletezem. (Az indexelő
+operátor is egy kivétel; azt is kötelező tagfüggvényként megírni.)
+</p>
+<p>
+Az <code>std::ostream</code>-re <em>kiíró</em> és az <code>std::istream</code>-ről
+<em>beolvasó</em> operátor, bár technikailag úgyszint két paraméterű, csak globálisan valósítható
+meg. Ennek az az oka, hogy tagfüggvényként az <code>ostream</code> vagy az <code>istream</code>
+osztály tagja kellene legyen, amelynek a definícióját viszont nem mi adjuk meg. 
+Vagyis nem tehetünk hozzá új tagfüggvényt.
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Példák">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Példák<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+A várva várt példa kód. Adott egy tört osztály, amely egyelőre a lenti módon
+néz ki. Írjunk hozzá néhány operátort!
+</p>
+<pre   ><code class="language-c">class Tort {
+  private:
+    int szaml, nev;
+  public:
+    Tort() {}
+    Tort(int sz, int n): szaml(sz), nev(n) {}
+};
+
+int main() {
+    Tort t1;                    /* inicializálatlan */
+    Tort t2(1, 2), t3(3, 4);    /* 1/2 és 3/4 */
+}</code></pre>
+
+<p>
+Nézzük meg először a szorzást, az könnyű művelet a törteknél.
+Ha megszorzunk egy törtet egy másikkal, akkor a számlálót a számlálóval,
+a nevezőt a nevezővel kell szorozni. Például ha az 1/2 értéket tároló
+t2 törtet megszorozzuk t3-mal, az eredmény 3/8 lesz. Kérdés az,
+hogy ez a 3/8 hova kerül. Ha azt írjuk, hogy <code>t2*=t3</code>, akkor
+t2 meg kell változzon, az 1/2-t elfelejtve a 3/8 értéket
+kell felvegye. t3 nyilván változatlan marad. Ha azt írjuk,
+hogy <code>t2*t3</code>, akkor se t2, se t3
+nem változik. Ilyenkor <em>keletkeznie egy új objektumnak</em>, amely a 3/8
+értéket tárolja, hiszen semelyik addigi objektum nem tárolt ilyen értéket.
+</p>
+<p>
+Az <code>operator*</code> ezért, bárhogyan valósítjuk is meg, egy <code>Tort</code>-tel
+kell visszatérjen. Csak érték lehet a visszatérés típusa, referencia nem, mert
+egy <em>új objektum keletkezik!</em> A paraméterét érdemes referenciával átvegye;
+ahhoz, hogy egy törtet megvizsgáljunk, kinézzük belőle a számlálót és a nevezőt
+a szorzás kedvéért, felesleges másolatot készíteni róla.
+A lenti példákban van globális és tagfüggvényes <code>operator*</code> megvalósítás
+is. Nyilvánvalóan elég csak az egyiket használni; több nem lehet, mert akkor a fordító
+nem tudna választani közülük.
+</p>
+<p>
+A függvények paramétereit az operátoroknál egyébként <code>lhs</code>-nek és
+<code>rhs</code>-nek szokás nevezni. <code>lhs</code>, a <em>left hand side</em> rövidítéseként, a bal oldali
+operandus; <code>rhs</code> pedig a <em>right hand side</em> rövidítése, a jobb oldali operandus.
+</p>
+<pre   ><code class="language-c">// Szorzás operátor: a három megvalósítás közül csak az egyik kell.
+
+/* Globális függvényes megvalósítás.
+ * Mivel ez nem tagfüggvény, baráttá kell tenni a tört
+ * osztályban: friend Tort operator*(Tort const&amp; lhs, Tort const&amp; rhs); */
+Tort operator*(Tort const&amp; lhs, Tort const&amp; rhs) {
+    Tort uj;
+    uj = Tort(lhs.szaml*rhs.szaml, lhs.nev*rhs.nev);
+    return uj;
+}
+
+/* Ez ugyanaz, mint a fenti, csak rövidebb. A fentit érdemes
+ * lenne így írni, mert a fordító jobban tudja optimalizálni. */
+Tort operator*(Tort const&amp; lhs, Tort const&amp; rhs) {
+    return Tort(lhs.szaml*rhs.szaml, lhs.nev*rhs.nev);
+}
+
+/* Ez pedig tagfüggvény, amelyet értelemszerűen az
+   osztályban deklarálni kell. */
+Tort Tort::operator*(Tort const&amp; rhs) {
+    return Tort(szaml*rhs.szaml, nev*rhs.nev);
+}</code></pre>
+
+<p>
+Talán a harmadik a legjobb. Viszont az <code>operator*=</code>-t most
+szándékosan tagfüggvényként írom. Annak az a sajátossága, az összes
+hasonló operátorral (<code>/=</code>, <code>+=</code> stb.) és az
+értékadó operátorral együtt, hogy a bal oldali operandussal kell
+visszatérjenek. Emiatt csinálja például a <code>t1=t2*=t3</code> kifejezés
+azt, hogy t2 és t3 értékét összeszorozza, az eredményt
+t2-be bemásolja (<code>t2*=t3</code>); ezután ez az eredmény bekerül
+t1-be is, mivel <code>t1=t2</code>. Vagyis a <code>t2*=t3</code>
+részkifejezés visszatérési értéke t2 kell legyen,
+amely, ha tagfüggvényként írtuk meg, a <code>*this</code>.
+<em>Ez az összes értékadás jellegű operátorra így van:
+<code>return *this</code> a végük.</em>
+Másolni most sem érdemes, ezért itt viszont referencia a visszatérés
+típusa.
+</p>
+<pre>
+t1=t2*=t3
+   \____/    &larr;  t2*=t3 &rarr; t2.operator*=(t3) &rarr; vissza: t2
+     t2
+\_____/      &larr;  t1=t2  &rarr; t1.operator=(t1)  &rarr; vissza: t1
+ t1=t2       
+</pre>
+<p>
+Lent két megoldás van; a másodikban a sima <code>operator*</code>-ra
+vezetem vissza az <code>operator*=</code>-t. Általában ezt egyébként
+fordítva szokás csinálni. Próbáljátok ki, miért.
+Tudni kell azt viszont, hogy ha írunk <code>*</code> operátort, a
+fordító nem generál automatikusan <code>*=</code> operátort is, hanem
+ezt nekünk kell megtennünk.
+
+<pre   ><code class="language-c">// *= operátor: itt is elég a kettő közül az egyik.
+
+/* Első lehetséges megoldás. A lényeg, hogy tagfüggvény esetén
+ * a bal oldali paraméter a *this. */
+Tort&amp; Tort::operator*=(Tort const&amp; rhs) {
+    szaml *= rhs.szaml;
+    nev *= rhs.nev;
+    return *this;
+}
+
+/* Második lehetséges megoldás: visszavezetjük a sima
+ * operator*-ra, ha már úgyis azt megírtuk. */
+Tort&amp; Tort::operator*=(Tort const&amp; rhs) {
+    (*this) = (*this)*rhs;
+    return *this;
+}</code></pre>
+
+<p>
+Érdekes az ellentettet visszaadó <code>operator-</code>. Ennek
+használatához ugyanis ugyanazt a mínusz jelet kell használni,
+mint a kivonáshoz. A paraméterek számából látszik az, hogy
+melyikről van szó. Álljon itt egymás mellett a
+megvalósításuk az összehasonlítás kedvéért! Mindkettő
+tagfüggvényes változat.
+Ilyen egyébként a <code>*</code> operátor is, amelynek van egy
+operandusú változata. Csak azt pointerekre használjuk <code>*p</code>,
+és itt nincs értelme. Egy operandusú a <code>!</code> tagadás operátor
+is, ami itt úgyszint felesleges lenne.
+</p>
+
+<pre   ><code class="language-c">// operator-: kivonás és ellentett.
+// a paraméterek számából látja a különbséget a fordító!
+
+/* kivonás operátor: a this-ből vonjuk ki a másikat,
+ * és az eredménnyel térünk vissza */
+Tort Tort::operator-(Tort const&amp; rhs) {
+    int ujnev = this-&gt;nev*rhs.nev;
+    int ujszaml = this-&gt;szaml*rhs.nev - rhs.szaml*this-&gt;nev;
+    return Tort(ujszaml, ujnev);
+}
+
+/* ellentett operátor: van a this, és
+ * nincs több paraméter! */
+Tort Tort::operator-() {
+    return Tort(-szaml, nev);
+}</code></pre>
+
+
+<p>
+Bár, mint tudjuk, a <code>++</code> operátor azt jelenti, hogy <em>következő</em>,
+a racionális számoknál pedig ilyen nincsen... Írjuk azért meg úgy, hogy ugyanaz
+történjen rájuk, mint az egész számokra: megnőnek eggyel!
+A prefixes forma egyértelmű. Megnöveli az értéket, és utána a megnövelt értékkel
+tér vissza. A régi értékre nincsen szükség, csak a megnöveltre.
+Ezért ha tagfüggvényként írjuk, simán ez is
+végződhet egy <code>return *this</code>-szel, a visszatérés pedig történhet
+referenciával. Nem ez a helyzet a postfixes alaknál. A postfixes működésnél
+a tört értéke meg kell változzon, de a kifejezés értéke még a régi állapotát
+kell tükrözze, vagyis a növelés előtti értékét! Ezt úgy lehet megvalósítani,
+ha a növelés előtt elmentjük egy segédváltozóba az értéket, és azzal térünk vissza.
+Ebből az következik, hogy két objektum kell legyen; a régi, amelyikhez
+egyet adtunk, és az új, amelyik még a növelés előtti értéket tárolja. Az új
+objektum a függvényben jön létre, vagyis <em>a postfixes <code>++</code> operátor
+értékkel tér vissza, nem referenciával!</em> Furcsán különbözteti amúgy meg a C++
+ezt a prefixes alaktól: mivel az operandusok számában nem térnek el, a postfixes
+alak egy jelképes <code>int</code> adattagot kap.
+</p>
+
+<pre   ><code class="language-c">// Preincrement és postincrement. Mind a kettő tagfüggvényként
+// szerepel itt, szóval az osztályban deklarálni kell őket.
+
+/* Preincrement. A this-en kívül nincs más paraméter. */
+Tort&amp; Tort::operator++() {
+    szaml += nev;
+    return *this;
+}
+
+/* Postincrement. Jelképes int paraméter, ez különbözteti
+ * meg a prefixestől. */
+Tort Tort::operator++(int) {
+    Tort regi(*this);       /* lemásolom a növelés előtt */
+    ++(*this);              /* meghívom a prefixest */
+    return regi;            /* növelés előtti állapot másolata */
+}
+</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A kiíró, beolvasó operátorok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A kiíró, beolvasó operátorok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Ezek, mint fent azt látni lehetett, két operandusú operátorok
+ugyan, de nem lehet őket tagfüggvényként megvalósítani. Egy
+<code>cout&lt;&lt;t</code> hívásnál, ha tagfüggvénynek szeretnénk
+az <code>operator&lt;&lt;</code>-t, akkor az a cout-ot tartalmazó
+osztály, vagyis az <code>std::ostream</code> tagfüggvénye kellene legyen.
+Ehhez viszont nem írhatunk továbbiakat (hiszen akkor az láthatná
+a privát adattagokat, és akkor az egész private/public védelemnek
+semmi értelme nem lenne), ezért marad a globális függvényes
+megvalósítás.
+</p>
+
+<p>
+A <code>cout&lt;&lt;t</code> kifejezés függvény alakban
+így néz ki: <code>operator&lt;&lt;(cout, t)</code>. A bal oldali
+paraméter, hogy hova írjuk ki a számot, a jobb oldali pedig maga
+a szám. A számot itt is érdemes konstans referenciaként átvenni.
+A bal oldaliról pedig fejből kell tudni, hogy annak a típusa
+<code>std::ostream</code>. Fontos az is, hogy azt <em>kötelező
+referenciaként átvenni</em>, hiszen értelmetlen lemásolni!
+A visszatérési érték a láncolhatóság miatt ugyanaz kell legyen,
+mint a bal oldali paraméter; a típusa is ennek megfelelően ugyanaz.
+</p>
+
+<pre>
+std::cout&lt;&lt;t1&lt;&lt;t2;
+\___________/           std::cout&lt;&lt;t1 &rarr; visszaadja: std::cout
+  std::cout  &lt;&lt;t2;      std::cout&lt;&lt;t2
+</pre>
+
+<p>
+Jelen esetben ez a függvény az osztály barátja kell legyen,
+mivel eléri az adattagjait. Ha a kiírandó dolgok látszanának
+a publikus felületen keresztül (pl. lenne a számlálót és a nevezőt
+lekérdező tagfüggvény), akkor nem lenne erre szükség. A beolvasó
+operátort ugyanígy kell megvalósítani; az <code>std::cin</code>
+típusa <code>std::istream</code>. És persze referencia. És ugyanúgy
+bal oldali paraméter, hiszen ezt írjuk: <code>cin&gt;&gt;t</code>!
+
+<pre   ><code class="language-c">std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, Tort const&amp; t) {
+    os &lt;&lt; t.szaml &lt;&lt; '/' &lt;&lt; t.nev;
+    return os;
+}</code></pre>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Konverziós operátorok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Konverziós operátorok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Gyakran szeretnénk azt, ha egy függvény, amelyik törtet vár paraméterként,
+simán kaphatna egy egész számot is. Hiszen az egész számok is racionális
+számok; a nevezőjük 1. A C++-ban az <em>egy paraméterű konstruktorok
+egyben konverziót is jelentenek</em>. Vagyis a lenti konstruktor
+egy ilyen konverziót valósít meg. Ez sokszor kényelmes; például ha létezik
+ilyen, akkor egyből elfogadható lesz a <code>t+1</code> kifejezés; a
+fordító számára ez azt fogja jelenteni, hogy <code>t+Tort(1)</code>, amely
+két tört összeadása; amelyre pedig már megvan a függvény.
+</p>
+<p>
+Ez persze egy ideiglenes objektum létrejöttét is jelenti. Bonyolultabb
+konstruktoroknál ez hátrány lehet. A C++ beépített sztring típusa például
+tartalmaz char*&rarr;string konstruktort, de az összeadás műveletet külön
+megvalósították a string+string és a string+char* esetre is, hogy ne másolódjon
+feleslegesen le a jobb oldali karaktertömb csak az összeadás miatt.
+</p>
+<p>
+(Fontos megemlíteni, hogy mivel a fordító a kódunkat nem érti, az összes egy
+paraméterű konstruktort konverzió lehetőségének tekint – hacsak nem mondjuk
+neki azt, hogy ne tegye. Erre való az <code>explicit</code> kulcsszó. Például
+egy dinamikus tömb méretét megadó, egyedüli <code>int</code> paraméter a
+konstruktorban nem konverziót jelent, ezért oda kell írni elé, hogy <code>explicit</code>!
+Ott nem az egész számot akarjuk tömbbé konvertálni. Itt viszont az egész számot
+törtté, ami egy értelmes művelet.)
+</p>
+
+<pre   ><code class="language-c">Tort::Tort(int sz)
+    : szaml(sz), nev(1) {
+}</code></pre>
+
+<p>
+Az egyparaméterű konstruktor formailag nem operátor. Szükségünk lehet
+azonban pl. egy olyan konverzióra, amelyben egy törtet valós számmá,
+<code>double</code> típusú értékké alakítunk. Ezt is meg lehet oldani;
+ez csak tagfüggvény lehet, és a neve <code>operator double()</code>.
+Az érdekessége az, hogy a konstruktorokhoz hasonlóan nem kell és nem
+is szabad semmilyen visszatérési típust megadni. Ami azonban nyilvánvaló,
+hiszen az <code>operator double()</code> csak <code>double</code>
+típusa konvertálhat, semmi másra.
+
+<pre   ><code class="language-c">Tort::operator double() {
+    return (double) szaml/(double) nev;
+}</code></pre>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A teljes kód">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A teljes kód<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Itt a teljes kód, kipróbálható program. Duplaklikk kijelöli!
+</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+class Tort {
+  private:
+    int szaml, nev;
+  public:
+    Tort() {}       /* inicializálatlan */
+    /* egy paraméterű ctor: konverzió */
+    Tort(int sz): szaml(sz), nev(1) {}
+    Tort(int sz, int n): szaml(sz), nev(n) {}
+
+    Tort&amp; operator*=(Tort const&amp; rhs);
+
+    Tort operator-();
+    Tort operator-(Tort const&amp; rhs);
+
+    Tort&amp; operator++();
+    Tort operator++(int);
+
+    operator double();
+    
+    friend Tort operator*(Tort const&amp; lhs, Tort const&amp; rhs);
+
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, Tort const&amp; t);
+};
+
+/* szorzás: itt most globális fv, de lehetne tag is */
+Tort operator*(Tort const&amp; lhs, Tort const&amp; rhs) {
+    return Tort(lhs.szaml*rhs.szaml, lhs.nev*rhs.nev);
+}
+
+/* *= tagfüggvényként */
+Tort&amp; Tort::operator*=(Tort const&amp; rhs) {
+    szaml *= rhs.szaml;
+    nev *= rhs.nev;
+    return *this;
+}
+
+/* ellentett operátor */
+Tort Tort::operator-() {
+    return Tort(-szaml, nev);
+}
+
+/* kivonás operátor */
+Tort Tort::operator-(Tort const&amp; rhs) {
+    int ujnev = this-&gt;nev*rhs.nev;
+    int ujszaml = this-&gt;szaml*rhs.nev - rhs.szaml*this-&gt;nev;
+    return Tort(ujszaml, ujnev);
+}
+
+/* Preincrement. A this-en kívül nincs más paraméter. */
+Tort&amp; Tort::operator++() {
+    szaml += nev;
+    return *this;
+}
+
+/* Postincrement. Jelképes int adattag, ez különbözteti
+ * meg a prefixestől. */
+Tort Tort::operator++(int) {
+    Tort regi(*this);       /* lemásolom a növelés előtt */
+    ++(*this);              /* meghívom a prefixest */
+    return regi;            /* növelés előtti állapot másolata */
+}
+
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, Tort const&amp; t) {
+    os &lt;&lt; t.szaml &lt;&lt; '/' &lt;&lt; t.nev;
+    return os;
+}
+
+Tort::operator double() {
+    /* egész/egész elkerülésére konvertálok */
+    return szaml/(double)nev;
+}
+
+int main() {
+    Tort t1;                    /* inicializálatlan */
+    Tort t2(1,2), t3(3,4);      /* 1/2 és 3/4 */
+    
+    std::cout &lt;&lt; t2 &lt;&lt; std::endl;
+    std::cout &lt;&lt; t3 &lt;&lt; std::endl;
+
+    t1=t2*t3;
+    t1*=t2;
+    std::cout &lt;&lt; t1 &lt;&lt; std::endl;
+    std::cout &lt;&lt; t2 &lt;&lt; std::endl;
+    std::cout &lt;&lt; -t2 &lt;&lt; std::endl;
+    std::cout &lt;&lt; t2++ &lt;&lt; std::endl;
+    std::cout &lt;&lt; ++t2 &lt;&lt; std::endl;
+    std::cout &lt;&lt; (double)t2 &lt;&lt; std::endl;   /* konverzió */
+
+    std::cout &lt;&lt; t3 &lt;&lt; std::endl;
+    std::cout &lt;&lt; t3+1 &lt;&lt; std::endl;         /* automatikus konverzió! */
+
+    return 0;
+}</code></pre>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

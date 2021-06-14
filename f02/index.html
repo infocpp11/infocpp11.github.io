@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 2. hét: C++11 osztályhierarchiák</title>
+<meta property="og:title" content="TEST InfoC++11 :: 2. hét: C++11 osztályhierarchiák">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 2. hét: C++11 osztályhierarchiák">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 2. hét: C++11 osztályhierarchiák">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="2. hét: C++11 osztályhierarchiák">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">2. hét: C++11 osztályhierarchiák</h1>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Kifejezésfák: az előadáshoz</a>
+                      <li><a href="index.html#2" class="">Kifejezésfák: a laborhoz</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kifejezésfák: az előadáshoz">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_kifejezesfa_ea" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Kifejezésfák: az előadáshoz<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+
+<h3>Strucc</h3>
+
+<p>Igaz-e az, hogy a strucc egyfajta madár?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Definíció kérdése. Biológiából igen, de OOP-ben általában nem. Ugyanis
+ha a <code>Bird</code> osztálynak van egy <code>fly()</code> tagfüggvénye,
+akkor az <code>Ostrich</code> osztálynak is lesz <code>fly()</code> tagfüggvénye.
+Ha minden madár tud repülni, és a strucc egy madár, akkor a strucc is tud repülni.
+Ezért OOP-ben az <code>Ostrich</code> osztály nem szabad a madárból származtassa
+magát, különben megsérti azt a szerződést, amelyet a <code>Bird</code> osztály
+a használóival kötött (ti. hogy meg lehet hívni az objektumon a <code>fly()</code>
+tagfüggvényt, és az értelmes dolgot fog csinálni).</p>
+</div>
+</details>
+
+
+
+
+
+<h3>Kör</h3>
+
+<p>Igaz-e az, hogy a kör öröklődik az ellipszis osztályból?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Mint a struccos példa: matekból igen, OOP-ből nem. Ha az ellipszis ígér olyat,
+amit a kör nem tud betartani (például hogy van <code>set_size(width, height)</code>
+tagfüggvénye), akkor a kör nem lehet ellipszis.</p>
+</div>
+</details>
+
+
+
+<h3>Ellipszis</h3>
+
+<p>Származtatható-e az ellipszis a kör osztályból?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Örökölné a sugarát lekérdező függvényt is. Ha pl. ilyen van, akkor semmiképp.</p>
+<pre   ><code class="language-cbub">Ellipse e1{2, 3};
+std::cout &lt;&lt; e1.get_radius();   // ?!</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Most vexing parse</h3>
+
+<p>Tulajdonképp mi lesz itt a <code>c2</code>, hogyan érti ezt a sort a fordító?</p>
+<pre   ><code class="language-c">Complex c2(Complex(c1), Complex());</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Amikor a C++ egy sornál választhat, hogy egy objektum definíciójáról
+vagy egy függvény deklarációjáról van szó, mindig az utóbbit részesíti előnyben.
+A <code>c2</code> ezért egy függvény lett, amely két paraméterű, és <code>Complex</code>
+visszatérési értékű. Az első paraméter típusa <code>Complex</code>, neve pedig <code>c1</code>.
+(Igen, és a zárójelet, mivel nem módosítja a jelentést, feleslegesnek ítéli a fordító.
+Próbáld ki: <code>int (main)(int (argc), char **(argv)){}</code>!) A második, névtelen paraméternél egy függvény típust
+adunk meg; a függvénynek nincs paramétere, a visszatérési típusa <code>Complex</code>.
+A tömbökhöz hasonlóan a paraméterként átadott függvényeket pointerként kezeli a fordító.
+Ezek alapján a <code>c2</code>-es sor ezzel egyenértékű:
+<pre   ><code class="language-c">Complex c2(Complex param1, Complex (*param2)());</code></pre>
+<p>Így már jobban látszik, hogy ez egy függvény.</p>
+</div>
+</details>
+
+
+
+
+<h3>inline virtuális függvény?</h3>
+
+<p>Lehet egy virtuális függvényt osztályon belül, inline definiálni? Úgy tűnhet,
+semmi értelme, mert a virtuális függvényt nem lehet a hívás helyén kifejteni: a
+hívása mindig indirekt, a virtuális függvénytábla pointerén keresztül történik.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A fenti példákban a szabatosság kedvéért vannak az osztályon belül megírva
+a függvények. Ezt meg szabad tenni a virtuális függvényeknél is. Mivel a fordító
+tudja, hogy virtuális függvényről van szó, tudja azt is, hogy a virtuális függvénytábla
+pointere miatt muszáj nem inline változatot is készítenie belőle. A hívás általában
+a függvénytáblán keresztül történik, azonban lehetséges olyan helyzet, ahol
+már fordítási időben ki lehet választani a függvényt, és így akár kódbeillesztéssel
+is megvalósítható a hívás:</p>
+<pre   ><code class="language-c">Constant c1{5.1};
+c1.print(std::cout);</code></pre>
+<p>Itt például pontosan ismert a <code>c1</code> objektum típusa.</p>
+</div>
+</details>
+
+
+
+
+<h3>Inicializálás</h3>
+
+<p>Mi a különbség az alábbi két inicializálás között?</p>
+<pre   ><code class="language-c">Complex c1{2.3, 3.4}, c2 = {2.3, 3.4};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Semmi.</p>
+</div>
+</details>
+
+
+
+
+<h3>Üres objektum</h3>
+
+<p>Kérdések <a href="../ea02/index.html#variable">az előadás Variable osztályával kapcsolatban</a>.</p>
+
+<p>Egy <code>Variable</code> objektumban nincs adattag, üres. Lehet az, hogy semennyi
+helyet nem foglal a memóriából?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Tartalmaz egy pointert, amelyik a virtuális függvénytáblájára mutat. Úgyhogy nem
+üres, csak nincsenek a felhasználó által is látható adattagjai.</p>
+</div>
+</details>
+
+<p>Van a <code>Variable</code> osztálynak saját destruktora?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Van, a fordító írt neki. Egy olyat, ami meghívja azt adattagok destruktorait
+(bár most nincsenek adattagok), utána pedig meghívja az ős destruktorát.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+<h3>Virtuális függvények száma</h3>
+
+<p>Az <a href="../ea02/index.html#nvi">előadás TwoOperand osztályával</a> kapcsolatos kérdés.</p>
+
+<p>Egyre több a virtuális függvény; a kétoperandusú osztályban most lett
+két új. Nem lesznek ettől túl nagyok a kétoperandusú objektumok?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem. Az objektumokban nincsenek virtuális függvényekre mutató pointerek,
+hanem csak egy virtuális függvénytáblára mutató pointer van (amely lényegében
+egy pointereket tartalmazó struktúra). Így ha már volt egy virtuális függvény,
+további virtuális függvények hozzáadásának nincs semmilyen plusz költsége.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>Nem virtuális interfész</h3>
+
+<p>Az <a href="../ea02/index.html#nvi">előadás kifejezésfáival</a> kapcsolatos kérdés.</p>
+
+<p>Ha az osztály publikus interfészén nem kellene virtuális függvényeknek 
+lenniük, akkor az <code>Expression</code> osztálynak miért vannak ilyenjei? Tudsz 
+példákat mondani arra, hogy a kiértékelésnél és a kiírásnál miért kellene, hogyan 
+lehetne a függvénysablon tervezési mintát alkalmazni?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>print()</code> metódus és a globális <code>operator&lt;&lt;</code> (amely szinte része az osztálynak)
+már most is ilyen. A <code>print()</code> lehetne privát, a kiíró operátor
+pedig <code>friend</code>, és pl. minden kiírt kifejezés elé odaírná, hogy <code>f(x)=</code>.
+A leszármazottak pedig ebből tudnák, hogy az nem az ő dolguk.</p>
+<p>Az <code>evaluate()</code> is lehetne privát, mondjuk <code>do_evaluate()</code>
+néven. A publikus, nem virtuális <code>evaluate()</code> pedig ellenőrizné, hogy
+nem hibás-e a paraméterként kapott <code>double x</code>, mielőtt ténylegesen
+belekezd a kiértékelésbe. Például hogy nem <code>inf</code> vagy <code>nan</code>
+értékű-e.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>Különbség és hányados</h3>
+
+<p>Az <a href="../ea02/index.html#osszeg_es_szorzat">előadás kifejezésfáival</a> kapcsolatos feladat.</p>
+
+<p>Implementálj különbség és hányados osztályokat!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Mint az összeg és a szorzat, csak <code>-</code> és <code>/</code> operátorokkal.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>Függvény osztály</h3>
+
+<p>Az <a href="../ea02/index.html#osszeg_es_szorzat">előadás kifejezésfáival</a> kapcsolatos feladat.</p>
+
+<p>Tervezz és implementálj egy általános függvény osztályt! Hova illik ez
+be az osztályhierarchiába? Implementálj egy szinusz és egy koszinusz osztályt!
+Ha ügyesen tervezted meg a függvény osztályt, akkor ezek az összeghez és
+a szorzathoz hasonlóan pár sorból fognak állni.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A függvény osztály hasonló a kétoperandusúhoz. Pl. sin(2x): a kiértékeléskor
+ki kell értékelni a belül tárolt kifejezést (2x), utána pedig alkalmazni kell
+a függvényt (sin). A kiírásnál pedig ki kell írni a függvény nevét, zárójel,
+belső kifejezés, zárójel.</p>
+</div>
+</details>
+
+<p>Ha kész vannak a függvény, szinusz és koszinusz osztályok, akkor
+most írd meg azok deriválását is! Figyelj arra, hogy az összetett függvény
+deriválási szabályát kell alkalmaznod: f(g(x))'=f'(g(x))·g'(x), mert a
+szinusz vagy a koszinusz objektum is egy kifejezést tartalmaz.
+Használd a függvénysablon tervezési mintát! Próbáld meg a függvény
+osztályban megvalósítani, amit csak lehet, hogy a leszármazottak
+minél egyszerűbbek legyenek.</p>
+
+<p>Válaszd külön az interfészeket és az implementációkat! Az egy
+fájlból álló programot bontsd szét fejlécfájlokra és forrásfájlokra!
+Tartsd be a C++ projekteknél megszokott elvet: egy osztály, egy forrásfájl.</p>
+
+
+
+
+<h3>Virtuális konstruktor</h3>
+
+<p>Miért nem lehet egy konstruktor virtuális?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Amíg még létre sem jött az objektum, nincs virtuális függvénytábla. A
+virtuális konstruktor tervezési mintát így csak meglévő objektumokkal tudjuk
+használni.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>Egyszerűsítés</h3>
+
+<p>Az <a href="../ea02/index.html#kifejezes_egyszerusites">előadás kifejezésfáival</a> kapcsolatos feladat.</p>
+
+<p>Írd meg a többi osztály, pl. különbség, függvény, egyszerűsítő függvényeit is!
+Vigyázz, a különbség és a hányados nem kommutatív! Vajon a függvény
+osztályban az egyszerűsítést mennyire lehet általánosan megfogalmazni?</p>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kifejezésfák: a laborhoz">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="feladat_kifejezesfa_lab" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Kifejezésfák: a laborhoz<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+
+
+<h3>Függvény rajzolása</h3>
+
+<p>Az SVG (scalable vector graphics) egy ún. vektorgrafikus képformátum. Ebben nem képpontok
+vannak megadva, hanem egyszerű síkidomok (szakasz, kör stb.), és a képnéző program dolga megrajzolni
+a képet. Egy SVG fájl, amely néhány szakaszt tartalmaz, így néz ki:</p>
+
+<pre   ><code class="language-xml">&lt;svg width=&quot;320&quot; height=&quot;80&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+  &lt;line x1=&quot;30&quot; y1=&quot;17.9136&quot; x2=&quot;0&quot; y2=&quot;42.9137&quot; stroke=&quot;blue&quot; /&gt;
+  &lt;line x1=&quot;60&quot; y1=&quot;21.0799&quot; x2=&quot;30&quot; y2=&quot;17.9136&quot; stroke=&quot;blue&quot; /&gt;
+  &lt;line x1=&quot;90&quot; y1=&quot;48.3747&quot; x2=&quot;60&quot; y2=&quot;21.0799&quot; stroke=&quot;blue&quot; /&gt;
+  &lt;line x1=&quot;120&quot; y1=&quot;64.9893&quot; x2=&quot;90&quot; y2=&quot;48.374&quot; stroke=&quot;blue&quot; /&gt;
+&lt;/svg&gt;</code></pre>
+
+<p>Írj egy olyan programrészt, amely kirajzolja <a href="../lab02/index.html#kifejezes_beolvas">a beolvasáskor kapott függvényt</a>! Ehhez nincs más dolgod, mint
+az x tengelyen haladva kiértékelni néhány helyen (mondjuk –5-től +5-ig, 0,1 lépésközzel), és szakaszokkal
+összekötni a kapott pontokat. Figyelj arra, hogy valamennyire ki kell nagyítanod a képet (hogy ne egy
+képpontnyi legyen az egység, mert akkor szinte semmi nem fog látszani), és a matematikai origót a kép
+közepére tenned (a fenti 320×80-as méretű képnél pl. x+160 és y+40). Az SVG-ben az y koordináta
+fentről lefelé nő, ezért a kapott y koordinátákat negáld a nagyítás és az eltolás előtt!</p>
+
+<div class="megjegyzes">
+<p>Tetszőlegesen használhatsz C (fprintf) vagy C++ (ostream) fájlkezelést is. A C-s talán egyszerűbb,
+mert a koordináták helyére <code>%f</code>-et írhatsz, és egy nagy, nem pedig sok apró sztringet kell megadnod.
+A C++11-ben használhatsz ún. raw string literal-okat, amelyeknél nem kell külön kezelned az idézőjelet
+és a visszapert. A legegyszerűbb raw string literal <code>R"(</code> karakterekkel kezdődik és <code>)"</code>
+karakterekkel fejeződik be:</p>
+<pre   ><code class="language-c">std::cout &lt;&lt; R&quot;(Hello idézőjelben &quot;\n&quot; sortörés!)&quot;;</code></pre>
+<pre class="screenshot">
+Hello idézőjelben "\n" sortörés!
+</pre>
+<p>Így könnyedén megadhatod az idézőjelekkel teli sztringeket:</p>
+<pre   ><code class="language-c">fprintf(fp, R&quot;(&lt;svg width=&quot;320&quot; height=&quot;80&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;)&quot;);</code></pre>
+</div>
+
+<p>A kapott fájlt egy böngészőprogrammal, vagy szinte bármelyik képnéző programmal meg
+tudod nyitni.</p>
+
+<pre class="screenshot">
+0.5 x x x * * *   0.8 x x * *   +   <span class="bubble">0.5*x*x*x + 0.8*x*x</span>
+</pre>
+
+<img src="func.svg" class="kozep" style="height: 12em; background: white; border: 1px solid black;">
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;cstdio&gt;
+
+
+void draw(Expression *e, char const *filename, char const *color) {
+    FILE *fp = fopen(filename, &quot;wt&quot;);
+    double w = 320, h = 240;
+    double zoom = 20;
+    fprintf(fp, R&quot;(&lt;svg width=&quot;%f&quot; height=&quot;%f&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;)&quot;, w, h);
+    double dx = 0.1;
+    for (double x = -5.0; x &lt;= +5.0; x += dx) {
+        double x1 = x;
+        double y1 = e-&gt;evaluate(x1);
+        double x2 = x + dx;
+        double y2 = e-&gt;evaluate(x2);
+        
+        x1 = x1 * zoom + w/2;
+        y1 = y1 * -zoom + h/2;
+        x2 = x2 * zoom + w/2;
+        y2 = y2 * -zoom + h/2;
+        fprintf(fp, R&quot;(&lt;line x1=&quot;%f&quot; y1=&quot;%f&quot; x2=&quot;%f&quot; y2=&quot;%f&quot; stroke=&quot;%s&quot; /&gt;)&quot;, x1, y1, x2, y2, color);
+    }
+    fprintf(fp, R&quot;(&lt;/svg&gt;)&quot;);
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+<h3>Kifejezésfa rajzolása</h3>
+
+<p>A graphviz nevű programmal könnyedén lehet gráfokat rajzolni. Csak meg kell neki adni a csúcsokat és az éleket,
+és automatikusan elhelyezi őket egy képen – figyelve arra is, hogy szimmetrikus gráfokat rajzoljon, ha lehet. Egy
+egyszerű irányított gráfot így lehet neki megadni:</p>
+
+<img src="kettopluszharom.svg" class="float" style="height: 7.5em; margin-right: 1em; border: 1px solid black;">
+
+<pre   ><code class="language-c">digraph ketto_plusz_harom {
+    csucs_egy [label=&quot;+&quot;];      // csúcs: név és attribútumok
+    csucs_ketto [label=&quot;2&quot;];
+    csucs_harom [label=&quot;3&quot;];
+    csucs_egy -&gt; csucs_ketto;   // él: honnan -&gt; hova
+    csucs_egy -&gt; csucs_harom;
+};</code></pre>
+
+<p>Az így megadott gráfból az alábbi módon, parancssorból könnyen lehet SVG fájlt csinálni.
+(Itt egy online változat is: <a href="http://sandbox.kidstrythisathome.com/erdos/">http://sandbox.kidstrythisathome.com/erdos/</a>.)</p>
+
+<pre class="screenshot">
+$ dot proba.dot -Tsvg -o proba.svg
+</pre>
+
+<p>Írd át úgy <a href="../lab02/index.html#kifejezes_beolvas">a kifejezéseket beolvasó programot</a>, hogy a 
+felépített kifejezésfát ki tudja írni egy ilyen dot fájlba! Két dologra kell figyelned:</p>
+
+<ul>
+<li>A kifejezésfát rekurzívan be kell járnod, hogy lásd az összes csúcsot. Egy alkalmasan megadott
+virtuális függvény írhatja ki ilyenkor a csúcsok adatait egy fájlba, a csúcs típusától függő felirattal.
+A kétoperandusú objektum (összeg, szorzat) látja a gyerekeit, ezért ő könnyen ki tudja írni az éleket
+megadó sorokat.
+<li>A csúcsoknak egyedi azonosítót kell adnod. Ehhez egy egyszerű trükköt használhatsz itt, amelynek alapja
+az, hogy C++-ban minden objektum memóriacíme egyedi. Ha a csúcs nevébe beteszed a csúcsot jelképező
+objektum memóriacímét, akkor bármikor bármelyik csúcs nevét könnyen előállíthatod:
+<pre   ><code class="language-c">Obj x;
+std::cout &lt;&lt; &quot;csucs_&quot; &lt;&lt; &amp;x;</code></pre>
+<pre class="screenshot">
+csucs_0x7fffd531a684
+</pre>
+<p>Ez pont jó lesz névnek.</p>
+</ul>
+
+<p>Ne felejtsd megadni az új virtuális függvény <code>override</code> és <code>final</code> minősítőit, ahol kell!</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egy lehetséges megoldás a következő.</p>
+<pre   ><code class="language-c">class Expression {
+  public:
+    /* ez írja ki egy csomópont adatait; a this értéke bekerül a csomópont nevébe.
+     * a leszármazottak get_label() tagfüggvénye a feliratot fogja megadni. */
+    virtual void dot(std::ostream &amp;os) const {
+        os &lt;&lt; &quot;node_&quot; &lt;&lt; this &lt;&lt; &quot; [label=\&quot;&quot; &lt;&lt; get_label() &lt;&lt; &quot;\&quot;];\n&quot;;
+    }
+  private:    
+    virtual std::string get_label() const = 0;
+};
+
+/* így néznek ki a get_label() függvények */
+class Constant : public Expression {
+    std::string get_label() const {
+        std::ostringstream os;
+        os &lt;&lt; c_;
+        return os.str();
+    }
+};
+
+class Variable: public Expression {
+    std::string get_label() const {
+        return &quot;x&quot;;
+    }
+};
+
+/* a kétoperandusú műveletek a csomópont adatai mellett kiírják
+ * az éleket is, és meghívják a gyerekek kiíró függvényét is. */
+class TwoOperand : public Expression {
+    /* write to dot file */
+    virtual void dot(std::ostream &amp;os) const final {
+        Expression::dot(os);
+        os &lt;&lt; &quot;node_&quot; &lt;&lt; this &lt;&lt; &quot; -&gt; &quot; &lt;&lt; &quot;node_&quot; &lt;&lt; lhs_ &lt;&lt; &quot;;\n&quot;;
+        os &lt;&lt; &quot;node_&quot; &lt;&lt; this &lt;&lt; &quot; -&gt; &quot; &lt;&lt; &quot;node_&quot; &lt;&lt; rhs_ &lt;&lt; &quot;;\n&quot;;
+        lhs_-&gt;dot(os);
+        rhs_-&gt;dot(os);
+    }
+
+    /* az eddigi kiírás miatt már úgyis van ez a függvényünk,
+     * ami megadja az operátort. az jó lesz feliratnak. */
+    std::string get_label() const final {
+        char str[] = { get_operator(), '\0' };
+        return str;
+    }
+};</code></pre>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

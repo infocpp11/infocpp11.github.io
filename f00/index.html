@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 0. hét: Összetett feladatok</title>
+<meta property="og:title" content="TEST InfoC++11 :: 0. hét: Összetett feladatok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A tárgy anyagához szorosan nem kapcsolódó, nehezebb programozási feladatok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A tárgy anyagához szorosan nem kapcsolódó, nehezebb programozási feladatok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="0. hét: Összetett feladatok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">0. hét: Összetett feladatok</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A tárgy anyagához szorosan nem kapcsolódó, nehezebb programozási feladatok.</p>
+</div>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Morzekódot dekódoló tömb</a>
+                      <li><a href="index.html#2" class="">Rekurzió – stílusgyakorlat</a>
+                      <li><a href="index.html#3" class="">Szótár, trie fa</a>
+                      <li><a href="index.html#4" class="">abs() – rejtvény</a>
+                      <li><a href="index.html#5" class="">Keresőfa-e</a>
+                      <li><a href="index.html#6" class="">Sakktábla objektum, figura objektum</a>
+                      <li><a href="index.html#7" class="">Szótár bináris kereséssel</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Morzekódot dekódoló tömb">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Morzekódot dekódoló tömb<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A listákat és a fákat általában dinamikus adatszerkezeteknek nevezzük, mert dinamikus foglalással hozzuk létre az egyes csomópontjaikat. A dinamikus memóriakezelés azonban nem szükségszerű. A csomópontokból építhetünk tömböt is, hiszen az egyes csomópontokban tárolt pointerek nem feltétlenül kell dinamikus memóriaterületre mutassanak, mutathatnak egy tömb elemeire is. (Sőt ilyenkor akár a pointerek helyett indexeket is használhatnánk: -1 jelentené a lista végét vagy az üres fát, mert az nem lehet tömbindex.)</p>
+<p>Például egy láncolt lista, amely az 5, 6, 7 számokat tartalmazza, és a tömb 0, 2, 1. elemeiből épül fel:</p>
+<pre   ><code class="language-c">struct Listaelem {
+  int adat;
+  ListaElem *kov;
+};
+
+ListaElem elemek[4] = {
+  { 5, &amp;elemek[2] },
+  { 7, NULL },
+  { 6, &amp;elemek[1] },
+};
+ListaElem *eleje = &amp;elemek[0];</code></pre>
+<p>A tömb 3. eleme üres, ha a listát bővíteni szeretnénk, ott még van egy hely.</p>
+<p>Mindez adhat egy ötletet a morzekód dekódoláshoz. Tudjuk, hogy a morzekódot egy dekódoló fával lehet leggyorsabban dekódolni. És azt is, hogy a morzekód előre adott, nem változik - ezért a dekódoló fát legjobb lenne már a forráskódba beépíteni, nem pedig futási időben létrehozni. A forráskód a fentihez hasonló lehetne.</p>
+<p>Ezt azonban kézzel megírni elég időrabló dolog, jobb lenne egy másik programmal generálni. A feladat tehát a következő: ki kell indulnod egy olyan forráskódból, amelyik tartalmazza a morzeábécét:</p>
+<pre   ><code class="language-c">Morse morse_data[] = {
+    { 'A', &quot;.-&quot; },
+    { 'B', &quot;-...&quot; },
+    { 'C', &quot;-.-.&quot; },
+    /* ... */
+    { 'Z', &quot;--..&quot; },
+    { '0', &quot;-----&quot; },
+    { '1', &quot;.----&quot; },
+    /* ... */
+    { '9', &quot;----.&quot; },
+    {0}
+};</code></pre>
+<p>És ezt kell kiegészítened egy olyan teljes programmá, amelyik a fenti tömb felhasználásával előállítja a morzekód dekódolására használható bináris fát a szabványos kimenetén:</p>
+<pre   ><code class="language-c">MorseTree root[] = {
+    { 0, root + 1, root + 3 },
+    { 'E', root + 9, root + 2 },
+    { 'A', root + 18, root + 16 },
+    { 'T', root + 4, root + 12 },
+    /* ... */
+};</code></pre>
+<p>Ennek a fának a gyökere a tömb 0. eleme. Onnan eggyel balra, az 1. indexen az 'E' betű van (ti), eggyel jobbra, a 3. indexen pedig a 'T' betű (tá). (Választásod szerint a tömbbön belüli pointerek helyett lehetnek akár tömbindexek is.)</p>
+<p>Mutasd is meg, hogy működik az így megépített fa, dekódold a morzekóddal leírt nevedet a segítségével!</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Rekurzió – stílusgyakorlat">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Rekurzió – stílusgyakorlat<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tetszőlegesen hosszú szöveget beolvasni: ez nem könnyű feladat. Amíg nem láttuk az egész szöveget, nem tudjuk, mennyi memóriát kell foglalni. Amíg nem foglaltuk le a memóriaterületet a sztring számára, addig viszont nem olvashatjuk a szöveget, mert nem tudjuk eltárolni a karaktereket.</p>
+<p>Vagy mégis? Tudjuk, hogy a függvények lokális változóiból minden függvényhíváskor létrejön egy új példány. Így ha egy rekurzív függvénynek egy karakter a lokális változója, akkor egy rekurzív hívással létrehozunk egy újabb karaktert, meg még egyet és még egyet, amíg a szöveg végére nem értünk. Ha ez megtörtént, akkor pedig lefoglalhatjuk a memóriaterületet, mert addigra látjuk, hány karakter volt.</p>
+<p>A feladatod egy ilyen függvényt írni:</p>
+<pre   ><code class="language-c">/* A függvény beolvas egy teljes sort (enterig) a szabványos bemenetről,
+ * és visszaadja egy dinamikusan foglalt sztringben. A sztring
+ * nullával van lezárva, az entert nem tartalmazza. A hívó felelőssége
+ * a free()-t meghívni a kapott pointerre. */
+char* sort_beolvas(void);</code></pre>
+
+<p>A szöveg beolvasását a fenti módszerrel kell megvalósítanod. Amit használhatsz:</p>
+<ul>
+    <li>tetszőleges saját segédfüggvény,
+    <li>egyetlen egy malloc hívás.
+</ul>
+<p>Amit pedig nem:</p>
+<ul>
+    <li>statikus élettartamú változó (azaz globális és függvénybeli statikus),
+    <li>tömb átméretezés, bármilyen egyéb tároló.
+</ul>
+<p>Figyelem: ennek a feladatnak elméleti jelentősége van csak! A gyakorlatban az okos átméretezés (pl. a méret duplázása) célravezetőbb, hatékonyabb.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szótár, trie fa">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Szótár, trie fa<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<img src="trie.svg" style="width: 12em;" class="float">
+
+<p>A trie fa (trie tree, radix tree, prefix tree) egy olyan adatszerkezet, amelyben sztringek tárolhatók, és azok
+prefix alapján könnyen kereshetők.</p>
+
+<p>Jobb oldalt látható egy ilyen fa, amely a <code>tea</code>, <code>ten</code>, <code>in</code> és <code>inn</code>
+szavakat tartalmazza. A <code>t</code>, <code>te</code> és <code>i</code> sztringek nincsenek a fában; csak az
+előbbi szavakhoz vezető út miatt kellett létrehozni őket.</p>
+
+<p>Írj programot, amely ilyen szótárat épít az STL eszközeivel. Lehessen egy egyszerű felületen hozzáadni
+a szavakat, és ellenőrizni, benne vannak-e a szótárban!</p>
+
+<pre class="screenshot" style="overflow: hidden;">
+> add tea
+added tea.
+> add ten
+added ten.
+> find tea
+tea in dict.
+> find te
+te not in dict.
+</pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="abs() – rejtvény">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        abs() – rejtvény<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az alábbi program mást ír ki using namespace std-vel és anélkül. Miért? Mi lehet az oka, hogy ezt így találták ki?</p>
+
+<pre   ><code class="language-c">#include &lt;cmath&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main() {
+    std::cout &lt;&lt; abs(sin(1.2));
+}</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Keresőfa-e">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Keresőfa-e<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írj függvényt, amely paraméterként egy egész számot tartozó fát kap, visszatérési értékében
+pedig azt jelzi, hogy ez rendelkezik-e keresőfa tulajdonsággal, vagy nem! Vagyis balra mindig a
+gyökértől kisebb, jobbra mindig a gyökértől nagyobb számok vannak, mindenhol.</p>
+
+<p>Vizsgáld meg az algoritmusod futási idejét! Hogyan függ az a fa csúcspontjainak számától!</p>
+
+<p>Ha nem O(n) időben fut az algoritmusod, oldd meg azt O(n) időben is!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+
+<p>Nem elég azt vizsgálni, hogy a teljes fa gyökeréhez képest csak balra kisebbek, jobbra
+nagyobbak vannak-e. Az alábbi fában ez teljesül (a 2 és a 3 kisebbek a gyökérben lévő 5-nél,
+illetve a 6, 9 és 8 nagyobbak nála), mégsem keresőfa; a jelölt elemek elrontják azt.</p>
+
+<pre class="sorsurit1">
+    5
+   / \
+  3   9
+ /   / \
+2   <span class="piros athuzott">6</span>   <span class="piros athuzott">8</span>
+</pre>
+
+<p>Azt sem elég vizsgálni, hogy minden csomópont gyerekei balra kisebbek, jobbra nagyobbak-e.
+Az alábbi fában ez minden közvetlen kapcsolatban lévő elemre teljesül, mégsem keresőfáról van
+szó: a 6-os elem rossz helyen van, bár a 3-nál nagyobb, de az egész fát tekintve a gyökérben
+lévő 5-től jobbra keresnénk.</p>
+
+<pre class="sorsurit1">
+    5
+   / \
+  3   8
+ / \   \
+2   <span class="piros athuzott">6</span>   9
+</pre>
+
+<p>A két tulajdonságnak együtt kell teljesülnie.</p>
+
+<pre   ><code class="language-c">struct BinFa {
+    int szam;
+    BinFa *bal, *jobb;
+};
+
+/* maximumot keres a fában. a teljes fát vizsgálja, nem feltételez keresőfa
+ * tulajdonságot. nem hívható üres fára. */
+int max_fa(BinFa *gy) {
+    int max = gy-&gt;szam;
+    if (gy-&gt;bal != NULL) {
+        int bal_max = max_fa(gy-&gt;bal);
+        max = bal_max &gt; max ? bal_max : max;
+    }
+    if (gy-&gt;jobb != NULL) {
+        int jobb_max = max_fa(gy-&gt;jobb);
+        max = jobb_max &gt; max ? jobb_max : max;
+    }
+    return max;
+}
+
+int min_fa(BinFa *gy) {
+    return /* ... mint fent ... */;
+}
+
+bool keresofa_e(BinFa *gy) {
+    if (gy == NULL)     /* üres fa = keresőfa, mert nem hibás */
+        return true;
+    
+    /* ha balra bárhol túl nagy elem van, vagy jobbra bárhol túl kicsi */
+    if (max_fa(gy-&gt;bal) &gt; gy-&gt;szam)
+        return false;
+    if (min_fa(gy-&gt;jobb) &lt; gy-&gt;szam)
+        return false;
+    
+    /* ha balra vagy jobbra nem keresőfa van */
+    if (!keresofa_e(gy-&gt;bal) || !keresofa_e(gy-&gt;jobb))
+        return false;
+    
+    /* egyébként az */
+    return true;
+}</code></pre>
+
+<p>Ez nem hatékony; minden részfát annyiszor bejár (sőt duplán annyiszor), amilyen magas részfában van.</p>
+
+<p>Hatékonyabb megoldáshoz érdemes egy bejárásból kiindulni. Tudjuk, hogy a keresőfát inorder bejárva
+növekvő számsort kapunk. Tehát nem kell mást tenni, mint elvégezni a bejárást, és ha bárhol olyan
+számot találunk, amelyik egyenlő az előbb látottal vagy kisebb annál, akkor a fát hibásnak jelölhetjük.
+Figyelni kell arra, hogy az első elemet még nincs mivel összehasonlítani a keresésben. Erre jó lehet
+egy <code>std::optional</code> objektum. Érdemes megállítani a keresést, ha hibát találunk a fában;
+ez pedig úgy oldható meg legyegyszerűbben, ha kivételt dobunk a rekurzió mélyéről.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;optional&gt;
+
+struct BinFa {
+    int szam;
+    BinFa *bal, *jobb;
+};
+
+class NemKeresofa : public std::exception {};
+
+void keresofa_hibat_keres(BinFa *gy, std::optional&lt;int&gt; &amp;elozo) {
+    if (gy == NULL)
+        return;
+    keresofa_hibat_keres(gy-&gt;bal, elozo);
+    if (elozo &amp;&amp; *elozo &gt;= gy-&gt;szam)
+        throw NemKeresofa();
+    elozo = gy-&gt;szam;
+    keresofa_hibat_keres(gy-&gt;jobb, elozo);
+}
+
+bool keresofa_e(BinFa *gy) {
+    try {
+        std::optional&lt;int&gt; max;
+        keresofa_hibat_keres(gy, max);
+    } catch (NemKeresofa nk) {
+        return false;
+    }
+    return true;
+}
+
+int main() {
+    BinFa *fa =
+        new BinFa{5,
+            new BinFa{3,
+                new BinFa{2, nullptr, nullptr},
+                new BinFa{4, nullptr, nullptr}},
+            new BinFa{7, nullptr, nullptr}};
+    std::cout &lt;&lt; keresofa_e(fa);
+}</code></pre>
+
+<p>Másik megoldási lehetőség: figyelembe vehetjük azt is, hogy a hierarchia milyen intervallumba szorítja be a részfák csomópontjaiban található értékeket. Ehhez vegyük példának az alábbi fát:</p>
+
+<pre class="sorsurit1">
+    5
+   / \
+  3   9
+     / \
+    x   10
+</pre>
+
+<p>Ebben a fában az x-szel jelölt helyen (akár egy csomópont van ott, akár egy nagyobb részfa) csak 5-nél nagyobb, és 9-nél kisebb szám lehet. 5-nél nagyobb azért, mert a gyökérben lévő 5-től jobbra van (ha kisebb lenne, akkor az 5-től balra kellene legyen). 9-nél kisebb pedig azért, mert egy attól balra lévő részfáról van szó.</p>
+
+<p>A megoldás így:</p>
+
+<pre   ><code class="language-c">bool keresofa_e_belso(BinFa *gy, int *min, int *max) {
+    if (gy == nullptr)
+        return true;
+    
+    if ((min != nullptr &amp;&amp; gy-&gt;szam &lt;= *min)
+        || (max != nullptr &amp;&amp; gy-&gt;szam &gt;= *max))
+        return false;
+    
+    return keresofa_e_belso(gy-&gt;bal, min, &amp;gy-&gt;szam)
+        &amp;&amp; keresofa_e_belso(gy-&gt;jobb, &amp;gy-&gt;szam, max);
+}
+
+bool keresofa_e(BinFa *gy) {
+    return keresofa_e_belso(gy, nullptr, nullptr);
+}</code></pre>
+
+<p>A függvény a fa gyökere mellett átvesz egy minimumot és egy maximumot is – ezek között kellene legyen
+az adott részfa összes eleme. Ha ez nem teljesül az adott csomópontnál, hamissal tér vissza, amúgy pedig
+vizsgálja a részfákat. Amikor balra halad, akkor a gyökér határozza meg a maximumot (annál nagyobb elem
+a gyökértől balra nem lehet), amikor jobbra, akkor pedig a gyökér a minimumot adja (annál jobbra kisebb
+elem nem lehet). A keresést úgy kell elindítani, hogy mindkét pointer nullptr értékű; a gyökér esetében
+még nincs sem alsó, sem felső határ.</p>
+
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sakktábla objektum, figura objektum">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Sakktábla objektum, figura objektum<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A sakk tisztjei az alábbi módokon tudnak mozogni:</p>
+
+<ul>
+    <li>A <em>bástya</em> azonos soron vagy oszlopon léphet.
+    <li>A <em>futó</em> azonos átlón léphet.
+    <li>A <em>vezér</em> bástyaként és futóként is tud lépni.
+    <li>Végül pedig a <em>huszár</em> az egyetlen, amely el tud menekülni a vezér elől, mert L alakban (2-t erre, 1-et arra) lép.</li>
+</ul>
+
+<div class="kozep">
+<img src="rookb.png" style="display: inline; max-width: 32%;">
+<img src="bishopb.png" style="display: inline; max-width: 32%;">
+</div>
+
+<div class="kozep">
+<img src="queenb.png" style="display: inline; max-width: 32%;">
+<img src="knightb.png" style="display: inline; max-width: 32%;">
+</div>
+
+<p>Olyan programot kell írnod, amelyben feladat megmondani egy kiválasztott mezőn álló figuráról, hogy támadja-e valamelyik
+másik figurát a táblán. A színekkel (világos, sötét) most nem kell foglalkoznod.</p>
+
+<h3>Procedurálisan</h3>
+
+<p>Készíts ehhez procedurális modellt! Ebben egy mezőn álló figura típusát egy felsorolt típusú értékkel <code>enum</code>-mal
+tárolhatod, amelynek része kell legyen az üres mező is. A tábla ilyen <code>enum</code>-ok tömbje. Írd meg azt a függvényt,
+amely egy pozíciót kap, és igaz/hamis értékkel tér vissza attól függően, hogy van-e ott figura ÉS támad-e az egy másik figurát!</p>
+
+<h3>Objektumorientáltan</h3>
+
+<p>Az objektumorientált modellben a tábla olyan objektumokból áll, amelyek mind egy figura ősosztály leszármazottjai. A tábla
+így egy heterogén kollekció, amely 8×8 pointerből áll; az üres mező lehet null pointer is. A lépést pedig valamilyen virtuális
+függvény adja meg. Írd meg így is a programot!</p>
+
+<p>Végül hasonlítsd össze a két programot olyan szempontból, hogy mennyire különülnek el a programban az egyes önálló
+tevékenységek függvényei!</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+class Table;
+
+
+class Piece {
+  public:
+    /* igazzal tér vissza, ha a megadott mezőre tud mozogni a figura */
+    virtual bool can_move(int x, int y) const = 0;
+    /* igazzal tér vissza, ha bármit épp támad */
+    bool attacks_something() const;
+    /* táblán elhelyezés */
+    void set_pos(Table *table, int x, int y) {
+        table_ = table;
+        x_ = x;
+        y_ = y;
+    }
+  protected:
+    int x_, y_;
+    Table *table_;
+};
+
+
+class Table {
+  public:
+    Table() {
+        for (int y = 0; y &lt; 8; ++y)
+            for (int x = 0; x &lt; 8; ++x)
+                table_[y][x] = nullptr;
+    }
+    void set(int x, int y, Piece *p) {
+        table_[y][x] = p;
+        p-&gt;set_pos(this, x, y);
+    }
+    Piece *get(int x, int y) const {
+        return table_[y][x];
+    }
+  private:
+    Piece *table_[8][8];
+};
+
+
+bool Piece::attacks_something() const {
+    /* mit támad? */
+    for (int y = 0; y &lt; 8; ++y) {
+        for (int x = 0; x &lt; 8; ++x) {
+            /* saját magát nem */
+            if (x == x_ &amp;&amp; y == y_)
+                continue;
+            /* ha van ott valami, és én léphetek oda, akkor támadom. */
+            /* az algoritmus független a típustól! */
+            if (table_-&gt;get(x, y) &amp;&amp; this-&gt;can_move(x, y))
+                return true;
+        }
+    }
+    return false;
+}
+
+
+class Rook : public Piece {
+  public:
+    virtual bool can_move(int x, int y) const {
+        return x == x_ || y == y_;
+    }
+};
+
+class Bishop : public Piece {
+  public:
+    virtual bool can_move(int x, int y) const {
+        return abs(x - x_) == abs(y - y_);
+    }
+};
+
+class Queen : public Piece {
+  public:
+    virtual bool can_move(int x, int y) const {
+        return x == x_ || y == y_ || abs(x - x_) == abs(y - y_);
+    }
+};
+
+class Knight : public Piece {
+  public:
+    virtual bool can_move(int x, int y) const {
+        int dx = abs(x - x_);
+        int dy = abs(y - y_);
+        return (dx == 2 &amp;&amp; dy == 1) || (dx == 1 &amp;&amp; dy == 2);
+    }
+};
+
+
+int main() {
+    Table t;
+    Rook r1;
+    Rook r2;
+    t.set(5, 5, &amp;r1);
+    t.set(6, 6, &amp;r2);
+    std::cout &lt;&lt; r1.attacks_something();
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szótár bináris kereséssel">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Szótár bináris kereséssel<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Első rész</h3>
+
+<p>Adott a következő szótárprogram: <a href="szotar.c">szotar.c</a>. Ez C-ben íródott; egy max. 200 szópárból álló angol–magyar
+szótárat képes tárolni, fájlba írni és onnan visszaolvasni. A szavak maximum 50 betűsek lehetnek.</p>
+
+<p>Írd át ezt a programot C++-ba! Használd az STL eszközeit a szótár tárolásához, szüntesd meg a max. 50 betű, illetve max. 200
+szópár korlátozásokat! OOP-sítsd a szótárat, szünetsd meg a C stílusú hibakezelést, és végül írd át C++-osra a fájlkezelést is!</p>
+
+<h3>Második rész</h3>
+
+<p>Végezd el a következő módosításokat!</p>
+
+<ul>
+<li>Hozz létre indexelő tömböket, amelyek segítségével magyar és angol nyelven egyszerre is rendezett lehet a szótár.
+    Pl. ha egy indexelő tömb tartalma <code>{3, 4, 2, 0, 1}</code>, az azt jelentheti, hogy a szótár elemeit ilyen sorrendben
+    olvasva magyar ábécérendben kapjuk a szavakat. A másik indexelő tömb pl. <code>{2, 4, 3, 1, 0}</code> lehet, az meg az
+    angol sorrendre.
+<li>Az indexelő tömböt fájlba ne mentsd, ugyanakkor figyelj arra, hogy betöltéskor újra kell azt generálni.
+<li>Új szó felvételekor szintén az indexelő tömböket kezelni kell.
+<li>Lehessen listázni kétféleképpen: magyar nyelvű sorrend szerint és angol nyelvű sorrend szerint is!
+<li>A keresést írd át úgy, hogy bináris keresést alkalmazz benne. Ügyelj arra, hogy a funkcionalitás megmaradjon: magyar és angol kifejezés alapján is kell tudni keresni.
+</ul>
+
+<p>Próbáld minél inkább elkerülni a kódduplikációt!</p>
+
+<p>Ha végül már csak nyelv szerinti esetszétválasztásaid maradnak a programban (<code>if nyelv == magyar ... else ...</code> jellegű
+kódrészletek), akkor azokat is próbáld megszüntetni! Ez nehezebb feladat, komolyabb átalakítást igényelhet.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A probléma oda vezethető vissza, hogy egy osztály két adattagja közül kell választani mindig. Hol eszerint keresünk,
+hol eszerint rendezünk stb. Valahogy így:</p>
+<pre   ><code class="language-c">if (nyelv == Magyar)
+    return tomb[i].magyar;
+else
+    return tomb[i].angol;</code></pre>
+<p>Több megoldás is kínálkozik:</p>
+<ul>
+    <li>Át kell alakítani az adatszerkezetet. A nyelvek nem osztály adattagjaiként jelennek meg, hanem egymástól
+    független tömbökként, valahogy így:
+    <pre   ><code class="language-c">class Szotar {
+    std::vector&lt;std::string&gt; magyar_szavak;
+    std::vector&lt;int&gt; magyar_indexek;
+    std::vector&lt;std::string&gt; angol_szavak;
+    std::vector&lt;int&gt; angol_indexek;
+};</code></pre>
+    A párhuzamos tömbök nem szépek, de az indexelő tömbök eleve párhuzamosan kell fussanak (pl. megegyező méretben)
+    a szavak tömbjeivel, így ez elfogadható ebben a feladatban. Esetleg egy nyelv szavaihoz és indexeihez osztályt
+    lehet létrehozni:
+    <pre   ><code class="language-c">class Szotar {
+    struct Nyelv {
+        std::vector&lt;std::string&gt; szavak;
+        std::vector&lt;int&gt; indexek;
+    };
+    
+    Nyelv magyar, angol;
+};</code></pre>
+    A lényeg így is az lesz, hogy egy összetartozó szótömb–indextömb páros már adatként kezelhető; pl. a kereső
+    függvény referenciaként kaphatja, hogy melyik szótömbben, melyik indextömbbel kell keresni.
+    </li>
+    <li>Lehet C++ adattag mutatókat (member pointer) is használni:
+<pre   ><code class="language-c">struct Szo {
+    std::string magyar, angol;
+};
+
+std::string Szo::* p;
+
+p = &amp;Szo::magyar;
+std::cout &lt;&lt; szavak[i].*p;  // a magyar szó
+                           
+p = &amp;Szo::angol;           
+std::cout &lt;&lt; szavak[i].*p;  // az angol szó</code></pre>
+    Így is elérhető, hogy ez az információ paraméterként adható át a függvényeknek.
+    </li>
+    <li>Lehet függvényeket is írni is, amelyek egy szópár angol vagy magyar szavát adják vissza. Ezek kompatibilis
+    függvények lesznek (szópár &rarr; sztring fejléccel), és átadhatók paraméterként.
+    Így a keresés és a rendezés is generikus lehet.</li>
+</ul>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

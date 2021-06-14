@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Erős típusok használata</title>
+<meta property="og:title" content="TEST InfoC++11 :: Erős típusok használata">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Egy erősen típusos nyelvben a típusok és a függvénynév túlterhelések segítségével egyszerűbben, célratörőbben, biztonságosabban fogalmazhatjuk meg a mondanivalónkat. Az egyes részfeladatainkat, megkötéseinket is új típusokkal modellezhetjük. Ez az írás néhány példát mutat meg, hogyan lehet ezeket az eszközöket használni.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Egy erősen típusos nyelvben a típusok és a függvénynév túlterhelések segítségével egyszerűbben, célratörőbben, biztonságosabban fogalmazhatjuk meg a mondanivalónkat. Az egyes részfeladatainkat, megkötéseinket is új típusokkal modellezhetjük. Ez az írás néhány példát mutat meg, hogyan lehet ezeket az eszközöket használni.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Erős típusok használata">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Erős típusok használata</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Egy erősen típusos nyelvben a típusok és a függvénynév túlterhelések segítségével egyszerűbben, célratörőbben, biztonságosabban fogalmazhatjuk meg a mondanivalónkat. Az egyes részfeladatainkat, megkötéseinket is új típusokkal modellezhetjük. Ez az írás néhány példát mutat meg, hogyan lehet ezeket az eszközöket használni.</p>
+</div>
+
+<h3>Gyengén vagy erősen típusos a nyelv?</h3>
+
+<p>A típusokat az egyes programozási nyelvek eltérően kezelik. Ezek alapján a nyelveket gyakran nevezzük erősen típusosnak (strongly
+typed) vagy gyengén típusosnak (weakly typed).</p>
+
+<p>A két fogalmat elég pongyolán szokás használni. Egyes helyeken a C és C++ nyelveket erősen típusosnak szokták nevezni, mert 
+minden változónak előre meg kell határozni a típusát, összemosva így a fogalmat a statikus és a dinamikus típusossággal. Máskor 
+gyengén típusosnak nevezik őket, mondván, hogy az egyes beépített típusok között nagyon sok az automatikus, akár adatvesztéses 
+konverzió: az <code>int</code>&rarr;<code>char</code> és a <code>double</code>&rarr;<code>int</code> például ilyenek.</p>
+
+<p>Sose gondoljuk azt, hogy a gyengén vagy erősen típusos nyelvek jobbak a másiknál. Hogy melyik előnyösebb, az mindig a felhasználási területen múlik, a 
+konkrét feladaton. Inkább tekintsünk egy nyelv típusosságának „mértékére” úgy, mint egyfajta kompromisszumra. Az erősen típusos 
+nyelvek szigorúak: a változókat típus szerint deklarálni kell, a konverziókat külön kiírni – ez hosszabb, részletesebb 
+programszöveget eredményez. Többet gépelünk, cserébe több ellenőrzést kapunk. A gyengén típusos nyelvek programkódjai általában 
+rövidek, némelyek az érthetőség határáig tömörítettek; a kódot olvasva nagyon kell ismernünk a nyelvet, hogy rájöjjünk, mi 
+történik. Cserébe ezekben sokkal természetesebb például a generikus programozás.</p>
+
+<h3>Erős típusok – új megközelítésben</h3>
+
+<p>A C++ a típusokat, konverziókat szigorúbban kezeli, mint a C. Ugyanakkor lehetőséget biztosít a függvénynevek és az operátorok 
+átdefiniálásán (overload) keresztül arra, hogy tömören fejezzük ki magunkat a kódban. Közben a statikusan ismert típusok miatt 
+mégis minden lépésünk fordítási időben ellenőrzött lehet.</p>
+
+<p>A típusokat okosan használó programban minden különálló feladatot egy típusra (osztályra) bízunk, Ez nem akadályozza, hanem 
+kifejezetten segíti és biztonságosabbá teszi a munkát. Legközismertebb példa erre az <code>std::string</code>, még ha nem is
+gondoltunk rá eddig ilyen szempontból. Mennyivel egyszerűbb azt használni, mint egy <code>char*</code>-ot!</p>
+
+<p>A sztring ötletét tovább is lehet vinni. Képzeljük el, hogy egy nevet el kell tárolnunk a programban. Hogyan tesszük ezt? 
+Első gondolatunk egy sima <code>std::string</code> lenne. Azonban kiköthetjük, hogy a név nem lehet üres sztring. Kérdés ezek után, 
+hogy egy ilyen függvény esetén kinek a dolga ellenőrzni, üres-e a kapott sztring?</p>
+
+<pre   ><code class="language-c">std::string get_name();</code></pre>
+
+<p>Bújhatjuk a kommenteket és a dokumentációt...
+Ha ezt a sztringet több függvényen keresztül adogatjuk tovább, előbb-utóbb a programunk tele lesz <code>if (name != "")</code>
+vizsgálatokkal. Ennél sokkal jobb ötlet külön típussal modellezni a problémát:</p>
+
+<pre   ><code class="language-c">class Name {
+  private:
+    std::string name;
+  public:
+    explicit Name(std::string name) : name(name) {
+        if (this-&gt;name == &quot;&quot;)
+            throw std::invalid_argument(&quot;a name cannot be empty&quot;);
+    }
+};</code></pre>
+
+<p>Mit válaszolunk ezek után arra a kérdésre, hogy térhet vissza a következő függvény üres sztringgel? Nyilvánvalóan lehetetlen, hogy ilyen történjen!</p>
+
+<pre   ><code class="language-c">Name get_name();</code></pre>
+
+<p>A technikát <a href="index.html#strongtypes">erős típusoknak (strong types)</a> nevezik – ez nem keverendő a nyelv fentebb említett erősen 
+típusos (strongly typed) voltával. Ez az írás a technika használatára mutat példákat. Megint elő fog jönni pár C++11 nyelvi elem. 
+De ne csak ezekre koncentráljunk, hanem a módszerekre, ötletekre is!</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az automatikusan inicializálódó Int</a>
+                      <li><a href="index.html#2" class="">RAII = Resource Acquisition is Initialization</a>
+                      <li><a href="index.html#3" class="">Any – type erasure</a>
+                      <li><a href="index.html#4" class="">Mennyiség = mérőszám és mértékegység</a>
+                      <li><a href="index.html#5" class="">A névterek és a Koenig Lookup</a>
+                      <li><a href="index.html#6" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az automatikusan inicializálódó Int">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az automatikusan inicializálódó Int<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>„C++-ban objektum nem jön létre anélkül, hogy ne lenne inicializálva.” Igaz
+ez? Osztálynál igen, de beépített típusnál nem. A beépített <code>int</code>,
+<code>char</code>, <code>double</code> stb. típusú változók ugyanúgy viselkednek, mint
+C-ben: ha nem adunk nekik kezdeti értéket, inicializálatlanok maradnak, és ez
+hibalehetőség a programban.</p>
+
+<p>De nem csak hibalehetőség, hanem programozási kényelmetlenséget is jelenthet. Tegyük fel, hogy van egy osztályunk, sok
+adattaggal. Az osztály alapértelmezett konstruktorában minden adattag alapértelmezett konstruktorát szeretnénk hívni. Mi a
+helyzet, ha van egy <code>int</code> adattagunk? Akkor amiatt az egyetlen adattag miatt régen konstruktort kellett írnunk, sok
+<code>int</code> adattagnál pedig mind fel kellett sorolnunk azokat. Ha csak egy kimarad, máris gond van. A C++11-ben odaírhatjuk
+melléjük, hogy <code>= 0</code>, de ez továbbra is kifelejthető.</p>
+
+<p>Mi lenne, ha nem <code>int</code>-eket használnánk? Hanem 
+helyettük valami mást, ami magától is nullára inicializálódik, ugyanakkor bárhol 
+használható, ahol egy normál <code>int</code> is. Mint például az alábbi osztály. 
+Ennek alapértelmezett konstruktorába a fordító beépíti az <code>i_ = 0</code>
+inicializálást; így egy <code>Int</code> objektum külön kérés nélkül is nullára inicializálódik:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">class Int {
+  private:
+    int i_ = 0;
+  public:
+    Int() = default;
+    Int(int i) : i_{i} {}
+    operator int() const { return i_; }
+};</code></pre>
+
+<p>A konstruktornak azonban van még egy szerepe. Egyparaméterű konstruktor lévén 
+ez egy <em>konverziós lehetőséget</em> is ad. Ezeket úgy tekinti a fordító, mintha azt 
+mondanánk: így kell <code>int</code>-ből <code>Int</code>-et csinálni. És ezt 
+használja is, ha egy kifejezést csak így tud értelmezni. A konverzió teszi lehetővé
+az alábbi sorok leírását:</p>
+
+<pre   ><code class="language-c">Int i = 5;      /* Int i = Int{5}; */
+i = 6;          /* i = Int{6}; */</code></pre>
+
+<p>Az <code>operator int()</code> függvény pedig egy <em>konverziós operátort</em> ad meg:
+éppen a fordított irányt. Emiatt a fordító elfogadja az alábbi sorokat is:</p>
+
+<pre   ><code class="language-c">Int i = 5;
+std::cout &lt;&lt; i + 3;             /* static_cast&lt;int&gt;(i) + 3 */
+std::cout &lt;&lt; i;                 /* static_cast&lt;int&gt;(i) */
+double *arr = new double[i];    /* new double[static_cast&lt;int&gt;(i)]; */</code></pre>
+
+<p>Mindez azért működik, mert a fordító előbb a kifejezéseket nyelvtanilag elemzi 
+(operátorok, precedenciák), és utána nézi meg azt, hogyan helyettesíthetők be a 
+konkrét értékek. Ha pedig a típusok nem stimmelnek, akkor még nem adja fel, 
+megpróbálkozik konverziókkal is. Az <code>i+3</code> kifejezésnél előbb megnézi, 
+talál-e <code>Int+int</code> operátort, de nincs. Utána azt próbálja meg, hogy a 
+létező operátorok (<code>int+int</code>, <code>double+double</code>, ...) közül 
+nem lenne-e használható valamelyik konverzióval. Így talál rá az 
+<code>(Int&rarr;int)+int</code> lehetőségre: ha a bal oldali operandusból 
+<code>int</code>-et csinál, akkor az <code>int+int</code> jó lesz. Ezért nem 
+kell saját kiíró operátort sem írni: az
+<code>std::cout&lt;&lt;i</code> kifejezés értelmezése is megoldható a konverzióval.
+Akár mindkét irány használható egyszerre:</p>
+
+<pre   ><code class="language-c">Int i = 5;
+i = 4 + i;      /* i = Int{4 + static_cast&lt;int&gt;(i)}; */</code></pre>
+
+<p>Fontos: sose felejtsük el, hogy az ilyen jellegű kódolásnak <em>nincsen</em>
+futási idejű költsége! A sok <code>inline</code> függvény miatt a fordító szinte
+teljesen kioptimalizálja az egész varázslást, és vissza fog cserélni mindent egy ahhoz
+hasonló, vagy akár ugyanolyan kódra, mintha sima <code>int</code>-ekkel írtunk
+volna mindent.</p>
+
+
+<div class="megjegyzes">
+<h3>Az <code>Int</code> objektum címe?</h3>
+<p>Ha azt szeretnénk, hogy egy <code>Int</code> objektumnak még a címe is <code>int*</code>
+legyen, semmi más dolgunk nincs, mint átdefiniálni az <em>addressof</em>
+operátort: <code>operator&amp;</code>. Nem konstans <code>Int</code> objektumra <code>int*</code> mutat, konstans
+<code>Int</code>-re <code>int const *</code>, ezért:</p>
+<pre   ><code class="language-c">class Int {
+  public:
+    /* ... */
+    int * operator&amp;() { return &amp;i_; }
+    int const * operator&amp;() const { return &amp;i_; }
+};
+
+int main() {
+    Int i;
+    int *pi = &amp;i;
+    *pi = 4;
+    std::cout &lt;&lt; i;
+}</code></pre>
+<p>Az <em>addressof</em> operátorra gondolhatunk úgy is, mint az alapértelmezett
+konstruktorhoz hasonlóan automatikusan megírt tagfüggvényre. Ha nem mondunk mást,
+a függvény ennyit csinál: <code>return this</code>. Hivatalosan viszont nem számít
+ún. <em>special member function</em>-nek, mint mondjuk az alapértelmezett konstruktor.</p>
+</div>
+
+
+<h3>Az <code>explicit</code> kulcsszó</h3>
+
+<p>Az automatikus, felhasználó által definiálható konverziók nagyban növelik a 
+nyelv használhatóságát. A saját típusainkat beilleszthetjük a beépített típusok 
+közé: bármikor sztring objektummá válhat egy <code>char const *</code>, bármikor 
+komplex számmá egy <code>double</code>, és így tovább. Vigyázni kell azonban 
+arra, hogy ne történjen szándékolatlan konverzió. Nem minden 
+konstruktor számít értelmes konverziónak. Hogy melyik igen, azt viszont a fordító 
+nem tudja eldönteni! Példának definiáljunk egy dinamikus tömb osztályt, amelynek 
+konstruktora a méretet adja meg:</p>
+
+<pre   ><code class="language-c">class DynArray {
+  public:
+    DynArray(size_t siz);
+};</code></pre>
+
+<p>Formailag ez semmiben nem különbözik az <code>Int</code> osztály 
+konstruktorától, ezért ha kell, ezt is konverzióra fogja használni a fordító. 
+Emiatt viszont az alábbi, értelmetlen programrészletek lefordulnak:</p>
+
+<pre   ><code class="language-c">DynArray a = 5;     /* DynArray a = DynArray(5); */
+
+void func(DynArray const &amp;arr);
+func(6);            /* func(DynArray(6)); */</code></pre>
+
+<p>Azért értelmetlenek ezek, mert a <code>DynArray(size_t)</code> nem jelenti 
+azt, hogy „így kell egész számból tömböt csinálni”. Erre való az 
+<code>explicit</code> kulcsszó, amely az automatikus konverziót akadályozza meg. 
+Ha egyparaméterű konstruktort írunk, mindig gondolkozzunk el rajta, hogy az 
+konverziót jelent-e, és ha nem, írjuk elé az <code>explicit</code> szót:</p>
+
+<pre   ><code class="language-cbub">class DynArray {
+  public:
+    explicit DynArray(size_t siz);
+};</code></pre>
+
+<p>C++11 óta az <code>explicit</code> kulcsszó több paraméterű konstruktoroknál is használható
+lehet. Az alábbi kódot akkor fogadja el a fordító, ha <code>T</code>-nek van <code>(int, int)</code>
+paraméterű, nem explicit konstruktora. Ha a konstruktor explicit, akkor csak a <code>return T(2, 3)</code>
+engedélyezett.</p>
+
+<pre   ><code class="language-cbub">T get_t() {
+    return {2, 3};
+}</code></pre>
+
+<p>Hasonló a helyzet a konverziós operátoroknál is. Gyakran írunk például az osztályoknak 
+<code>operator bool()</code> konverziót, hogy lehetővé tegyük az <code>if 
+(obj)</code> alakú utasításokat. Például egy hálózati kapcsolat osztálynál:</p>
+
+<pre   ><code class="language-cbub">class NetworkConnection {
+  public:
+    /* ... */
+    operator bool() const { return is_open(); }
+};
+
+NetworkConnection conn1{/* ... */};
+if (conn1)
+    /* ... */;</code></pre>
+
+<p>Ez különösen veszélyes, mert a C-ből örökölten a logikai típus aritmetikai típusnak
+is számít. Emiatt  lefordulnak az alábbi kódrészletek is:</p>
+
+<pre   ><code class="language-cbub">NetworkConnection conn1{/* ... */}, conn2{/* ... */};
+
+conn1 + 19;         /* static_cast&lt;bool&gt;(conn1) + 19 */
+conn1 &gt;= conn2;     /* static_cast&lt;bool&gt;(conn1) &gt;= static_cast&lt;bool&gt;(conn2) */</code></pre>
+<p>A C++11 a konverziós operátorokra is bevezette az <code>explicit</code> kulcsszót,
+hogy ilyesmi ne történhessen:</p>
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">class NetworkConnection {
+  public:
+    /* ... */
+    explicit operator bool() const { return is_open(); }
+};
+
+NetworkConnection conn1{/* ... */}, conn2{/* ... */};
+
+conn1 + conn2, conn1 &gt;= conn2;      /* fordítási hiba */
+if (conn1)                          /* rendben, az if () speciális, mert bool-t vár */
+    /* ... */;
+if (conn1 &amp;&amp; conn2)                 /* rendben, a &amp;&amp; operátor speciális */
+    /* ... */;</code></pre>
+
+<p>A fenti osztályhoz hasonlóan csinálhatunk <code>0.0</code> értékűre inicializálódó <code>Double</code>-t, <code>false</code> 
+alapértékű <code>Bool</code>-t, vagy akár <code>nullptr</code> értékűre inicializálódó pointereket. Ha kiírjuk ezen típusok 
+paraméter nélküli inicializálását, akkor az említett nullaszerű értékek éppen ezen típusok alapértékei is:</p>
+
+<pre   ><code class="language-c">bool b1;        /* inicializálatlan */
+bool b2{};      /* false */
+char *p1;       /* inicializálatlan */
+char *p2{};     /* nullptr */</code></pre>
+
+<p class="megjegyzes">A C-s örökség miatt ezek a típusok mind inicializálhatóak a 
+<code>0</code> értékkel is. Ezt hagyjuk meg a C programoknak: a <code>bool b=0</code> 
+C++-ban inkább képzavarnak tűnik.</p>
+
+<p>Az automatikusan inicializálódó beépített típus emiatt sablon osztályként is 
+megírható. A <code>T{}</code> formájú inicializálás használható az inicializáló 
+listán és alapértelmezett paraméterértékként is, így az alábbi két osztálysablon 
+egyformán jól megoldja a feladatot. Ezek bármelyikéből példányosíthatunk 
+okosított <code>int</code>-et, <code>double</code>-t vagy különféle 
+pointereket:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class InitBuiltin {
+  private:
+    T val_;
+  public:
+    InitBuiltin(): val_{} {}
+    InitBuiltin(T val): val_{val} {}
+    operator T() const { return val_; }
+};</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class InitBuiltin {
+  private:
+    T val_;
+  public:
+    InitBuiltin(T val = T{}): val_{val} {}
+
+    operator T() const { return val_; }
+};</code></pre>
+</div>
+</div>
+
+<p>A fenti sablonból létrehozott osztályoknak rövid neveket is adhatunk. A 
+C++11-ben a <code>typedef</code> helyett a típusok átnevezésére a 
+<code>using</code> kulcsszót illik használni, mert ez tisztább, és támogatja a 
+<code>template</code>-eket is (a <code>typedef</code> ilyet nem tudott). A 
+szintaktikája egyszerű, <code>using újnév = réginév</code>:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">using Int = InitBuiltin&lt;int&gt;;
+using Bool = InitBuiltin&lt;bool&gt;;
+template &lt;typename T&gt; using InitPtr = InitBuiltin&lt;T*&gt;;
+
+Bool b;             /* == false */
+InitPtr&lt;int&gt; p;     /* == nullptr; */</code></pre>
+
+<div class="megjegyzes">
+<p>A <code>using</code> kulcsszavas típusdefiníció olvashatóbb is, mint a
+<code>typedef</code>-es párja, mert segít, hogy a definiált típus és a név ne
+keveredjenek szintaktikailag. A C-s operátorok hol bal, hol jobb oldalon állnak,
+így a keveredés gyakori. Gondoljunk csak a függvényekre mutató pointerekre:</p>
+<pre   ><code class="language-c">typedef double (*FuncPtr)(double);      /* C++98 */
+using FuncPtr = double (*)(double);     /* C++11 */</code></pre>
+</div>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="RAII = Resource Acquisition is Initialization">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="raii" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        RAII = Resource Acquisition is Initialization<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi kódrészletet:</p>
+
+<pre   ><code class="language-c">void do_something() {
+    SomeObj *x = new SomeObj();
+    /* ... */
+    some_function();
+    /* ... */
+    delete x;
+}</code></pre>
+
+<p>Mi ezzel a kódrészlettel a probléma? Az, hogy memóriaszivárgás léphet fel.
+Ha kivételt dob a közepén meghívott függvény, az <code>x</code> által
+mutatott objektum nem lesz felszabadítva. Első körben ezt úgy is javíthatjuk,
+ha elkapjuk a kivételt:</p>
+
+<pre   ><code class="language-c">void do_something() {
+    SomeObj *x = new SomeObj();
+    /* ... */
+    try {
+        some_function();
+    }
+    catch (...) {   /* elkapjuk, bármi is */
+        delete x;
+        throw;      /* továbbdobjuk */
+    }
+    /* ... */
+    delete x;
+}</code></pre>
+
+<p>Ezt azonban könnyű kifelejteni. Hogy rájöjjünk, hova kell ilyen 
+<code>try...catch</code> blokkokat tenni, ahhoz át kell néznünk a kódot. A 
+függvényekre pedig nincs ráírva, hogy dobhatnak-e kivételeket, vagy nem. Talán 
+csak a dokumentációjukból derül ki.</p>
+
+<p>Egyes programozási nyelvek a <code>try ... 
+catch</code> szerkezetnél megengednek egy harmadik, <code>finally</code> blokkot. 
+A <code>finally</code> ezeken a nyelveken egy olyan kódrészletet ad meg, amelyet 
+le kell futtatni akkor is, ha volt kivétel, és akkor is, ha nem volt:</p>
+
+<div class="sticky">NEM C++</div>
+<pre>
+void do_something() {
+    SomeObj *x = new SomeObj();
+    /* ... */
+    <em>try</em> {
+        some_function();
+    }
+    <em>finally</em> {       <span class="bubble">NEM C++</span>
+        delete x;
+    }
+}
+</pre>
+
+<p>A C++-ban viszont ilyen nincsen. Valószínű nem is lesz, mert a C++-nak 
+egyszerűen nem ez a logikája. A <code>finally</code> szerkezetet támogató nyelvek 
+programjai általában menedzselt környezetben (managed environment) futnak, és a 
+dinamikusan foglalt objektumok felszabadításáért a futtató környezet felel 
+(szemétgyűjtés, garbage collection). Ezeknél lehet ugyan tudni, hogy az 
+objektumok valamikor fel lesznek szabadítva, de azt nem, hogy mikor. Ezekben a 
+nyelvekben nem szokott lenni destruktor sem, hiszen ha nem tudjuk, hogy mikor fut 
+le, akkor nincs értelme feladatot bízni rá.</p>
+
+<p>Nem így a C++-ban. A C++-ban a veremben létrehozott objektumok azonnal megszűnnek,
+ahogy az őket tartalmazó utasításblokkot elhagyja a végrehajtás. Emiatt van értelme
+a <em>destruktoroknak</em> is. És itt a lényeg: mivel tudjuk, mikor fognak lefutni a destruktorok, kritikus feladatok
+is bízhatók rájuk, mint például egy memóriaterület felszabadítása.</p>
+
+<p>Vegyük észre, hogy a destruktorok általánosabb szerepet tudnak betölteni, mint
+az automatikus szemétgyűjtés! A szemétgyűjtő csak a dinamikusan foglalt memóriaterületeket
+képes felszabadítani, a <em>destruktorok</em> azonban <em>bármilyen erőforrásért</em>
+felelhetnek, legyen az dinamikus memória, nyitott hálózati kapcsolat, a képernyőn lévő
+bezárandó ablak vagy grafikus kártyára feltöltött textúra. Bár az automatikus szemétgyűjtés
+kényelmes, a lehetőségei korlátozottak.</p>
+
+<p>A fenti probléma úgy oldható meg nagyon könnyen, ha létrehozunk egy objektumot,
+amelynek <em>destruktora</em> végzi el a feladatot. Például egy ehhez hasonló okos pointer osztályt:</p>
+
+<pre   ><code class="language-cbub">class SmartPtr {
+  private:
+    SomeObj *x_;
+  public:
+    explicit SmartPtr(SomeObj *x) : x_{x} {}
+    ~SmartPtr() { delete x; }    // !
+    SmartPtr(SmartPtr const &amp;) = delete;
+    SmartPtr &amp; operator=(SmartPtr const &amp;) = delete;
+    SomeObj&amp; operator*() const { return *x_; }    // !
+};
+
+void do_something() {
+    SmartPtr x(new SomeObj());
+    /* ... */
+    some_function();    /* ha kivételt dob, itt ~x */
+    /* ... */
+} /* ha nem dobott kivételt, akkor itt ~x */</code></pre>
+
+<p>Így biztosan fel lesz szabadítva az objektum, akár dob kivételt a hívott függvény, akár nem. Nem lehet elrontani, mert az 
+<code>x</code> objektum destruktorát a fordító automatikusan meghívja. Kivétel esetén a verem visszafejtése (stack unwinding) 
+közben, normál esetben pedig a függvényből visszatéréskor. Ezt az elvet RAII-nek nevezzük.</p>
+
+<div class="csik">
+<h3>Resource Acquisition is Initialization</h3>
+<p>Ha bármilyen erőforrást foglalunk le, bízzuk azt azonnal egy automatikus memóriakezelésű objektumra! Így annak az objektumnak 
+a destruktora biztosan el fogja végezni az erőforrás felszabadítását.</p>
+<p>A RAII (Resource Acquisition is Initialization) név arra utal, hogy egy objektum inicializálásához kell kötni az erőforrás 
+megszerzését – bár láthatóan az elv inkább a destruktorokról szól. Lehetne ezt SBRM-nek is nevezni (Scope Based 
+Resource Management), de inkább a RAII név terjedt el.</p>
+</div>
+
+<p>A RAII elvet nem csak a függvények belsejében foglalt erőforrásoknál érdemes alkalmazni, hanem osztályok adattagjainál is. 
+Képzeljünk el egy osztályt, amelynek egy pointere egy dinamikusan foglalt memóriaterületre mutat. Ha ezt a mutatót egy sima, 
+„nyers” pointerben tároljuk, destruktort kell írnunk. Ha egy okos pointer hivatkozik rá, a destruktorral nem kell foglalkoznunk, 
+mert az adattag megszűnésekor az okos pointer intézkedni fog. Minden automatikus:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">class MyClass {
+  private:
+    SomeObj *x;
+  public:
+    /* ... */
+    MyClass()
+        : x(new SomeObj()) {
+    }
+    ~MyClass() {
+        delete x;
+    }
+};</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">class MyClass {
+  private:
+    std::unique_ptr&lt;SomeObj&gt; x;
+  public:
+    /* ... */
+    MyClass()
+        : x(new SomeObj()) {
+    }
+
+    /* nem kell destruktor */
+
+};</code></pre>
+</div>
+</div>
+
+<p>A fenti <code>SomeObjPtr</code> osztály a C++11-es <code>std::unique_ptr</code>-hez hasonló. <a href="../ea05/index.html#tulajdonosszemantika">Okos pointerekről</a> később részletesebben lesz
+szó.</p>
+
+<p class="megjegyzes">A fenti kódról eszünkbe juthat a C++98-as <code>std::auto_ptr</code> osztály us. De azzal
+sok gond volt, <a href="../autoptr/index.html">elavultnak számít</a>, nem használjuk már.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Any – type erasure">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="type_erasure" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Any – type erasure<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++-ban többféle generikusság is létezik. A sablonok lehetővé teszik azt, hogy egy osztály vagy függvény forráskódjában egy
+típust fordítási időben kicseréljünk: így létre tudjuk hozni egész számok, valós számok, valamilyen objektumok listáját. A
+heterogén kollekciókban valamilyen ősosztálybeli objektumokat (pontosabban azok pointereit) tároljuk, és ott a különböző típusú
+objektumok futási időben cserélhetőek.</p>
+
+<p>Időnként előfordul az, hogy egy olyan változót szeretnénk létrehozni, amelyik „tényleg generikus”. Mit jelent ez? Egy ilyen 
+változó tetszőleges típusú értéket fölvehet, legyen az akár beépített, akár felhasználó által definiált. Továbbá képes arra, hogy 
+dinamikusan, <em>futási időben</em> típust váltson. Olyasmi kellene legyen ez a változó, mint a C-s <code>void*</code> pointer, ami 
+bármire mutathat. Itt is a programozónak kell majd tudnia, hogy épp milyen típusú  értéket tárol a változó, de szerencsére ez a C-s 
+verziónál okosabban megcsinálható, futási idejű ellenőrzésekkel, és érték szerinti másolással.</p>
+
+<p>Gondoljuk meg, mire lenne itt szükségünk!</p>
+
+<pre   ><code class="language-c">int main() {
+    Any a;
+    
+    a.set(5);
+    std::cout &lt;&lt; a.get&lt;int&gt;();
+    
+    a.set(std::string(&quot;hello&quot;));
+    std::cout &lt;&lt; a.get&lt;std::string&gt;();
+}</code></pre>
+
+<p>A változó itt egyszer <code>int</code>, máskor <code>std::string</code> típusú értéket tárolt el. A <code>.set()</code>
+tagfüggvény <em>sablonfüggvény</em> kell legyen, hogy tetszőleges típusú paramétert át tudjon venni. Igazából ugyanúgy sablon,
+mint a <code>.get()</code>, ahol a programozó adja meg a típust. Csak az előbbinek van paramétere, amiből a fordító
+a sablonparamétert le tudja vezetni. A <code>.get()</code>-nél erre nincsen lehetőség, mivel annak nincs paramétere.</p>
+
+<p>A <code>.set()</code> függvénynek adott objektumok eltérő méretűek lehetnek, mégis ugyanannak az <code>Any</code> típusú,
+előre lefoglalt memóriaterülettel rendelkező változónak kell eltárolnia őket. Ez csak úgy oldható meg, ha a tényleges tárolás
+az <code>Any</code> objektumon kívül történik. Ezért <em>dinamikus memóriakezelést</em> kell használnunk: az így lefoglalt objektumnak
+az <code>Any</code> csak a memóriacímét fogja tárolni. Ahányféle objektumot kap a <code>.set()</code>, annyiféle objektumot
+kellhet tárolni; így ha a <code>.set()</code> sablonfüggvény, akkor a dinamikusan létrehozott objektumnak is <em>sablonnak</em>
+kell lennie.</p>
+
+<p>A <code>new int</code> és a <code>new std::string</code> kifejezésektől kapott <code>int*</code> és <code>std::string*</code>
+típusú pointerek nem kompatibilisek egymással. Az <code>Any</code> tárolhatna <code>void*</code>-ot, de jobban járunk, ha
+az eltárolandó objektumot <em>becsomagoljuk egy segédobjektumba</em>, a segédobjetumok számára pedig létrehozunk egy
+<em>közös ősosztályt</em>. Tulajdonképpen egy egyelemű heterogén „kollekciót” kapunk (ahol a kollekció nem véletlenül
+van idézőjelben, már csak a tervezési mintára való utalásként szerepel):</p>
+
+<pre   ><code class="language-cbub">class Any {
+    class ContainerBase {                    // Üres ősosztály
+      public:
+        virtual ~ContainerBase() {}
+    };
+
+    template &lt;typename T&gt;
+    class Container : public ContainerBase { // Container&lt;T&gt;::data tárol
+      public:
+        T data;
+        Container(T const &amp;what) : data(what) {}
+    };
+
+    ContainerBase* pdata = nullptr;          // Emiatt kell az ősosztály
+};</code></pre>
+
+<p>A módszer neve: <strong>type erasure</strong>. Ebben a közös ősosztály „csak azért van, hogy legyen”, mert kell a közös ős.</p>
+
+<p>A <code>.set()</code> és a <code>.get()</code> függvények ezután
+már könnyen megvalósíthatóak. A <code>.set()</code> megadott típusú csomagoló objektumot foglal, és beállítja
+a pointert. Ezen a ponton elveszik a típusinformáció, de azt a <code>.get()</code> újból megkapja a
+sablonparaméterében, és egy <code>dynamic_cast</code> visszaalakítja a segédobjektum referenciáját a megfelelő típusúra:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void Any::set(T const&amp; what) {
+    ContainerBase* newpdata = new Container&lt;T&gt;(what);
+    delete pdata;
+    pdata = newpdata;
+}
+
+template &lt;typename T&gt;
+T&amp; Any::get() {
+    return dynamic_cast&lt;Container&lt;T&gt;&amp;&gt;(*pdata).data;
+}</code></pre>
+
+<p>A <code>dynamic_cast</code> futási idejű hibaellenőrzését itt ki is lehet használni. Ha helytelen a konverzió,
+<code>std::bad_cast</code> típusú hibát fog dobni (referenciák esetén így viselkedik). A <code>dynamic_cast</code>-hoz szükség
+van virtuális függvényre, de ez a feltétel szerencsére automatikusan teljesül az ősosztálybeli virtuális destruktor miatt, amire
+amúgy is szükségünk lenne.</p>
+
+<p>Már csak egy dolgot kell megoldanunk, az <code>Any</code> objektumok érték szerinti másolását. A <code>ContainerBase*</code>
+indirekció miatt a fordító által generált másoló konstruktor helytelenül működik, csak a pointert másolja, nem az objektumot. A
+pointer által mutatott objektum dinamikus típusa azonban ismeretlen, ezért a szokásos trükköt kell alkalmaznunk: a virtuális
+konstruktort. Ez egy újabb virtuális függvény a segédobjektum számára. Szerencsére a <code>.clone()</code>-t most csak egyszer
+kell implementálnunk, a sablon osztályban:</p>
+
+<pre   ><code class="language-cbub">class Any {
+  private:
+    class ContainerBase {
+        virtual ContainerBase* clone() const = 0;
+    };
+    
+    template &lt;typename T&gt;
+    class Container : public ContainerBase {
+        ContainerBase* clone() const { return new Container&lt;T&gt;(*this); }
+    };
+
+    ContainerBase* pdata;
+};
+
+template &lt;typename T&gt;
+Any::Any(Any const&amp; to_copy) {
+    pdata = to_copy.pdata-&gt;clone();
+}</code></pre>
+
+<p>A teljes változat letölthető innen: <a href="any.cpp">any.cpp</a>. A C++17 már tartalmaz
+egy ehhez hasonlóan működő osztályt, <a href="../cpp1417/index.html#cpp14std"><code>std::any</code> néven</a>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mennyiség = mérőszám és mértékegység">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="mertekegyseg" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Mennyiség = mérőszám és mértékegység<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Sokszor ha fizikai mennyiségeket szeretnénk a programban kifejezni, egyszerűen valós számokat használunk. Ez azonban elég 
+könnyen hibákhoz vezethet. Ha azt írjuk, <code>double ido = 1.2</code> és hogy <code>double hossz = 1.7</code>, a 
+<code>hossz/ido</code> kifejezés értelmes, és egy sebességet ad. A <code>hossz+ido</code> kifejezés viszont értelmetlen. De csak nekünk az, 
+sajnos a fordítónak nem, mert az csak annyit lát ebből, hogy össze szeretnénk adni két valós számot. A mértékegységeket már 
+eldobtuk.</p>
+
+<p>Gyakori probléma az is a mérnökségben, hogy eltérő mértékegységrendszereket használunk. Hosszakat ki lehet fejezni méterben, 
+hüvelykben vagy mérföldben is. Az átváltásokra külön kell figyelni, és tudjuk, hogy nem egyszer adódott már ebből probléma (lásd a <a 
+href="index.html#gimli">Gimli Glider</a> és a <a href="index.html#marsorbiter">Mars Climate Orbiter</a> történetét). Ráadásul ez nem csak mértékegységekkel 
+rendelkező, hanem mértékegység nélküli számoknál is gond. A szögeket mértékegység nélküli számmal mérjük, és mégis eltérő 
+„mértékegységekkel” is kifejezzük őket néha: fokban és radiánban. Mindenki beleütközött már abba a problémába, hogy a 
+<code>sin()</code> függvény (vagy épp a zsebszámológépe) radiánt vár fok helyett.</p>
+
+<p>Az alábbi programban, kihasználva az erősen típusos C++ adta lehetőségeket, egy sablon osztály segítségével a 
+mérőszámokhoz (magnitude) mértékegységeket (multitude, unit) társítunk. A mennyiség (quantity) objektumok egy egyszerű valós 
+szám formájában tartalmazzák a mérőszámokat, a mértékegységet pedig a típusuk mutatja meg, méghozzá SI (MKS: méter, kilogramm, 
+másodperc) mértékegységrendszerben. Mivel így <a href="index.html#touchofclass">minden mennyiség eltérő típusként jelenik meg a programban</a>,
+függvényeket adhatunk meg hozzájuk, amelyeket a fordító automatikusan tud kezelni. Így nemcsak hogy nem lehet majd eltérő típusú 
+mértékeket összeadni, de szorzások és osztások esetén a fordító ki fogja találni a keletkező mennyiség mértékegységét!</p>
+
+<p>A mértékegységrendszerek közötti átváltásokhoz pedig literális operátorokat használunk, amely a C++11 nyelvi újdonságai közül 
+az egyik. A végeredmény az, hogy ilyesmiket írhatunk a programban:</p>
+
+<pre   ><code class="language-c">Length s = 56.8_km;
+Time t = 1.2_h;
+Speed v = s/t;</code></pre>
+
+<p>Mindeközben a fizikát a fordító intézi a háttérben. Mindennek futási idejű költsége nulla, mivel a sablonok körüli összes 
+munkát a fordító fordítási időben elvégzi. A lefordított program ugyanúgy néz ki, mintha nyers <code>double</code> számokkal 
+írtuk volna meg, de az összes átváltás és ellenőrzés automatikus!</p>
+
+
+
+
+<h3>A mennyiség osztály</h3>
+
+<p>Itt is arra a következtetésre juthatunk, hogy egy sablon osztályt kell létrehoznunk a 
+mennyiségek számára. Minden mennyiség hasonlóan működik (pl. az összeadás, kivonás műveletek mindegyiknél egyformák), azonban a 
+célunk az, hogy a különféle mértékegységekkel (típusokkal) rendelkező osztályokon ne lehessen elvégezni ezeket a műveleteket.</p>
+
+<p>A különféle mértékegységek az egyes alapmértékegységekből építhetők fel. Ezek hatványozhatóak: m, m<sup>2</sup>, 
+m<sup>3</sup> a hossz, terület, térfogat mértékegységei; de negatív hatványok is léteznek: m<sup>-1</sup> jelentése: 
+méterenként, s<sup>-1</sup> jelentése: másodpercenként. Különféle alapmértékegységek is keverhetők, pl. 
+m<sup>1</sup>s<sup>-1</sup>: méter másodpercenként (sebesség), vagy kg<sup>1</sup>m<sup>-3</sup>: kilogramm köbméterenként 
+(sűrűség). Mint látjuk, ezek mind leírhatóak három egész számmal, a m, kg és s alapmértékegységek hatványkitevőivel. Ezért ez a 
+három szám lesz a sablonparaméter:</p>
+
+<pre   ><code class="language-c">template &lt;int M, int KG, int S&gt;
+class Quantity {
+  public:
+    double magnitude;
+    explicit Quantity(double magnitude): magnitude{magnitude} {}
+};</code></pre>
+
+<p class="megjegyzes">Az alábbiakban sokszor fogjuk leírni a <code>template &lt;int M, int KG, int S&gt;</code> kódrészletet. Ez 
+azt mutatja, hogy a három alapmértékegység hatványait egy külön osztállyal kellene összefogni, amely egyetlen 
+<code>template</code> paramétere lehetne a <code>Quantity</code> osztálynak. Az egyszerűség kedvéért maradjunk most annál a 
+változatnál, amikor kiírjuk ezeket. A mérőszám is legyen most publikus adattag.</p>
+
+<p>Az osztály semmi egyebet nem tartalmaz, mint egy mérőszámot. Minden egyéb információ a típusába van kódolva. Az 
+egyparaméteres konstruktor megkapta az <code>explicit</code> jelzőt, hogy a fordító ne használja konverzióra: így nem fog 
+automatikusan semmilyen valós számhoz mértékegységet társítani, hanem nekünk kell minden esetben megadnunk azt.</p>
+
+<p>Az egyszerű használathoz megadhatunk rövid neveket is az egyes típusoknak, pl.:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">using Length = Quantity&lt;1, 0, 0&gt;;         /* hossz, m */
+using Area = Quantity&lt;2, 0, 0&gt;;           /* terület, m^2 */
+using Mass = Quantity&lt;0, 1, 0&gt;;           /* tömeg, kg */
+using Time = Quantity&lt;0, 0, 1&gt;;           /* idő, s */
+using Speed = Quantity&lt;1, 0, -1&gt;;         /* sebesség, m/s */
+using Acceleration = Quantity&lt;1, 0, -2&gt;;  /* gyorsulás, m/s^2 */
+using Force = Quantity&lt;1, 1, -2&gt;;         /* erő, N=m*kg/s^2 */
+using Energy = Quantity&lt;2, 1, -2&gt;;        /* energia, J=m^2*kg/s^2 */
+using Power = Quantity&lt;2, 1, -3&gt;;         /* teljesítmény, Watt = Joule/s = m^2*kg/s^3 */
+
+Length l1{1.2};     /* 1.2 m */
+Time t1{3.7};       /* 3.7 s */</code></pre>
+
+<p>Két mennyiség akkor adható össze, ha megegyezik a mértékegységük. Ez így van bármilyen mértékegységnél. Ezt egy sablon 
+összeadó operátor függvénnyel fejezhetjük ki. Ez azt fejezi ki, hogy két <em>egyforma</em> dimenzió mennyiség (paraméterek) 
+összege egy <em>ugyanolyan</em> dimenziójú mennyiség (visszatérési érték), amely úgy áll elő, hogy a két mérőszámot összeadjuk. 
+A kivonás ugyanígy működik:</p>
+
+<pre   ><code class="language-c">template &lt;int M, int KG, int S&gt;
+Quantity&lt;M, KG, S&gt; operator+(Quantity&lt;M, KG, S&gt; a, Quantity&lt;M, KG, S&gt; b) {
+    return Quantity&lt;M, KG, S&gt;{a.magnitude + b.magnitude};
+}
+
+template &lt;int M, int KG, int S&gt;
+Quantity&lt;M, KG, S&gt; operator-(Quantity&lt;M, KG, S&gt; a, Quantity&lt;M, KG, S&gt; b) {
+    return Quantity&lt;M, KG, S&gt;{a.magnitude - b.magnitude};
+}</code></pre>
+
+<p>A szorzás és az osztás trükkösebb. Szorozni és osztani nem csak egyforma dimenziójú mennyiségeket, hanem bármely két 
+mennyiséget lehet, csak az eredmény <em>dimenziója más lesz</em>. A kapott mennyiség dimenzióját azonban a két tényezőből származtatni tudjuk: szorzás esetén a dimenziók is összeszorzódnak, osztás esetén elosztódnak. A 
+mértékegységeket az alapmértékegységek hatványkitevőivel reprezentáljuk, ez a szorzásnál a kitevők összegzéseként fog megjelenni,
+pl. hossz×hossz=terület, m<sup>1</sup>×m<sup>1</sup>=m<sup>1+1</sup>=m<sup>2</sup>. A különféle mértékegységek miatt két 
+csoport sablonparaméter kell; az eredmény mértékegysége ezekből levezethető:</p>
+
+<pre   ><code class="language-c">template &lt;int M1, int KG1, int S1, int M2, int KG2, int S2&gt;
+Quantity&lt;M1+M2, KG1+KG2, S1+S2&gt; operator*(Quantity&lt;M1, KG1, S1&gt; a, Quantity&lt;M2, KG2, S2&gt; b) {
+    return Quantity&lt;M1+M2, KG1+KG2, S1+S2&gt;{a.magnitude * b.magnitude};
+}</code></pre>
+
+<p>Az osztás ugyanilyen, csak a mérőszámokat osztani, a kitevőket kivonni kell:</p>
+
+<pre   ><code class="language-c">template &lt;int M1, int KG1, int S1, int M2, int KG2, int S2&gt;
+Quantity&lt;M1-M2, KG1-KG2, S1-S2&gt; operator/(Quantity&lt;M1, KG1, S1&gt; a, Quantity&lt;M2, KG2, S2&gt; b) {
+    return Quantity&lt;M1-M2, KG1-KG2, S1-S2&gt;{a.magnitude / b.magnitude};
+}</code></pre>
+
+<p>Egyéb operátorok is megadhatók. Minden, aminek van értelme, és amit a programban használni fogunk. Két mennyiség 
+összehasonlítása:</p>
+
+<pre   ><code class="language-c">template &lt;int M, int KG, int S&gt;
+bool operator&lt;(Quantity&lt;M, KG, S&gt; a, Quantity&lt;M, KG, S&gt; b) {
+    return a.magnitude &lt; b.magnitude;
+}</code></pre>
+
+<p>Egy mennyiség kiírása általában (valamennyire szépítve):</p>
+
+<pre   ><code class="language-c">template &lt;int M, int KG, int S&gt;
+std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Quantity&lt;M, KG, S&gt; m) {
+    os &lt;&lt; m.magnitude &lt;&lt; ' ';
+    bool elso = true;
+    if (M != 0) {
+        elso = false;
+        os &lt;&lt; &quot;m^&quot; &lt;&lt; M;
+    }
+    if (KG != 0) {
+        if (!elso) os &lt;&lt; '*';
+        elso = false;
+        os &lt;&lt; &quot;kg^&quot; &lt;&lt; KG;
+    }
+    if (S != 0) {
+        if (!elso) os &lt;&lt; '*';
+        elso = false;
+        os &lt;&lt; &quot;s^&quot; &lt;&lt; S;
+    }
+    return os;
+}</code></pre>
+
+<p>Egyes mértékegységeknek saját nevük van, ezért a kiírás specializálható. Például az erő (force) mértékegysége a Newton (N):</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Force f) {
+    os &lt;&lt; f.magnitude &lt;&lt; &quot; N&quot;;          /* Newton */
+    return os;
+}</code></pre>
+
+<p>Ezekkel már megoldhatunk egy feladatot: „Egy 1450 kg-os Ferrari 0-ról 100 km/h-ra 4 s alatt gyorsul. Mekkora ez a sebesség 
+m/s-ban kifejezve, és átlagosan mekkora erő gyorsítja az autót?”</p>
+
+<pre   ><code class="language-c">int main() {
+    Length l{100 * 1000};   /* 100 km */
+    Time hour{3600};        /* óra = 3600 s */
+    Time t{4};              /* gyorsulás: 4 s alatt */
+    Mass m{1450};           /* az autó tömege: 1450 kg */
+
+    Speed v = l/hour;
+    std::cout &lt;&lt; &quot;100 km/h = &quot; &lt;&lt; v &lt;&lt; std::endl;
+
+    Acceleration a = v/t;
+    Force f = m*a;          /* Newton törvénye */
+    std::cout &lt;&lt; &quot;F = &quot; &lt;&lt; f &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Ebben a kis példaprogramban a legfontosabb az, ami nem látszik, amit nem csinál. Az, hogy <em>nem lehet elrontani</em>. Ha 
+bármelyik képletet elrontanánk, pl. <code>F=m*a</code> helyett <code>F=m/a</code>-t írnánk, a program nem lenne lefordítható. 
+Fordítási időben kiderülne a hiba!</p>
+
+<p>Az eddigi program: <a href="quantity1.cpp">quantity1.cpp</a>.</p>
+
+
+
+
+
+
+<h3>Mértékegységek a kódban is</h3>
+
+<p>Az eddigiek működnek, típusbiztosak, már csak egy gond van: nem szép a kód. Sőt elég nehéz olvasni; a megszokott <code>l=100 
+km</code> helyett <code>l{100*1000}</code>-at kell írni. Ha órában adunk meg valamit, 3600-zal kell szorozni, ha lóerőben, akkor 
+745,7-del. Bár ezeknek az értékeknek adhatunk nevet, a szorzásra nekünk kell emlékezni.</p>
+
+<p>Már a C is támogatott néhány előtagot és utótagot (prefix, suffix) a beépített típusú értékek megadásánál. Az <code>1.0</code> 
+érték <code>double</code> típusú, az <code>1.0f</code> pedig <code>float</code>. A <code>255</code> érték tízes számrendszerben 
+adott, a <code>0377</code> nyolcasban, a <code>0xFF</code> pedig tizenhatosban. A C++11 lehetővé teszi azt, hogy <em>saját 
+utótagokat</em> adjunk meg a programba épített literálisokhoz (user-defined literal). Ezeket globális operátor függvényként kell 
+megvalósítani (literal suffix operator).</p>
+
+<p>Ezeket az operátorfüggvényeket az „üres sztring operátorral” kell jelölni: <code>operator ""</code>, utána pedig le kell írni 
+az utótagot. Paraméterként a literálist kapják, visszatérési értékük pedig az előállítandó objektum kell legyen. Például ha azt 
+akarjuk, hogy a méter mértékegységet lehessen használni a programban:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">constexpr Length operator &quot;&quot; _m (long double magnitude) {
+    return Length(magnitude);
+}
+
+Length l = 1.2_m;       /* 1.2 méter */</code></pre>
+
+<p class="megjegyzes">A <code>Length</code> objektum inicializálásánál a konstruktort kerek zárójellel <code>()</code> hívja a 
+függvény a kapcsos zárójel helyett <code>{}</code>. Ezt azért kell így írni, mert azon a ponton számítási pontosság veszik el 
+(narrowing conversion), a <code>long double</code>&rarr;<code>double</code> konverzió miatt. A kapcsos zárójeles inicializálás 
+nem engedi ezt meg. A <code>long double</code>-re az utótag operátorokra vonatkozó szabályok miatt van szükség, lásd lentebb.</p>
+
+<p>Ezeknél gyakran előkerül a <code>constexpr</code> kulcsszó is, bár ez nem törvényszerű. A <code>constexpr</code> jelző olyan függvényt vagy változót jelöl meg, amelynek értéke már fordítási időben meghatározható. 
+Így nem futási időben fog megtörténni az átalakítás (hiszen 1.2 méter mindig 1.2 méter lesz, akárhányszor kiértékeljük), hanem 
+már fordításkor. Ehhez a <code>Quantity</code> konstruktora is <code>constexpr</code> kell legyen.</p>
+
+<p>Ha szeretnénk kilométerben megadni egy hosszúságot, esetleg órában az időt:</p>
+
+<pre   ><code class="language-c">constexpr Length operator &quot;&quot; _km (long double magnitude) {
+    return Length(magnitude * 1000.0);
+}
+
+constexpr Time operator &quot;&quot; _h (long double magnitude) {
+    return Time(magnitude * 3600);
+}</code></pre>
+
+<p>Ezekkel és hasonló függvényekkel együtt a Ferrari gyorsulását kiszámító
+program így írható:</p>
+
+<pre   ><code class="language-c">Speed v = 100.0_km / 1.0_h;       /* 100 km/h */
+std::cout &lt;&lt; &quot;100 km/h = &quot; &lt;&lt; v &lt;&lt; std::endl;
+
+Acceleration a = v / 4.0_s;       /* az adott sebességre 4 s alatt */
+Force f = 1450.0_kg * a;          /* Newton */
+std::cout &lt;&lt; &quot;F = &quot; &lt;&lt; f &lt;&lt; std::endl;</code></pre>
+
+
+
+<div class="csik">
+<h3>A felhasználó által definiált literálisok</h3>
+
+<p>A literális utótag operátorok feladata, hogy valamilyen objektumot hozzanak létre a programkódban megadott literális alapján. 
+Ezeket az <code>operator ""</code> (üres sztring) globális függvénnyel adjuk meg, az alábbi formában:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">OutputType operator &quot;&quot; _suffix(ParamType p);
+
+OutputType x = 123_suffix;</code></pre>
+
+<p>Előtag operátort nem lehet definiálni, kizárólag utótagot. Ezek neve az alulvonás <code>_</code> (underscore) karakterrel kell 
+kezdődjön; minden más szabványosításra van fenntartva. A <a href="../cpp1417/index.html#cpp14literalisok">C++14-be néhány be is 
+került</a>.</p>
+
+<p>Az operátor a paraméterében kapja meg azt az értéket, ami után írtuk. Számok esetén az értéket két formában kérhetjük, nyersen 
+(raw) és előkészítve (cooked). A nyers forma sztringet, azaz nullával lezárt karaktertömböt jelent: a fenti példában 
+<code>"123"</code> lenne <code>char const *</code>-ként. Az előkészített forma pedig <code>unsigned long long</code> vagy 
+<code>long double</code> típust. Ez mindig a létező legnagyobb ábrázolási tartományú, a 123 így simán <code>123</code> lenne 
+<code>unsigned long long</code>-ként.</p>
+
+<p>Sztringek esetén az értéket mindig nullával lezárt karaktertömbként kapjuk, az utótag operátornak azonban ilyenkor nem egy, 
+hanem két paramétere van. Az első egy <code>char const *</code> (vagy más karakter típus, pl. <code>wchar_t</code>), ez tartalmazza 
+a sztringet. A másodikban pedig a karakterek számát kapjuk egy <code>size_t</code> típus értékben – így akár null karakterek is 
+lehetnek a sztringben.</p>
+
+<table>
+  <thead>
+    <tr>
+        <th>Kódrészlet
+        <th><code>operator"" _xyz<em>(... milyen paraméterezéssel ...)</em></code>
+  </thead>
+  <tbody>
+    <tr>
+        <td>
+            <code>123_xyz</code>
+        <td>
+            <code>(unsigned long long)</code> vagy <code>(char const *)</code>
+    <tr>
+        <td>
+            <code>123.0_xyz</code>
+        <td>
+            <code>(long double)</code> vagy <code>(char const *)</code>
+    <tr>
+        <td>
+            <code>"hello"_xyz</code>
+        <td>
+            <code>(char const *, size_t)</code>
+  </tbody>
+</table>
+
+<p>Első példa. Az alábbi függvény egy <code>_deg</code> utótagot ad meg, amely egy fokban megadott szöget radiánba vált át. Ez 
+előkészített (cooked) formában veszi át a valós számot, hogy ne kelljen bíbelődni a számjegyek értelmezésével:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">long double operator &quot;&quot; _deg(long double degree) {
+    return degree * 3.141592653589793238462643383276/180;   /* pi/180 */
+}
+
+std::cout &lt;&lt; 90.0_deg &lt;&lt; ' ' &lt;&lt; sin(180.0_deg);</code></pre>
+
+<p>Második példa. <code>std::string</code>-gé alakító <code>_str</code> utótag; ilyen van C++14-ben <code>operator""s</code> 
+néven:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">std::string operator&quot;&quot; _str(char const *str, size_t len) {
+    return std::string(str, len);
+}
+
+std::cout &lt;&lt; &quot;hello&quot;_str + &quot;vilag&quot;_str;</code></pre>
+
+<p>Úgy tűnhet, hogy ezt a nyelvi elemet kevés helyen lehet használni, esetleg csak tudományos vagy mérnöki feladatokat ellátó 
+programokban. De eredetileg is erre szánták. A C++-nak nagy a részesedése ezekben az alkalmazásokban.</p>
+
+
+<p>Megjegyzések:</p>
+<ul>
+<li>Az egész számok előkészített formában mindig előjel nélküliek, mert a literálisok mindig nemnegatívak. A <code>-1</code> egy 
+kifejezés, az <code>1</code> literálissal és az egyoperandusú <code>-</code>, azaz negálás operátorral. Az előkészítésbe a 
+számrendszer megadását is bele kell érteni; <code>0xFF_x</code> esetén a <code>_x</code> utótag operátor az <code>unsigned long 
+long</code> típusú 255 értéket fogja megkapni.
+
+<li>A számok átvételének van egy harmadik formája, amikor egy sablon függvény sablonparamétereiként kapjuk a karaktereket. Erről 
+majd később lesz szó.
+
+<li>Ha számot veszünk át raw formában, csak <code>char const *</code> paramétere van a függvénynek. Ha sztringet,
+akkor <code>char const *</code> és <code>size_t</code> – ez különbözteti meg a kettőt.
+
+<li>Ahol lehet, adjunk <code>constexpr</code> jelzőt az utótag operátornak. Amit lehet, fordítási időben kell kiértékelni.
+
+<li>Általában pedig: hasonlók a saját 
+literálisok, mint a saját operátorok. Ne erőltessük a használatukat! Csak akkor használjunk ilyet, ha <em>érthetőbb</em> lesz 
+tőle a kód, ne az legyen a cél, hogy tömörebb legyen!</li>
+</ul>
+</div>
+
+<div class="csik">
+<h3>A <code>constexpr</code> jelző</h3>
+
+<p>A C és a C++ nyelvben a <code>const</code> jelzővel ellátott értékek nem igazi fordítási idejű konstansok. Ellentmondásnak 
+tűnik, de a konstans változók is csak változók, amelyekre ugyanolyan szabályok vonatkoznak, mint a többi változóra. Például 
+C++-ban nem lehet konstans változóval megadni egy tömb méretét, de nem lehet sablonparaméter sem:</p>
+
+<pre   ><code class="language-cbub">const int i = 12;
+int arr[i];         // HIBÁS (kivéve 1-2 kontextust)
+
+const unsigned j = 13;
+SomeType&lt;j&gt; x;      // HIBÁS</code></pre>
+
+<p>A <em>const</em> nem azt jelenti, hogy egy érték megváltoztathatatlan, hanem csak egy ígéretet a többi programrész számára: azt az 
+értéket <em>azon a változónéven keresztül</em> nem fogjuk megváltoztatni.</p>
+
+<p>Érezzük azonban, hogy van sok olyan helyzet, amikor valami tényleg konstans, megváltoztathatatlan; sőt akár fordítási időben 
+is meg lehetne határozni az értékét. A <em>fordítási idejű konstansokat</em> a C++11-ben a <code>constexpr</code> kulcsszóval lehet 
+megjelölni. A <code>constexpr</code> azt jelenti a fordító számára: fordítási időben kiértékelendő. Az így megjelölt változók
+már bárhol használhatók, ahol eddig konstansokból álló kifejezéseket várt a fordító, innen jön a nevük is:</p>
+
+<pre   ><code class="language-cbub">constexpr int i = 12;
+int arr[i];         // OK
+
+constexpr unsigned j = 13;
+SomeType&lt;j&gt; x;      // OK</code></pre>
+
+<p><code>constexpr</code> lehet lokális és globális változó is. <code>constexpr</code> lehet osztály statikus változója is, és 
+ez esetben már megengedett, hogy az osztály belsejében adjuk meg annak értékét, nem csak akkor, ha egész típusú:</p>
+
+<pre   ><code class="language-c">class X {
+    static constexpr double x = 0.19;
+};</code></pre>
+
+<p><code>constexpr</code> lehet még akár függvény is, feltéve hogy a törzse egyetlen <code>return</code> utasításból áll (a 
+C++14-ben <a href="../cpp1417/index.html#cpp14constexpr">lazítottak ezen a szabályon</a>). Ha ciklust szeretnénk, rekurziót is
+használhatunk:</p>
+
+<pre   ><code class="language-c">constexpr unsigned int fact(unsigned int n) {
+    return n == 0 ? 1 : n*fact(n-1);
+}</code></pre>
+
+<p>A <code>constexpr</code> értékekkel hívott <code>constexpr</code> függvény értéke is <code>constexpr</code>. Így lehetnek az 
+egyes mértékegységekhez tartozó utótag operátor függvények <code>constexpr</code> minősítésűek. És így csökken nullára a futási 
+idejű költség, mert így a mennyiség objektumokat a fordító fordítási időben előállítja, és bit szinten előkészítve kerülnek a 
+lefordított programba.</p>
+
+</div>
+
+<p>A program második változata: <a href="quantity2.cpp">quantity2.cpp</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A névterek és a Koenig Lookup">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="koeniglookup" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A névterek és a Koenig Lookup<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A most megírt programunk sok nagyon általános nevű típust definiált, pl. <code>Time</code>, <code>Speed</code>, ezek bárhol 
+előfordulhatnak. Az ilyen nevek ütközésének elkerülésére találták ki a névtereket. Érdemes ezért a <em>teljes</em> kódot egy 
+<code>Units</code> nevű névtérbe tenni.</p>
+
+<p>A névterek használatánál a háttérben egy érdekes szabály munkálkodik, amiről 
+kevesen tudnak*, és ez a <a href="index.html#koenig">Koenig Lookup</a>:</p>
+
+<blockquote>
+<h3>Koenig Lookup (Argument dependent lookup, ADL)</h3>
+<p>Andrew Koenig nagy szerepet vállalt a C++ kidolgozásában, Bjarne Stroustrup mellett. Ő találta ki ezt a szabályt: ha egy
+függvényhívásban paraméterként egy valamilyen osztálybeli objektumot adunk meg, akkor a fordító a megadott nevű függvényt az
+objektum osztályát magában foglaló névtérben is keresi.</p>
+<p>* Hogy a szabályról kevesen tudnak, az 
+nem sértés akar lenni: egyszerűen úgy van kitalálva, hogy kényelmessé és természetessé teszi a névterek használatát. Ezért 
+legtöbbször fel sem tűnik, hogy egyáltalán létezik.</p>
+</blockquote>
+
+<p>Kódban ez a következőt jelenti:</p>
+
+<pre   ><code class="language-c">namespace NS {
+    class A {};
+    
+    void f(A a) {
+    }
+}
+
+int main() {
+    NS::A x;
+    NS::f(x);       /* NS::f-et hívja */
+    f(x);           /* using namespace nélkül is NS::f-et hívja!
+                     * mert az x típusa NS-beli */
+}</code></pre>
+
+<p>Ebben a példában az <code>f(x)</code> függvényhívásnál is rájön a fordító, hogy az <code>NS</code>-beli <code>f()</code> 
+függvényről van szó, anélkül hogy külön kiírtuk volna a hívásnál a névteret, vagy <code>using namespace</code>-t használtunk 
+volna. Mégpedig azért, mert a függvénynek adott objektum az <code>NS</code> névtérből származik, ezért számítani lehet rá, hogy 
+az <code>NS</code> névtérbeli függvénynek szeretnénk paraméterként adni.</p>
+
+<p>A Koenig Lookup akkor fontos igazán, ha olyan függvényhívást szeretnénk csinálni, ahol nem írhatjuk ki a névteret. Ilyenek 
+például az operátorok. Ha van két <code>Math::Matrix</code> típusú változónk, <code>x</code> és <code>y</code>, akkor az 
+<code>x+y</code> kifejezést leírva a fordítónak rá kell jönnie, hogy az <code>operator+()</code> függvényt a <code>Math</code> 
+névtérben is keresse. Ezt nem tudjuk név szerint kiírni (<code>a Math::+ b</code>?! <code>Math::operator+(a, b)</code>...), és 
+ha nem lenne ez a névkeresési szabály, az a használhatóság rovására menne.</p>
+
+<p>A mértékegységes példában így érdemes a <em>teljes</em> kódot a <code>Units</code> névtérbe tenni, a literálisok operátorait 
+pedig még azon <em>belül</em> is a <code>Literals</code> névtérbe:</p>
+
+<pre   ><code class="language-cbub">namespace Units { // Units
+    template &lt;int M, int KG, int S&gt;
+    class Quantity {
+        /* ... */
+    };
+
+    template &lt;int M, int KG, int S&gt;
+    std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Quantity&lt;M, KG, S&gt; m) {
+        /* ... */
+    }
+
+    namespace Literals { // Units::Literals
+        constexpr Length operator &quot;&quot; _m (long double magnitude) {
+            return Length(magnitude);
+        }
+        /* ... */
+    }
+    
+    /* ... */
+}</code></pre>
+
+<p>Ez nem rontja a használhatóságot. A főprogram így a következőképp nézhet ki:</p>
+
+<pre   ><code class="language-c">int main() {
+    using namespace Units::Literals;
+    
+    std::cout &lt;&lt; &quot;Ferrari ===&quot; &lt;&lt; std::endl;
+    Units::Speed v = 100.0_km / 1.0_h;
+    std::cout &lt;&lt; &quot;100 km/h = &quot; &lt;&lt; v &lt;&lt; std::endl;
+    
+    Units::Acceleration a = v / 4.0_s;
+    Units::Force f = 1450.0_kg * a;          /* Newton */
+    std::cout &lt;&lt; &quot;F = &quot; &lt;&lt; f &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Az egyes mennyiségek típusait minősítjük a névtér nevével, így nincs ütközés a hasonló nevekkel. A kiírásoknál a 
+<code>Units</code> névtérben lévő, mértékegységekhez megadott kiíró operátort a fordító megtalálja a Koenig Lookup miatt, és 
+ugyanez a helyzet a többi operátorral is. A literálisokat kezelő operátort pedig a <code>using namespace 
+Units::Literals</code>-szal láthatóvá tesszük a függvényen belül – de lehetőleg semmiképp sem globálisan.</p>
+
+<p>Az így kialakított változat: <a href="quantity3.cpp">quantity3.cpp</a>.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+<li id="strongtypes"><a href="https://arne-mertz.de/2016/11/stronger-types/">Arne Mertz: Use Stronger Types!</a>
+<li><a href="https://www.fluentcpp.com/2016/12/08/strong-types-for-strong-interfaces/">Strong types for strong interfaces</a>
+<li><a href="https://www.fluentcpp.com/2018/04/06/strong-types-by-struct/">Vincent Zalzal: Getting the Benefits of Strong Typing in C++ at a Fraction of the Cost</a>
+<li><a href="https://github.com/joboccara/NamedType">Jonathan Boccara: Implementation of strong types in C++</a>
+<li id="touchofclass"><a href="https://www.youtube.com/watch?v=OB-bdWKwXsU">Bjarne Stroustrup: C++11 Style – A Touch of Class</a>, Going Native 2012 Keynote Speech (Youtube).
+<li id="koenig"><a href="http://www.gotw.ca/gotw/030.htm">Herb Sutter: GotW #30: Name Lookup</a>.
+<li id="gimli"><a href="http://en.wikipedia.org/wiki/Gimli_Glider">Gimli Glider</a> (Wikipedia).
+<li id="marsorbiter"><a href="http://en.wikipedia.org/wiki/Mars_Climate_Orbiter">Mars Climate Orbiter</a> (Wikipedia).
+</ul>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

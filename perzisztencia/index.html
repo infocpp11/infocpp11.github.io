@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Heterogén kollekció perzisztenciája</title>
+<meta property="og:title" content="TEST InfoC++11 :: Heterogén kollekció perzisztenciája">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Heterogén kollekciók és perzisztencia. Hogyan használunk virtuális függvényt a beolvasásnál, amíg azt sem tudjuk, milyen típusú objektum adatait kell beolvasni?">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Heterogén kollekciók és perzisztencia. Hogyan használunk virtuális függvényt a beolvasásnál, amíg azt sem tudjuk, milyen típusú objektum adatait kell beolvasni?">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Heterogén kollekció perzisztenciája">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Heterogén kollekció perzisztenciája</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Heterogén kollekciók és perzisztencia. Hogyan használunk virtuális függvényt a beolvasásnál, amíg azt sem tudjuk, milyen típusú objektum adatait kell beolvasni?</p>
+</div>
+
+<p>C++-ban a perzisztenciát általában egy virtuális <code>save()</code> és <code>load()</code> függvénnyel valósítják meg, vagyis az
+egyes objektumok maguk gondoskodnak a fájlba mentésükről és visszatöltésükről.</p>
+
+<p>Ha egy fájlban többféle objektum adatait tároljuk, akkor egy kicsit bonyolódik a helyzet. Minden objektum
+elé ki kell írni ugyanis egy nevet (pl. kör, téglalap), hogy a típusokat meg tudjuk különböztetni. A
+visszaolvasáskor pedig először be kell olvasni ezt a nevet, utána pedig egy esetszétválasztás következik: ha a
+név „kör”, akkor egy kör konstruktornak kell futnia; ha a név „téglalap”, akkor egy téglalap konstruktornak
+stb. Itt már gond van, ugyanis virtuális konstruktor nincs, vagyis a többalakúságot már nem tudjuk
+használni.</p>
+
+<p>Az öröklésnél annyiban is bonyolult a helyzet, hogy szeretnénk egyrészt minél több működést megvalósítani az
+alaposztályban, másrészt pedig szeretnénk úgy megvalósítani az alaposztályt, hogy abból utána bármilyen további
+osztályokat le lehessen származtatni, de arról az alaposztálynak ne kelljen előre tudnia. A beolvasás az
+összes leszármazott osztálynál megvalósítandó tulajdonság, viszont az esetszétválasztást már nem rakhatjuk az
+alaposztályba, mert ott fel kell sorolni az összes leszármazott osztályt – akkor ugye azzal a kitétellel
+vagyunk gondban, hogy bármit kéne tudnunk származtatni az alaposztályból, annak „tudta nélkül”.</p>
+
+<p>Ez a helyzet a következőképpen oldható meg.</p>
+
+<p>Minden leszármazott objektum rendelkezik egy virtuális <code>save()</code> függvénnyel, amelyik valami ilyesmit ír a
+fájlba: „típus adat1 adat2 adat3”. Mindegyik rendelkezik a megfelelő virtuális <code>load()</code> függvénnyel, amelyik már
+csak az adatokat olvassa vissza egy meglévő objektumba: „adat1 adat2 adat3”. Nyilván egy meglévő példánynak
+kell lennie, mert csak így lehet virtuális a függvény – az objektumnak már léteznie kell, hogy a megfelelő
+virtuális függvénye meglegyen.</p>
+
+<p>Hogy a virtuális jellegét ki tudjuk használni a <code>load()</code> függvénynek, az egyes objektumok létrehozásakor már
+léteznie kell az objektumnak, vagyis pontosabban, egy(!) olyan(!) objektumnak már léteznie kell. Ha létezik egy
+olyan objektum, akkor azt lemásolhatjuk (a típus persze itt is változhat, vagyis ennek is virtuálisnak kell
+lennie), és az adatokat a fájlból a másolatba beolvassuk. Az alaposztályban így a következő dolgot csináljuk:
+
+<ul>
+<li>A fájlból olvasott típus alapján előkerítjük az objektum prototípusát.
+<li>A prototípust megkérjük, hogy másolja le magát (virtuális).
+<li>A másolatba pedig beolvassuk az objektum adatait (virtuális).
+</ul>
+
+<p>Az alaposztálynak nem kell tudnia a leszármazott osztályokról! A prototípusokat egy tárolóba rakjuk,
+amelyik tároló a fájlba írt neveket képezi le a különféle objektumokra, nevezetesen az alaposztály pointerére.
+Ez praktikusan egy <code> std::map&lt;std::string, Alap*&gt;</code> lesz. A beolvasáskor az adott sztringre
+rákeresve az alaposztály így találja meg a prototípust; a konkrét típusról nem kell tudnia, mert mind a
+másolást, mind a beolvasást már a leszármazott osztályok virtuális függvényei csinálják. A prototípusok
+tárolóját pedig a program elején feltöltjük a megfelelő objektum példányokkal.</p>
+
+<p>Látható, hogy így sem a heterogén kollekciókat (pl. alakzatokat tároló rajztábla objektum), sem az
+alaposztályt nem kell módosítani ahhoz, hogy egy új típust létrehozzunk. Az új típus létrehozása a szokásos
+módon történik: leszármaztatjuk az alaposztályból, megírjuk a virtuális függvényeit; az egyetlen többlet teendő
+a prototípus létrehozása a program elején. </p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;stdexcept&gt;
+
+
+/* ALAP OSZTALY */
+class Alakzat {
+  protected:
+    int x, y;
+  public:
+    virtual void kiir(std::ostream&amp; os) const = 0;  /* magyarul */
+
+    virtual void save(std::ostream&amp; os) const = 0;  /* fajlba ment */
+    virtual void load(std::istream&amp; is) = 0;        /* visszatolt */
+    virtual Alakzat* klonoz() const = 0;            /* masolat */
+
+    virtual ~Alakzat() {}
+
+    /* a prototipusok kezelese es az uj objektum eloallitasa */
+};
+
+
+class AlakzatKezelo {
+  private:
+    std::map&lt;std::string, Alakzat*&gt; prototipusok;
+
+  public:
+    ~AlakzatKezelo() {
+        std::map&lt;std::string, Alakzat*&gt;::iterator it;
+        for (it = prototipusok.begin(); it != prototipusok.end(); ++it)
+            delete it-&gt;second;
+    }
+
+    void prototipus_hozzaad(Alakzat* a, char const *nev) {
+        prototipusok[nev] = a;
+    }
+
+    Alakzat* beolvas(std::istream&amp; is) {
+        std::string tipus;
+        if (!(is &gt;&gt; tipus))
+            return NULL;    /* nincs tobb adat */
+        std::map&lt;std::string, Alakzat*&gt;::iterator it;
+        it = prototipusok.find(tipus);
+        if (it == prototipusok.end())
+            throw std::runtime_error(&quot;ervenytelen alakzat tipus!&quot;);
+
+        Alakzat* proto = it-&gt;second;    /* a prototipus a map-bol */
+        Alakzat* uj = proto-&gt;klonoz();  /* lemasoljuk a prototipust */
+        uj-&gt;load(is);                   /* a masolat beolvassa magat */
+        return uj;                      /* es azt adjuk vissza */
+    }
+};
+
+
+/* LESZARMAZOTTAK */
+class Teglalap: public Alakzat {
+  private:
+    int szel, mag;
+  public:
+    Teglalap() {}   /* a prototipusok miatt szuksegunk van default konstruktorra */
+    Teglalap(int x1, int y1, int x2, int y2) {
+        x = x1; y = y1;
+        szel = x2-x1; mag = y2-y1;
+    };
+    void kiir(std::ostream&amp; os) const {
+        os &lt;&lt; &quot;Teglalap vagyok, itt: &quot; &lt;&lt; x &lt;&lt; ',' &lt;&lt; y &lt;&lt; &quot;, &quot;
+           &lt;&lt; szel &lt;&lt; 'x' &lt;&lt; mag &lt;&lt; std::endl;
+    }
+    void save(std::ostream&amp; os) const {
+        os &lt;&lt; &quot;rectangle&quot; &lt;&lt; ' ' &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; ' '
+           &lt;&lt; szel &lt;&lt; ' ' &lt;&lt; mag &lt;&lt; std::endl;
+    }
+    void load(std::istream&amp; is) {
+        is &gt;&gt; x &gt;&gt; y &gt;&gt; szel &gt;&gt; mag;
+    }
+    Teglalap* klonoz() const {
+        return new Teglalap(*this);
+    }
+};
+
+
+class Kor: public Alakzat {
+  private:
+    int sugar;
+  public:
+    Kor() {}
+    Kor(int xk, int yk, int r) {
+        x = xk; y = yk;
+        sugar = r;
+    };
+    void kiir(std::ostream&amp; os) const {
+        os &lt;&lt; &quot;Kor vagyok, itt: &quot; &lt;&lt; x &lt;&lt; ',' &lt;&lt; y
+           &lt;&lt; &quot;, r=&quot; &lt;&lt; sugar &lt;&lt; std::endl;
+    }
+    void save(std::ostream&amp; os) const {
+        os &lt;&lt; &quot;circle&quot; &lt;&lt; ' ' &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y
+           &lt;&lt; ' ' &lt;&lt; sugar &lt;&lt; std::endl;
+    }
+    void load(std::istream&amp; is) {
+        is &gt;&gt; x &gt;&gt; y &gt;&gt; sugar;
+    }
+    Kor* klonoz() const {
+        return new Kor(*this);
+    }
+};
+
+
+int main() {
+    /* a program elejen eloallitjuk a prototipusokat. */
+    AlakzatKezelo ak;
+    ak.prototipus_hozzaad(new Teglalap, &quot;rectangle&quot;);
+    ak.prototipus_hozzaad(new Kor, &quot;circle&quot;);
+
+
+    /* es akkor a kiprobalas innentol kezdve: ------------- */
+    std::vector&lt;Alakzat*&gt; v;
+    v.push_back(new Teglalap(20, 30, 50, 70));
+    v.push_back(new Kor(30, 50, 10));
+
+    std::cout&lt;&lt;&quot;Ezek az alakzatok vannak: -----&quot;&lt;&lt;std::endl;
+    for (size_t i = 0; i &lt; v.size(); ++i)
+        v[i]-&gt;kiir(std::cout);
+    std::cout&lt;&lt;std::endl;
+
+
+
+    /* elmentem oket egy &quot;fajlba&quot;. */
+    std::ostringstream os;
+    for (size_t i = 0; i &lt; v.size(); ++i)
+        v[i]-&gt;save(os);
+
+    std::cout &lt;&lt; &quot;A fajl tartalma: -----&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; os.str();
+    std::cout &lt;&lt; std::endl;
+
+
+
+    /* elfelejtem oket */
+    for (size_t i = 0; i &lt; v.size(); ++i)
+        delete v[i];
+    v.clear();
+    std::cout&lt;&lt;&quot;A vektor most ures.&quot;&lt;&lt;std::endl&lt;&lt;std::endl;
+
+
+
+    /* beolvasom oket a &quot;fajlbol&quot; */
+    std::istringstream is(os.str());
+    Alakzat* uj;
+    while ((uj = ak.beolvas(is)) != NULL)
+        v.push_back(uj);
+
+    /* ujra kiir mindent */
+    std::cout &lt;&lt; &quot;Ezeket olvastam a fajlbol: -----&quot; &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; v.size(); ++i)
+        v[i]-&gt;kiir(std::cout);
+    std::cout &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; v.size(); ++i)
+        delete v[i];
+}</code></pre>
+    
+                  </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

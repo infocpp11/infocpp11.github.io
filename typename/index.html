@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: A typename kulcsszó</title>
+<meta property="og:title" content="TEST InfoC++11 :: A typename kulcsszó">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Templatelt osztályból öröklődés rejtelmei">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Templatelt osztályból öröklődés rejtelmei">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="A typename kulcsszó">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">A typename kulcsszó</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Templatelt osztályból öröklődés rejtelmei</p>
+</div>
+
+<p>Mit jelent az alábbi kód?</p>
+
+<pre   ><code class="language-c">void f() {
+    A::B * C;
+}</code></pre>
+
+<p>Valójában a kérdésnek két megoldása lehet:</p>
+
+<ul>
+    <li><code>A</code> osztálybeli <code>B</code> <em>belső típusú</em> objektumra
+        mutató pointer, amelynek a neve <code>C</code>. Tehát a <code>*C</code>
+        kifejezéssel egy <code>A::B</code> típusú objektumot érnénk el.
+        Konkrét példa: <code>string::iterator * p</code>.</li>
+    <li><code>A</code> osztálybeli <code>B</code> nevű <em>statikus változó</em>,
+        amit összeszorzunk C-vel.</li>
+</ul>
+
+<p>A félreérthetőséget az okozza, hogy a belső típust és a statikus változót
+ugyanazzal a szintaxissal kell elérni; mindkettőt a <code>::</code> <em>scope operator</em>
+segítségével tudjuk hivatkozni.</p>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Belső osztályok és sablonok</a>
+                      <li><a href="index.html#2" class="">Ősosztályokban</a>
+                      <li><a href="index.html#3" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Belső osztályok és sablonok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Belső osztályok és sablonok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fentiekkel alapesetben nincsen gond. Bár a fordítóprogramok tervezésekor nehézséget jelent, hogy
+a sor jelentése kontextusfüggő – bele kell néznie az <code>A</code> osztályba,
+hogy kiderüjön a kódsor jelentése –, az <code>A</code> osztály vizsgálata után egyértelmű
+a kód.</p>
+
+<p>Kivétel persze akkor, ha sablon kódban vagyunk:</p>
+
+<pre   ><code class="language-c">template &lt;typename A&gt;
+void f() {
+    A::B * C;
+}</code></pre>
+
+<p>Jelen pillanatban ugyanis a kódrészlet mindkét verzióvá „átváltozhatna”. Ha a sablonparaméter
+egy olyan osztály, amelyikben <code>B</code> belső típus, akkor <code>C</code>-t egy pointerként
+lehetne értelmezni:</p>
+
+<pre   ><code class="language-c">class Egyik {
+  public:
+    class B {};
+};
+
+
+f&lt;Egyik&gt;();
+
+/* A keletkező specializáció: */
+template &lt;&gt;
+void f&lt;Egyik&gt;() {
+    Egyik::B * C;
+}</code></pre>
+
+<p>Viszont ha egy másik osztállyal példányosítjuk a sablont, amelyben a <code>B</code> egy statikus
+változó, akkor ez ismét szorzásnak tűnik:</p>
+
+<pre   ><code class="language-c">class Masik {
+  public:
+    static int B;
+};
+
+
+f&lt;Masik&gt;();
+
+/* A keletkező specializáció: */
+template &lt;&gt;
+void f&lt;Masik&gt;() {
+    Masik::B * C;
+}</code></pre>
+
+<p>Hogyan oldható fel ez a kétértelműség? Úgy, hogy a kódban <em>jeleznünk kell</em> a fordító számára,
+hogy melyikről van szó; vagyis a <code>::</code> scope operator használata esetén megjelöljük, hogy
+statikus változóra vagy belső típusra kell gondolnia. A szabály egyszerű:</p>
+
+<ul>
+    <li>Ha nem mondunk semmit, <em>statikus változónak</em> tekinti.</li>
+    <li>Viszont ha <em>belső típusra</em> szeretnénk hivatkozni, akkor elé kell írnunk,
+        hogy <code>typename</code>.</li>
+</ul>
+
+<pre   ><code class="language-cbub">template &lt;typename A&gt;
+void f1() {
+    A::B * C;          // statikus változózó
+}
+
+template &lt;typename A&gt;
+void f2() {
+    typename A::B * C; // belső típus
+}</code></pre>
+
+<p><code>A::B</code>-t ilyenkor függő névnek (dependent name) nevezzük; a jelentése ugyanis függ
+az <code>A</code> sablonparamétertől. A függés lehet közvetlen, vagyis a sablonparaméter maga lehet
+az az osztály, amelyből egy belső típust felhasználunk:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename CONTAINER&gt;
+void f() {
+    typename CONTAINER::iterator * ptr;
+}</code></pre>
+
+<p>De lehet közvetett is, például:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void f() {
+    typename std::vector&lt;T&gt;::iterator * ptr;
+}</code></pre>
+
+<p>A probléma itt is fennáll, hiszen amíg a <code>T</code> nem ismert, addig nem lehet tudni,
+a vektornak melyik specializációjával dolgozunk. Ne feledjük, csak számunkra egyértelmű ennek
+a kódnak a jelentése: a vektor, iterátor, ptr nevek elárulják, mire gondolunk. A fordító
+számára viszont ezek nem jelentenek semmit, az csak ennyit lát:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename IZEBIGYO&gt;
+void f() {
+    typename VALAMI::AKARMI&lt;T&gt;::BARMI * BLABLA;
+}</code></pre>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Ősosztályokban">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Ősosztályokban<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ez egész problémakör egyébként teljesen más kontextusokban is előkerülhet:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class Alap {
+  public:
+   int tagvaltozo;
+   class BelsoTipus {
+       ...
+   };
+   ...
+};
+
+template &lt;typename U&gt;
+class Leszarmazott: public Alap&lt;U&gt; {
+    void fv1() {
+        std::cout &lt;&lt; tagvaltozo; // 1
+    }
+    void fv2() {
+        BelsoTipus x; // 2
+    }
+};</code></pre>
+
+<p>Az <span class="bubble">1</span>-essel jelölt helyen nem lehet tudni, hogy tagváltozóról,
+vagy globális változóról van szó. Ha <code>Alap&lt;U&gt;</code> rendelkezik ilyen nevű
+attribútummal, akkor ez lehetne az is. De ha nem – márpedig létezhet olyan specializációja,
+amelyiknek nincs ilyenje –, akkor ez egy globális változó. (Ha ez a helyzet, és tényleg
+van ilyen nevű globális változó, akkor a fordító értelmezni tudja majd a kódot!) Egyértelművé
+tehetjük ezt az ősosztály megjelölésével, vagy a <code>this</code> kiírásával:</p>
+
+<pre   ><code class="language-c">void fv1() {
+    std::cout &lt;&lt; Alap&lt;U&gt;::tagvaltozo;
+}
+
+void fv1() {
+    std::cout &lt;&lt; this-&gt;tagvaltozo;
+}</code></pre>
+
+<p>A <span class="bubble">2</span>-essel jelölt helyen ugyanez a helyzet: nem lehet tudni,
+hogy az ősosztály belső típusáról van szó, vagy egy globálisan létező típusról. Alapértelmezetten
+globális típusról, tehát a belső osztály hivatkozását kell egyértelműsíteni:</p>
+
+<pre   ><code class="language-c">void fv2() {
+    typename Alap&lt;U&gt;::BelsoTipus x;
+}</code></pre>
+
+<p>Mivel ilyenkor függő nevet hivatkozunk (<code>Alap&lt;U&gt;</code> függ az <code>U</code> sablonparamétertől),
+ezért a <code>typename</code> kulcsszó is előkerül. Amelyik fordító enélkül is lefordítja a kódot,
+az nem követi a szabványt.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li><a href="http://isocpp.org/wiki/faq/templates#nondependent-name-lookup-types">Why am I getting errors when my template-derived-class uses a nested type it inherits from its template-base-class?</a>
+    <li><a href="http://isocpp.org/wiki/faq/templates#nondependent-name-lookup-members">Why am I getting errors when my template-derived-class uses a member it inherits from its template-base-class?</a>
+    <li><a href="http://isocpp.org/wiki/faq/templates#nondependent-name-lookup-silent-bug">Can the previous problem hurt me silently? Is it possible that the compiler will silently generate the wrong code?</a>
+</ul>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

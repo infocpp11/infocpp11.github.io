@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Objektumok élettartama, okos pointerek</title>
+<meta property="og:title" content="TEST InfoC++11 :: Objektumok élettartama, okos pointerek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Funarg problémák kezelése C++ kódban. RAII és okos pointerek írása.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Funarg problémák kezelése C++ kódban. RAII és okos pointerek írása.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Objektumok élettartama, okos pointerek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Objektumok élettartama, okos pointerek</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Funarg problémák kezelése C++ kódban. RAII és okos pointerek írása.</p>
+</div>
+
+
+<blockquote>
+<h3>A laborokhoz</h3>
+<p>A laborok mellé minden héten lesz kiírva egy beadandó az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A Hérón-féle gyökvonás</a>
+                      <li><a href="index.html#2" class="">Numerikus deriválás</a>
+                      <li><a href="index.html#3" class="">A kifejezésfa okos pointerrel</a>
+                      <li><a href="index.html#4" class="">RAII: a FILE* becsomagolása</a>
+                      <li><a href="index.html#5" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A Hérón-féle gyökvonás">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A Hérón-féle gyökvonás<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi, Hérón-féle módszerrel gyökvonást végző algoritmus JavaScript kódja. (A módszer lényege: addig finomítjuk a 
+tippelt gyököt, amíg elég jó nem lesz. A finomítás egy átlagolással végezhető el, mert az igazi gyök a tipp és szám/tipp között 
+van.) Ez két belső függvényt tartalmaz, amelyek <em>a külső függvény <code>x</code> változóját is látják</em>. Emlékezz vissza: ez egy ún. 
+<a href="../ea05/index.html#funarg">„downwards funarg” probléma</a>. A változó még létezik, de nem a hívott függvény keretében van, hanem fentebb, valamely hívóéban.</p>
+
+<pre   ><code class="language-js">function heron(x) {
+    function good_enough(guess) {
+        return Math.abs(guess*guess - x) &lt; 0.001;
+    }
+    function improve(guess) {
+        return (guess + x/guess)/2.0;
+    }
+    var guess = 1.0;
+    while (!good_enough(guess))
+        guess = improve(guess);
+    return guess;
+}</code></pre>
+
+<p>Hogy lehet megcsinálni ugyanezt egy objektummal C++-ban?</p>
+
+<pre   ><code class="language-c">int main() {
+    Heron h;
+    std::cout &lt;&lt; h.get(2.0);
+}</code></pre>
+
+<p><strong>Figyelem:</strong> nem kell más felépítésű programot írnod, mint a fenti!
+Szinte ugyanezek a függvények lesznek, szinte csak szintaktikai átalakításról van szó.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A belső függvényekből tagfüggvények lesznek. A minden tagfüggvény által látható
+változókból pedig tagváltozók.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+class Heron {
+  public:
+    double get(double x) {
+        x_ = x;
+        double guess = 1.0;
+        while (!good_enough(guess))
+            guess = improve(guess);
+        return guess;
+    }
+
+  private:
+    double x_;
+    double good_enough(double guess) const {
+        return fabs(guess*guess - x_) &lt; 0.001;
+    }
+    double improve(double guess) const {
+        return (guess + x_/guess) / 2.0;
+    }
+};
+
+int main() {
+    Heron h;
+    std::cout &lt;&lt; h.get(2.0);
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Numerikus deriválás">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Numerikus deriválás<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi függvény JavaScriptben. Ez paraméterként egy valós&rarr;valós 
+függvényt vesz át. Visszatérési értéke is egy valós&rarr;valós függvény, amely az 
+előbbi numerikus deriváltja (0,001 lépésközű differenciahányadossal közelítve). 
+Itt egy <a href="../ea05/index.html#funarg">„upwards funarg” problémát</a> látsz: a visszaadott <code>derivalt()</code> 
+függvény miatt <em>nem szabadna felszabadítani az <code>f</code> és <code>dx</code> 
+lokális változókat</em>.</p>
+
+<pre   ><code class="language-js">function derival(f) {
+    var dx = 0.001;
+    function derivalt(x) {
+        return (f(x+dx) - f(x)) / dx;
+    }
+
+    return derivalt;
+}</code></pre>
+
+<ul class="feladatok">
+
+<li>
+<p>Írd meg ugyanezt C++-ban! Egy osztályt kell írnod, amelynek konstruktora egy
+valós-valós függvényt vesz át, és egy olyan objektumot hoz létre, amelynek van
+függvényhívó operátora. Ha helyes a derivált, akkor az alábbi program 0-hoz
+közeli értékeket ír ki, mert <code>sin()</code> deriváltja <code>cos()</code>:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+
+int main() {
+    Derival my_cos = Derival{sin};
+    for (double f = 0; f &lt; 3.1415; f += 0.1)
+        std::cout &lt;&lt; std::setw(20) &lt;&lt; my_cos(f)-cos(f) &lt;&lt; std::endl;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A paraméterként kapott függvényt el kell tárolni az objektumban. Ugyanígy kell
+tenni az összes változóval.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+
+class Derival {
+  private:
+    using fvtype = double (*)(double);
+    fvtype f_;
+    double dx_;
+
+  public:
+    Derival(fvtype f): f_{f}, dx_{0.001} {
+    }
+    double operator() (double x) {
+        return (f_(x+dx_) - f_(x)) / dx_;
+    }
+};
+
+int main() {
+    Derival my_cos = Derival{sin};
+    for (double f = 0; f &lt; 3.1415; f += 0.1)
+        std::cout &lt;&lt; std::setw(20) &lt;&lt; my_cos(f)-cos(f) &lt;&lt; std::endl;
+}
+</code></pre>
+</div>
+</details>
+
+<li>
+<p>Mi a helyzet, ha a deriválandó függvény a programkódban nem függvény típusú, 
+hanem valami más? Például ha paraméterezhető parabolát szeretnénk: 
+<code>f(x)=ax<sup>2</sup>+bx+c</code>, ahhoz létrehozható egy 
+<code>Parabola</code> objektum. Ennek szintén a függvényhívó operátora végzi 
+el a számítást:</p>
+
+<pre   ><code class="language-c">Parabola p1{0.5, 2.3, -5};  /* 0.5x^2 + 2.3x - 5 */
+for (double f = 0; f &lt; 3.0; f += 0.1)
+    std::cout &lt;&lt; std::setw(20) &lt;&lt; p1(f) &lt;&lt; std::endl;</code></pre>
+
+<p>Hogy lehet egy ilyet deriválni? Hogyan kell sablonná alakítani a deriváló 
+osztályt? Írd meg a parabolát, és írd át a deriváló osztályt! Az alábbi 
+programnak 0-hoz közeli értékeket kell kiírnia, <code>p1</code> numerikus 
+<code>p1_der</code> és analitikus <code>p2</code> deriváltjának különbségét:</p>
+
+<pre   ><code class="language-c">Parabola p1{0.5, 2.3, -5};  /* 0.5x^2 + 2.3x - 5 */
+??????? p1_der = ???????;
+
+Parabola p2{0, 1, 2.3};     /* x + 2.3, p1 deriváltja */
+for (double f = 0; f &lt; 3.0; f += 0.1)
+    std::cout &lt;&lt; std::setw(20) &lt;&lt; p1_der(f)-p2(f) &lt;&lt; std::endl;</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+
+class Parabola {
+  public:
+    Parabola(double a, double b, double c) : a_{a}, b_{b}, c_{c} {
+    }
+    double operator () (double x) {
+        return a_*x*x + b_*x + c_;
+    }
+  private:
+    double a_, b_, c_;
+};
+
+template &lt;typename FVTYPE&gt;
+class Derival {
+  private:
+    FVTYPE f_;
+    double dx_;
+
+  public:
+    Derival(FVTYPE f): f_{f}, dx_{0.001} {
+    }
+    double operator() (double x) {
+        return (f_(x+dx_) - f_(x)) / dx_;
+    }
+};
+
+int main() {
+    Parabola p1{0.5, 2.3, -5};  /* 0.5x^2 + 2.3x - 5 */
+    Derival&lt;Parabola&gt; p1_der = Derival&lt;Parabola&gt;{p1};
+
+    Parabola p2{0, 1, 2.3};     /* x + 2.3, p1 deriváltja */
+    for (double f = 0; f &lt; 3.0; f += 0.1)
+        std::cout &lt;&lt; std::setw(20) &lt;&lt; p1_der(f)-p2(f) &lt;&lt; std::endl;
+}
+</code></pre>
+</div>
+</details>
+</ul>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A kifejezésfa okos pointerrel">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A kifejezésfa okos pointerrel<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Innen letölthető a kifejezéseket kiértékelő és deriváló program: <a href="expression.cpp">expression.cpp</a>.
+Emlékezz vissza:</p>
+<ul>
+    <li>Ez kifejezéseket (<code>Expression</code>), azon belül konstansokat (<code>Constant</code>),
+        változókat (<code>Variable</code>), összegeket (<code>Sum</code>) és szorzatokat (<code>Product</code>)
+        tudott tárolni. Az utóbbi két osztályt a kód egy közös <code>TwoOperand</code> ősosztállyal valósítja meg.
+    <li>A kétoperandusú műveletek lényegében egy kételemű heterogén kollekciót tartalmaznak:
+        <code>Expression *lhs_, *rhs_</code>. Ezek erőforráskezelése miatt destruktorra volt szükség.
+    <li>A szorzat deriválásánál: <code>(ab)' = a'b + ab'</code>, a keletkező kifejezésben felhasználjuk a
+        bal és a jobboldali operandusnak nem csak a deriváltját, hanem a másolatát is. Emiatt szükség volt
+        az ismeretlen típusú objektum másolására, amit virtuális konstruktorral lehetett megoldani: ez lett
+        a <code>clone()</code> függvény.
+</ul>
+
+<p>Feladat:</p>
+<ul>
+    <li>Írd át úgy a programot, hogy a nyers pointerek és a kézi erőforráskezelés helyett <code>std::shared_ptr</code>-t
+        használjon! Mindenhol, ahol eddig sima pointer volt, ott <code>shared_ptr</code>-nek kell lennie.
+    <li>Mely függvények szűnnek meg ezáltal?
+    <li>Használd az <code>std::make_shared&lt;T&gt;(...)</code> függvényt! Ez dinamikusan lefoglal és <code>shared_ptr</code>-be
+        csomagol egy <code>T</code> típusú objektumot, a <code>...</code> helyén megadott értékeket a konstruktornak
+        átadva. Pl. az alábbi két sor egyenértékű:
+        <pre   ><code class="language-c">return std::shared_ptr&lt;Constant&gt;(new Constant{3.14});</code></pre>
+        <pre   ><code class="language-c">return std::make_shared&lt;Constant&gt;(3.14);</code></pre>
+    <li>Miután ez elkészült, gondolkodj el rajta, hogy a szorzat deriválásánál tényleg szükséges-e a másolás,
+        vagy a részfákat meg lehet-e osztani az egyes kifejezések között. Tehát hogy tényleg szükséges-e a mély
+        másolat, vagy elegendő a sekély másolat is. Ha elegendő a sekély másolat, akkor a <code>clone()</code>
+        teljesen kitörölhető, a megosztást pedig a <code>shared_ptr</code> kezelni fogja.
+    <li>Vannak olyan kommentek a kódban, amelyeket ki kellene törölni?
+</ul>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>TwoOperand</code> erőforráskezelő függvényei (destruktor, másoló konstruktor) teljesen eltűnnek.</p>
+
+<p>A kifejezésfák megoszthatók. A sekély másolat azért engedhető meg, mert a kifejezések soha nem módosulnak,
+az összes objektum értéket jelképez, konstans. Ha lenne pl. <code>Constant::set_value()</code>, vagy
+<code>Sum::set_left_operand()</code> függvény, akkor ez nem lenne igaz!</p>
+
+<p>A dinamikus memóriakezeléssel kapcsolatos kommenteket törölni kell – a <code>shared_ptr</code>-ek segítségével
+automatikussá vált a memóriakezelés, így teljesen lényegtelen, hogy a háttérben dinamikus memóriakezelés van. 
+Észre kell venni: az átalakított kódban sehol sem szerepel sem a <code>new</code>, sem a <code>delete</code> szó!</p>
+
+<p>A teljes megoldás: <a href="expression_shared.cpp">expression_shared.cpp</a>.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="RAII: a FILE* becsomagolása">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        RAII: a FILE* becsomagolása<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<blockquote>
+<h3>#maradjotthon</h3>
+<p>Ez lett volna a jobbértékekkel foglalkozó labor fájlos feladatának az előzménye.
+Idén ez a rendkívüli rektori szünet miatt későbbre került – sajnos így nem logikus a sorrend.</p>
+<p>Úgy tudod jól használni gyakorlásra a feladatot, ha az egészet újra megírod, üres
+fájlból indulva, beépítve a múlt héten szerzett tapasztalataidat is.</p>
+</blockquote>
+
+<p><code>FILE*</code> a C++-ban is van, a <code>cstdio</code> fejlécfájlt kell 
+használni hozzá. A szokásos függvényei is megvannak, <code>fopen()</code>, 
+<code>fclose()</code>, <code>fprintf()</code>, tökéletesen ugyanaz minden, mint 
+C-ben.</p>
+
+<p>A megnyitott fájl egy olyan erőforrás, amit nem a <code>delete</code> 
+operátorral kell felszabadítani, így a beépített okos pointerek nem jók hozzá. A 
+feladatod egy olyan osztályt írni, amely RAII becsomagol egy <code>FILE*</code> 
+pointert. Az objektumot át kell tudni adni a szokásos C-s függvényeknek. Az 
+alábbi főprogramnak kell működnie, és a fájlnak automatikusan be kell záródnia:</p>
+
+<pre   ><code class="language-c">int main() {
+    FilePtr fp;
+    
+    fp = fopen(&quot;hello.txt&quot;, &quot;wt&quot;);
+    fprintf(fp, &quot;Hello vilag&quot;);
+}</code></pre>
+
+<ol>
+<li><p>Milyen operátort kell írni az osztálynak ahhoz, hogy az <code>fopen()</code>-es sor
+működjön? Figyeld az értékadás két oldalán álló típusokat!
+
+<li><p>Milyen operátor kell ahhoz, hogy az <code>fprintf()</code>-es sor működjön?</p>
+
+<li><p><code>FilePtr</code> objektumokat nem szabad lemásolni és értékül adni, mert akkor
+a bennük tárolt <code>FILE*</code> átmásolódna az új objektumba, és kétszer lenne
+bezárva egy fájl. Tiltsd le a másoló konstruktort és az értékadó másolás operátort!</p>
+
+<li><p>Aki nem ismeri ezt az osztályod pontosan, és nem tudja, hogy az <code>fclose()</code>
+automatikusan meghívódik a destruktorból, esetleg megpróbálhatná kézzel meghívni a
+függvényt: <code>fclose(fp)</code>. Márpedig ha az <code>fprintf()</code>-es sor lefordul, akkor
+ez is, és kétszer záródik be a fájl. Meg lehet valahogyan oldani, hogy ilyet ne engedjen a fordító?</p>
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az <code>fclose()</code>-hoz: Kell lennie egy olyan <code>fclose()</code> nevű 
+függvénynek, amely konverzió nélkül is át tud venni egy <code>FilePtr</code>-t. 
+Ha van ilyen, akkor az <code>fclose(fp)</code>-nél azt fogja használni a fordító.
+A konverzió nélküli értelmezésnek mindig elsőbbsége van. Megírni a függvényt nem
+kell, legjobb <code>= delete</code> deklarálni.
+</p>
+<pre   ><code class="language-c">#include &lt;cstdio&gt;
+
+class FilePtr {
+  public:
+    explicit FilePtr(FILE *fp = nullptr) : fp_{fp} {}
+    ~FilePtr() {
+        close_if_open();
+    }
+    FilePtr(FilePtr const &amp;) = delete;
+    FilePtr &amp; operator=(FilePtr const &amp;) = delete;
+    
+    FilePtr &amp; operator=(FILE *fp) {
+        close_if_open();
+        fp_ = fp;
+        return *this;
+    }
+    operator FILE* () const {
+        return fp_;
+    }
+  private:
+    FILE *fp_;
+    
+    void close_if_open() {
+        if (fp_ != nullptr)
+            fclose(fp_);
+        fp_ = nullptr;
+    }
+};
+
+void fclose(FilePtr) = delete;
+
+int main() {
+    FilePtr fp;
+    
+    fp = fopen(&quot;hello.txt&quot;, &quot;wt&quot;);
+    fprintf(fp, &quot;Hello vilag&quot;);
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f05/index.html#feladat_elettartam">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

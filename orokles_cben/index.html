@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Öröklés C-ben</title>
+<meta property="og:title" content="TEST InfoC++11 :: Öröklés C-ben">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Objektumok memóriaképe I. A tartalmazás és az öröklés közötti összefüggés. Az öröklés megvalósítása C-ben. A virtuális függvények működése. C nyelvű OOP keretrendszerek.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Objektumok memóriaképe I. A tartalmazás és az öröklés közötti összefüggés. Az öröklés megvalósítása C-ben. A virtuális függvények működése. C nyelvű OOP keretrendszerek.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Öröklés C-ben">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Öröklés C-ben</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Objektumok memóriaképe I. A tartalmazás és az öröklés közötti összefüggés. Az öröklés megvalósítása C-ben. A virtuális függvények működése. C nyelvű OOP keretrendszerek.</p>
+</div>
+
+<p>Ebben az írásban a mélyére nézünk annak, mit csinál egy C++ fordító akkor, amikor osztályok közötti öröklést használunk. 
+Megnézzük, miért működhetett az első C++ fordító úgy, hogy C kóddá fordította át a programszöveget. Körbejárjuk azt is, hogyan 
+lehet C-ben megvalósítani ugyanezt, és hogy hogyan működnek a C nyelvű objektumorientált keretrendszerek.</p>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az objektumok felépítése</a>
+                      <li><a href="index.html#2" class="">A virtuális függvények</a>
+                      <li><a href="index.html#3" class="">Több virtuális függvény</a>
+                      <li><a href="index.html#4" class="">Piszkos technikai részletek</a>
+                      <li><a href="index.html#5" class="">Öröklés C-ben: a gyakorlatban</a>
+                      <li><a href="index.html#6" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az objektumok felépítése">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az objektumok felépítése<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <a href="../ea07/index.html#objektumbajt">előadáson láttuk</a>, hogy hogyan épít fel a fordító egy
+objektumot:
+</p>
+
+<ul>
+    <li>Az adattagok egymás után helyezkednek el a memóriában.</li>
+    <li>Az első adattag az objektum legelején található.</li>
+    <li>Leszármazás esetén a leszármazott objektum elején egy pont ugyanolyan
+        memóriaképű részobjektum (subobject) lesz, mint az ő ősosztálya.</li>
+</ul>
+
+<img src="2shaperectangle.svg" class="kozep" style="width: 13em;">
+
+<p>Az utóbbi kellett ahhoz, hogy az ősosztály lefordított
+tagfüggvényei működjenek a leszármazott objektumokon is. Mindegy, hogy
+ősosztálybeli, vagy leszármazott objektumot kap a tagfüggvény, mindkét esetben
+<em>ugyanazokat az ofszeteket</em> kell használnia.</p>
+
+<p>Tehát az osztályok definíciója alapján a fordító meghatározza, hogy melyik adattag
+milyen ofszeten kezdődjön az objektumokban. A C szabványban van egy külön szabály
+arra vonatkozóan, hogy ez hogyan kell történjen. Így hangzik: egy struktúra első
+adattagjának ofszete pontosan nulla. Másképpen fogalmazva, a struktúra
+memóriacíme meg kell egyezzen az első adattagjának memóriacímével. Ezt a szabályt
+kihasználva tudunk olyan kódot írni C-ben, amely a C++ öröklést utánozza!</p>
+
+<p>A megvalósítás módja a következő. Először is, definiáljuk az alaposztályt:
+<code>struct Shape</code>. Ebbe bármilyen adattagot írhatunk. Ezután definiáljuk
+a leszármazott osztályt: <code>struct Rectangle</code>, amelybe <em>első
+adattagként</em> tegyünk egy <code>Shape</code> objektumot. Ez itt a trükk,
+mert <a href="index.html#offset0">ennek az adattagnak lesz nulla az ofszete</a>. Így lesz mindig pont a <code>Rectangle</code> objektumok
+címén a tartalmazott <code>Shape</code> objektum. A <code>Rectangle*</code>
+pointer így biztonságosan átadható egy <code>Shape*</code>-ot váró függvénynek is:</p>
+
+<pre   ><code class="language-cbub">#include &lt;stdio.h&gt;
+
+typedef struct Shape {
+    int x, y;
+} Shape;
+
+typedef struct Rectangle {
+    Shape base_obj; // első adattag!
+    int width, height;
+} Rectangle;
+
+void print_shape(Shape const *s) {
+    printf(&quot;x=%x y=%x\n&quot;, s-&gt;x, s-&gt;y);
+}
+
+int main() {
+    Rectangle d1 = { {0x1122, 0x3344}, 0x5566, 0x7788 };
+
+    printf(&quot;&amp;d1.base_obj = %p\n&quot;, &amp;d1.base_obj);
+    printf(&quot;&amp;d1 = %p\n&quot;, &amp;d1);
+
+    print_shape(&amp;d1.base_obj);
+    print_shape((Shape*) &amp;d1); // Shape* = Rectangle*
+}</code></pre>
+
+<p>Az eredmény és a belső működés teljesen ugyanolyan, mintha C++-ban írtuk volna
+és öröklést használtunk volna. A hátrány az, hogy nyelvi támogatás híján
+szintaktikailag nehézkes mindez, és könnyebb elrontani is. Egyrészt ha
+<code>Rectangle</code> típusú objektumot látunk, annak örökölt adattagjait csak közvetve
+tudjuk elérni: <code>d1.x</code> helytelen, helyette <code>d1.base_obj.x</code> vagy
+<code>((Shape*) &d1)-&gt;x</code> kell. Másrészt paraméterátadáskor kézzel kell a pointer típusát
+átalakítani, <code>print_shape(&amp;d1)</code> helyett <code>print_shape((Shape*)
+&amp;d1)</code>-et írni, különben figyelmeztetést kapunk.</p>
+
+<p>Nézzünk meg egy konkrét példát! Ha így kell dolgoznunk, akkor érdemes egy
+szabályrendszert kialakítani, hogy mit hogyan csinálunk, mit hogyan nevezünk el,
+és azt követve írni meg a kódot. Ilyen konvenció, hogy mindig
+<code>self</code>-nek nevezzük el a <code>this</code>-t helyettesítő pointert
+(vannak nyelvek, ahol pont így hívják), vagy hogy mindig első paraméterként
+kapják ezt a függvények. Tehát egy egyszerű C++ osztály, és a C párja így nézhet
+ki:</p>
+
+<div class="sticky">C++</div>
+<pre   ><code class="language-c">struct Shape {
+    int x, y;
+    Shape(int x, int y) : x(x), y(y) {}
+    void print() const {
+        printf(&quot;Shape::print, %x %x\n&quot;, x, y);
+    }
+    ~Shape() {
+        printf(&quot;Shape::destruct&quot;);
+    }
+};</code></pre>
+
+<div class="sticky">C</div>
+<pre   ><code class="language-c">typedef struct Shape {
+    int x, y;
+} Shape;
+
+void shape_construct(Shape *self, int x, int y) {
+    self-&gt;x = x;
+    self-&gt;y = y;
+}
+
+void shape_print(Shape const *self) {
+    printf(&quot;Shape::print, %x %x\n&quot;, self-&gt;x, self-&gt;y);
+}
+
+void shape_destruct(Shape *self) {
+    printf(&quot;Shape::destruct&quot;);
+}</code></pre>
+
+<p>A konkrét öröklés megvalósításánál pedig kézzel kell megírnunk azt, amit a
+C++-tól megtanultunk. Például hogy a leszármazott konstruktora hívja az ős
+konstruktorát, a destruktora pedig az ős destruktorát:</p>
+
+<div class="sticky">C++</div>
+<pre   ><code class="language-c">struct Rectangle : Shape {
+    int width, height;
+    Rectangle(int x, int y, int width, int height)
+        : Shape(x, y)
+        , width(width), height(height) {}
+    ~Rectangle() {
+        printf(&quot;Rectangle::destruct&quot;);
+    }
+};</code></pre>
+
+<div class="sticky">C</div>
+<pre   ><code class="language-cbub">typedef struct Rectangle {
+    Shape base_obj;
+    int width, height;
+} Rectangle;
+
+void rectangle_construct(Rectangle *self, int x, int y, int width, int height) {
+    shape_construct((Shape*) self, x, y); // ős konstruktora
+    self-&gt;width = width;
+    self-&gt;height = height;
+}
+
+void rectangle_destruct(Rectangle *self) {
+    printf(&quot;Rectangle::destruct&quot;);
+    shape_destruct((Shape*) self); // ős destruktora
+}</code></pre>
+
+<p>Mivel az OOP-nél általában nem tudjuk, milyen típusokkal dolgozunk (bármelyik
+objektum lehet leszármazottja is annak az osztálynak, amit látunk), C-ben a
+legtöbb helyen pointerekkel kell dolgoznunk. Az objektumok nem egyforma méretűek,
+a pointerek azonban egyformák, és ezért ezekkel könnyebben tudunk dolgozni.
+Legtöbbször dinamikus memóriakezelést is használunk, hogy tudjunk olyan
+függvényt írni, ami valamilyen objektumot létrehoz. A dinamikus memóriakezelésnél
+arra kell figyelni, hogy a konstruktorok maguk nem képesek ellátni a foglalás
+feladatát. Ha a <code>rectangle_construct()</code> is foglalna egy
+memóriaterületet, meg az általa meghívott <code>shape_construct()</code> is,
+akkor már két objektumunk lenne! A foglalást a konstruktor hívása előtt, azzal
+egyező típusra kell elvégezni.</p>
+
+<pre   ><code class="language-c">Rectangle * rectangle_new(int x, int y, int width, int height) {
+    Rectangle *self = (Rectangle *) malloc(sizeof(Rectangle));
+    rectangle_construct(self, x, y, width, height);
+    return self;
+}</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A virtuális függvények">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A virtuális függvények<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az alakzatos példa közismert folytatása: minden alakzat a saját maga módján 
+rajzolódik ki. Tegyünk ezért egy virtuális függvényt az alakzat ősosztályba! 
+Emlékezzünk vissza: a virtuális függvény lényege az, hogy a hívás helyén ismert 
+típustól függetlenül (általában: alaposztály pointere vagy referenciája), az 
+objektum valós típusának megfelelő függvény hívódik (általában: valamilyen 
+leszármazott). Nézzük meg, hogy néz ki egy ilyen objektum memóriaképe!</p>
+
+<pre   ><code class="language-c">struct Shape {
+    int x, y;
+    Shape(int x, int y) : x(x), y(y) {}
+    virtual void draw() const {
+        std::cout &lt;&lt; &quot;Shape draw&quot; &lt;&lt; std::endl;
+    }
+};
+
+struct Rectangle : Shape {
+    int width, height;
+    Rectangle(int x, int y, int width, int height)
+        : Shape(x, y), width(width), height(height) {
+    }
+    virtual void draw() const {
+        std::cout &lt;&lt; &quot;Rectangle draw&quot; &lt;&lt; std::endl;
+    }
+};
+
+int main() {
+    Shape b(0x1122, 0x3344);
+    print_obj_hex(b);
+
+    Rectangle d1(0x1122, 0x3344, 0x5566, 0x7788);
+    print_obj_hex(d1);
+
+    Shape *ps1 = &amp;b, *ps2 = &amp;d1;
+    ps1-&gt;draw();
+    ps2-&gt;draw();
+}</code></pre>
+
+<pre class="screenshot">
+<em>a0 12 40 00 00 00 00 00</em> 22 11 00 00 44 33 00 00
+<em>20 12 40 00 00 00 00 00</em> 22 11 00 00 44 33 00 00 66 55 00 00 88 77 00 00
+Shape draw
+Rectangle draw
+</pre>
+
+<p>A nem virtuális függvényeknél fordítási időben, statikusan dől el az, hogy melyik függvény hívódik meg (early binding, static 
+binding), a virtuális függvényeknél futási időben, dinamikusan (late binding, <a href="index.html#dynamic_binding">dynamic binding</a>, dynamic dispatch). Ennek a 
+legegyszerűbb megvalósítása az, ha a virtuális függvényhívást indirektté tesszük: az objektumokban egy pointer utal arra, hogy 
+melyik a meghívandó függvény. Ezt a rejtett <em>pointert</em> látjuk most az objektumok elején.</p>
+
+<p>Teljes bizonyossággal kijelenthetjük, hogy a virtuális függvény a legfontosabb dolog az OOP-ben, hiszen enélkül az öröklésnek 
+marginális haszna lenne csak. Nem véletlen, hogy külön nyelvi elemet biztosít a C++ a virtuális függvények létrehozására, mert 
+ezzel teszi egyszerűvé a használatukat. Az örökléshez hasonló a helyzet itt a C és a C++ közötti viszonyt tekintve: az, hogy 
+C-ben nincsenek virtuális függvények, még nem jelenti azt, hogy nem tudunk hasonló működést létrehozni. Függvényre mutató 
+pointereink vannak, használjuk hát azokat! A fenti kóddal ekvivalens C kód az alábbi:</p>
+
+<pre   ><code class="language-cbub">typedef struct Shape Shape;
+struct Shape {
+    void (*draw) (Shape const *self); // a virtuális függvényre mutat
+    int x, y;
+};
+
+void shape_draw(Shape const *self) {
+    printf(&quot;Shape draw\n&quot;);
+}
+
+void shape_construct(Shape *self, int x, int y) {
+    self-&gt;draw = &amp;shape_draw; // a konstruktor beállítja
+    self-&gt;x = x;
+    self-&gt;y = y;
+}
+
+typedef struct Rectangle Rectangle;
+struct Rectangle {
+    Shape base_obj; // örökli a pointert is
+    int width, height;
+};
+
+void rectangle_draw(Rectangle const *self) {
+    printf(&quot;Rectangle draw\n&quot;);
+}
+
+void rectangle_construct(Rectangle *self, int x, int y, int width, int height) {
+    shape_construct((Shape*) self, x, y);
+    ((Shape*) self)-&gt;draw = (void(*)(Shape const *)) &amp;rectangle_draw; // sajátjára
+    self-&gt;width = width;
+    self-&gt;height = height;
+}
+
+int main() {
+    Shape b1;
+    shape_construct(&amp;b1, 0x1122, 0x3344);
+
+    Rectangle d1;
+    rectangle_construct(&amp;d1, 0x1122, 0x3344, 0x5566, 0x7788);
+
+    Shape *ps1 = (Shape*) &amp;b1, *ps2 = (Shape*) &amp;d1;
+    ps1-&gt;draw(ps1);
+    ps2-&gt;draw(ps2);
+}</code></pre>
+
+<img src="3shaperectanglevirt.svg" class="float" style="width: 18em;">
+
+<p>A működés a következő. A <code>Shape</code> osztály szokásos <code>x</code>
+és <code>y</code> adattagja elé fölveszünk egy <code>draw</code>, pointer típusú
+adattagot. Ez fogja mutatni azt, hogy a konkrét objektumpéldánynak melyik a saját
+típusához való kirajzolófüggvénye. A létrehozásnál <code>shape_construct()</code>
+konstruktor beállítja ezt az adattagot a <code>shape_draw()</code> függvényre.
+Ugyanígy tesz a <code>rectangle_construct()</code> konstruktor is; miután meghívta
+az alaposztály konstruktorát, átállítja a pointert a <code>rectangle_draw()</code>-ra.
+Az értékadás elég körülményes, de mindvégig szabályos, amit csinálunk benne.
+A bal oldalon a <code>self</code> pointert <code>Rectangle*</code> típusról
+<code>Shape*</code> típusra cast-oljuk; ezt szabad, mert a <code>Rectangle</code>
+struktúrában 0 ofszeten egy <code>Shape</code> struktúra van. A
+<code>rectangle_draw</code> függvényre mutató pointert pedig át kell cast-olni
+olyan típusú függvény pointerére, amelyet a <code>Shape</code> osztálynál is
+használtunk; de ezt is szabad, mivel a két függvény fejléce csak a pointer paraméter típusában
+tér el egymástól, és minden objektumra mutató pointer egyforma.</p>
+
+<p>Az igazi varázslat a virtuális függvények hívásánál történik: ezek alakja
+<code>objptr-&gt;fptr(objptr)</code> kell legyen. A kifejezés <code>objptr-&gt;fptr</code>
+részlete kiolvassa az objektumból a függvényre mutató pointert, a <code>()</code>
+operátor pedig a szokásos módon meghívja azt a függvényt. A fenti példában a <code>ps1</code>
+pointer a <code>b1</code> objektumra mutat, ezért a <code>shape_draw</code> függvény
+címét kapjuk; a <code>ps2</code> pointer pedig a <code>d1</code> objektumra, amelybe
+a <code>rectangle_construct()</code> függvény a <code>rectangle_draw()</code> címét
+tette. Akármilyen meglepő, hogy C-ben le lehet írni egy <code>obj.f()</code> alakú
+vagy egy <code>obj-&gt;f()</code> alakú kifejezést, mégis így van: az objektumba
+tett függvénypointer esetén a kifejezés szintaktikailag értelmes, és az OOP tapasztalatok
+alapján tudjuk, hogy hasznos is.</p>
+
+<p>Ahogy egy leszármazott objektum létrehozása folyik, a konstruktorok az adattagok 
+inicializálása mellett a virtuális függvény pointerét is az újabb 
+és újabb változatra cserélik. Az objektum egyfajta egyedfejlődésen megy 
+keresztül: általános alakzatként kezdi az életét, csak utána fejlődik tovább, 
+„upgrade-elődik” téglalappá. Ez a C++-os változatban is így történik, és könnyen 
+ellenőrizhető is: ha a <code>Shape()</code> és a <code>Rectangle()</code> 
+konstruktorba is teszünk egy <code>draw()</code> hívást, az előbbi „Shape draw”, 
+az utóbbi „Rectangle draw” sort fog kiírni. Mindez visszafelé is megtörténik: 
+miután a <code>Rectangle</code> destruktora elvégezte a dolgát, a függvény 
+pointere visszaáll az eredeti értékre, a <code>Shape::draw()</code> függvényre. 
+Tehát az objektum visszafejlődik, „downgrade-elődik”. Végeredményben így működik 
+egy C++ konstruktor- és destruktorpár:</p>
+
+<pre   ><code class="language-cbub">void rectangle_construct(Rectangle *self, int x, int y, int width, int height) {
+    shape_construct((Shape*) self, x, y);
+    ((Shape *) self)-&gt;draw = (void(*)(Shape const *)) &amp;rectangle_draw; // upgrade
+    /* ... */
+}
+
+void rectangle_destruct(Rectangle *self) {
+    /* ... */
+    ((Shape *) self)-&gt;draw = &amp;shape_draw; // downgrade
+    shape_destruct((Shape *) self);
+}</code></pre>
+
+<p>Mindennek a célja az is, hogy a konstruktorból és a destruktorból ne lehessen 
+olyan adattagot elérni, amely még (vagy már) nem létezik. Ha a <code>Shape</code> 
+konstruktorából a <code>Rectangle</code>-specifikus virtuális függvényt hívnánk 
+meg, az olyan adattagra is hivatkozhatna, amelyet majd csak a 
+<code>Rectangle()</code> konstruktor fog létrehozni, és egyelőre csak 
+memóriaszemét van a helyükön. A destruktoroknál is hasonló a helyzet: ha a 
+<code>~Rectangle()</code> destruktora után a <code>~Shape()</code> destruktorból 
+<code>Rectangle</code>-osztálybeli függvény hívódna, az már megszűnt adattagokon 
+próbálna dolgozni. Ezért szokás úgy tanítani, hogy konstruktorból és destruktorból
+tilos virtuális függvényhívást csinálni. Mint látjuk, <em>de jure</em> nem 
+tilos, azonban <em>de facto</em> nem az történik a hívás által, amire 
+számítunk. Ha ilyet szeretnénk az osztálytól, az tervezési hibára utal.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Több virtuális függvény">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Több virtuális függvény<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Függvénypointer adattagok segítségével akárhány virtuális függvényt adhatunk 
+egy osztálynak. Adjunk például a <code>Shape</code> osztálynak egy virtuális 
+destruktort, és tegyük fel, hogy a <code>Rectangle</code> osztálynak adunk egy 
+<code>resize()</code> függvényt is:</p>
+
+<pre   ><code class="language-c">struct Shape {
+    Shape(int x, int y);
+    int x, y;
+    virtual void draw() const;
+    virtual ~Shape();
+};
+
+struct Rectangle : Shape {
+    Rectangle(int x, int y, int width, int height);
+    int width, height;
+    virtual void draw() const;
+    virtual void resize(int width, int height);
+};</code></pre>
+
+<p>Mindez megoldható újabb és újabb függvénypointer adattagok felvételével. A
+probléma csak az, hogy így az objektumok egyre nagyobbak lennének. Semmi gond,
+ezen is segít egy <a href="index.html#ftse">újabb indirekció</a>! Észrevehetjük, hogy a virtuális függvények
+nem konkrét objektumokhoz, hanem osztályokhoz tartoznak, osztályonként
+csoportosíthatóak. A fenti példában az összes <code>Shape</code> objektumhoz
+a <code>Shape::draw()</code> függvény és a <code>Shape::~Shape()</code>
+destruktor tartozik. Az összes <code>Rectangle</code>-höz pedig a
+<code>Rectangle::draw()</code> függvény, a fordító által írt
+<code>Rectangle::~Rectangle()</code> destruktor, és a
+<code>Rectangle::resize()</code>.</p>
+
+<div class="columns">
+<div>
+<table>
+<caption><code>Shape</code> osztály</caption>
+<thead><tr><th>Név<th>Függvény</thead>
+<tr><td>draw<td>Shape::draw()
+<tr><td>destruktor<td>Shape::~Shape()
+</table>
+</div>
+<div>
+<table>
+<caption><code>Rectangle</code> osztály</caption>
+<thead><tr><th>Név<th>Függvény</thead>
+<tr><td>draw<td>Rectangle::draw()
+<tr><td>destruktor<td>Rectangle::~Rectangle()
+<tr><td>resize<td>Rectangle::resize()
+</table>
+</div>
+</div>
+
+<p>Mint tudjuk, az összetartozó dolgokat struktúrába kell tenni, tegyük ezért a 
+függvénypointereket is abba! Akkor az objektumokba nem kell sok pointert tenni, 
+hanem csak egyetlen egyet, amelyik az adott objektum osztályához tartozó 
+struktúrára mutat. Így születik meg a <em>virtuális függvénytábla</em> (virtual 
+function table, virtual table, vtable).</p>
+
+<img src="4rectanglevptr.svg" class="kozep" style="width: 27em;">
+
+<p>Még egy dolgot észrevehetünk. A <code>Shape</code>-eknek virtuális destruktora 
+van, és virtuális <code>draw()</code>-ja. Ahogyan a <code>Rectangle</code>-öknek 
+is, csak az kiegészül egy virtuális <code>resize()</code> függvénnyel. Ez 
+megint nem más, mint egy öröklési kapcsolat. A <code>Rectangle</code> virtuális 
+függvénytáblája egy olyan struktúra, amely a <code>Shape</code> függvénytáblájából 
+öröklődik. Ez általában is így van: <em>a virtuális függvénytáblák között 
+párhuzamosan ugyanaz a hierarchia van, mint az osztályok között,</em> amelyekhez 
+tartoznak.</p>
+
+<p>Ezek a virtuális függvénytábla objektumok létre is jönnek a memóriában. A C++ 
+fordító a programba belefordítja őket, globális, „örökéletű” objektumként, amely 
+persze névtelen, a programozó számára láthatatlan. A minden részletet mutató C 
+megvalósítás az alábbi:</p>
+
+<pre   ><code class="language-cbub">typedef struct Shape Shape;
+typedef struct ShapeVirtTable ShapeVirtTable;
+
+struct Shape {
+    ShapeVirtTable *vptr; // egyetlen pointer
+    int x, y;
+};
+
+void shape_construct(Shape *self, int x, int y);
+void shape_draw(Shape const *self);
+void shape_destruct(Shape *self);
+
+struct ShapeVirtTable {
+    void (*draw) (Shape const *);
+    void (*dtor) (Shape *);
+} shape_virtual_table = { // globális élettartamú változó
+    &amp;shape_draw,
+    &amp;shape_destruct
+};</code></pre>
+
+<p>Látszik, hogy az objektum egyetlen pointert tartalmaz csak. Bármennyi virtuális
+függvényünk is legyen, az objektumonkénti költség nem lesz több egyetlen egy
+pointernél! A leszármazás pedig:</p>
+
+<pre   ><code class="language-cbub">typedef struct Rectangle Rectangle;
+typedef struct RectangleVirtTable RectangleVirtTable;
+
+struct Rectangle {
+    Shape base_obj; // már van benne vptr
+    int width, height;
+};
+
+void rectangle_draw(Rectangle const *self);
+void rectangle_resize(Rectangle *self, int width, int height);
+void rectangle_construct(Rectangle *self, int x, int y, int width, int height);
+void rectangle_destruct(Rectangle *self);
+
+struct RectangleVirtTable {
+    ShapeVirtTable base_obj; // párhuzamos öröklődés
+    void (*resize) (Rectangle *, int, int);
+} rectangle_virtual_table = {
+    { (void (*) (Shape const *)) &amp;rectangle_draw,
+      (void (*) (Shape *)) &amp;rectangle_destruct
+    },
+    &amp;rectangle_resize
+};</code></pre>
+
+<p>A virtuális függvény hívásánál az objektumból előbb kivesszük a
+tábla pointerét, aztán a táblából pedig a függvény pointerét.
+Az előzőekhez hasonlóan a sok cast operátor azért kell, mert a C nem ismeri
+az öröklődés fogalmát. De mindegyik cast helyes, akár a függvények, akár
+az objektumok pointereiről van szó:</p>
+
+<pre   ><code class="language-c">((Shape const *) &amp;rect)-&gt;vptr-&gt;draw((Shape const *) &amp;rect);</code></pre>
+
+<p>Persze ezt a körülményes dolgot elrejthetnénk egy <code>void*</code>
+paraméterű függvénybe is:</p>
+
+<pre   ><code class="language-c">void shape_draw_wrapper(void const *self) {
+    ((Shape const *) self)-&gt;vptr-&gt;draw((Shape const *) self);
+}
+
+Rectangle *r1 = /* ... */;
+shape_draw_wrapper(&amp;r1);</code></pre>
+
+<blockquote class="megjegyzes">
+<h3>A virtuális függvényhívások sebessége</h3>
+
+<p>Gyakran éri az a vád a virtuális függvényeket, hogy lassúak. Az eddigiek
+alapján látszik, hogy egy virtuális függvényhívásnak <em>két adattag elérésének
+idejével</em> nagyobb a költsége, mint egy normál függvényhívásnak: előbb
+a tábla pointerét kell kiolvasni, utána pedig a táblából a függvény címét.</p>
+
+<p>De ne feledjünk két dolgot. Egyik, hogy minderre csak akkor van szükség, ha az objektum típusa nem ismert. 
+Ha egy objektumra ősosztály típusú pointerünk van, akkor természetesen végig kell 
+csinálni a procedúrát. Ha azonban látszik az objektum definíciója is, akkor 
+pontosan ismert a típusa; így nem csak a függvénytábla műveletei maradhatnak el, 
+hanem <code>inline</code> függvénynél még akár a törzs beillesztése is megtörténhet:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">void f(Shape *s) {
+    s-&gt;draw();  // ismeretlen típus
+}</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">Rectangle r( /* ... */ );
+
+r.draw();       // ismert típus</code></pre>
+</div>
+</div>
+
+<p>Másik pedig, ha nem használnánk virtuális függvényeket, akkor helyettesítenünk
+kellene őket valamivel. Nem fair önmagukban összehasonlítani egy nem virtuális és egy virtuális
+függvényhívás sebességét. Sportszerűbb lenne például a virtuális <code>draw()</code>
+sebességét mondjuk ehhez a kódrészlethez mérni:</p>
+
+<pre   ><code class="language-c">Shape *s = /* ... */;
+switch (s-&gt;type) {
+    case ShapeTypeRectangle:
+        /* ... */
+        break;
+    case ShapeTypeCircle:
+        /* ... */
+        break;
+    /* ... */
+}</code></pre>
+
+<p>És akkor az így strukturált program fejlesztési költségeiről, a
+karbantartási nehézségekről és hibalehetőségekről még nem is beszéltünk.</p>
+</blockquote>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Piszkos technikai részletek">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Piszkos technikai részletek<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fenti bepillantás a virtuális függvények megvalósításába mindent elárul
+a működésükről, és számos dologra emlékeztet minket, mit szabad megtennünk a C++
+objektumainkkal, és mit nem.</p>
+
+<h3>„Standard-layout” objektumok</h3>
+
+<p>A C++ ígérete szerint semmi olyat nem kényszerít rá a használóira,
+amire nincsen szükségük. Nem véletlenül kell megmondanunk minden metódusról,
+virtuálisként szeretnénk létrehozni azt, vagy nem. Ha nincs szükségünk a
+virtuális függvényre, nem kell fizetnünk az áráért futási időben.</p>
+
+<p>Vegyük észre, hogy a virtuális függvényeknek nem csak a hívások pillanatában 
+van jelentősége. Amint egy osztályba virtuális függvényt teszünk, a fordítónak a 
+függvénytábla pointerét is be kell tennie az objektumba. Amíg semmi nem 
+virtuális, az adattagok ofszetei megegyeznek a két nyelvben. A C++ az ilyen 
+objektumokat „standard-layout” objektumoknak nevezi. Egy standard-layout objektum 
+memóriaképe bitről bitre megegyezik azzal, mint amilyen a C-s párja. Ez fontos, 
+mert emiatt a két nyelv kompatibilis, és ez lehetővé teszi azt, hogy C-ben és 
+C++-ban írt programrészeket linkeljünk egymáshoz, és hogy azok egyszerűen, 
+hatékonyan, konvertálás nélkül dolgozhassanak egymás adatain.</p>
+
+<p class="megjegyzes">A standard-layout elrendezéshez az is kell, hogy az összes
+adattag egyforma elérhetőségű (publikus v. privát) legyen, mert a fordító
+az egyforma elérhetőségű tagokat átrendezheti, csoportosíthatja.</p>
+
+<p>Virtuális tagok esetén azonban virtuális függvénytábla pointere is van az 
+objektumnak, és ez nem csak a C miatt számít. Ez a láthatatlan adattag része az 
+objektumnak, és beleszámít a méretébe is. Egy standard-layout objektumot könnyedén
+bináris fájlba írhatunk, egy virtuális függvényt tartalmazóval azonban ezt már 
+nem tehetjük meg. Az alábbi hívás a fájlba írja a virtuális függvénytábla 
+pointerét is:</p>
+
+<pre   ><code class="language-c">Rectangle r( /*...*/ );
+fwrite(&amp;r, sizeof(r), 1, fp);</code></pre>
+
+<p>A fájlba írás még nem lenne nagy baj, de a visszaolvasásnál nagyon megütnénk a 
+bokánkat, felülírnánk ezt a láthatatlan pointert is. Márpedig ennek a pointernek 
+az értékét nem tudjuk irányítani. Gépenként, fordítónként, akár fordításonként is 
+változhat: attól függ, épp hova került a tábla a memóriában.</p>
+
+
+
+<h3>Az objektumok címei: <code>void*</code> pointerek és többszörös leszármazás</h3>
+
+<p>A fenti C kódok magyarázatánál mindenhol azt mondtuk, „a <code>Rectangle*</code> és a <code>Shape*</code> pointerek egymásba 
+konvertálhatóak, mert az ofszet mindig nulla, a konvertáláskor pedig nem történik semmi” – igen, de ez C++-ban már nem igaz. A 
+pointerek konvertálásakor (cast-olásakor) itt az <em>értékük is változhat.</em> Tegyük fel, hogy van egy alaposztályunk, 
+virtuális függvény nélkül, majd egy leszármazott, amelynek már van virtuális függvénye. Az alaposztálynak még nincs virtuális 
+pointere, a leszármazottnak azonban már kell legyen:</p>
+
+<pre   ><code class="language-cbub">struct A {
+    A(int a) : a(a) {}
+    int a;
+};
+
+struct B : A {
+    B(int a, int b) : A(a), b(b) {}
+    int b;
+    virtual ~B() {}
+};
+
+int main() {
+    A a(0x1122);
+    B b(0x1122, 0x3344);
+    std::cout &lt;&lt; &quot;a: &quot;; print_obj_hex(a);
+    std::cout &lt;&lt; &quot;b: &quot;; print_obj_hex(b);
+    std::cout &lt;&lt; &quot;&amp;b:      &quot; &lt;&lt; &amp;b &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;(A*) &amp;b: &quot; &lt;&lt; (A*) &amp;b &lt;&lt; std::endl;
+}</code></pre>
+
+<pre class="screenshot">
+a: 22 11 00 00
+b: <em>20 14 40 00 00 00 00 00</em> 22 11 00 00 44 33 00 00
+&b:      0x7fff89ebbe98
+(A*) &b: 0x7fff89ebbea0
+</pre>
+
+<p>A kiírásból látszik, hogy a <code>b</code> objektumba a pointer az objektum elejére épül be. Ezután jön az <code>A</code>-ból 
+örökölt adattag, utána pedig a <code>B</code>-féle adattag. Ha az <code>&amp;b</code> kifejezéssel az objektum címét kérjük, az 
+elejének címét kapjuk. Azonban ha ezt a pointert <code>A*</code> típusúvá cast-oljuk, az értéke megváltozik! Ennek azért kell 
+így lennie, mert az <code>A*</code> pointert tartalmazó kifejezések az <code>A</code> osztály ofszeteit használják; az 
+<code>A*</code> pointer paramétert kapó függvények ennek felépítését ismerik. Márpedig az <code>A</code>-ban az első adattag 
+ofszete nulla, mert nincs előtte virtuális pointer.</p>
+
+<p>A fordító az osztályok definícióit ismerve tudja, hogy melyik irányú konvertálásnál mennyivel kell változtatni a pointer 
+értékét. Ha a <code>B*</code>-ból <code>A*</code> lesz, akkor hozzáad 8-at. Ha <code>A*</code>-ból <code>B*</code>, kivon 8-at. 
+Ezt mindenhol meg tudja tenni, ahol ismert a típus. Megpróbálhatjuk elkövetni azt a merényletet a fordító ellen, hogy a pointert 
+<code>void*</code>-gá alakítjuk, ezzel teljesen eldobva a típusinformációt. Ha ilyet csinálunk, akkor azonban leginkább 
+magunknak teszünk keresztbe, mert innentől a fordító nem tudja garantálni a helyes működést.</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; &quot;&amp;b:                   &quot; &lt;&lt; &amp;b &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;(A*) &amp;b:              &quot; &lt;&lt; (A*) &amp;b &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;(B*) (A*) &amp;b:         &quot; &lt;&lt; (B*) (A*) &amp;b &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;(B*) (void*) (A*) &amp;b: &quot; &lt;&lt; (B*) (void*) (A*) &amp;b &lt;&lt; std::endl; // hibás!</code></pre>
+
+<pre class="screenshot">
+&b:                   0x7fff5105af58  (eredeti)
+(A*) &b:              0x7fff5105af60  (változott)
+(B*) (A*) &b:         0x7fff5105af58  (visszakapjuk az eredetit)
+(B*) (void*) (A*) &b: 0x7fff5105af60  <em>hibás!</em>
+</pre>
+
+
+<p>Ugyanez a helyzet áll elő többszörös leszármazás (multiple inheritance) esetén is, amikor egy osztálynak egynél több 
+ősosztálya van. Ez a memóriaképeket vizsgálva nyilvánvaló is, mert ilyenkor a két helyről örökölt adattagokat a fordító kénytelen
+egymás mellé tenni. A pointert a két ősosztály típusa felé cast-olva eltérő értékeket kapunk:</p>
+
+<pre   ><code class="language-c">struct A { int a; };
+struct B { int b; };
+struct C : A, B {};
+
+C c1;
+std::cout &lt;&lt; &quot;C*: &quot; &lt;&lt; &amp;c1 &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;A*: &quot; &lt;&lt; (A*) &amp;c1 &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;B*: &quot; &lt;&lt; (B*) &amp;c1 &lt;&lt; std::endl;</code></pre>
+
+<pre class="screenshot">
+C*: 0x7fffa0cde530
+A*: 0x7fffa0cde530
+B*: 0x7fffa0cde534
+</pre>
+
+<p>Emiatt az is előfordulhat, hogy helytelen eredményt kapunk, ha nem az öröklődési utak mentén alakítjuk át a pointereket (pl. 
+egy <code>C</code> objektumra mutató, <code>A*</code> típusú pointert közvetlenül <code>B*</code>-gá alakítunk), vagy nem 
+használunk <code>dynamic_cast</code>-ot. A pointerek helytelen értéke pedig veszélyes memóriakezelési hiba, amelyre a fordító nem tud 
+figyelmeztetni; az explicit cast-olásnál a típusok ellenőrzése ki van kapcsolva. Nem véletlen, hogy C++-ban nem javasolt a 
+<code>void*</code> pointerek használata sem. Amire leggyakrabban használtuk, azt úgyis kiváltották a sablonok.</p>
+
+<p class="megjegyzes">Többszörös leszármazás esetén a virtuális függvénytáblák tartalmazzák azt az információt is, hogy az 
+objektumban melyik örökölt részobjektum (sub-object) hol kezdődik. Ezt figyeli a <code>dynamic_cast</code>. A történet azért nem 
+egyszerű, mert a lehetséges konverziók miatt többszörös leszármazás esetén még olyan is lehet, hogy egy objektumnak nem egy,
+hanem több virtuális függvénytáblája van.</p>
+
+
+
+
+<blockquote class="megjegyzes">
+<h3>A virtuális függvénytábla mint globális változó</h3>
+
+<p>A virtuális függvénytáblákat a fordító teljesen automatikusan kezeli, a programozónak nincs velük dolga. Ez azt jelenti, hogy 
+a táblákat, amelyek globális változók, a fordítónak kell létrehoznia. Minden olyan osztály programkódjának fordításakor, amely 
+tartalmaz virtuális függvényt, generálnia kell egy globális változót is: a függvénypointereket tartalmazó struktúrát. Ezt a 
+globális változót a programozó nem látja, a linker viszont igen.</p>
+
+<p>A gond csak az, hogy a virtuális tábla szükségessége az osztályok definícióiból, azaz általában a fejlécfájlokból derül ki. 
+Ugyanakkor egy fejlécfájlt általában több forrásfájlba is beillesztünk:</p>
+
+<pre   ><code class="language-c">/* shape.h */
+class Shape {
+  public:
+    virtual void draw() const; /* kell majd vtable */
+    virtual ~Shape() {}
+};</code></pre>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">/* rectangle.cpp */
+#include &quot;shape.h&quot;
+/* ... */</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">/* triangle.cpp */
+#include &quot;shape.h&quot;
+/* ... */</code></pre>
+</div>
+</div>
+
+<p>A kész program pedig a forrásfájlokból előállított tárgykód (object) fájlokból lesz összerakva. Ha a fordító minden 
+alkalommal, amikor az osztály definíciójával találkozik, létrehozza a függvénytábla globális változót, akkor az <em>többször 
+lesz definiálva</em>, több fordítási egységben. Ez pedig <a href="index.html#missing_vtable">linkelési hibához</a> vezet, mivel mindent csak egyszer lehet definiálni. A 
+problémát a fordítók általában úgy szokták megoldani, hogy a virtuális táblát abban a fordítási egységben helyezik el, ahol az 
+első virtuális függvény <em>definíciójával</em> találkoznak. A függvény definícióját csak egyszer írhatjuk le, így virtuális 
+táblából is csak egy lesz.</p>
+
+<p>Vagy nulla, abban az esetben, ha elfelejtjük definiálni a függvényt. Mivel az osztály függvényeinek <em>deklarációja</em> 
+megvan, a fordító ezért nem szól, és ez a hiba csak linkelés közben derül ki. A linker erre a helyzetre az „undefined reference 
+to 'vtable for Xyz'” hibaüzenettel reagál:</p>
+
+<pre   ><code class="language-c">class Shape {
+  public:
+    virtual void draw() const;
+    virtual ~Shape() {}
+};
+
+int main() {
+    Shape s;
+}</code></pre>
+
+<pre class="screenshot">
+$ clang++ proba.cpp
+/tmp/proba-dK7nbD.o: In function `Shape::Shape()':
+proba.cpp:(.text._ZN5ShapeC2Ev[_ZN5ShapeC2Ev]+0x8): undefined reference to `vtable for Shape'
+</pre>
+
+<p>A hibajelenség azért kellemetlen, mert a hibaüzenet nem utal a konkrét hibára, hogy nem definiáltuk a függvényt, arra főleg 
+nem, hogy melyiket. Így jobb megjegyezni, hogy ez a hibaüzenet mindig egy hiányzó függvénydefinícióra utal.</p>
+
+</blockquote>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Öröklés C-ben: a gyakorlatban">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Öröklés C-ben: a gyakorlatban<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fenti C kódok hűen leutánozzák egy C++ fordító működését, de a tényleges használathoz túlzottan kényelmetlenek. Ha 
+valamiért C-ben kell igazi, örökléses objektumorientált programot írni, akkor más megoldás után érdemes nézni.</p>
+
+
+
+<h3>„Nyers” C kód</h3>
+
+<p>Ha úgy döntünk, mi írjuk meg a C kódot, akkor a nehézkes struktúrás bűvészkedés helyett érdemesebb <code>union</code>-okat 
+használni. Igaz, így utólag nem lehet majd örökölni egy osztályból, de kisebb projekt esetén, ahol előre ismerjük az összes 
+típust, az egyszerűség miatt ez célravezetőbb lehet.</p>
+
+<p>A C11 bevezetett egy új nyelvi elemet, amely megkönnyíti itt a dolgunkat. Az új verzió megengedi azt, hogy egy struktúra 
+belsejében létrehozzunk egy másik, <em>névtelen</em> <code>struct</code> vagy <code>union</code> adattagot. Ebben az esetben 
+ennek belső adattagjai a külső struktúra adattagjaiként érhetők el:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">C89</div>
+<pre   ><code class="language-cbub">struct Number {
+    enum {
+        integer, real
+    } type;
+
+    union {
+        int i;
+        double d;
+    } data; // !
+};
+
+struct Number sz;
+sz.type = integer;
+sz.data.i = 5; // !</code></pre>
+</div>
+<div>
+<div class="sticky">C11</div>
+<pre   ><code class="language-cbub">struct Number {
+    enum {
+        integer, real
+    } type;
+
+    union {
+        int i;
+        double d;
+    }; // !
+};
+
+struct Number sz;
+sz.type = integer;
+sz.i = 5; // !</code></pre>
+</div>
+</div>
+
+<p>Így könnyen létrehozhatók egyszerűbb osztályhierarchiák. Az adott osztályokra jellemző adattagokat névtelen struktúrába kell 
+tenni, ezeket a névtelen struktúrákat pedig egy névtelen <code>union</code>-ba:</p>
+
+<pre   ><code class="language-cbub">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Shape Shape;
+struct Shape {
+    int x, y;                    // alap adattagok
+
+    union {
+        struct { /* Rectangle */ // leszármazottak adattagjai
+            int width, height;
+        };
+        struct { /* Circle */
+            int radius;
+        };
+    };
+
+    struct { /* Virtuals */
+        void (*draw) (Shape const *);
+    };
+};
+
+void rectangle_draw(Shape const *self) {
+    printf(&quot;x:%d y:%d w:%d h:%d\n&quot;, self-&gt;x, self-&gt;y, self-&gt;width, self-&gt;height);
+}
+
+void circle_draw(Shape const *self) {
+    printf(&quot;x:%d y:%d r:%d\n&quot;, self-&gt;x, self-&gt;y, self-&gt;radius);
+}
+
+void shape_draw(Shape const *self) { // kényelmi fv, sima hívásból virtuálisat csinál
+    self-&gt;draw(self);
+}
+
+Shape * rectangle_new(int x, int y, int width, int height) {
+    Shape *newshape = (Shape *) malloc(sizeof(Shape));
+    *newshape = (Shape) {
+        .x = x,
+        .y = y,
+        .width = width,
+        .height = height,
+        .draw = &amp;rectangle_draw
+    };
+    return newshape;
+}
+
+int main(void) {
+    Shape *s = rectangle_new(5, 10, 15, 20);
+    shape_draw(s);
+}</code></pre>
+
+<p>Így egyetlen típus használható az összes altípus (leszármazott) leírására. Ez valamennyire pazarolja a memóriát (a 
+<code>Shape</code> struktúra mindig akkora lesz, amekkora a legnagyobb típus), ugyanakkor így spórolhatunk az indirekciókon is. 
+A <code>Shape</code> objektumok egyforma méretűek, ezért építhetnénk belőlük tömböt, vagy értékként átadhatnánk őket 
+függvénynek.</p>
+
+
+
+
+<h3>Előfordítók, makrócsomagok</h3>
+
+<p>Az első C++ fordítók, a még <a href="index.html#dne">Stroustrup által írt</a> <em>C with Classes</em> és <em><a href="index.html#cfront">Cfront</a></em> programok a kapott C++ kódot C kóddá fordították 
+át, amit aztán egy szokványos C fordító is kezelni tudott. Ehhez hasonló programokat manapság is használnak.</p>
+
+<p>Az egyik ilyen a <em><a href="index.html#classc">ClassC</a></em>. Ez egy C előfordító, amelyik nem valósít meg igazi öröklést, hanem az öröklés helyett csak „vegyíti” 
+az adattagokat. Ez inkább csak arra jó, hogy strukturáltabbá tegyük a programunkat, objektumokba rejtsük a túlzottan sok 
+globális változót. (Vegyük észre a párhuzamot: a tagfüggvényeken belül tagváltozókkal dolgozni olyasmi szemantikailag, mint 
+globális függvényekkel a globális változókon. Csak éppen sok, különálló példány lehet belőlük!) Egy ClassC kód és a lefordított 
+változatának részlete:</p>
+
+<div class="sticky">ClassC</div>
+
+<pre   ><code class="language-c">Counter {
+    int counter;
+
+    void increment() {
+        counter++;
+    }
+}</code></pre>
+
+<pre   ><code class="language-c">struct Counter
+{
+    struct Counter_Class *_class;
+    void **_components;
+    int counter;
+};
+
+struct Counter_Class
+{
+    char *className;
+    void *classId;
+    void (*increment) (struct Counter *);
+
+};
+
+void Counter_increment(struct Counter *self)
+{
+    self-&gt;counter++;
+}</code></pre>
+
+<p>A <code>Counter_Class</code> osztály a virtuális függvénytáblához hasonló szerepű; a függvényhívásoknál és a dinamikus 
+cast-oknál használja a rendszer.</p>
+
+<p>Az <em><a href="index.html#ooc">ooc</a></em> (Object Oriented C) hasonló, de nem előfordítással működik, hanem makrók segítségével. Az előfordított forráskód az 
+előzőekhez hasonlóan néz ki.</p>
+
+<div class="sticky">ooc</div>
+
+<pre   ><code class="language-c">DeclareClass(Counter, Base);
+
+ClassMembers(Counter, Base)
+    int counter;
+EndOfClassMembers;
+
+void Counter_increment(Counter self) {
+    assert(ooc_isInstanceOf(self, Counter));
+    self-&gt;counter++;
+}</code></pre>
+
+
+
+
+
+
+
+
+<h3>A GObject keretrendszer</h3>
+
+<p>A <a href="index.html#gobject">GObject</a> nevű keretrendszer az összes C alapú megoldás közül a legfejlettebb és legelterjedtebb. Számos linuxos program és 
+keretrendszer erre épül. Az osztályok létrehozása mellett a GObject rendszer egyéb szolgáltatásokat is nyújt, mint pl. az 
+automatikus memóriakezelés referenciaszámlált objektumokon keresztül, vagy a sztringgel megnevezett adattagok elérése.</p>
+
+<p class="megjegyzes">Miért C, miért nem C++? Mert még mindig ez illeszthető a legtöbb másik programozási nyelvhez. Például a 
+GObject alapon írt GTK+ grafikus keretrendszer C++, C#, Java, Python, JavaScript, Vala, Perl, Ruby, Pascal, PHP, R, Lua, Guile, 
+Ada, OCaml, Haskell, FreeBASIC, D, Go és Fortran nyelveken használható.</p>
+
+<p>Egy osztály létrehozásához itt két struktúrát kell definiálnunk. Az „instance struct” példányai lesznek a konkrét objektumok; 
+a „class struct” pedig az osztályt és a virtuális függvényeket írja majd le. Néhány makrót is definiálni kell, amelyek 
+segítségével az objektum típusa lekérdezhető, és a pointer cast-ok ellenőrzötten elvégezhetőek. A fejlécfájlban:</p>
+
+<div class="sticky">GObject</div>
+
+<pre   ><code class="language-cbub">#include &lt;glib-object.h&gt;
+
+typedef struct MyCounter MyCounter;
+typedef struct MyCounterClass MyCounterClass;
+
+struct MyCounter {
+    GObject parent_instance;   // ősosztály (a GObject minden osztály őse)
+    
+    /* instance members */
+    int count;
+};
+
+struct MyCounterClass {
+    GObjectClass parent_class; // ősosztály virtuális táblája
+    
+    /* class members, virtual function pointers */
+};
+
+#define MY_TYPE_COUNTER             (my_counter_get_type())
+#define MY_COUNTER(obj)             (G_TYPE_CHECK_INSTANCE_CAST((obj), MY_TYPE_COUNTER, MyCounter))
+#define MY_IS_COUNTER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE((obj), MY_TYPE_COUNTER))
+#define MY_COUNTER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), MY_TYPE_COUNTER, MyCounterClass))
+#define MY_IS_COUNTER_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE((klass), MY_TYPE_COUNTER))
+#define MY_COUNTER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), MY_TYPE_COUNTER, MyCounterClass))</code></pre>
+
+<p>Az osztályhoz tartozó forrásfájlban pedig meg kell adni néhány függvényt. A <code>G_DEFINE_TYPE</code> makró létrehozza a 
+virtuális függvénytábla objektumot, és definiál néhány függvényt, amikre a GObject-nek van szüksége. A 
+<code>my_object_class_init()</code> függvényt a rendszer egyszer fogja meghívni, az első objektum létrehozásakor; itt 
+állíthatjuk be a virtuális függvények pointereit. A <code>my_object_init()</code> pedig tulajdonképpen a konstruktor. A nevek 
+többé-kevésbé kötöttek: a <code>G_DEFINE_TYPE</code> makró paraméterével épp azt adjuk meg, hogy mi lesz a függvénynevek 
+előtagja.</p>
+
+<pre   ><code class="language-cbub">G_DEFINE_TYPE(MyCounter, my_counter, G_TYPE_OBJECT)
+
+static void my_counter_class_init(MyCounterClass *klass) {
+    /* set virtual function pointers etc. */
+}
+
+static void my_counter_init(MyCounter *obj) {
+    /* constructor */
+    obj-&gt;count = 0;
+}</code></pre>
+
+<p>Az utolsó dolgunk a „publikus konstruktor” létrehozása: ez egy olyan függvény, amely az osztályunk egy dinamikusan foglalt 
+adattagjával tér vissza. A publikus tagfüggvények is emellé mehetnek; ha vannak virtuális függvényeink, azokhoz érdemes egysoros 
+csomagoló függvényt írni, amely az osztályt leíró objektumból kiveszi a megfelelő függvénypointert.</p>
+
+<pre   ><code class="language-c">GObject *my_counter_new(void) {
+    return g_object_new(MY_TYPE_COUNTER, NULL);
+}
+
+void my_counter_increment(MyCounter *obj) {
+    obj-&gt;count ++;
+}</code></pre>
+
+<p>A használat ezután egyszerű. A fenti függvénnyel lehet egy új objektumot létrehozni; a referenciaszámlálóját csökkentve pedig 
+törölni lehet azt. A makrók helyettesítik a kevésbé olvasható pointer cast szintaxist, és futási időben ellenőrzik, hogy 
+helyes-e az objektum típusa.</p>
+
+<pre   ><code class="language-c">GObject *myobj = my_counter_new();
+
+my_counter_increment(MY_COUNTER(myobj));
+printf(&quot;%d\n&quot;, MY_COUNTER(myobj)-&gt;count);
+ 
+g_object_unref(myobj);</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ol>
+<li id="dynamic_binding"><a href="http://www.parashift.com/c++-faq/dyn-binding.html">What's the difference between how virtual and non-virtual member functions are called?</a> (C++ FAQ).
+<li id="missing_vtable"><a href="http://www.parashift.com/c++-faq/link-errs-missing-vtable.html">What does it mean that the "virtual table" is an unresolved external?</a> (C++ FAQ).
+<li id="offset0"><a href="http://nullprogram.com/blog/2014/10/21/">C Object Oriented Programming &laquo; null program</a> (nagyon jó blog).
+<li id="cfront"><a href="http://en.wikipedia.org/wiki/Cfront">Cfront</a> (Wikipedia).
+<li id="ftse"><a href="http://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering">Fundamental theorem of software engineering</a> (Wikipedia).
+<li id="dne">Bjarne Stroustrup: The Design and Evolution of C++. Addison-Wesley, 1994.
+<li id="classc"><a href="http://milgra.com/classc/">Class-C</a> (keretrendszer).
+<li id="ooc"><a href="http://ooc-coding.sourceforge.net/">Object Oriented C</a> (keretrendszer).
+<li id="gobject"><a href="https://developer.gnome.org/gobject/stable/">GObject Reference Manual</a> (keretrendszer).
+<li><a href="http://ooc-lang.org/">ooc-lang</a>, C&rarr;C fordító.
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

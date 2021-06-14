@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Sablon függvények és paramétereik: type_identity</title>
+<meta property="og:title" content="TEST InfoC++11 :: Sablon függvények és paramétereik: type_identity">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Legtöbb esetben egyszerűen hagyjuk a fordítónak, hogy a függvényhívásból levezesse a sablon függvényeink paramétereit. Néha azonban ez látszólag triviálisnak tűnő helyzetekben nem sikerül neki.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Legtöbb esetben egyszerűen hagyjuk a fordítónak, hogy a függvényhívásból levezesse a sablon függvényeink paramétereit. Néha azonban ez látszólag triviálisnak tűnő helyzetekben nem sikerül neki.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Sablon függvények és paramétereik: type_identity">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Sablon függvények és paramétereik: type_identity</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.04.12.</p>
+<p class="kivonat">Legtöbb esetben egyszerűen hagyjuk a fordítónak, hogy a függvényhívásból levezesse a sablon függvényeink paramétereit. Néha azonban ez látszólag triviálisnak tűnő helyzetekben nem sikerül neki.</p>
+</div>
+
+<p>Tegyük fel, hogy szeretnénk egy <code>for_each</code> függvénysablont írni, amely egy <code>std::vector</code> minden elemére 
+meghív egy függvényt. A vektorunk bármilyen adatokat tartalmazhat, a függvény pedig legyen egy <code>std::function</code>:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void for_each(std::vector&lt;T&gt; vec, std::function&lt;void(T)&gt; func) {
+    for (auto item : vec)
+        func(item);
+}</code></pre>
+
+<p>A rövid kódunk azonban a legegyszerűbb esetben sem fordítható le:</p>
+
+<pre   ><code class="language-c">int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    for_each(v, [] (int i) { std::cout &lt;&lt; i &lt;&lt; &quot; &quot;; });
+}</code></pre>
+
+<pre class="screenshot">
+In function ‘int main()’:
+  error: no matching function for call to ‘for_each(std::vector&lt;int&gt;&amp;, main()::&lt;lambda(int)&gt;)’
+  note: candidate: template&lt;class T&gt; void for_each(std::vector&lt;T&gt;, std::function&lt;void(T)&gt;)
+  note:   template argument deduction/substitution failed:
+  note:   ‘main()::&lt;lambda(int)&gt;’ is not derived from ‘std::function&lt;void(T)&gt;’</pre>
+
+<p>Első kérdés: miért fordítható le a kód, ha a lambda köré kapcsos zárójelpárt írunk?</p>
+
+<pre   ><code class="language-cbub">int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    for_each(v, { [] (int i) { std::cout &lt;&lt; i &lt;&lt; &quot; &quot;; } });   // { } a λ körül
+}</code></pre>
+
+<p>Második kérdés: hogyan érjük el, hogy ne kelljen kitenni ezt a zárójelpárt? Ugyanis ez elég szokatlan és zavaró is;
+sosem szokott kelleni a függvényparaméterek köré kapcsos zárójelet tenni.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Hogy működik a sablonparaméterek levezetése?</a>
+                      <li><a href="index.html#2" class="">Mit csinál a kapcsos zárójelpár?</a>
+                      <li><a href="index.html#3" class="">Hogy szabadulunk meg a zárójelpártól?</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hogy működik a sablonparaméterek levezetése?">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Hogy működik a sablonparaméterek levezetése?<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az első kérdés megválaszolásához előbb körül kell járnunk, tulajdonképp a kapcsos zárójelek mit is csinálnak.</p>
+
+<p>A fenti kódban a lambda körüli zárójelpár egy konstruktorhívást jelöl. Figyeljük meg az alábbi kódban, hogy ezzel
+egy implicit konstruktorhívást tudunk megjelölni:</p>
+
+<pre   ><code class="language-cbub">class Complex {
+  public:
+    Complex(double re = 0, double im = 0);
+};
+
+Complex get_complex() {
+    return {2, 3};  // Complex{2, 3}
+}</code></pre>
+
+<p>Mivel a függvény visszatérési értéke egy <code>Complex</code> típusú objektum, a megadott értékek annak konstruktorparaméterei 
+lesznek. Észre kell venni, hogy ez nem ugyanaz, mintha <code>return 2, 3;</code>-at írunk volna; akkor a két szám között egy vessző 
+operátor lenne, és a kód <code>return Complex(3);</code> jelentésű volna. Ugyanígy, a kerek zárójel sem jelentené a <code>re = 2, 
+im = 3</code> paraméterű konstruktorhívást: <code>return (2, 3)</code>, mivel azt szintén vessző operátornak értelmezné a 
+fordító. A kapcsos zárójel viszont aggregátumot jelöl (brace-enclosed initializer list), amelyben a vessző felsorolást ad meg, nem 
+pedig operátorként viselkedik.</p>
+
+<p>Miért segít ez a lambdás függvényhívásnál? Ennek megértéséhez a sablonparaméterek levezetési szabályaiban (template argument 
+deduction) is el kell mélyednünk egy kicsit. Induljunk ki ehhez is egy egyszerű példából, a <code>max()</code> függvénysablonból! 
+Ez két szám közül a nagyobbikat adja vissza:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+T max(T a, T b) {
+    return a &gt; b ? a : b;
+}
+
+std::cout &lt;&lt; max(3, 2);     // OK
+
+std::cout &lt;&lt; max(3.4, 5.6); // OK
+
+std::cout &lt;&lt; max(2, 3.4);   // fordítási hiba
+
+std::cout &lt;&lt; max&lt;double&gt;(2, 3.4);   // OK, double(2), 3.4</code></pre>
+
+<p>A hívások helyein a fordítónak ki kell találnia a sablonparamétert a konkrét függvényparaméterekből. Ehhez <em>mindkét</em> 
+konkrét paramétert figyelembe veszi, utána pedig ellenőrzi, hogy nem jutott-e ellentmondásra.</p>
+
+<ul>
+    <li><code>max(3, 2)</code> esetén: <code>3(int) &rarr; T=int</code>, <code>2(int) &rarr; T=int</code>, oké.</li>
+    <li><code>max(3.4, 5.6)</code> esetén ugyanez, csak mindkettő <code>T=double</code>-t ad.</li>
+    <li><code>max(2, 3.4)</code> esetén viszon: <code>2(int) &rarr; T=int</code>, <code>3.4(double) &rarr; T=double</code>,
+        vagyis a <code>T</code> sablonparamétert nem lehetett ellentmondásmentesen meghatározni, és ez fordítási hibát vált ki.</li>
+</ul>
+
+<p>A lényeg, hogy a levezetést <em>mindkét paraméterre</em> külön-külön elvégzi, és utána összeveti az eredményt. Ha valamelyik
+paraméter esetén sikertelen a levezetés, vagy a végeredmény ellentmondásos, a fordítás hibajelzéssel leáll. Mindez persze csak
+akkor érvényes, ha nincs megadva explicite a sablonparaméter; ha megadjuk, mint a negyedik sorban, akkor nincs probléma.</p>
+
+<p>A fenti példában mindkét paraméter egy sablonparaméter ún. levezetési környezetet ad meg (deduced context). Tudnunk kell azt is, 
+hogy a sablonparaméterek levezetése <em>után</em> még függvénykiválasztás (overload resolution) vagy konverziók is történhetnek. Figyeljük 
+meg az alábbi kódrészletet, mert ez rávilágít arra, miért fontos figyelembe vennünk a sorrendet.</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class TemplatedClass {
+  public:
+    TemplatedClass(int i) {}
+    TemplatedClass(double d) {}
+};
+
+template &lt;typename T&gt;
+void func(T data, TemplatedClass&lt;T&gt; obj) {}
+
+int main() {
+    func(2, 3);        // fordítási hiba
+    
+    func(2, 3.4);      // fordítási hiba
+}</code></pre>
+
+<p>Hiába érezzük úgy, a kódból ki lehetne következtetni, hogy milyen sablonparaméterre és melyik konstruktorra lenne szükség: ebben 
+az esetben mindkét hívás fordítási hibát vált ki. A nyelv szabályai szerint ez nincs így, ugyanis azok így szólnak:</p>
+
+<ul>
+    <li>Előbb el kell végezni a sablonparaméterek levezetését.</li>
+    <li>Utána pedig az overloadok kiválasztását, esetleg a konverziókat.</li>
+</ul>
+
+<p>Jelen esetben már a sablonparaméterek levezetésén elbukik a dolog. Vegyük példának az első sort! A kérdés tehát itt most csak
+az, hogy <code>T</code> helyére mit kell írni a <code>func&lt;T&gt;</code> függvénysablonnál.</p>
+
+<ul>
+    <li>Első paraméter alapján: <code>2(int)</code> és <code>T data</code>-ból <code>T=int</code> következik.
+    <li>Második paraméter alapján: <code>3(int)</code>, és <code>TemplatedClass&lt;T&gt;</code> nem egyeztethető össze,
+        nincs rá levezetési szabály.</li>
+</ul>
+
+<p>Vagyis a problémát igazából az okozza, hogy a fordító a <code>3(int)</code>-ből semmiféle következtetést nem tud levonni
+a <code>TemplatedClass&lt;T&gt;</code> típusára. Ne feledjük, az osztály konstruktorai itt még nem lényegesek; a konstruktor
+kiválasztása csak később történne, a <code>T</code> meghatározása után.</p>
+
+<p>Mi a helyzet akkor, ha explicite megadjuk a sablonparamétereket?</p>
+
+<pre   ><code class="language-cbub">int main() {
+    func&lt;int&gt;(2, 3);        // OK, TemplatedClass&lt;int&gt;(int = 3)
+    
+    func&lt;int&gt;(2, 3.4);      // OK, TemplatedClass&lt;int&gt;(double = 3.4)
+}</code></pre>
+
+<p>Ezzel a levezetést kikapcsoltuk; a fordító a <code>T = int</code> behelyettesítés után ezt a teljes specializációt állítja 
+elő:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void func&lt;int&gt;(int data, TemplatedClass&lt;int&gt; obj) {}</code></pre>
+
+<p>Ennek hívásához a főprogramban konverziókra is szükség van; mivel az osztálynak az <code>int</code> és a <code>double</code>
+paraméterű konstruktora sem explicit, azokkal a konverzió elvégezhető. A <code>3(int)</code> és a <code>3.4(double)</code>
+értékek típusa alapján eldől az is, melyik esetben melyik konstruktort kell hívni.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mit csinál a kapcsos zárójelpár?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Mit csinál a kapcsos zárójelpár?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Akkor vajon mi a helyzet, ha a második paramétert kapcsos zárójelek közé tesszük?</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class TemplatedClass {
+  public:
+    TemplatedClass(int i) {}
+    TemplatedClass(double d) {}
+};
+
+template &lt;typename T&gt;
+void func(T data, TemplatedClass&lt;T&gt; obj) {}
+
+int main() {
+    func(2, {3});       // OK, TemplatedClass&lt;int&gt;(int = 3)
+                    
+    func(2, {3.4});     // OK, TemplatedClass&lt;int&gt;(double = 3.4)
+}</code></pre>
+
+<p>Ebben az esetben a kódunk működni kezd, de hogy lehet ez? Úgy, hogy ezek a kapcsos zárójelek konstruktorhívást jelentenek, 
+vagyis objektumokat inicializáló értékeket. Vagyis a <code>3</code> és a <code>3.4</code> most nem a <code>func()</code> függvény 
+paraméterei, hanem a <code>func()</code> függvény <em>paraméterének konstruktorparaméterei</em>.</p>
+
+<p>Figyeljük meg, hogy jelenleg a <code>func</code> sablonparaméterei nincsenek megadva, tehát a fordítónak kell majd kitalálnia, 
+hogy <code>func&lt;T&gt;</code>-ben a <code>T</code> típus micsoda. Viszont mivel most a <code>3</code> és a <code>3.4</code> már 
+nem számítanak a <code>func</code> paramétereinek, ezért azokat nem fogja figyelembe venni a levezetés közben (non-deduced 
+context). Ilyenkor tehát a <code>T</code> levezetése az alábbiak szerint zajlik le:</p>
+
+<ul>
+    <li>Első paraméter: <code>2(int)</code>-ből <code>T = int</code> következik.</li>
+    <li>Második paraméter: nincs figyelembevéve.</li>
+</ul>
+
+<p>Ezek alapján pedig <code>T = int</code> az eredmény. Példányosodik a sablon, előáll a specializáció; a 
+<code>TemplatedClass</code> konstruktorai pedig át tudják venni a <code>3</code> és a <code>3.4</code> értékeket.</p>
+
+<p>Ugyanezért segít a kapcsos zárójelpár a <code>vector</code>–<code>function</code> példában:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void for_each(std::vector&lt;T&gt; vec, std::function&lt;void(T)&gt; func);
+
+int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3 };
+    for_each(v, { [] (int i) { std::cout &lt;&lt; i &lt;&lt; &quot; &quot;; } });   // { } a λ körül
+}</code></pre>
+
+<p>Ilyenkor nem úgy veszi, hogy a lambda a <code>for_each</code> paramétere (ami gond lenne, mert a lambda típusából nem lehet 
+következtetni a <code>function</code> sablonparaméterére). Hanem úgy, hogy a lambda, mint érték, a <code>func</code> nevű paraméter 
+konstruktorparamétere lesz. Vagyis a <code>func</code> paraméter típusát nem próbálja levezetni belőle, hanem a <code>T</code>-t 
+csakis a vektor típusa alapján határozza meg. Abból <code>T = int</code> vezethető le, utána pedig egy konverzió történik: az 
+<code>std::function&lt;void(int)&gt;</code> konstruktora veszi át a lambdát. (Egyébként az utóbbi konstruktor szintén sablon, tehát 
+sablon osztálybeli sablon konstruktorról van szó.)</p>
+
+<p>Kicsit zavarosnak tűnhet a fenti okfejtés. Nézzük meg egy életszerűbb példán ugyanezt:</p>
+
+<pre   ><code class="language-cbub">void print(std::vector&lt;int&gt; const &amp; v) {
+    for (auto i : v)
+        std::cout &lt;&lt; i &lt;&lt; ' ';
+}
+
+int main() {
+    print(3);        // compile error
+
+    print({3});      // print(std::vector&lt;int&gt;{3})
+}</code></pre>
+
+<p>Az első esetben a <code>print</code> függvény paramétere a <code>3</code>. Ez nyilvánvalóan értelmetlen, és fordítási hibát fog 
+kiváltani, hiszen a függvény nem egy egész számot, hanem egy vektort vár. A második esetben viszont a kapcsos zárójel azt mondja, a 
+benne lévő <code>3</code> nem a <code>print</code> paramétere, hanem a <code>vector&lt;int&gt;</code> konstruktorparamétere: tehát 
+a <code>print</code> paraméterként <code>vector&lt;int&gt;{3}</code>-at kap. Nyelvileg ez a <code>function</code> és a lambda 
+esetén is ugyanígy jelenik meg, csak míg itt természetesnek érezzük a kapcsos zárójelet (amelyik amúgy inicializáló listát ad
+meg), a függvényes-lambdás esetben inkább zavaró.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hogy szabadulunk meg a zárójelpártól?">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Hogy szabadulunk meg a zárójelpártól?<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az eddigiek alapján adja magát, hogy a zárójelpártól hogyan lehet megszabadulni. Azt kell elérnünk, hogy a <code>T</code>
+sablonparaméter levezetésében a második paraméter, a függvény ne vegyen részt. Mert ha a fejléc ez:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void for_each(std::vector&lt;T&gt; vec, std::function&lt;void(T)&gt; func);</code></pre>
+
+<p>Akkor a <code>T</code>-t mindkét paraméter alapján megpróbálja majd levezetni a fordító, és még egyezniük is kell. A másodikat,
+a függvényt ki kellene ebből hagyni; az <em>non-deduced context</em> kellene legyen; a <code>T</code> helyére abban csak a vektor
+típusából kikövetkeztetett típust kellene beírnia a fordítónak.</p>
+
+<p>Erre több lehetőségünk is van, a szabvány több olyan helyzetet is felsorol, ahol nincs automatikus levezetés. Az egyik az, 
+amikor a paraméter típusában <code>decltype</code> szerepel. Vagyis ha a <code>function</code> sablonparaméterei közé egy 
+<code>decltype</code>-ot csempészünk, pont ez fog történni. Kérdés, hogyan írunk olyan <code>decltype</code>-t, amely pontosan egy 
+általunk ismert típust fog visszaadni. Például úgy, hogy deklarálunk egy függvényt, amelyik pont ezzel a típussal tér vissza:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+T for_each_helper();
+
+template &lt;typename T&gt;
+void for_each(std::vector&lt;T&gt; vec,
+              std::function&lt;void( decltype(for_each_helper&lt;T&gt;()) )&gt; func)
+{
+    for (auto item : vec)
+        func(item);
+}</code></pre>
+
+<p class="megjegyzes">Vigyázat: ez nem ugyanaz, mint az <code>std::declval&lt;T&gt;()</code>, mert az <code>T&amp;&amp;</code>-t 
+adna.</p>
+
+<p>Másik lehetőségünk, hogy egy osztály belső típusát használjuk. Ha a paraméterben <code>valami&lt;T&gt;::akármi</code> szerepel
+(nested name-specifier), akkor a paraméterlevezetés kikapcsol. Ezért bevezetünk egy segédtípust, amely pont így viselkedik,
+és amúgy <code>T</code>-t ad:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+struct type_identity {
+    using type = T;
+};
+
+template &lt;typename T&gt;
+void for_each(std::vector&lt;T&gt; vec,
+              std::function&lt;void( typename type_identity&lt;T&gt;::type )&gt; func)
+{
+    for (auto item : vec)
+        func(item);
+}</code></pre>
+
+<p class="megjegyzes">Ez a segédosztály <code>std::type_identity</code> néven lesz elérhető C++20-tól. Pont erre találták ki,
+hogy le lehessen vele tiltani a sablonparaméterek levezetését, igazából semmi másra nem jó.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

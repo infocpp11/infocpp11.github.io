@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 8. hét: Kivételek</title>
+<meta property="og:title" content="TEST InfoC++11 :: 8. hét: Kivételek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 8. hét: Kivételek">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 8. hét: Kivételek">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="8. hét: Kivételek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">8. hét: Kivételek</h1>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Kivételbiztos kódok</a>
+                      <li><a href="index.html#2" class="">„Kivételkezelés” C-ben</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kivételbiztos kódok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_kivetelbiztos" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Kivételbiztos kódok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Noexcept move constructor</h3>
+
+<p>Mondtuk, hogy jó lenne, ha minden move konstruktor noexcept minősítést kaphatna, mert akkor tudják a többi függvények, hogy egy (ismeretlen) objektum erőforrása mozgatható. Meg azt is látjuk, hogy legtöbbször a move konstruktor szinte triviális, egy-két pointerművelet vagy ilyesmi. De akkor hogy is van ez? Meg lehet minden move konstruktort noexceptesre csinálni, és csak szintaktikai elvárás, hogy kiírjuk a noexceptet, vagy nem lehet mindet, és okkal kell figyelni ennek kiírására? Miért?</p>
+
+<p>(Ha nem lehet, mutass ellenpéldát. Ha lehet, akkor magyarázd meg, miért. Rosszul vagy hiányosan implementált osztály nem lehet pro, sem kontra érv.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Több példa is van erre:</p>
+<ul>
+    <li>Konstans adattag vagy referencia adattag. (Az utóbbi olyasmi, mint egy konstans pointer.) Ezek nem módosíthatóak, ezért
+        nem is mozgatható el a tartalmuk.</li>
+        
+    <li>Ha más, egyéb okból nem mozgatható részei vannak az objektumnak. Az <code>std::list</code> pl. strázsás láncolt listát épít, mégpedig
+        azért, hogy a végéről (<code>std::list::end</code>), vagyis az utolsó <em>utáni</em> elemtől vissza lehessen jönni <code>--</code>
+        operátorral az utolsóra. Egyben azt is ígéri, hogy bármilyen műveletet végzünk a listával, a <em>nem módosított</em> elemek iterátora
+        érvényes marad. Ha van egy <code>end</code> iterátorunk egy listára, és annak a listának a tartalmát elmozgatjuk, az <code>end</code>
+        iterátor érvényes kell maradjon; ami azt jelenti, hogy a strázsát nem mozgathatjuk, az meg kell maradjon az eredeti listánál.
+        Emiatt az új lista, amibe áthelyezzük az objektumokat, a strázsát nem veheti el, hanem saját strázsákat kell létrehoznia.</li>
+    
+    <li>Operációs rendszer vagy hardver limitációk, pl. egy <code>std::mutex</code>.</li>
+    
+    <li>Olyan esetek, amikor harmadik szereplővel végzett művelet is bekerül a képbe. Ilyen a <a href="https://cpp11.local/supernoisy/">SuperNoisy</a> osztály
+        is; ebben a közös tárolóba regisztrált objektumok miatt a mozgató konstruktornak többlet feladata van, amelyik nem csak a két objektumot
+        érinti (amiből és amibe mozgatni kell az adatot), hanem a tárolót is, amelyhez hozzá kell adni az új objektumot.</li>
+</ul>
+</div>
+</details>
+
+
+<h3>Noexcept függvények</h3>
+
+<p>A főprogramban két kódrészlet van. Külön kell őket vizsgálnod. Melyiknél mi történik? Miért?</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+struct X {
+    X() = default;
+    X(X const &amp;) { throw 0; }
+};
+
+void f_val(X param) noexcept {
+}
+
+void f_ref(X const &amp; param) noexcept {
+    X copy(param);
+}
+
+int main() {
+    X x1;
+
+    try {
+        std::cout &lt;&lt; &quot;f_val hivasa&quot; &lt;&lt; std::endl;
+        f_val(x1);
+    } catch (...) {}
+    
+    try {
+        std::cout &lt;&lt; &quot;f_ref hivasa&quot; &lt;&lt; std::endl;
+        f_ref(x1);
+    } catch (...) {}
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az <code>f_val()</code> függvényben tényleg nem keletkezhet kivétel. Ugyan a hívásához létrejönne az
+<code>x1</code> objektum másolata az <code>X</code> osztály másoló konstruktorához, amely kivételt dob,
+de ez a kivétel nem a függvényben keletkezik, hanem még azon kívül.</p>
+<p>Az <code>f_ref()</code> esetében más a helyzet. Ennek hívása kedvéért csak egy referencia jön létre,
+a függvénytörzsbe belépés előtt kivétel még nem keletkezik. A törzsben viszont igen, a másolat létrehozásakor.
+Mivel a függvény <code>noexcept</code> minősítővel rendelkezik, ez a kivétel nem jut ki a függvényből,
+hanem megszakad a program futása.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>Noexcept mozgató konstruktor</h3>
+
+<p>Mi a hiba az alábbi programrészben? Kettőt is tudsz mutatni!</p>
+
+<pre   ><code class="language-c">class String {
+    /* ... */
+};
+
+String::String(String &amp;&amp; moved) noexcept {
+    data_ = moved.data_;
+    len_ = moved.len_;
+    moved.data_ = new char[1];
+    moved.data_[0] = '\0';
+    moved.len_ = 0;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az első hiba a kód jelenlegi formájában a <code>noexcept</code> kulcsszó. A függvény törzsében lévő kód igenis dobhat kivételt;
+ha egy <code>noexcept</code> függvényben ilyen történik, a program futása megszakad. Ennél jobb ötlet lenne a <code>noexcept</code>
+kulcsszót törölni; ha kivétel dobódik, legalább kaphassa el azt a hívó.</p>
+<p>A másik hiba az, hogy az új dinamikus tömb valószínűleg felesleges. A <code>moved</code> objektum tartalmát ez a konstruktor
+elmozgatja; az objektumnak érvényes állapotban kell maradnia, de lehet üres is (destructable / assignable state). Az üres objektum
+tartalmát senkinek nem szabad felhasználnia, senki nem építhet arra a kódban, hogy mi tárolódik benne. Jobb, hatékonyabb lenne,
+ha az a tömb nem jönne létre, hanem a <code>moved.data_</code> értékét <code>nullptr</code>-re állítanánk.</p>
+<p>Ha így teszünk, akkor egyébként a függvény visszakaphatja a <code>noexcept</code> minősítőjét:</p>
+<pre   ><code class="language-c">String::String(String &amp;&amp; moved) noexcept {
+    data_ = moved.data_;
+    len_ = moved.len_;
+    moved.data_ = nullptr;
+    moved.len_ = 0;
+}</code></pre>
+</div>
+</details>
+
+
+
+<h3>std::stack top és pop</h3>
+
+<p>Az <code>std::stack</code> osztálynak két függvénye van, amelyik a stack tetején lévő elemmel dolgozik. A <code>top()</code> 
+visszaadja ezt az elemet (<code>T&amp;</code> értékű függvény), de nem veszi ki a stackből; a <code>pop()</code> kitörli az elemet, 
+de nem adja vissza (void értékű függvény). Miért van ez így? Miért nincs olyan, amelyik kitörli és visszaadja a visszatérési 
+értékében? Miért nincs olyan, amely egy referencia által adott helyre másolja? Miért nincs olyan, hogy... [egyéb verzió]? Mutasd be 
+kódrészleten a másféle megoldások problémáit!</p>
+
+
+
+<h3>A kivételkezelés tesztelése</h3>
+
+<p>A kivételek általában kivételes helyzetekben keletkeznek – ahogy a nevük is mutatja. A legtöbb kivétel olyan
+körülmény miatt jön létre, aminek nem kellene bekövetkeznie; pl. név nélküli fájlba próbálunk elmenteni valamilyen
+tartalmat, vagy elfogy a memória.</p>
+
+<p>A kivételeket kezelő kódrészleteket ezért sokszor nehéz <em>tesztelni</em>, mivel elő kell állítani a kivételes helyzetet.
+A <a href="../lab08/index.html#labor_verem_kivetel">labor verem osztályával</a> könnyebb a helyzet; mivel a legtöbb helyen a sablon példányosító osztály, <code>T</code>
+által generált kivételeket próbálja a verem helyesen kezelni. Nincs más dolgunk, mint létrehozni egy olyan osztályt (egy mock-ot),
+amelynek adott művelete adott pillanatban kivételt dob, és ellenőrizni, hogy a verem objektum megoldotta-e a helyzetet.</p>
+
+<p>Írj ilyen osztályt, és tesztelj vele pár helyzetet!</p>
+
+
+
+
+<h3>std::shared_ptr</h3>
+
+<p>Tudjuk, hogy egy dinamikusan foglalt objektumot („kezelt objektum”) egy <code>std::shared_ptr</code> okos
+pointernek adva az okos pointer felelni fog annak felszabadításáért. Sőt több <code>std::shared_ptr</code>
+közösen is mutathat egyetlen kezelt objektumra. Sőt vannak <code>std::weak_ptr</code>-ek is, amelyek azt is
+tudják, hogy a kezelt objektum már delete-elve lett-e. Mindezt úgy oldják meg, hogy <a href="../ea05/index.html#weak_ptr">közösen használnak egy menedzser objektumot</a>, amely
+tartalmazza a kezelt objektum pointerét, továbbá a referenciaszámlálókat.</p>
+
+<p>A menedzser objektumot a kellő számú indirekció és az élettartamának beállítása miatt szintén dinamikusan
+kell foglalni. Ebből az következik, hogy az <code>std::shared_ptr</code> konstruktora dinamikus
+memóriafoglalást kell tartalmazzon, ami <code>std::bad_alloc</code> típusú kivételhez vezethet. Ha a
+konstruktora kivételt dob, akkor az okos pointer nem jött létre, tehát a destruktora sem fog lefutni, amelyik
+felszabadította volna a kezelt objektumot.</p>
+
+<p>A kérdés a következő. Helyesen működik-e a következő függvény akkor, ha a kezelt <code>T</code> objektumot már sikerült 
+létrehozni, de a <code>std::shared_ptr</code> konstruktorában kivétel keletkezik? Lesz-e itt memóriaszivárgás? Miért?
+Rövid, vázlatos kódrészleteket írj a magyarázat mellé!</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+std::shared_ptr&lt;T&gt; my_make_shared() {
+    return std::shared_ptr&lt;T&gt;(new T());
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>shared_ptr</code> konstruktora elkapja a menedzser objektum létrehozásakor keletkező kivételt.
+Ilyenkor a neki adott <code>T</code> objektumot felszabadítja, és továbbdobja ezt a kivételt.</p>
+<p>Más szóval, amint elindul a konstruktor, onnantól kezelt objektumnak számít a <code>T</code>, nem pedig
+csak onnantól kezdve, amikor lefutott. A konstruktor belseje valami ilyesmi:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+shared_ptr&lt;T&gt;::shared_ptr(T *rawptr) {
+    try {
+        this-&gt;managerobj = new managerobj;
+    } catch (...) {     /* ha nem sikerült lefoglalni a menedzsert */
+        delete rawptr;  /* akkor felszabadíŧja a kezelt objektumot */
+        throw;
+    }
+    this-&gt;managerobj-&gt;rawptr = rawptr;
+    this-&gt;managerobj-&gt;refcount = 1;
+}</code></pre>
+
+
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="„Kivételkezelés” C-ben">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        „Kivételkezelés” C-ben<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3><code>goto</code> :)</h3>
+
+<p>C-ben nincsenek kivételek. Ellenben sok olyan függvényt írunk, amelyik felépít valamilyen állapotot, erőforrásokat foglal 
+egymás után (nyitott fájl, dinamikus memória stb.), és kivételes körülmény esetén ezeket fel kell szabadítania.</p>
+
+<a class="noicon" href="http://xkcd.com/292/"><img src="xkcd_goto.png" class="kozep"></a>
+
+<p>A kritikus függvényeknek két kilépési pontja (return) van: egy olyan, ahol hiba esetén fejeződik be a függvény, és egy olyan, 
+ahol normál esetben. Hiba esetén a lefoglalt erőforrásokat a foglaláshoz képest fordított sorrendben fel kell szabadítani, ahogy 
+a <em>stack unwinding</em> is történne C++-ban. Ezt úgy szokták megoldani, hogy a rendes kilépési pont alá teszik ezeket a 
+programrészeket, címkékkel ellátva. Így a felszabadítást végző programrészbe egy <code>goto</code> utasítással be lehet ugrani, 
+az annak megfelelő helyre, ameddig a foglalásokkal eljutottunk. Így:</p>
+
+<pre   ><code class="language-c">ErrorCode func() {
+    int* ints = (int*) malloc(sizeof(int) * 100);
+    if (ints == NULL)
+        goto end_nothing;
+
+    /* ... */
+    if (/* ... */)
+        goto end_ints;
+    /* ... */
+    
+    free(ints);
+    return OK;
+
+  end_ints:
+    free(ints);
+  end_nothing:
+    return Fail;
+}</code></pre>
+
+<pre class="screenshot float">
+3 3
+3.4   9.2   0
+1.2   0     4.5
+-3    5.6   11
+</pre>
+
+<p>Írd át ilyenre az innen letölthető mátrixos programot: <a href="matrix.c">matrix.c</a>! Ennek feladata az, hogy a
+jobb oldalt látható formátumú fájlból beolvasson egy mátrixot, és visszaadja az arra mutató <code>double**</code> pointert.</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">double **read_matrix(char const *filename) {
+    int w, h;
+    FILE *fp;
+    double ** ret;
+
+    fp = fopen(filename, &quot;rt&quot;);
+    if (fp == NULL)
+        goto error;
+    if (fscanf(fp, &quot;%d %d&quot;, &amp;w, &amp;h) != 2)
+        goto error_file;
+    
+    /* mátrix foglalása */
+    ret = (double **) malloc(sizeof(double*) * h);
+    if (ret == NULL)
+        goto error_file;
+    /* kitöltjük null pointerrel, hogy tudni lehessen, melyik sor van lefoglalva */
+    for (int y = 0; y &lt; h; ++y)
+        ret[y] = NULL;
+    for (int y = 0; y &lt; h; ++y) {
+        ret[y] = (double *) malloc(sizeof(double) * w);
+        if (ret[y] == NULL)
+            goto error_matrix;
+    }
+    
+    for (int y = 0; y &lt; h; ++y) {
+        for (int x = 0; x &lt; w; ++x) {
+            if (fscanf(fp, &quot;%lf&quot;, &amp;ret[y][x]) != 1)
+                goto error_matrix;
+        }
+    }
+
+  /* rendes visszatérés */
+    fclose(fp);
+    return ret;
+
+  /* hibák esetén erőforrások felszabadítása */
+  error_matrix:
+    for (int y = 0; y &lt; h; ++y)
+        free(ret[y]);
+    free(ret);
+  error_file:
+    fclose(fp);
+  error:
+    return NULL;
+}</code></pre>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

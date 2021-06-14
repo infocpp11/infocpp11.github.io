@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Property</title>
+<meta property="og:title" content="TEST InfoC++11 :: Property">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="C# stílusú „property” az objektumokban">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="C# stílusú „property” az objektumokban">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Property">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Property</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">C# stílusú „property” az objektumokban</p>
+</div>
+
+<p>C#-ban „property”-nek nevezzük azokat a fajta adattagokat, amelyek írásához és kiolvasásához
+(get és set) külön műveletet, függvényt társíthatunk. Ezek használata kényelmes és főleg intuitív, mivel
+úgy viselkednek, mintha publikus, szabadon változtatható adattagok lennének. Tehát míg a szabványos
+C++-ban egy vektor méretének lekérdezését, és a vektor átméretezését így írjuk:</p>
+
+<pre   ><code class="language-c">std::vector&lt;int&gt; v;
+
+v.resize(10);               /* setter */
+std::cout &lt;&lt; v.size();      /* getter */</code></pre>
+
+<p>Ha lenne property nyelvi elem, így írnánk:</p>
+
+<pre   ><code class="language-c">myvector v;
+
+v.size = 10;               /* setter - átméretezés */
+std::cout &lt;&lt; v.size;       /* getter - méret lekérdezése */</code></pre>
+
+<p>Ilyen nyelvi elem C++-ban nincs. De nem is kell, mert ez felépíthető a meglévőekből! A trükk
+csak annyi, hogy a vektorban lévő <code>size</code>, méret adattag helyett egy olyan objektumot
+használjunk, amelynek operátorait alkalmas módon átdefiniálva a tényleges adattagot helyettesítő
+objektumként látszódjon.</p>
+
+<p>A fenti példában a <code>size</code> objektum egy <code>size_t</code> típusú
+adattagot helyettesít (a vektor méretét). Ennek tehát írnunk kell egy <code>.operator=(size_t)</code>
+függvényt (mert <code>v.size = 10</code> jelentése: <code>v.size.operator=(10)</code>), és egy
+<code>operator size_t()</code> konverziós operátort (<code>cout &lt;&lt; (size_t) v.size</code>).</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A megvalósítás</a>
+                      <li><a href="index.html#2" class="">Példa: egy vektor</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A megvalósítás">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A megvalósítás<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A megvalósítás lényege a fent említett két operátor megírása. Ezeknek az operátoroknak a feladata, hogy meghívják a
+tartalmazó objektum megfelelő getter és setter tagfüggvényét, lekérdezés illetve értékadás esetén. Maga a property objektum,
+amelyik a tényleges adattagot helyettesíti (annak proxy-ja), lényegében nem tartalmaz adatot.</p>
+
+<p>A lenti megvalósításban csak egy referenciát tartalmaz a saját szülő objektumára (a példában ez a vektor). Erre azért van
+szükség, mert C++-ban egy objektum sosem tudja, hogy egy másik objektumnak részobjektuma-e, és ha igen, nem tudja sehogyan
+lekérdezni, hogy melyiké. A szülő objektumot viszont ismernie kell, hiszen annak a getter és setter függvényét kell hívni.</p>
+
+<p>A getter és a setter függvényekre a property objektum egy tagfüggvény pointert kap. A tagfüggvény pointerek lehetnek
+sablonparaméterek is (megengedi a nyelv), és érdemes is így írnunk a kódot, hogy hatékony legyen. (Egy konkrét adattaghoz
+konkrét getter és setter függvények tartoznak. Ezek azonban lehetnek virtuálisak is.)</p>
+
+<p class="megjegyzes">Említést érdemel még a „szokványos” értékadó operátor és a másoló konstruktor. Az értékadó operátort a
+referencia adattag miatt a fordító automatikusan letiltaná. A vektor használója írhatna olyat, hogy <code>v1.size =
+v2.size</code> (hogy a két vektor legyen egyforma), ezalatt viszont amúgy sem a propertyk értékadását értenénk, hanem a
+<code>v2.size</code> kiolvasását és a <code>v1.size</code> felülírását. Ezért a property=property alakú értékadó operátort úgy
+definiáljuk, hogy tényleg ezt csinálja. A másoló konstruktorban hasonló furcsa helyzet áll elő. Ha nem mondanánk semmit, ez a
+referencia másolását jelentené, ami ahhoz vezetne, hogy az újonnan létrehozott objektum property-je a lemásolt objektumra
+hivatkozik. Ezért a másoló konstruktort letiltjuk; aki property-t tartalmazó osztályt szeretne másolhatóvá tenni, írjon egy
+olyan másoló konstruktort, amelyben az újonnan létrehozott objektum referenciáját adja az új property-nek.</p>
+
+<pre   ><code class="language-c">/* property: milyen CLASS-hoz, milyen T típusú adattag,
+ * melyik SETTERPTR tagfüggvény a setter, melyik GETTERPTR tagfüggvény a getter */
+template &lt;typename CLASS, typename T,
+          void (CLASS::*SETTERPTR)(T const&amp; newvalue),
+          T (CLASS::*GETTERPTR)() const&gt;
+class Property {
+    CLASS&amp; obj;
+    /* copy ctor letiltása, hogy muszáj legyen megadni az új szülő
+     * objektumot (különben másolódna a referencia!) */
+    Property(Property const&amp;) = delete;
+    
+  public:
+    /* a property szülő objektuma. ezt azért kell paraméterként átvenni,
+     * mert c++ban nem lehet sehogy kitalálni egy objektumról, hogy egy
+     * másik objektum része-e (subobject) */
+    Property(CLASS&amp; obj) : obj(obj) {}
+    
+    /* property beállítása */
+    Property&amp; operator= (T const&amp; newvalue) {
+        (obj.*SETTERPTR)(newvalue);
+        return *this;
+    }
+    
+    /* property lekérdezése */
+    operator T () const {
+        return (obj.*GETTERPTR)();
+    }
+    
+    /* property = property eset kezelése */
+    Property&amp; operator= (Property const&amp; the_other) {
+        *this = the_other.operator T ();
+        return *this;
+    }
+};</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Példa: egy vektor">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Példa: egy vektor<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az alábbi vektorban szándékosan nem tárolódik a méret; helyette a lefoglalt memóriaterület elejét és
+végét tárolják a pointerek. Ezeket adná a <code>begin()</code> és az <code>end()</code> tagfüggvény. Így
+látszik, milyen szerepe lehet a getternek – a setteré amúgy triviális.</p>
+
+<pre   ><code class="language-c">/* példa */
+class Vektor {
+  private:
+    /* a memóriaterület eleje és vége. szándékosan két pointer,
+     * hogy látszódjon, a getter is csinál valamit. */
+    int* databegin;
+    int* dataend;
+    
+    void sizesetter(size_t const&amp; newsize) {
+        size_t oldsize = dataend-databegin;
+        int* newdata = new int[newsize];
+        std::copy(databegin, databegin + std::min(newsize, oldsize), newdata);
+        delete[] databegin;
+        databegin = newdata;
+        dataend = newdata + newsize;
+        std::cout &lt;&lt; &quot;resizing to &quot; &lt;&lt; newsize &lt;&lt; std::endl;
+    }
+    
+    size_t sizegetter() const {
+        return dataend - databegin;
+    }
+
+  public:
+    Vektor() : databegin(nullptr), dataend(nullptr), size(*this) {}
+    int&amp; operator[] (size_t idx) {
+        if (idx &gt;= sizegetter())
+            throw &quot;index out of bounds&quot;;
+        return databegin[idx];
+    }
+
+    /* így kell megadni egy propertyt: Vektor osztályhoz,
+     * size_t fiktív adattag, amelynek a settere és a gettere ez.
+     * a vektor kliense ezt egy adattagnak látja. */
+    Property&lt;Vektor, size_t, &amp;Vektor::sizesetter, &amp;Vektor::sizegetter&gt; size;
+};
+
+
+/* példa */
+int main() {
+    Vektor v;
+
+    v.size = 5;
+    v[2] = 1;
+    for (int i = 0; i &lt; v.size; ++i)
+        std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; std::endl;
+
+    v.size = 10;
+    v[7] = 7;
+    for (int i = 0; i &lt; v.size; ++i)
+        std::cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; std::endl;
+}</code></pre>
+
+
+<p>A teljes kód letölthető innen: <a href="property.cpp">property.cpp</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

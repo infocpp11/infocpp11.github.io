@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: STL és iostream gyorstalpaló</title>
+<meta property="og:title" content="TEST InfoC++11 :: STL és iostream gyorstalpaló">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="STL és iostream gyorstalpaló">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="STL és iostream gyorstalpaló">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="STL és iostream gyorstalpaló">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">STL és iostream gyorstalpaló</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">STL és iostream gyorstalpaló</p>
+</div>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+<p>
+A C++ tartalmaz csomó olyan adatszerkezetet és osztályt, amire minden programnak szüksége
+lehet. Ilyenek a sztring, a duplán láncolt lista, a dinamikus tömb és még sok egyéb.
+Ezt az osztály gyűjteményt STL-nek, "Standard Template Library"-nek hívják.
+A programozást nagyban megkönnyítik, mert ezek a C++-ban szabványosak, bármikor
+használhatóak, nem kell őket újra megírni.
+</p>
+
+<p>
+Ezeknek az osztályoknak a részletes megértéséhez szükség van eddig nem bemutatott C++
+nyelvi elemek ismeretére is (pl. osztály sablonok), ezért általában a félév végén
+szoktak szerepelni a tananyagban. Az egyszerűbb felhasználáshoz azonban, amilyen például
+a nagy házi feladatokhoz is elegendő, ez nem olyan lényeges még.
+</p>
+
+<p>
+A házik közül a legtöbb feladat nem valamilyen
+alapvető osztály létrehozására koncentrál, és ilyenkor igazából nem éri meg
+gürcölni a saját, kézzel megvalósított dinamikus sztringgel (<code>char*</code> rémálom), saját
+dinamikus tömbbel stb. Hogy az energia ne ezeknek a megvalósítására menjen el, röviden
+leírom, milyen beépített tároló osztályokat ad a C++. Ennek az irománynak az
+áttanulmányozása után sokkal könnyebb lesz a házit elkezdeni.
+</p>
+
+<p>
+Az STL részletesebb dokumentációja elérhető pl. a <a href="http://cplusplus.com/">http://cplusplus.com</a> helyen.
+</p>
+
+<p>
+Megj.: az osztályok mind az std névtérben vannak; én mindig ki is írom ezt. Nem
+szeretek using namespace-elni (vannak hátrányai), de ez ízlés kérdése.
+</p>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">std::string, a beépített string típus</a>
+                      <li><a href="index.html#2" class="">std::vector, átméretezhető, egydimenziós tömb</a>
+                      <li><a href="index.html#3" class="">std::list, kétszeresen láncolt lista osztály</a>
+                      <li><a href="index.html#4" class="">std::set, halmaz osztály</a>
+                      <li><a href="index.html#5" class="">std::map, asszociatív tömb</a>
+                      <li><a href="index.html#6" class="">iostream, fstream, ...</a>
+                      <li><a href="index.html#7" class="">Komplexebb példa</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::string, a beépített string típus">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        std::string, a beépített string típus<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <p>
+Dinamikusan átméreteződő, okos string, az összes elképzelhető
+operátora átdefiniálva.
+</p>
+
+<pre   ><code class="language-c">#include &lt;string&gt;
+
+std::string s;      // Üres stringet hozunk létre.
+                    // A méretével nem kell foglalkozni.
+std::string m(&quot;Hello vilag!&quot;);
+std::string a(&quot;alma&quot;), k(&quot;korte&quot;);
+
+s = &quot;Hello&quot;;        // Beállítjuk valamilyen értékre.
+s += &quot; vilag!&quot;;     // Hozzátoldunk valamit.
+std::cout &lt;&lt; s;     // Kiírjuk a konzolra.
+
+if (s == m)         // Összehasonlítjuk.
+    std::cout &lt;&lt; &quot;egyformák!&quot;;
+if (a &lt; k)
+    std::cout &lt;&lt; a &lt;&lt; &quot; (kvázi) előbb van az ABC-ben.&quot;;
+
+s[0] = 'h';             // hello vilag!
+s.erase(2, 3);          // Töröl a belsejéből: &quot;he vilag!&quot;
+s = m.substr(2, 3);     // m belsejéből egy darab, &quot;llo&quot;
+int i = a.find(&quot;lm&quot;);   // Keresés: 1, mert &quot;alma&quot; szóban &quot;lm&quot; pozíciója
+a.insert(3, &quot;er&quot;);      // Beszúrás: &quot;alma&quot;-ból almera lesz</code></pre>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::vector, átméretezhető, egydimenziós tömb">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        std::vector, átméretezhető, egydimenziós tömb<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <p>
+Ez egy osztály sablon. A tömb bármilyen elemeket tartalmazhat; a
+tartalmazott típusokat <code>&lt;&gt;</code> között kell megadni. Például egész számokat
+tartalmazó tömb: <code>std::vector&lt;int&gt;</code>.
+</p>
+
+<pre   ><code class="language-c">#include &lt;vector&gt;
+
+std::vector&lt;int&gt; t;         // Tömb, ami egyelőre üres.
+std::vector&lt;double&gt; d(50);  // 50 elemű double tömb.
+
+d[23] = 3.14;
+t.push_back(1);             // A tömb végére rak egy új számot,
+t.push_back(2);             // és meg is növeli a tömb méretét.
+
+for (int i = 0; i &lt; t.size(); ++i)  // Kiírjuk a tömb tartalmát,
+    std::cout &lt;&lt; t[i] &lt;&lt; ' ';       // az aktuális méretét a size() adja meg.
+std::cout &lt;&lt; std::endl;
+t.clear();                  // Kitörli a tömböt, újra üres lesz.
+
+d[60] = 10.3;               // NEM SZABAD!!! Továbbra is 0..49 között
+                            // indexelődik az 50 elemű tömb.
+d.at(120) = 0.012;          // Ugyanaz, mint az indexelő, csak
+                            // ellenőrzi, hogy nem hivatkozunk-e
+                            // nem létező indexre. Ha igen, kivételt dob.
+
+#include &lt;algorithm&gt;        // rendezéshez, std::sort
+#include &lt;cstdlib&gt;          // rand() véletlenszámokhoz
+
+t.resize(100);              // Méretezzük át a tömböt 100 eleműre.
+srand(time(0));             // Véletlenszám-generátor indítása
+for (int i = 0; i &lt; t.size(); ++i)
+    t[i] = rand() % 200;    // Minden elem: véletlenszám 0..199 között
+std::sort(t.begin(), t.end());      // Növekvő sorrendbe az egész
+                                    // tömb, az elejétől a végéig.
+for (int i = 0; i &lt; t.size(); ++i)
+    std::cout &lt;&lt; t[i] &lt;&lt; ' ';
+std::cout &lt;&lt; std::endl;
+
+// Érdemes abba belegondolni, hogy az egyszerű másolás,
+// mint lehetőség, illetve a méret az adatokkal
+// történő egységbe zárása miatt már sokszor megéri
+// std::vectort használni sima tömb helyett.
+// Például nem kell átadnunk egy függvénynek a tömb
+// méretét, mert az már tartalmazza azt:
+double atlag(const double *tomb, int meret);
+double atlag(const std::vector&lt;double&gt; &amp;tomb);
+
+// Egy függvény, amely valahány (nem kell tudni
+// előre, mennyi) stringgel tér vissza:
+std::vector&lt;std::string&gt; beolvas();</code></pre>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::list, kétszeresen láncolt lista osztály">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        std::list, kétszeresen láncolt lista osztály<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tetszőleges típusú adattagokkal.</p>
+
+<pre   ><code class="language-c">#include &lt;list&gt;
+#include &lt;cctype&gt;
+
+std::list&lt;std::string&gt; szavak;  // stringekből álló lista (!)
+szavak.push_back(&quot;alma&quot;);       // alma  (... került az üres lista végére)
+szavak.push_back(&quot;korte&quot;);      // alma, korte
+szavak.push_front(&quot;málna&quot;);     // málna, alma, korte   (elejére teszi!)
+szavak.push_front(&quot;villa&quot;);     // villa, málna, alma, korte
+std::cout &lt;&lt; szavak.size() &lt;&lt; &quot; szót tartalmaz.\n&quot;;
+szavak.remove(&quot;villa&quot;);         // kitöröljük a kakukktojást
+std::cout &lt;&lt; &quot;Az első elem: &quot; &lt;&lt; szavak.front() &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;Az utolsó elem: &quot; &lt;&lt; szavak.back() &lt;&lt; std::endl;
+
+std::list&lt;std::string&gt; masolat;
+masolat = szavak;                   // Lemásoljuk a listát: értékadás!
+while (!masolat.empty()) {          // Amíg nem üres a lista:
+    std::cout &lt;&lt; masolat.back() &lt;&lt; ' '; // Kiírjuk az utolsó elemet...
+    masolat.pop_back();                 // és kitöröljük.
+}</code></pre>
+
+<p>
+Az egyes tároló osztályokhoz létezik ún. iterátor osztály, amely legegyszerűbb esetben
+arra jó, hogy az összes adaton egy ciklussal végig tudjunk menni. Az iterátoron
+értelmezett két legalapvetőbb művelet a <code>++</code> (következő elemre ugrás) és a <code>*</code> (jelenlegi elem elérése).
+Ebből a szempontból ugyanúgy működnek, mint a pointerek, csak sokkal okosabbak azoknál!
+Figyeljük meg, hogy a lista belső felépítéséről semmit nem tudunk, ez el van rejtve
+előlünk. Az iterátor viszont együtt dolgozik a listával; tudja, hogy a lista belsejében
+mi hogyan van megoldva. De azt nekünk nem kell tudni. Legyen az az iterátor dolga.
+</p>
+
+<pre   ><code class="language-c">std::list&lt;std::string&gt;::iterator it;    // Sztringekből álló lista iterátora.
+// Indulunk a lista elejéről (begin). Addig megyünk, amíg
+// el nem érjük a lista végét (end). Amikor egy adott elemmel
+// elvégeztük a dolgunkat, ugrunk a következőre (++). Ismerős?
+for (it = szavak.begin(); it != szavak.end(); ++it) {
+    char &amp; c = (*it)[0];        // Az iterátor által mutatott sztring
+                                // kezdő karakterére referencia.
+    c = toupper(c);             // nagybetűsítjük az első karakterét
+    std::cout &lt;&lt; *it &lt;&lt; ' ';    // kiírjuk a szót.
+}</code></pre>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::set, halmaz osztály">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        std::set, halmaz osztály<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Bármilyen típusokat képes tárolni. Adott értékről
+meg tudja mondani, szerepel-e benne.
+</p>
+<p>
+Az iterátorok itt is használhatóak. (És egyébként az összes tárolónál használhatóak
+és ugyanígy működnek! Vektornál, listánál, halmaznál, mindenhol. Nem kell foglalkoznunk
+azzal, hogyan néznek ki belülről!) Az egész számokat tartalmazó halmaz iterátorát lent a ciklus
+fejlécében deklarálom, a <code>for (int i=0...)</code> mintájára természetesen ezt is lehet.
+</p>
+
+<pre   ><code class="language-c">#include &lt;set&gt;
+
+std::set&lt;int&gt; s;            // Egész számok halmaza
+
+std::cout &lt;&lt; &quot;Írj be számokat, 0=vége!&quot; &lt;&lt; std::endl;
+int i;
+std::cin &gt;&gt; i;
+while (i != 0) {
+    if (s.find(i) != s.end()) // Így jelzi, ha nincs benne
+        std::cout &lt;&lt; &quot;Ez már benne volt!\n&quot;;
+    else                    // Berakjuk a halmazba a kapott számot.
+        s.insert(i);        // Természetesen, ha már benne volt,
+                            // amúgy se történne semmi.
+    std::cout &lt;&lt; &quot;Most &quot; &lt;&lt; s.size() &lt;&lt; &quot; szám van a halmazban.\n&quot;;
+
+    std::cout &lt;&lt; &quot;Kérem a következőt!\n&quot;;
+    std::cin &gt;&gt; i;
+}
+
+
+std::cout &lt;&lt; &quot;A halmaz elemei: &quot;;
+for (std::set&lt;int&gt;::iterator it = s.begin(); it != s.end(); ++it)
+    std::cout &lt;&lt; *it &lt;&lt; ' ';</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::map, asszociatív tömb">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        std::map, asszociatív tömb<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+Értékeket képez le. Mintha egy tömb lenne, amit nem számmal kell indexelni.</p>
+
+<pre   ><code class="language-c">#include &lt;map&gt;
+
+// Sztringeket képezünk le egész számokra;
+// vagyis minden sztringhez rendelünk egy egész számot.
+std::map&lt;std::string, int&gt; m;
+
+m[&quot;Ernőke&quot;] = 5;        // Mintha a tömböt indexelnénk, csak épp sztringgel.
+m[&quot;Pistike&quot;] = 7;
+m[&quot;Orsika&quot;] = 4;
+
+std::cout &lt;&lt; &quot;Ernőke, még csak &quot; &lt;&lt; m[&quot;Ernőke&quot;] &lt;&lt; &quot; éves vagy.&quot; &lt;&lt; std::endl;
+
+// Vigyázni kell, hogy ha olyan névvel indexeljük a map-et, ami még
+// nem szerepel benne, akkor létrejön az az elem! És kap kezdeti
+// értéket is, ami intek esetén nulla.
+//      std::cout&lt;&lt;m[&quot;NincsIlyen&quot;]&lt;&lt;std::endl;
+// Ez a sor nullát írna ki, és létrehozna egy NincsIlyen nevű embert!!!
+// Ha ellenőrizni szeretnénk, hogy van-e benne, akkor a find
+// függvény használható.
+std::cout &lt;&lt; &quot;Kinek szeretnéd tudni a korát? &quot;;
+std::string s;
+std::cin &gt;&gt; s;
+if (m.find(s) != m.end())
+    std::cout &lt;&lt; s &lt;&lt; ' ' &lt;&lt; m[s] &lt;&lt; &quot; éves.&quot; &lt;&lt; std::endl;
+else
+    std::cout &lt;&lt; &quot;Nincs ilyen név, hogy &quot; &lt;&lt; s &lt;&lt; &quot;!&quot; &lt;&lt; std::endl;
+
+// Persze itt is lehet iterátorunk, viszont nem csak az értéket, hanem
+// a kulcsot is látjuk. it-&gt;first a kulcs, it-&gt;second pedig az érték,
+// mert az std::map belül std::pair elemeket tárol.
+// Sztringeket egészekre leképező map iterátora:
+std::map&lt;std::string, int&gt;::iterator it;
+for (it = m.begin(); it != m.end(); ++it)
+    std::cout &lt;&lt; it-&gt;first &lt;&lt; &quot; még csak &quot; &lt;&lt; it-&gt;second &lt;&lt; &quot; éves.&quot; &lt;&lt; std::endl;</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="iostream, fstream, ...">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        iostream, fstream, ...<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>
+A C++ fájl műveleteit megvalósító osztályai. Jól kombinálhatók az std::stringgel.
+</p>
+
+<pre   ><code class="language-c">#include &lt;fstream&gt;
+#include &lt;iomanip&gt;      // manipulátorok, lásd lent
+
+std::ifstream is;       // input file stream, vagyis olvasunk egy fájlból
+
+is.open(&quot;fajl.txt&quot;);    // megnyitjuk a fájlt
+if (!is) {
+    std::cerr &lt;&lt; &quot;Nincs ilyen fájl!&quot;;
+    // ... meg csinálunk is valami értelmeset ilyenkor
+}
+
+// Beolvasunk egy teljes sort. A string szükség szerint átméreteződik!
+std::string s;
+int i = 0;
+while (getline(is, s))
+    // Számozva kiírjuk a sorokat. std::setw manipulátor: az utána
+    // következő kiírt dolgot 5 karakter szélességűre veszi.
+    // Mintha printf %5d lenne.
+    std::cout &lt;&lt; std::setw(5) &lt;&lt; ++i &lt;&lt; &quot;. sor: &quot; &lt;&lt; s &lt;&lt; std::endl;
+is.close();</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Komplexebb példa">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Komplexebb példa<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Számoljuk meg, egy szövegfájlban melyik szó hányszor szerepel.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;fstream&gt;
+
+int main()
+{
+    std::ifstream is(&quot;fajl.txt&quot;);   // konstruktor egyből meg is nyitja
+    if (!is) {
+        std::cerr &lt;&lt; &quot;Nem lehet megnyitni!&quot; &lt;&lt; std::endl;
+        return 1;
+    }
+
+    std::string s;
+    std::map&lt;std::string, int&gt; m;   // sztringeket képzünk le egészekre
+
+    // Beolvasunk egy szót...
+    while (is &gt;&gt; s) {
+        // A map megfelelő számát növeljük eggyel. Ha még
+        // nem volt olyan, létrejön 0 értékkel, és az növelődik.
+        m[s]++;
+    }
+
+    std::map&lt;std::string, int&gt;::iterator it;
+    for (it = m.begin(); it != m.end(); ++it) {
+        std::cout &lt;&lt; it-&gt;second &lt;&lt; &quot;x szerepelt ez: &quot;;
+        std::cout &lt;&lt; it-&gt;first &lt;&lt; std::endl;
+    }
+}</code></pre>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

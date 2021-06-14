@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Összetett feladatok az STL-hez</title>
+<meta property="og:title" content="TEST InfoC++11 :: Összetett feladatok az STL-hez">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Összetett feladatok, rövid megoldásokkal. Lényeg, hogy minél több elemet használjunk az STL-ből!">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Összetett feladatok, rövid megoldásokkal. Lényeg, hogy minél több elemet használjunk az STL-ből!">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<link rel="stylesheet" href="sakk.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Összetett feladatok az STL-hez">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Összetett feladatok az STL-hez</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.02.08.</p>
+<p class="kivonat">Összetett feladatok, rövid megoldásokkal. Lényeg, hogy minél több elemet használjunk az STL-ből!</p>
+</div>
+
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első három feladatot meg kell oldani.</p>
+<p>Javaslat a munkához: előbb gondold végig mindig fejben vagy rajzon, milyen adatokat szeretnél
+tárolni, és hogy azokon milyen algoritmust szeretnél futtatni. Ebből következik majd,
+hogy milyen tárolót keresel a megoldáshoz. Ha nem így teszel, több órányi kemény kódolással
+spórolsz meg magadnak pár perc gondolkodást....</p>
+</blockquote>
+
+<p>Az alábbi feladatoknál az a cél, hogy minél több STL elemet használj! Néhol funktorokat kellhet majd írni, ehhez
+használhatsz lambda függvényeket, vagy klasszikus funktor osztályokat is.</p>
+
+<a href="stl_map.jpg" target="_blank" style="display: block;"><img src="stl_map_small.jpg" class="kozep arnyek"></a>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Szavak gyakoriság szerint</a>
+                      <li><a href="index.html#2" class="">Időpont és dátum</a>
+                      <li><a href="index.html#3" class="">Ajándékok (Advent of Code 2015/3)</a>
+                      <li><a href="index.html#4" class="">Ajándékok II.</a>
+                      <li><a href="index.html#5" class="">Nyolc királynő</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szavak gyakoriság szerint">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Szavak gyakoriság szerint<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Van egy program, amelyik Stroustrup minden könyvében szerepel (az újban is: <a href="http://www.stroustrup.com/Programming/">http://www.stroustrup.com/Programming/</a>). Ebben statisztikát kell készíteni a szabványos bemenet szavairól: kiírni őket ábécében, és melléjük írni, melyik hányszor szerepelt. Ez <code>std::map</code>-pel ilyen egyszerű:</p>
+
+<pre   ><code class="language-c">int main() {
+    std::map&lt;std::string, int&gt; m;
+    std::string s;
+    while (std::cin &gt;&gt; s)
+        ++m[s];
+    for (auto p : m)
+        std::cout &lt;&lt; p.first &lt;&lt; &quot; &quot; &lt;&lt; p.second &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Rendezve kapjuk az elemeket, mert a map a sztring szerint rendezve tárol (bináris fában); az indexelő operátor pedig kényelmes, mert a nem létező elemet a megindexeléskor létrehozza.</p>
+
+<pre class="screenshot">
+alma korte barack barack
+</pre>
+
+<pre class="screenshot">
+alma 1
+barack 2
+korte 1
+</pre>
+
+<p>A feladat (szintén az új könyvéből): írd át úgy a programot, hogy ne ábécé sorrend szerint, hanem <strong>gyakoriság szerint rendezve</strong> írja ki a szavakat! Bármilyen STL tárolót használhatsz. Sőt a feladat egészen konkrétan ez: írd meg úgy a programot, hogy minél inkább az STL elemeit használod!</p>
+
+<pre class="screenshot">
+1 alma korte
+2 barack
+</pre>
+
+<details >
+<summary>Első tipp</summary>
+<div>
+<p>Ne töröld ki a meglévő kódot! Elsőre felépíteni azt a tárolót, amiben gyakoriság szerint vannak csoportosítva a szavak, nagyon nehéz lenne. A feladat igazából az, hogy a meglévő
+tárolót feldolgozva építs fel egy másikat.</p>
+</div>
+</details>
+
+<details >
+<summary>Második tipp</summary>
+<div>
+<p>Ügyelni kell arra, hogy egy gyakorisághoz több szó is tartozhat. Például a fenti bemenetnél az almának és a körtének is 1 a gyakorisága. Csinálhatunk olyan leképezést, aminél a gyakoriság a kulcs, de akkor egy kulcshoz több értéket is kell tárolni.</p>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A megoldás pl. egy <code>map&lt;int, vector&lt;string&gt;&gt;</code> lehet; ez egy kulcshoz több értéket is tud tárolni.</p>
+<p>Az alábbi mintamegoldás a hecc kedvéért nem tartalmaz ciklust.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;iterator&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::map&lt;std::string, int&gt; m;
+    for_each(std::istream_iterator&lt;std::string&gt;(std::cin),
+             std::istream_iterator&lt;std::string&gt;(),
+             [&amp;] (std::string s) {
+                 ++m[s];
+             });
+             
+    std::cout &lt;&lt; &quot;Szavak szerint:&quot; &lt;&lt; std::endl;
+    for_each(m.begin(), m.end(), [] (auto p) {
+        std::cout &lt;&lt; p.first &lt;&lt; &quot; &quot; &lt;&lt; p.second &lt;&lt; std::endl;
+    });
+
+    std::cout &lt;&lt; &quot;Gyakoriság szerint:&quot; &lt;&lt; std::endl;
+    std::map&lt;int, std::vector&lt;std::string&gt;&gt; mm;
+    for_each(m.begin(), m.end(), [&amp;] (auto p) {
+        mm[p.second].push_back(p.first);
+    });
+    for_each(mm.begin(), mm.end(), [] (auto p) {
+        std::cout &lt;&lt; p.first &lt;&lt; &quot; &quot;;
+        std::copy(p.second.begin(), p.second.end(), std::ostream_iterator&lt;std::string&gt;(std::cout, &quot; &quot;));
+        std::cout &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Időpont és dátum">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Időpont és dátum<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Hogy működik a lenti kód? Mi történik itt?</p>
+
+<pre   ><code class="language-c">#include &lt;utility&gt;
+#include &lt;tuple&gt;
+#include &lt;iostream&gt;
+
+struct Time {
+    int h, m;
+};
+
+struct Date {
+    int y, m, d;
+};
+
+bool operator&lt;(Time t1, Time t2) {
+    return std::make_pair(t1.h, t1.m) &lt; std::make_pair(t2.h, t2.m);
+}
+
+bool operator&lt;(Date d1, Date d2) {
+    return std::make_tuple(d1.y, d1.m, d1.d) &lt; std::make_tuple(d2.y, d2.m, d2.d);
+}
+
+int main() {
+    std::cout &lt;&lt; (Time{12, 15} &lt; Time{13, 45});
+    std::cout &lt;&lt; (Date{2011, 11, 11} &lt; Date{2012, 11, 12});
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az <code>std::tuple</code> hasonló az <code>std::pair</code> osztályhoz: egy ad-hoc adatcsomag, de nem
+két elemből, hanem bármennyiből.</p>
+<p>A <code>pair</code> érdekessége, hogy definiálja a relációs operátorokat, <code>==</code>, <code>!=</code>
+és a többiek. Ezek az operátorok előbb a <code>first</code>, aztán a <code>second</code> adattagot hasonlítják
+össze. A <code>tuple</code> ugyanezt csinálja: megvizsgálja az első adatot, ha abból nem dől el, akkor a másodikat,
+és így tovább. A dátumoknál pont ez kell nekünk: az év kisebb-e vagy nem; ha az
+évek egyformák, akkor a hónap kisebb-e vagy nem, és végül a nap.</p>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Ajándékok (Advent of Code 2015/3)">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Ajándékok (Advent of Code 2015/3)<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A mikulás ajándékokat visz végtelen, kétdimenziós rácson elhelyezkedő házakba.</p>
+
+<p>Kezdetben beadja az ajándékot a kiindulási pozícióban lévő házba, utána pedig rádión kapja az utasításokat, merre kell tovább mennie: északra (<code>^</code>, kalap), délre (<code>v</code>, kis v betű), keletre (<code>&gt;</code>) vagy nyugatra (<code>&lt;</code>, kacsacsőrök). Minden lépés után bead egy ajándékot az új pozícióban lévő házba.</p>
+
+<p>A gond csak az, hogy az utasítások kicsit össze-vissza  vannak, ezért némely háznál többször is jár. Kérdés az, hogy <strong>hány házba vitt legalább egy ajándékot</strong>.</p>
+
+<p>Például:</p>
+<ul>
+    <li><code>&gt;</code> két házba; egyik a kiindulási pozíció, másik pedig az attól keletre lévő.
+    <li><code>^&gt;v&lt;</code> négy házba; a kiinduló házban így két ajándékot kapnak.
+    <li><code>^v^v^v^v^v</code> rengeteg ajándékot kap két szerencsés gyerek.
+</ul>
+
+<p>Oldd meg a feladatot STL eszközökkel! Saját osztály definiálására nem lesz szükséged.</p>
+
+<details >
+<summary>Tipp – a tároló</summary>
+<div>
+<p>Minden háznál azt kell megjegyezni, hogy voltunk-e már ott, vagy nem. Azaz hogy láttuk-e már azt a pozíciót, vagy nem. Ha többször voltunk ott, az nem számít már. Ez egy matematikai fogalomhoz vezet.</p>
+</div>
+</details>
+
+<details >
+<summary>Tipp – a pozíció</summary>
+<div>
+<p>A pozíció egy egész számpárral adható meg.</p>
+</div>
+</details>
+
+<p>Bemenő adat: <a href="santa.txt">santa.txt</a>, erre a kimenet 2081 kell legyen. Mentsd el fájlként, mert copy-paste közben lemaradhat a második fele!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A megoldás egy halmaz, amelynek a számossága a kérdés. A pozíciót egy egész számpár (<code>std::pair&lt;int, int&gt;</code>) tárolhatja. Ez azért előnyös, mert annak van <code>&lt;</code> operátora, amit amúgy a halmaz igényel.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;utility&gt;
+#include &lt;set&gt;
+#include &lt;sstream&gt;
+
+int main() {
+    std::istringstream is(&quot;^&gt;v&lt;&quot;);
+    
+    using position = std::pair&lt;int, int&gt;;
+    std::set&lt;position&gt; visited;
+    position pos = {0, 0};
+    visited.insert(pos);
+    char c;
+    while (is &gt;&gt; c) {
+        switch (c) {
+            case '&lt;': pos.first--; break;
+            case '&gt;': pos.first++; break;
+            case '^': pos.second++; break;
+            case 'v': pos.second--; break;
+        }
+        visited.insert(pos);
+    }
+    std::cout &lt;&lt; visited.size();
+}</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Ajándékok II.">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Ajándékok II.<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A szituáció ugyanaz mint az előbb: a véletlenszerű bolyongás közben a házakba több ajándékot is visz. Vannak olyan szerencsés gyerekek, akik több ajándékot is kapnak, ha az ő házukat többször is érinti.</p>
+
+<p>A kérdés: <strong>hol lakik a legszerencsésebb gyerek?</strong> Másképp fogalmazva: mi annak a háznak a koordinátája, ahova a legtöbb ajándék került? (Ha több egyforma van, akkor az egyik.)</p>
+
+<p>Bemenő adat: <a href="santa.txt">santa.txt</a>, erre a kimenet: 23 ajándék, a (-11;9) pozícióban (matematikában megszokott koordinátarendszer szerint, x jobbra, y felfelé).</p>
+
+<details >
+<summary>Tipp – a tároló</summary>
+<div>
+<p>A pozíciókat leképezzük egy egész számra: hány ajándék került oda.</p>
+</div>
+</details>
+<details >
+<summary>Tipp – a maximumkeresés</summary>
+<div>
+<p>Van, nem kell megírni: <code>std::max_element</code>. De hogy kell paraméterezni?</p>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A tároló <code>map&lt;position, int&gt;</code> lehet. Ha egy ilyenen iterálunk, látjuk azt is,
+hogy miket tartalmaz: <code>pair&lt;position, int&gt;</code>-eket, ahol <code>p.first</code> a kulcs
+és <code>p.second</code> az érték. A maximumkeresésnél az értéket figyeljük, ezért a <code>max_element</code>
+függvénynek adott lambda a <code>second</code> adattagokat hasonlítja össze.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;utility&gt;
+#include &lt;map&gt;
+#include &lt;algorithm&gt;
+#include &lt;fstream&gt;
+
+int main() {
+    std::ifstream is(&quot;santa.txt&quot;);
+    
+    using position = std::pair&lt;int, int&gt;;
+    std::map&lt;position, int&gt; presents;
+    position pos = {0, 0};
+    presents[pos] += 1;
+    char c;
+    while (is &gt;&gt; c) {
+        switch (c) {
+            case '&lt;': pos.first--; break;
+            case '&gt;': pos.first++; break;
+            case '^': pos.second++; break;
+            case 'v': pos.second--; break;
+        }
+        // itt figyelni kellene arra, hogy a mozgás elmaradása esetén
+        // a növelés elmaradjon (pl. szóköz van a bemeneti fájlban) 
+        presents[pos] += 1;
+    }
+    // ellenőrzés: hova mennyi került?
+    // for (auto const&amp; pair : presents)
+    //     std::cout &lt;&lt; pair.first.first &lt;&lt; &quot;;&quot; &lt;&lt; pair.first.second
+    //               &lt;&lt; &quot; -&gt; &quot; &lt;&lt; pair.second &lt;&lt; std::endl;
+
+    auto it = std::max_element(presents.begin(), presents.end(),
+        [] (std::pair&lt;position, int&gt; a, std::pair&lt;position, int&gt; b) {
+            return a.second &lt; b.second;
+        });
+    std::cout &lt;&lt; &quot;Legtöbb ajándék: &quot; &lt;&lt; it-&gt;second &lt;&lt; &quot; darab, &quot;
+              &lt;&lt; &quot;(&quot; &lt;&lt; it-&gt;first.first &lt;&lt; &quot;;&quot; &lt;&lt; it-&gt;first.second &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Nyolc királynő">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Nyolc királynő<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A feladat közismert: helyezzünk el 8 királynőt a sakktáblán úgy, hogy azok nem ütik egymást!</p>
+
+<p>A királynők vízszintesen, függőlegesen és átlósan léphetnek. Ugyanabban a sorban vagy oszlopban, illetve ugyanazon a 45 fokos (átlós) vonalon nem lehet két királynő.</p>
+
+<p>Első ötletünk az lehetne, hogy a 8×8=64 pozícióra vizsgáljuk, hogyan osszuk el a 8 királynőt. Tehát 64 elem 8-adosztályú kombinációit vizsgáljuk; 4426165368 lehetőségből kell a 92 helyeset megtalálnunk. Ez sokáig fog tartani.</p>
+
+<p>Észrevehetjük azt, hogy minden királynő külön sorban kell legyen, mert ha nem így lenne, akkor ütnék egymást. Ebből következően így is gondolkodhatunk: minden sorban pontosan egy királynő lesz, tehát azt kell eldöntenünk, hogy melyik sorban hol legyen a királynő. Az adatszerkezetünk így egy <code>int[8]</code>; pl. <code>[5,2,4,7,3,8,6,1]</code> jelentése az, hogy a felső sor 5. oszlopában, a következő sor 2. oszlopában, ... van királynő. Így a programunknak már csak 8<sup>8</sup>, azaz 16777216 lehetőséget kell megvizsgálnia.</p>
+
+<table class="sakk">
+<tbody><tr><th class="sakk-idx">5</th><td></td><td></td><td></td><td></td><td>♛</td><td></td><td></td><td>
+</td></tr><tr><th class="sakk-idx">2</th><td></td><td>♛</td><td></td><td></td><td></td><td></td><td></td><td>
+</td></tr><tr><th class="sakk-idx">4</th><td></td><td></td><td></td><td>♛</td><td></td><td></td><td></td><td>
+</td></tr><tr><th class="sakk-idx">7</th><td></td><td></td><td></td><td></td><td></td><td></td><td>♛</td><td>
+</td></tr><tr><th class="sakk-idx">3</th><td></td><td></td><td>♛</td><td></td><td></td><td></td><td></td><td>
+</td></tr><tr><th class="sakk-idx">8</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>♛
+</td></tr><tr><th class="sakk-idx">6</th><td></td><td></td><td></td><td></td><td></td><td>♛</td><td></td><td>
+</td></tr><tr><th class="sakk-idx">1</th><td>♛</td><td></td><td></td><td></td><td></td><td></td><td></td><td>
+</td></tr></tbody></table>
+
+<p>Sőt, mivel egy oszlopban nem lehet két királynő, ezért ebben a tömbben különböző számoknak kell lenniük, különben azonos oszlopban lennének. Tehát igazából az <code>[1,2,3,4,5,6,7,8]</code> tömb permutációiból kell a megoldásokat kiválasztanunk; 8!, azaz 40320 megoldás közül 92-t.</p>
+
+<p>Írd meg a fentiek alapján a programot, amelyik megkeresi és kirajzolja a megoldást! Használd az STL tárolóit is algoritmusait!</p>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<code>std::vector</code>, <code>std::next_permutation</code>, esetleg <code>std::all_of</code>.
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az adatszerkezet kizárja, hogy azonos oszlopban vagy azonos sorban több királynő helyezkedjen el.
+Ez azt jelenti, hogy már csak azt kell vizsgálnunk, hogy átlósan támadják-e egymást.</p>
+<p>Átlósan akkor támadják egymást, ha a sorok és oszlopok szerinti távolságuk megegyezik: Δx = Δy.
+Figyelve persze arra, hogy a távolságok abszolút értékét vegyük: (2;2) és (2;-2) is támadásnak számít,
+az egyik ╱, a másik ╲ irányban.</p>
+<p>Az <code>nqueen_ok()</code> függvényben minden királynő (<code>i</code>) pozícióját összevetjük minden
+további királynővel (<code>j</code>). A sort a tömbindexek adják meg, az oszlopot a tömbértékek. Mivel
+<code>j&gt;i</code>, az egyik abszolút érték elmaradhat – igaz, gond sem lenne belőle.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;numeric&gt;
+
+void nqueen_print(std::vector&lt;int&gt; const &amp;queens) {
+    for (int i = 0; i &lt; (int)queens.size(); ++i) {
+        for (int j = 1; j &lt;= (int)queens.size(); ++j)
+            std::cout &lt;&lt; (queens[i] == j ? 'X' : '.');
+        std::cout &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; std::endl;
+}
+
+bool nqueen_ok(std::vector&lt;int&gt; const &amp;queens) {
+    for (int i = 0; i &lt; (int)queens.size()-1; ++i)
+        for (int j = i+1; j &lt; (int)queens.size(); ++j)
+            if (j-i == std::abs(queens[j]-queens[i]))
+                return false;
+    return true;
+}
+
+int main() {
+    std::vector&lt;int&gt; queens(8);
+    std::iota(queens.begin(), queens.end(), 1);
+    do {
+        if (nqueen_ok(queens))
+            nqueen_print(queens);
+    } while (std::next_permutation(queens.begin(), queens.end()));
+}</code></pre>
+<p>Alább egy másik lehetőség, amelyben <code>std::all_of</code>-ot és <code>std::none_of</code>-ot használunk.
+<code>std::all_of</code>, mindegyik királynőnek olyannak kell lennie, hogy <code>std::none_of</code>, semelyik
+másikat nem üti. Az <code>i</code> és <code>j</code> változók, továbbá az abszolút érték ugyanolyan szerepűek,
+mint a fenti kódban. A megoldás Dobos-Kovács Mihály ötletét kiegészítve készült.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstdlib&gt;
+
+int main() {
+    std::vector&lt;int&gt; pos = {1, 2, 3, 4, 5, 6, 7, 8};
+    std::vector&lt;int&gt; const idxs = {0, 1, 2, 3, 4, 5, 6, 7};
+    std::vector&lt;std::vector&lt;int&gt;&gt; solutions;
+
+    do {
+        if (std::all_of(idxs.begin(), idxs.end() - 1, [&amp;](int i) {
+            return std::none_of(idxs.begin() + i+1, idxs.end(), [&amp;](int j) {
+                return j-i == std::abs(pos[i]-pos[j]);
+            });
+        })) solutions.push_back(pos);
+    } while (std::next_permutation(pos.begin(), pos.end()));
+
+    for (auto const &amp; solution: solutions) {
+        for (auto pos : solution)
+            std::cout &lt;&lt; pos;
+        std::cout &lt;&lt; std::endl;
+    }
+}</code></pre>
+</div>
+</details>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

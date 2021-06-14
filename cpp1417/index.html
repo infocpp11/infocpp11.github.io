@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: C++14/17 újdonságok</title>
+<meta property="og:title" content="TEST InfoC++11 :: C++14/17 újdonságok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="C++14/17 újdonságok">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="C++14/17 újdonságok">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="C++14/17 újdonságok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">C++14/17 újdonságok</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">C++14/17 újdonságok</p>
+</div>
+
+<p>Ez az oldal áttekintést ad a C++14 és a C++17 nyelv újdonságairól (a teljesség igénye nélkül). Nem olyan részletes, mint a
+tananyag többi része. De ezek a részek nem is szerepelnek a számonkérésekben, hanem inkább kitekintést nyújtanak.</p>
+
+<p>C++17 tekintetében érdemes ezt az oldalt is nézni: <a href="http://www.bfilipek.com/2017/01/cpp17features.html">http://www.bfilipek.com/2017/01/cpp17features.html</a>. Ez az egyes eszközöket támogató fordítóprogramok verziószámát is jelzi. Hasznos gyűjtemény még ez: <a href="index.html#changescpp1417">Changes between C++14 and C++17 DIS</a>.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Kiértékelési sorrendek</a>
+                      <li><a href="index.html#2" class="">Literálisok</a>
+                      <li><a href="index.html#3" class="">Inline és sablon változók</a>
+                      <li><a href="index.html#4" class="">Lambda függvények</a>
+                      <li><a href="index.html#5" class="">std::string_view</a>
+                      <li><a href="index.html#6" class="">Garantált copy elision optimalizáció</a>
+                      <li><a href="index.html#7" class="">Visszatérési típus levezetése és decltype(auto)</a>
+                      <li><a href="index.html#8" class="">constexpr függvények</a>
+                      <li><a href="index.html#9" class="">Attribútumok</a>
+                      <li><a href="index.html#10" class="">Szabványos könyvtár</a>
+                      <li><a href="index.html#11" class="">Elnevezés: „universal reference” vs. „forwarding reference”</a>
+                      <li><a href="index.html#12" class="">Osztályok sablonparamétereinek levezetése</a>
+                      <li><a href="index.html#13" class="">Sablon metaprogramozás eszközök</a>
+                      <li><a href="index.html#14" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kiértékelési sorrendek">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="evaluationorder" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Kiértékelési sorrendek<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C nyelvben annak idején elég lazán vették a kiértékelési sorrendek meghatározását. Nem volt megkötve, hogy az
+értékadások bal vagy jobb oldala értékelődik ki előbb. Nem volt megkötve, hogy a függvényhívások paraméterei milyen
+sorrendben értékelődnek ki. Azonban azóta a programozási stílus sokat változott, és ezt követnie kell a nyelvnek is.
+A C++17-ben ezért:</p>
+
+<ul>
+    <li>A postfix kifejezések, pl. az indexelések, függvényhívások, balról jobbra értékelődnek ki.
+    <li>Az értékadások operandusai jobbról balra értékelődnek ki.
+    <li>A léptető (és egyben kiíró, beolvasó) operátorok balról jobbra értékelődnek ki.
+</ul>
+
+<p>Hogy erre miért volt szükség, arról a <a href="index.html#evaluationorderpdf">hivatkozott írásban</a> lehet olvasni; néhány kézzelfogható
+példával együtt. Ez a változás egyébként, bár igencsak a nyelv alapjait érinti, jól megírt programok esetén nem okoz
+semmiféle problémát.</p>
+
+<div class="megjegyzes">
+
+<p>Vigyázat! Az operátorok precedenciája és asszociativitása nem ugyanazt jelenti, mint a kiértékelési sorrend! A precedencia azt
+határozza meg, hogy melyik operátornak mik az operandusai. A kiértékelési sorrend pedig azt, hogy a mellékhatások (változások)
+milyen sorrendben történnek meg. Például az alábbi kódban az indexelő és a függvényhívó operátor nagyon magas, míg az értékadó
+operátor nagyon alacsony precedenciájú. Ezért biztos, hogy az értékadás az indexelő operátor által visszaadott memóriahelyre
+fogja írni a tagfüggvény által visszaadott értéket. Ez teljesen egyértelmű.</p>
+
+<pre   ><code class="language-c">std::map&lt;int, int&gt; m;
+m[0] = m.size();</code></pre>
+
+<p>Csak az nem volt eddig egyértelmű, hogy az indexelő operátor, vagy a méret lekérdezése hívódik meg előbb. Mert ha az indexelő,
+akkor a <code>.size()</code> már 1-et fog adni (a map indexelése létrehozza a nem létező elemet), viszont ha fordítva, akkor 0-t.
+Most már kötött a sorrend, a méret lekérdezése fog előbb meghívódni, és csak utána történik meg az indexelés.</p>
+
+</div>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Literálisok">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="cpp14literalisok" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Literálisok<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Bináris literálisok</h3>
+
+<p>A rendszerközeli programozásban gyakran használunk bináris konstansokat. Hajdanán, a C nyelv születésekor sokkal nagyobb volt a
+rendszerközeli feladatok megoldására írt programok aránya, sőt a C nyelvet eleve ilyen célra találták ki – mégsem lehetett benne
+bináris, csak oktális hexadecimális konstansokat megadni. Aztán ezt a C++ nyelv örökölte is. Ennek fényében meglepő, hogy a
+C++14-be behozták a bináris literálisokat – de most már ezek léteznek és használhatóak: <code>0bxxxx</code> formában kell
+megadni őket.</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">std::cout &lt;&lt; 0b1100;    // 12</code></pre>
+
+<h3>Számjegyek csoportosítása: „ezres” elválasztók</h3>
+
+<p>A számok olvasását megkönnyíti az ezres elválasztók használata. Lokalizációtól (országtól, nyelvtől) függően az
+<code>1000</code> számot <code>1 000</code>, <code>1.000</code>, <code>1,000</code> vagy <code>1'000</code> formában is szokás
+írni. C++-ban nyilván se a szóköz, se a pont vagy a vessző nem működhetnének (mást jelentenek), de a C++14 óta az aposztrófok
+használhatók a számjegyek csoportosítására:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">std::cout &lt;&lt; 1'234'567.8;</code></pre>
+
+<p>A fordító nem veszi figyelembe az aposztrófok helyzetét, csak a kód olvashatóságát javítják. A nyelvi elem kombinálható az eddig
+ismert literális módosítókkal:</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; std::boolalpha &lt;&lt; (0xFC == 0b1111'1100); // true
+
+std::cout &lt;&lt; 0'100; // 64</code></pre>
+
+<h3>Literális operátorok a szabványos könyvtárban</h3>
+
+<p>A C++11 új eleme volt a literális operátorok megadásának lehetősége, de maga a nyelv nem definiált ilyeneket. A C++14-ben
+ez változott:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">auto str = &quot;hello vilag&quot;s; // std::string
+auto hello = &quot;hello vilag&quot;s + &quot;!&quot;s;
+
+auto dur = 60s; // std::chrono::seconds
+
+auto z = 1i; // std::complex&lt;double&gt;</code></pre>
+
+<p>Ezek persze mind kényelmi eszközök. Aki <code>std::string + char[]</code> és <code>char[] + std::string</code>
+mellett írt már le véletlenül <code>char[] + char[]</code> alakú kódot is: <code>"hello vilag" + "!"</code>, az tudja. A
+fenti esetben egyébként <code>"hello vilag"s + "!"</code> is működne.</p>
+
+<p>Külön érdekesség, hogy két <code>operator"" s</code> van. De <a href="../ea03/index.html#mertekegyseg">emlékezzünk vissza</a>, a kettő könnyen megkülönböztethető:</p>
+
+<ul>
+<li>A <code>"hello vilag"s</code> kódrészlet az
+<code>operator"" s(char const *, size_t)</code> függvényt hívja, mert sztring van az <code>s</code> előtt.</li>
+
+<li>A <code>60s</code> kifejezés pedig a <code>operator"" s(unsigned long long)</code> függvény meghívását
+eredményezi. Vagy esetleg az <code>operator"" s(char const *)</code>-ét, aminek a <code>size_t</code> híján
+szintén más a fejléce, de valószínűleg nem így implementálták ezt az operátort, mert az előző megoldás célravezetőbb.</li>
+</ul>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Inline és sablon változók">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="cpp14inlinetemplatevar" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Inline és sablon változók<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Inline változók</h3>
+
+<p>A C++ nyelvnek van egy szabálya, amit a szabvány és más szövegek is nagyon gyakran hivatkoznak.
+Ez az ODR (one definition rule), amelyik azt mondja ki, hogy bár deklarálni mindent sokszor szabad, definiálni
+csak egyszer lehet. A teljes fordítási modell erre épül, emiatt biztosított az, hogy a különálló forrásfájlokból
+lefordított program működni tud.</p>
+
+<p>A C nyelvtől örökölt szabályba az inline függvények és a sablonok egyszer már bekavartak. Mert mindkét nyelvi
+elemnél lényegében elvárás az, hogy függvénytörzseket is tegyünk fejlécfájlokba. De amíg minden fordítási egységben
+pontosan ugyanaz a függvénytörzs, osztálydefiníció stb. látszik, addig ez nem jelent problémát. Lehet hogy így egy
+függvénynek több lefordított változata lesz, de lévén hogy egyformák, a linker tetszőlegesen választhat közülük.</p>
+
+<p>A C++17 kiterjeszti a többszöri definíciók lehetőségét a <a href="index.html#inlinevariables">globális változókra is</a>. Ha létre
+szeretnénk hozni egy globális változót, de nem szeretnénk csak amiatt külön, új fordítási egységet is kezdeni, az
+<code>inline</code> kulcsszóval megjelölhetjük azt:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">#ifndef MYHEADER_H
+#define MYHEADER_H
+
+/* ... */
+
+inline int i = 3;
+
+/* ... */
+#endif</code></pre>
+
+<p>Ez egyszerűbbé teszi a header-only függvénykönyvtárak fejlesztését is.</p>
+
+
+
+<h3>Sablon változók</h3>
+
+<p>Gyakran szükség van <a href="index.html#templatevariables">sablon változókra</a> is. Azaz önálló változókra, amik sablonok kell legyen, de
+emiatt nem akarunk egy külön osztályt létrehozni. Az eredeti javaslatból vett példa alapján:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+template&lt;typename T&gt;
+constexpr T pi = T(3.1415926535897932385);
+
+template&lt;&gt;
+constexpr const char* pi&lt;const char*&gt; = &quot;pi&quot;;
+
+int main() {
+    std::cout &lt;&lt; std::setprecision(10) &lt;&lt; pi&lt;double&gt; &lt;&lt; std::endl;
+    std::cout &lt;&lt; std::setprecision(10) &lt;&lt; pi&lt;float&gt; &lt;&lt; std::endl;
+    std::cout &lt;&lt; pi&lt;char const*&gt; &lt;&lt; std::endl;
+}</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Lambda függvények">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="cpp14lambda" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Lambda függvények<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Generikus lambdák</h3>
+
+<p>C++11-ben a <a href="../ea09/index.html#lambda">lambda függvényeknél</a> mindig meg kellett adni a paraméterek típusát:</p>
+
+<pre   ><code class="language-cbub">auto lambda = [](int x, int y) { return x+y; };</code></pre>
+
+<p>C++14-ben ezekre a helyekre már az <code>auto</code> kulcsszót is írhatjuk:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">auto lambda = [](auto x, auto y) { return x+y; };
+
+std::cout &lt;&lt; lambda(3, 4) &lt;&lt; std::endl; // 7
+std::cout &lt;&lt; lambda(5.6, 7.8) &lt;&lt; std::endl;    // 13.4
+std::cout &lt;&lt; lambda(&quot;lo&quot;, 3) &lt;&lt; std::endl; // lo</code></pre>
+
+<p>Nagy varázslatra itt egyébként a megvalósítás terén nem kell gondolni, csak két
+meglévő nyelvi elemet kombináltak. Az <code>int x, int y</code> paraméterezésű lambdából
+<code>operator() (int x, int y)</code> tagfüggvénnyel rendelkező osztályt generál a fordító.
+A generikus lambdák esetén a szóban forgó függvényhívó operátor egyszerűen sablon lesz:</p>
+
+<pre   ><code class="language-c">class Lambda {
+  public:
+    template &lt;typename XTYPE, typename YTYPE&gt;
+      auto operator() (XTYPE x, YTYPE y) { return x+y; }
+};</code></pre>
+
+<h3>Lambda kifejezésekben létrehozott változók</h3>
+
+<p>A <code>mutable</code> lambdák kapcsán sok vita volt a C++11 véglegesítése után. A C++-ban szokatlan ez a viselkedés, hogy
+valamit lemásolunk magunknak, és utána nem változtathatjuk meg azt. Ezért a
+C++14-ben bevezettek még egy módot, ahogyan egy lambda funktornak inicializált tagváltozót adhatunk meg:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-c">int arr[] = { 4, 7, 18, 16, 14, 16, 7, 13, 10, 2, 3};
+std::for_each(std::begin(arr), std::end(arr),
+    [count = 0] (int i) mutable {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;. &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+);</code></pre>
+
+<p>Itt a <code>count</code> kívül nem is létezik, csak a lambdán belül jön létre egy <code>auto count = 0</code>, azaz
+<code>int</code> típusú változónk. Erre azért is szükség volt, mert különben nem lehetett csak mozgatható, de
+nem másolható (move-only) objektumokat tenni a lambdákba. Most már lehet:</p>
+
+<pre   ><code class="language-c">std::ofstream os(&quot;hello.txt&quot;);
+auto lambda = [file = std::move(os)] (auto data) mutable {
+    file &lt;&lt; data;
+};
+lambda(&quot;hello vilag&quot;);</code></pre>
+
+<h3>Lambda <code>*this</code></h3>
+
+<p>C++11-ben a lambda kifejezések capture-specifier részében használhattuk a <code>this</code> kulcsszót:
+ez azt jelentette, hogy a <code>this</code> pointer eltárolódott a lambda objektumban, a függvény pedig az adott
+objektum tagfüggvényeként működött.</p>
+
+<p>Ez némileg talán szokatlan viselkedés (<a href="index.html#capturequirk1">1</a>, <a href="index.html#capturequirk2">2</a>). Megszoktuk,
+hogy a lambdák esetén az address-of operátor jelzi a referencia szerinti eltárolást: <code>[i]</code>
+hatására érték szerint, <code>[&amp;i]</code> referencia szerint látja a lambda az <code>i</code> változót. A
+<code>[this]</code> leírása esetén azonban egy pointer fog csak másolódni érték szerint. A mutatott objektumot
+referencia szemantikával látjuk! Ez a viselkedés és az élettartam szempontjából is egész más: az eredeti
+objektum változhat, és figyelnünk kell az élettartamára is, léteznie kell a lambda függvény meghívásakor.</p>
+
+<div class="sticky">C++17</div>
+<p>A C++17-ben lehetséges <code>[*this]</code>-t is írni: ez a lambda kifejezést létrehozó objektum érték
+szerinti másolását jelenti.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::string_view">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="cpp17stringview" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        std::string_view<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Gyakran szükségünk van sztring paraméterű függvényre: például egy megnyitandó fájl nevét kaphatja
+meg a függvényünk. Ilyenkor mindig fölmerül a kérdés: <code>char const *</code> vagy
+<code>std::string</code> típusú legyen a paraméter? C++17 óta egyik sem: helyette
+<code>std::string_view</code> típusú objektumot érdemes létrehozni. Ezzel a típussal,
+és az előnyeivel egy <a href="../string_view/index.html">külön írás foglalkozik</a>.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Garantált copy elision optimalizáció">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="cpp17copyelision" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Garantált copy elision optimalizáció<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Amikor egy függvényből objektummal térünk vissza, az objektum többször is lemásolódhat:</p>
+
+<pre   ><code class="language-c">Obj foo() {
+    Obj x;
+    return x;   /* 1 */
+}
+
+int main() {
+    Obj y = foo();  /* 2 */
+}</code></pre>
+
+<p>Itt az objektum kétszer is lemásolódhat: egyszer a függvényből visszatéréskor az <code>x</code> változó memóriaterületéről
+a visszatérési érték helyére, utána pedig a visszatérési érték helyről az <code>y</code> változó memóriaterületére.</p>
+
+<p>A két felesleges másolást meg kellene spórolni. A jobbérték referenciák bevezetésével sokat javult a helyzet, mert ez a két 
+másolás inkább mozgatás lehet. De már előtte is, a nyelv '98-as változatában megengedett volt a fordítók számára az, hogy az 
+objektum áthelyezése céljából hívott másoló konstruktor + destruktor párosakat kioptimalizálják, és ezt szinte mindig meg is tudják 
+tenni.</p>
+
+<p>Egy szokatlan helyzet adódik itt. Amikor a mozgatás (másoló/mozgató konstruktor + destruktor) kioptimalizálódik, akkor 
+tulajdonképp egyik függvény sincsen meghívva. Ennek ellenére a fordító ellenőrzi a meglétüket, és az elérésüket is 
+(privát/publikus), ami elég furcsa annak fényében, hogy nem lesznek meghívva. Gondot jelent az is, hogy ez lényegében csak egy 
+optimalizáció, tehát a programozó sosem lehet biztos abban, hogy megtörténik-e vagy nem. Gyakran az ígéret helyett garanciát 
+szeretnénk erre, meg azt is szeretnénk, ha nem kellene megírni olyan függvényt, ami garantáltan nem fog meghívódni.</p>
+
+<p>Vagyis most azt szeretnénk jelezni, hogy egy osztálynál kötelezővé akarjuk tenni a fordító számára a <em>copy elision</em>
+optimalizációt. <a href="index.html#copyelision2">C++17-ben ennek a szintaxisa</a> az alábbi:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">struct NonMoveable {
+    NonMoveable() {}
+    std::array&lt;int, 1024&gt; arr;
+
+    NonMoveable(NonMoveable &amp;) = delete;    /* nem hívható */
+    NonMoveable(NonMoveable &amp;&amp;) = delete;
+};
+
+NonMoveable make() {
+    return NonMoveable(); /* rögtön a visszatérési érték helyén jön létre */
+}
+
+auto nm = make();         /* nem hoz létre újat, megtartja a visszatérési értéket */</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Visszatérési típus levezetése és decltype(auto)">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+    <a id="cpp14auto" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Visszatérési típus levezetése és decltype(auto)<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3><code>auto f()</code>: automatikusan meghatározott visszatérési típus</h3>
+
+<p>A C++11-ben, ha egy függvény visszatérési értékét az <code>auto</code> kulcsszóval adtuk meg, akkor a fejléc végén,
+a trailing return type szintaxissal meg kellett adnunk a levezetés módját. Általában ehhez a <code>decltype</code>
+kulcsszót használtuk, amelyben a visszatérésnél előállított (vagy azzal ekvivalens) kifejezést adtunk meg.
+Azért volt erre szükség, hogy a függvény deklarációját és definícióját el lehessen választani egymástól. A
+<code>return</code> utasítás ugyanis csak a függvénytörzsben látszik, a deklarációban még nem:</p>
+
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+  auto add(T1 a, T2 b) -&gt; decltype(a+b);</code></pre>
+
+<p>Ellenben ha például egy <code>inline</code> függvényt írunk, vagy a definíció más okból ismert, a nyíl utáni rész igazából csak 
+kódduplikáció:</p>
+
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+inline auto add(T1 a, T2 b) -&gt; decltype(a+b) {
+    return a+b;
+}</code></pre>
+
+<p>Ezért a C++14 óta megengedett, a C++11 lambda függvényeihez hasonlóan, hogy ezt elhagyjuk. Feltéve persze, hogy a függvény
+definíciója, azaz törzse, látszik a függvényhívás helyén. Tehát:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+inline auto add(T1 a, T2 b) {
+    return a+b;
+}</code></pre>
+
+<p>A lambdákhoz hasonlóan, ha több <code>return</code> utasítás van, akkor az ott megadott kifejezések mind ugyanarra
+a típusra kell kiértékelődjenek.</p>
+
+<p>Rekurzív függvényt is megadhatunk így, csak figyelni kell arra, hogy a visszatérési érték típusa már ismert kell legyen
+a használat helyén:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">OK</div>
+<pre   ><code class="language-c">auto fact(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n*fact(n-1);
+}</code></pre>
+<p>OK; a visszatérési érték <code>int</code> az
+első <code>return</code> alapján, és a másodiknál is
+ez az eredmény.</p>
+</div>
+<div>
+<div class="sticky">Nem<br>OK</div>
+<pre   ><code class="language-c">auto fact(int n) {
+    if (n &gt; 0)
+        return n*fact(n-1);
+    else
+        return 1;
+}</code></pre>
+<p>Nem jó: az első <code>return</code>-nél nem ismert még
+a <code>fact()</code> hívás visszatérési értéke, ezért nem
+hívható meg.</p>
+</div>
+</div>
+
+<h3><code>decltype(auto)</code> alakú változódefiníció</h3>
+
+<p>Az <code>auto</code> és a <code>decltype</code> kapcsán <a href="../ea04/index.html#decltype">tudjuk</a>,
+hogy ezek eltérő levezetési szabályokat alkalmaznak. Az <code>auto</code> általában értéket ad, tehát megszünteti
+az érték referencia voltát:</p>
+
+<pre   ><code class="language-cbub">int&amp; f();
+auto x = f(); // int</code></pre>
+
+<p>Ez általában logikus, mert amikor egy <code>valami x = ...;</code> alakú változódefiníciót látunk, egyből értékre gondolunk, és 
+nem referenciára. Viszont gyakran a pontos típusra lenne szükségünk. A <code>decltype(f())</code> kódrészlet megadja az 
+<code>f</code> függvény visszatérési típusát, de kódduplikációt jelent, mert a hívást kétszer is le kell írnunk, és ez még egy 
+ilyen rövid kódnál is zavaró:</p>
+
+<pre   ><code class="language-cbub">int&amp; f();
+decltype(f()) x = f(); // int&amp;</code></pre>
+
+<p>Ezért C++14-ben bevezették a <code>decltype(auto)</code> jelölést, amellyel változót tudunk úgy létrehozni, hogy
+nem az <code>auto</code>-s, hanem a <code>decltype</code>-os levezetési szabályokat alkalmazzuk:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-cbub">int&amp; f();
+decltype(auto) x = f(); // int&amp;</code></pre>
+
+<p>Sajnos elég nehéz érteni a jelölést, két kulcsszót kötöttek össze eléggé esetleges módon – meg kell tanulni, hogy ez ezt 
+jelenti. <code>auto</code> = automatikusan kitalált típus, <code>decltype</code> = decltype szabályokkal, nem az 
+<code>auto</code>-sak. Ugyanez függvények visszatérési értékénél is használható.</p>
+
+<h3><code>auto f(auto)</code></h3>
+
+<p>A C++17 még azt is megengedi, hogy a függvényparaméterek típusai helyett <code>auto</code>-t írjunk. Elsőre nem
+tűnik annak, de ez egy sablon függvény:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-cbub">auto add(auto a, auto b) {
+    return a+b;
+}</code></pre>
+
+<p>Ezt a C++14 még csak lambda függvényeknél engedte.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="constexpr függvények">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+    <a id="cpp14constexpr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        constexpr függvények<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++11 <code>constexpr</code> függvények törzse <code>return</code> utasítással kellett kezdődjön. Ez az erős
+megkötés sok eszköz használatát kizárja: nem lehet vezérlési szerkezeteket használni (<code>if</code>, <code>for</code>),
+nem lehet változókat definiálni és így tovább.</p>
+
+<p>A C++14-ben lazítottak ezeken a szabályokon. Most már:</p>
+<ul>
+    <li>Lehet változókat létrehozni. Értelemszerűen nem statikusakat, mert egy <code>constexpr</code> függvénynek nem lehet hatása, csak értéke.</li>
+    <li>Lehet elágazásokat: <code>if</code>, <code>switch</code> és ciklusokat: <code>for</code>, <code>while</code> használni.</li>
+    <li>Objektumok tagfüggvényei is hívhatóak, amennyiben az objektumok a <code>constexpr</code> függvényben jöttek létre.</li>
+</ul>
+
+<p>A fentiek alapján C++14-ben ez egy helyes kódrészlet:</p>
+
+<div class="sticky">C++14</div>
+<pre   ><code class="language-c">constexpr int fact(int n) {
+    int acc = 1;
+    for (int i = 2; i &lt; n; ++i)
+        acc *= i;
+    return acc;
+}</code></pre>
+
+<p>C++17-ben <a href="index.html#constexprlambda">lambda függvényeket</a> is lehet definiálni <code>constexpr</code> függvény belsejében.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Attribútumok">
+<div class="slide" id="slide_9">
+
+<a id="9" class="namer"></a>
+    <a id="cpp14attribute" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">9</span><span class="oldalszamafter">. </span>        Attribútumok<a class="hlink" href="index.html#9"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fordítás menetét – implementációtól függő módon – hagyományosan <code>#pragma</code> direktívákkal volt szokás jelölni.
+Van azonban sok általános, minden környezetben egyformán érvényes információ, metaadat a forráskód mellé, amit a fordítóval
+közölni szeretnénk. Például hogy egy paramétert szándékosan nem használunk (és ezért ne figyelmeztessen), vagy hogy egy
+függvény nem tér vissza. Ezeket a C++11 óta ún. <a href="index.html#arnemertzattr">attribútumokkal</a> lehet jelölni, a forráskódban dupla szögletes
+zárójel között. Például:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">[[nodiscard]] void* malloc(size_t s);</code></pre>
+
+<p>A fenti deklaráció egy olyan függvényt ad meg, aminek a visszatérési értékét mindenképpen használnunk kell
+valamire – mert ha nem, az instant memóriaszivárgás lenne.</p>
+
+<p>Szabványosított attribútumok:</p>
+
+<dl>
+    <dt><code>[[noreturn]]</code></dt>
+    <dd>(C++11) Annak jelölése, hogy a függvény soha nem tér vissza.</dd>
+    <dt><code>[[carries_dependency]]</code></dt>
+    <dd>(C++11) Többszálú kódok optimalizálását segíti.</dd>
+    <dt><code>[[deprecated("Hibaüzenet")]]</code></dt>
+    <dd>(C++14) Függvénykönyvtárak elavult függvényeinek megjelölésére. A fordító figyelmeztetést ad, ha a függvényt valaki használja.</dd>
+    <dt><code>[[fallthrough]]</code></dt>
+    <dd>(C++17) <code>switch()</code> szerkezetben a hiányzó <code>break</code> szándékos voltát jelzi.</dd>
+    <dt><code>[[nodiscard]]</code></dt>
+    <dd>(C++17) A jelölt függvénynél, vagy a jelölt típus összes használatánál azt jelzi, hogy a visszatérési értéket nem szabad eldobni.</dd>
+    <dt><code>[[maybe_unused]]</code></dt>
+    <dd>(C++17) Szándékosan nem használt változó vagy paraméter.</dd>
+</dl>
+
+<p>A jelöléshez használt dupla nyitó szögletes zárójel sajnos más szövegkörnyezetben is előfordulhat. Bár extrém eset, de mégis
+lehetséges: indexelő operátor belsejében létrehozott lambda kifejezés. Ha ez előjön, egy plusz zárójelezés
+megoldja a problémát: <code>obj[ ([](){}) ]</code>, vagy esetleg az indexelő operátor helyett
+használhatunk függvényhívó operátort: <code>obj( [](){} )</code>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szabványos könyvtár">
+<div class="slide" id="slide_10">
+
+<a id="10" class="namer"></a>
+    <a id="cpp14std" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">10</span><span class="oldalszamafter">. </span>        Szabványos könyvtár<a class="hlink" href="index.html#10"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<div class="sticky">C++14</div>
+<h3>std::make_unique</h3>
+
+<p>A szabványos <code>std::make_shared&lt;&gt;</code> függvénysablon dinamikusan létrehoz egy objektumot, és <code>std::shared_ptr</code> okos pointerbe csomagolja azt. Mivel van <code>std::unique_ptr</code> is, logikusnak
+tűnik, hogy kell legyen <code>std::make_unique&lt;&gt;</code> is. Ezt azonban a nyelvből <a href="index.html#makeunique">kifelejtették</a>.
+(A szabványt is csak emberek írják, akárhányan is ellenőrzik azt.) A C++14 óta <a href="index.html#spring2013">létezik</a> ez a függvény.</p>
+
+<div class="sticky">C++14</div>
+<h3>std::cbegin, std::rbegin, std::crbegin</h3>
+
+<p>A fentihez hasonlóan, ha a tárolóknak vannak <code>.cbegin()</code> és <code>.rbegin()</code> függvényeik,
+akkor azt gondolnánk, hogy globális <code>std::cbegin()</code>, <code>std::rbegin()</code> és
+<code>std::crbegin()</code> is létezik. C++14 óta megvannak ezek a függvények is.</p>
+
+<h3>Parallel STL</h3>
+<p>A C++17-ben szinte az összes STL algoritmusnak van <a href="index.html#parallel_stl">párhuzamosított változata</a>.
+Például:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">for_each(std::par, first, last, [](auto&amp; x){ process(x); });</code></pre>
+
+<h3>std::any</h3>
+
+<p>A <code>boost:any</code>-hez, és az előadáson bemutatott <code>Any</code>-hez hasonló osztály, amely futási
+időben bármilyen típusú értéket, objektumot képes érték szerint lemásolni, eltárolni. Ez képes arra is, hogy
+kicsi objektumok (pl. egész számok) esetén elkerülje a dinamikus memóriakezelést.</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">std::any a;
+ 
+a = &quot;hello&quot;s;                               /* std::string */
+std::cout &lt;&lt; std::any_cast&lt;std::string&gt;(a); /* hello */
+ 
+a = std::vector&lt;int&gt;{1, 2, 3};              /* std::vector&lt;int&gt; */
+std::cout &lt;&lt; std::any_cast&lt;std::vector&lt;int&gt;&gt;(a)[0]; /* 1 */
+ 
+try {
+    std::cout &lt;&lt; std::any_cast&lt;double&gt;(a);  /* nem jó */
+} catch (std::bad_any_cast &amp;e) {
+    std::cerr &lt;&lt; &quot;Nem double van benne!&quot;;
+}</code></pre>
+
+<p>Hasonló osztály az <code>std::variant</code>, amelyik a <code>boost::variant</code>-hoz hasonlóan egy
+okos <code>union</code>-t csinál. Ennek sablonparaméterben előre meg kell adni, mik a lehetséges típusok; ha ezek ismertek előre,
+hatékonyabban működik, mint az <code>any</code>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Elnevezés: „universal reference” vs. „forwarding reference”">
+<div class="slide" id="slide_11">
+
+<a id="11" class="namer"></a>
+    <a id="autorefref" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">11</span><span class="oldalszamafter">. </span>        Elnevezés: „universal reference” vs. „forwarding reference”<a class="hlink" href="index.html#11"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++11-ben új sablonparaméter <a href="../ea11/index.html#forwardingreference">levezetési szabályok</a> is
+lettek. Ezek alapján az alábbi két függvény paraméterezése gyökeresen eltérő dolgot jelent: az egyik függvény paramétere
+egy jobbérték objektum lehet, a másiké viszont akár jobbérték, akár balérték is:</p>
+
+<pre   ><code class="language-cbub">void egyik(X &amp;&amp; x);
+
+template &lt;typename X&gt;
+  void masik(X &amp;&amp; y);</code></pre>
+
+<div class="sticky">C++17</div>
+<p>Emiatt a <code>masik()</code> függvény paraméterét nem nevezhetjük jobbérték referenciának. Kellett ennek,
+és az ugyanígy viselkedő <code>auto &amp;&amp;</code>-nek egy név, hogy lehessen beszélni róla. Sokáig
+a <a href="index.html#universalref">„universal reference”</a> volt használatos (univerzális referencia). Végül
+a <a href="index.html#forwardingref">„forwarding reference”</a> név mellett döntöttek (kb. paramétertovábbító referencia).
+A C++17-ben így nevezik ezt az eszközt.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Osztályok sablonparamétereinek levezetése">
+<div class="slide" id="slide_12">
+
+<a id="12" class="namer"></a>
+    <a id="cpp17ctad" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">12</span><span class="oldalszamafter">. </span>        Osztályok sablonparamétereinek levezetése<a class="hlink" href="index.html#12"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Függvényeknél kényelmes, hogy a hívás helyén a fordító képes levezetni a sablonparamétereket. Osztályok
+esetén sajnos ez nincs így. Pedig gyakran egy sablon osztály <em>konstruktorparamétereiből</em> következtetni
+tudnánk, és következtetni szeretnék az osztály <em>sablonparamétereire</em>. Legegyszerűbb példa erre az
+<code>std::pair</code> osztály, amelyik két tetszőleges típusú objektumot tárol:</p>
+
+<pre   ><code class="language-c">#include &lt;utility&gt;
+
+template &lt;typename F, typename S&gt;
+struct Pair {
+    F first;
+    S second;
+    
+    Pair(F first, S second)
+        : first(std::move(first))
+        , second(std::move(second))
+    {}
+};
+
+template &lt;typename F, typename S&gt;
+Pair&lt;F, S&gt; make_pair(F first, S second) {
+    return Pair&lt;F, S&gt;{std::move(first), std::move(second)};
+}
+
+int main() {
+    // error: missing template arguments before ‘(’ token
+    auto p1 = Pair(5.6, &quot;string&quot;);                          // error
+    
+    auto p2 = Pair&lt;double, char const*&gt;(5.6, &quot;string&quot;);     // ok, de :(
+    
+    auto p3 = make_pair(5.6, &quot;string&quot;);                     // ok, de :(
+}</code></pre>
+
+<p>A <code>p1</code> változót nem tudjuk létrehozni így, fordítási hibához vezet. Nincsenek megadva az osztály sablonparaméterei. A 
+<code>p2</code>-t létrehozó sor műr működik, de kényelmetlen. Ki kell írni a sablonparamétereket. A <code>p3</code>-as sor mutatja 
+a megoldást: egy olyan függvényt kell írni, amely tulajdonképpen semmit nem csinál; csak azért van, mert függvényeknél levezethető 
+a sablonparaméter, osztálykonál nem. Az STL nagyon sok ilyen gyártófüggvényt tartalmaz: <code>make_pair</code>, 
+<code>make_tuple</code>, ...</p>
+
+<p>A gyártófüggvényeket általában kioptimalizálja a fordító, de jobb lenne, ha inkább a konstruktorhívásból levezetné a 
+sablonparamétereket. A C++17 a sablonparaméterek levezetését <a href="index.html#classtemplates">kiterjeszti a sablon osztályok 
+konstruktoraira</a> is. Tehát az alábbi definíciók már helyesnek számítanak:</p>
+
+<pre   ><code class="language-c">std::pair p(1, 2.3);                /* ok, std::pair&lt;int, double&gt; */
+
+double square(double d) {
+    return d * d;
+}
+
+std::function f(square);            /* ok, std::function&lt;double(double)&gt; */</code></pre>
+
+<p>Ehhez vezettek be C++17-től egy új nyelvi elemet, amellyel megadhatjuk, hogy a konstruktorparaméterekből hogyan következtetünk 
+az osztály sablonparamétereire. Ezek az ún. levezetési útmutatók (class template argument deduction guide, CTAD). Ilyeneket a <a 
+href="index.html#deductionguide">programozó is definiálhat</a>. A szintaxis a következő:</p>
+
+<pre   ><code class="language-cbub">#include &lt;utility&gt;
+
+template &lt;typename F, typename S&gt;
+struct Pair {
+    F first;
+    S second;
+    
+    Pair(F first, S second)
+        : first(std::move(first))
+        , second(std::move(second))
+    {}
+};
+
+template &lt;typename F, typename S&gt;
+Pair(F first, S second) -&gt; Pair&lt;F, S&gt;;  // C++17
+
+int main() {
+    auto p = Pair(5.6, &quot;string&quot;);
+}</code></pre>
+
+<p>Itt a jelölt, középső rész a lényeg. Ennek első fele egy függvénydeklarációhoz hasonló rész: <code>Pair(F first, S 
+second)</code>, mintha a konstruktort hívnánk meg. Ezt egy nyíl követi. A végén pedig egy típus található: <code>Pair&lt;F, 
+S&gt;</code>, ilyen sablonparaméterekkel kell példányosítani az osztályt.</p>
+
+<p>Néhány levezetési szabályt a fordító maga is előállít; egyparaméteres konstruktoroknál tudjuk ezt kihasználni.
+Például ha egy tárolót szeretnénk írni, amely inicializáló listát is kaphat a konstruktorában, akkor az inicializáló elemek
+típusából is levezethető a sablonparaméter:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class MyVector {
+    public:
+        MyVector(std::initializer_list&lt;T&gt; l) {}
+        /* ... */
+};
+
+int main() {
+    MyVector v = { 1, 2, 3 };       // ok, MyVector&lt;int&gt;
+}</code></pre>
+
+<p>Ez olyan, mintha megírtuk volna az alábbi szabályt:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+MyVector(std::initializer_list&lt;T&gt; l) -&gt; MyVector&lt;T&gt;;</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sablon metaprogramozás eszközök">
+<div class="slide" id="slide_13">
+
+<a id="13" class="namer"></a>
+    <a id="cpp14template" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">13</span><span class="oldalszamafter">. </span>        Sablon metaprogramozás eszközök<a class="hlink" href="index.html#13"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>if constexpr</h3>
+
+<p>Az <a href="../ea10/index.html#enable_if"><code>std::enable_if</code> (SFINAE)</a> és
+a <a href="../ea10/index.html#dispatch">tag dispatching</a> nagyon hasznos technikák.
+Sajnos viszonylag körülményes használni őket, és az ezekkel megírt kód nagyon nehezen kezelhető.
+Egyik legfájóbb probléma a fenti eszközöknél a kód lokalitásának romlása. Általában a kódunkat több
+függvényre kell darabolnunk, miközben gyakran csak valami ehhez hasonlót szeretnénk írni:</p>
+
+<pre   ><code class="language-c">template &lt;typename ITER, typename VALUE&gt;
+bool my_search(ITER begin, ITER end, VALUE what) {
+    if (/* ITER egy véletlen elérést biztosító iterátor */) {
+        /* bináris keresés, ami ITER+int, ITER-ITER kifejezéseket is használ */
+    }
+    else {
+        /* lineáris keresés, ami csak ITER++ kifejezéseket használ */
+    }
+}</code></pre>
+
+<p>Tehát fordítási időben választani szeretnénk két vagy több kódrészlet közül, miközben tudjuk, hogy
+bizonyos esetekben a nem kiválasztott, figyelmen kívül hagyandó kódrészlet szemantikailag hibás is.
+A fenti esetben például, ha láncolt lista iterátoraival hívjuk meg a függvényt, akkor pont ez a
+helyzet. A bináris kódrészlet, bár szintaktikailag helyes (nincsenek hiányzó zárójelek vagy ilyesmi),
+szemantikailag helytelen (hiányoznak a megfelelő operátorok).</p>
+
+<p>Mivel úgyis tudjuk, hogy az elágazás feltétele fordítási időben kiértékelhető (hiszen az az ITER típusától
+függ, nem az értékétől), valahogy jelezhetnénk azt is a fordítónak, hogy a hamis, nem lefutó ágat meg se
+próbálja lefordítani. Erre való az <code>if constexpr</code> nyelvi eszköz: ez egy olyan elágazást ad meg,
+amelynél a feltétel fordítási idejű konstans kell legyen, és a végre nem hajtott ágat a fordító
+teljesen figyelmen kívül hagyja. Így abban lehet akár olyan kifejezés is, amely nem kiértékelhető, vagy
+az adott körülmények között szemantikailag hibás kód.</p>
+
+<p>Így például a véletlen elérésű tárolók esetén bináris keresést használó függvény:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;type_traits&gt;
+#include &lt;iterator&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+
+template &lt;typename ITER, typename VALUE&gt;
+bool my_search(ITER begin, ITER end, VALUE const &amp;what) {
+    using iter_categ_tag = typename std::iterator_traits&lt;ITER&gt;::iterator_category;
+
+    if constexpr (std::is_base_of&lt;std::random_access_iterator_tag, iter_categ_tag&gt;::value) {
+        std::cout &lt;&lt; &quot;Binaris kereses&quot; &lt;&lt; std::endl;
+        while (begin != end) {
+            ITER mid = begin + (end - begin) / 2;
+            if (*mid == what)
+                return true;
+            if (*mid &lt; what)
+                begin = mid + 1;
+            else
+                end = mid;
+        }
+        return false;
+    }
+    else {
+        std::cout &lt;&lt; &quot;Linearis kereses&quot; &lt;&lt; std::endl;
+        for (ITER it = begin; it != end; ++it)
+            if (*it == what)
+                return true;
+        return false;
+    }
+}
+
+int main() {
+    std::vector&lt;int&gt; v = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    std::list&lt;int&gt; l = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    
+    std::cout &lt;&lt; my_search(std::begin(v), std::end(v), 3) &lt;&lt; std::endl;
+    std::cout &lt;&lt; my_search(std::begin(l), std::end(l), 3) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>(Az <code>is_base_of&lt;B, D&gt;</code> nem csak akkor ad igazat, ha <code>D</code> leszármazottja <code>B</code>-nek, hanem 
+akkor is, ha <code>D</code> = <code>B</code>. Bár egy osztály nem leszármazottja saját magának, ez mégis helyes válasz. Az
+<code>is_base_of</code> igazából a „<code>B</code> egy fajta <code>D</code>” kapcsolat ellenőrzésére van kitalálva, csak a neve
+félrevezető.)</p>
+
+<p>Egy egyszerű <code>move_if_noexcept</code> megvalósítás:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+decltype(auto) my_move_if_noexcept(T &amp;&amp; data) {
+    using TYPE = typename std::remove_reference&lt;T&gt;::type;
+    if constexpr (std::is_nothrow_move_constructible_v&lt;TYPE&gt;)
+        return static_cast&lt;TYPE &amp;&amp;&gt;(data);
+    else
+        return static_cast&lt;TYPE &amp;&gt;(data);
+}</code></pre>
+
+<p>Itt érdemes megfigyelni, hogy a függvény <code>decltype(auto)</code> visszatérési értékű.
+A fordító azonban az <code>if constexpr</code> miatt mindig csak az egyik <code>return</code>
+utasítást veszi figyelembe, ezért nem gond, hogy különálló típusok (<code>T &amp;&amp;</code> és <code>T &amp;</code>)
+vannak a visszatéréseknél.</p>
+
+<p>Jó példa a mindent kiíró függvény függvény is:</p>
+
+<div class="sticky">C++17</div>
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+template &lt;typename HEAD, typename... TAIL&gt;
+void my_print(HEAD const &amp; head, TAIL const &amp; ... tail) {
+    std::cout &lt;&lt; head;
+    if constexpr (sizeof...(tail) &gt; 0) {
+        std::cout &lt;&lt; &quot;, &quot;;
+        my_print(tail...);
+    }
+    else {
+        std::cout &lt;&lt; std::endl;
+    }
+}
+
+int main() {
+    my_print(3, 5.6, &quot;hello&quot;, 'x');
+}</code></pre>
+
+<p>Ha már nincs több paraméter, tehát a <code>tail</code> üres, az elágazásban lévő kódot meg sem próbálja lefordítani
+a fordító. Nem is lehetne, mert a <code>(head, tail...)</code> paraméterezésű függvény legalább egy paramétert várna, nulla
+paraméterrel pedig a hívás hibás lenne.</p>
+
+<h3>std::integer_sequence</h3>
+
+<p>A C++14-es <code>std::integer_sequence</code> osztály sablon metaprogramokban adattárolásra használható. Hasonló
+egy tömbhöz, megadhatjuk az elemek típusát is, és magukat az elemeket. Például <code>std::integer_sequence&lt;int, 3, 4, 5&gt;</code> egy háromelemű <code>int</code> sorozat, <code>std::integer_sequence&lt;bool, false, true&gt;</code> pedig
+egy kételemű <code>bool</code> sorozat.</p>
+
+<p>Gyakran szükségünk van a természetes számok sorozatára, például indexelésekhez. Ilyeneket az <code>std::make_index_sequence</code> hoz létre. Például az <code>std::make_index_sequence&lt;3&gt;</code>
+típus egyenértékű azzal, mintha <code>std::integer_sequence&lt;size_t, 0, 1, 2&gt;</code>-t írtunk volna,
+csak épp paraméterezhetően állítható elő.</p>
+
+<p>Mire jók ezek? Például egy <code>std::tuple</code> „kicsomagolására”. Az <code>std::get&lt;N&gt;(t)</code>
+függvényhívással kivehetjük az <code>N</code>-edik értéket a <code>t</code> <code>tuple</code>-ből – ahol
+<code>N</code> természetesen fordítási idejű konstans kell legyen. Sablon metaprogramozással ez megoldható.
+Az alábbi kódban a <code>call_f</code> függvény valamelyik <code>f</code> nevű függvényt fogja meghívni attól
+függően, hogy a paraméterként adott <code>tuple</code> milyen értékeket tartalmazott.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;tuple&gt;
+#include &lt;utility&gt;
+
+void f(int i) {
+    std::cout &lt;&lt; &quot;(int) &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+
+void f(double d, char c) {
+    std::cout &lt;&lt; &quot;(double, char) &quot; &lt;&lt; d &lt;&lt; &quot; &quot; &lt;&lt; c &lt;&lt; std::endl;
+}
+
+template &lt;typename... ARGS, size_t... IDX&gt;
+void call_f_helper(std::tuple&lt;ARGS...&gt; t, std::integer_sequence&lt;size_t, IDX...&gt;) {
+    f(std::get&lt;IDX&gt;(t)...);
+}
+
+template &lt;typename... ARGS&gt;
+void call_f(std::tuple&lt;ARGS...&gt; t) {
+    call_f_helper(t, std::make_index_sequence&lt;sizeof...(ARGS)&gt;{});
+}
+
+int main() {
+    call_f(std::make_tuple(5));
+    call_f(std::make_tuple(5.3, 'A'));
+}</code></pre>
+
+<p>A kód működése a következő. Először meghívódik a <code>call_f</code> függvény, amely átveszi paraméterként
+a <code>tuple</code>-t. Ez már a <code>tuple</code> típusából kitalálja a sablonparaméter levezetésekor, hogy
+milyen típusú adatokat tartalmaz. Mivel itt ezek már látszanak, a számuk is kiderül; <code>sizeof...(ARGS)</code>
+megadja a <code>tuple</code>-ben lévő adatok számát. Például ha a <code>tuple</code> 3 elemű, ezt a függvényhívást
+kellene csinálni:</p>
+
+<pre   ><code class="language-c">f(std::get&lt;0&gt;(t), std::get&lt;1&gt;(t), std::get&lt;2&gt;(t));</code></pre>
+
+<p>Ezért a <code>call_f</code> függvény létrehoz egy <code>std::integer_sequence</code>-t, amelyben a <code>get</code> paraméterei,
+azaz az indexek vannak: <code>std::integer_sequence&lt;size_t, 0, 1, 2&gt;</code>. Ezután történik egy újabb függvényhívás. A
+<code>call_f_helper</code> függvény csak az újabb sablonparaméter-levezetés miatt szükséges. Ennek második paramétere az
+<code>std::integer_sequence</code>, amelynek <code>IDX...</code> sablonparamétere miatt az abból hívott <code>call_f_helper</code>
+<code>IDX</code> nevű variadikus sablonparamétere a számsort fogja tartalmazni: <code>0, 1, 2</code>. Ezek a számok
+helyettesítődnek be egyesével az <code>std::get</code> sablonparamétereként. (Mivel a három pont a <code>get</code> hívása
+után van, nem pedig az <code>f</code> hívása után, ezért <code>f(p1, p2, p3)</code> lesz a kód értelme, nem pedig <code>f(p1),
+f(p2), f(p3)</code>. Értelemszerűen az előbbit szeretnénk.) A kifejtés után pedig a fordító megkeresi a megfelelő <code>f</code>
+függvényt, és meghívja, ha van.</p>
+
+<p>Ehhez hasonlóan valósították meg az <a href="index.html#apply"><code>std::apply</code> függvényt</a>. Az lényegében ezt csinálja: <code>std::apply(f, t)</code> meghívja az <code>f()</code> függvényt a <code>t</code> <code>tuple</code>-be csomagolt paraméterekkel.</p>
+
+
+
+<h3>Folding expressions</h3>
+
+<p>A variadikus paraméterlistát általában rekurzív függvényekkel dolgozzuk fel. Például ha tetszőlegesen sok szám összegére van szükségünk:</p>
+
+<pre   ><code class="language-c">auto sum() {
+    return 0;
+}
+
+template&lt;typename T&gt;
+auto sum(T t) {
+    return t;
+}
+
+template&lt;typename T, typename... Ts&gt;
+auto sum(T t, Ts... ts) {
+    return t + sum(ts...);
+}</code></pre>
+
+<p>Igazából itt csak ennyit szeretnénk mondani a fordítónak: „vedd az összes paramétert, írd le közéjük a <code>+</code> operátort, és az így kapott kifejezést kell kiértékelni”. C++17-ben ezt már könnyen megtehetjük:</p>
+
+<pre   ><code class="language-c">template&lt;typename... T&gt;
+auto sum(T... t) {
+    return (0 + ... + t);
+}
+
+int main() {
+    std::cout &lt;&lt; sum(1, 2, 3);
+}</code></pre>
+
+<pre class="screenshot">
+6
+</pre>
+
+<p>A zárójelezett kifejezés neve: <a href="index.html#foldexpression">folding expression</a>. Fontos, hogy a kifejezésnek része a kerek zárójel is, amelyet kötelező kitenni. A fenti példában, az <code>1,2,3</code> paraméterek hatására a <code>return</code> utasításban <code>(((0+1)+2)+3)</code> lesz a kiértékelt kifejezés. Ez az ún. <strong>binary left fold</strong>; a <code>0</code> megadja a kezdőértéket, illetve a <code>0</code> és a paramétercsomag egymáshoz képesti helye a zárójelezést.</p>
+
+<p><code>(t + ... + 0)</code> esetén a kiértékelt kifejezés <code>(1+(2+(3+0)))</code> lenne (<strong>binary right fold</strong>), bár az összeadás kommutativitása miatt ugyanazt az összeget kapnánk. Nem úgy, mint a következő példában. Itt sejtjük is, hogy nem írhatnánk fordított sorrendben a <code>cout</code>-ot és a <code>t</code>-t:</p>
+
+<pre   ><code class="language-c">template &lt;typename... T&gt;
+void print_all(T... t) {
+    (std::cout &lt;&lt; ... &lt;&lt; t);
+}
+
+int main() {
+    print_all(1, ' ', 2.3);
+}</code></pre>
+
+<p>Egyes operátoroknál a kezdőérték elhagyható, ilyenkor a nulla tagból álló kifejezésnek előre adott értéke van. De csak három ilyen van összesen: <code>&amp;&amp;</code> és <code>||</code> esetén az értékek <code>true</code> és <code>false</code> (a Boole-algebra egységeleme és nulleleme), illetve vessző operátor esetén <code>void</code>. Tehát pl. <code>And</code> metafüggvényt nagyon könnyű készíteni:</p>
+
+<pre   ><code class="language-c">template &lt;bool... B&gt;
+class And : public std::bool_constant&lt;(B &amp;&amp; ...)&gt; {};
+
+int main() {
+    std::cout &lt;&lt; And&lt;true, false, true&gt;::value;
+    std::cout &lt;&lt; And&lt;true, true&gt;::value;
+    std::cout &lt;&lt; And&lt;&gt;::value;
+}</code></pre>
+
+<p>A <strong>folding expression</strong> részeként bonyolultabb kifejezések is szerepelhetnek, amelyekbe a szokásos módon, egyesével behelyettesítődnek az argumentumok. Itt a vessző operátor segítségével épül a kifejezés:</p>
+
+<pre   ><code class="language-c">template &lt;typename T, typename... ARGS&gt;
+void push_back_vec(std::vector&lt;T&gt;&amp; v, ARGS&amp;&amp;... args)
+{
+    (v.push_back(std::forward&lt;ARGS&gt;(args)), ...);
+}
+
+int main() {
+    std::vector&lt;double&gt; v;
+    push_back_vec(v, 1, 2.3);
+}</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_14">
+
+<a id="14" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">14</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#14"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="capturequirk1"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3424.pdf">Herb Sutter: Lambda Correctness and Usability Issues</a>.
+    <li id="capturequirk2"><a href="http://scottmeyers.blogspot.hu/2014/02/capture-quirk-in-c14.html">Herb Sutter: Capture Quirk in C++14</a>.
+    <li id="constexprlambda"><a href="https://isocpp.org/files/papers/P0170R1.pdf">Faisal Vali et al.: Wording for Constexpr Lambda</a>.</li>
+    <li id="makeunique"><a href="http://herbsutter.com/gotw/_102/">Herb Sutter: GotW #102: Exception-Safe Function Calls</a> – miért nincs <code>std::make_unique()</code>?
+    <li id="spring2013"><a href="https://isocpp.org/blog/2013/04/trip-report-iso-c-spring-2013-meeting">Herb Sutter: Trip Report: ISO C++ Spring 2013 Meeting</a>.</li>
+    <li id="universalref"><a href="http://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers">Scott Meyers: Universal References in C++11</a> – az „univerzális referencia” kifejezést bevezető cikk.
+    <li id="forwardingref"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4164.pdf">Herb Sutter et al.: Forwarding References</a> – a C++17-ben bevezetett „forwarding reference” elnevezésről.</li>
+    <li id="parallel_stl"><a href="https://isocpp.org/files/papers/P0024R2.html">Jared Hoberock: The Parallelism TS Should be Standardized</a>.</li>
+    <li id="classtemplates"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0091r2.html">Mike Spertus et al.: Template argument deduction for class templates</a>.</li>
+    <li id="deductionguide"><a href="https://arne-mertz.de/2017/06/class-template-argument-deduction/">Arne Mertz Modern C++ Features – Class Template Argument Deduction</a>.</li>
+    <li id="any"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3804.html">Beman Dawes et al.: Any Library Proposal (Revision 3)</a>.</li>
+    <li id="if_constexpr"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0292r1.html">Jens Maurer: constexpr if: A slightly different syntax</a>.</li>
+    <li id="copyelision"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0135r0.html">Richard Smith: Guaranteed copy elision through simplified value categories</a>.</li>
+    <li id="copyelision2"><a href="https://jonasdevlieghere.com/guaranteed-copy-elision/">Jonas Devlieghere: Guaranteed Copy Elision</a>.</li>
+    <li id="inlinevariables"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4424.pdf">Hal Finkel and Richard Smith: Inline Variables</a>.</li>
+    <li id="templatevariables"><a href="https://isocpp.org/files/papers/N3651.pdf">Gabriel Dos Reis: Variable Templates</a>.</li>
+    <li id="evaluationorderpdf"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0145r2.pdf">Gabriel Dos Reis: Refining Expression Evaluation Order for Idiomatic C++</a>.</li>
+    <li id="apply"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n3915.pdf">Peter Sommerlad: apply() call a function with arguments from a tuple</a>.</li>
+    <li id="arnemertzattr"><a href="https://arne-mertz.de/2016/12/modern-c-features-attributes/">Arne Mertz: Modern C++ Features – Attributes</a>.</li>
+    <li id="foldexpression"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4191.html">Andrew Sutton, Richard Smith: Folding expressions</a>.</li>
+    <li id="changescpp1417"><a href="https://isocpp.org/files/papers/p0636r0.html">Changes between C++14 and C++17 DIS</a>.</li>
+    
+    </ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

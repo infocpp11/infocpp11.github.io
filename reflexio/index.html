@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Reflexió C++-ban</title>
+<meta property="og:title" content="TEST InfoC++11 :: Reflexió C++-ban">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Az előadás példájának folytatása: az adattag pointereket type erasure-be csomagolva elérhetjük, hogy többféle típusú adattag esetén is tudjunk iterálni azokon.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Az előadás példájának folytatása: az adattag pointereket type erasure-be csomagolva elérhetjük, hogy többféle típusú adattag esetén is tudjunk iterálni azokon.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Reflexió C++-ban">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Reflexió C++-ban</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Az előadás példájának folytatása: az adattag pointereket type erasure-be csomagolva elérhetjük, hogy többféle típusú adattag esetén is tudjunk iterálni azokon.</p>
+</div>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Reflexió C++-ban</a>
+                      <li><a href="index.html#2" class="">„Igazi” reflexió: ismeretlen típus</a>
+                      <li><a href="index.html#3" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Reflexió C++-ban">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="cpprefl" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Reflexió C++-ban<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha szeretnénk <a href="../ea07/index.html#offsetof">az előadás példáját</a>, amelyben a pontnak osztálynak 
+<code>double</code> és <code>string</code> adattagja is van, reprodukálni C++-ban, egy problémába ütközünk. Az adattag pointerek 
+egymással nem kompatibilis típusok. Tekintsük az alábbi osztályt:</p>
+
+<pre   ><code class="language-c">struct Point {
+    double x, y;
+    std::string label;
+};</code></pre>
+
+<p>Ennek <code>x</code> és <code>y</code> adattagjára <code>double Point::*</code>, <code>label</code> adattagjára
+pedig <code>std::string Point::*</code> típusú pointer tud mutatni. Ennek a két pointertípusnak azonban nincs közös
+őse, így nem tehetünk egy tárolóba, pl. tömbbe, vegyesen <code>double Point::*</code>-okat és <code>std::string Point::*</code>-okat:</p>
+
+<div class="sticky">ezt így<br>nem lehet</div>
+<pre   ><code class="language-cbub">struct PointMemberData {
+    char const* name;
+    ?????? mptr;                // ide nem tudunk mit írni
+} point_members[] = {
+    { &quot;x&quot;, &amp;Point::x },
+    { &quot;label&quot;, &amp;Point::label },   // ez a kettő nem kompatibilis
+};</code></pre>
+
+<p>Közös őse csak osztályoknak lehet, beépített típusoknak nem. Csomagoljuk be osztályokba ezeket a mutatókat!
+Az ezeket tartalmazó osztály sablon lesz, ahol a sablonparaméter a hivatkozott adattag típusa. A sablon osztályok
+pedig leszármaznak egy közös ősből (<strong>type erasure</strong>):</p>
+
+<pre   ><code class="language-c">struct Point;
+
+
+struct PointMemberBase {
+    char const* name;
+    
+    PointMemberBase(char const* name) : name(name) {}
+    virtual ~PointMemberBase() = default;
+};
+
+
+template &lt;typename T&gt;
+struct PointMember : public PointMemberBase {
+    T Point::* mptr_;
+
+    PointMember(char const* name, T Point::* mptr)
+      : PointMemberBase(name), mptr_(mptr) {}
+};</code></pre>
+
+<p>Figyeljük meg: a közös ős nem csinál semmit, csak azért van, hogy legyen. Ez teszi majd lehetővé, hogy a különféle
+<code>PointMember</code> objektumokból (<code>PointMember&lt;double&gt;</code>, <code>PointMember&lt;std::string&gt;</code>)
+heterogén kollekciót építsünk. Így:</p>
+
+<pre   ><code class="language-cbub">struct Point {
+    double x, y;
+    std::string label;
+};
+
+
+PointMemberBase* point_members[] = {
+    new PointMember&lt;double&gt;(&quot;x&quot;, &amp;Point::x),      // konverzió!
+    new PointMember&lt;double&gt;(&quot;y&quot;, &amp;Point::y),
+    new PointMember&lt;std::string&gt;(&quot;label&quot;, &amp;Point::label),
+    nullptr,
+};</code></pre>
+
+<p>Abban a pillanatban, hogy egy <code>PointMember&lt;T&gt;</code> objektum pointerét az
+ősosztálya pointerévé alakítunk, információt dobunk el: nem látjuk a becsomagolt <code>mptr</code> adattagokat
+a <code>PointMemberBase</code> típusú pointeren keresztül. Ezért mielőtt használni szeretnénk valamelyik
+objektumba csomagolt <code>mptr</code>-t, vissza kell alakítani a pointert a saját, eredeti
+típusára. Oldjuk meg most ezt virtuális függvény helyett egy <code>dynamic_cast</code>-tal! A <code>dynamic_cast</code>
+futási időben ellenőrzi a pointerátalakítás helyességét, és <code>nullptr</code>-t ad akkor, ha nem megfelelő
+a cél típus. Ezt ki is tudjuk használni:</p>
+
+<pre   ><code class="language-c">int main() {
+    Point p1 = { 2.3, 4.5, &quot;hello&quot; };
+
+    for (size_t i = 0; point_members[i] != nullptr; ++i) {
+        auto memberbase = point_members[i];
+
+        std::cout &lt;&lt; memberbase-&gt;name &lt;&lt; &quot; = &quot;;
+       
+        if (auto member = dynamic_cast&lt;PointMember&lt;double&gt;*&gt;(memberbase)) {
+            std::cout &lt;&lt; p1.*(member-&gt;mptr_) &lt;&lt; &quot; (double)&quot;;
+        }
+        else if (auto member = dynamic_cast&lt;PointMember&lt;std::string&gt;*&gt;(memberbase)) {
+            std::cout &lt;&lt; p1.*(member-&gt;mptr_) &lt;&lt; &quot; (std::string)&quot;;
+        }
+        else {
+            throw std::logic_error(&quot;Unknown data type in object&quot;);
+        }
+
+        std::cout &lt;&lt; std::endl;
+    }
+}</code></pre>
+
+<pre class="screenshot">
+x = 2.3 (double)
+y = 4.5 (double)
+label = hello (std::string)
+</pre>
+
+<div class="sticky">A teljes<br>program:<br><a href="point_refl.cpp">point_refl.cpp</a>.</div>
+
+<p>A lényeg a <code>dynamic_cast</code>-os sorokban történik. Ha a cast sikeres, nem <code>nullptr</code>-t ad vissza, akkor azt jelenti,
+hogy pont olyan típusú adattagról van szó – ebben az esetben pedig kiolvassuk azt, kiírjuk, és melléírjuk a típusát is. (Ne
+felejtsük el, hogy a két <code>&lt;&lt;</code> operátor is különbözik, az egyik a <code>double</code>-ös, a másik az
+<code>std::string</code>-es, csak ez formailag nem látszik rajtuk!) A <code>dynamic_cast</code> miatt az ősosztályban szükségünk van egy virtuális destruktorra. A <code>dynamic_cast</code> csak polimorf osztályokon
+működik. Azokon, amelyekneknek van virtuális függvénytáblájuk, mert van legalább egy virtuális függvényük.</p>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="„Igazi” reflexió: ismeretlen típus">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="cpprefl2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        „Igazi” reflexió: ismeretlen típus<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az eddig leírt programrészeknek van egy komoly hiányossága: a leíró struktúrában, a hivatkozó adattag pointerekben mindenhol
+szerepel a <code>Point</code> osztály neve. Az egészet erre a konkrét osztályra hegyeztük ki. Egy nagyobb programban ennél
+komolyabb célunk lehet: olyan függvények írása, amelyek fájlba írják, fájlból beolvassák egy objektum adatait, esetleg
+dialógusablakot hoznak létre az objektum tulajdonságai módosításának lehetővé tételére. Mindezt az objektum típusának ismerete
+nélkül.</p>
+
+<div class="columns">
+<div class="column kozep">
+<img src="dialog_ellipse.png">
+</div>
+<div class="column kozep">
+<img src="dialog_image.png">
+</div>
+</div>
+
+<p>Elégedjünk meg most azzal, hogy az objektumban lévő adattagok típusait, mint az előbb, felsoroljuk. Tehát azt
+mondjuk, hogy a reflektív objektumaink, rendelkezhetnek pl. valós szám, szín, sztring, logikai érték típusú adattaggal,
+és mással nem.</p>
+
+<p>A megoldás trükkje az, hogy nem a reflektív objektum tagfüggvénye keresi meg a saját attribútumát, hanem az adattag pointert
+tároló segédosztály tagfüggvénye végzi el ezt a munkát, és azt kell meghívni. A következőképpen képzelhetjük el a működést:</p>
+
+<ol>
+    <li>Kapunk egy ismeretlen típusú objektumot. Csak annyit látunk, hogy az objektum leszármazik a <code>Reflective</code>
+    osztályból (azaz megvalósítja a <code>Reflective</code> interfészt). Ezen kívül semmit nem tudunk róla.
+    <li>Legyen a <code>Reflective</code> osztálynak egy <code>get_memberdata()</code> függvénye, amelyet ha meghívunk, ad egy tömböt, amely leírja az
+    adott osztály adattagjait. Valahogy így: „Van egy <code>x</code> nevű adattagom, ez egy valós. Van egy <code>y</code>
+    nevű adattagom, szintén valós szám. A <code>label</code> adattagom egy sztring.”
+    <li>Ezek után végigiterálunk a kapott tömbön. Egy esetszétválasztásban felsoroljuk a lehetséges típusokat;
+    valamiféle <code>get()</code> függvény pedig megadja a szóban forgó objektum szóban forgó adattagjának referenciáját,
+    amelyet írni/olvasni tudunk.
+</ol>
+
+<p>Használjuk fel az előző pontban kitalált trükköt: csomagoljuk az adattag pointereket osztályokba, amelyeket a számunka szükséges hierarchiába szervezünk! A fenti működést az adattag pointereket tartalmazó, alábbi osztályhierarchia teszi majd lehetővé:</p>
+
+<img src="reflective.svg" style="width: 24em;" class="kozep">
+
+<p>Ebben a legfelső <code>Mptr</code> osztály feladata, hogy közös ősként szolgáljon az összes <code>MptrType&lt;T&gt;</code>
+osztályok számára. A következő szinten, az <code>MptrType&lt;T&gt;</code> osztályokban azt már ismerjük, hogy milyen típusú
+adattagról van szó (<code>int</code>, <code>double</code>, ...), de azt még nem, hogy milyen osztály adattagjáról. Így ezen a
+szinten sem tárolódnak még adattag pointerek (azok mindig az osztályhoz és az adattag típusához is kötöttek). Viszont ezen a
+szinten már minden osztálynak van egy <code>T&amp; get(Reflective &amp;obj)</code> tisztán virtuális függvénye, amelyet majd a
+leszármazottak valósítanak meg. A <code>T&amp; get(Reflective &amp;obj)</code> függvény jelentése: egy ismeretlen típusú
+(<code>Reflective</code>) objektumnak kérjük el a már ismert típusú (<code>T</code>) adattagját.</p>
+
+<p>A legalsó szinten vannak azok az osztályok, amelyeknek már sablonparamétere a hivatkozott objektum típusa és az adattag
+típusa is. Így ezek el tudják tárolni az adattag pointereket, és a <code>T&amp; get(Reflective &amp;obj)</code> függvényeket
+megvalósítva a hívójuknak vissza is tudják adni egy objektum valamely adattagját. A <code>get()</code> függvények megvalósítása
+egyetlen sorból áll:</p>
+
+<pre   ><code class="language-c">template &lt;typename CLASS_NAME, typename MEMBER_TYPE&gt;
+class MptrTypeClass : public MptrType&lt;MEMBER_TYPE&gt; {
+    MEMBER_TYPE CLASS_NAME::* mptr;
+
+    virtual MEMBER_TYPE&amp; get(Reflective&amp; obj) const {
+        return dynamic_cast&lt;CLASS_NAME&amp;&gt;(obj).*mptr;
+    }
+};</code></pre>
+
+<p>Mit csinál a <code>return</code> utasításban megadott kifejezés? Megkapta egy objektum referenciáját. Az objektum
+számára ismeretlen típusú, csak annyit tud róla, hogy valamilyen reflektív objektum. Van hozzá egy
+adattag pointer (<code>mptr</code>), aminek a típusa elvileg a kapott objektumhoz kell passzoljon. Ezért ezt a referenciát
+átalakítja <code>CLASS_NAME&amp;</code> típusú referenciává, és utána már a <code>.*</code> operátorral eléri az
+<code>mptr</code> pointer által hivatkozott adattagot. Ez éppen a keresett adattag, ezért vissza is tér vele.
+Vegyük észre, hogy a <code>dynamic_cast()</code>-ba épített futási idejű ellenőrzés miatt nem tudunk hibázni: ha
+az <code>obj</code> objektum típusa és az <code>mptr</code> típusa nem stimmel, a <code>dynamic_cast()</code> kivételt
+fog dobni.</p>
+
+<p>Az ismeretlen típusú objektum adatait kiíró függvény, amely megvalósítja a fenti lépéseket, így néz ki:</p>
+
+<pre   ><code class="language-cbub">void print_data_in_obj(Reflective&amp; obj) {   // 1
+    Mptr** memberdata = obj.get_memberdata();   // 2
+    for (size_t i = 0; memberdata[i] != nullptr; ++i) {
+        if (auto member = dynamic_cast&lt;MptrType&lt;double&gt;*&gt;(memberdata[i])) {    // 3
+            std::cout &lt;&lt; memberdata[i]-&gt;name &lt;&lt; &quot; = &quot;
+                      &lt;&lt; member-&gt;get(obj) &lt;&lt; &quot; double &quot; &lt;&lt; std::endl;
+        }
+        else if (auto member = dynamic_cast&lt;MptrType&lt;std::string&gt;*&gt;(memberdata[i])) {
+            std::cout &lt;&lt; memberdata[i]-&gt;name &lt;&lt; &quot; = '&quot;
+                      &lt;&lt; member-&gt;get(obj) &lt;&lt; &quot;' std::string &quot; &lt;&lt; std::endl;
+        }
+        else {
+            throw std::logic_error(&quot;Unknown data type&quot;);
+        }
+    }
+}</code></pre>
+
+<p class="megjegyszes">Furcsának tűnhet, hogy <code>obj.get(member)</code> helyett <code>member-&gt;get(obj)</code>
+alakú a hívás. De így nem a <code>Reflective</code> osztály leszármazottaiban kell implementálni ezeket a függvényeket;
+a leszármazottaknak semmi dolgunk nincs az adattagokat leíró táblázat megadásán kívül. Az OOP-ben sokszor segít, ha
+A és B objektum kommunikációját megpróbáljuk <code>A.fv(B)</code> és <code>B.fv(A)</code> módon is megvalósítani.
+„<a href="index.html#hollywood">Don't call us, we'll call you</a>”.</p>
+
+<div class="sticky">A teljes program:<br><a href="gen_reflective.cpp">gen_reflective.cpp</a>.</div>
+
+<p>Figyeljük meg a kódot: itt sehol nem történt hivatkozás az objektum konkrét típusúra. </p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ol>
+    <li id="hollywood">„Don't call us, we'll call you” – the <a href="http://en.wikipedia.org/wiki/Hollywood_principle">Hollywood principle</a>.
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

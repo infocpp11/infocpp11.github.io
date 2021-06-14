@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Az elavult std::auto_ptr</title>
+<meta property="og:title" content="TEST InfoC++11 :: Az elavult std::auto_ptr">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Mi volt a baj a régi std::auto_ptr-rel? Miért került ki a szabványból? Hogy volt megvalósítva?">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Mi volt a baj a régi std::auto_ptr-rel? Miért került ki a szabványból? Hogy volt megvalósítva?">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Az elavult std::auto_ptr">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Az elavult std::auto_ptr</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Mi volt a baj a régi std::auto_ptr-rel? Miért került ki a szabványból? Hogy volt megvalósítva?</p>
+</div>
+
+<p>Miért nem használjuk már az <code>std::auto_ptr</code>-t? Miért döntöttek úgy, hogy teljesen
+kitörlik azt a szabványból? Mi volt az, ami ekkora problémát jelentett?</p>
+
+<h3>Tulajdonos szemantika</h3>
+
+<p>Az előadáson láttuk, hogy az <code>auto_ptr</code> tulajdonos szemantikát valósít meg, méghozzá
+olyan módon, hogy egy dinamikusan foglalt objektumért pontosan egy <code>auto_ptr</code> felel.
+A pointer objektum törlődésekor törölni kell a kezelt objektumot is:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class auto_ptr {
+  public:
+    explicit auto_ptr(T *ptr = nullptr): ptr_(ptr) {}
+    ~auto_ptr() { delete ptr_; }
+    /* ... */
+  private:
+    T *ptr_;</code></pre>
+
+<p>Ezért egy ilyen objektum „lemásolásakor”, történjen az akár egy konstruktorral, akár
+az értékadó operátorral, az eredeti pointertől el kell venni a kezelt objektumot. Így biztosítva
+azt, hogy egy kezelt objektum csak egy pointerhez tartozzon:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class auto_ptr {
+  public:
+    T * release() {
+        T *temp = ptr_;
+        ptr_ = nullptr;     /* elfelejti */
+        return temp;        /* innentől a hívó felel érte */
+    }
+    
+    auto_ptr(auto_ptr &amp;the_other)     // nem konstans ref
+        : auto_ptr(the_other.release())
+    {
+    }
+    
+    auto_ptr &amp; operator=(auto_ptr &amp;the_other) {  // itt sem konstans
+        if (ptr_ != the_other.ptr_) {
+            delete ptr_;
+            ptr_ = the_other.release();
+        }
+    }
+};</code></pre>
+
+<h3>Problémák: másolás = másolás?</h3>
+
+<p>A gond az, hogy ezektől a függvényektől másolást szoktunk meg, ennek ellenére
+a nekik paraméterként adott objektumokat módosítják. Ez szokatlan működés, amely
+a legváratlanabb helyzetekben okozhat fennakadást. Pl. <code>auto_ptr</code> típusú
+függvényparaméter esetén:</p>
+
+<pre   ><code class="language-cbub">void foo(auto_ptr&lt;int&gt; p);
+
+void bar() {
+    auto_ptr&lt;int&gt; p1(new int);
+    *p1 = 17;
+
+    foo(p1); // törlődik az int
+
+    std::cout &lt;&lt; *p1; // nullptr, segfault</code></pre>
+
+<p>Gond volt akkor is, ha <code>auto_ptr</code>-eket tettünk tárolókba. Sok algoritmus feltételezi, hogy a
+„másolások” nem teszik tönkre az eredeti objektumokat. Például a gyorsrendezés úgy működik, hogy egy
+kiválasztott elemet kiemel egy segédváltozóba, hogy aztán a többi elemet ahhoz hasonlítsa. A segédváltozó pedig
+végül megszűnik, tehát rendezés közben eltűnne a tömb egyik eleme.</p>
+
+<h3>A temporális objektumok és a nem konstans referenciák</h3>
+
+<p>Van még egy problémánk, amely a nyelvi elemekkel kapcsolatos. A temporális objektumok jobbértékek, amelyekre
+más paraméterátadási szabályok vonatkoznak, mint a balértékekre. A C++-ban a jobbértékeket, azaz a temporális
+objektumokat nem tudják átvenni paraméterként az olyan függvények, amelyek referenciát várnak
+(<code>T&amp;</code>); csak azok, amelyek konstans referenciát (<code>T const &</code>) vagy értéket
+(<code>T</code>).</p>
+
+<div class="megjegyzes">
+<p>Emlékezzünk vissza a C-s terminológiára: balérték az, ami egy értékadás bal
+oldalán állhat, vagy más megközelítésben, aminek a memóriacíme képezhető. Jobbérték minden
+más. Az <code>int i</code> deklaráció után az <code>i</code> változó hivatkozása
+egy balérték; <code>i = 0</code> és <code>&amp;i</code> is helyes. Az <code>i +
+1</code> és az <code>5</code> kifejezések pedig jobbértékek; az <code>i + 1 =
+0</code> és <code>&amp;5</code> kifejezések helytelenek. C++-ban jobbértékek a
+temporális objektumok, és természetesen minden olyan függvényhívás értéke is,
+amely objektumot ad, nem pedig referenciát.</p>
+<p>Ha nem konstans referencia átvehetne jobbértéket, elég furcsa dolgokat lehetne
+írni. Pl.:</p>
+<pre   ><code class="language-c">void novel(int &amp;i) {
+    ++i;
+}
+
+novel(3);</code></pre>
+</div>
+
+<p>A „másoló” konstruktorunk paramétere viszont most semmiképpen nem lehet
+konstans referencia, hanem csak sima referencia. Ezért a másoló konstruktor most
+nem tud temporális objektumot átvenni. Ami azért baj, mert az alábbiak teljesen
+ésszerű használatát mutatják az osztálynak, sőt pont így képzeljük el ez egészet.
+Az első esetben a visszatérési értéket próbáljuk egy temporális kifejezéssel
+inicializálni, a második esetben pedig a függvény visszatérési értéke a
+temporális objektum, amely alapján a <code>p</code>-t inicializálni szeretnénk.
+Egyikre sem illik rá a másoló konstruktor nem konstans referencia paramétere:</p>
+
+<pre   ><code class="language-cbub">auto_ptr&lt;int&gt; create_int() {
+    return auto_ptr&lt;int&gt;{new int{}};     // temporális!
+}
+
+auto_ptr&lt;int&gt; p = create_int();          // temporális!</code></pre>
+
+<p>A megoldási lehetőséget az adja, hogy bár temporális objektumot nem adhatunk
+nem konstans referencia paraméterű függvénynek – azt mégis megengedi a nyelv,
+hogy egy temporális objektum <em>tagfüggvényét</em> meghívjuk, még akkor is, ha
+az a tagfüggvény nem konstans minősítésű. Kell ezért egy segédobjektum
+(<code>auto_ptr_helper</code>), amely a másolásban segédkezni fog, méghozzá a következőképpen.</p>
+
+<ul>
+    <li>Egy <code>auto_ptr_helper</code> objektum ugyanolyan pointert tud tárolni,
+    mint az <code>auto_ptr</code> párja, de a tároláson kívül semmit nem csinál.
+    <li>Az <code>auto_ptr</code>-nek van egy <code>auto_ptr</code> paraméterű
+    konstruktora: <code>auto_ptr(auto_ptr&amp;)</code> (ez a „másoló” konstruktor), és egy <code>auto_ptr_helper</code>
+    paraméterű konstruktora: <code>auto_ptr(auto_ptr_helper)</code>.
+    <li>A <code>return auto_ptr&lt;int&gt;{new int{}};</code> utasításban egy
+    objektumot inicializálunk, a visszatérési értéket. Ebből látja a fordító,
+    hogy egy <code>auto_ptr</code> konstruktort kell hívni. Megnézi, milyenek
+    vannak. Két konstruktor jöhet szóba.
+    <li>Az első az <code>auto_ptr</code> paraméterű másoló konstruktor. Ezt nem
+    engedik a szabályok, mert a temporális egy jobbérték, amihez nem köthető a
+    nem konstans referencia.
+    <li>A másik konstruktor egy <code>auto_ptr_helper</code>-t vár. A temporális
+    nem ilyen típusú, de még lehet, hogy konvertálható. Megnézi ezért, van-e
+    <code>auto_ptr</code>&rarr;<code>auto_ptr_helper</code> konverzió.
+    <li>Ezt a konverziót kell megírnunk. Ennek a konverziós függvénynek a dolga,
+    hogy a kezelt objektumot elengedje (<code>release()</code>), és az ideiglenesen
+    létrehozott <code>auto_ptr_helper</code> objektumra bízza. Az az objektum létrejön,
+    a temporális <code>auto_ptr</code> pedig kiürül, null pointerré válik, így a
+    destruktora nem fog csinálni semmit.
+    <li>A kezelt objektum pointerét az <code>auto_ptr_helper</code>-től a másik
+    <code>auto_ptr</code> átveszi, és eltárolja. Az ideiglenes <code>auto_ptr_helper</code>-re
+    ezután már nincs szükség.
+</ul>
+
+<p>Mindez C++ nyelven:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class auto_ptr {
+  public:
+    /* a segédosztály */
+    class auto_ptr_helper {
+      public:
+        T *ptr_;
+        auto_ptr_helper(T *ptr_) : ptr{ptr} {}
+    };
+
+    /* auto_ptr -&gt; auto_ptr_helper */
+    operator auto_ptr_helper () {
+        return auto_ptr_helper{this-&gt;release()};
+    }
+    
+    /* auto_ptr_helper -&gt; auto_ptr */
+    auto_ptr(auto_ptr_helper helper): ptr_{helper.ptr_} {
+    }
+};
+
+auto_ptr&lt;int&gt; create_int() {
+    return auto_ptr&lt;int&gt;{new int{}};     // return static_cast&lt;auto_ptr_helper&gt;(...);
+}</code></pre>
+
+<p>Mi látszik ebből? Leginkább az, hogy a nyelvünk nem tud kifejezni valamit, amire a tulajdonos szemantikájú
+okos pointer leírásához szükségünk lenne. A C++98-ban még nem tudtuk megkülönböztetni egymástól nyelvi szinten
+a jobbértékeket és a balértékeket. C++11 óta szerencsére erre <a href="../ea06/index.html#movector">van már lehetőség</a>.</p>
+    
+                  </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

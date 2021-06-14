@@ -1,0 +1,38 @@
+table.sakk {
+    border-collapse: collapse;
+    border: 2px solid #444;
+    font-size: 1.4em;
+    user-select: none;
+    -moz-user-select: none;
+}
+table.sakk td,
+table.sakk th {
+    width: 1.2em;
+    height: 1.2em;
+    line-height: 1;
+    text-align: center;
+    vertical-align: center;
+    padding: 0;
+    color: #000;
+    text-shadow: 0 -1px 0 #fff, 0 +1px 0 #fff, -1px 0 0 #fff, +1px 0 0 #fff;
+    font-size: 100%;
+    font-weight: normal;
+}
+table.sakk td {
+    border: 1px solid #444;
+}
+table.sakk tr:nth-child(even) td:nth-of-type(even),
+table.sakk tr:nth-child(odd) td:nth-of-type(odd) {
+    background-color: #efedd1;
+}
+table.sakk tr:nth-child(odd) td:nth-of-type(even),
+table.sakk tr:nth-child(even) td:nth-of-type(odd) {
+    background-color: #789656;
+}
+
+table.sakk th.sakk-idx.sakk-idx.sakk-idx {
+    background-color: #fcc;
+    text-shadow: none;
+    border-right: 1px solid #666;
+}
+

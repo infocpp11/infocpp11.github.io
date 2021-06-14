@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Az OOP szemlélet</title>
+<meta property="og:title" content="TEST InfoC++11 :: Az OOP szemlélet">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="OOP tervezés, OOP szemlélet erősítése.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="OOP tervezés, OOP szemlélet erősítése.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Az OOP szemlélet">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Az OOP szemlélet</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">OOP tervezés, OOP szemlélet erősítése.</p>
+</div>
+
+
+<p>Egy C-s program C++-os újraírása nem csak abból áll, hogy minden <code>malloc()</code>-ot <code>new</code>-ra cserélünk.
+C-ben is programozhatunk objektumorientáltan, és C++-ban is programozhatunk procedurális szemlélettel.</p>
+
+<p>A procedurális és az objektumorientált szemlélet alapvetően, gyökeresen más felépítésű programhoz vezet ugyanannál a
+feladatnál. A mai labor erre igyekszik rámutatni. A feladatokban kisebb-nagyobb programokat kell megírni procedurális = „mit
+kell csinálni most, itt helyben” és objektumorientált = „bízzuk a részfeladatokat egy osztályra” szemlélettel. A két szemlélet
+között nehéz meghúzni a határvonalat, de az elkészült programokat összehasonlítva jól látszik majd a különbség.</p>
+
+<blockquote>
+<h3>A laborokhoz</h3>
+<p>A laborok mellé minden héten lesz kiírva egy beadandó az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Függvény rajzolása, C</a>
+                      <li><a href="index.html#2" class="">Függvény rajzolása, C++</a>
+                      <li><a href="index.html#3" class="">Megszentségteleníthetetlenségeskedéseitekért</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvény rajzolása, C">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Függvény rajzolása, C<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi kis program, amely egy egyváltozós függvényt rajzol ki a képernyőre.</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+enum Consts {
+    W = 79,
+    H = 20,
+};
+
+void clear(char page[H][W]) {
+    for (int y = 0; y &lt; H; ++y)
+        for (int x = 0; x &lt; W; ++x)
+            page[y][x] = ' ';
+}
+
+void plot(char page[H][W], char c, double (*f)(double)) {
+    for (int x = 0; x &lt; W; ++x) {
+        double fx = (x - W/2)/4.0;
+        double fy = f(fx);
+        int y = (fy * 4.0) * -1 + H/2;
+        if (y &gt;= 0 &amp;&amp; y &lt; H)
+            page[y][x] = c;
+    }
+}
+
+void print(char page[H][W]) {
+    for (int y = 0; y &lt; H; ++y) {
+        for (int x = 0; x &lt; W; ++x)
+            putchar(page[y][x]);
+        putchar('\n');
+    }
+}
+
+int main() {
+    char page[H][W];
+
+    clear(page);
+    plot(page, '.', sin);
+    plot(page, '+', cos);
+    print(page);
+}</code></pre>
+
+<pre class="screenshot">
+           ++++++ ......             +++++ ......             ++++++......
+          +     .++     .          ++     ++     .          ++     .+     .
+.        +     .   +     .        +      .  +     .        +      .  +     .
+ .      +     .     +     .      +      .    +     .      +      .    +     .
+  .    +     .       +     .    +     ..      +     .    +      .      +     .
+   .  +     .         +     .  +     .         +     .  +      .        +     .
+    .+     .           +     .+     .           +     .+     ..          +
++++++......             ++++++......             ++++++......             +++++
+</pre>
+
+<p>Nézd át jól a kódot – ezt a programot kaptad, hogy tovább kellene fejleszteni.
+Másold be a fejlesztőkörnyezetbe!</p>
+
+<h3>sin(x), sin(2x), sin(3x)</h3>
+
+<p>Az első továbbfejlesztési kérés a következő. Úgy szeretnék a programot használni,
+hogy a felhasználó parametrizálhassa a <code>sin(d*x)</code> alakú függvényét:</p>
+
+<pre   ><code class="language-cbub">printf(&quot;sin(d * x), d = ?\n&quot;);
+scanf(&quot;%lf&quot;, &amp;d);
+plot(page, '.', ... valahogyan sin d*x ...);</code></pre>
+
+<p>Hogyan kell ehhez C-ben (nem C++) módosítani a rajzoló <code>plot()</code> függvényt?
+Milyen okból korlátozza a <code>double (*f)(double)</code> paraméter a megvalósítást?
+Találj ki egy módszert, hogyan kerülöd meg a problémát, és valósítsd is meg C-ben! Gondolj
+arra, hogy igazából a <code>sin(d*x)</code> csak egy példa... Lehetne <code>d*sin(x)</code>,
+<code>d*sin(c+x)</code>, esetleg <code>a*sin(b*x+c)+sqrt(d*x*x)</code> is a függvény, amit
+ábrázolni kell.</p>
+
+<p>Többféle megoldás is lehetséges, azonban mindegyik úgy tűnik, hogy valamiért nem
+túl szerencsés. A választott megoldásodnak van valamilyen hiányossága?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Lehetőségek pl.:</p>
+<ul>
+    <li>Adni kell az ábrázolt függvénynek egy plusz paramétert, amelyiken keresztül ez a parametrizálás elvégezhető. Ezt a
+    paramétert az ábrázolás közben a meghívott függvénynek mindig át kell adni. Ez azért nem túl szerencsés, mert elrugaszkodik
+    a matematikától: a sin(2x), sin(3x) stb. egyváltozós matematikai függvények, míg a program új ábrázolandó függvénye
+    „kétváltozós” lett.
+<pre   ><code class="language-c">void plot(char page[H][W], char c, double (*f)(double, double), double param) {
+    ...
+        double fy = f(fx, param);
+    ...
+}
+
+double sin_d_times_x(double x, double d) {
+    return sin(d * x);
+}</code></pre>
+    
+    <li>Az előző megoldásnak az is baja, hogy csak egy paramétere lehet. C-ben ezen csak úgy tudunk segíteni, ha a <code>double
+    param</code> helyett egy <code>void*</code>-ot passzolgat tovább a <code>plot()</code> az <code>f()</code>-nek; amely
+    <code>void*</code> tetszőlegesen nagy struktúrára mutat, akármennyi adattal.
+    
+    <li>Használhatunk globális változót is. Ez egyszerűbb programokban talán még ez a legjobb megoldás. Azonban nagyobb
+    programokban ez nem szerencsés: globális változó esetén nehéz követni, mi függ össze mivel.
+<pre   ><code class="language-c">double d;
+
+void plot(char page[H][W], char c, double (*f)(double)) {
+    ...
+        double fy = f(fx);
+    ...
+}
+
+double sin_d_times_x(double x) {
+    return sin(d * x);
+}</code></pre>
+    
+</ul>
+</div>
+</details>
+
+
+
+
+
+<h3>Tetszőleges lapméret</h3>
+
+<p>Újabb igény érkezik: a felhasználó adhassa meg a lap méretét (amelyet eddig a <code>Consts</code> <code>enum</code>
+adott meg). Írd át a programot C-ben, figyelve arra, hogy a rajz origója továbbra is
+a lap közepe maradjon! Figyeld meg, mely helyeken kell módosítani a programot!</p>
+
+<p>Használd az előadáson bemutatott, <a href="../ea01/index.html#c99vla">változóval megadott méretű tömböket</a>!</p>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvény rajzolása, C++">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Függvény rajzolása, C++<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előző feladat kódját kell C++-ba átírni.</p>
+
+<h3>sin(x), sin(2x), sin(3x), C++</h3>
+
+<p>Hogyan lehet megoldani a parametrizálható függvényt C++-ban? Az igazán OOP-s megoldás nem a sablon (template), hanem az, ha
+függvényre mutató pointer helyett a <code>plot()</code> egy függvényobjektumot kap, amelynek egy virtuális függvényét hívva
+kapja meg az eredményt. Valahogy így:</p>
+
+<pre   ><code class="language-c">Sin_d_times_x f(0.5);       // f(x) = sin(0.5*x)
+plot(page, '*', f);</code></pre>
+
+<p>Írd meg így a programot! Miért jobb ez a megoldás, mint bármi, amit procedurális kódban írni tudunk?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A globális változókat is elkerüli, és a hívott „függvény” is egy paraméterű marad, mint a matematikai párja. A változtatás 
+lényege, hogy a függvény helyett <em>függvényobjektumot</em> használunk, és így <em>adatot tudunk társítani</em> mellé. Egy 
+leszármazáson keresztül bármennyit!</p>
+<p>A virtuális függvény lehet akár a függvényhívó operátor is, de ez nem szükségszerű.</p>
+<pre   ><code class="language-c">class Func {
+  public:
+    virtual double operator()(double x) const = 0;
+};
+
+void plot(char page[H][W], char c, Func const&amp; f) {
+    ...
+        double fy = f(fx);
+    ...
+}
+
+class Sin_d_times_x : public Func {
+  public:
+    Sin_d_times_x(double d) {
+        d_ = d;
+    } 
+    virtual double operator()(double x) const {
+        return sin(d_ * x);
+    }
+  private:
+    double d_;
+};</code></pre>
+<p>Ha a <code>plot()</code> függvényt sablonná alakítjuk, átvehet sima függvényre mutató pointert is.
+Ilyenkor a fenti öröklés akár el is hagyható, mert a sablon úgyis átvehet bármit, nem kell az osztályok
+közötti kapcsolatot leírni az  örökléssel.</p>
+</div>
+</details>
+
+
+
+
+<h3>Tetszőleges lapméret, C++</h3>
+
+<p>Vedd most újra az eredeti programot, a dinamikus lapméret előtti változatot. Írd át úgy, hogy a rajz kezelése
+objektumorientáltan történjen: a paraméterként átadott tömb helyett mindig egy <code>Page</code> objektumot adj át, amely
+tárolja a méretét (és az lekérdezhető), amelynek van <code>setchar()</code> függvénye, amely figyel a túlindexelésre, esetleg
+<code>print()</code> és <code>clear()</code> függvénye is! Ha ezzel elkészültél, <em>utána</em> végezd el az előző módosítást:
+tedd dinamikussá a lap méretét! (A <code>Page</code> osztály másoló konstruktorával most ne töltsd az időt, nem lényeges.)
+A főprogram valami ilyesmi lehet:</p>
+
+<pre   ><code class="language-c">Sin_d_times_x f(0.5);
+
+Page p(40, 10);
+plot(p, '*', f);
+p.print();</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+
+class Page {
+  public:
+    Page(int w, int h) {
+        w_ = w;
+        h_ = h;
+        page_ = new char*[h_];
+        for (int y = 0; y &lt; h_; ++y)
+            page_[y] = new char[w_];
+        clear();
+    }
+
+    /* destruktor, másoló konstruktor, op= helye */
+
+    void clear() {
+        for (int y = 0; y &lt; h_; ++y)
+            for (int x = 0; x &lt; w_; ++x)
+                page_[y][x] = ' ';
+    }
+
+    void print() const {
+        for (int y = 0; y &lt; h_; ++y) {
+            for (int x = 0; x &lt; w_; ++x)
+                putchar(page_[y][x]);
+            putchar('\n');
+        }
+    }
+
+    void setchar(int x, int y, char c) {
+        if (x &gt;= 0 &amp;&amp; x &lt; w_ &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; h_)
+            page_[y][x] = c;
+    }
+
+    int get_width() const {
+        return w_;
+    }
+    int get_height() const {
+        return h_;
+    }
+
+  private:
+    int w_, h_;
+    char **page_;
+};
+ 
+ 
+ 
+void plot(Page &amp;page, char c, double (*f)(double)) {
+    for (int x = 0; x &lt; page.get_width(); ++x) {
+        double fx = (x - page.get_width()/2)/4.0;
+        double fy = f(fx);
+        int y = (fy * 4.0) * -1 + page.get_height()/2;
+        page.setchar(x, y, c);
+    }
+}
+ 
+ 
+int main() {
+    Page p(40, 10);
+    plot(p, '.', sin);  /* ebben most nincs benne a fv. obj */
+    p.print();
+}</code></pre>
+</div>
+</details>
+
+<p>Hány helyen, hol kell ehhez most módosítanod a programot? Mennyire érzed úgy, hogy a módosítások közben a feladathoz illő,
+vagy a feladathoz nem illő implementációs részletekkel kell foglalkoznod?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Bár a kód hosszabb, a felelősségek sokkal jobban ki vannak osztva benne: minden, ami a lap kezeléséhez tartozik, az a
+<code>Page</code> osztályba kerül. Ideértve a memóriakezelést, a túlindexelés kezelését, a méret nyilvántartását.
+A <code>plot()</code> függvény interfésze <em>nem függ</em> attól, hogy a <code>Page</code> osztály belül hogyan
+tárolja az adatokat, nem kell azt is módosítani, amikor a <code>Page</code> osztály memóriakezelése megváltozik.
+Ez az egységbe zárás lényege!</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Megszentségteleníthetetlenségeskedéseitekért">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Megszentségteleníthetetlenségeskedéseitekért<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>2012-es Prog1 vizsgafeladat volt az alábbi.</p>
+
+<p class="csik"> Írj programot, mely a szabványos bemenetről fájl végéig olvas egy szöveget, a benne található leghosszabb szót
+megtalálja, és a futás végén a standard kimenetre írja! Egy szó alatt a bemeneti karakterfolyam olyan szakaszát értjük, melyben
+csak angol betűk vannak. A szavak bármilyen hosszúak lehetnek!</p>
+
+<p>Ehhez dinamikus memóriakezelést kell használni. Karakterenként olvasva a bemenetet, valami ilyet képzelhetünk el:</p>
+
+<pre>
+while (c = új karakter) {
+    if (c egy betű) {
+        szó += c;
+    } else {
+        if (szó > leghosszabb)
+            leghosszabb = szó;
+        szó = "";
+    }
+}
+</pre>
+
+<h3>C-ben, favágó módszerrel</h3>
+
+<div class="sticky">leghosszabb_1.c</div>
+
+<p>Írd meg a fenti programot tisztán C-ben, úgy hogy közben nem használhatsz saját függvényeket! A beépített <code>malloc()</code>,
+<code>getchar()</code>, <code>isalpha()</code> függvényeket természetesen igen. A megvalósításkor mindig csak arra figyelj, mi a
+következő lépés a számítógép számára: azt kell írnod a kódba.</p>
+
+<h3>C-ben, függvényekkel</h3>
+
+<div class="sticky">leghosszabb_2.c</div>
+
+<p>Írd meg a programot C-ben úgy, hogy a sztringek nyújtása <code>+=</code> és értékadása <code>=</code> művelethez függvényt
+írsz!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+
+void append(char **str, char what) {
+    char *newstr = malloc(strlen(*str) + 2);
+    sprintf(newstr, &quot;%s%c&quot;, *str, what);
+    free(*str);
+    *str = newstr;
+}
+
+void copy(char **str, char *what) {
+    free(*str);    /* a szabvany szerint szabad null ptr-t */
+    *str = malloc(strlen(what) + 1);
+    strcpy(*str, what);
+}
+
+int main() {
+    char *current = NULL, *longest = NULL;
+    int c;
+
+    copy(&amp;current, &quot;&quot;);
+    copy(&amp;longest, &quot;&quot;);
+    while ((c=getchar()) != EOF) {
+        if (isalpha(c))
+            append(&amp;current, c);
+        else {
+            if (strlen(current) &gt; strlen(longest))
+                copy(&amp;longest, current);
+            copy(&amp;current, &quot;&quot;);
+        }
+    }
+    free(current);
+    printf(&quot;leghosszabb: %s\n&quot;, longest);
+    free(longest);
+}</code></pre>
+</div>
+</details>
+
+<h3>C++-ban, saját osztállyal</h3>
+
+<div class="sticky">leghosszabb_3.cpp</div>
+
+<p>Az előző, függvényes változatban már a dinamikus memóriakezelést végző programrészeket (a sok <code>malloc()</code>-ot, <code>
+free()</code>-t) külön függvényekbe költöztetted. Csinálj ezekből osztályt, és használd őket a kódban! Írd meg egy saját sztring
+típussal a programot!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cctype&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+class String {
+    char *str;
+  public:
+    String(char const *s = &quot;&quot;) { str = new char[strlen(s)+1]; strcpy(str,s); }
+    String(String const &amp;other) {
+        str = new char[strlen(other.str)+1];
+        strcpy(str,other.str);
+    }
+    
+    String &amp;operator=(String rhs) {
+        swap(this-&gt;str,rhs.str);
+        return *this;
+    }
+    
+    String &amp;operator+= (int c) {
+        char *uj = new char[strlen(this-&gt;str)+2];
+        sprintf(uj, &quot;%s%c&quot;, this-&gt;str, c);
+        delete [] str;
+        str = uj;
+        return *this;
+    }
+    size_t size() { return strlen(str); }
+    
+    ~String() {
+        delete [] str;
+    }
+    
+    friend ostream &amp;operator&lt;&lt;(ostream&amp;os, String const &amp;s);
+};
+
+ostream &amp;operator&lt;&lt;(ostream &amp;os, String const &amp;s) {
+    os &lt;&lt; s.str;
+    return os;
+}
+
+int main() {
+    String szo;
+    String leghosszabb;
+
+    szo = &quot;&quot;;
+    leghosszabb = &quot;&quot;;
+    char c;
+    while (cin.get(c)) {
+        if (isalpha(c))
+            szo += (char) c;
+        else {
+            if (szo.size() &gt; leghosszabb.size())
+                leghosszabb = szo;
+            szo = &quot;&quot;;
+        }
+    }
+    
+    cout &lt;&lt; leghosszabb &lt;&lt; endl;
+    return 0;
+}</code></pre>
+</div>
+</details>
+
+<h3>Összehasonlítás</h3>
+
+<p>Hasonlítsd össze a kapott programokat, különösen az elsőt (C), a harmadikat (C++), és a pszeudokódot! Melyiknél érzed úgy, hogy
+„azt kell írni, amire gondolsz”? A két forráskód közül melyik hasonlít a pszeudokódra?</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

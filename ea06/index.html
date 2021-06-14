@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: A jobbérték referenciák és a mozgatás szemantika</title>
+<meta property="og:title" content="TEST InfoC++11 :: A jobbérték referenciák és a mozgatás szemantika">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Másolások problémája, tulajdonos szemantika. Jobbérték referenciák, mozgató konstruktorok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Másolások problémája, tulajdonos szemantika. Jobbérték referenciák, mozgató konstruktorok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="A jobbérték referenciák és a mozgatás szemantika">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">A jobbérték referenciák és a mozgatás szemantika</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Másolások problémája, tulajdonos szemantika. Jobbérték referenciák, mozgató konstruktorok.</p>
+</div>
+
+
+<a href="copy.png"><img src="copy_thumb.png" class="float"></a>
+
+<p>A C++ tanórákon egyik leggyakrabban elhangzó szó a „másolás”. Másoló konstruktor, másoló értékadás, lemásoljuk a függvény
+visszatérési értékét, a tárolóba másoljuk a paraméterként kapott objektumot, és így tovább. Ez gyakran vicc tárgya is, de sajnos
+oka van. A verem alapú memóriakezelésnél rendszeresen <a href="../ea05/index.html#funarg">funarg problémákba</a> ütközünk, amiket valahogyan kezelni kell –
+ennek egyik módja a másolás.</p>
+
+<p>A másolások elkerülésére a C++11-ben bevezettek egy újfajta referencia típust, a jobbérték referenciát. Ez
+az új nyelvi elem arra is jó, hogy <a href="../ea05/index.html#tulajdonosszemantika">tulajdonos szemantikát</a> valósítsunk meg az objektumok által kezelt erőforrásainkhoz. Lássuk,
+hogyan is működik ez!</p>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A felmerülő problémák</a>
+                      <li><a href="index.html#2" class="">Mire lenne szükség a nyelvben?</a>
+                      <li><a href="index.html#3" class="">Balértékek és jobbértékek (lvalues and rvalues)</a>
+                      <li><a href="index.html#4" class="">A mozgató konstruktorok</a>
+                      <li><a href="index.html#5" class="">A tulajdonos szemantika és a mozgató konstruktorok</a>
+                      <li><a href="index.html#6" class="">A jobbérték referencia vajon jobbérték?</a>
+                      <li><a href="index.html#7" class="">Az std::move() függvény használata</a>
+                      <li><a href="index.html#8" class="">Implicit generált mozgató konstruktor?</a>
+                      <li><a href="index.html#9" class="">C++-jogászoknak: lvalue, rvalue, xvalue, prvalue és glvalue</a>
+                      <li><a href="index.html#10" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A felmerülő problémák">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A felmerülő problémák<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>A sok felesleges másolás problémája</h3>
+
+<p>Gondoljunk egy egyszerű sztring osztályra! Ennek szeretnénk egy összefűző operátort. Az összefűzés a két operandust átveheti 
+másolás nélkül, referenciával. A visszatérési érték azonban érték típusú kell legyen, semmiképpen nem lehet referencia, mert a 
+függvénybeli lokális változó meg fog szűnni (upward funarg problem):</p>
+
+<pre   ><code class="language-c">String operator+(String const &amp;a, String const &amp;b) {
+    String result{...};
+    ...
+    return result;
+}
+
+c = a + b;</code></pre>
+
+<p>A visszatérési értéket a sztring másoló konstruktora fogja inicializálni, amely 1) dinamikus memóriaterületet foglal, és 2)
+átmásolja a paraméterként átvett <code>result</code> sztringből a karaktereket. Ezután a <code>result</code> objektumnak lefut a
+destruktora, mivel az élettartama végére értünk.</p>
+
+<p>A másoló konstruktor és a destruktor <em>együttese</em> miatt érezzük azt, hogy
+feleslegesen dolgoztunk. Semmi értelme nem volt lemásolni a sztring dinamikus tömbjét, annak az objektumnak az erőforrását,
+amelyiket már úgysem fogja használni senki. Jobban jártunk volna, ha a mindjárt megszűnő objektumtól egyszerűen <em>elvettük</em>
+volna ezt az erőforrást: az újonnan létrejövő, visszatérési érték sztring dinamikus tömbjére mutató pointerét beállítjuk a
+mindjárt megszűnő lokális változó sztring tömbjére. Ugyanez a helyzet a <code>c = a + b</code> sorban az értékadásnál: az értékadó operátor feleslegesen másol.</p>
+
+<div class="columns">
+<div>
+<img src="return_copy.svg" style="height: 9em;" class="kozep">
+<p class="kozep">a karaktertömb másolása</p>
+</div>
+<div>
+<img src="return_move.svg" style="height: 9em;" class="kozep">
+<p class="kozep">a karaktertömb átadása</p>
+</div>
+</div>
+
+<p>Ha jobban megnézzük a <a href="../ea04/index.html#myvector">múltkori <code>MyVector</code></a> (dinamikus tömb osztály) átméretező függvényét, ott is hasonló
+működéssel találkozunk:</p>
+
+<pre   ><code class="language-cbub">T *newPData = static_cast&lt;T*&gt;(::operator new(sizeof(T) * newcapacity)); // 1
+for (size_t i = 0; i != size_; ++i) {
+    new (&amp;newPData[i]) T(pData_[i]); // 2
+    pData_[i].~T(); // 3
+}
+::operator delete(pData_); // 4</code></pre>
+
+<p>Itt az 1-essel jelzett helyen új memóriaterületet foglalunk, a 4-essel jelzett helyen a régit
+felszabadítjuk. Ez még rendben lenne, de a 2-es sorban az objektumokat új helyre <em>másoljuk,</em>
+a 3-as sorban pedig a régi objektumokat <em>megszüntetjük.</em> Ezek olyan, időigényes műveletek,
+amelyekre a vektor átméretezésekor nem kellene szükség legyen. Nem átmásolni, hanem <em>áthelyezni</em>
+szeretnénk az objektumokat az új területre.</p>
+
+
+
+
+<h3>A tulajdonos szemantika problémája</h3>
+
+<p>Emlékezzünk vissza egy másik problémára is, a <a href="../ea05/index.html#tulajdonosszemantika">tulajdonos szemantikát</a> megvalósító <code>AutoPtr</code>
+osztályra (C++98-ban: <code>std::auto_ptr</code>). Ennél az volt a feladatunk, hogy megoldjuk,
+a kezelt erőforrást, a dinamikusan foglalt objektumot az egyik <code>AutoPtr</code> <em>átadja</em>
+a másiknak. Erre – jobb híján – a másoló konstruktort kellett használnunk, és a C++-os referenciák, paraméterátadási,
+és konverziós szabályok miatt <a href="../autoptr/index.html">zűrös segédosztályokat és segédfüggvényeket</a> írtunk:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class AutoPtr {
+    AutoPtr(AutoPtr &amp;the_other);    /* nem konstans! */
+
+    class AutoPtrHelper;            /* segédosztály */
+    operator AutoPtrHelper ();      /* AutoPtr -&gt; AutoPtrHelper */
+    AutoPtr(AutoPtrHelper helper);  /* AutoPtrHelper -&gt; AutoPtr */
+};</code></pre>
+
+<p>Mindezek azért kellettek, hogy az okos pointer helyes használatát (!) megengedje
+a fordító. Mert az alábbi sorokban létrejövő ideiglenes objektumot a nem konstans
+referencia paraméterű „másoló” konstruktor nem tudná átvenni:</p>
+
+<pre   ><code class="language-c">AutoPtr&lt;Shape&gt; create_shape() {
+    return AutoPtr&lt;Shape&gt;{new Rectangle};
+}
+
+AutoPtr&lt;Shape&gt; p = create_shape();</code></pre>
+
+<p>Ugyanakkor a helytelen használatot ezek nem akadályozzák meg, sőt a szokatlan viselkedésű „másoló” konstruktor komoly
+veszélyforrás:</p>
+
+<pre   ><code class="language-cbub">void fv(AutoPtr&lt;Shape&gt;);
+
+/* x elveszik, pedig másolásnak néz ki */
+AutoPtr&lt;Shape&gt; y = x;     // nem OK
+
+/* x elveszik, pedig érték szerinti paraméterátadásnak néz ki */
+fv(x);                  // nem OK</code></pre>
+
+<p>A régi, C++98-as nyelvi eszközeinkkel nem tudjuk kifejezni a tulajdonos szemantikát: azt, hogy egy
+<code>AutoPtr</code> ide-oda rakosgatható, de nem másolható.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mire lenne szükség a nyelvben?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Mire lenne szükség a nyelvben?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Figyeljük meg egy kicsit jobban azokat a sorokat, amiket leírtunk! Vegyük észre, hogy a legtöbb esetben,
+amikor egy erőforrást <em>mozgatni</em> szeretnénk, akkor olyan objektumról van szó, amely épp a következő
+pillanatban meg fog szűnni. Egy <em>temporális objektumról</em>. Mozgatni kell a sztringek összefűzésénél, ahol
+a függvény visszatérési értékéből, a névtelen objektumból kivehetjük az adatokat, mielőtt megszűnik a
+pontosvesszőnél:</p>
+
+<pre   ><code class="language-cbub">String operator+(String const &amp;, String const &amp;);
+
+String a, b, c;
+c = a + b;      // mozgatható</code></pre>
+
+<p>Viszont másolni kell akkor, ha változóról van szó:</p>
+
+<pre   ><code class="language-cbub">String a, b;
+a = b;          // másolni kell</code></pre>
+
+<p>Mozgatni kell az erőforrást az <code>AutoPtr</code> objektumok között is, amikor
+<code>AutoPtr</code> a függvény visszatérési értéke. Ez is temporális objektum:</p>
+
+<pre   ><code class="language-cbub">AutoPtr&lt;Shape&gt; create_shape();
+
+AutoPtr&lt;Shape&gt; p = create_shape();  // helyes</code></pre>
+
+<p>Az <code>AutoPtr</code>-nél a helytelen használatokat viszont éppen arról ismerjük meg, hogy a másoló konstruktor
+nem temporális objektumot, hanem változót kap:</p>
+
+<pre   ><code class="language-cbub">void fv(AutoPtr&lt;Shape&gt;);
+
+AutoPtr&lt;Shape&gt; y = x;     // helytelen
+
+fv(x);                    // helytelen</code></pre>
+
+<p>Vonjuk le a következtetést ezekből! Arra lenne szükségünk, hogy szintaktikailag meg tudjuk különböztetni egymástól a
+temporális és a nem temporális objektumokat. Ha a temporálisok és a nem temporálisok különféle típusnak számítanának (ez már
+eddig is így volt, C++98), és lehetne egy objektum temporális vagy nem temporális volta alapján választani két függvény közül (ez lesz
+az újdonság, C++11), akkor a fordító automatikusan kiválasztaná a függvények közül a megfelelő változatot:</p>
+
+<pre   ><code class="language-cbub">class String {
+    String(TEMPORÁLIS String);
+    String&amp; operator=(TEMPORÁLIS String);      // áthelyezések
+
+    String(NEM_TEMPORÁLIS String);
+    String&amp; operator=(NEM_TEMPORÁLIS String);  // másolások
+};
+
+class AutoPtr {
+    AutoPtr(TEMPORÁLIS AutoPtr);
+    AutoPtr&amp; operator=(TEMPORÁLIS AutoPtr);                // tulajdonjog átadása
+
+    AutoPtr(NEM_TEMPORÁLIS AutoPtr) = delete;
+    AutoPtr&amp;e operator=(NEM_TEMPORÁLIS AutoPtr) = delete;  // tilos, fordítási hiba
+};</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Balértékek és jobbértékek (lvalues and rvalues)">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Balértékek és jobbértékek (lvalues and rvalues)<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A változók és temporális értékek fogalmát már a C nyelv is ismerte. Ott azt mondtuk, hogy balértéknek (left-value, lvalue)
+nevezzük az olyan kifejezések értékét, amely módosítható (modifiable), vagy másképpen, amelynek érték adható (assignable). Jobbértéknek (right-value, rvalue) pedig azt, ami nem módosítható. Például az <code>i</code> és a <code>*j</code> kifejezés értéke
+balérték, mert módosítható. A <code>3</code> és az <code>i + 4</code> kifejezés értéke pedig jobbérték, nem lehet neki értéket
+adni:</p>
+
+<pre   ><code class="language-c">int i;
+int *j = &amp;i;
+
+i = 5;      /* OK, balérték = ... */
+*j = 6;     /* OK */
+
+3 = i;      /* HIBÁS, jobbérték = ... */
+i + 4 = 6;  /* HIBÁS */</code></pre>
+
+<p>Az elnevezések az <em>értékadás művelet</em> két operandusának sorrendjéből erednek: balértéknek kell lennie az értékadás bal oldalán,
+a jobbérték pedig csak az értékadás jobb oldalán állhat. A pongyola definíciókat később módosították, hogy inkább azt mutassa
+meg, temporális vagy nem temporális értékről van szó, mert ez fontosabb, hasznosabb megkülönböztetés. C++-ban egy temporális
+objektum is kaphat értéket (meghívható valamely tagfüggvénye, akár az értékadó operátora is). Az is elképzelhető, hogy egy
+balérték nem kaphat értéket. Ilyen egy konstans objektum.</p>
+
+<p>Tehát az eggyel pontosabb definíciók a következők:</p>
+
+<blockquote>
+<dl>
+    <dt>Balérték (lvalue)</dt>
+    <dd>Olyan kifejezés értéke, amely a memóriában megjelölt helyre hivatkozik. A balértéknek képezhető a címe az
+    egyoperandusú <code>&amp;</code> operátorral.</dd>
+
+    <dt>Jobbérték (rvalue)</dt>
+    <dd>Minden más.</dd>
+</dl>
+</blockquote>
+
+<p>Balérték lehet egy változó: <code>int i</code>, lehet referencia: <code>int &amp;j</code>, de lehet akár egy pointer által
+megjelölt hely is: <code>*k</code>. C++-ban balérték lehet egy függvény visszatérési értéke is, pl. <code>int
+&amp;fv()</code> esetén <code>fv()</code>. Balérték objektum tagváltozója is balérték. Ezek mind beleférnek a „címe képezhető”,
+illetve „van egy kijelölt helye a memóriában” definícióba.</p>
+
+<p class="megjegyzes">Természetesen attól a trükktől most tekintsünk el, ha letiltjuk vagy priváttá tesszük egy osztály
+<code>&amp;</code> operátorát, és amiatt nem látjuk az objektumai címét. Ez megtehető, de attól még az objektumai lehetnek
+balértékek.</p>
+
+<p>A C++98 nyelv ugyan megkülönbözteti egymástól a balértékeket és a jobbértékeket, de a függvénynév overload feloldó
+mechanizmusával ezt a megkülönböztetést nem tudjuk kihasználni. Nézzük meg, miért! Tegyük fel, hogy van három függvényünk:</p>
+
+<pre   ><code class="language-c">void fv_val(String);
+void fv_ref(String &amp;);
+void fv_cref(String const &amp;);</code></pre>
+
+<p>Egy <code>String s</code> változóval bármelyik függvény hívható a fentiek közül:</p>
+
+<pre   ><code class="language-c">String s = &quot;hello&quot;;
+
+fv_val(s);  /* OK, lemásolódik, a másolatot látja */
+fv_ref(s);  /* OK, s-t látja, meg is változtathatja */
+fv_cref(s); /* OK, az eredeti s-t látja */</code></pre>
+
+<p>Ha <code>String const s</code> változónk van:</p>
+
+<pre   ><code class="language-c">String const s = &quot;hello&quot;;
+
+fv_val(s);  /* OK, mert lemásolható */
+fv_ref(s);  /* HIBA, bár balérték, de a fv nem ígéri meg, hogy változatlan marad */
+fv_cref(s); /* OK, mert ígéri, hogy nem fog változni */</code></pre>
+
+<p>Ha pedig van egy jobbértékünk:</p>
+
+<pre   ><code class="language-c">fv_val(String(&quot;hello&quot;));  /* OK, esetleg le is másolódik */
+fv_ref(String(&quot;hello&quot;));  /* HIBA, nem balérték */
+fv_cref(String(&quot;hello&quot;)); /* OK, nem másolódik, a temporálist látja */</code></pre>
+
+
+<p>Mindez táblázatban összefoglalva lent látható. Az oszlopok az inicializálandó típusokat, a <a href="../ertekkonstref/index.html">függvényparaméterek típusait</a> mutatják, a sorok pedig azokat a lehetséges értéktípusokat, amelyekkel inicializálni szeretnénk ezeket a paramétereket.</p>
+
+<table class="kozepre">
+<caption>Értékek típusai és hívható függvények</caption>
+<thead>
+<tr><th><th>fv_val(X)<th>fv_ref(X &amp;)<th>fv_cref(X const &amp;)</tr>
+</thead>
+<tr><th>balérték         <td><i class="igen"></i><td><i class="igen"></i><td><i class="igen"></i></tr>
+<tr><th>konstans balérték<td><i class="igen"></i><td><i class="nem "></i><td><i class="igen"></i></tr>
+<tr><th>jobbérték        <td><i class="igen"></i><td><i class="nem "></i><td><i class="igen"></i></tr>
+</table>
+
+<p>A probléma ezen jól látható: nem létezik olyan függvényparaméter-típus, amely csakis és kizárólag a jobbértékre
+illeszkedik. Pedig ahhoz, hogy a felesleges másolásokat el tudjuk kerülni, meg kell tudnunk mondani a paraméterként
+átvett objektumról, hogy balérték vagy jobbérték; mert csak akkor lophatjuk el tőle az erőforrást, ha egy névtelen
+temporális, azaz jobbérték típusú objektumról van szó.</p>
+
+<p>Ezért vezettek be C++11-ben egy újfajta referencia típust, a jobbértékek referenciáját (rvalue reference). A jelük <code> 
+&amp;&amp;</code> – ezt gyakran ref-ref-nek mondjuk, magyarul és angolul is. (Nevezzük a régieket innentől balérték referenciának.) 
+A jobbérték referenciaként létrehozott változót ugyanúgy inicializálni kell, mint az eddigi referenciákat. A különlegességüket az 
+adja, hogy ez csakis jobbértékkel tehető meg, és ezért egy jobbérték referencia formális paraméterű függvénynév csakis jobbérték 
+argumentumra fog illeszkedni:</p>
+
+<pre   ><code class="language-c">void fv_rref(String &amp;&amp;);
+
+String s = &quot;hello&quot;;
+String const cs = &quot;hello&quot;;
+
+fv_rref(s);                 /* HIBA, nem jobbérték */
+fv_rref(cs);                /* HIBA, nem jobbérték */
+fv_rref(String(&quot;hello&quot;));   /* OK, jobbérték */</code></pre>
+
+
+<p>A táblázatot kiegészítve:</p>
+
+<table class="kozepre">
+<caption>Értékek típusai és hívható függvények</caption>
+<thead>
+<tr><th><th>fv_val(X)<th>fv_ref(X&amp;)<th>fv_cref(X const &amp;)<th class="piros">fv_rref(X &amp;&amp;)</tr>
+</thead>
+<tr><th>balérték         <td><i class="igen"></i><td><i class="igen"></i><td><i class="igen"></i><td class="piros"><i class="nem "></i></tr>
+<tr><th>konstans balérték<td><i class="igen"></i><td><i class="nem "></i><td><i class="igen"></i><td class="piros"><i class="nem "></i></tr>
+<tr><th>jobbérték        <td><i class="igen"></i><td><i class="nem "></i><td><i class="igen"></i><td class="piros"><i class="igen"></i></tr>
+</table>
+
+<p>Az egyes típusok alapján „overload”-olhatjuk a függvényneveket is. Mint azt mindjárt látni fogjuk, ez a konstruktoroknál
+nagyon hasznos lesz.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void fv(std::string &amp;s) {
+    std::cout &lt;&lt; &quot;non-const lvalue&quot; &lt;&lt; std::endl;
+}
+
+void fv(std::string const &amp;s) {
+    std::cout &lt;&lt; &quot;const lvalue&quot; &lt;&lt; std::endl;
+}
+
+void fv(std::string &amp;&amp;s) {
+    std::cout &lt;&lt; &quot;rvalue&quot; &lt;&lt; std::endl;
+}
+
+int main() {
+    std::string s = &quot;hello&quot;;
+    std::string const cs = &quot;hello&quot;;
+
+    fv(s);
+    fv(cs);
+    fv(std::string(&quot;hello&quot;));
+}</code></pre>
+
+<pre class="screenshot">
+non-const lvalue
+const lvalue
+rvalue
+</pre>
+
+
+<p>A táblázat most sem teljes. Elvileg lehetséges még konstans jobbérték referencia és konstans érték típusú paraméter is, de ezek 
+most nem lényegesek. A konstans jobbérték referencia automatikusan kiadódik következményként a típusrendszerből (bármi kaphat 
+konstans minősítőt), csak nem jó semmire.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A mozgató konstruktorok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="movector" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A mozgató konstruktorok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Innentől nyert ügyünk van: ha tudjuk, hogy a paraméterként átvett objektum jobbérték, akkor tudjuk, hogy az egy névtelen,
+temporális változó, amit senki más nem lát, és mindjárt meg fog szűnni. Ebből aztán levonhatjuk azt a következtetést is, hogy az
+erőforrását el lehet lopni tőle.</p>
+
+<p>Írjuk meg a sztring osztályt, hogy lássuk, hogy működik ez! A szokásos állatorvosi lovunk két adattagot tartalmaz, a
+méretet és a dinamikusan foglalt tömböt a karakterekkel:</p>
+
+<pre   ><code class="language-c">class String {
+    size_t size_;
+    char *data_;
+};</code></pre>
+
+<p>A memóriaterületet a konstruktorai foglalják, és a destruktora szabadítja fel.</p>
+
+<pre   ><code class="language-c">String::String(char const *init) {
+    size_ = strlen(init);
+    data_ = new char[size_+1];
+    strcpy(data_, init);
+}
+
+String::~String() {
+    delete[] data_;
+}</code></pre>
+
+<p>Tudjuk, hogy aminek kell destruktor, annak kell másoló konstruktor és értékadó operátor is. Írjuk meg
+ezeket, hogy össze tudjuk majd hasonlítani őket a jobbérték referenciát használó párjukkal:</p>
+
+<pre   ><code class="language-c">String::String(String const &amp;the_other) {
+    size_ = the_other.size_;
+    data_ = new char[size_+1];
+    strcpy(data_, the_other.data_);
+}
+
+String&amp; String::operator=(String const &amp;rhs) {
+    if (this != &amp;rhs) {
+        delete[] data_;
+        size_ = rhs.size_;
+        data_ = new char[size_+1];
+        strcpy(data_, rhs.data_);
+    }
+    return *this;
+}</code></pre>
+
+<p>Ezek a függvények balérték referenciát vesznek át a másolandó objektumra. Régen, amíg csak ilyen volt, nem tudhattuk, hogy
+egy balérték vagy jobbérték objektumot látunk (változót vagy temporálist), ezért kénytelenek voltunk lemásolni a tömböt.</p>
+
+<p>Nem ez a helyzet a jobbértékeknél. A forráskódban csak azokat az objektumokat tudjuk hivatkozni többször, amiknek
+nevük van. <em>A temporálisoknak nincs nevük,</em> ezért ha egy <strong>jobbérték referencián</strong> keresztül látunk egy objektumot, akkor tudhatjuk,
+hogy csakis mi érjük el azt, senki más nem látja. Azt is tudhatjuk, hogy egy temporális, ami nemsokára meg fog szűnni, így aztán
+azt csinálunk vele, amit akarunk. A költséges másolás helyett egy sokkal
+egyszerűbb, hatékonyabb megoldást választhatunk: <em>elvehetjük a tömböt</em> a sztringtől, mert úgysem lesz már használva semmire. Az
+alább látható konstruktor nem másolja, hanem <em>mozgatja</em> az objektumot (move constructor), elvéve
+a paraméterként kapott sztring tömbjét:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">String::String(String &amp;&amp; the_other) noexcept {
+    size_ = the_other.size_;
+    the_other.size_ = 0;
+    data_ = the_other.data_;    // elveszi a tömböt
+    the_other.data_ = nullptr;
+}</code></pre>
+
+<p>Észre kell venni, hogy a mozgató konstruktor <code>String &amp;&amp;</code> paramétere nem konstans sztringet jelöl!
+A másoló konstruktornál megszoktuk, hogy konstans a paraméter, de itt pedig pont nem lehet az, mert módosul az objektum,
+amitől elvesszük az erőforrást.</p>
+
+<p>Fontos, hogy a jobbérték referencián keresztül látott objektum (a lenti rajzon az <code>a+b</code>) élettartama a függvény idején 
+ugyan még tart, de utána vége lesz, és a <em>destruktora</em> le fog futni. A pointerét ezért le kell nulláznunk, különben az 
+objektumnak a destruktora felszabadítaná azt a tömböt, amit átvettünk tőle. Tehát a tömböt a mozgató konstruktorban elvesszük,
+a jobbérték referencián keresztül látott objektumot pedig üres állapotban hagyjuk, hogy megszüntethető legyen (destructable state).</p>
+
+<p>A mozgató konstruktor <em>elnevezését ne értsük félre!</em> Technikailag nem mozdul el egyik objektum sem
+a memóriában, sőt igazából két különböző objektumról van szó. Ez egy konstruktor, létrehoz egy új
+objektumot, a régi pedig még megmarad egy ideig. Ehelyett az erőforrás az, ami átadódik egyiktől
+a másikhoz: <em>az erőforrás mozog, nem az objektum</em>.  Az alábbi ábra a memóriaképet mutatja egy ilyen helyzetben,
+a mozgatás előtt és után:</p>
+
+<pre   ><code class="language-cbub">String c = a+b;</code></pre>
+
+<img src="move.svg" class="kozep" style="width: 28em;">
+
+<p>A felső ábra azt az állapotot mutatja, amikor elindul a mozgató konstruktor. Ekkor a <code>c</code> objektumban
+még memóriaszemét van, az <code>a+b</code> függvényhívás értéke pedig egy olyan sztring, ami az összefűzött szövegeket
+tartalmazza. A konstruktor lefutása után a <code>c</code> objektum pointere mutat ugyanarra a karaktertömbre; a
+<code>the_other</code> referencián keresztül látott <code>a+b</code> objektum pointere pedig null értékű lett.
+Semelyik objektum nem mozdult el, se a sztring objektumok, se a karaktertömb. Csak ettől a ponttól kezdve a
+karaktertömb már <code>c</code> kezelésében van, <code>a+b</code>-hez pedig már nem tartozik semmi.</p>
+
+<p>Az értékadó operátor (move assignment operator) hasonlóan működhet. Az önértékadás ellenőrzését
+jobb benne hagyni, mert konverziókkal itt is előfordulhat az önértékadás – erről majd kicsit később.</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">String&amp; String::operator=(String &amp;&amp; rhs) noexcept {
+    if (this != &amp;rhs) {
+        delete[] data_;
+        size_ = rhs.size_;
+        rhs.size_ = 0;
+        data_ = rhs.data_;    // elveszi a tömböt
+        rhs.data_ = nullptr;
+    }
+    return *this;
+}</code></pre>
+
+<p>Az eddigi <strong>hármas szabályunkat,</strong> miszerint ha valaminek kellett 1) destruktor vagy 2) másoló konstruktor vagy 3) értékadó
+operátor, akkor mind a három kell, ezentúl egy ötös szabállyá alakíthatjuk. Azt kell mondanunk, ha egy objektum valamely
+speciális tagfüggvénye erőforrást kezel, akkor valószínűleg mind az öt speciális függvényt meg kell írnunk:
+1) destruktor, 2) másoló konstruktor, 3) értékadó operátor, 4) mozgató konstruktor és 5) mozgató értékadó operátor. Az
+első hármat a helyes működés érdekében, az utolsó kettőt pedig a gyors működés érdekében.</p>
+
+<p>Egy dologra figyelnünk kell ezeknél: kapjanak egy <code>noexcept</code> minősítőt. Hogy ez miért fontos,
+arról <a href="../ea08/index.html#moveifnoexcept">később lesz szó</a>. Az öt erőforráskezelő
+függvény végleges formája a sztring esetében:</p>
+
+<pre   ><code class="language-c">class String {
+  public:
+    String(String const &amp;);
+    String(String &amp;&amp;) noexcept;
+    String&amp; operator=(String const &amp;);
+    String&amp; operator=(String &amp;&amp;) noexcept;
+    ~String();  /* ez is noexcept, de nem kell kiírni */
+    /* ... */
+}</code></pre>
+
+<p>Ha ezeket a függvényeket megírjuk, a fordító automatikusan választja majd ki őket a hívásoknál: ha balérték a
+paraméter, a másoló konstruktor hívódik, ha pedig jobbérték, akkor a mozgató konstruktor. Többet nem is kell foglalkozni velük!
+Így lehetséges az, hogy egy C++98-ban megírt, STL tárolókat, sztringet használó program egy egyszerű C++11-es újrafordítástól
+<em>felgyorsul.</em> A C++11 STL-je már tartalmazza a mozgató konstruktorokat és értékadó operátorokat, amelyek a fordító használni
+tud a jobbértékeknél. Ezzel egy csomó másolást megspórol, és ez nekünk semennyi többlet munkába nem kerül. Bátran
+adhatunk vissza bármekkora tárolót egy függvényből, egy-két pointer értékadásnyi időbe fog csak telni.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A tulajdonos szemantika és a mozgató konstruktorok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="uniqueptr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A tulajdonos szemantika és a mozgató konstruktorok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Vannak olyan osztályok, amelyek objektumai nem másolhatóak, mert a másolás értelmetlen lenne. Ilyen egy nyitott
+fájlt vagy egy hálózati kapcsolatot reprezentáló osztály, de ilyen a tulajdonos szemantikát megvalósító okos pointer
+is. Emlékezzünk vissza, a tulajdonos szemantika azt jelenti, hogy a kezelt objektumra pontosan egy darab okos
+pointernek kell mutatnia, többnek nem szabad. Ezért tilos ezeknél a másolás. A nem konstans balérték referenciát
+átvevő „másoló” konstruktort és segédosztályt kényszerből csináltuk, hogy az ilyen okos pointer objektumok <em>áthelyezését,</em>
+mozgatását meg tudjuk valósítani. Mert ha a másolásnak nincs is értelme ezeknél, az áthelyezésnek még lehet, sőt a tulajdonos
+szemantikájú okos pointernél éppen ennek van értelme. A függvény belsejében létrehozott okos pointert ki kell hozni
+a függvényből:</p>
+
+<pre   ><code class="language-c">AutoPtr&lt;Shape&gt; create_shape() {
+    return AutoPtr&lt;Shape&gt;{new Rectangle};
+}</code></pre>
+
+<p>A másolást és a mozgatást most már meg tudjuk különböztetni.
+A balértéket átvevő másoló konstruktort letiltjuk, a jobbértéket átvevő mozgató konstruktort pedig megírjuk úgy, hogy
+a később megszűnő temporálistól átvegye a kezelt objektumot. Így működik az új nevű <code>UniquePtr</code> osztályunk,
+így működik a C++11 szabványbeli <code>std::unique_ptr</code> is, amely a régi <code>std::auto_ptr</code>-t
+leváltotta:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class UniquePtr {
+  private:
+    T *ptr_;
+  public:
+    explicit UniquePtr(T *ptr = nullptr) : ptr_{ptr} {}
+    ~UniquePtr() { delete ptr_; }
+
+    UniquePtr(UniquePtr const &amp;) = delete;            // nem lehet másolni
+    UniquePtr&amp; operator=(UniquePtr const &amp;) = delete;
+
+    UniquePtr(UniquePtr &amp;&amp; the_other) noexcept {      // a mozgatás viszont ok
+        ptr_ = the_other.ptr_;
+        the_other.ptr_ = nullptr;
+    }
+    UniquePtr&amp; operator=(UniquePtr &amp;&amp; rhs) noexcept { // értékadás jobbértékből is ok
+        if (this != &amp;rhs) {
+            delete ptr_;
+            ptr_ = rhs.ptr_;
+            rhs.ptr_ = nullptr;
+        }
+        return *this;
+    }
+};</code></pre>
+
+<p>Így a mozgatás mindenhol működik, a másolás pedig mindenhol tilos:</p>
+
+<pre   ><code class="language-c">UniquePtr&lt;Shape&gt; create_shape() {
+    return UniquePtr&lt;Shape&gt;{new Rectangle};
+}
+
+void fv(UniquePtr&lt;Shape&gt; p) {
+}
+
+int main() {
+    UniquePtr&lt;Shape&gt; p = create_shape();    /* OK */
+    UniquePtr&lt;Shape&gt; p2{p};                 /* HIBA, másoló konstruktor lenne */
+    UniquePtr&lt;Shape&gt; p3;
+    p3 = p;                                 /* HIBA, másoló értékadás lenne */
+    p3 = create_shape();                    /* mozgatás, OK */
+    fv(p);                                  /* HIBA, másoló konstruktor lenne */
+    fv(create_shape());                     /* mozgatás, OK */
+}</code></pre>
+
+<p>Ezzel együtt lehetővé vált az, amit a régi <code>std::auto_ptr</code>-rel nem lehetett megcsinálni:
+<code>std::unique_ptr</code>-eket, vagy <code>std::fstream</code>-eket tehetünk STL tárolókba.
+Ha a tároló nem igényli azt, hogy a tárolt objektumok másolhatóak legyenek, hanem megelégszik a mozgató
+konstruktor létezésével, akkor ezzel a típussal példányosítható a sablon.</p>
+
+<blockquote>
+<h3>Az <code>std::unique_ptr&lt;&gt;</code> sablon</h3>
+<p>A C++11 óta az <code>std::unique_ptr&lt;&gt;</code> sablon része a szabványnak: tulajdonjoggal
+rendelkező okos pointert valósít meg. A régi <code>std::auto_ptr&lt;&gt;</code> pedig elavult, kerülendő.</p>
+</blockquote>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A jobbérték referencia vajon jobbérték?">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A jobbérték referencia vajon jobbérték?<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi függvényt! A „mitírki” feladat kérdése egyszerű: ha az <code>String</code> osztálynak van másoló és mozgató
+konstruktora is, melyik hívódik a kettő közül?</p>
+
+<pre   ><code class="language-cbub">void foo(String &amp;&amp; s) {
+    String other_s{s};   // másol vagy mozgat?
+}</code></pre>
+
+<p>A válasz elsőre talán meglepő: <em>nem a mozgató konstruktor</em>. Az <code>s</code> ugyanis egy változó, egy balérték, hiába 
+definiáltuk jobbérték referenciának. Miért? Mert a jobbérték referencia megadásával nem azt mondjuk, hogy jobbérték típusú változót 
+szeretnénk, hanem csak annyit, hogy egy olyan referenciát szeretnénk, amely egy már létező, jobbérték típusú objektumhoz van kötve 
+(the reference is bound to an rvalue).</p>
+
+<p>A paraméterben lévő jobbérték referencián keresztül <em>nevet adunk</em> az objektumnak, amely néven keresztül többször is
+hivatkozhatjuk. Márpedig aminek neve van, az balértéknek kell számítson.
+Így aztán nem lehet temporális változó, legalábbis abban a hatókörben (scope) nem, ahol a referencia látszik. Bár az objektum, amit a
+<code>foo(String &amp;&amp; s)</code> függvény kap, eredetileg egy jobbérték kellett legyen, a függvény belsejében nem
+jobbértéknek érzékeljük. A függvényen belül az <code>s</code> változón keresztül látott objektum nem temporális objektumként
+viselkedőnek látszik, a függvényhívás egész időtartama alatt létezik. Így
+az alábbi kódrészletben a <em>másoló</em> konstruktor hívódik:</p>
+
+<pre   ><code class="language-cbub">void foo(String &amp;&amp; s) {
+    String other_s{s};    // ez itt másolás!
+}
+
+foo(String{});</code></pre>
+
+<p class="megjegyzes">Vegyük észre, hogy a függvényből visszatérve viszont megszűnik az ideiglenes objektum ideiglenes
+neve is! Bár természetesen nem ettől szűnik meg az ideiglenes <code>String</code> objektum, hanem attól, hogy elérünk
+a hívás utáni pontosvesszőig, tehát végére érünk annak a teljes kifejezésnek (full expression), amelyik a temporális
+létrehozását eredményezte.</p>
+
+<p>Miért fontos mindez ez? Mert gyakran előfordul, hogy egy jobbérték referencián keresztül látott objektumot szeretnénk egy
+kifejezésben jobbértékként használni: például amikor egy leszármazott osztály mozgató konstruktorában szeretnénk az ős
+mozgató konstruktorát meghívni. Ha nem teszünk semmit, akkor balértékként fogja látni, mert a referencia által az
+objektum nevet kapott, márpedig akkor balértéknek számít. Ha jobbérték referenciává alakítjuk (annak tekintjük) egy
+<code>static_cast</code>-tal, akkor viszont mozgatás történik majd:</p>
+
+<pre   ><code class="language-cbub">void foo(String &amp;&amp; s) {
+    String new_s{static_cast&lt;String &amp;&amp;&gt;(s)};
+}</code></pre>
+
+<p>A típuskonverzióval lényegében külön engedélyt adunk a fordítónak a mozgató konstruktor használatára.</p>
+
+
+<blockquote class="megjegyzes">
+<h3>Emlékeztető: a <code>decltype</code></h3>
+<p>Vigyázat: egy kifejezés általában nem olyan típusú értéket ad, mint amilyennek a benne szereplő változót deklaráltuk.
+Emlékezzünk vissza a <code>decltype</code> kapcsán említett <em>deklarált típusra:</em> <code>decltype(s)</code> és az <em>
+effektív típusra:</em> <code>decltype((s))</code>. Az előbbi azt mutatja, hogy a megadott név deklarációjánál milyen típust
+adtunk meg, az utóbbi pedig azt, hogy a bezárójelezett kifejezés milyen típusra értékelődik ki. Ezek eltérőek lehetnek.</p>
+
+<p>Például <code>class Complex { double re, im; }</code> osztály <code>Complex c1</code> példánya esetén a <code>c1.re</code> 
+deklarált típusa <code>double</code>, effektív típusa pedig <code>double &amp;</code>, egy balérték, a memóriában lévő valós szám 
+referenciája, melynek a címe képezhető. Egy másik, <code>Complex const c2</code> példány esetén viszont az effektív típus <code> 
+double const &amp;</code>, azaz egy konstans szám. Hasonlóan nyakatekert egy függvény és egy változó kapcsolata: <code>int 
+foo()</code> és <code>int x</code>. Mindkettőt <code>int</code> típusúnak deklaráltuk, viszont míg a <code>foo()</code> kifejezés 
+jobbértéket, addig az <code>x</code> kifejezés balértéket ad. Ha sokszor hívjuk a <code>foo()</code> függvényt, mindig más integert 
+kapunk. Ha sokszor hivatkozunk az <code>x</code> változóra a nevével, akkor viszont mindig ugyanazt.</p>
+
+<p>A jobbérték referenciaként deklarált dolgok lehetnek balértékek és jobbértékek is. Az <code>int&amp;&amp; foo()</code>
+függvény visszatérési értékét jobbértéknek definiáljuk, és a hívás esetén is jobbértéket kapunk. Az <code>int&amp;&amp; x</code>
+típussal definiált változó pedig egy balértéket ad. Ezt majd lentebb tisztázzuk.</p>
+</blockquote>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::move() függvény használata">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+    <a id="objektumelettartam" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Az std::move() függvény használata<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A mozgatás kifejezésére a fenti <code>static_cast</code> helyett az <code>std::move()</code> függvénysablont szoktuk használni
+(<code>#include &lt;utility&gt;</code>). Az alábbi programrész teljesen ugyanazt csinálja, mint a <code>static_cast</code>-os változat,
+csak jobban látszik a kód olvasója számára a szándék:</p>
+
+<pre   ><code class="language-cbub">void foo(String &amp;&amp; s) {
+    String new_s{std::move(s)};
+}</code></pre>
+
+<p>Az <code>move()</code> függvény itt tulajdonképpen elrejti a neki paraméterként adott változó nevét. A visszatérési
+értéke már egy névtelen érték, még ha tudjuk is róla, hogy az ugyanaz az objektum, mint a paramétere.
+A függvény működése kicsit bonyolultabb (majd lesz róla szó), de legbelül igazából csak egy <code>static_cast</code> van.</p>
+
+<h3>Jobbérték referencia paraméterű függvényekben</h3>
+
+<p>A <code>std::move()</code> függvényt sok helyen fogjuk használni. Figyelni kell rá a mozgató konstruktorok és értékadó operátorok
+írásánál, akár tartalmazott részobjektumot, akár az ősosztály részobjektumát szeretnénk mozgatni. Ha itt nem
+írjuk ki, akkor nem mozgatás, hanem másolás történik:</p>
+
+<pre   ><code class="language-cbub">Derived::Derived(Derived &amp;&amp; the_other) noexcept
+  : Base(the_other) // HIBÁS
+{
+}</code></pre>
+<pre   ><code class="language-cbub">Derived::Derived(Derived &amp;&amp; the_other) noexcept
+  : Base(std::move(the_other)) // JÓ
+{
+}</code></pre>
+
+<p>Vagy például amikor az előző órai dinamikus tömb osztályunk átméretezését írjuk. Az <code>std::move()</code> függvény itt is
+jól kifejezi, hogy az objektumokat nem másoljuk, hanem mozgatjuk az új memóriaterületre. Persze a régi helyen lévő objektumok
+destruktorait továbbra is meg kell hívnunk, mert azok az objektumok, amelyektől elvettük az erőforrást, még élő objektumnak
+számítanak:</p>
+
+<pre   ><code class="language-cbub">T *newPData = static_cast&lt;T*&gt;(::operator new(sizeof(T) * newcapacity));
+for (size_t i = 0; i != size_; ++i) {
+    new (&amp;newPData[i]) T(std::move(pData_[i]));  // mozgatunk, nem másolunk
+    pData_[i].~T();
+}
+::operator delete(pData_);</code></pre>
+
+<h3>Eltárolt objektumoknál</h3>
+
+<p>A mozgató konstruktorok alapvetően megváltoztatják azt, ahogyan a paraméterátadásról gondolkozunk. Eddig mindig azt mondtuk, 
+hogy nagyobb, lassabban másolható objektumokat konstans referenciával érdemes átvenni. Ez valójában már nem igaz így. Azokat az 
+objektumokat, amelyeket egy függvény „elhasznál”, azaz eltárolja valahol, visszaadja a visszatérési értékében, esetleg lokális 
+változóként módosítja, érdemes értékként átvenni. (Ezeknek az „elhasznált”, eltárolt vagy továbbadott paramétereknek a neve az 
+angol szakirodalomban <a href="index.html#sinkargument">sink argument</a>.)</p>
+
+<p>Vegyünk erre egy nagyon egyszerű példát. Adott egy ember objektum, amelyik egy <code>std::string</code> típusú adattagot
+tartalmaz, a nevét. Ezt a mozgató konstruktor ismeretében így írhatjuk le a legegyszerűbben, és egyben leghatékonyabban:</p>
+
+<pre   ><code class="language-cbub">class Human {
+  private:
+    std::string name;
+  public:
+    explicit Human(std::string pname)
+        : name(std::move(pname)) // !
+    {}
+};</code></pre>
+
+<p>Vegyük észre, hogy a konstruktor paramétere érték, és nem referencia. Az ember osztály adattagként tartalmaz egy sztringet, 
+vagyis egy ember objektum létrehozásakor mindenképp egy sztring objektumot is létre kell majd hozni. Ezért tud hatékony lenni ez a 
+paraméterátadás: a sztring létrehozását amúgy sem lehet megúszni (szükség van rá az ember objektumhoz), így aztán mindegy, 
+hogy az ember konstruktora végzi majd el a sztring másolását, vagy a konstruktor már egy kész sztringet kap, amelyből az erőforrást 
+(a dinamikus tömböt) átteszi, átmozgatja az adattagba. Így jobb, ha a paraméter érték, mert ez arra is lehetőséget ad, hogy <em>a 
+paramétert is a mozgató konstruktor</em> inicializálja:</p>
+
+<pre   ><code class="language-cbub">std::string first_name, surname;
+
+Human h1(first_name + &quot; &quot; + surname);</code></pre>
+
+<p>Mi történik itt?</p>
+
+<ul>
+    <li>Az összefűzések által előáll egy sztring, amelyik a létrehozott ember neve. Ez egy temporális objektum.</li>
+    <li>A konstruktor hívásához előkészületként létre kell hozni annak paraméterét, a <code>pname</code> objektumot.
+        Ezt inicializálni kell, méghozzá a temporális objektummal. Ezért meghívódik a sztring mozgató
+        konstruktora, az összefűzött karaktertömb átkerül a <code>pname</code>-hez.</li>
+    <li>A konstruktorban a <code>pname</code> lokális változó, balérték, de a <code>move()</code> függvényhívás miatt
+        jobbértéknek kezeljük. Ez a jobbérték inicializálja az adattag <code>name</code>-et, vagyis ismét a mozgató
+        konstruktor hívódik; a karaktertömb átkerül a <code>name</code>-hez.</li>
+</ul>
+
+<p>Azaz végülis a <code>h1.name</code>-nél ugyanaz a karaktertömb lesz, mint amit még az összefűzés állított elő. Valószínűleg
+a fordító a mozgató konstruktor kétszeri hívását is ki fogja optimalizálni.</p>
+
+
+<h3>Erőforrások mozgatásánál</h3>
+
+<p>Az <code>std::move()</code> függvénnyel egy okos, gyors és általános <code>std::swap</code> függvényt lehet csinálni. A régi 
+változat három másolásból tudott megcserélni két változót, ezért érdemes volt specializálni a saját típusainkra. Az új változat 
+viszont a mozgatást használja, ezért ha van mozgató konstruktorunk és értékadó operátorunk, akkor nagyon gyors, és nem kell 
+osztályonként specializálni. A működése egyszerű: az <code>a</code> objektum erőforrásait áthelyezi a <code>temp</code> objektumba; 
+a <code>b</code> erőforrásait az <code>a</code>-ba, végül a <code>temp</code>, azaz eredetileg <code>a</code> erőforrásait a 
+<code>b</code>-be. Közben sehol nem történik másolás, csakis mozgatás.</p>
+
+<div class="columns">
+<div>
+<div class="sticky">régi std::swap</div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void swap(T &amp;a, T &amp;b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}</code></pre>
+</div>
+<div>
+<div class="sticky">új std::swap</div>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void swap(T &amp;a, T &amp;b) {
+    T temp = std::move(a);
+    a = std::move(b);
+    b = std::move(temp);
+}</code></pre>
+</div>
+</div>
+
+<img src="swap.svg" style="width: 42em" class="kozep" alt="Objektumok tartalmának cseréje az új std::swap() függvénnyel">
+
+<p>Érdemes megfigyelni, hogy mindkét objektum, <code>a</code> is és <code>b</code> is, miután egyszer
+már „kiürítette” őket a mozgató konstruktor és értékadó operátor, újra értéket kap. Például a <code>temp</code>
+inicializálása után az <code>a</code> objektum üres, nincs nála kezelt erőforrás, mert az átkerült a
+<code>temp</code>-be. De ettől még nem tűnik el; a második sor után az objektum újra „feléled”. A
+jobbérték referenciát átvevő konstruktorokat és értékadó operátorokat ezért nem szabad azzal a feltételezéssel
+megírnunk, hogy a paraméterként kapott objektum ténylegesen meg fog szűnni. Elvehetjük tőle az erőforrást, de lehet, hogy
+később majd teljes értékű objektumként folytatja tovább az életét! Így nem csak megszüntethető (destructable)
+kell maradjon, hanem olyan állapotban kell hagyni, hogy újra értéket is lehessen neki adni (assignable).
+Benne viszont nincsen semmi, tehát ha az értékét használnánk, akkor az kódolási hiba lenne.</p>
+
+<img src="elettartam_move.svg" class="kozep" style="width: 28em;">
+
+<blockquote class="megjegyzes">
+    <h3>Mi is van az elmozgatott objektumban?</h3>
+    <p>A fenti kijelentést érdemes még kicsit pontosítani.</p>
+    <p>A típusokat általában két csoportra bonthatjuk. Az egyik csoportba azok tartoznak, amelyek
+    másolhatóak (van másoló konstruktoruk). Ezeknél a mozgatás igazából egy optimalizációs lehetőség.
+    Ezeknél mozgatás helyett használhatunk másolást is bárhol, csak az lassabb. Mozgatni pedig olyan objektumból
+    szoktunk, amit később már nem használunk – tehát tulajdonképp <em>mindegy, hogy mi marad benne</em>. Az
+    optimalizáció kedvéért előírjuk, hogy a kliensek ne építsenek arra, hogy mi maradt az objektumban.</p>
+    <p>Azok az osztályok, amelyek objektumai <em>nem másolhatóak, csak mozgathatóak</em>, mint pl. a
+    <code>unique_ptr</code>, azért definiálnak mozgató konstruktort, mert így közelítik meg azt, hogy egy
+    objektumot mozgatni lehessen. Valójában viszont csak a tartalom mozog, maga az objektum nem, úgyhogy ennek
+    a műveletnek van egy mellékterméke, az üres objektum. Mozgatni viszont nem lehet belőle anélkül, hogy
+    a tartalmát ne módosítanánk, hisz másoló konstruktor nincs: tehát elvégzünk rajta egy olyan műveletet,
+    amelyik <em>az állapotát megváltoztatja</em>. Hogy mi a konkrét változás, azt akár rögzíteni is lehet;
+    például a <code>unique_ptr</code> esetében az eredeti pointerre mindenképpen meghívódik a <code>.release()</code>
+    tagfüggény, ezért biztosak lehetünk benne, hogy null értékűvé változik.</p>
+    <p>Azt mondjuk ezért általában, hogy az elmozgatott objektum érvényes, de <em>a tartalma, állapota nincs specifikálva</em>
+    (valid but unspecified state). Valójában az „elmozgatva” állapot nem létezik, csak azért
+    tekintünk így az objektumokra általában, mert nem mindig tudjuk, mi van bennük. Amikor igen, mint pl. a <code>unique_ptr</code>
+    esetében, az csak speciális eset: ott a dokumentáció specifikálja a tartalmat is. Az a kijelentés viszont,
+    miszerint az elmozgatott objektumon „már csak a destruktor és az értékadó operátor használható”, ugyan jó közelítése
+    a dolgoknak, de nem mindig igaz.</p>
+</blockquote>
+
+<p>Még egy fontos dolog az <code>std::move()</code>-val kapcsolatban. Ha egy függvényből egy lokális változóval
+szeretnénk visszatérni, akkor nem kell használnunk. A visszatéréskor megszűnnek a lokális változók, ezért itt a
+fordító már minden lokálisra úgy tekint, hogy mozgatni lehet belőle, külön kérés nélkül is:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">String foo() {
+    String s;
+    ...
+    return s;  // továbbra is így kell
+}</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">String foo() {
+    String s;
+    ...
+    return std::move(s);  // rosszabb
+}</code></pre>
+</div>
+</div>
+
+<p>Ha odaírjuk a <code>move()</code>-ot, akkor csak rontunk a helyzeten. Emlékezzünk vissza, hogy az ilyen kódot a fordítók képesek 
+úgy optimalizálni, hogy eleve a visszatérési érték helyén hozzák létre azt a változót, amit a <code>return</code> utasításnál 
+megadunk (RVO – return value optimization). A <code>move()</code> miatt az önálló változónév helyett egy kiértékelendő kifejezést 
+fog látni a fordító, és kikapcsolja ezt az optimalizációt. Így ugyan a viszonylag gyors mozgató konstruktort kapjuk, de az még 
+mindig lassabb, mintha egyáltalán semmilyen konstruktort nem kellene meghívni. Tehát ebben a helyzetben mindent ugyanúgy kell 
+csinálni, mint eddig, és majd a fordító eldönti, hogy RVO-t vagy mozgató konstruktort használ.</p>
+
+<p>Fontos, hogy ez nem jelenti azt, hogy sehova nem szabad <code>return std::move(...)</code>-ot írni. Ez csak a lokális változókra 
+érvényes, ott számít ez pesszimizálásnak. Ha az objektum máshonnan származik – pl. egy paraméterként kapott tömbből, akkor simán
+előfordulhat, hogy ilyet érdemes írnunk.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Implicit generált mozgató konstruktor?">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+    <a id="implicitmove" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Implicit generált mozgató konstruktor?<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C-vel való kompatibilitás érdekében a C++ automatikusan generál másoló konstruktort és értékadó operátort az
+osztályainknak. Automatikusan ír destruktort is, amely az adattagok destruktorát meghívja. Felmerült, hogy esetleg automatikusan
+írhatna mozgató konstruktort is. Kiderült azonban, hogy ezt nagyon szigorú
+feltételekhez kell kötni.</p>
+
+<p>Tegyük fel, hogy van egy láncolt listánk, amelynek gyakran le kell kérdezni a méretét. A méret lekérdezése
+hosszú időbe telik (végig kell lépkedni a láncon), ezért a listát becsomagoljuk egy új osztályba, amely figyeli
+a beszúrás/törlés műveleteket, számon tartva közben a méret változását is. Tesztelés céljából a destruktorban
+ellenőrizzük, hogy a nyilvántartott méret megegyezik-e a tényleges lista objektum által jelzett mérettel:</p>
+
+<pre   ><code class="language-c">class IntListWithSize {
+  public:
+    void append(int i) {
+        l.append(i);
+        s++;
+    }
+    void remove_last() {
+        l.remove_last(i);
+        s--;
+    }
+    size_t get_size() const {
+        return s;
+    }
+    ~IntListWithSize() {
+        check();
+    }
+  private:
+    IntList l;
+    size_t s = 0;
+    void check() {
+        assert(s == l.get_size());
+    }
+};</code></pre>
+
+<p>Namármost, ha ennek az osztálynak a fordító egy olyan mozgató konstruktort ír, amely az egyes adattagokat mozgatja, akkor
+hibát fog jelezni a destruktor. A belső lista objektumból való mozgatás kiüríti <code>l</code>-t, míg az <code>s</code>
+adattagból való mozgatás meghagyja annak értékét, mert a beépített adattagoknál a mozgatás a másolással egyenértékű.</p>
+
+<p>Ezért a fordító csak akkor ír mozgató konstruktort és mozgató értékadó operátort, ha:</p>
+<ul>
+    <li>nincs a felhasználó által írt másoló konstruktor, sem destruktor,
+    <li>nincs a felhasználó által írt másoló vagy mozgató értékadás,
+    <li>nincsen valami miatt implicit törölve (például mert az egyik adattagé törölve van).
+</ul>
+
+<p>Így ezekben az esetekben magunknak kell írnunk ilyen függvényeket. Vagy ha tudjuk, hogy a fordító
+által generált jó lesz, az <code>= default</code> jelzéssel visszahozhatjuk.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C++-jogászoknak: lvalue, rvalue, xvalue, prvalue és glvalue">
+<div class="slide" id="slide_9">
+
+<a id="9" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">9</span><span class="oldalszamafter">. </span>        C++-jogászoknak: lvalue, rvalue, xvalue, prvalue és glvalue<a class="hlink" href="index.html#9"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++98-ban elég volt balértékeket (lvalue) és jobbértékeket (rvalue) megkülönböztetni. A mozgató konstruktorok végett
+bevezetett jobbérték referenciákkal együtt azonban egy kicsit bonyolultabbá vált a helyzet.</p>
+
+<p>A mozgatás legfontosabb szabálya az, hogy mozgatni csak akkor szabad, ha az teljesen biztonságos. Minden egyéb
+esetben meg kell elégedni a másolással. Tekintsük az alábbi programrészt! Ebben a <code>foo()</code> függvénynek
+<code>X &amp;&amp;</code> típusú a visszatérési értéke, pont ugyanolyan, mint amilyen az <code>std::move()</code>-é is:</p>
+
+<pre   ><code class="language-cbub">X &amp;&amp; foo() {
+    /* ... */
+}
+
+X &amp;&amp; x_refref = foo();
+X x1 = val_refref;      // másolás? mozgatás?
+std::cout &lt;&lt; val_refref;
+
+X x2 = foo();           // másolás? mozgatás?</code></pre>
+
+<p>Amikor először felmerült a jobbérték referenciák ötlete, akkor úgy gondolták a nyelv tervezői, hogy az első szövegbuborékkal 
+jelölt a sorban mozgatást kell végrehajtani. Az <code>x_refref</code> jobbérték referenciának lett definiálva, tehát az 
+<code>x1</code> konstruktora jobbértéket kap, így érveltek. De a tapasztalat megmutatta, hogy ez nem működhet így, mert 
+aminek neve van, az többször is hivatkozható; ha mozgatás történne abban a sorban, akkor a kiírásnál elhasalna a program.</p>
+
+<p>Ezért hozták azt a szabályt, hogy a jobbérték referenciának definiált változók balértéknek számítanak. Innentől kezdve viszont 
+nem lehet azt mondani, hogy az <code>X &amp;&amp;</code> mindenhol ugyanazt jelenti. Így most különbözik egymástól a 
+<code>foo()</code> függvény által visszaadott jobbérték referencia, és az <code>x_refref</code> változó, pedig az is jobbérték 
+referencia. A <code>foo()</code> függvény visszatérési értékéből lehet mozgatni (a második buboréknál a mozgató konstruktor 
+hívódik), az <code>x_refref</code>-ből viszont nem (az első buboréknál másolás történik). Pedig mindkettő típusa <code>X 
+&amp;&amp;</code>.</p>
+
+<p>A névvel rendelkező jobbérték referenciák egyértelműen balértékek. Már csak a név nélküli jobbérték referenciáknak kellene
+valamilyen nevet adni, hogy beszélni is lehessen róluk. A <code>foo()</code> visszatérési értéke biztosan nem balérték, mert
+mozgatni lehet belőle. Ugyanakkor nem is jobbérték, mert referencia lévén, képezhető a címe.</p>
+
+<p>Márpedig ha ez <em>nem is balérték</em> és <em>nem is jobbérték</em>, akkor valami új dolog kell legyen. Egy olyan értékről van szó, ami
+balértékként működik, kivéve azt az egy szempontot, hogy mozgatni lehet belőle, azaz hogy jobbérték referencia köthető hozzá.
+Ezért elnevezték xvalue-nak (expiring value). Az expiring szó egy megszűnő, élettartama végén lévő objektumra utal.</p>
+
+<p>Az xvalue típusú értékek azok, amelyek miatt két új kategóriát is megneveztek. A prvalue (pure rvalue) nevet adták azoknak
+az értékeknek, amelyekre régebben egyszerűen rvalue-ként hivatkoztunk; a glvalue (generalized lvalue) pedig az xvalue-k és
+lvalue-k összefoglaló neve.</p>
+
+<img src="value.svg" style="height: 12em; " class="kozep">
+
+<p>Az egyes típusok tulajdonságai és példák:</p>
+
+<dl>
+    <dt>lvalue = left value</dt>
+    <dd>Nem temporális objektum, aminek címe képezhető. Például egy változó, aminek neve van: <code>i</code>, egy dereferált pointer: <code>*p</code>,
+    vagy egy balérték referencia visszatérési értékű függvény értéke: <code>int &amp; foo()</code>.</dd>
+
+    <dt>xvalue = expiring value</dt>
+    <dd>Amelynek erőforrásai mozgathatóak, és címe is képezhető. Például
+    az <code>int &amp;&amp; foo()</code> függvény értéke.</dd>
+
+    <dt>prvalue = pure rvalue</dt>
+    <dd>Amit eddig jobbértéknek neveztünk; egy temporális objektum vagy egy érték, ami nem tartozik objektumhoz.
+    Például az <code>int foo()</code> függvény értéke, vagy a literálisok: <code>5</code>, <code>true</code>, <code>-3.4e7</code>,
+    <code>nullptr</code>. Egy prvalue nem lehet polimorf, a típusa mindig az objektum tényleges típusával egyezik meg.
+    Ezek lényegében azok a kifejezések, amelyek egy objektumot inicializálnak.</dd>
+
+    <dt>glvalue = generalized lvalue</dt> <dd>Minden kifejezés, amely kiértékelése eredményeképp egy memóriahelyet kapunk; tehát
+    ami lvalue vagy xvalue. Ez polimorf lehet, a tényleges objektum lehet más típusú, mint a kifejezés típusa (pl.
+    <code>Shape</code> referenciához <code>Circle</code> objektum).</dd>
+
+    <dt>rvalue = right value</dt>
+    <dd>Amiből mozgatni lehet: egy xvalue vagy egy temporális objektum.</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_10">
+
+<a id="10" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">10</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#10"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Még lesz egy előadás, ahol a jobbérték referenciákról szó lesz. Az alábbi írásokban egyelőre nem lényegesek azok a részek,
+ahol „perfect forwarding”-ról van szó, vagy sablon függvényekről, amelyek <code>T &amp;&amp;</code> sablonparaméterrel
+rendelkeznek.</p>
+
+<ul>
+    <li>Thomas Becker: <a href="http://thbecker.net/articles/rvalue_references/section_01.html">C++ Rvalue References Explained</a>.
+    <li>Howard E. Hinnant, Bjarne Stroustrup, and Bronek Kozicki: <a href="http://www.artima.com/cppsource/rvalue.html">A Brief Introduction to Rvalue References</a>.
+    <li>rpz: <a href="http://kukuruku.co/hub/cpp/ref-qualified-member-functions">http://kukuruku.co/hub/cpp/ref-qualified-member-functions</a>.
+    <li>Sean Parent: <a href="https://channel9.msdn.com/Events/GoingNative/2013/Inheritance-Is-The-Base-Class-of-Evil">Inheritance Is The Base Class of Evil</a>.</li>
+    <li>Herb Sutter: <a href="https://herbsutter.com/2020/02/17/move-simply/">Move, Simply</a>.</li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

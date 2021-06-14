@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: I/O manipulátorok</title>
+<meta property="og:title" content="TEST InfoC++11 :: I/O manipulátorok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Az std::setw-hez hasonló manipulátorok írása.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Az std::setw-hez hasonló manipulátorok írása.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="I/O manipulátorok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">I/O manipulátorok</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Az std::setw-hez hasonló manipulátorok írása.</p>
+</div>
+
+<p>Folytassuk az <a href="../ea03/index.html#mertekegyseg">előadás mértékegységes példáját</a>!</p>
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Manipulátorok mint segédobjektumok</a>
+                      <li><a href="index.html#2" class="">Feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Manipulátorok mint segédobjektumok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Manipulátorok mint segédobjektumok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsünk két egyszerű fizikai problémát: a libikókát és egy doboz vonszolását.</p>
+
+<div class="columns kozep">
+<div>
+<img src="libikoka.svg" style="height: 10em">
+</div>
+<div>
+<img src="doboz.svg" style="height: 10em">
+</div>
+</div>
+
+<p>A libikóka akkor van egyensúlyban, ha a két oldalon ható <em>forgatónyomaték</em> (torque) megegyezik. Ezt az erő és az 
+erőkar vektoriális szorzataként tudjuk kiszámolni, ennek mértékegysége az erő×hosszúság miatt Newton×méter, azaz Nm. A doboz 
+vonszolása közben végzett <em>munkát</em> (work), a befektetett energiát az erő és az elmozdulás skaláris szorzásával tudjuk kiszámolni. 
+Itt is egy erő és egy hosszúság szorzódik össze, ennek mértékegyége is Newton·méter, azonban ezt J-vel jelöljük, Joule nevéből.
+</p>
+
+<p>A két mennyiség (legalábbis az abszolút értékük) mértékegysége tehát megegyezik, ezért a két mennyiséget a C++ programunkban ugyanaz a típus jelképezi. Ez a 
+számításoknál rendjén is van, azonban ha a kiírást az energia típusra specializáljuk, hogy <code>J</code> mértékegységben 
+íródjanak ki az értékek, hirtelen a forgatónyomatékok is elkezdenek <code>J</code>-ként kiíródni. Amit viszont nem szeretnénk, 
+mert értelmetlen. Hiába, a fordító nem tudja megkülönböztetni őket, mert a két érték típusa ugyanaz:</p>
+
+<pre   ><code class="language-cbub">using Energy = Quantity&lt;2, 1, -2&gt;;         /* energia, J=m^2*kg/s^2 */
+using Torque = Quantity&lt;2, 1, -2&gt;;         /* forgatónyomaték, Nm=m^2*kg/s^2 */
+
+template &lt;&gt;
+std::ostream &amp; operator&lt;&lt; &lt;&gt;(std::ostream &amp; os, Energy m) {
+    os &lt;&lt; m.magnitude &lt;&lt; &quot; J&quot;;
+    return os;
+}
+
+Torque N = 120.0_N * 1.8_m;
+std::cout &lt;&lt; N &lt;&lt; std::endl;               // „216 J” :(</code></pre>
+
+<p>Ezzel a problémával már találkoztunk, és a szabványos könyvtárban néhány esetre meg is van oldva. Például egy számot ki tudunk 
+írni tízes és tizenhatos számrendszerben is. Pedig a hívás ugyanarra az operátorfüggvényre kell feloldódjon, hiszen mindkét 
+esetben egész típusú értékkel etetjük az <code>std::cout</code>-ot:</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; std::hex &lt;&lt; 255 &lt;&lt; std::endl;
+std::cout &lt;&lt; std::dec &lt;&lt; 255 &lt;&lt; std::endl;</code></pre>
+
+<div class="megjegyzes">
+
+<p>Az <code>std::ostream</code>-ekhez tartozik egy olyan <code>operator&lt;&lt;</code> overload, amely egy 
+<code>std::ostream</code>-et paraméterként váró és visszaadó függvényre mutató pointert tud átvenni. Egy ilyenbe betehetünk egy 
+olyan programrészt, amely az <code>std::ostream</code> objektum valamilyen paraméterét átállítja. Az <code>std::hex</code> is 
+ehhez hasonlóan működik:</p>
+
+<pre   ><code class="language-c">std::ostream &amp; myhex(std::ostream &amp; os) {
+    os.flags(std::ios::hex);
+    return os;
+}
+
+std::cout &lt;&lt; myhex &lt;&lt; 15;</code></pre>
+
+<p>Azonban ez most nekünk nem lesz jó, mert nincs olyan tagfüggvénye az <code>std::ostream</code>-nek, amit meghívhatnánk, és 
+amivel jelezhetnénk, hogy a <em>saját,</em> <code>Quantity&lt;2, 1, -2&gt;</code> típusú értékünket hogyan kezelje. Valami más 
+megoldást kell keresnünk.</p>
+
+</div>
+
+<p>Nézzük meg jobban a kifejezést, amit le szeretnénk írni!</p>
+
+<pre   ><code class="language-c">Torque N = 120.0_N * 1.8_m;
+Energy E = 120.0_N * 1.8_m;
+std::cout &lt;&lt; newtonmeter &lt;&lt; N &lt;&lt; std::endl;
+std::cout &lt;&lt; joule &lt;&lt; E &lt;&lt; std::endl;</code></pre>
+
+<p>A kétkacsacsőr <code>&lt;&lt;</code> operátor balról jobbra asszociatív, ezért
+a fenti kifejezések lényeges részét így kell értelmezni:</p>
+
+<pre   ><code class="language-c">((std::cout &lt;&lt; newtonmeter) &lt;&lt; N)</code></pre>
+
+<p>Itt az <code>std::cout</code> típusa <code>std::ostream</code>, az <code>N</code> típusa <code>Quantity&lt;2, 1, 
+-2&gt;</code>. A <code>newtonmeter</code> típusát szabadon megválaszthatjuk. Az <code>std::cout &lt;&lt; newtonmeter</code> 
+„kiírás” hatására ugyanis nem kell semmi láthatónak történnie. Sőt nem is szabad, mert a tényleges kiírandó érték az 
+<code>N</code>-ben van. A <code>newtonmeter</code>-nek azért érdemes saját típust adnunk, mert akkor ahhoz egy új 
+<code>operator&lt;&lt;</code> függvényt adhatunk meg.</p>
+
+<p>Azonban ez még nem elegendő. Ha a <code>newtonmeter</code> objektum „kiírása”, azaz a <code>std::cout &lt;&lt; newtonmeter</code>
+részkifejezés kiértékelésével a függvény a szokásos módon visszatér az 
+<code>std::cout</code>-tal, akkor nincs hova feljegyezni azt az információt, hogy a következő <code>Quantity&lt;2, 1, 
+-2&gt;</code>-ot newtonméterként vagy joule-ként kell kiírni. Ezért az <code>std::cout &lt;&lt; newtonmeter</code> függvényhívás 
+visszatérési értékének is egy <em>új, másik típussal</em> kell rendelkeznie.</p>
+
+<p>A működés tehát a következő:</p>
+
+<pre   ><code class="language-c">/* 1. */ ((std::cout &lt;&lt; newtonmeter) &lt;&lt; N) &lt;&lt; std::endl
+/* 2. */ (TempObj{std::cout, newtonmeter} &lt;&lt; N) &lt;&lt; std::endl
+/* 3. */ (std::cout) &lt;&lt; std::endl;</code></pre>
+
+<ol>
+    <li>Először meghívódik az az <code>operator&lt;&lt;</code>,
+    amelyik „kiírja” a <code>newtonmeter</code>-t – legyen annak típusa akármi is.
+    <li>Aztán ez a függvény visszatér egy olyan objektummal, amelybe bele
+    van kódolva, hogy melyik <code>std::ostream</code>-re, milyen formában kell kiírni
+    a következő <code>Quantity&lt;2, 1, -2&gt;</code>-t.
+    <li>A következő <code>operator&lt;&lt;</code> az <code>N</code>-re vonatkozik, de
+    a bal oldalán nem az <code>std::ostream</code> van, hanem az ideiglenes objektum.
+    Ez az operátor elvégzi a tényleges kiírást, és visszatér az <code>std::ostream</code>-mel.
+    <li>Az <code>std::ostream</code>-mel való visszatérés miatt pedig a kiírás folytatódhat
+    a további <code>&lt;&lt;</code> operátorok által.
+</ol>
+
+<p>Az első <code>operator&lt;&lt;</code> függvényt a szokásos módon, globális függvényként kell megvalósítani, mert ennek bal 
+oldali argumentuma az <code>std::ostream</code> osztálybeli objektum. A második operátort, amely a tényleges kiírást végzi, 
+azonban megvalósíthatjuk az ideiglenesen létrehozott objektum tagfüggvényeként is, mivel annak, saját osztályunk lévén, olyan 
+tagfüggvényt írunk, amilyet csak szeretnénk. A konkrét mértékegységet meghatározó érték lehet akár egy <code>enum</code> is. A 
+teljes megvalósítás:</p>
+
+<pre   ><code class="language-c">class NewtonMeterPrinter {
+  public:
+    enum Unit {
+        newtonmeter,
+        joule,
+    };
+    NewtonMeterPrinter(std::ostream &amp;os, Unit unit)
+        : os(os), unit{unit} {
+    }
+    /* ez kezeli a második operator&lt;&lt;-t */
+    std::ostream &amp; operator&lt;&lt; (Quantity&lt;2, 1, -2&gt; q) const {
+        os &lt;&lt; q.magnitude &lt;&lt; ' ';
+        switch (unit) {
+            case newtonmeter:
+                os &lt;&lt; &quot;Nm&quot;;
+                break;
+            case joule:
+                os &lt;&lt; &quot;J&quot;;
+                break;
+        }
+        return os;
+    }
+  private:
+    std::ostream &amp; os;
+    Unit const unit;
+};
+
+/* ez kezeli az első operator&lt;&lt;-t */
+NewtonMeterPrinter operator&lt;&lt; (std::ostream &amp;os, NewtonMeterPrinter::Unit unit) {
+    return NewtonMeterPrinter{os, unit};
+}</code></pre>
+
+<p class="megjegyzes">Itt könnyű belefutni a C++11 egyik bug-jába, nevezetesen hogy
+referencia nem inicializálható <code>{}</code> szintaxissal. Ez a szabvány szövegezésében
+volt egy hiba, amit azóta kijavítottak. Az legújabb fordítókkal ezért működne a fenti
+kódban az <code>os{os}</code> is, ahogy számítunk is rá.</p>
+
+<p>A használat pedig pont úgy néz ki, mint az <code>std::hex</code>-nél és az
+<code>std::dec</code>-nél:</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; &quot;Energy vs. Torque ===&quot; &lt;&lt; std::endl;
+Torque N = 120.0_N * 1.8_m;
+std::cout &lt;&lt; NewtonMeterPrinter::newtonmeter &lt;&lt; N &lt;&lt; std::endl;
+Energy E = 120.0_N * 1.8_m;
+std::cout &lt;&lt; NewtonMeterPrinter::joule &lt;&lt; E &lt;&lt; std::endl;</code></pre>
+
+<p>Látszik, hogy az objektumok okosabbak tudnak lenni, mint a függvények. A függvények csak a paramétereiken keresztül látják a 
+külvilágot, az objektumokba azonban bármilyen adatot el tudunk rejteni.</p>
+
+<p>Az így kiegészített változat: <a href="quantity4.cpp">quantity4.cpp</a>.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Feladatok">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Feladatok<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Lóerő vagy Watt?</h3>
+
+<p>A teljesítményt (energia/idő) néha wattban (W), néha lóerőben (HP) adjuk 
+meg. 1 lóerő = 745,699872 watt. Specializáld a kiíró operátort, hogy a 
+teljesítményeket általában wattban írja ki! Írj egy I/O manipulátort, amely 
+segítségével lóerőben is kiírható egy teljesítmény! Becsüld meg a programban, 
+hány lóerős lehet a Ferrari (lásd: <a href="quantity4.cpp">quantity4.cpp</a>),
+azaz a 4 másodperces gyorsítás alatt mekkora volt az átlagos teljesítménye!</p>
+
+
+
+
+<h3>Bináris számok</h3>
+
+<p>Írj bináris szám kiíró I/O manipulátort! A használata legyen az alábbi. Vajon mi lehet itt a <code>bin</code> típusa?
+<pre   ><code class="language-cbub">std::cout &lt;&lt; bin &lt;&lt; 240 &lt;&lt; std::endl;        /* 11110000 */</code></pre>
+
+
+
+<p>Írj bináris beolvasó I/O manipulátort! Olvassa ez addig a bemenetet, amíg 0 
+és 1 karaktereket kap. Figyelj arra, hogy a következő karaktert ne egye meg a 
+beolvasás! Nézz utána az <code>istream::get()</code> és
+<code>istream::putback()</code> tagfüggvényeknek, hogy lásd, hogyan kell ezt megoldani.
+Lehet ezt a programod egyesíteni a bináris kiíró manipulátoros programmal?</p>
+
+<pre   ><code class="language-cbub">unsigned int i;
+std::cin &gt;&gt; bin &gt;&gt; i;           /* input = 11110000 -&gt; i = 240 */</code></pre>
+
+
+
+<h3>Számrendszerek</h3>
+
+<p>Írj akárhányas számrendszerben kiíró I/O manipulátort!</p>
+<pre   ><code class="language-cbub">std::cout &lt;&lt; base(2) &lt;&lt; 240;    /* 11110000 */
+std::cout &lt;&lt; base(16) &lt;&lt; 240;   /* F0 */</code></pre>
+
+<p>Melyik az első részkifejezés, amit ki kell értékelnie a fordítónak? Indulj ki
+ebből!</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

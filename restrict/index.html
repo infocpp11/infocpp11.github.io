@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: A C99 restrict kulcsszó</title>
+<meta property="og:title" content="TEST InfoC++11 :: A C99 restrict kulcsszó">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A C99 restrict kulcsszóról és az optimalizálásról néhány gondolat.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A C99 restrict kulcsszóról és az optimalizálásról néhány gondolat.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="A C99 restrict kulcsszó">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">A C99 restrict kulcsszó</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A C99 restrict kulcsszóról és az optimalizálásról néhány gondolat.</p>
+</div>
+
+<p>Találós kérdés. Adott az alábbi függvény. Mi a visszatérési értéke?</p>
+
+<pre   ><code class="language-c">int foo(int *a, int *b) {
+    *a = 1;
+    *b = 2;
+    return *a;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A válasz: nem tudhatjuk. Előfordulhat az, hogy mindkét pointer ugyanarra
+a változóra mutat. Ha ez így van, a visszatérési érték 2, amúgy 1:</p>
+<pre   ><code class="language-c">int i;
+printf(&quot;%d&quot;, foo(&amp;i, &amp;i));</code></pre>
+</div>
+</details>
+
+<p>Ha a programjainkban csak értékként definiált változók lennének, nem lehetne föltenni ezt a találós kérdést. Mert akkor
+minden egyes változó egy egyedi helyet jelölne a memóriában, és így mindegyik független lenne. Azonban abban a pillanatban, hogy
+pointereket vagy referenciákat kezdünk használni, előfordulhat az, hogy két különállónak látszó név ugyanazt a memóriaterületet,
+ugyanazt a változót hivatkozza. A probléma neve az angol nyelvű szakirodalomban: <em>aliasing</em>, és már találkoztunk vele
+C++-ból a másoló értékadó operátorok (copy assignment operator) megírása kapcsán. Ott is figyelnünk kellett az önértékadásra,
+amit arról ismertünk fel, hogy a <code>this</code> pointer és a paraméterként kapott referencia ugyanazt az objektumot
+hivatkozzák:</p>
+
+<pre   ><code class="language-c">Vector&amp; Vector::operator=(Vector const &amp;rhs) {
+    if (this != &amp;rhs) {
+        /* ... */
+    }
+    return *this;
+}</code></pre>
+
+<p>Emiatt fenti találós kérdés függvényéről sem lehet teljes biztonsággal állítani, hogy 1-gyel térne vissza. A függvény
+lefordításakor a fordító nem ismeri az <code>a</code> és <code>b</code> pointerek értékét, ezért fel kell készülnie arra, hogy
+esetleg a két pointer megegyezik egymással.</p>
+
+<p>Ez akkor fontos, ha sebességre optimalizálva próbáljuk lefordítani a kódot. Az aliasing lehetősége miatt rengeteg
+optimalizációs, gyorsítási lehetőség veszik el. Például az alábbi <code>foo1()</code> függvényben a <code>*n</code> indirekciót
+nem lehet kiemelni a ciklus elé (a jobb oldalon látható <code>foo2()</code> változat), mivel akár az is lehet, hogy
+az <code>n</code> pointer a <code>vec[]</code> tömb valamelyik elemére mutat, azaz <code>*n</code> a <code>vec[]</code>
+tömb valamelyik elemével egyezik meg. Pedig ez fontos lenne, mert iterációnként egy memóriaműveletet megspórolhatnánk:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">void foo1(int vec[], int *n) {
+
+    for (int i = 0; i != *n; ++i)
+        vec[i] += 1;
+}</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">void foo2(int vec[], int *n) {
+    int t = *n;
+    for (int i = 0; i != t; ++i)
+        vec[i] += 1;
+}</code></pre>
+</div>
+</div>
+
+<p>A következő programrész pedig nem gyorsítható úgy, hogy az egyes bájtokat nem egyesével, hanem négyesével vagy nyolcasával másoljuk
+(az erre való gépi utasítással), hiszen a két tömb átfedheti egymást:</p>
+
+<pre   ><code class="language-c">void my_memcpy(char *dst, char const *src, size_t n) {
+    for (size_t i = 0; i != n; ++i)
+        dst[i] = src[i];
+}</code></pre>
+
+<p>Pedig ezek mind olyan optimalizációk, amelyre a mai fordítók képesek lennének.</p>
+
+<p>C++-ban még rosszabb a helyzet. Ott egy
+objektum tagváltozói mindig indirekt elérésűek, a <code>this</code> pointeren keresztül. Az alábbi tagfüggvényben a
+<code>size</code> nem lokális változó, ezért lehet, hogy a <code>data</code> pointeren keresztül hivatkozható. Emiatt minden
+egyes iterációban újra ki kell olvasni az értékét a memóriából:</p>
+
+<pre   ><code class="language-c">class Vector {
+  public:
+    void clear() {
+        for (int i = 0; i &lt; size; i++)
+            data[i] = 0;
+    }
+
+  private:
+    int size;
+    int *data;
+};</code></pre>
+
+<p>Akármennyire is tűnik ez értelmetlennek <em>nekünk,</em> a fordító nem érti a kódot,
+és nem élhet azzal a feltételezéssel, hogy <code>data!=&amp;size</code> teljesül!</p>
+
+<h3>TBAA: Type-based alias analysis</h3>
+
+<p>A szabvány és a fordítók írói megpróbáltak kicsit javítani ezen a helyzeten. Vannak olyan körülmények, amelyek fennállása
+esetén tudni lehet, hogy két pointer biztosan nem ugyanarra az objektumra mutat. Például egy <code>int*</code>-ról és egy
+<code>double*</code>-ról „ránézésre” is tudjuk, hogy nem kell feltételezni az egyezésüket. De a „ránézésre” nem elég, a
+szabályrendszert formalizálni kell, mert a fordítók csak a beléjük programozott szabályokat tudják követni.</p>
+
+<p>Az előző példa azonban adhat egy ötletet. A nyelv típusait fel lehet használni arra, hogy felismerjük a különálló
+pointereket! Ebből kiindulva, a szabályok a következők:</p>
+
+<ol>
+    <li>Minden memóriaterület csak egy bizonyos típusú objektumot tárolhat, amíg
+    annak az objektumnak az élettartama tart.</li>
+    <li>Két pointer akkor nevezünk <em>kompatibilisnek,</em> ha:
+    <ol>
+        <li>Csak előjelben vagy minősítőkben (<em>qualifier</em>, pl. <code>const</code>) térnek el.</li>
+        <li>Az egyikük <code>void *</code>, mert az bármilyen típussal kompatibilis (generikus
+        pointer).</li>
+        <li>Az egyikük <code>char *</code> vagy <code>unsigned char *</code>, mert ezt használjuk bájtonkénti memóriacímzésre.</li>
+    </ol>
+    </li>
+    <li>Két pointerről csak akkor kell feltételezni, hogy ugyanarra az objektumra
+    mutatnak, ha kompatibilis típusúak.</li>
+</ol>
+
+<p>A szabályok alapján a fordítók már sok optimalizálást el tudnak végezni. Például az alábbi <code>foo1()</code> függvényt
+jogosan <code>foo2()</code>-ként értelmezhetik, mivel tudni lehet, hogy az <code>int *n</code> pointer nem mutat a <code>float
+vec[]</code> tömb semelyik elemére. Így nem kell a <code>*n</code> kifejezést minden iterációban kiértékelni:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">/* vec[i] ugyanaz az int, mint *n? */
+void foo1(float vec[], int *n) {
+
+    for (int i = 0; i != *n; ++i)
+        vec[i] += 1;
+}</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">/* biztosan nem ugyanazok! */
+void foo2(float vec[], int *n) {
+    int t = *n;
+    for (int i = 0; i != t; ++i)
+        vec[i] += 1;
+}</code></pre>
+</div>
+</div>
+
+<p>Azonban ez <code>int vec[]</code>, <code>int *n</code> esetén még mindig nem lenne segítség.</p>
+
+
+<h3>A kompatibilis pointerekhez: <code>restrict</code> kulcsszó</h3>
+
+<p>Ha két kompatibilis pointerünk van, akkor is jelezhetjük a fordító számára, hogy biztosan nem ugyanarra az objektumra
+mutatnak. Ezt a <a href="index.html#restrict2"><code>restrict</code></a> minősítővel tehetjük meg. A kulcsszót a pointert jelző <code>*</code> után kell írni,
+mivel a pointert minősíti, nem a mutatott objektumot:</p>
+
+<pre   ><code class="language-c">int foo(int * restrict a, int * restrict b) {
+    *a = 1;
+    *b = 2;
+    return *a;
+}</code></pre>
+
+<p>Ha egy blokkban a <code>restrict</code> kulcsszóval megjelölünk egy pointert, azzal azt jelezzük a fordítónak, hogy abban a
+blokkban az általa mutatott objektumot csak az a pointer, vagy az abból létrehozott másolatok hivatkozzák. Így a fenti kódban
+például optimalizálhatja a visszatérési értéket, fixen 1-re. Ha megnézzük a generált assembly kódot, ez látszik is:</p>
+
+<div class="columns">
+<div>
+<h4><code>restrict</code> nélkül generált assembly kód:</h4>
+<pre>
+movl	$1, (%rdi)    ; *a = 1;
+movl	$2, (%rsi)    ; *b = 2;
+movl	(%rdi), %eax  ; (vissza) = *a;
+ret                   ; visszatérés a fv-ből
+</pre>
+</div>
+<div>
+<h4><code>restrict</code>-tel generált assembly kód:</h4>
+<pre>
+movl	$1, (%rdi)    ; *a = 1;
+movl	$1, %eax      ; (vissza) = 1;
+movl	$2, (%rsi)    ; *b = 2;
+ret                   ; visszatérés a fv-ből
+</pre>
+</div>
+</div>
+
+<p>Tömbök esetén nagyon sokat segíthet a <code>restrict</code> kulcsszó, mert lehetővé teheti a tömbelemek párhuzamos
+feldolgozását. A mai processzorok rengeteg ún. SIMD (single instruction, multiple data) utasítással rendelkeznek, amelyek sok
+adatot dolgoznak fel egyszerre, így az előny például a lenti függvényben jelentős lehet. (Itt <code>a</code> és <code>b</code>
+pointerek! A tömb szintaktikájú formális paraméternél így kell jelölni a <code>restrict</code>-et.)</p>
+
+<pre   ><code class="language-c">/* vector a += b */
+void vec_plus(int n, float a[restrict], float const b[restrict]) {
+    for (int i = 0; i != n; ++i)
+        a[i] += b[i];
+}</code></pre>
+
+<p>Nagyon vigyázni kell arra, hogy a <code>restrict</code> használatával ígéretet teszünk a fordítónak a pointerek által
+mutatott objektumokat illetően. Ha mégis olyan értékeket adunk a pointereknek, amelyek megegyeznek, nem garantált, hogy a
+futtatott program helyes eredményt ad! Például:</p>
+
+<pre class="screenshot">
+$ cat restrict.c
+#include &lt;stdio.h&gt;
+
+int foo(int * restrict a, int * restrict b) {
+    *a = 1;
+    *b = 2;
+    return *a;
+}
+
+int main() {
+    int i;
+    printf("%d\n", foo(&amp;i, &amp;i));
+}
+
+$ clang -O0 restrict.c -o restrict; ./restrict
+2
+
+$ clang -O2 restrict.c -o restrict; ./restrict
+1
+</pre>
+
+<p>Látszik, hogy a <code>-O2</code> optimalizálás mellett a fordító kihasználta az ígéretünket, és ezért más lett <em>az amúgy
+helytelen (!)</em> programkód futási eredménye, mint optimalizálás nélkül.</p>
+
+<ol class="feladatok">
+<li><p>A C89-ben két függvénnyel lehetett adott méretű memóriaterületet
+másolni, ezek a <code>memcpy()</code> és a <code>memmove()</code>. Mindkettő
+paraméterei: cél pointer, forrás pointer, memóriaterület mérete. Mi
+a két függvény között a különbség? A C99-től kezdve a kettő közül vajon melyik
+paraméterei <code>restrict</code> minősítésű pointerek?</p>
+</li>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>memcpy()</code>-nál elvárás volt a C89-ben is, hogy olyan tömböket
+adjunk paraméterként, amelyek nem fedik egymást. Így az új verzióban ennek
+<code>restrict</code> minősítésűek a paraméterei. A <code>memmove()</code>-nál
+nincs ilyen elvárás, az képes egymást átfedő memóriaterületeket is másolni.</p>
+</div>
+</details>
+
+</ol>
+
+
+
+
+
+<h3>Irodalom</h3>
+
+<ol>
+    <li id="restrict1"><a href="http://stackoverflow.com/questions/745870/realistic-usage-of-the-c99-restrict-keyword">Realistic usage of the C99 'restrict' keyword?</a>
+    <li id="restrict2"><a href="http://en.wikipedia.org/wiki/Restrict">restrict</a> – Wikipedia
+</ol>
+    
+                  </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

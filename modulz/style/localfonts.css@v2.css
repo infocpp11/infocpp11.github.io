@@ -1,0 +1,53 @@
+/* ez szándékosan css, mert parancssorból is */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(opensans.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(opensansbold.woff) format('woff');
+}
+@font-face {
+  font-family: 'McLaren';
+  font-style: normal;
+  font-weight: 400;
+  src: url(mclaren.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url(robotomono.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Mono Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: url(robotomonomedium.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: url(robotomonobold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: url(ptserif.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  src: url(ptserifbold.ttf) format('truetype');
+}
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="10cm" width="26cm" version="1.1" xmlns:cc="http://creativecommons.org/ns#" viewBox="238 58 503 183" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata64">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="g4">
+  <polygon id="polygon6" points="520 120 380 180 240 120 380 60" fill="#fff"/>
+  <polygon id="polygon8" stroke="#000" points="520 120 380 180 240 120 380 60" stroke-width="2" fill="none"/>
+  <text id="text10" style="text-anchor:middle" font-family="sans-serif" font-size="13.547px" y="107.2" x="380" fill="#000000">
+   <tspan id="tspan12" y="107.2" x="380">új objektum</tspan>
+   <tspan id="tspan14" y="124.133" x="380">keletkezett a</tspan>
+   <tspan id="tspan16" y="141.067" x="380">függvényben?</tspan>
+  </text>
+ </g>
+ <g id="g18" stroke="#000" stroke-width="2" fill="none">
+  <line id="line20" y2="120" x2="575.53" y1="120" x1="520"/>
+  <polyline id="polyline22" points="567.76 125 577.76 120 567.76 115"/>
+ </g>
+ <g id="g24">
+  <rect id="rect26" height="40" width="160" y="100" x="580" fill="#fff"/>
+  <rect id="rect28" height="40" width="160" stroke="#000" y="100" x="580" stroke-width="2" fill="none"/>
+  <text id="text30" style="text-anchor:middle" font-family="sans-serif" font-size="13.547px" y="124.133" x="660" fill="#000000">
+   <tspan id="tspan32" y="124.133" x="660">érték kell legyen</tspan>
+  </text>
+ </g>
+ <line id="line34" stroke-width="2" y2="220" x2="380" stroke="#000" y1="180" x1="380" fill="none"/>
+ <g id="g36" stroke="#000" stroke-width="2" fill="none">
+  <line id="line38" y2="220" x2="575.53" y1="220" x1="380"/>
+  <polyline id="polyline40" points="567.76 225 577.76 220 567.76 215"/>
+ </g>
+ <g id="g42">
+  <rect id="rect44" height="40" width="160" y="200" x="580" fill="#fff"/>
+  <rect id="rect46" height="40" width="160" stroke="#000" y="200" x="580" stroke-width="2" fill="none"/>
+  <text id="text48" style="text-anchor:middle" font-family="sans-serif" font-size="13.547px" y="224.133" x="660" fill="#000000">
+   <tspan id="tspan50" y="224.133" x="660">lehet referencia</tspan>
+  </text>
+ </g>
+ <text id="text52" style="text-anchor:middle" font-family="sans-serif" font-size="13.547px" y="106.8" x="550" fill="#000000">
+  <tspan id="tspan54" y="106.8" x="550">igen</tspan>
+ </text>
+ <text id="text56" style="text-anchor:middle" font-family="sans-serif" font-size="13.547px" y="206.8" x="550" fill="#000000">
+  <tspan id="tspan58" y="206.8" x="550">nem</tspan>
+ </text>
+</svg>

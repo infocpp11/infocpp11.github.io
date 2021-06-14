@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: C++11 fejlesztőeszközök</title>
+<meta property="og:title" content="TEST InfoC++11 :: C++11 fejlesztőeszközök">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="C++11 fordítók, parancssori fordítás és linkelés.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="C++11 fordítók, parancssori fordítás és linkelés.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="C++11 fejlesztőeszközök">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">C++11 fejlesztőeszközök</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.02.08.</p>
+<p class="kivonat">C++11 fordítók, parancssori fordítás és linkelés.</p>
+</div>
+
+
+<p>A mai alkalom a unixos fejlesztőeszközökről szól: parancssorból használható fordítóprogramokról, linkerekről és
+nyomkövetőkről. Ezért ma minden fordítást szándékosan a parancssorból fogunk elvégezni. Ennek célja az, hogy lássuk, „mi
+van a motorháztető alatt”, azaz mi az a munka, amelyet egy integrált fejlesztőkörnyezet a háttérben elvégez.</p>
+
+<p>A programunk szegmentálása nem áll meg a függvényekre bontásnál: az 
+összetartozó függvényeket különálló modulokba csoportosítjuk. A könnyű, hatékony 
+kezelhetőség érdekében pedig több forrásfájlból építjük fel a programot. A 
+feldarabolt, külön fordított programrészletet végén a linker segítségével rakjuk 
+össze. Ezen laboralkalom célja a linkelés technikai részleteinek bemutatása is.</p>
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első négy feladatot meg kell oldani.</p>
+<p>A feladatok kifejezetten unixos parancssori eszközökről szólnak. A lehetőségeid az alábbiak:</p>
+<ul>
+    <li>MinGW-ben dolgozol Windowson, pl. a CodeBlocks mellé telepített verzióval.</li>
+    <li>Saját Linuxon dolgozol.</li>
+    <li>Az általunk biztosított virtuális gépen dolgozol. Ennek adatai: 152.66.72.60, SSH-val
+        érhető el; saját felhasználói neved van, amely a neptun kódod, a jelszó pedig ugyanaz
+        (minden csupa nagybetűvel). Rendelkezésre álló eszközök: gcc, g++, clang, clang++, make,
+        valgrind, mc, wget, curl, pico, mcedit, vim. Fájlok WinSCP-vel mozgathatók legegyszerűbben;
+        bár olyan kicsi fájlokkal kell dolgozni, hogy a terminálablakból copy-paste is megteszi.</li>
+</ul>
+<p>A feladatokban nem programokat kell írni, ettől függetlenül keletkeznek
+majd általad megírt fájlok, azokat kell beadni. Ha a fentebb említett virtuális gépen dolgoztál,
+a beadásban elég megemlíteni azt, hogy ott vannak a fájlok, de ez ne maradjon el.</p>
+</blockquote>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Fejlesztőeszközök</a>
+                      <li><a href="index.html#2" class="">Program fordítása, futtatása parancssorban</a>
+                      <li><a href="index.html#3" class="">Fordítás és linkelés</a>
+                      <li><a href="index.html#4" class="">A make program</a>
+                      <li><a href="index.html#5" class="">C++ fordítás és linkelés, a „name mangling”</a>
+                      <li><a href="index.html#6" class="">C és C++ linkelése</a>
+                      <li><a href="index.html#7" class="">Ha marad időd: dinamikus linkelés</a>
+                      <li><a href="index.html#8" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Fejlesztőeszközök">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Fejlesztőeszközök<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nyiss egy parancssort vagy egy terminálablakot! A fordítóprogramok verziószáma a <code>-v</code> paraméterrel ellenőrizhető:</p>
+
+<div class="sticky">Linux</div>
+<pre class="screenshot">
+$ g++ -v
+gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1)
+</pre>
+<div class="sticky">HSZK-ban: Windows és<br>CodeBlocks</div>
+<pre class="screenshot">
+C:\&gt; cd C:\Program Files\MinGW-4.8.1\bin
+
+C:\Program Files\MinGW-4.8.1\bin&gt; g++ -v
+gcc version 4.8.1 (tdm-2)
+</pre>
+
+<p>Windowson a telepítés módjától függően a Unix-kompatibilis MinGW fejlesztőkörnyezetek más mappába is települhettek. Az 
+alapbeállítás <code>C:\MinGW-4.8.1</code>. A fenti példa a HSZK-ban használt <code>C:\Program Files\codes.v52\MinGW-4.8.1</code>
+mappát mutatja (ez lehet, hogy változott). A konkrét programok az ezen belüli <code>bin</code> mappában vannak.</p>
+
+<p>Ha a HSZK-ban vagy, a mai laboron végzett munkához használd végig <em>ugyanazt a parancssori ablakot,</em> és állítsd be
+abban a <code>PATH</code> környezeti változót, hogy a GCC programjai bármelyik mappából elérhetőek legyenek:</p>
+
+<pre class="screenshot">
+C:\> PATH=%PATH%;C:\Program Files\MinGW-4.8.1\bin
+</pre>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Program fordítása, futtatása parancssorban">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Program fordítása, futtatása parancssorban<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Indítsd el a Geany-t (Linuxon) vagy a CodeBlocks-ot (Windowson), és mentsd el a <code>proba.c</code> fájlba ezt a 
+programkódot:</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    for (int i = 1; i &lt;= 5; ++i)
+        printf(&quot;Hello %d!\n&quot;, i);
+}</code></pre>
+
+<div class="megjegyzes">
+<p>A Geany-hez érdemes tudni:</p>
+<ul>
+<li><kbd>Ctrl+S</kbd> mentés.
+<li><kbd>Shift+nyilak</kbd> kijelölés, <kbd>Ctrl-C</kbd>, <kbd>Ctrl-V</kbd> szokásos.
+<li><kbd>Ctrl+K</kbd> sort töröl.
+<li><kbd>Ctrl+D</kbd> sort vagy kijelölést dupláz, <kbd>Ctrl+E</kbd> kommentel.
+<li><kbd>F9</kbd> fordít és linkel, <kbd>F5</kbd> futtat.
+</ul>
+</div>
+
+<p>A programot alapbeállítás szerint valószínűleg nem fogja lefordítani a GCC fordító, mert annak nem alapértelmezése a C99
+nyelv. A <code>for()</code> ciklus fejlécében definiált <code>int i</code> változó viszont C99 nyelvi elem. Használd ezért a
+terminál ablakot (parancssort), és fordítsd le kézzel a programot:</p>
+
+<pre class="screenshot">
+$ gcc -std=c99 -Wall -Wdeprecated -pedantic proba.c -o proba
+
+$ ./proba   <span class="bubble">Windowson: proba</span>
+Hello 1!
+Hello 2!
+Hello 3!
+Hello 4!
+Hello 5!
+</pre>
+
+<p class="megjegyzes">A fordításhoz Linuxon használható a <code>clang</code> is. A <code>clang</code> paraméterezését úgy találták 
+ki, hogy teljesen csereszabatos legyen a <code>gcc</code>-vel, így a laboranyagban leírtak érvényesek mindkettőre. A Geany 
+beállításához lásd a <a href="../fejlesztokornyezet/index.html">fejlesztőkörnyezetekről</a> szóló írást!</p>
+
+<p class="megjegyzes">A program futtatásakor Linuxban azért kellett megadni az elérési utat: (<code>./</code> a név elején), mert
+Linux rendszerekben az aktuális könyvtár biztonsági okokból nem része a PATH-nak. Windowson elérési út beírása nélkül is indíthatóak
+az aktuális mappa programjai.</p>
+
+<p>A fenti opciók jelentése:</p>
+
+<ul>
+<li><code>-std=c99</code>: C99 módba kapcsolja a fordítót. Szokásos értékei még: <code>c89</code>, <code>c11</code>.
+<li><code>-Wall</code>: bekapcsolja a figyelmeztetéseket. (A <code>-W</code> még több figyelmeztetést mutat.)
+<li><code>-Wdeprecated</code>: engedélyezi a figyelmeztetéseket az olyan nyelvi elemek használatánál, amelyek elavultnak számítanak, és van helyettük modernebb megoldás.
+<li><code>-pedantic</code>: szigorú szabványkövető módba kapcsol. Tanulásnál hasznos!
+<li><code>-o proba</code>: megadja a kimeneti fájl, jelen esetben a futtatható (bináris) nevét. Windowson ebből automatikusan <code>proba.exe</code> lesz.
+</ul>
+
+<p>A laborban használni kell majd még ezeket is:</p>
+
+<ul>
+<li><code>-c</code>: csak fordít, a linkelést nem végzi el (lásd lentebb).</li>
+<li><code>-g</code>: nyomkövetéshez használható információ elhelyezése a programban (melyik függvény hol van stb.).</li>
+<li><code>-O0</code>: optimalizálás nélkül fordítja a programot (nyomkövetéshez).</li>
+<li><code>-O2</code>: a legtöbb optimalizálási módszert bekapcsolva fordítja a programot.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Fordítás és linkelés">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Fordítás és linkelés<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Tárgykód fájlok</h3>
+
+<p>Írj egy új programot <code>hello.c</code> néven, amelyben a kiírás külön függvényben van!</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+
+static void hello(int i) {
+    printf(&quot;Hello %d!\n&quot;, i);
+}
+
+int main(void) {
+    for (int i = 1; i &lt;= 5; ++i)
+        hello(i);
+}</code></pre>
+
+<p>Emlékezz vissza: a fordítás mindig két lépésből áll. Az első lépésben (fordítás, compile) a fordítóprogram (compiler) a  
+forráskódot gépi kóddá alakítja, és ekkor keletkeznek a <em>tárgykód</em> (object) fájlok. Ezek még a globális változók és 
+függvények név szerinti hivatkozásait tartalmazzák. A tárgykódokból lesz a <em>linkelés</em> (összeállítás, összeszerkesztés, 
+„linkelés”, link) művelet után a futtatható program. A linkelés közben a név szerinti hivatkozásokat a linker feloldja. Ennek az 
+egésznek az (is) az értelme, hogy különálló, kicsi, áttekinthető forrásfájlokból lehessen egy nagy programot építeni.</p>
+
+<p>Ezeket a műveleteket a fordító megfelelő paraméterezésével külön is el lehet végezni. A <code>-c</code> paraméterrel azt lehet 
+jelezni, hogy csak fordítani kell, linkelni nem. Ilyenkor a <code>-o</code> a létrehozandó tárgykód fájl nevét adja meg. Ha 
+paraméterként tárgykód fájlokat kap a fordító, akkor pedig tudja, hogy azokat lefordítani már nem kell, csak linkelni. (A linkelést 
+igazából egy külön program, az <code>ld</code> végzi, de azt bonyolultabb közvetlenül paraméterezni.)</p>
+
+<p>Végezd el külön a fenti  projekt fájljainak fordítását és linkelését! Előbb a fordítást:</p>
+
+<pre class="screenshot">
+$ gcc -g -std=c11 <em>-O0</em> main.c <em>-c</em> -o main.o
+</pre>
+
+<p>Ekkor előállt a <code>main.o</code> tárgykód fájl.
+A parancssori <code>nm</code> alkalmazás megmutatja, hogy mi van egy tárgykód 
+fájlban. (Linuxon a <code>man nm</code> beírása után olvashatsz róla részletesebben.)</p>
+
+<pre class="screenshot">
+$ nm main.o
+</pre>
+
+<p>A kimeneten azt látod, hogy a tárgykód fájl tartalmaz két lefordított függvényt
+(ezeket <code>t</code> és <code>T</code> betűk jelölik, ami a <code>text</code>
+szóra utal). Van benne egy hivatkozás a <code>printf</code>-re, ezt pedig az
+<code>U</code> csoportba sorolja a program. Az <code>U</code> <code>undefined</code>-ot,
+definiálatlant jelent: ahhoz, hogy ezt a tárgykód fájlt programként használjuk,
+elő kell majd kerítenünk a <code>printf()</code> függvény definícióját, lefordított változatát.</p>
+
+<h3>Linkelés</h3>
+
+<p>A tárgykódot linkelve a fordító ezt a <code>libc</code>-ből (a szabványos C
+lefordított függvényeit tartalmazó függvénykönyvtár, C Library) előkeresi a <code>printf()</code>-et, és így
+futtatható programot kapunk:</p>
+
+<pre class="screenshot">
+$ gcc main.o -o program
+
+$ ./program  <span class="bubble">Windows: program.exe</span>
+</pre>
+
+<p>Unixon a linkeléshez használható a <code>-lc</code> paraméter is, amely azt jelenti,
+hogy linkelni „<code>-l</code>” kell a „<code>c</code>” nevű könyvtárat is.
+Ez annyira alapvető, hogy ezt kérés nélkül is meg szokta tenni a linker.</p>
+
+<p class="megjegyzes">Az <code>ldd</code> paranccsal ellenőrizni lehet, hogy a bináris
+mely könyvtárakhoz van linkelve. Ez a parancs csak Unixokon van, a <code>MinGW</code>-ből kihagyták.
+Ugyancsak, a <code>printf()</code> a MinGW-ben kicsit másképp néz ki; van némi hókuszpókusz
+a háttérben, hogy a MinGW-s kódból a Microsoft Visual C-ben lévő <code>printf()</code> elérhető legyen.
+Ezek most nem lényegesek.</p>
+
+<h3>A statikus függvény</h3>
+
+<p>Emlékezz most vissza arra is Prog1-ből, mit jelentett a <code>static</code> 
+kulcsszó a függvény neve előtt. Ennek a többmodulos programoknál volt értelme:
+a <code>static</code> globális változó vagy függvény esetén egy olyan
+tárolási osztályt jelent (linkage), amely csak az adott fordítási egységben látszik
+(internal linkage). A nem 
+statikus nevek, mint pl. a <code>main</code>, a teljes projektben látszanak, így 
+egyediek kell legyenek. A statikus neveknek azonban elég csak fordítási egységenként 
+egyedieknek lenniük; egy másik <code>valami.c</code> fájlban lehetne egy másik 
+<code>hello()</code> függvény is.</p>
+
+<p>A <code>hello()</code> tehát csak a mostani <code>main.c</code> forrásfájlból
+hívható függvény. Fordítsd le most a programot optimalizálással együtt (<code>-O0</code>
+helyett <code>-O2</code> kapcsolóval), állítsd
+elő így a tárgykódot és vizsgáld meg az <code>nm</code> paranccsal! Látsz valami
+különbséget? Mi okozza ezt a különbséget? Magyarázd meg!</p>
+
+<pre class="screenshot">
+$ gcc -g -std=c11 <em>-O2</em> main.c -c -o main.o
+
+$ nm main.o
+</pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A függvény definíciója ilyenkor valószínűleg eltűnik a tárgykód fájlból.
+Ez azért van, mert kicsi, rövid függvény lévén a fordító úgy dönt az optimalizálás,
+gyorsabb futás érdekében kihagyja a függvényhívást, és a függvény törzsét beilleszti
+a hívás helyére, megspórolva így az ide-oda ugrást és a paraméterátadás műveleteit.
+Mivel a <code>static</code> miatt a fordító látja, hogy sehol máshol nem hívódik
+a függvény, teljesen kihagyja azt a tárgykódból.</p>
+</div>
+</details>
+
+<h3>Több forráskód</h3>
+
+<p>Bontsd most két forráskódra a programot! A <code>main.c</code>-ben legyen a
+<code>main()</code> függvény, a <code>hello.c</code>-ben a <code>hello()</code>
+függvény, és írj az utóbbihoz egy <code>hello.h</code> fejlécfájlt is!</p>
+
+<p>Fordítsd le linkelés nélkül külön a két forrásfájlt, majd vizsgáld meg az
+<code>nm</code> paranccsal a kapott tárgykódokat! Linkeld össze a két tárgykódot
+teljes programmá! Hogyan kellett mindehhez a <code>hello()</code> függvényt módosítanod?
+Azt kell elérni, hogy a tárgykód fájlba úgy kerüljön a <code>hello()</code> függvény,
+hogy máshonnan is elérhető legyen (exportált függvény; exported function, function
+with external linkage).</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egyszerű: le kell róla szedni a <code>static</code> jelzőt. Különben a
+<code>main()</code> nem fogja látni, hiába van deklarálva a <code>hello.h</code>-ban,
+és hiába van definiálva a <code>hello.c</code>-ben.</p>
+<p>A fordítás lépése:</p>
+<pre class="screenshot">
+$ gcc -std=c99 -Wall -Wdeprecated -pedantic -g -c main.c -o main.o
+$ gcc -std=c99 -Wall -Wdeprecated -pedantic -g -c hello.c -o hello.o
+$ gcc -g main.o hello.o -o program
+</pre>
+</div>
+</details>
+
+<h3>Globális változók</h3>
+
+<p>Módosítsd újra a projektet! Hozz most létre egy <code>lang</code> nevű globális változót a 
+<code>hello.c</code>-ben, amelynek a típusa legyen <code>enum Language</code>, a 
+lehetséges értékei legyenek: <code>language_en</code> és <code>language_hu</code>.
+Add ennek a változónak a <code>language_en</code> kezdeti értéket!
+Írd át úgy a <code>hello()</code> függvényt, hogy ennek figyelembe vételével
+jelenítse meg az üzenetet! Írd át a főprogramot is:</p>
+
+<pre   ><code class="language-cbub">int main(void) {
+    hello(0);           // angol (kezdeti érték)
+    lang = language_hu;
+    hello(1);           // magyar
+    lang = language_en;
+    hello(2);           // megint angol
+}</code></pre>
+
+<p>Minek, hol kell lennie ehhez? Mi különbözteti meg egy globális változó deklarációját
+a definíciójától? Mi a különbség egyáltalán a deklaráció és a definíció között?
+Nézd meg most is a tárgykód fájlokat!</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A felsorolt <em>típus definíciója</em> a fejlécfájlban, a <code>hello.h</code>-ban, mert
+azt mindkettő fordítási egységnél látnia kell a fordítónak:</p>
+
+<pre   ><code class="language-c">typedef enum Language {
+    language_en, language_hu
+} Language;</code></pre>
+
+<p>A <em>változó definíciója</em> a forrásfájlba, <code>hello.c</code>-be kell:</p>
+
+<pre   ><code class="language-c">Language lang = language_hu;</code></pre>
+
+<p>És végül, a <em>változó deklarációja</em> a fejlécfájlba. Ehhez az <code>extern</code>
+kulcsszót kell használni, ettől válik deklarációvá a sor:</p>
+
+<pre   ><code class="language-c">extern Language lang;</code></pre>
+
+<p>Változónál és függvénynél a <em>deklaráció</em> azt jelenti, hogy megadjuk a
+típusát; a <em>definíció</em> pedig azt, hogy lefoglaljuk hozzá a memóriaterületet.
+A deklarációra a többi programrész fordítása közben van szükség, a definíció hatására
+pedig ténylegesen kerül is valami a tárgykódba.</p>
+
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A make program">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A make program<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fordítás és linkelés különválasztásának akkor van igazán értelme, ha nagy 
+projekten kell dolgozni. Ha nem mindegyik forrásfájl változik az újrafordítások 
+között, akkor sok tárgykód fájl változatlan maradhat. A mostani projektben 
+például a <code>main.c</code> változásakor a <code>main.o</code>-t kell újra 
+előállítani, az <code>hello.o</code> viszont változatlan maradhat. Így rengeteg
+idő megspórolható. Az alábbi gráf élei a <em>függőségeket</em> (dependency) 
+mutatják, vagyis azt, hogy melyik fájl tartalmától melyik másik fájl tartalma 
+függ.</p>
+
+<img src="fuggoseg.svg" class="kozep" style="width: 24em;">
+
+<p>Ha ismertek a függőségek, akkor a keletkező fájlok előállítása automatizálható:pl. ha egy tárgykód fájl újabb,
+mint a belőle linkelt program, akkor a linkelést újra el kell végezni.
+Erre képes a <code>make</code> program. A függőségeket ennek egy ún. Makefile írja le, aminek a neve mindig
+<code>Makefile</code>. Ez <em>szabályokat</em> (rule) tartalmaz. Minden szabály egy cél fájlt ad meg
+és annak függőségeit, továbbá parancsokat, amelyekkel a cél fájl előállítható.
+Az egyes szabályok leírása között üres sornak kell szerepelnie. A parancsokat pedig egy tabulátor
+vezeti be, alább ezt a piros vonalak jelzik:</p>
+
+<pre>
+célfájl1: függőségfájl1 függőségfájl2 függőségfájl3...
+<em>_______</em>parancsok...
+<em>_______</em>parancsok...
+<em>_______</em>parancsok...
+
+célfájl2: függőségfájl1 függőségfájl2...
+<em>_______</em>parancsok...
+<em>_______</em>parancsok...
+<em>_______</em>parancsok...
+</pre>
+
+<p>A helló projektet az alábbi Makefile tudja kezelni:</p>
+
+<pre>
+program: main.o hello.o
+	gcc -g main.o hello.o -o program
+
+hello.o: hello.c hello.h
+	gcc -std=c99 -Wall -Wdeprecated -pedantic -g -c hello.c -o hello.o
+
+main.o: main.c hello.h
+	gcc -std=c99 -Wall -Wdeprecated -pedantic -g -c main.c -o main.o
+</pre>
+
+<p>Mentsd el ezt <code>Makefile</code> néven, és próbáld ki a <code>make</code> parancsot (Windowson lehet, hogy <code>mingw32-make</code> kell)!
+Töröld le külön-külön az egyes előállított fájlokat (pl. <code>main</code>, <code>hello.o</code>),
+és figyeld meg, mikor melyik parancsot futtatja a <code>make</code>!</p>
+
+<div class="csik kicsinyit">
+<h3>Változók, makrók és minták</h3>
+<p>A program az alábbi Makefile segítségével is megépíthető. Ez változókat
+(mint pl. a BINARY), makrókat (pl. <code>$^</code> és <code>$@</code>) és mintákat
+(pl. a <code>%.o</code> kezdetű szabály) is tartalmaz. Bogarászd ki, vajon melyik mit jelent!</p>
+
+<pre>
+BINARY = program
+OBJECTS = main.o hello.o
+HEADERS = hello.h
+
+CC = gcc
+CFLAGS = -std=c11 -O0 -Wall -Wdeprecated -pedantic -g
+LDFLAGS = -g
+
+.PHONY: all clean
+
+all: $(BINARY)
+
+clean:
+	rm -f $(BINARY) $(OBJECTS)
+
+$(BINARY): $(OBJECTS)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+</pre>
+</div>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C++ fordítás és linkelés, a „name mangling”">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        C++ fordítás és linkelés, a „name mangling”<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Térjünk most át a C++ nyelvre! C-ben minden függvényt egyértelműen azonosított a neve. C++-ban ez már nincs így, több 
+ugyanolyan nevű függvényünk is lehet. </p>
+
+<p>Tekintsük az alábbi, (khm) demonstrációs céllal készült programkódot:</p>
+
+<div class="sticky">foo.cpp</div>
+<pre   ><code class="language-cbub">void foo() {} // 1
+
+void foo(int i) {} // 2
+
+class Foo {
+  public:
+    void foo(); // 3
+};
+void Foo::foo() {}
+
+namespace FooNS {
+    void foo() {} // 4
+
+    class Foo {
+    public:
+        void foo(); // 5
+    };
+    void Foo::foo() {}
+}
+
+int main(int argc, char *argv[]) {
+    /* 1 */ foo();
+    /* 2 */ foo(1);
+    /* 3 */ Foo().foo(); 
+    /* 4 */ FooNS::foo(); 
+    /* 5 */ FooNS::Foo().foo(); 
+}</code></pre>
+
+<p>Az egyforma nevű függvények közül a kiválasztott példányt a
+hívás helye és módja határozza meg: a választásnál a fordító figyelembe veszi a 
+paraméterek típusát, a névteret, tagfüggvények esetén pedig az objektum típusát 
+is. Csak egy gond van: a fordítás után keletkező tárgykódban már nem léteznek a 
+deklarációk, ott már csak nevek vannak. Csakis és kizárólag a nevek alapján meg 
+kell tudni különböztetni a függvényeket. Ezért találták ki a <em><a href="index.html#namemangling">name mangling</a></em> nevű 
+módszert (más néven: function name decoration). Ez azt jelenti, hogy a tárgykódba 
+írt függvénynevekbe a fordító szisztematikusan belekódolja a paraméterek típusát, 
+az osztályok és a névterek neveit is.</p>
+
+<p class="megjegyzes">
+Az egyes fordítók egészen eltérő „name mangling” módszereket használnak. A
+Wikipédián van egy <a href="index.html#namemangling">jó 
+táblázat</a> erről: a <code>void h(int)</code> függvénynek a különféle fordítók
+egész változatos neveket adnak, pl.
+<code>_Z1hi</code>, <code>h__Fi</code>, <code>?h@@YAXH@Z</code>,
+<code>CXX$__7H__FI0ARG51T</code> és hasonlók.
+</p>
+
+<p>Próbáld ezt ki! Fordítsd le a fenti programot, állítsd elő a tárgykód
+fájlt! A C++ fordítónak használhatod a <code>g++</code>-t vagy Linuxon a <code>clang++</code>-t;
+a paraméterezésük megegyezik a C fordítóéval. Írasd ki a keletkező tárgykód
+fájl szimbólumait! A <code>-C</code> paraméter hatására az <code>nm</code>
+„demangle”-eli a neveket; hasonlítsd össze a kimenetet enélkül és ezzel együtt is!
+Mi a helyzet a <code>main()</code> függvénnyel? Mit gondolsz, miért?</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az előállított tárgykód fájl tartalma G++ fordítóval:</p>
+
+<pre class="screenshot">
+0000000000000050 T main                     0000000000000050 T main
+0000000000000010 T _Z3fooi                  0000000000000010 T foo(int)
+0000000000000000 T _Z3foov                  0000000000000000 T foo()
+0000000000000020 T _ZN3Foo3fooEv            0000000000000020 T Foo::foo()
+0000000000000040 T _ZN5FooNS3Foo3fooEv      0000000000000040 T FooNS::Foo::foo()
+0000000000000030 T _ZN5FooNS3fooEv          0000000000000030 T FooNS::foo()
+</pre>
+
+<p>A <code>main()</code> előtt is van élet: a fordítók további programrészeket
+tesznek a lefordított programba, amelyek létrehozzák a globális változókat, átveszik
+a paramcssori argumentumokat, és így tovább. Ezek a programrészek hívják meg
+a <code>main()</code> függvényt. Mivel ezek lefordítva, készen járnak a
+fejlesztőkörnyezethez, bennük a <code>main()</code> függvény már név szerint
+van hivatkozva. Ezért annak nevét változatlanul hagyja a fordító. Ebben is különleges
+ez a függvény, nem csak abban, hogy kiegészíti a fordító <code>return 0</code>-val,
+ha nem lát benne ilyet.</p>
+</div>
+</details>
+
+<p>Egészítsd ki az előbbi Makefile-t úgy, hogy C++ programok lefordítására is
+alkalmas legyen. Ehhez tedd a következőket:</p>
+<ul>
+    <li>Hozz létre a <code>CC</code> mellett egy <code>CXX</code> nevű változót is.
+    Ez fogja megadni a C++ fordító nevét: <code>g++</code>.
+    <li>Hozz létre egy <code>CXXFLAGS</code> nevű változót is, a C++ fordító
+    paraméterezéséhez. A szabvány évjáratát a g++-nál is a <code>-std=</code>
+    kapcsoló adja meg; legyen ez <code>c++11</code>. (A szokásos értékei:
+    <code>c++98</code> és <code>c++11</code>.)
+    <li>A linkelés helyén írd át a <code>CC</code> változót <code>CXX</code>-re,
+    hogy a lefordított programhoz a C++-specifikus könyvtárak is linkelődjenek.
+    <li>Hozz létre egy szabály mintát a <code>%.o: %.c</code> mellett: ez legyen
+    a <code>%.o: %.cpp</code> minta. Add meg értelemszerűen a parancsot.
+</ul>
+
+<p>Állítsd be a tetején úgy a változókat, hogy a <code>foo.cpp</code> adja meg
+a teljes programot: <code>foo</code>. Próbáld ki egy <code>make clean</code> 
+után, hogy működik-e a Makefile-od! Ezután jön a varázslat: össze kell majd linkelned
+egy C-ben és egy C++-ban írt programrészletet. Erről szól a következő feladat.</p>
+    
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre>
+BINARY = foo
+OBJECTS = foo.o
+HEADERS = 
+
+CC = gcc
+CXX = g++
+CFLAGS = -std=c11 -O0 -Wall -Wdeprecated -pedantic -g
+CXXFLAGS = -std=c++11 -O0 -Wall -Wdeprecated -pedantic -g
+LDFLAGS = -g
+
+.PHONY: all clean
+
+all: $(BINARY)
+
+clean:
+	rm -f $(BINARY) $(OBJECTS)
+
+$(BINARY): $(OBJECTS)
+	$(CXX) $(LDFLAGS) $^ -o $@
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+
+%.o: %.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $&lt; -o $@
+</pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C és C++ linkelése">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        C és C++ linkelése<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Hozz létre egy üres mappát a következő projektnek, és másold bele azt a 
+Makefile-t, amit az előbb okosítottál fel C++-hoz. Hozz létre két forrásfájlt
+és egy fejlécfájlt: <code>main.cpp</code>, <code>hello.c</code> és <code>hello.h</code>,
+és add meg ezeket a fájlokat a Makefile-ban, ahol kell.</p>
+
+<p>Írj a <code>hello.c</code>-ben egy <code>hello_c()</code> nevű függvényt.
+Csináljon ez csak annyit, hogy kiír egy üzenetet a képernyőre. Tegyél bele valami
+nagyon C-specifikus dolgot, pl. hozz létre egy <code>class</code> nevű változót
+(ilyet C++-ban garantáltan nem lehet).</p>
+
+<p>Írd meg a főprogramot a <code>main.cpp</code>-ben! Hívd meg innen a
+<code>hello_c()</code> nevű függvényt, ezen felül pedig csinálj valami nagyon
+C++-specifikus dolgot, pl. definiálj egy osztályt a <code>class</code> kulcsszóval!</p>
+
+<p>Próbáld meg lefordítani és linkelni a programot. Mit tapasztalsz? Mi az oka?
+Elvileg odáig el kellett jutnia a fordításnak, hogy létrejön a <code>main.o</code>
+és a <code>hello.o</code>. Vizsgáld meg ezeket az <code>nm</code> paranccsal!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A hibát az okozza, hogy a C++ fordító használ <em>name mangling</em>-et, a C fordító pedig
+nem. A C fordító ezért egy <code>hello_c</code> nevű függvényt tesz a tárgykódba,
+a C++ fordító pedig a <code>_Z7hello_cv</code> függvényre hivatkozik:</p>
+<pre class="screenshot">
+$ nm main.o
+0000000000000000 T main
+                 U _Z7hello_cv <span class="bubble">nem ugyanaz,</span>
+
+$ nm hello.o
+0000000000000000 T hello_c <span class="bubble">mint ez</span>
+                 U printf
+</pre>
+</div>
+</details>
+
+<h3>Az <code>extern "C"</code> hívási konvenció</h3>
+
+<p>A C-ben írt kódrészletek igen nagy hányada változtatás nélkül C++-ban is 
+lefordítható, és ugyanúgy működik is. Ez azonban nem azt jelenti, hogy ugyanaz a 
+tárgykód fájl keletkezik, és a legnyilvánvalóbb különbséget épp a tárgykódban 
+megjelenő függvénynevek jelentik a C++-os <em>name mangling</em> miatt. Mivel azonban
+a C/C++ programok ahol lehet, binárisan is kompatibilisek, a két tárgykódot
+össze lehet linkelni, ha szólunk a C++ fordítónak, hogy a <code>hello_c()</code>
+függvényt az eredeti nevén keresse. Ezt pedig az <code>extern "C"</code> jelzéssel
+lehet megtenni.</p>
+
+<p>Első lépésként töröld ki az <code>#include "hello.h"</code> sort a mainből, és
+tedd be helyette ezt a sort:</p>
+
+<pre   ><code class="language-c">extern &quot;C&quot; void hello_c(void);</code></pre>
+
+<p>Próbáld meg így lefordítani a programot – így már működnie kell. Vizsgáld meg
+a tárgykód fájlokat, látni fogod, mindkét helyen már <code>hello_c</code> néven
+látszik a hivatkozás.</p>
+
+<p>Ez a jelzés a fordító számára a függvény ún. hívási konvencióját (calling 
+convention) adja meg. Általában akkor kell ilyet használni, amikor külső, más 
+fordítóval lefordított, esetleg más nyelven íródott függvényt kell hívni. Azt 
+adja meg a fordító számára, hogy a hívott függvény hogyan, milyen sorrendben, 
+milyen elhelyezéssel várja a paramétereket a veremben, esetleg máshol – mindezt 
+bit szinten pontosan. Ebben az esetben arra is utal a C++ fordítónak, hogy ez
+egy C-ben írt függvény lesz, ezért a nevét pontosan így lehet majd megtalálni
+a tárgykódban, nem szabad <em>name mangling</em>-et használni.</p>
+
+<p>A hívási konvenciót egyszerre több függvény deklarációjára is lehet alkalmazni,
+ehhez egyszerűen egy blokkba kell tenni a függvényeket:</p>
+
+<pre   ><code class="language-c">extern &quot;C&quot; {
+    void hello_c(void);
+    double masik_fuggveny(int, char*);
+}</code></pre>
+
+<p>Legjobb lenne ezt ilyen formán betenni a <code>hello.h</code> fejlécfájlba,
+de azt nem lehet, mert annak a fájlnak a C fordító által is értelmezhetőnek kell
+lennie. Ezt a problémát az előfordító segítségével szokás megoldani. A C++
+biztosítja, hogy előfordítás közben definiálva van egy <code>__cplusplus</code>
+nevű makró, C-ben pedig nincs ilyen. Ezt a tényt kihasználva lehet megjeleníteni
+vagy eltüntetni a hívási konvenció megadását:</p>
+
+<pre   ><code class="language-c">#ifdef __cplusplus
+extern &quot;C&quot; {
+#endif
+
+void hello_c(void);
+
+#ifdef __cplusplus
+}
+#endif</code></pre>
+
+<p>Ha így írjuk meg a fejlécfájlt, akkor az már azt fogja jelenteni mindkét
+nyelven, amit kell. A C++ előfordító beteszi az <code>extern "C"</code>-t, ezért
+a <em>name mangling</em> nem lesz érvényes a függvényre; a C fordító pedig az egészből nem
+lát semmit, mert az előfordítója kitörölte azt a sort.</p>
+
+<p>Javítsd a fejlécfájlt ilyenre, és fordítsd le a programot! Ellenőrizd ezután
+újra a tárgykód fájlokat!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<div class="sticky">main.cpp</div>
+<pre   ><code class="language-c">#include &quot;hello.h&quot;
+
+class Osztaly {};
+
+int main() {
+    hello_c();
+}</code></pre>
+<div class="sticky">hello.c</div>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &quot;hello.h&quot;
+
+void hello_c(void) {
+    int class = 2;
+    printf(&quot;Hello C, class = %d!\n&quot;, class);
+}</code></pre>
+<div class="sticky">hello.h</div>
+<pre   ><code class="language-c">#ifndef HELLO_H
+#define HELLO_H
+
+#ifdef __cplusplus
+extern &quot;C&quot; {
+#endif
+
+void hello_c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Ha marad időd: dinamikus linkelés">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Ha marad időd: dinamikus linkelés<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Normál, „statikus” linkelés közben a futtatható programba bemásolódnak
+a lefordított függvények. Ennek több hátránya van:</p>
+
+<ul>
+    <li>Ha egy függvényt átírunk, nem csak a forrásfájlját kell újrafordítani,
+    hanem újra is kell linkelni a programot.
+    <li>Ha több programban is használjuk ugyanazokat a függvényeket, többször
+    lesznek bent a memóriában.
+</ul>
+
+<p>Ezeket a problémákat oldja meg a <em>dinamikus linkelés</em> (dynamic 
+linking). Ez lényegében annyit jelent, hogy némely forrásfájlokat nem a 
+futtatható programfájl előállításakor, hanem csak annak elindításakor linkelünk a 
+programhoz. Ezek Unix operációs rendszeren az SO-k (shared object), Windowson 
+pedig a DLL-ek (dynamic link library).</p>
+
+<p>Az SO-kból (DLL-ekből) csak egy változat töltődik be a memóriába; ha több
+program használja azokat, akkor osztoznak rajta. Így kisebb a memóriafelhasználás.
+Könnyebb a cseréjük is: ha az SO-ból új verzió készül, az azt használó programokat
+nem kell újralinkelni (amíg persze a benne lévő függvények kompatibilisek maradtak).
+Még az is megoldható, hogy egy program a futása közben töltsön be és dobjon el
+egy SO-t; így működnek a programok bővítményei (pluginek) és a hardvereszközök
+meghajtóprogramjai (driver v. kernel module).</p>
+
+<p>Az SO-k létrehozása és programhoz linkelése majdnem ugyanúgy megy, mint a
+szokásos fordítás, csak néhány extra paramétert kell adni a fordítónak, amivel
+megadjuk, mit szeretnénk. Ezek közül az egyetlen, aminek elméleti jelentősége
+van, a <code>-fPIC</code> paraméter. Ezzel kell jelezni fordítás közben azt, hogy
+„PIC = position independent code”-ot szeretnénk létrehozni. Az így lefordított
+programba a fordító a globális változók és függvények elérését indirekción
+keresztül végzi, ami lehetővé teszi azt, hogy ezek elmozdíthatók legyenek
+a memóriában.</p>
+
+<p>Próbáld ki a dinamikus linkelést! Hozd létre az alábbi mini-projektet,
+és utána kövesd az utasításokat!</p>
+
+<div class="sticky">test.c</div>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &quot;test.h&quot;
+
+void test(void) {
+    printf(&quot;Dynamic linking test 1.0\n&quot;);
+}</code></pre>
+<div class="sticky">test.h</div>
+<pre   ><code class="language-c">#ifndef TEST_H_INCLUDED
+#define TEST_H_INCLUDED
+void test(void);
+#endif</code></pre>
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">#include &quot;test.h&quot;
+
+int main(void) {
+    test();
+}</code></pre>
+
+<p>Először fordítsd le a <code>test.c</code> fájlt! Az ebben lévő függvény
+fog a dinamikusan linkelt részbe kerülni. Ennél a fordítási lépésnél kell megadni
+a <code>-fpic</code> paramétert:</p>
+
+<pre class="screenshot">
+$ gcc <em>-fPIC</em> test.c -c -o test.o
+</pre>
+
+<p>Ezután hozd létre az SO (DLL) fájlt! Itt meg lehetne adni több tárgykódot, amik
+beépülnek az SO-ba, de most csak egy van:</p>
+
+<pre class="screenshot">
+$ gcc <em>-shared</em> test.o -o libtest.so  <span class="bubble">Windowson: -o libtest.dll</span>
+</pre>
+
+<p>Végül fordítsd le a főprogramot, és linkeld hozzá dinamikusan a <code>-l</code> paraméterrel a függvénykönyvtárat! A
+<code>-L.</code> paraméter azt adja meg, hogy a <code>.so</code> (.dll) fájlt az aktuális mappában kell keresni; mert alapértelmezetten
+csak a rendszerszinten definiált mappákban keresné. Az <code>-ltest</code> paraméternél nem kell a név elején lévő <code>lib</code>-et, 
+és a név végén lévő <code>.so</code>-t odaírni; azokat automatikusan kezeli. Ezeket megadva a linkelés közben ellenőrzi, hogy 
+megtalálhatók-e a függvények. Az <code>rpath</code> a linkernek átadott paraméter (<code>-Wl</code>: a linkernek, <code>rpath
+</code>: a <code>-rpath</code> paramétert, az értéke: <code>.</code>); azt a mappát adja meg, ahol az SO fájlt futási időben 
+keresni fogja a program. Most ez is az aktuális mappa lesz:</p>
+
+<pre class="screenshot">
+$ gcc main.c <em>-L. -ltest -Wl,-rpath,.</em> -o prog
+</pre>
+
+<p>Ezután a program elindítható. Az <code>ldd</code> paranccsal ellenőrizni tudod, hogy a létrejött futtatható milyen 
+könyvtárakhoz kapcsolódik, ezek között látszódnia kell a <code>libtest.so</code>-nak is, és nem lehet mellette „not found” 
+jelzés:</p>
+
+<div class="sticky">MinGW-ben<br>nincs <code>ldd</code></div>
+<pre class="screenshot">
+$ ldd prog
+</pre>
+
+<p>Próbáld ki, hogy tényleg dinamikus-e a linkelés! Változtasd meg a <code>test()</code>
+függvényt, írjon ki ez új verziószámot! Fordítsd utána a <code>test.c</code>-t újra,
+és állítsd elő a <code>libtest.so</code> új verzióját is. A <code>./prog</code>
+programot futtatva ezután rögtön az új verziószám kell látszódjon.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <ol>
+<li id="namemangling"><a href="http://en.wikipedia.org/wiki/Name_mangling">Name mangling</a> (Wikipedia).
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

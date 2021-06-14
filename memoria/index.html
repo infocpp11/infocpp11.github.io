@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Memóriakezelés</title>
+<meta property="og:title" content="TEST InfoC++11 :: Memóriakezelés">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A memória „típusairól” és a memóriakezelésről.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A memória „típusairól” és a memóriakezelésről.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Memóriakezelés">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Memóriakezelés</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A memória „típusairól” és a memóriakezelésről.</p>
+</div>
+
+<p>A C és C++ programozás tanulása során sok problémát okoz a memóriakezelés megértése. Az alábbi magyarázattal próbálom a lényeges elemeket összefoglalni.</p>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A memóriaterületek</a>
+                      <li><a href="index.html#2" class="">Tömbök átadása függvényeknek, sizeof</a>
+                      <li><a href="index.html#3" class="">A memóriakezelési hibák látható jelei</a>
+                      <li><a href="index.html#4" class="">Feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A memóriaterületek">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A memóriaterületek<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A program a futása során három jól elkülöníthető szerepű memóriaterülettel rendelkezik, ezek funkciók szerint a <em>globális változók memóriaterületei</em>, a <em>verem</em> és a <em>dinamikusan lefoglalt memóriaterületek</em>.</p>
+
+<p>A memóriakezelés megértése lényegében azon múlik, hogy az ember tisztában van-e vele, a különféle módokon deklarált változók
+és adatterületek melyik helyre kerülnek. Abból már egyértelműen következnek az órákon általában bemutatott ökölszabályok is,
+például hogy miért nem lehet lokális változóra mutatót visszaadni egy függvényből.</p>
+
+<h3>A globális memóriaterület</h3>
+
+<p>A globális memóriaterületen helyezkednek el, ahogyan a neve is mutatja, a globális változók. Ezek a program egész futása
+alatt léteznek. Az ott létrehozott változók elhelyezkedése nem változik meg. A kiosztásuk már a program fordításakor eldől, és
+még azelőtt létrejönnek, hogy a <code>main()</code> függvény első sorát elkezdené végrehajtani a gép.</p>
+
+<div class="columns">
+<div>
+    <img class="kozep" src="glob.svg" style="width: 14em">
+</div>
+<div>
+<pre   ><code class="language-c">1. int a;
+2. char s[100] = &quot;hello&quot;;
+3. char* ptr = &quot;szoveg&quot;;
+4.
+5. int main()
+6. {
+7.     printf(&quot;%d&quot;, i);
+8. }</code></pre>
+</div>
+</div>
+
+<p>A változók elhelyezését könnyű megérteni, ha betűről betűre ragaszkodunk ahhoz, amit a kódrészlet tartalmaz. A gép
+úgysem képes másra... Vastag betűvel kiemeltem, hogy melyik sorban mit, milyen típusú változót deklarálunk.</p>
+
+<p>Az 1. sorban egy integert (<code>int</code>) hozunk létre a globális memóriaterületen. A 2. sor egy száz elemű, karakterekből álló tömböt
+(<code>char [100]</code>) hoz létre. A tömb első 6 karakterét használjuk (az öt betűs „hello” és a lezáró nulla a sztring végén), a többi
+tartalék hely, hogy hosszabb sztringet is másolhassunk ide.</p>
+
+<p>A 3. sor cselesebb. Ott csak egy pointert deklarálunk (<code>char*</code>), amelyik egy, a globális memóriaterületen elhelyezett névtelen
+karakter tömbre mutat. Ez nagyon fontos különbség az előzőhöz képest, ahol nem egy pointer és egy tömb jött létre, hanem csak
+egy tömb. Itt egy pointer is létrejön, amely igazából független a tömbtől, csak most éppenséggel kezdeti értékként ráállítottuk
+arra a tömbre.</p>
+
+<p>A 7. sorban a printf hívás hasonlít ehhez. Megadunk egy formátum sztringet, ami alapján tudja, hogy hogyan kell kiírnia a
+változót. Ez a formátum sztring is a globális memóriaterületen helyeződik el, ugyancsak névtelen tömbként. A <code>printf()</code> egy pointert
+kap erre futás közben, ahogy a harmadik sor ptr-je is csak egy mutató az előző névtelen tömb elejére.</p>
+
+<p>Ha a <code>printf()</code> után azt mondanánk, hogy <code>ptr=s</code>; akkor onnantól kezdve <code>ptr</code> az <code>s[]</code> tömbre mutat. A „szoveg” sztringet akkor többé
+semmi módon nem érjük el, mivel névtelen tömb, és nem tudjuk, hol van a memóriában – nem mutat rá pointerünk.</p>
+
+
+
+<h3>A verem (stack)</h3>
+
+<p>A verembe a függvények lokális változói kerülnek. A verem speciális tulajdonsága, hogy a tartalma fel-le változik; ha egy
+függvény belsejének végrehajtásába kezdünk, akkor a verem tetején létrejönnek a függvény lokális változói, ha pedig a
+függvényből visszatérünk, akkor azok a változók megszűnnek. Az adott függvényhíváshoz tartozó memóriaterületet a veremben stack
+frame-nek nevezzük. A veremben minden függvény csak a saját lokális változóit látja. Ha a függvény saját magát hívja meg, akkor
+különböző és egymástól független példányok keletkeznek a lokális változóiból.</p>
+
+<div class="columns">
+<div>
+    <img class="kozep" src="verem.svg" style="width: 16em">
+</div>
+<div>
+<pre   ><code class="language-c">1.  void fv(int b)
+2.  {
+3.    char* ptr = &quot;global&quot;;
+4.    char tomb[] = &quot;ding&quot;;
+5.    b = 6;
+6.  }
+7.
+8.  int main()
+9.  {
+10.   int a = 5;
+11.   char s[50] = &quot;verembe&quot;;
+12.
+13.   fv(a);
+14. }</code></pre>
+</div>
+</div>
+
+<p>Ennél a példánál a következő módon alakul a memóriaterületek tartalma. A program indításkor a <code>main()</code> függvényt
+kezdi el végrehajtani. A <code>main()</code> függvénynek két lokális változója van, egy integer (<code>int a</code>, 10. sor),
+és egy ötven elemű karakter tömb (11. sor). A karakter tömb maga, vagyis az egyes karakterek is a veremben helyezkednek el.</p>
+
+<p>Ha meghívjuk az <code>fv()</code> függvényt (13. sor), akkor az induláskor létrejönnek a veremben a paraméterei (!) és
+lokális változói, b nevű egész (1. sor), a ptr nevű pointer (3. sor) és a tomb nevű tömb (4. sor). A <code>ptr</code>-rel megint
+csak egy pointert deklarálunk, nem pedig egy tömböt! Ha <code>char*</code>-ot írunk, a gép <code>char*</code>-ot ért alatta. A
+verembe, amely a lokális változókat tárolja, így csak a pointer kerül, amely be is állítódik a „global” szót tartalmazó tömbre.
+A tömb az előzőekhez hasonlóan a globális memóriaterületre került, és a program egész futása alatt létezik. Az 4. sorban nem
+pointert, hanem egy tömböt deklarálunk; annak tartalma is a verembe kerül, még így is, hogy méretét nem adtuk meg, hanem az
+inicializáló sztring alapján számolja a fordító. A deklaráció pontos értelmezése mindent eldönt!</p>
+
+<p>A lokális változók csak addig léteznek, amíg a függvény belsejében vagyunk, a 6. sorig bezárólag. Ha visszatérünk a
+függvényből, és újra a <code>main()</code>-ben vagyunk, akkor már nem. A <code>b = 6</code> emiatt értelemszerűen nem a
+<code>main()</code> változóját, <code>a</code>-t módosítja, hanem a veremben lévő másolatot.</p>
+
+
+
+<h3>A kupac (heap)</h3>
+
+<p>A dinamikus memóriaterület, vagyis a heap olyan terület, amelyből egy adott nagyságú részt a program futása közben kérhetünk,
+és ha már nem kell, visszaadhatjuk. Így foglalhatunk le akkora méretű memóriát, amelynek a nagyságát a program írása, fordítása
+közben még nem ismerjük.</p>
+
+<p>A lefoglaláskor egy pointert, vagyis egy mutatót kapunk arra a memóriahelyre, ahol a gép megfelelő nagyságú területet talált;
+amikor arra már nincs szükségünk, akkor felszabadítjuk azt. A terület a lefoglalástól kezdve mienk, egészen addig, amíg vissza
+nem adjuk. C-ben ez a <code>malloc()</code> és <code>free()</code> függvényhívásokkal, C++-ban a <code>new</code> és a
+<code>delete</code> operátorokkal történik.</p>
+
+    <p class="megjegyzes">A C++ szabvány megkülönbözteti ezt a kettőt. A <code>malloc()</code>-<code>free()</code> páros által
+    használt memóriaterület neve ott heap, a <code>new</code>-<code>delete</code> operátorok által használt pedig free store.
+    Ezek persze lehetnek közösek; és egy programban lehet használni egyszerre mind a kettőt. Csak amit a <code>malloc()</code>
+    foglalt, azt <code>free()</code>-vel kell felszabadítani, nem <code>delete</code>-tel. Ugyanez igaz fordítva is.</p>
+
+<p>A lentebbi példa kód 3. sorban először is deklarálunk egy <code>char*</code> típusú pointert. A pointer maga a veremben jön
+létre, és beállítjuk egy dinamikusan lefoglalt memóriaterületre, amely száz karaktert képes tárolni. C-ben ehhez a
+<code>malloc()</code> függvényhívást használjuk, C++-ban pedig a <code>new[]</code> operátort. A száz karakternek való hely a dinamikus
+memóriaterületen foglalódik le, vagyis a heap-en.</p>
+
+<p>A 4. sorban egy <code>Komplex</code> számra mutató pointert deklarálunk, és foglalunk helyet a heapből egyetlen egy
+<code>Komplex</code> számnak. Az 5. sor pedig megint csak egy pointert deklarál csupán a veremben; a pointernek akkor lesz
+értelme, ha beállítjuk, hogy valahova mutasson, valami számunkra hasznos helyre. Jelen esetben egy nagy, ezer egész számot
+tartalmazó, dinamikusan foglalt tömbre.</p>
+
+<p>A 7. sorban a lefoglalt karakter tömbbe másolunk egy sztringet. A sztring hossza 11 betű, meg van még egy lezáró nullánk,
+vagyis 12 karakterből áll; 100 karaktert foglaltunk, vagyis ez rendben van. Az eredeti sztring egyébként az előző példákhoz
+hasonlóan a globális memóriaterületen van, névtelenül. Onnan másolódik át most a heapen lefoglalt területre.</p>
+
+<div class="columns">
+<div>
+    <img class="kozep" src="heap.svg" style="width: 18em">
+</div>
+<div>
+C-ben:
+<pre   ><code class="language-c">1.  int main()
+2.  {
+3.    char *tea = malloc(100*sizeof(char));
+4.    Komplex *k = malloc(sizeof(Komplex));
+5.    int *sok = malloc(1000*sizeof(int));
+6.
+7.    strcpy(tea, &quot;bai ji guan&quot;);
+8.
+9.    free(sok);
+10.   free(k);
+11.   free(tea);
+12. }</code></pre>
+
+C++-ban:
+<pre   ><code class="language-c">1.  int main()
+2.  {
+3.    char *tea = new char[100];
+4.    Komplex *k = new Komplex;
+5.    int *sok = new int[1000];
+6.
+7.    strcpy(tea, &quot;bai ji guan&quot;);
+8.
+9.    delete[] sok;
+10.   delete k;
+11.   delete[] tea;
+12. }</code></pre>
+</div>
+</div>
+
+<p>A 10. sorban felszabadítjuk a <code>Komplex</code> típusú adatunknak lefoglalt memóriaterületet. Ezt érdemes egyből megtenni,
+amikor már nincsen szükség arra a változóra. A <code>k</code> mutató ezután továbbra is oda mutat, ahol az a
+<code>Komplex</code> szám volt, de ezután már nem szabad hivatkozni a területre, hiszen visszaadtuk a <code>malloc()</code>-nak
+(<code>new</code>-nak), hogy használja újra, ha majd másra kell. Ezt a szabályt mindig, minden körülmények között be kell
+tartani; az nem indok, hogy úgysem foglaltunk még új memóriát, vagy hogy „csak már ott van még lécci” az a szám, ahol eredetileg
+volt. A programunk lehet többszálú, és akkor egy másik szálban bármikor lefoglalódhat az a terület más célra. Sőt akár az
+operációs rendszerhez is visszakerülhetett, és egy másik program használja.</p>
+
+<p>A többi terület felszabadítása ugyanígy történik. Érdemes megfigyelni, hogy C++-ban, amikor csak egyetlen
+<code>Komplex</code>-nek foglaltunk helyet, akkor a <code>new</code> operátort használtuk, a felszabadításhoz pedig a
+<code>delete</code>-et. A tömb foglalásakor a <code>new[]</code> operátor kellett, és a felszabadításhoz pedig a
+<code>delete[]</code>. A kettőt nem szabad keverni; ami <code>new</code>, az később <code>delete</code>; ami <code>new[]</code>,
+az pedig később <code>delete[]</code>. Nem ugyanazt jelentik a <code>new char</code> és a <code>new char[1]</code>
+kifejezések!</p>
+
+    <p class="megjegyzes">Ennek nem csak az az értelme, hogy egy <code>ptr = new Objektum[100]</code> utáni <code>delete
+    ptr</code>-nél csak az első objektum destruktora hívódik meg. A <code>new</code> és a <code>new[]</code> operátorokat külön
+    kell átdefiniálni; az egyik lehet, hogy teljesen más helyről ad memóriát, és más nyilvántartást vezet a lefoglalt
+    területekről, mint a másik.</p>
+
+<p>Erre igazából C-ben és C++-ban is nekünk kell figyelni. A pointeren nem látszik, hogy az egyetlen egy adatra mutat, vagy egy
+tömbre. Vagyis egy önálló <code>Komplex</code> szám memóriacíme, és egy <code>Komplex</code> tömb memóriacíme ugyanaz a típus:
+<code>Komplex*</code>.</p>
+
+<p>Ugyanígy, egy pointeren nem látszik az, hogy dinamikusan foglaltunk memóriát, és arra mutat a pointer; vagy a pointert
+beállítottuk egy, a globális memóriaterületen, esetleg a veremben elhelyezkedő változóra (a következő kód 6-8 sora). Csak azt a
+memóriát kell kézzel felszabadítanunk, amit mi magunk foglaltunk le; a többiről a fordító gondoskodik. A veremből úgyis eltűnik,
+amikor vége a függvény végrehajtásának; a globális memóriaterületről pedig, amikor a programénak.</p>
+
+<div class="columns">
+<div>
+    <img class="kozep" src="pointerek.svg" style="width: 17em">
+</div>
+<div>
+C-ben:
+<pre   ><code class="language-c">1.  char global[100];
+2.
+3.  int main()
+4.  {
+5.    char tomb[200];
+6.    char* veremben;
+7.    char* heapen;
+8.    char* globalisban;
+9.
+10.   heapen = malloc(100);
+11.   globalisban = global;
+12.   veremben = tomb;
+13.
+14.   …
+15.
+16.   free(heapen);
+17. }</code></pre>
+</div>
+</div>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Tömbök átadása függvényeknek, sizeof">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Tömbök átadása függvényeknek, sizeof<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A tömböket függvényeknek kezdőcímükkel lehet átadni. A kezdőcím a tömb méretét nem tartalmazza; a függvénynek ezért semmi
+módja nincsen azt megtudni, hacsak explicit módon meg nem mondjuk neki. Az átadás lehetséges formái:</p>
+
+<pre   ><code class="language-c">int osszeg(int* tomb, int meret);
+int osszeg(int tomb[], int meret);</code></pre>
+
+<p>Mind a kettő egyformán jó, mert ugyanazt jelentik. Az előbbi jobban kifejezi, hogy egy kezdőcímről van szó. A függvény
+belsejében a tomb nevű pointert, amely csak egy pointer, akár meg is változtathatjuk (pl. <code>tomb++</code>); ezt gyakran csinálják
+sztringeket kezelő függvényeknél. A második forma kihangsúlyozza, hogy tömbről van szó, de nem teszi lehetővé a pointer
+megváltoztatását; illetve kicsit arra utal, mintha az egész tömb lemásolódna, ami nem igaz.</p>
+
+<p>Mivel a függvény az egész eredeti tömbből csak egy kezdőcímet lát, semmiképp nem használható benne a <code>sizeof</code> operátor. Ha
+belül azt írjuk, hogy <code>sizeof(tomb)</code>, akkor egy pointer méretét kapjuk meg, nem pedig a tömb méretét. Ez sztringeknél okoz sok
+keveredést.</p>
+
+<pre   ><code class="language-c">char s1[20] = &quot;hello&quot;;
+char s2[50] = &quot;hello&quot;;
+char* s3 = &quot;hello&quot;;
+char s4[] = &quot;hello&quot;;</code></pre>
+
+<p>A <code>sizeof(s1)</code> kifejezés értéke 20, mert 20 darab karakter a tömb mérete (<code>sizeof(char)</code> definíció
+szerint 1). A <code>sizeof(s2)</code> kifejezésé pedig 50, ugyanezen okból. Hiába tartalmazza ugyanazt a sztringet! A
+<code>sizeof(s3)</code> értéke gépfüggő, lehet például 4, ha éppen az adott gépen annyi bájt a pointer mérete. A
+<code>sizeof(s4)</code> az 6, mert megint csak a tömb méretét kérdezzük; 5 karakter a hellónak és 1 a lezáró nullának. A
+<code>sizeof</code> a típus méretét adja meg, nem figyel a tartalomra! Ugyanakkor
+<code>strlen(s1)</code>=<code>strlen(s2)</code>=<code>strlen(s3)</code>=<code>strlen(s4)</code>=5, mert 5 betűből áll a szó;
+valószínű erre vagyunk kíváncsiak.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A memóriakezelési hibák látható jelei">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A memóriakezelési hibák látható jelei<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A memóriakezelési hibák kellemetlen tulajdonsága, hogy sokszor észrevétlenül maradnak. Egy felszabadítatlan memóriaterületnek
+a heapen például semmi látható hatása nincs. „Csak” annyi, ha a windowsos feladatkezelőben, linuxos topban vagy hasonló helyen
+nézzük a program memóriaigényét, akkor azt látjuk, hogy egyre csak nő. Eszi el a többi programtól a memóriát, észre meg csak
+akkor vesszük, ha már lassulni kezd miatta a gép. Minél nagyobb a programunk, ez annál könnyebben lehet gond. Kellően összetett,
+memóriaszivárgással teli programhoz ha új részt írunk, már kideríteni sem tudjuk, hogy vajon az új kódrészletekkel rontottunk-e
+a helyzeten.</p>
+
+<p>Másik gyakori jelenség a memóriakezelési hibák esetén a változók értékeinek misztikus megváltozása. Ilyesmi akkor szokott
+előfordulni, ha egy lefoglalt tömböt nagyobbnak gondolunk, mint amekkora valójában.</p>
+
+<pre   ><code class="language-c">char tomb[10] = &quot;ez&quot;;
+char tomb2[20] = &quot;az&quot;;
+strcpy(tomb, &quot;memoriakezelesi hiba&quot;);</code></pre>
+
+<p>A fenti kódrészletben például a tíz karakterből álló tömbbe, amely egyébként kilenc betűt és a lezáró nullát tartalmazhatja
+maximum, egy sokkal nagyobb sztringet másolnánk. Ettől lehet, hogy <code>tomb2</code> meg fog változni. De az is lehet, hogy nem. Az is
+lehet, hogy lefagy a programunk, de akár előfordulhat az is, hogy észrevétlenül fut tovább. Minden attól függ, hogy a fordító
+hogyan helyezte el a tömbjeinket a memóriában. Ez különösen akkor érdekes, ha a két tömb egy függvény lokális változója, ugyanis
+akkor a veremben vannak, és a verem nem csak változókat, hanem például azt a memóriacímet is tartalmazza, ahol a program
+végrehajtását folytatni kell a függvényből kilépés után. Ha azt véletlenül felülírjuk, az elszállás garantált. A fordítón múlik,
+hogy hogyan helyezi el a tömböket.</p>
+
+<pre   ><code class="language-c">char* tomb = malloc(10);
+char* tomb2 = malloc(20);
+strcpy(tomb, &quot;memoriakezelesi hiba&quot;);</code></pre>
+
+<p>Ugyanez a helyzet a dinamikusan lefoglalt esetben is. Ha <code>tomb</code> után <code>tomb2</code> van a memóriában,
+felülírjuk. Ha egy éppen lyukas rész van ott (lásd a <code>Komplex</code> felszabadítása), akkor észre sem vesszük. A program különböző
+futtatásai során ráadásul máshol találhat nekünk szabad memóriát a <code>malloc()</code>: egyszer működik, másszor pedig lefagy. Egyik gépen
+működik, a másikon meg nem, mert esetleg nem ugyanaz a memóriakezelési stratégia. A konklúzió az, hogy akkor van szerencsénk, ha
+legalább lefagy a program. Akkor legalább kiderül, hogy valami baja van.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Feladatok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Feladatok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Van hiba az alábbi kódrészletekben? Ha igen, hol?</p>
+
+<ol>
+<li>
+<pre   ><code class="language-c">int* fv()
+{
+    int t[] = {1, 2, 3, 4, 5};
+    return t;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A tömb a függvény lokális változója, a veremben jött létre. Nem adhatunk vissza rá pointert, mert ahogy a függvényből
+kijöttünk, már nem létezik.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">char* fv()
+{
+    char* szo = &quot;hello&quot;;
+    return szo;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nincs benne hiba. A függvényben csak a pointer a lokális változó; a sztring a globális memóriaterületen van, vagyis a
+függvényen kívül is létezik.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">const char* szam2string(int i)
+{
+    static char str[30];
+    sprintf(str, &quot;%d&quot;, i);
+    return str;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Ebben sincs hiba. A tömb, bár lokálisnak van kikiáltva, statikus. Vagyis igazából globális változóként viselkedik, amely
+megmarad a függvényből kilépés után is. (Ez az egyetlen olyan hely, ahol a static kulcsszó tényleg azt csinálja, amit az angol
+szó jelent.) A függvény a számból sztring létrehozásának egy – igazából nem túl szerencsés – megvalósítása. A karakter tömbből
+ugyanis csak egyetlen példány van; a hívások között megtartja az értékét, de több hívás során már nem. Például az alábbi sor nem
+írja ki a 4-et és az 5-öt. Nem szeretjük a globális változókat, ugyebár.</p>
+<pre   ><code class="language-c">printf(&quot;%s %s&quot;, szam2string(4), szam2string(5));</code></pre>
+</div>
+</details>
+
+
+
+<li>
+<pre   ><code class="language-c">const char* ki_vagy()
+{
+    return &quot;Pistike&quot;;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Teljesen jó. "Pistike" típusa <code>const char[]</code>; a globális memóriaterületen létrejött konstans tömb. Megmarad a hívás után, sőt
+létezett már előtte is.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">int* fv()
+{
+    int tarolo[30] = {1, 2, 3, 9};
+    static int* statptr;
+    statptr = tarolo;
+    return statptr;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A pointer ugyan statikus (globális memóriaterületen van), vagyis az értéke megmarad a hívások között... A tömb viszont, amire
+mutat, az meg fog szűnni a függvény végén, mert az meg a veremben van. Ezért ez hibás.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class String {
+    char* szo;
+  public:
+    String(const char* init) {
+        szo = new char[strlen(init)];
+        strcpy(szo, init);
+    }
+    ~String() { delete[] szo; }
+};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az odaírt dolgokban a hiba, hogy a sztringnek eggyel több karakter kell, mint <code>strlen(init)</code>; mert az
+<code>strlen()</code> csak az értékes karaktereket számolja, a lezáró nullát viszont nem. Az oda nem írt dolgok pedig: kell
+másoló konstruktor és értékadó operátor. (Ha a destruktor, másoló konstruktor, értékadó operátor közül bármelyik kell, akkor
+általában mind a három kell.)</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class String {
+    char* szo;
+  public:
+    String() { szo = &quot;&quot;; }
+    String(const char* init) {
+        szo = new char[strlen(init)+1];
+        strcpy(szo, init);
+    }
+    ~String() { delete[] szo; }
+};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Szinte teljesen jónak tűnik, de mégsem. Ha a paraméter nélküli konstruktort hívjuk, akkor a szo pointer egy globális
+memóriaterületen elhelyezett üres sztringre fog mutatni. Ha egy ilyen objektum destruktora fut, az fel akarja szabadítani ezt a
+memóriaterületet, de nem fog menni; a pointer ugyanis nem a <code>new[]</code> operátortól származik.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class Tarolo {
+    Adat** t;
+    int db;
+  public:
+    Tarolo(int i) { db = 0; t = new Adat* [i]; }
+    ~Tarolo() { delete[] t; }
+    berak(Adat* a) { t[db++] = a; }
+};
+
+Adat m;
+Tarolo tar(10);
+tar.berak(new Adat);
+tar.berak(&amp;m);</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az osztály kódja jónak néz ki, ahogy használjuk, az viszont tervezési hibára utalhat. Pointereket tárol el <code>Adat</code>
+objektumokra; adunk neki olyan pointert is, amelyik globális (vagy veremben lévő) objektumra mutat, meg olyat is, amelyik a
+heapen van (<code>new Adat</code>). Viszont ha nem tartjuk nyilván, hogy melyik melyik, akkor nem fogjuk tudni utólag, melyiket
+kell <code>delete</code>-elni, melyiket nem. (Egy pointeren nem látszik, hogy globális, verem, vagy heap területre mutat-e!)
+Vagy esetleg ha ez a két berak() hívás egy függvényen belül történt, akkor abból kikerülve az m objektum megszűnik, a tároló
+viszont még mindig tárolja a pointerét, ami előbb-utóbb hibához vezet majd. Ha már fix a tömb mérete, nem ártana azt sem
+ellenőrizni a <code>berak()</code> hívásnál.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">char* ptr = new char(80);
+strcpy(ptr, &quot;Nederlandse Spoorwegen&quot;);
+delete[] ptr;</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A puskázók és egymásról másolók tipikus hibája. :) A 80 karakterből álló tömb a heapen ugyanis nem <code>new(80)</code>,
+hanem <code>new[80]</code>. A kerek zárójel azt jelenti, hogy egyetlen egy karaktert foglalunk le, aminek 80-as értéket adunk
+(amely a nagy P betű ASCII kódja).</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class Tarolo {
+    Adat** t;
+    int db;
+  public:
+    Tarolo(int i) { db = 0; t = new Adat* [i]; }
+    ~Tarolo() { for (int i = 0; i &lt; db; ++i) delete t[i]; }
+    berak(Adat* a) { t[db++] = a; }
+};
+
+Adat m;
+Tarolo tar(10);
+tar.berak(new Adat);
+tar.berak(&amp;m);</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Hasonló a 8-as feladat tárolójához, de ez úgymond örökbe fogadja az objektumokat, vagyis <code>delete</code>-eli őket, ha ő maga is
+megszűnik. A <code>delete</code>-elés módja rendben van; de a tömböt, amelyik az egyes Adat-okra mutató pointereket tartalmazza (amit a
+konstruktorban hozunk létre), azt nem szabadítja föl. Vagyis tartalmaz az osztály egy memóriaszivárgást.</p>
+
+<p>Az sincsen rendben, ahogyan használjuk; ennek a tárolónak a <code>delete</code>-elés miatt csak dinamikusan lefoglalt objektumokat adhatunk,
+ezért </code>berak(&amp;m)</code> is hibás.</p>
+
+<p>Kényes kérdés egyébként itt a másoló konstruktor. Ha lemásoljuk a tárolót, akkor le kell másolnunk a benne lévő objektumokat
+is (mert a destruktora deletel). Nem elég csak átmásolni az <code>Adat**</code> pointert, hanem új pointereket tároló tömb kell;
+és nem elég az azon belül tárolt pointereket sem átmásolni, hanem mindegyik objektumról másolatot kell készíteni egyesével.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">/* mit ír ki? */
+const char* egyik = &quot;hello&quot;;
+const char* masik = &quot;hello&quot;;
+
+if (egyik == masik)
+    printf(&quot;egyforma&quot;);
+else
+    printf(&quot;nem egyforma&quot;);</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem lehet megmondani, mit ír ki. Nem a két sztringet hasonlítjuk össze, hanem a rájuk mutató pointereket. Két pointert
+deklaráltunk csak, nem pedig két tömböt. Ráállítottuk őket az egyik, illetve a másik „hello” sztringre, amelyeket a globális
+memóriaterületen helyeztünk el. Mivel a sztring literálisok ("hello") típusa <code>const char[]</code>, az általuk tárolt karakterek
+konstansok. Ha pedig konstansok, akkor úgysem fognak megváltozni. Ezért a fordító, ha felfigyel rá, hogy egyforma a két sztring,
+megteheti azt, hogy csak egy másolatot tárol el belőle. Így kisebb lehet a program.</p>
+
+<p>GCC-vel kipróbálva, ha egy fájlban van definiálva a két sztring, akkor egyformák a pointerek. Ha két külön <code>.c</code> fájlban vannak,
+akkor linkeléskor már nem keresi, hogy egyformák-e; és különbözőek lesznek a pointerek.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class String {
+    char* ptr;
+  public:
+    String(char* init) {
+        ptr = new char[strlen(init)+1];
+        strcpy(ptr, init);
+        delete[] init;
+    }
+};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem biztos, hogy hibás; igazából ez nem kódolási, hanem tervezési hiba lehet. A konstruktorban <code>delete[]</code>-eljük azt a karakter
+tömböt, aminek a másolatát tárolja a <code>String</code> objektum. Annyiban rossz gondolat ez, hogy a tömbért, amit a <code>String</code>-nek csak le kell
+másolnia, nem a <code>String</code> a felelős, hanem a hívó. Ha valamiért mégis így döntünk, az nem csak logikátlan felépítését jelenti a
+programnak: onnantól kezdve ezt a <code>String-</code>et csak dinamikusan lefoglalt karakter tömbből lehet inicializálni. Még olyat se
+írhatunk, hogy <code>String s("hello")</code>; mert itt a paraméterben megadott sztring globális területen van.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class String {
+    char* ptr;
+  public:
+    String() {
+        /* Üres string: egy szem lezáró nulla. Inicializáljuk is. */
+        ptr = new char('\0');
+    }
+    String(const char* init) {
+        ptr = new char[strlen(init)+1];
+        strcpy(ptr, init);
+    }
+    ~String() { delete[] ptr; }
+};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem indul rosszul, lefoglalunk egyetlen karaktert, mert úgyis csak a lezáró nulla kell, és egyből be is másoljuk azt a
+nullát. De amit <code>new</code> operátorral foglaltunk le, azt később nem lehet <code>delete[]</code> operátorral
+felszabadítani. Szóval mégis rossz.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">/* kétdimenziós, négyzetes mátrix determinánsát számolja */
+double determinans(double **matrix, int meret);
+
+double matr[3][3];
+printf(&quot;%g&quot;, determinans(matr, 3));</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem jó típust adunk át paraméternek. A <code>matr[3][3]</code> egy kétdimenziós tömb, amely igazából 3*3=9 darab szám
+sorfolytonosan elhelyezve a memóriában. A  paraméterben lévő <code>matrix</code> pedig: </code>double** matrix</code>, vagyis
+<code>double* matrix[]</code>, vagyis <code>double</code> számokra mutató pointerek tömbje. Ez nem lehet kompatibilis az elsővel
+(ott nincsenek pointerek).</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">char s[30] = &quot;hello&quot;;
+printf(&quot;%s&quot;, &amp;s);</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem jó, <code>printf("%s", s)</code> a helyes. A típus nem egyezik; <code>s</code> típusa 30 karakterből álló tömb, amely kezdőcímével adódik át a
+függvénynek, amely egy karakterre mutató pointert vár. Más kérdés, hogy ott több karakter is lesz. <code>&amp;s</code> pedig nem karakterre
+mutató pointer, hanem 30 elemű karakter tömbre mutató pointer. És megint csak más kérdés, hogy annak az értéke történetesen
+ugyanaz, mint <code>s</code>-nek. Változó hosszúságú paraméterlista esetén nincsen típusellenőrzés. Aki nem hiszi, járjon utána: <code>strlen(&amp;s)</code>
+nem működik; <code>printf("%s", (&amp;s)+1)</code> sem írja ki, hogy „ello”.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">int* t = new int[300];
+…
+free(t);</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Tipikus „otthon még működött” hiba. Nem csak az a baj, hogy ha a lefoglalt objektumoknak lenne destruktora (az
+<code>int</code>-nek mondjuk nincs), az nem fog meghívódni a <code>free()</code> esetén; hanem hogy a
+<code>new[]</code>-<code>delete[]</code> lehet, hogy különböző területről ad memóriát, vagy más nyilvántartást vezet a lefoglalt
+területekről, mint a malloc-free. Nagyon gyakran van az, hogy a <code>new</code> és a <code>new[]</code> a háttérben a
+<code>malloc()</code> hívást használja, némelyik fordítót így írták meg, némelyiket meg nem. Ezért néhol „véletlenül” jól fut ez
+a programrész, máshol meg memóriakezelési hibaüzenettel leáll.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">void nagybetus(char* t)
+{
+    for (int i = 0; t[i] != '\0'; t++)
+        t[i] = toupper(t[i]);
+}
+
+const char str1[] = &quot;hello&quot;;
+
+int main()
+{
+    char* str2 = &quot;hello&quot;;
+    const char str3[] = &quot;hello&quot;;
+    nagybetus(str1);
+    nagybetus(str2);
+    nagybetus(str3);
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egyik függvényhívás sem jó. <code>str1</code> esetén konstans tömböt deklarálunk a globális memóriaterület konstans részén. A fordító a
+függvényhívásra jelezni fogja, hogy nem kellene. Ha egy casttal ráerőltetjük, akkor meg futás közben a processzor fogja jelezni,
+hogy nem lehet írni a csak olvashatóként megjelölt memóriaterületre. A második esetben (<code>str2</code>) egy pointert deklarálunk csak,
+amelyet a konstans globális területen létrehozott tömbre állítunk. A fordító a deklarációnál fogja jelezni, hogy nincs rendben a
+dolog; a hívásnál nem. A futás közben ugyanúgy memóriahibát fog jelezni a processzor (segmentation fault). A harmadik esetben
+(<code>str3</code>) a fordító jelez, hogy konstans tömbre hívjuk meg a függvényt. Ha egy casttal meggyőzzük – akkor a program lefut, a
+sztring valóban nagybetűs lesz. Azért, mert az egy tömb a veremben; a verem pedig nem helyezkedhet el csak olvasható
+memóriaterületen. Akkor nem lehetne használni semmire.</p>
+
+<p>A globális memóriaterületből igazából kettő van, egy csak olvasható, és egy írható-olvasható. A read-only (csak olvasható)
+memóriaterület, mint lehetőség, csak a globális változók esetén működik; a legtöbb mai processzor szerencsére támogat ilyet.
+Valami múzeumi gépen, régi fordítóval, a megfelelő castokkal mind a három hívás működésre bírható.</p>
+</div>
+</details>
+
+<li>
+<pre   ><code class="language-c">class Vektor {
+    int meret;
+    double* adat;
+  public:
+    Vektor (int meret = 3)
+      : meret(meret), adat(new double[meret])
+    {
+        for (int i = 0; i &lt; meret; ++i)
+            adat[i] = 0;
+    }
+    friend Vektor operator*(double d, const Vektor&amp; v);
+};
+
+Vektor operator*(double d, const Vektor&amp; v)
+{
+    Vektor temp;
+    temp.meret = v.meret;
+    temp.adat = new double[temp.meret];
+    for (int i = 0; i &lt; temp.meret; ++i)
+        temp.adat[i] = d*v.adat[i];
+    return temp;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>(Destruktor, másoló konstruktor és értékadó operátor kell, természetesen. De azon kívül.) Memóriaszivárgást csinál az
+<code>operator*</code> függvény. Ez ugyanis létrehoz egy vektort, temp néven. Ez a vektor az alapértelmezett konstruktorával jön
+létre, hármas mérettel. Vagyis a <code>temp.adat</code> lefoglalt memóriaterületre mutat; amelyre a pointert a <code>temp.adat =
+new double[temp.meret];</code> értékadás felülír, így az elveszik.</p>
+
+<p>Lehet javítani pl. úgy, hogy az új memóriaterület foglalása előtt felszabadítjuk a konstruktor által lefoglaltat, de az se
+nem szép, se nem gyors megoldás. Jobb megoldás az, ha a konstruktornak megadjuk paraméterben a <code>v</code> vektor méretét (<code>Vektor
+temp(v.meret)</code>), mert akkor eleve akkora terület jön létre, amekkora a szorzatnak kell, és nem kell felszabadítani és újra
+foglalni sem. Harmadik megoldás, ha a másoló konstruktort használjuk, ugyanerre a célra, hiszen az is pont akkora vektort hoz
+létre, mint <code>v</code>, amely pedig pont akkora, amekkorának a szorzatnak is kell lennie.</p>
+</div>
+</details>
+
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

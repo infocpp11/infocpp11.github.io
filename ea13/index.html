@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Többszálúság</title>
+<meta property="og:title" content="TEST InfoC++11 :: Többszálúság">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Többszálú programok írása C++11. Szál és mutex segédosztályok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Többszálú programok írása C++11. Szál és mutex segédosztályok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Többszálúság">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Többszálúság</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Többszálú programok írása C++11. Szál és mutex segédosztályok.</p>
+</div>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A többszálúság fogalma</a>
+                      <li><a href="index.html#2" class="">A bankszámla – a többszálúság alapproblémája</a>
+                      <li><a href="index.html#3" class="">Szinkronizációs primitív: a mutex</a>
+                      <li><a href="index.html#4" class="">Az std::mutex osztály</a>
+                      <li><a href="index.html#5" class="">A thread, mutex és lock_guard osztályok közös használata</a>
+                      <li><a href="index.html#6" class="">A holtpont</a>
+                      <li><a href="index.html#7" class="">Atomi típusok</a>
+                      <li><a href="index.html#8" class="">std::condition_variable</a>
+                      <li><a href="index.html#9" class="">std::async és std::future</a>
+                      <li><a href="index.html#10" class="">Összetett példa</a>
+                      <li><a href="index.html#11" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A többszálúság fogalma">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A többszálúság fogalma<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A programjainknak gyakran egyszerre több dolgot kell csinálnia. Például egy valós időben futó játékprogram egyszerre
+kell kezelje a szimulációt (pályán lévő játékosok mozgása), a megjelenítést és a hangokat. Ezt a programban egy helyen
+vezérelni nagyon nehéz feladat: nem elég arra figyelni, hogy mikor melyikkel kell foglalkoznunk, hanem még arra is
+figyelni kell, nehogy valamelyik művelet elhúzódjon. Ha túl lassú a játékosok mozgásának szimulációja, vagy túl lassú
+a megjelenítés, akkor kifutunk az időből, és a hangkártya nem kap bemenetet – aminek a hang szaggatása lesz az eredménye.</p>
+
+<p>Külön-külön, nem összefésülve azonban egyszerű megírni az egyes részeket. A többszálúság azt jelenti, hogy az operációs rendszer 
+képes arra, hogy a programunk különálló részeit egymástól függetlenül, egymás mellett futtassa. Így nekünk nem kell törődnünk az 
+ütemezéssel. A párhuzamos futtatás történhet <em>időosztásban</em> (minden szál minden körben kap néhány milliszekundum időt), vagy 
+a mai, modern számítógépeken akár ténylegesen <em>párhuzamosan</em> (több processzormagon).</p>
+
+<p>A C++11-be beépítették a szálak létrehozásának lehetőségét. Új szálat az <code>std::thread</code> osztály konstruktora
+indít (<code>#include &lt;thread&gt;</code>). Ennek első paramétere az a függvény kell legyen, amely külön szálon fog futni,
+további paraméterei pedig a függvény paraméterei. A konstruktor azonnal visszaadja a vezérlést, és a fő szál
+futhat tovább, tehát az alábbi kódban a ...-tal jelzett helyen bármilyen műveletet végezhetnénk, miközben a kiírások történnek.
+Végül a <code>.join()</code> tagfüggvénnyel be kell várnunk az indított szálat, tehát meg kell várnunk, amíg befejeződik:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+ 
+void szal(int i) {
+    for (int j = 0; j &lt; 1000; ++j)
+        std::cout &lt;&lt; i;
+}
+ 
+int main() {
+    std::thread t1{szal, 1};       /* szal(1); */
+    std::thread t2{szal, 2};       /* szal(2); */
+    
+    /* ... */
+    
+    t1.join();
+    t2.join();
+}</code></pre>
+
+<pre class="screenshot">
+1111111111111111111111111111111111111111111111111111111111111111111111121222222212121
+2121212121222222221212121111111121212222222212222222212121111111121212121212121212121
+2122222222121211111111211111111212121212121212121212121212222222212121212121212121212
+1222222221212121212121212121212121212121212121212121212121212121211111111212222222212
+</pre>
+
+<p class="megjegyzes">A fordításkor a programhoz kell linkelni a környezet saját szálkönyvtárát; Linuxon pl. a g++ 
+<code>-pthread</code> kapcsolót kell használni.</p>
+
+<p>A szálak ütemezéséről nem tudunk semmit, csak annyit, hogy nagyjából egyszerre futónak érzékeljük őket. Ez azonban néha problémát 
+jelent. Az alábbi kódban elindítunk 20 szálat, amelyek mindegyike a saját sorszámának megfelelő sort írja ki:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;vector&gt;
+ 
+void szal(int i) {
+    std::cout &lt;&lt; &quot;Hello a szalbol: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+ 
+int main() {
+    std::vector&lt;std::thread&gt; szalak;
+    
+    for (int i = 1; i &lt;= 20; ++i)
+        szalak.push_back(std::thread{szal, i}); // szal(i)
+    
+    for (auto &amp; szal : szalak)
+        szal.join();
+}</code></pre>
+
+<p>A baj az, hogy a kimenet néha szétesik. Ezt az okozza, hogy néha a szálváltás a kiírás <em>közben</em> történik meg (a 
+sztring után, de még a szám előtt, vagy a szám után, de még az újsor előtt):</p>
+
+<pre class="screenshot">
+Hello a szalbol: Hello a szalbol: Hello a szalbol: Hello a szalbol: 47
+Hello a szalbol: 5
+2
+Hello a szalbol: Hello a szalbol: 6
+Hello a szalbol: 8
+
+3
+1
+Hello a szalbol: 9
+Hello a szalbol: 10
+</pre>
+
+<p>A sorszámok össze-visszasága még nem lenne baj, de a széteső kimenet már igen. Ezt a problémát kezelni kellene 
+valahogy.</p>
+
+<img src="multi.png" class="kozep">
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A bankszámla – a többszálúság alapproblémája">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A bankszámla – a többszálúság alapproblémája<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A többszálúság problémáinak bemutatásához adott az alábbi bankszámla osztály. Az osztály invariánsai: <code>egyenleg &ge; 0
+</code> minden pillanatban, továbbá a pénz kivételénél <code>kivett pénz = régi egyenleg - új egyenleg</code>, és pénz 
+betevésénél hasonlóképp. Ezt a bankszámlát többen fogják használni közösen; a programban különálló szálakban. A program egyes 
+szálai felváltva futnak; az egyes szálak futását az operációs rendszer bármikor megszakíthatja, és átadhatja a vezérlést a másik 
+szálnak.</p>
+
+
+<pre   ><code class="language-c">class Bankszamla {
+  private:
+    int egyenleg = 0;
+  public:
+    /* betesz ennyi pénzt. */
+    void betesz(int mennyit) {
+        egyenleg = egyenleg + mennyit;
+    }
+    /* kivesz és visszaad ennyi pénzt, ha van.
+     * ha nincs, akkor 0-t ad vissza. */
+    int kivesz(int mennyit) {
+        if (mennyit &lt;= egyenleg) {
+            /* 1 */
+            egyenleg = /* 2 */ egyenleg - mennyit;
+            return mennyit;
+        }
+        else {
+            return 0;
+        }
+    }
+};</code></pre>
+
+<p>Tegyük fel, hogy egyszerre ketten próbálnak meg pénzt felvenni a bankszámláról, amelynek egyenlege 100 peták. A 
+<code>kivesz()</code> függvény két szálból kerül meghívásra, 50 és 60 paraméterekkel. Tegyük fel azt is, hogy az 1-es kommenttel 
+jelölt helyen kerül át a végrehajtás az egyik szálból a másikba. Az 50 és a 60 peták kivételének nem szabadna sikerülnie, hiszen 
+<code>50+60 &ge; 100</code>. Ezzel szemben mi történik? A bank kölcsönt ad, pedig nem szeretne. De legalább a 
+rendszerben mozgó pénz mennyisége nem változott meg, az eredmény ha csak félig is, de helyes:</p>
+
+<pre>
+                    Bank
+Tulaj1              100 pt              Tulaj2
+kivesz(50)                              kivesz(60)
+ 
+50&le;egyenleg? igen.
+
+                   (szálváltás)
+
+                                        60&le;egyenleg? igen.
+                                        egyenleg = 100-60 = 40
+                                        vissza: 60
+
+                   (szálváltás)
+
+egyenleg = 40-50 = -10
+vissza: 50
+                    Bank
+                    egyenleg: -10 pt
+</pre>
+
+<p>Tegyük most fel, hogy a 100-as egyenlegű bankszámláról szintén 50 és 60 petákot szeretne kivenni a két társtulajdonos. Tegyük 
+fel azt is, hogy most a 2-vel jelölt helyen történik meg a szálváltás, a kivonás után (egy regiszterben már
+megvan az eredmény), de még az értékadás előtt (a változóba még nem íródott vissza).
+Mi történik ilyenkor? Teljesen rossz eredmény kerül végül az egyenlegbe: 50 &ne; 100-50-60! A bank bukott 60 petákot:</p>
+
+<pre>
+                    Bank
+                    100 pt
+Tulaj1                                  Tulaj2
+kivesz(50)                              kivesz(60)
+ 
+50&le;egyenleg(100)? igen.
+(reg) = 100-50 = 50
+
+                   (szálváltás)
+
+                                        60&le;egyenleg(100)? igen.
+                                        (reg) = 100-60 = 40
+                                        egyenleg = (reg) = 40
+                                        vissza: 60
+
+                   (szálváltás)
+
+egyenleg = (reg) = 50
+vissza: 50
+ 
+                    Bank
+                    egyenleg: 50 pt?
+                    egyenleg: 40 pt?
+</pre>
+
+<p>Nézzünk egy harmadik esetet. Tegyük fel, hogy a két szál nem időosztásban fut, hanem két különböző processzormagon. Tegyük 
+fel azt is, hogy a két mag egyszerre ér a 2-es kommenttel jelölt részhez, egészen pontosan az értékadáshoz. Vajon mi történik 
+ilyenkor? A két mag egyszerre elkezdi meghajtani a címbuszt és az adatbuszt, ráadásul különböző értékekkel?! Ennek nyilván 
+katasztrofálisak lennének a következményei a jól kiszámolt busz időzítésekre nézve (áramkörileg). Erre persze már végképp nincs ráhatásunk a 
+C++ kódból, a hardvernek kell ezt megoldania.</p>
+
+<p>Összefoglalva: ha két különböző szálból szeretnénk egy közös erőforrást (jelen esetben az egyenleg változót) elérni, akkor meg 
+kell oldani azt, hogy a két szál egyszerre ne férhessen hozzá. Szinkronizálni kell a szálakat: amíg az egyik teljes egészében el 
+nem végezte a műveleteket, a másiknak várnia kell.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szinkronizációs primitív: a mutex">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Szinkronizációs primitív: a mutex<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írjunk egy osztályt, amely arra lesz használható, hogy egy bizonyos programrész (kritikus szakasz) egyszerre több szálból 
+való, konkurrens végrehajtását megakadályozzuk. Tehát kölcsönösen zárják ki egymást a szálak: mutex, mutually exclusive.</p>
+
+<p>Az osztálynak két művelete lesz. Egy mutex lezárható (lock). A lezárás függvény lezárja a mutexet, ha addig nyitva volt. Ha 
+zárva volt, akkor megvárja a másik szálból történő megnyitását, és utána zárja le. A lock függvényből visszatérés után tehát a 
+mutex zárva van a saját szálunk által, és minden más szál, ha lockolni szeretne, várnia kell. Az unlock hívás pedig újból 
+kinyitja.</p>
+
+<p class="megjegyzes">A lock és az unlock műveletet néhol a mai napig P-vel és V-vel jelölik, <a href="index.html#dijkstrapv">ahogy Dijkstra 
+is tette</a>. Ő a vasúti szemaforok mintájára találta ki ezt a módszert. A „legenda” szerint lock = bemegy a vonat a vágányra 
+(passeren), unlock = kijön, felszabadul a vágány (vrijgeven) betűkből jön a jelölés, de Dijkstra a prolaag és verhoog szavakat 
+használta.</p>
+
+<pre   ><code class="language-c">class SoseFogMukodniEzAMutex {
+  private:
+    bool locked = false;
+  public:
+    void lock() {
+        while (locked)
+            wait();
+        /* 1 */
+        locked = true;
+    }
+    void unlock() {
+        locked = false;
+    }
+};</code></pre>
+
+<p>Jobban megnézve, ezt megírni próbálva visszakaptuk a bankszámlás problémát: ha az 1-gyel jelölt helyen történik szálváltás, a 
+mutex helytelenül működhet. A saját szálunk befejezte a várakozást, épp arra készül, hogy lezárja a mutexet: de mire visszakapná 
+a vezérlést, lezárja más. És ő erről nem fog tudni!</p>
+
+<p>A tanulság: egy jól működő mutex megvalósításához hardver/operációs rendszer támogatás kell! Például az, hogy legyen egy elemi, 
+atomi, bonthatatlan „test_and_set” műveletünk, amely megnézi, hogy egy változó hamis értékű-e, és ha igen, igaz értékűre állítja. E 
+két lépés közé pedig nem ékelődhet be semmilyen másik művelet!</p>
+
+<pre   ><code class="language-cbub">class HelyesenMukodoMutexKoncepcio {
+  private:
+    bool locked = false;
+  public:
+    void lock() {
+        while (!atomic_test_and_set(locked))    // hw/os támogatással
+            wait();
+    }
+    void unlock() {
+        locked = false;
+    }
+};</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::mutex osztály">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Az std::mutex osztály<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++11 tartalmaz egy <code>std::mutex</code> osztályt: ennek metódusai <code>lock()</code> és <code>unlock()</code>.</p>
+
+<pre   ><code class="language-c">#include &lt;mutex&gt;
+ 
+/* Egyik lehetséges megoldás. Ehhez kell egy std::mutex, amelynek
+ * műveletei m.lock() és m.unlock(). */
+class Bankszamla {
+  private:
+    std::mutex m;
+    int egyenleg = 0;
+  public:
+    /* betesz ennyi pénzt. */
+    void betesz(int mennyit) {
+        m.lock();
+        egyenleg = egyenleg + mennyit;
+        m.unlock();
+    }
+    /* kivesz és visszaad ennyi pénzt, ha van.
+     * ha nincs, akkor 0-t ad vissza. */
+    int kivesz(int mennyit) {
+        m.lock();
+        int vissza;
+        if (mennyit &lt;= egyenleg) {
+            egyenleg = egyenleg - mennyit;
+            vissza = mennyit;
+        }
+        else {
+            vissza = 0;
+        }
+        m.unlock();
+        return vissza;
+    }
+};</code></pre>
+
+<p>Észrevehetjük, hogy a mutex erőforrás: ha lezártuk, felelünk érte, fel is kell nyitni. Ezért a két műveletért felelhetne egy 
+objektum is, mert akkor a RAII (resource acquisition is initialization) által biztosítva lenne a felnyitás. Az 
+<code>std::lock_guard</code> sablon pont ilyen: a konstruktora lezár egy mutexet, a destruktora felnyitja. Így egyszerűbb a kód, 
+és ha esetleg valahol kivétel keletkezik, akkor sem marad a mutex lezárva!</p>
+
+<pre   ><code class="language-cbub">class Bankszamla {
+  private:
+    std::mutex m;
+    int egyenleg = 0;
+  public:
+    /* betesz ennyi pénzt. */
+    void betesz(int mennyit) {
+        std::lock_guard&lt;std::mutex&gt; lg{m};  // RAII lock guard
+        egyenleg = egyenleg + mennyit;
+    }
+    /* kivesz és visszaad ennyi pénzt, ha van.
+     * ha nincs, akkor 0-t ad vissza. */
+    int kivesz(int mennyit) {
+        std::lock_guard&lt;std::mutex&gt; lg{m};  // RAII lock guard
+        if (mennyit &lt;= egyenleg) {
+            egyenleg = egyenleg - mennyit;
+            return mennyit;
+        }
+        else {
+            return 0;
+        }
+    }
+};</code></pre>
+
+<p>A <code>lock_guard</code> sablonparamétere a lock típusa, mivel nem csak az <code>std::mutex</code>-et tudja használni, hanem 
+bármilyen más, akár saját mutexet is. Továbbá nem csak egy teljes függvény tehető vele szinkronizált kódrészletté, hanem akár csak 
+egy kis kódrészlet is. Ehhez a <code>lock_guard</code>-ot egy utasításblokkba kell tenni:</p>
+
+<pre   ><code class="language-c">void fv() {
+    ez_meg_az;
+    {   // kritikus szakasz
+        std::lock_guard&lt;std::mutex&gt; lg{m};
+        közös_erőforrás_műveletei;
+    }
+    ez_meg_az;
+}</code></pre>
+
+<p>Vagy akár írhatunk egy függvényt, amely egy adott mutex lezárása után hajt végre egy kódrészletet:</p>
+<pre   ><code class="language-c">template &lt;typename MUTEX, typename TEENDO&gt;
+inline void synchronize(MUTEX &amp; m, TEENDO &amp;&amp; t) {
+    std::lock_guard&lt;MUTEX&gt; lg{m};
+    t();
+}</code></pre>
+ 
+<p>Ezt így kell majd használni:</p>
+
+<pre   ><code class="language-c">synchronize(m, [] {
+    közös_erőforrás_műveletei;
+});</code></pre>
+
+<p>Egyéb típusú szabványos mutexek:</p>
+<ul>
+    <li> <code>std::timed_mutex</code>: adott ideig tud várni a lezárásra (try_lock_for).
+    <li> <code>std::recursive_mutex</code>: többször is lockolható. pl. akkor jó, ha egy összetett műveletet szeretnénk lezárni, de a meghívott 
+    függvények (elemi műveletek) is lezárnák a mutexet.
+    <li> <code>std::timed_recursive_mutex</code>: a fenti kettő együtt.
+</ul>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A thread, mutex és lock_guard osztályok közös használata">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A thread, mutex és lock_guard osztályok közös használata<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mint fent láttuk, szál indításához az <code>std::thread</code> osztály használható. Az <code>std::mutex</code> 
+osztály ismeretében a sorszámozott sorok kiírását végző programot már ki tudjuk javítani. A közös erőforrás ebben a példában az 
+<code>std::cout</code>. Hogy a függvények kiírásai ne keveredjenek össze (hiszen minden sor három kiírásból áll: egy szövegből, egy számból 
+és egy újsorból), mutexet kell használni. A mutex közös kell legyen, tehát pl. lehet egy globális változó.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;mutex&gt;
+#include &lt;vector&gt;
+ 
+std::mutex m;
+ 
+void szal(int i) {
+    std::lock_guard&lt;std::mutex&gt; lg{m};
+    std::cout &lt;&lt; &quot;Hello a szalbol: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+ 
+int main() {
+    std::vector&lt;std::thread&gt; szalak;
+    
+    for (int i = 1; i &lt;= 20; ++i)
+        szalak.push_back(std::thread{szal, i}); // szal(i)
+    
+    for (auto &amp; szal : szalak)
+        szal.join();
+}</code></pre>
+
+<p> A mutex is átadható paraméterként a szál indításakor, nem feltétlenül kell globális változónak lennie. Ilyenkor viszont a 
+szál indításakor <code>std::ref()</code>-be kell csomagolni, mert amúgy a thread konstruktora másolja a paramétereket. Ha nem másolná, az 
+előző példa nem is különböző i-ket írna ki! Egyébként átadhatnánk pointert is a mutexre, az is jó lenne (a
+pointer másolódna, de a mutex nem).</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;mutex&gt;
+#include &lt;vector&gt;
+ 
+void szal(int i, std::mutex &amp; m) {
+    std::lock_guard&lt;std::mutex&gt; lg{m};
+    std::cout &lt;&lt; &quot;Hello a szalbol: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+ 
+int main() {
+    std::vector&lt;std::thread&gt; szalak;
+    std::mutex m;
+    
+    for (int i = 1; i &lt;= 20; ++i)
+        szalak.push_back(std::thread{szal, i, std::ref(m)}); // szal(i, m)
+    
+    for (auto &amp; szal : szalak)
+        szal.join();
+}</code></pre>
+
+<p>Sokszor a szálban elvégzendő teendőt nem egy másik függvényben, hanem egyszerűen egy lambda kifejezésben adjuk meg. Így 
+megoldódik a paraméterátadás problémája is, egyszerűen csak be kell tenni a láthatóvá tett változókat a capture blokkba. De itt 
+is figyelni kell, hogy a sorszámot értékként, a mutexet referenciaként adjuk át!</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;mutex&gt;
+#include &lt;vector&gt;
+ 
+int main() {
+    std::vector&lt;std::thread&gt; szalak;
+    std::mutex m;
+    
+    for (int i = 1; i &lt;= 20; ++i)
+        szalak.push_back(std::thread{[i, &amp;m] () {
+            std::lock_guard&lt;std::mutex&gt; lg{m};
+            std::cout &lt;&lt; &quot;Hello a szalbol: &quot; &lt;&lt; i &lt;&lt; std::endl;
+        }});
+    
+    for (auto &amp; szal : szalak)
+        szal.join();
+}</code></pre>
+
+<div class="megjegyzes">
+<p>Az indított szál lehet egy objektum tagfüggvénye is. Ebben az esetben az <code>std::thread</code>
+első paramétere a tagfüggvény mutatója (member pointer), a második pedig az objektum kell legyen.</p>
+<pre   ><code class="language-c">class Print {
+  private:
+    std::string what_;
+  public:
+    Print(std::string what): what_(what) {}
+    Print(Print const&amp;) = delete;
+    void do_print() const {
+        std::cout &lt;&lt; what_;
+    }
+}; 
+ 
+int main() {
+    Print p1(&quot;hello world&quot;);
+    std::thread t1(&amp;Print::do_print, std::ref(p1));
+    t1.join();
+}</code></pre>
+<p>Az <code>std::bind()</code>-nál megszokott szabályok érvényesek itt is: ha az objektumot nem szeretnénk
+lemásolni, a címét kell átadnunk, vagy <code>std::ref()</code>-be csomagolnunk. Ez általában is igaz
+az <code>std::invoke()</code>-ot használó kódrészleteknél.</p>
+</div>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A holtpont">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A holtpont<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi bankszámla osztályt!</p>
+
+<pre   ><code class="language-c">class Bankszamla {
+  private:
+    std::mutex m;
+    int egyenleg = 0;
+  public:
+    void atutal(Bankszamla &amp; hova, int mennyit) {
+        this-&gt;m.lock();
+        /* 1 */
+        hova.m.lock();
+        
+        if (mennyit &lt;= egyenleg) {
+            this-&gt;egyenleg -= mennyit;
+            hova.egyenleg += mennyit;
+        }
+        
+        this-&gt;m.unlock();
+        hova.m.unlock();
+    }
+};</code></pre>
+
+<p>Tegyük fel, hogy P átutalna Z-nek 1000 petákot, és eközben Z is átutalna P-nek 1200 petákot, két külön szálban.
+Tegyük fel azt is, hogy az első szál végrehajtása az 1-es helyen szálváltás miatt megáll, és jön a második szál.</p>
+
+<pre   ><code class="language-c">p.atutal(z, 1000);              z.atutal(p, 1200);
+
+p.m.lock();
+                                z.m.lock();
+                                p.m.lock(); /* megakad */
+z.m.lock(); /* megakad */</code></pre>
+
+<p>A P mutexe már le van zárva, ezért a második szál a p.m.lock()-on nem tud túljutni. Várni kényszerül az első szál miatt, mivel 
+majd az fogja P-ét felszabadítani. Az első szál viszont ezt sosem fogja megtenni, mert az átutaláshoz ő a Z mutexe szabaddá 
+válására vár, amit viszont a második szál tart lezárva.</p>
+
+<p>Ez a holtpont (deadlock). A probléma megoldásához a két (vagy több) lock egyszerre történő lezárását atomivá kell tenni, és egy 
+olyan algoritmust használni, amely tudja kezelni ezt a helyzetet. Az <code>std::lock()</code> függvény pont ilyen: a paramétere 
+bármennyi darab mutex lehet, amelyeket a holtpont elkerülésével zár le (deadlock avoidance algorithm).</p>
+
+<pre   ><code class="language-c">class Bankszamla {
+  private:
+    std::mutex m;
+    int egyenleg = 0;
+  public:
+    void atutal(Bankszamla &amp; hova, int mennyit) {
+        std::lock(this-&gt;m, hova.m);
+        
+        if (mennyit &lt;= egyenleg) {
+            this-&gt;egyenleg -= mennyit;
+            hova.egyenleg += mennyit;
+        }
+        
+        this-&gt;m.unlock();
+        hova.m.unlock();
+    }
+};</code></pre>
+
+<p>Ha itt is szeretnénk RAII-t használni, arra is alkalmas az std::lock_guard osztály; csak a konstruktorának második 
+paraméterében jelezni kell azt, hogy neki a mutexet már lezárnia nem kell, csak a már lezárt mutex felszabadításáról 
+gondoskodni.</p>
+
+<pre   ><code class="language-c">class Bankszamla {
+  private:
+    std::mutex m;
+    int egyenleg = 0;
+  public:
+    void atutal(Bankszamla &amp; hova, int mennyit) {
+        std::lock(this-&gt;m, hova.m);
+        std::lock_guard&lt;std::mutex&gt; lg1(this-&gt;m, std::adopt_lock);
+        std::lock_guard&lt;std::mutex&gt; lg2(hova.m, std::adopt_lock);
+        
+        if (mennyit &lt;= egyenleg) {
+            this-&gt;egyenleg -= mennyit;
+            hova.egyenleg += mennyit;
+        }
+    }
+};</code></pre>
+
+
+<p>A fenti kódokban macerásnak tűnhet az, hogy előbb le kell zárni a mutexeket, utána pedig annyi darab <code>lock_guard</code>-ot
+létrehozni, ahány mutexünk van. C++17 óta létezik erre egy osztály, amivel a művelet egyszerűsíthető. Ennek a neve:
+<code>std::scoped_lock.</code> A használat egyszerű:</p>
+
+<pre   ><code class="language-c">void Bankszamla::atutal(Bankszamla &amp; hova, int mennyit) {
+    std::scoped_lock lock(this-&gt;m, hova.m);
+    if (mennyit &lt;= egyenleg) {
+        this-&gt;egyenleg -= mennyit;
+        hova.egyenleg += mennyit;
+    }
+}</code></pre>
+
+
+<div class="megjegyzes">
+<h3><code>std::recursive_mutex</code> példa</h3>
+<p>Rekurzív mutex is használható a bankszámlás feladatban, ha az átutalást a <code>betesz()</code>
+és <code>kivesz()</code> függvényekkel szeretnénk megvalósítani (pénzt teszünk az egyik számlára,
+amennyit kivettünk a másikról). A két bankszámla mutexét lezárjuk az <code>std::lock()</code>-kal,
+utána pedig a betesz és a kivesz még egyszer lezárja azt. Ez sima <code>std::mutex</code>-szel nem menne,
+csak <code>std::recursive_mutex</code>-szel.</p>
+
+<pre   ><code class="language-c">class Bankszamla {
+  private:
+    int egyenleg = 0;
+    std::recursive_mutex rm;
+  public:
+    void betesz(int mennyit) {
+        std::lock_guard&lt;std::recursive_mutex&gt; lg(this-&gt;rm);
+        egyenleg = egyenleg + mennyit;
+    }
+    int kivesz(int mennyit) {
+        std::lock_guard&lt;std::recursive_mutex&gt; lg(this-&gt;rm);
+        if (mennyit &lt;= egyenleg) {
+            egyenleg = egyenleg - mennyit;
+            return mennyit;
+        } else {
+            return 0;
+        }
+    }
+};
+
+void atutal(Bankszamla &amp; honnan, Bankszamla &amp; hova, int mennyit) {
+    std::scoped_lock lock(honnan.rm, hova.rm);
+
+    hova.betesz(honnan.kivesz(mennyit));
+}</code></pre>
+</div>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Atomi típusok">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Atomi típusok<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha a közös erőforrások csak beépített típusok, és csak az egyszerű műveleteket (pl. növelés, csökkentés) szeretnénk szálbiztossá 
+tenni, akkor érdemes atomi típusokat használni. Ezek kényelmesebbek és gyorsabbak is, mintha egy „teljes értékű” mutexet 
+használnánk. Például az alábbi osztály nyilván tudja tartani, hányan tartózkodnak egy épületben, ha közben egyszerre több kapun is 
+lehet be- és kimenni:</p>
+
+<pre   ><code class="language-c">#include &lt;atomic&gt;
+ 
+class ThreadSafeCounter {
+  private:
+    std::atomic&lt;int&gt; counter = 0;
+  public:
+    void increment() { counter++; }
+    void decrement() { counter--; }
+    int get() const { return counter.load(); }
+};</code></pre>
+
+<div class="megjegyzes">
+<p>Vigyázat! Az atomi típusokon végzett műveletek csak akkor szálbiztosak, ha a saját operátoruk végezte azt el. Az alábbi 
+függvényben az atomi egészen két műveletet végzünk, egy kiértékelést és egy értékadást. Ilyen esetben már nem tudja biztosítani 
+a művelet helyességét:</p>
+
+<pre   ><code class="language-c">void hibas(std::atomic&lt;int&gt; &amp; i) {
+    i = i*2 + 1;
+}</code></pre>
+
+<p>Hiába írjuk ezt így, ez sem lesz jó:</p>
+
+<pre   ><code class="language-c">void hibas(std::atomic&lt;int&gt; &amp; i) {
+    i *= 2;
+    i += 1;
+}</code></pre>
+
+<p>Ebben a példában viszont a szorzás és az összeadás közé már kerülhet másik művelet ezen a változón (egy másik szálból). Ha 
+ezt nem szeretnénk, marad a mutex. A bankszámlás feladat sem oldható meg mutex nélkül, hiába a közös erőforrás csak az egyenleg, 
+ami csak egy <code>int</code>!</p>
+</div>
+
+<p>Atomi <code>int</code>-et használhatunk például egy okos pointerben referenciaszámlálóként. Így biztosíthatjuk azt, hogy a
+referenciaszámlálás a szálak között is helyesen működjön; egy sima <code>int</code> ehhez nem lenne elegendő.</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SmartPtr {
+  private:
+    T* obj;
+    std::atomic&lt;int&gt;* nrefs;
+  public:
+    SmartPtr(T* obj = nullptr) : obj{obj}, nrefs{nullptr} {
+        if (obj) {
+            nrefs = new std::atomic&lt;int&gt;{1};
+        }
+    }
+    ~SmartPtr() {
+        if (obj) {
+            if (--*nrefs == 0) {
+                delete obj;
+                delete nrefs;
+            }
+        }
+    }
+};</code></pre>
+
+<p>Mindez megoldható C-ben is, mert a <a href="index.html#c11atomic">C11-nek is vannak beépített atomi típusai</a>.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::condition_variable">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        std::condition_variable<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az eddigi példákban valamilyen közös erőforrást védtünk meg attól, hogy több szál egyszerre próbálja meg módosítani azt.
+Ezekben a programokban a szálak egymástól függetlenül dolgoztak, sőt a célunk kifejezetten az volt, hogy elszigeteljük őket
+egymástól. Ez természetesen nincs mindig így: gyakori eset, hogy több szál együtt dolgozik, és az egyik szál a másik által
+elvégzett feladatra, eredményre vár.</p>
+
+<p>Tekintsük pl. az <code>std::thread::join()</code> metódust. Ezzel várja be egy szülő szál az általa indított gyerek szál
+befejeződését. Hogyan működik ez? Naív implementációként egy ilyet képzelhetünk el:</p>
+
+<pre   ><code class="language-c">std::atomic&lt;bool&gt; ready{false};
+int result;
+
+void mythread() {
+    /* do some work */
+    result = nth_prime(32436476);
+    
+    ready = true;
+}
+
+int main() {
+    std::thread t1(mythread);
+    
+    /* joining thread t1 */
+    while (!ready) {
+    }
+    
+    std::cout &lt;&lt; result;
+}</code></pre>
+
+<p>Ez azonban nem jó megoldás. A szülő szál, mivel folyamatosan ellenőrizgeti a változó állapotát, teljesen leterheli a 
+processzort: így megfeleztük a program végrehajtási sebességét. Ennél sokkal jobb lenne, ha a várakozás idejére a szülő szálat 
+valahogyan el tudnánk altatni, hogy a gyerek szál ébressze majd fel dolga végeztével. A probléma <em>általánosításának</em> 
+megoldására találták ki a <em>condition variable</em> szinkronizációs primitívet. Ilyen objektum segítségével oldható meg az, hogy 
+akár több szál várjon egy esemény bekövetkezésére: <code>wait()</code>, és hogy akár több szál is képes legyen jelezni ezek 
+számára, hogy az esemény bekövetkezett: <code>notify()</code>.</p>
+
+<p>Az <code>std::condition_variable</code> objektumok nem használhatóak önmagukban. Mivel az ilyen objektumokat több szál közösen 
+használja (az egyik a <code>wait()</code>, a másik a <code>notify()</code> művelettel), mindig szükség van melléjük egy mutexre is. 
+Az eredményre váró szálnak a várakozás megkezdése előtt le kell zárnia a mutexet, és utána meghívnia a <code>wait()</code> 
+függvényt. Ez a függvényhívás felnyitja a mutexet, és a várakozás befejeztével újra lezárja azt. Az őt értesítő szál hasonlóképp 
+cselekszik: az előbbi szálat felébresztő <code>notify()</code> hívás előtt neki is le kell zárnia ugyanazt a mutexet.
+A mutexre különböző <a href="index.html#conditionvariables">versenyhelyzetek elkerülése</a> miatt van szükség.</p>
+
+<p>A helyzetet tovább bonyolítja, hogy a <code>wait()</code> hívásból az alvó szálak spontán is felébredhetnek (spurious wakeup).
+Ezért valamilyen módon lehetőséget kell biztosítani a felébredő szál számára, hogy ellenőrizze, tényleg fel kellett-e ébrednie,
+vagy csak „véletlenül” ébresztette fel az operációs rendszer. Ez általában megoldható azon a változón keresztül, amelyben az
+eredményt várja a másik száltól (pl. egy pointer az eredményre mutat, vagy null pointer). Ha nincs ilyen, akkor egy egyszerű
+<code>bool</code>-t is használhatunk helyette. A spontán felébredés miatt a várakozást mindig egy ciklusba tesszük; amíg
+nem látjuk az eredményt a változóban, addig újra el kell altatni a szálat.</p>
+
+<div class="megjegyzes">
+<h3>Spurious wakeup</h3>
+<p>A szálak spontán felébredésének okai az operációs rendszerek belső felépítésében keresendőek. A 
+<code>wait()</code> művelet általában az operációs rendszer segítségével van megvalósítva, valamilyen kernelhívás segítségével. 
+Ez a végrehajtása közben megszakadhat egy külső esemény hatására. Például ha lejár egy időzítő (alarm), és a folyamat egy 
+szignált kap, miközben egy kernelhívásban van, hibajelzéssel tér az vissza. Ha a hívás épp egy ilyen <code>wait()</code> volt, 
+ezt úgy érzékeljük a programban, hogy az alvó szál ok nélkül felébredt.</p>
+
+<p>A legtöbb kernelhívás egyébként ilyen. Pl. a 
+<code>scanf()</code> függvény a <code>read()</code> kernelhívást használja a karakterek beolvasására. Ha a várakozás közben egy 
+szignál érkezik, a <code>read()</code> hibajelzéssel tér vissza (interrupted system call). Ilyenkor a <code>scanf()</code> újra 
+próbálkozik, tehát mindaddig újra és újra hívja egy ciklusban a <code>read()</code> függvényt, amíg ezt a hibakódot kapja. Így a 
+<code>scanf()</code> hívójaként már nem érzékeljük a jelenséget.</p>
+</div>
+
+<p>A fentiek miatt az <code>std::condition_variable</code> <code>wait()</code> tagfüggvényének két paramétere is van. Az egyik
+egy lezárt mutex <code>unique_lock</code>-ja. A másik pedig egy olyan függvény kell legyen, amellyel megmondjuk, hogy tényleg fel kellett-e ébrednie a
+szálnak. Ez általában egy egyszerű lambda függvény. Az eddigieket megvalósító példa kód:</p>
+
+<pre   ><code class="language-cbub">#include &lt;thread&gt;
+#include &lt;iostream&gt;
+#include &lt;mutex&gt;
+#include &lt;condition_variable&gt;
+#include &lt;unistd.h&gt;
+
+std::condition_variable cv;
+std::mutex mtx;
+int result = 0;
+
+void szamitas() {
+    sleep(3);                               // meló
+    result = 1234;
+    
+    std::unique_lock&lt;std::mutex&gt; lg{mtx};   // szólunk, hogy kész
+    cv.notify_one();
+}
+
+int main() {
+    std::thread t1(szamitas);
+    t1.detach();
+
+    std::unique_lock&lt;std::mutex&gt; lg{mtx};
+    cv.wait(lg, [&amp;] { return result != 0; });   // várunk, amíg t1 végez
+    
+    std::cout &lt;&lt; result;
+}</code></pre>
+
+<p class="megjegyzes">Az <code>std::unique_lock</code> az <code>std::lock_guard</code>-hoz hasonlóan működik. Azzal a különbséggel,
+hogy a <code>unique_lock</code> bármikor felnyitható-lezárható, míg a <code>lock_guard</code>-nál szigorúan a konstruktorhoz és
+a destruktorhoz van kötve ez a két művelet.</p>
+
+<p>A <em>condition variable</em> objektumok többre is képesek, mint két szál munkáját szinkronizálni. Egy ilyen ugyanis több 
+szálra is hivatkozhat; a <em>condition variable</em> objektum igazából egy tároló olyan szálak számára, amelyek egy bizonyos 
+esemény bekövetkeztére várnak. Sok szál közös munkájára klasszikus példa a véges méretű várakozási sor esete (bounded buffer). 
+Ebben több kliens helyez el feldolgozandó adatokat egy közös várakozási sor egyik végén; az adatokat feldolgozó szerverek olvassák
+ki a a sor másik végéről. Így működnek a webszerverek is: sok kliens bejövő kéréseit dolgozza fel sok végrehajtó szál a 
+szerverprogramban. A feladat kettő <em>condition variable</em> segítségével oldható meg. A kliensek akkor kényszerülnek 
+várakozásra, ha a megtelt várakozási sorba szeretnének új kérést beszúrni (push), és ebből az állapotból valamelyik szerver 
+általi adatkivétel ébreszti fel őket (pop). A szerverek pedig akkor alszanak, ha üres a sor; új adat beszúrása (push) esetén 
+valamelyik szerver felébreszthető, hogy a feladatot el tudja végezni (pop).</p>
+
+<img src="bounded_buffer.svg" style="width: 28em;" class="kozep" alt="várakozási sor">
+
+<p class="megjegyzes">Ez egy másik példa lehet a spontán felébredésre. Tegyük fel, hogy két szerver szál vár arra, hogy feladatot
+kapjon. A várakozási sorba bekerül egy végrehajtandó feladat. Ha ebben a pillanatban mindkét várakozó szál felébred, az egyik
+elvégezheti a munkát (kiveheti a feladatot a sorból), a másik pedig azt fogja látni, hogy hiába ébredt fel, nincs feladat. Magától
+értetődő, hogy a várakozási sor elérését mutexszel kell védeni, hiszen mindkét szál használni szeretné rögtön a felébredésük után.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::async és std::future">
+<div class="slide" id="slide_9">
+
+<a id="9" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">9</span><span class="oldalszamafter">. </span>        std::async és std::future<a class="hlink" href="index.html#9"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Néha el szeretnénk indítani egy szálat, hogy egy teendő elvégzése külön processzormagon futhasson. A teendőnek pedig van egy
+eredménye, amely az elindított függvény visszatérési értéke. Máskor van egy teendőnk, amelyet nem muszáj rögtön elvégeznünk,
+ráér később is – csak félre szeretnénk tenni a felparaméterezett függvényhívást egy „todo” listára, hogy majd később történjen meg,
+vagy esetleg el is maradjon.</p>
+
+<p>Egy függvény késleltetett végrehajtását nevezik future-nek, promise-nek és delay-nek is. A C++11-ben az <code>std::async()</code>
+függvénnyel tudunk indítani egy késleltetett végrehajtást, amelynek visszatérése egy <code>std::future&lt;T&gt;</code> objektum
+(ahol <code>T</code> a meghívott függvény visszatérési értéke). Ennek az objektumnak a <code>.get()</code> függvénye váltja be az
+ígéretet: ha a teendő félre volt téve, akkor elvégzi, ha külön szálon lett indítva, akkor bevárja. Ezekkel a függvényekkel és
+osztályokkal megkerülhető az, hogy a késleltetett függvényhívásra, eredmény visszaadására alkalmas infrastruktúrát
+nekünk kelljen felépíteni (mint az előbbi, <em>condition variable</em>-t használó példában).</p>
+
+<p>Az <code>std::async</code> hívás első paramétere az indítás módja. Ha ez <code>std::launch::async</code>, akkor külön szálon
+indul. Ha <code>std::launch::deferred</code>, akkor ugyanazon a szálon, a <code>.get()</code> hívásakor. Ha mindkettő meg van
+adva, vagy elmarad a paraméter, akkor a konkrét implementáció (fordító) határozza meg.</p>
+
+<p>Az előző példában a sokáig tartó függvény eredményének bevárása ennyire egyszerű az <code>std::async</code> használatával:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;future&gt;
+#include &lt;unistd.h&gt;
+ 
+int szamitas() {
+    /* sokáig tart */
+    sleep(3);                               
+    return 1234;
+}
+ 
+int main() {
+    auto handle = std::async(std::launch::async, szamitas);
+    /* ... itt csinálhatunk valami mást */
+    std::cout &lt;&lt; handle.get();
+}</code></pre>
+
+<p>Az alábbi függvény a párhuzamos összegzésre mutat példát.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;numeric&gt;
+#include &lt;thread&gt;
+#include &lt;future&gt;
+ 
+int parallel_sum(int *begin, int *end) {
+    int len = end-begin;
+    if (len &lt; 1000)
+        return std::accumulate(begin, end, 0);
+    
+    int *mid = begin + len/2;
+
+    auto handle = std::async(std::launch::async, parallel_sum, begin, mid);
+    int masodik_fele = parallel_sum(mid, end);
+    int elso_fele = handle.get();
+
+    return elso_fele + masodik_fele;
+}
+ 
+int main() {
+    int tomb[10000];
+    std::generate(std::begin(tomb), std::end(tomb), [] { return rand()%100; });
+    std::cout &lt;&lt; parallel_sum(std::begin(tomb), std::end(tomb));
+}</code></pre>
+
+<div class="megjegyzes">
+<h3>Kiértékelési sorrend</h3>
+<p>
+A függvény utolsó sorában nem szabad <code>return handle.get() + parallel_sum(mid, end)</code>-et
+írni! Nem lehet tudni, az összeg melyik tagját értékeli ki előbb
+a fordító. Ha a <code>handle.get()</code>-tel kezdene, ugrana a párhuzamosság.
+A fenti változat a helyes, ahol szekvenciapontokkal kikényszerítjük, hogy előbb
+a <code>parallel_sum(mid, end)</code> hívódjon, és csak utána nézzük meg a
+<code>handle.get()</code>-tel, hogy mi a helyzet az összegzés másik felével.
+</p>
+</div>
+
+<p>A C++17 definiál ehhez hasonló függvényeket: az <a href="../cpp1417/index.html#cpp14std">STL algoritmusainak
+párhuzamosított</a> változatait.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Összetett példa">
+<div class="slide" id="slide_10">
+
+<a id="10" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">10</span><span class="oldalszamafter">. </span>        Összetett példa<a class="hlink" href="index.html#10"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Egy összetett példát az extrák menüpont alatt olvasható írás mutat be: C++-ban írt <a href="../clocks/index.html">digitális áramkörszimulátor alapjai</a>.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_11">
+
+<a id="11" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">11</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#11"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="dijkstrapv">„Napi Dijkstra”: <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD00xx/EWD51.html">EWD51</a> (a P és V a holland eredetiben).
+    <li id="c11atomic">Chris Wellons: <a href="http://nullprogram.com/blog/2015/02/17/">Generic C Reference Counting</a>.
+    <li id="conditionvariables"><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf">Condition Variables</a>. Fejezet ebből a könyvből: <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a>.</li>
+    <li id="monitor"><a href="http://en.wikipedia.org/wiki/Monitor_%28synchronization%29">Monitor (synchronization)</a> – Wikipedia. Részletesen
+        leírja a <code>condition variable</code> és a <code>mutex</code> primitívek kapcsolatát.
+    <li id="spurious">Vladimir Prus: <a href="http://vladimir_prus.blogspot.hu/2005/07/spurious-wakeups.html">Spurious wakeup</a>.
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

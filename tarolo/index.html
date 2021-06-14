@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Tömb – egy egyszerű tároló osztály létrehozása</title>
+<meta property="og:title" content="TEST InfoC++11 :: Tömb – egy egyszerű tároló osztály létrehozása">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Tömb – egy egyszerű tároló osztály létrehozása">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Tömb – egy egyszerű tároló osztály létrehozása">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Tömb – egy egyszerű tároló osztály létrehozása">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Tömb – egy egyszerű tároló osztály létrehozása</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Tömb – egy egyszerű tároló osztály létrehozása</p>
+</div>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+<p>Az alábbi szösszenetben egy dinamikus tömb osztályt boncolgatok. Minden függvényben az egyszerűségre törekedtem, nem a trükkös rövidítési lehetőségek kihasználására.</p>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Dinamikus tömb</a>
+                      <li><a href="index.html#2" class="">Deklaráció</a>
+                      <li><a href="index.html#3" class="">Definíció</a>
+                      <li><a href="index.html#4" class="">A láncolhatóságról</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Dinamikus tömb">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Dinamikus tömb<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A feladat így szól:</p>
+
+<blockquote>
+<p>Csináljunk egy tömb osztályt, amely double számokat tárol. Lehessen a tömböt létrehozni adott mérettel; a számok induláskor legyenek mind nullák. Lehessen indexelni, mint egy sima, statikus C-s tömböt; lehessen másolni és értékadni (egyik tömböt a másiknak). Lehessen továbbá utólag megváltoztatni a méretét. Ha nagyobb lett, akkor az új elemek legyenek nullák, ha kisebb lett, akkor a hátsó elemek elveszhetnek. A tömb elején viszont a számok ne vesszenek el ennek hatására.</p>
+</blockquote>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Deklaráció">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Deklaráció<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fenti feladatkiírást nagyrészt megadhatták volna úgy is, hogy adott egy egyszerű programrész, amelyben látjuk, milyen tagfüggvényei hívódnak ennek a tömbnek. Ezekből következtetni tudunk arra, hogy milyen publikus tagfüggvényei kell legyenek az osztálynak. Ez csak a publikus rész: a privát tagváltozók és függvények ránk vannak bízva, azt az objektumok úgysem mutatják a külvilág felé. Nézzük tehát sorról sorra végig a kódot, hogy melyik rész mit csinál a tömbbel!</p>
+
+<pre   ><code class="language-cbub">int main() {
+    Tomb t(30);         // 1
+    std::cout &lt;&lt; t[20];     // 2
+    t[22] = 10.2;       // 3
+    t.atmeretez(50);        // 4
+    Tomb masolat(t), harmadik;   // 5
+    harmadik = t;           // 6
+}                       // 7</code></pre>
+
+<p>Az (1) helyen egy új tömböt hozunk létre, ez egy <em>konstruktor</em> hívása. A paramétere a 30, az egész szám, amely a feladatkiírás szerint a tömb mérete. Vagyis lesz egy <code>Tomb::Tomb(int)</code> konstruktor.</p>
+
+<p>A (2) helyen <em>indexeljük</em> a tömböt: a <code>t</code> objektumon használjuk a szögletes zárójel <code>[]</code> indexelő operátort. Ez a tömbnek egy átdefiniált indexelő operátora lesz. A szokásos módon, a tömb húszas indexű elemét kérjük el, ez lesz az indexelő operátor paramétere; vissza pedig a számot adja, amit utána kiírunk a kimenetre. Vigyázat: a kiíráshoz a tömbnek már semmi köze! A tömb csak megadja, hogy mi a húszas indexű szám. Egyelőre úgy okoskodunk, hogy lesz egy <code>double Tomb::operator[](int)</code> alakú tagfüggvény.</p>
+
+<p>A (3) helyen megint az <em>indexelő</em> operátort használjuk, most viszont – miután a tömb megmondta, hogy melyik az ő 22-es indexű eleme – bele is írunk ebbe az elembe. Az értékadásnak természetesen már itt sincs köze a tömbhöz! A tömb csak megadta, hogy melyik a 22-es elem. Hogy oda írni is tudjunk, ahhoz nem lesz jó, ha az indexelő operátor a számmal tér vissza, amit az adott helyen talált; azt kell megadnia, hogy hol van az a szám, mert csak akkor tudjuk módosítani. Tehát nem értékkel, hanem referenciával kell visszatérnie. Ezért az előző ötletünket úgy módosítjuk, hogy az indexelő operátor egy referenciával térjen vissza: <code>double&amp; Tomb::operator[](int)</code> kell legyen a függvény alakja.</p>
+
+<p>A (4)-gyel jelölt sor triviális, egész szám paraméterű átméretező függvény: <code>void Tomb::atmeretez(int)</code>.</p>
+
+<p>Az (5) helyen két új tömböt is létrehozunk, vagyis megint konstruktorokról van szó. Egyrészt a <code>masolat</code> nevűt; a konstruktor paraméterben <code>t</code>-t kapja, amelynek a típusa <code>Tomb</code>. Ez a másoló konstruktor. A tanult dolgok alapján <code>Tomb::Tomb(Tomb const&amp;)</code> a keresett tagfüggvényünk. A <code>harmadik</code> nevű tömbnek pedig nem adunk semmilyen paramétert. Ez a paraméter nélküli, alapértelmezett konstruktort hívja. A feladat specifikációja erről nem beszélt; intuíció alapján hozzunk létre ilyenkor üres tömböt. (Aminek van is értelme, mert később a mérete megváltoztatható.) Rájöhetünk, hogy az (1)-es sorhoz írt konstruktor végül is jó lesz erre a célra is; alapértelmezett paraméterként a méretnek nullát tekintünk, vagyis az előbbi okoskodásunkat is módosítjuk: <code>Tomb::Tomb(int=0)</code> a megvalósítandó függvény.</p>
+
+<p>A (6) helyen az értékadó operátort hívjuk; a tanultak alapján ez <code>Tomb&amp; Tomb::operator=(Tomb const&amp;)</code>. Mivel dinamikus adattagja lesz az osztálynak, ezt amúgy is meg kell írni, a másoló konstruktort beleértve. Akkor is, ha nincs ilyen egyértelműen kifejezve, mint itt az (5)-ös sorban; tudjuk, hogy egy ilyenhez muszáj. Ahogyan a (7)-es sorban (nem elírás) meghívódik a tömbök destruktora is; mivel a tömb foglal majd magának memóriát külön, muszáj destruktort írni, amely felszabadítja azt: <code>Tomb::~Tomb()</code>.</p>
+
+<p>Amit eddig tudunk:</p>
+
+<pre   ><code class="language-c">class Tomb {
+    /* privát adattagok helye - lásd lent */
+  public:
+    Tomb(int ekkora=0);
+    ~Tomb();
+    Tomb(Tomb const &amp;);             /* másoló ctor */
+    Tomb&amp; operator=(Tomb const &amp;);  /* értékadó op. */
+
+    double&amp; operator[](int);
+    void atmeretez(int);
+};</code></pre>
+
+<p>A privát adattagok jelen esetben adják magukat. Lesz egy <code>double *adat</code> dinamikus tömb, amelyben tároljuk a számokat, <code>new double[valamennyi]</code>, így fogunk memóriát foglalni. Mivel egy pointer nem tudja megmondani, mekkora lefoglalt memóriaterületre mutat, csinálunk egy <code>int darab</code> tagváltozót is. A kettő összefügg! Ahol <code>new[]</code> van, ott a méret beállításának is szerepelnie kell, és fordítva. Természetesen a <code>darab</code> is privát adattag, nehogy valaki kívülről megváltoztassa, mert akkor megzavarodhat pl. az <code>atmeretez()</code> függvényünk.</p>
+
+<pre   ><code class="language-c">class Tomb {
+    int darab;
+    double *adat;
+  public:
+    /* publikus interfész - lásd fent */
+}</code></pre>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Definíció">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Definíció<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írjuk meg a függvényeket!</p>
+
+<h3>A konstruktor: <code>Tomb::Tomb(int ekkora)</code></h3>
+
+<p>Ez könnyű. Mit kell csinálnia? Kap egy számot, hogy mekkora legyen a tömb (1). Megjegyzi, hogy mekkora (2); utána foglal memóriát annyi számnak (3), és kinullázza az elemeket (4).</p>
+
+<pre   ><code class="language-cbub">Tomb::Tomb(int ekkora) { // 1
+    darab = ekkora;          // 2
+    adat = new double[darab];    // 3
+    for (int i = 0; i &lt; darab; ++i)
+        adat[i] = 0;         // 4
+}</code></pre>
+
+<p class="megjegyzes">Nem aggódunk az <code>ekkora=0</code> eset miatt külön! A <code>new double[0]</code> teljesen elfogadott dolog. De az sem baj, ha valaki külön kezeli azt az esetet.</p>
+
+<p>Buktatók:</p>
+
+<ul>
+    <li>A konstruktornak nincs visszatérési értéke, se <code>void</code>, se semmi.</li>
+    <li>A default paramétert (<code>ekkora=0</code>) a definíciónál nem kell megismételni, vagyis itt már nem írjuk oda az (1) sorban, hogy <code>=0</code>.</li>
+    <li>Viszont amit paraméterben kaptunk méretet, meg kell jegyezni mindenképp. <code>new double[x]</code> és <code>darab=x</code> összetartozik!</li>
+</ul>
+
+<h3>A destruktor: <code>Tomb::~Tomb()</code></h3>
+
+<p>Még egyszerűbb:</p>
+
+<pre   ><code class="language-cbub">Tomb::~Tomb() {
+    delete[] adat;
+}</code></pre>
+
+<p>A tömb foglalta magának a memóriát, az ő dolga felszabadítani is. Mivel senki más nem látja a pointert (privát adattag), más nem is lehet ezért felelős!</p>
+
+<h3>Az átméretezés: <code>void Tomb::atmeretez(int uj_meret)</code></h3>
+
+<p>Tudjuk, hogy a <code>new[]</code> operátorral lefoglalt memóriaterületet átméretezni nem lehet. Ezért újat kell foglalni, az új méret alapján (1), és abba átmásolni mindent (2). A régit meg felszabadítani (3), persze csak azután, miután az adatokat kimásoltuk belőle. És csak ezután lehet a pointert átállítani (4).</p>
+
+<p>A darabszámot is csak a végén állítjuk át (5); a függvény belsejében ugyanis mindvégig szükség van a régi és az új méretre is. Például amikor el kell dönteni, hogy nőtt-e a tömb (6), mert akkor ugyebár a régieket másolni kell és az újakat nullázni (7). Vagy ha épp hogy csökkent, akkor csak másolni kell a régieket, és már azáltal kap az új tömb minden eleme értéket. Látható, hogy az előbb a buktatóknál említett szabályt, hogy <code>new[]</code>-oláskor darabot állítunk, itt is betartjuk (1, 4-5).</p>
+
+<pre   ><code class="language-cbub">void Tomb::atmeretez(int uj_meret) {
+    if (darab == uj_meret)
+        return;
+    double *uj_adat = new double[uj_meret];         // 1
+    if (uj_meret &gt; darab) {   /* ha megnő a tömb */     // 6
+        for (int i = 0; i&lt;darab; ++i)               // 2
+            uj_adat[i] = adat[i];
+        for (int i = darab; i &lt; uj_meret; ++i)
+            uj_adat[i] = 0;                         // 7
+    } else {
+        for (int i = 0; i&lt;uj_meret; ++i)            // 2
+            uj_adat[i] = adat[i];
+    }
+    delete[] adat;                                  // 3
+    adat = uj_adat;                                     // 4
+    darab = uj_meret;                               // 5
+}</code></pre>
+
+<p>Buktatók:</p>
+<ul>
+    <li>Sem a kódot, sem a magyarázatot nem érdemes megtanulni. (Ezt ugye mondtuk Prog1-ből?)</li>
+    <li>Aki megérti az új tömb létrehozását, utána nem fogja elrontani, hogy mikor milyen tagváltozót állítgasson át a kód.</li>
+</ul>
+
+<h3>Az indexelő operátor: <code>double&amp; Tomb::operator[](int i)</code></h3>
+<p>Egyszerű:</p>
+
+<pre   ><code class="language-cbub">double&amp; Tomb::operator[](int i) {
+  return adat[i];
+}</code></pre>
+
+<p>Ezen semmi érdekes nincs, lehetne hívni <code>index()</code>-nek is, de jobb <code>operator[]</code>-nek nevezni a függvényt, mert akkor <code>t.index(5)</code> helyett <code>t[5]</code> írható. Mennyivel jobban mutat! Meg persze kifelé valahogy elérhetővé kell tenni a privátként tárolt számokat. A buktató itt csak annyi lehet, ha nem referenciaként adjuk vissza az értéket (<code>double&</code>), hanem simán értékként (<code>double</code>), mert akkor megváltoztatni nem lehet az elemeket, hanem csak lekérdezni őket, és nem működne a <code>main()</code> (3) jelű sora.</p>
+
+<h3>Másoló konstruktor: <code>Tomb::Tomb(Tomb const &eredeti)</code></h3>
+<p>Nem azért írjuk meg csak most, mert félünk tőle, hanem mert a fentiekből össze lehet ollózni. Mit kell csinálni? Létre kell hozni egy <em>új tömböt</em>, mintaként tekintve a <em>paraméterként kapott másik tömbre</em>. Vagyis itt is foglalunk egy új adag memóriát (1), csak most nem nullázzuk a számokat, hanem a másik tömbből egyesével átmásoljuk őket (2). Persze nem feledkezünk meg a méret megjegyzéséről sem, a szokásos módon (3). Ezeket a sorokat a konstruktorból és az átméretező függvényből össze lehet puskázni.</p>
+
+<pre   ><code class="language-cbub">Tomb::Tomb(Tomb const&amp; eredeti) {  // 4
+    darab = eredeti.darab;             // 3
+    adat = new double[darab];      // 1
+    for (int i = 0; i&lt;darab; ++i) 
+        adat[i] = eredeti.adat[i]; // 2
+}</code></pre>
+
+<p>Buktatók:</p>
+
+<ul>
+    <li>Itt sem érdemes megtanulni a kódot. Csak megérteni, hogy ez egy új tömböt hoz létre (konstruktor), egy másik tömb mintájára (másoló). A többi adódik.</li>
+    <li>Az új tömbbe másolunk mindent az eredetiből, nem pedig fordítva. Ez egy konstruktor, az új objektum a <code>*this</code>, nem pedig a paraméterként kapott <code>eredeti</code>!</li>
+    <li>Legfontosabb észben tartani, hogy ez egy konstruktor! (Volt már erről szó?) Mivel egy vadiúj tömböt hozunk most létre, biztosan hülyeség bármit is kezdeni a <code>darab</code> változóval vagy az <code>adat</code> pointerrel, leszámítva azt persze, hogy értelmes értéket kapnak. Mert teljesen biztos, hogy nincs bennük értelmes dolog, amíg be nem állítjuk azokat!</li>
+    <li>Hogy ez egy konstruktor, az emlékeztessen arra is, hogy ennek nagyon kell hasonlítania a sima konstruktorra. A darabszám beállítása ugyanaz. Az memória foglalás ugyanaz. A nullázás helyett pedig másolás – vagyis a lefoglalt memóriát értelmes értékekkel töltjük ki: ugyanaz.</li>
+    <li>És még egyszer: ez egy konstruktor, vagyis nincs visszatérési értéke; nincs a (4) sorban se <code>void</code>, se semmi. A függvényben pedig se <code>return *this</code>, se semmi. </li>
+</ul>
+
+<p>A függvény fejlécében az osztály neve háromszor szerepel. <code>Tomb::</code>, azaz a tömb osztálynak, <code>Tomb</code>, az a fajta konstruktora, amelyik paraméterként egy másik tömböt kap: <code>Tomb const &eredeti</code>. A <code>const</code> még muszáj is (itt nem tárgyalt okok miatt). A referencia úgyszint, mert ha nem lenne, akkor másolatként kérné a másoló konstruktor a tömböt, amit le kell másolnia – és ez pont a saját feladata, vagyis végtelenül hivatkozna saját magára.</p>
+
+<h3>Az értékadó operátor: <code>Tomb&amp; Tomb::operator=(const Tomb&amp; eredeti)</code></h3>
+
+<p>Az értékadó operátor a végére maradt, de ez is azért, mert csak a megfelelő részeket fentről össze kell szedni, újdonság a működésében már nincs. Az értékadó operátor feladata, hogy a már meglévő tömb állapotát módosítsa úgy, hogy az egy másiknak a tökéletes másolata legyen. Nagyon fontos az a gondolat, hogy egy <em>már meglévő</em> tömb állapotát kell módosítani! A tömb mindent elfelejt, és utána újból felépíti magát, egy másik tömböt tekintve mintának. Az „elfelejt” szó utal arra, hogy puskázunk a destruktorból (4. sor); az „újból felépíti magát” pedig utal arra, hogy puskázunk a másoló konstruktorból (5-8. sor).</p>
+
+<pre   ><code class="language-cbub">Tomb&amp; Tomb::operator=(Tomb const &amp;eredeti) { // 1
+    if (this != &amp;eredeti) {                      // 3
+        delete[] this-&gt;adat;        /* destruktorból puska */
+        this-&gt;darab = eredeti.darab;  /* innentől: másolóból puska. */
+        this-&gt;adat = new double[this-&gt;darab];
+        for (int i = 0; i&lt;this-&gt;darab; ++i)
+            this-&gt;adat[i] = eredeti.adat[i];
+    }
+    return *this; // 2
+}</code></pre>
+
+<p>A biztonság kedvéért itt is háromszor szerepel a függvény fejlécében a típus (<code>Tomb</code>) neve. (1): <code>Tomb&amp;</code> visszatérési típusú a <code>Tomb::</code> osztály <code>operator=</code> nevű tagfüggvénye, amely paraméterként egy <code>Tomb const &amp;eredeti</code>-t kap. A visszatérési típus egy <code>Tomb</code> referencia (1), az objektum saját magára hivatkozik a visszatérési értékben (2). Ez azért van, hogy az értékadás láncolható legyen: ahogy sima számokra írhattuk, hogy <code>a=b=5</code>, úgy tömbökre is írhassuk, hogy <code>t=t2=t3</code>. Minden kulturált <code>operator=</code> úgy végződik, hogy <code>return *this</code>, ebből pedig adódik a <code>Tomb&amp;</code> visszatérési típus.</p>
+
+<p>A (3)-as sor pedig az önértékadás miatt fontos, ha netán az osztály használója ilyet találna írni: <code>t=t</code>. Józan ésszel is belátható, ha az objektum saját magát kéne megváltoztassa úgy, hogy ugyanazokat az adatokat tárola, amiket már addig is, akkor nem kell csinálnia semmit. Az egész procedúra menjen tehát az <code>if()</code>-be, ahogy az átméretezésnél is megtettük ezt a szívességet magunknak. Fontos viszont az önértékadás ellenőrzésre azért, mert ha az objektum, amelyik épp meg akarja változtatni magát (vagyis a <code>*this</code>), ugyanaz, mint a paraméterként kapott (vagyis az <code>eredeti</code>) – nem csak ugyanolyanok, hanem konkrétan ugyanazok! – akkor ha azt írjuk, hogy <code>this-&gt;adat</code>, akkor ugyanarról a memóriaterületről beszélünk, mintha azt írnánk, hogy <code>eredeti.adat</code>. Azt gondoljuk, hogy az egy másik memóriaterület, de mivel <code>this==&amp;eredeti</code>, az objektum megkapta a tagfüggvénye paraméterben saját magát, igazából a <code>delete[] this-&gt;adat</code> által az <code>eredeti.adat</code> is <code>delete[]</code>-elődik!</p>
+
+<p>Hogy ne vágjuk magunk alatt a fát, a (3)-as sorban pont azt nézzük, hogy a <code>this</code>, azaz a ránk mutató pointer ugyanannyi-e, mint a paraméterben kapott objektumra mutató pointer (<code>&amp;eredeti</code>). Vagyis hogy ugyanott vagyunk-e a memóriában, mint a paraméterként kapott objektum, mert ha igen, akkor saját magunkat kaptuk paraméterként, és nem hogy nem kell, de nem is szabad elvégezni a műveleteket.</p>
+
+<p class="megjegyzes">Ebben a tagfüggvényben szándékosan ki van emelve mindenhol, hogy melyik objektumról van szó, mégpedig azáltal, hogy a <code>this-&gt;</code> mindenhova ki van írva, bár általában nem szokás. A <code>this</code>-t amúgy sok programozási nyelvben nem <code>this</code>-nek hívják, hanem <code>self</code>-nek vagy <code>Me</code>-nek. Azok sokkal jobban mutatják, hogy mit kell érteni alatta!</p>
+
+<p>Buktatók:</p>
+
+<ul>
+    <li>Az (1), (2) és (3) sorokat érteni kell, hogy miért vannak így. A magyarázatuk fent. Ezen kívül, nem az objektumok változóit kell összehasonlítani (pl. <code>this-&gt;adat</code> és <code>eredeti.adat</code>), hanem magukra az objektumokra mutató pointereket, <code>this</code> és <code>&amp;eredeti</code>!</li>
+    <li>Érdemes itt arra gondolni, hogy a tömb elfelejt mindent, és utána lemásolja a paraméterként kapottat. A függvény lényegi működése a destruktorból és a másoló konstruktorból puskázható össze és érthető meg. Érdemes ilyen sorrendben kidolgozni őket.</li>
+    <li>A függvény neve <code>operator=</code> kell legyen, semmi más nem lehet. A prototípusa úgyszint kötött. Erről fogja tudni a gép, hogy mi most arról beszélünk, <code>t1=t2</code> esetben mi a teendő. Lemásolni itt is a <code>*this</code>-be kell az eredetit, és nem fordítva!</li>
+</ul>
+
+<p>Ennyi.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A láncolhatóságról">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A láncolhatóságról<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <p>Akinek nem tiszta az <code>operator=</code> láncolhatóság a <code>return *this</code>-szel, nézze meg a következő példát. Ez egy vicces C++ programozási stílus, amit néhányan szeretnek használni. Legyen egy téglalap osztályunk, amelynek minden tagfüggvénye térjen vissza saját magának a referenciájával:</p>
+<pre   ><code class="language-cbub">class Teglalap {
+    int x, y;
+    int szel, mag;
+    int szin;
+  public:
+    Teglalap&amp; poz_megad(int x_, int y_) { x = x_; y = y_; return *this; }
+    Teglalap&amp; meret_megad(int sz, int m) { szel = sz; mag = m; return *this; }
+    Teglalap&amp; szin_megad(int sz) { szin = sz; return *this; }
+};
+
+Teglalap tegl;
+tegl.poz_megad(100, 20).meret_megad(12, 8).szin_megad(7);</code></pre>
+
+<p>Minden tagfüggvény magával a téglalappal tér vissza. Referenciával, nem másolattal. Vagyis nem egy ugyanolyan téglalappal, hanem ugyanazzal a téglalappal. <code>tegl.poz_megad(100, 20)</code> visszatérési értéke ezért <code>tegl</code> saját maga; amire meghívjuk a <code>meret_megad(12, 8)</code> függvényt, amelynek a visszatérési értéke megint <code>tegl</code>; amire meghívjuk a <code>szin_megad(7)</code> függvényt, ami úgyszint <code>tegl</code>-lel tér vissza, de többet már nem foglalkozunk vele. Mintha mindegyik előtt kiírtuk volna, hogy <code>tegl.</code>, csak láncoltuk a függvényhívásokat. Ugyanilyen a láncolt értékadás is, amely zárójelezve még egyértelműbb:</p>
+<pre   ><code class="language-cbub">a=b=c;   →   a=(b=c);   →   b=c; a=b;</code></pre>
+<p>Először <code>b=c</code> hajtódik végre, annak visszatérési értéke <code>b</code>; utána <code>a=b</code> hajtódik végre.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

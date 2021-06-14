@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 7. hét: Objektumok memóriaképe</title>
+<meta property="og:title" content="TEST InfoC++11 :: 7. hét: Objektumok memóriaképe">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 7. hét: Objektumok memóriaképe">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 7. hét: Objektumok memóriaképe">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="7. hét: Objektumok memóriaképe">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">7. hét: Objektumok memóriaképe</h1>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az előadással kapcsolatosan...</a>
+                      <li><a href="index.html#2" class="">Reflektivitás</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az előadással kapcsolatosan...">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az előadással kapcsolatosan...<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>std::hex, std::setw, std::fill</h3>
+
+<p>Az előadás <a href="../ea07/index.html#objektumbajt">objektum bájtjait kiíró programjában</a>...</p>
+
+<p>Hogy lehet <code>printf()</code>-fel megoldani a ciklusban lévő körülményes
+kiírást?
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">printf(&quot;%02x &quot;, ptr[i]);</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>A referencia mérete</h3>
+
+<p>Az előadás <a href="../ea07/index.html#objektumbajt">objektum bájtjait kiíró programjában</a>...</p>
+
+<p>Nem rossz ez a program? A <code>sizeof(obj)</code> nem a referencia méretét
+adja? Hiszen az <code>obj</code> paraméter típusa konstans referencia. C-ben nem
+volt szabad ilyet csinálni: ha indirekt módon, pointerrel adtunk át egy paramétert
+(pl. tömböt), akkor a <code>sizeof</code> mindig a pointer méretét adta.
+Itt mi a helyzet?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nincs olyan, hogy „referencia mérete”. Egy objektum referenciája, azaz neve,
+mindenben megegyezik az eredeti objektummal, tökéletesen megkülönböztethetetlen
+attól. Ezért <code>sizeof(obj)==sizeof(T)</code> a függvényben. A referencia nem
+objektum, és így nincs definiált mérete sem.</p>
+</div>
+</details>
+
+
+
+
+<h3>Érték kiírása</h3>
+
+<p>Az előadás <a href="../ea07/index.html#objektumbajt">objektum bájtjait kiíró programjában</a>...</p>
+
+<p>Működik az, ha nincs változó, csak egy értéket szeretnék kiírni a fenti függvénnyel?
+Pl. helyes a <code>print_obj_hex(1234);</code> sor? Miért?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Igen, működik. A konstans referencia típusú paraméterek át tudnak venni jobbértékeket
+is, tehát olyan értékeket, amelyek nem változóban vannak tárolva, nincs nevük. Ilyenkor
+a fordító a hívás idejére létrehoz egy ideiglenes változót, és beteszi az értéket,
+hogy a függvény referenciaként megkaphassa azt.</p>
+</div>
+</details>
+
+
+
+<h3>Struct és class</h3>
+
+<p>Mi a különbség a <code>class</code> és a <code>struct</code> között?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Csak annyi, hogy a <code>class</code>-nál az adattagok (és az öröklések) alapértelmezetten
+privátak, a <code>struct</code>-nál publikusak. Ezért a <code>struct Rectangle : Shape</code> egy
+publikus leszármazást jelent.</p>
+</div>
+</details>
+
+
+
+
+<h3>Öröklés és tartalmazás</h3>
+
+<p>Ha az öröklésnél / tartalmazásnál is az objektum elejére kerül az ős objektum / tartalmazott
+objektum, akkor tulajdonképp mi a különség az öröklés és a tartalmazás között?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A memóriaképben ugyan semmi, de ez nem jelenti azt, hogy az öröklés és a tartalmazás között
+<em>jelentésbeli</em> különbség nincsen. Az öröklés „X egyfata Y”, a tartalmazás „X-nek van egy Y-ja”
+kapcsolatot fejez ki, és ez a programkód jelentése szempontjából sokat számít. Ettől függ az, hogy
+milyen konverziókat, paraméterátadásokat enged meg a fordító. Például nem származtathatunk egy
+pont típusból (x, y koordináták) téglalap típust azzal a céllal, hogy a téglalapnak legyen x és
+y koordinátája, mert akkor minden pontot váró függvénynek téglalapot is adhatunk paraméterként.
+A pont és a téglalap között nem leszármazási, hanem tartalmazási kapcsolat van: a téglalap nem egy pont,
+hanem a téglalapnak van egy pontja, amely a helyzetét meghatározza.</p>
+</div>
+</details>
+
+<h3>Offsetof I.</h3>
+
+<p>Az <a href="../ea07/index.html#offsetof">előadás programjában</a>, a <code>case TYPE_STRING</code> részben mit jelent
+a <code>char*</code>, és mit a <code>char**</code> cast? Melyik miért ilyen?
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az „objektum pointere plusz ofszet” kifejezés által egy pointer kapunk az adott adattagra.
+Mivel a pont neve esetén az adattag típusa <code>char*</code>, az így kapott pointer <code>char**</code>
+típusú. A <code>(char*)</code> cast pedig a bájtonkénti címzés miatt kell.</p>
+</div>
+</details>
+
+
+
+<h3>Offsetof II.</h3>
+
+<p>Az előbb említett kódban, az adattagokat elérő, <code>*(valami + valami.ofszet)</code> alakú kifejezések elég sok zárójelet
+tartalmaznak. Elhagyható-e valamelyik zárójelpár, és miért?
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p><code>((char*) &amp;p)</code> – itt elhagyható a külső pár. A következő operátor
+az összeadás, amely alacsonyabb precedenciájú, mint a <code>(char*)</code> cast.</p>
+</div>
+</details>
+
+
+
+<h3>A sok zárójel</h3>
+
+<p>Tényleg kell a zárójel <a href="../ea07/index.html#memberptr">az előadás kódjában</a> a
+<code>point_class_members[i].mptr</code> köré?
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem, csak nagyon nehéz olvasni nélküle. A <code>.*</code> operátor alacsonyabb precedenciájú,
+mint a <code>[]</code> és <code>.</code> operátorok, ezért a zárójel elhagyható lenne. Egy ilyen
+kifejezésben viszont látszik, hogy a <code>.*</code> jobb oldali operandusa egy teljes kifejezés
+lehet, szemben a sima <code>.</code> operátorral, amelynek a jobb oldali „operandusa” egy adattag
+neve lehet, semmi más.</p>
+</div>
+</details>
+
+
+
+<h3>Keresztkérdések</h3>
+
+<p>Az alábbi elméleti kérdésekre szövegben válaszolj, esetleg pár soros kódrészlettel illusztrálva, ha úgy látod hasznosnak! (Megjegyzések: 1. Az is lehet, hogy értelmetlen valamelyik kérdés. 2. Saját véleményt, meglátást írj, ne guglizz :D)</p>
+
+<ol>
+    <li>Ha egyetlen egy mondatban kell megfogalmaznod, hogy mi a közük C-ben a pointereknek a tömbökhöz, mi lesz az az egy mondat?
+    <li>Hány bájtos egy referencia?
+    <li>Létezik-e referenciák tömbje? Vajon miért?
+</ol>
+
+
+
+<h3 id="optional">std::optional</h3>
+
+
+<p>Néha szükségünk van egy olyan objektumra, amelyik egy jól meghatározott típusú értéket tárol – vagy éppenséggel üres. Például egy függvénynél, amelyik visszaad egy értéket, vagy nem ad vissza semmit. Ha sikerül beolvasnia egy számot, akkor visszaadja azt, ha nem, akkor pedig csak egy üres objektumot.</p>
+
+<p>Ezt meg tudjuk oldani dinamikus memóriakezeléssel is. De ebben az esetben az kényelmetlen és lassú: egyetlen egy <code>int</code>-et kellene dinamikusan foglalni, indirekten visszaadni stb. Ehelyett inkább egy olyan objektumra lenne szükségünk, amelyik ezt érték szerint tartalmazza, és tudja azt is, hogy üres-e vagy nem. A használatát így képzelhetjük el:</p>
+
+<pre   ><code class="language-c">Optional&lt;std::string&gt; get_string_from_stdin();
+
+int main() {
+    Optional&lt;std::string&gt; opt = get_string_from_stdin();
+    if (opt) {
+        std::cout &lt;&lt; &quot;Ezt a sztringet kaptam: &quot; &lt;&lt; *opt &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; &quot;Nem kaptam sztringet&quot; &lt;&lt; std::endl;
+    }
+}</code></pre>
+
+<p>A tárolt érték típusa <code>std::string</code>, de a sablonparaméter miatt lehetne bármi más.</p>
+
+<p>Készíts egy ilyen osztályt! Ügyelj az alábbiakra:</p>
+
+<ul>
+    <li>Nem használhatsz dinamikus memóriakezelést, mert akkor elveszik a feladat értelme.</li>
+    <li>Helyette egy <code>sizeof(T)</code> méretű tömböt kell az <code>Optional</code> objektumba tenni, és neked kell tudnod, hogy ott épp <a href="../ea04/index.html#placementnew">létre van hozva objektum vagy nincs</a>.</li>
+    <li>Ügyelni kell arra is, hogy a tömb <a href="../ea07/index.html#alignment">megfelelő módon helyezkedjen el a memóriában</a>. Előfordulhat, hogy a <code>T</code> típusra vonatkoznak ilyen megkötések (pl. <code>int</code> típus 4-gyel osztható memóriacímen). A memóriabeli igazítás az <code>alignas</code> kulcsszóval oldható meg.</li>
+    <li>Az <code>Optional</code> objektum megszűntekor a tartalmazott <code>T</code> destruktorát is meg kell hívni, már amennyiben volt tartalmazott <code>T</code>.</li>
+</ul>
+
+<p>Tesztesetek nincsenek megadva, azokat is neked kell kitalálnod. Vajon mi várható el egy ilyen osztálytól?
+Gondolj arra, hogy egy <code>Optional</code> 0 vagy 1 darab objektumot tartalmaz érték szerint, és azt
+az objektumot helyettesíti. Pl. másoláskor lemásolja azt. Érdemes a kódodat GCC/Clang <code>-fno-elide-constructors</code>
+fordítási paraméter mellett tesztelni, hogy kikapcsold a hibákat elfedő optimalizációkat!</p>
+
+<p>A C++17 óta egyébként van ilyen osztály, <code>std::optional</code> néven. Ez a Boost <code>optional</code> osztály mintájára készült.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+ 
+template &lt;typename T&gt;
+class Optional {
+  private:
+    alignas(T) unsigned char storage[sizeof(T)];
+    /* ha van benne objektum, ez == storage. ha nincs, akkor nullptr.
+     * lehetne egy bool is, de így egy csomó cast elkerülhető. */
+    T* obj;
+    
+  public:
+    Optional() {
+        obj = nullptr;
+    }
+        
+    Optional(T const &amp; newdata) {
+        obj = new (storage) T(newdata);
+    }
+    
+    ~Optional() {
+        if (obj)
+            obj-&gt;~T();
+    }
+ 
+    Optional(Optional const &amp; other) {
+        if (other.obj)
+            obj = new (storage) T(*other.obj);
+        else
+            obj = nullptr;
+    }
+    
+    Optional&amp; operator=(Optional const &amp; other) {
+        if (this == &amp;other)
+            return *this;
+ 
+        if (obj &amp;&amp; !other.obj) {
+            obj-&gt;~T();
+            obj = nullptr;
+        } else if (!obj &amp;&amp; other.obj) {
+            obj = new (storage) T(*other.obj);
+        } else if (obj &amp;&amp; other.obj) {
+            *obj = *other.obj;
+        } else {
+            /* mindkettő uninitialized, nincs teendő */
+        }
+        return *this;
+    }
+ 
+    explicit operator bool () const {
+        return obj != nullptr;
+    }
+   
+    T &amp; operator*() {
+        if (!obj)
+            throw std::runtime_error(&quot;empty optional&quot;);
+        return *obj;
+    }
+
+    T const &amp; operator*() const {
+        if (!obj)
+            throw std::runtime_error(&quot;empty optional&quot;);
+        return *obj;
+    }
+ };
+ 
+ 
+Optional&lt;std::string&gt; get_word_from_stdin() {
+    std::string s;
+    if (std::cin &gt;&gt; s)
+        return s;
+    else
+        return {};
+}
+ 
+int main() {
+    Optional&lt;std::string&gt; opt = get_word_from_stdin();
+    if (opt) {
+        std::cout &lt;&lt; &quot;Ezt a szót kaptam: &quot; &lt;&lt; *opt &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; &quot;Nem kaptam szót&quot; &lt;&lt; std::endl;
+    }
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Reflektivitás">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Reflektivitás<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Reflektivitás – a tevékenység virtuális függvényben</h3>
+
+<p>A kiindulási alap <a href="../reflexio/index.html#cpprefl">az extrákban megjelenő írás kódja</a>.</p>
+
+<p>A programot át lehetne írni úgy, hogy a kiírásokat végző <code>dynamic_cast</code> sorozat helyett
+a <code>PointMptrBase</code> osztályba egy virtuális függvényt teszünk:</p>
+<pre   ><code class="language-c">class PointMptrBase {
+  public:
+    virtual ~PointMptrBase() {}
+    virtual void save_to_stream(std::ostream &amp; os, Point const&amp; p) const = 0;
+};
+
+
+template &lt;typename T&gt;
+class PointMptr : public PointMptrBase {
+  public:
+    PointMptr(T Point::* mptr) : mptr(mptr) {}
+    T Point::* mptr;
+    virtual void save_to_stream(std::ostream &amp; os, Point const&amp; p) const {
+        os &lt;&lt; p.*mptr;
+    }
+};
+
+int main() {
+    /* ... */
+
+    for (int i = 0; point_class_members[i].name; ++i) {
+        std::cout &lt;&lt; point_class_members[i].name &lt;&lt; &quot; = &quot;;
+
+        point_class_members[i].mptrobj-&gt;save_to_stream(std::cout, p1);
+
+        std::cout &lt;&lt; std::endl;
+    }
+
+    /* ... */
+}</code></pre>
+<p>Mi a véleményed erről az átalakításról? Vannak előnyei, vannak hátrányai?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<ul class="elony">
+    <li>Megszűnt a <code>dynamic_cast</code>, automatikusan megíródnak a függvények a sablonból.
+    <li>Ha más működés kell bizonyos típusú adattagnál, egy adott <code>template &lt;typename T&gt; class PointMptr</code> osztály specializálható.
+</ul>
+<ul class="hatrany">
+    <li>A <code>PointMptrBase</code> osztályba bekerült egy olyan tevékenység, amihez annak az osztálynak
+        nincs köze (az adattag kiírása). Ide kerülne az összes többi tevékenység is; pl. dialógusablak létrehozásakor
+        a szövegbeviteli mező, csúszka stb. elemek létrehozása. Ezek nem igazán tartoznak ehhez az osztályhoz.
+        Ez feladatspecifikus, nem tartozik egy reflektivitást biztosító keretrendszerhez.
+</ul>
+</div>
+</details>
+</ol>
+
+
+
+
+<h3>Reflektivitás – dynamic_cast</h3>
+
+<p>A kiindulási alap <a href="../reflexio/index.html#cpprefl2">az extrákban megjelenő írás kódja</a>.</p>
+
+<p>Mi a helyzet ezzel a <code>dynamic_cast()</code> sorozattal, meg lehetne kerülni?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Meg, mint mindig. Betehetjük az <code>MptrType&lt;T&gt;</code> típusokba a teendőket.
+Esetleg használhatjuk a <a href="http://en.wikipedia.org/wiki/Visitor_pattern">látogató mintát</a> is,
+hogy külön osztályba kerülhessenek.</p>
+</div>
+</details>
+
+
+
+
+<h3>Reflektivitás – Visitor</h3>
+
+<p>Ez is az <a href="../reflexio/index.html#cpprefl2">az extrákban megjelenő írás kódjára</a> vonatkozik.</p>
+
+<p>Oldd meg látogató mintával (Visitor pattern) a reflektív objektumok bejárását, az egyes
+adattagokon elvégzendő tevékenységeket!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nincs mintamegoldás, de ha csináltál egyet, küldd el :D</p>
+</div>
+</details>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

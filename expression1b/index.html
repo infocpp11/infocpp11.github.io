@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: I/b. rész: Gyártófüggvények</title>
+<meta property="og:title" content="TEST InfoC++11 :: I/b. rész: Gyártófüggvények">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Mellékszál a kifejezésfa program refaktorolásában: gyártófüggvények és CRTP.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Mellékszál a kifejezésfa program refaktorolásában: gyártófüggvények és CRTP.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="I/b. rész: Gyártófüggvények">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">I/b. rész: Gyártófüggvények</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Mellékszál a kifejezésfa program refaktorolásában: gyártófüggvények és CRTP.</p>
+</div>
+
+<p>A sorozat <a href="../expression1/index.html">előző részében</a> a kifejezésfa programjába
+automatikus memóriakezelés került, az <code>std::shared_ptr&lt;&gt;</code> osztályt felhasználva. Ezzel robusztusabb
+lett a kód: könnyebb használni az osztályhierarchiát, gyakorlatilag nem tudunk memóriaszivárgást kiváltani. A
+megosztott részfák által pedig sok másolást megspóroltunk. Ez volt a kód végleges változata:
+<a href="expression_shared.cpp">expression_shared.cpp</a>.</p>
+
+<p>A kód azonban így megtelt <code>std::shared_ptr&lt;Expression&gt;</code>-ökkel és <code>std::make_shared&lt;&gt;</code>-ekkel.
+Például az <code>5*(3+x)</code> kifejezésfa létrehozásánál:</p>
+
+<pre   ><code class="language-c">std::shared_ptr&lt;Expression&gt; f =
+    std::make_shared&lt;Product&gt;(
+        std::make_shared&lt;Constant&gt;(5),
+        std::make_shared&lt;Sum&gt;(
+            std::make_shared&lt;Constant&gt;(3),
+            std::make_shared&lt;Variable&gt;()
+        )
+    );</code></pre>
+
+<p>Ezeknek a neve még mindig a memóriakezelésre utal, ami némileg zavaró. Amikor létre akarunk hozni egy szorzat objektumot,
+akkor igazából ezt a két szót akarjuk leírni: létrehozás, szorzat. Amikor pedig egy kifejezést szeretnénk tárolni, akkor egy
+kifejezés típusú változóval szeretnénk azt megtenni.</p>
+
+<p>Egy típusdefiníció és néhány gyártófüggvény bevezetése megoldja a problémánkat.</p>
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A típusdefiníció</a>
+                      <li><a href="index.html#2" class="">A gyártófüggvények</a>
+                      <li><a href="index.html#3" class="">A gyártóosztály</a>
+                      <li><a href="index.html#4" class="">A gyártóosztály okosítása</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A típusdefiníció">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A típusdefiníció<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A kifejezés típust könnyedén bevezethetjük. Egy <code>using ExpressionPtr = std::shared_ptr&lt;Expression&gt;</code>
+sor leírása után a programban az összes <code>std::shared_ptr&lt;Expression&gt;</code>-t akár automatikusan
+<code>ExpressionPtr</code>-re cserélhetjük. Így a név mögé van rejtve a memóriakezelés, de azért a név utal
+a közös részfákra (<code>...Ptr</code>). Az ősosztály definiálásakor kicsit figyelni kell: mivel már ez
+használni fogja az <code>ExpressionPtr</code> típust, ezért a típusdefiníciót az osztály definíciója elé kell írnunk,
+és ahhoz meg az osztályt előre deklarálnunk kell:</p>
+
+<pre   ><code class="language-cbub">class Expression;   // elődeklaráció
+
+using ExpressionPtr = std::shared_ptr&lt;Expression&gt;;
+
+class Expression {
+  public:
+    virtual ExpressionPtr derivative() const = 0;
+
+    virtual ExpressionPtr simplify() const = 0;
+    
+    /* ... */
+};</code></pre>
+
+<p>Észrevehetjük, hogy a kiíró operátor <code>&lt;&lt;</code> használatánál ezeket a pointereket mindig dereferáltuk.
+Mindig pointerekkel dolgozunk, ezért praktikusabb lenne az operátor jobb oldali operandusát is ilyen típusúra választani:</p>
+
+<pre   ><code class="language-cbub">std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, ExpressionPtr e) { // Expression&amp; helyett
+    e-&gt;print(os);
+    return os;
+}</code></pre>
+
+<p>Így rengeteg <code>*</code> operátor eltűnik a programból. Ugyan a referencia kifejezte, hogy nem lehet null pointer, de
+amúgy sem használunk sehol null értékű <code>ExpressionPtr</code>-eket. Így kényelmesebb használni.</p>
+
+<p>A kód jelenlegi állapota ez: <a href="expression_ptr.cpp">expression_ptr.cpp</a>. A főprogramon szembetűnő a változás.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A gyártófüggvények">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A gyártófüggvények<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A gyakori <code>std::make_shared&lt;...&gt;(...)</code> használat is egy mintázatra utal. Egy csomópont példányosítása
+mindig egy <code>make_shared()</code> hívást jelent. Ezek helyett az egyes osztályokba betehetünk egy
+<code>create()</code> nevű statikus gyártófüggvényt, amely egy csomópont létrehozásához használható majd: létrehozza
+a csomópontot, és becsomagolja az okos pointerbe. Például a konstans esetén:</p>
+
+<pre   ><code class="language-cbub">class Constant {
+  public:
+    static ExpressionPtr create(double c) {
+        return std::make_shared&lt;Constant&gt;(c);
+    }
+    /* ... */
+};
+
+auto c = Constant::create(3.14);</code></pre>
+
+<p>Talán megint a főprogramon látszik legjobban a változás:</p>
+
+<div class="sticky">előtte</div>
+<pre   ><code class="language-c">ExpressionPtr c = std::make_shared&lt;Product&gt;(
+                      std::make_shared&lt;Constant&gt;(5),
+                      std::make_shared&lt;Sum&gt;(
+                          std::make_shared&lt;Constant&gt;(3),
+                          std::make_shared&lt;Variable&gt;()
+                      )
+                  );</code></pre>
+<div class="sticky">utána</div>
+<pre   ><code class="language-c">ExpressionPtr c = Product::create(
+                      Constant::create(5),
+                      Sum::create(
+                          Constant::create(3),
+                          Variable::create()
+                      )
+                  );</code></pre>
+
+<p>A jelenlegi változat: <a href="expression_factory_method.cpp">expression_factory_method.cpp</a>.</p>
+
+<div class="megjegyzes csik">
+<h3>Gyártófüggvények és privát konstruktorok</h3>
+<p>Gyakran gyártófüggvények használata esetén a konstruktorokat priváttá (vagy védetté) tesszük, mert az osztály tagfüggvényeként
+jelen lévő gyártófüggvény úgyis eléri azt. Ez az okos pointerek és a <code>make_shared()</code> használata esetén nem olyan
+egyszerű. Ugyanis a tényleges konstruktorhívás nem a gyártófüggvényben, hanem a <code>make_shared()</code>-ben történik meg,
+ami pedig nem része az osztálynak. No persze a <code>friend</code> kulcsszó segíthet.</p>
+</div>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A gyártóosztály">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A gyártóosztály<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Észrevehetjük a refaktorálás közben, hogy a <code>create()</code> függvények eléggé egyformák lettek. Például
+a konstans és az összeg esetén:</p>
+
+<pre   ><code class="language-c">ExpressionPtr Constant::create(double c) {
+    return std::make_shared&lt;Constant&gt;(c);
+}
+
+ExpressionPtr Sum::create(ExpressionPtr lhs, ExpressionPtr rhs) {
+    return std::make_shared&lt;Sum&gt;(lhs, rhs);
+}</code></pre>
+
+<p>Ez annyira nem meglepő, hiszen lényegében csak a <code>make_shared()</code> hívásokat csomagoltuk be, hogy
+kényelmesebb legyen használni őket. De lényegében egy kaptafára megy az összes:</p>
+
+<pre   ><code class="language-c">ExpressionPtr VALAMILYEN_KIFEJEZÉS::create(KONSTRUKTOR_PARAMÉTEREK) {
+    return std::make_shared&lt;VALAMILYEN_KIFEJEZÉS&gt;(KONSTRUKTOR_PARAMÉTEREK);
+}</code></pre>
+
+<p>A feladatra írhatnánk egy sablon függvényt, hasonlóképp, ahogy az <code>std::make_shared()</code> esetén
+is csinálták. Egy kis csavar a történetben, hogy most nem egy globális függvényt kell írnunk, hanem különféle
+osztályokat kell kiegészíteni statikus függvényekkel. De ez nem gond, mert a függvényt betesszük egy segédosztályba,
+és aztán mindenki abból a segédosztályból származik majd, megörökölve a statikus függvényt. A gyártó osztálynak
+sablonparamétere lesz a gyártott objektum típusa; a konstruktor paraméterei pedig értelemszerűen a gyártófüggvény
+paraméterei kell legyenek.</p>
+
+<pre   ><code class="language-c">template &lt;typename EXPRESSION_TYPE&gt;
+class ExpressionFactory {
+  public:
+    template &lt;typename... ARGS&gt;
+    static ExpressionPtr create(ARGS &amp;&amp; ... args) {
+        return std::make_shared&lt;EXPRESSION_TYPE&gt;(std::forward&lt;ARGS&gt;(args)...);
+    }
+};</code></pre>
+
+<p>Például a <code>Constant</code> osztály definíciója, és gyártófüggvényének használata így néz ki ezután:</p>
+
+<pre   ><code class="language-cbub">class Constant final : public Expression, public ExpressionFactory&lt;Constant&gt; {  // !
+    /* ... */
+};
+
+auto c = Constant::create(3.14);</code></pre>
+
+<p>A <code>Constant::create(3.14)</code> hívásakor az <code>ExpressionFactory&lt;Constant&gt;::create&lt;double&gt;</code>
+függvény fog hívódni. A gyártóosztály sablonparaméterét az öröklésnél megadtuk (<code>EXPRESSION_TYPE</code> = <code>Constant</code>),
+a függvény sablonparaméterét pedig a fordító vezeti le (<code>ARGS... = double</code>).</p>
+
+<div class="megjegyzes csik">
+<h3>CRTP</h3>
+
+<p>Érdekes módon, az osztályok így egy olyan osztályból örökölnek, amelynek sablonparaméterként saját magukat adják 
+(<code>Constant</code> &rarr; <code>ExpressionFactory&lt;Constant&gt;</code>). Ezt a sablon metaprogramozásban CRTP-nek (Curiously 
+recurring template pattern) nevezik. Az általános séma ez:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Base {
+};
+
+template Derived : public Base&lt;Derived&gt; {
+};</code></pre>
+</div>
+
+<div class="megjegyzes csik">
+<h3>Trait-ek és mix-in-ek</h3>
+<p>Bár alapvelv a tervezésnél, hogy nem öröklünk kódot újrafelhasználási céllal, azért ez más helyzet. Az
+<code>ExpressionFactory</code> osztály csak egy statikus függvényt ad hozzá az osztályokhoz. Inkább csak egy mix-in,
+nem egy teljes értékű ősosztály. Egyes nyelvek meg is különböztetik az ilyen jellegű relációt; pl. a PHP az ilyen
+osztályokat <code>trait</code>-nek nevezi, és a <code>use</code> kulcsszóval tudjuk beemelni egy <code>trait</code> kódját
+egy másik osztályba.</p>
+<p>A mix-in jellegű osztályok általában valamilyen nagyon általános feladatot oldanak meg, ezért
+akarhatjuk a kódban több, egymástól független osztályban felhasználni őket. Észre is vehetjük, hogy az <code>ExpressionFactory</code>
+osztályunkban igazából semmilyen <code>Expression</code>-specifikus dolog nincsen; ha a <code>create()</code> függvény
+visszatérési értékét egy <code>std::shared_ptr</code>-re cseréljük, egy teljesen általános kódot kapunk:</p>
+<pre   ><code class="language-c">template &lt;typename TYPE&gt;
+class Factory {
+  public:
+    template &lt;typename... ARGS&gt;
+    static std::shared_ptr&lt;TYPE&gt; create(ARGS &amp;&amp; ... args) {
+        return std::make_shared&lt;TYPE&gt;(std::forward&lt;ARGS&gt;(args)...);
+    }
+};</code></pre>
+</div>
+
+<p>A gyártó osztályt használó változat: <a href="expression_factory_class.cpp">expression_factory_class.cpp</a>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A gyártóosztály okosítása">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A gyártóosztály okosítása<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A gyártófüggvény külön osztályba szervezésével egy OOP tervezésben megszokott tervezési mintát követtünk –
+persze most fordítási időben, nem futási időben adjuk meg a létrehozandó objektum típusát. Így most a kifejezések
+létrehozásának módját kicsit jobban kézbe tudjuk venni. Például tudjuk, hogy változó csak egyféle van, az
+<code>x</code>, és az bármilyen környezetben ugyanazt jelenti. És azt is tudjuk, hogy a referenciaszámlálás miatt
+megoszthatjuk a fák között az objektumokat.</p>
+
+<p>Így megtehetjük, hogy egyetlen egy példányt hozunk létre a változóból, és azt tesszük mindenhova. Ehhez
+specializáljuk az <code>ExpressionFactory</code> sablont a <code>Variable</code> típusra. Legegyszerűbben így:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+class ExpressionFactory&lt;Variable&gt; {
+  public:
+    static ExpressionPtr create();
+};
+
+ExpressionPtr ExpressionFactory&lt;Variable&gt;::create() {
+    static ExpressionPtr x = std::make_shared&lt;Variable&gt;();
+    return x;
+};</code></pre>
+
+<p>Ezzel a módosítással a változó Singleton-ná (egykévé) vált. Vegyük észre, hogy ehhez nem a változó osztályt módosítottuk, hanem a 
+gyártófüggvényt. Sokan úgy tartják, hogy a Singleton tervezési minta értelmetlen – jogosan, hiszen ha nem akarjuk, hogy egy 
+osztályból több példány legyen, akkor ne hozzunk belőle többet létre, és kész. Ehhez nem az osztályt kell módosítani! Itt ezt az 
+elvet követi a kód: a gyártófüggvény biztosítja, hogy ne jöjjön több példány létre az objektumból.</p>
+
+
+<p>A letölthető kód a változó gyártójának specializációját tartalmazza:
+<a href="expression_factory_variable_singleton.cpp">expression_factory_variable_singleton.cpp</a>.</p>
+
+<p>Mindezek a változások az eredeti kódba nem fognak belekerülni, hanem egy másik irányba megy tovább a fejlesztés. A 
+gyártóosztályból való öröklés amúgy is csak kényelmi funkció, nem igazán C++-os. Ezt a publikus öröklés is mutatja, mert
+annak nem ezt kellene jelentenie. Leginkább a gyártóosztály megmaradhatna külön – specializálni, mint fentebb, már akkor is lehet.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

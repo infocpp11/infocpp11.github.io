@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Solver</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1>Solver</h1>
+
+<script>
+
+function Solver() {
+    var variables = [];
+    var iterators = [];
+    var constraints = [];
+
+    this.add_variable = function(values) {
+        variables.push(values);
+        var pos = variables.length - 1;
+        return function() {
+            return variables[pos][iterators[pos]];
+        };
+    };
+
+    this.add_constraint = function(constraint) {
+        constraints.push(constraint);
+    };
+
+    this.solve = function(do_what) {
+        var i;
+        iterators.length = 0;
+        for (i = 0; i != variables.length; ++i)
+            iterators.push(0);
+
+        var end = false;
+        while (!end) {
+            var satisf = true;
+            for (i = 0; satisf && i != constraints.length; ++i)
+                if (!constraints[i]())
+                    satisf = false;
+            if (satisf)
+                do_what();
+
+            var carry = true;
+            for (i = 0; i < variables.length; ++i) {
+                ++iterators[i];
+                carry = iterators[i] == variables[i].length;
+                if (carry)
+                    iterators[i] = 0;
+                else
+                    break;
+            }
+            end = carry;
+        }
+
+        iterators.length = 0;
+    };
+}
+
+var t = new Solver;
+
+var baker = t.add_variable([1, 2, 3, 4, 5]);
+var cooper = t.add_variable([1, 2, 3, 4, 5]);
+var fletcher = t.add_variable([1, 2, 3, 4, 5]);
+var miller = t.add_variable([1, 2, 3, 4, 5]);
+var smith = t.add_variable([1, 2, 3, 4, 5]);
+
+var guys = [ baker, cooper, fletcher, miller, smith ];
+t.add_constraint(function() {
+    for (var first = 0; first != guys.length; ++first)
+        for (var second = first+1; second != guys.length; ++second)
+            if (guys[first]() == guys[second]())
+                return false;
+    return true;
+});
+
+t.add_constraint(function() { return baker() != 5; });
+t.add_constraint(function() { return cooper() != 1; });
+t.add_constraint(function() { return fletcher() != 1 && fletcher() != 5; });
+t.add_constraint(function() { return miller() > cooper(); });
+t.add_constraint(function() { return Math.abs(smith() - fletcher()) != 1; });
+t.add_constraint(function() { return Math.abs(cooper() - fletcher()) != 1; });
+
+var print_all = function() {
+    document.write("Baker " + baker() + "<br>"
+                 + "Cooper " + cooper() + "<br>"
+                 + "Fletcher " + fletcher() + "<br>"
+                 + "Miller " + miller() + "<br>"
+                 + "Smith " + smith() + "<br>");
+};
+t.solve(print_all);
+
+</script>
+
+<p>Lásd a HTML forrását!</p>
+
+</body>
+
+</html>

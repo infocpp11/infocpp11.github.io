@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Haladó memóriakezelés</title>
+<meta property="og:title" content="TEST InfoC++11 :: Haladó memóriakezelés">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Placement new, osztályok saját operator new függvényei, allokátorok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Placement new, osztályok saját operator new függvényei, allokátorok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Haladó memóriakezelés">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Haladó memóriakezelés</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Placement new, osztályok saját operator new függvényei, allokátorok.</p>
+</div>
+
+
+<p>Ez a labor néhány haladó memóriakezelési technikát mutat be.</p>
+
+<blockquote>
+<h3>Feltöltés</h3>
+<p>A laborhoz kiírt beadandó a szokásos helyen van, az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A globális operator new</a>
+                      <li><a href="index.html#2" class="">A „placement new” szintaxis</a>
+                      <li><a href="index.html#3" class="">Verem nyújtózkodó tömbbel</a>
+                      <li><a href="index.html#4" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A globális operator new">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A globális operator new<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Emlékezz vissza az előadásra a globális <code>operator new</code> függvénnyel
+kapcsolatban! A C++ szabványos könyvtár biztosít két függvényt a dinamikus memória
+foglalásához (allocation) és felszabadításához (deallocation):</p>
+
+<pre   ><code class="language-c">#include &lt;new&gt;
+
+void * operator new(size_t);
+void operator delete(void *) noexcept;</code></pre>
+
+<p>Ezek a C-s <code>malloc()</code> és <code>free()</code> függvénnyel teljesen analóg módon használhatóak. Az <code>operator 
+new</code> megkapja bájtokban, mekkora memóriaterületet kell foglalnia, és a foglalt területre mutató pointerrel tér vissza. Az 
+<code>operator delete</code> az így kapott pointer kapja, és felszabadítja a memóriaterületet. Objektumok konstruktorát és 
+destruktorát ezek nem futtatják, hanem csak a memória kezeléséért felelnek.</p>
+
+<p>Ezek a függvények a felhasználó által definiálhatóak, és így a rendszer által adott dinamikus memóriakezelő lecserélhető.</p>
+
+<ol class="feladatok">
+    <li>Próbáld ezt ki! Definiáld a fenti függvényeket úgy, hogy a C-s könyvtári
+        <code>malloc()</code> és <code>free()</code> függvényeket használják!
+    <li>Írj mindegyik függvénybe egy kiírást a működés megfigyeléséhez, pl.
+        „allocated 45 bytes at 0x01203567” és „freed memory at 0x01203567”. A
+        <code>void *</code> pointerekhez van <code>operator&lt;&lt;</code> <em>overload</em>.
+    <li>Foglalj egy <code>int</code>-et: <code>new int</code>. Szabadítsd fel: mit látsz?
+    <li>Hozz létre egy <code>std::string</code> objektumot: <code>std::string h = "helló világ alma körte barack";</code>.
+        (Fontos, hogy hosszú szöveg legyen benne, mert egyes <code>std::string</code> implementációk a rövid
+        szövegeknél el tudják kerülni a dinamikus memóriakezelést.)
+        Mit látsz? És akkor, ha <code>std::string *h = new std::string("helló világ alma körte barack")</code>
+        módon foglalod? Kipróbálhatsz más osztályt is, pl. <code>std::set{1, 2, 3, 4, 5}</code>.
+    <li>Valósíts meg egy egyszerű dinamikus memóriakezelést ellenőrző keretrendszert
+        a függvények által! Tartsd nyilván egy közös (globális) <code>int</code> változóban, hány darab memóriaterület
+        van épp lefoglalva! A <code>cstdlib</code> fejlécfájl <code>atexit()</code>
+        függvényének átadhatsz egy paraméter és visszatérési érték nélküli, <code>void()</code>
+        függvényt, amelyet a programból kilépéskor, azaz a <code>main()</code>-ből
+        visszatérés után meghív. Adj ennek egy olyan függvényt, amely kiírja, hány darab
+        felszabadítatlan memóriaterület maradt! Teszteld, hogy mutatja-e a felszabadítatlan
+        területeket!
+    <li>A <code>new</code> operátornak <code>std::bad_alloc</code> típusú kivételt
+        kell dobnia, ha a foglalás nem sikerült. Ellenőrizd ezért a <code>malloc()</code>
+        által adott pointert, hogy nem null értékű-e! Dobj hibát, ha ez null, vagy ha 1 megabájtnál
+        nagyobb területet próbál foglalni a hívó!
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;string&gt;
+#include &lt;set&gt;
+#include &lt;stdexcept&gt;
+#include &lt;new&gt;
+
+class MAllocator {
+  private:
+    static unsigned allocated_count;
+  public:
+    static void * alloc(size_t size) {
+        if (size &gt; 1&lt;&lt;20) {
+            std::cerr &lt;&lt; &quot;Can't allocate &quot; &lt;&lt; size &lt;&lt; &quot; bytes&quot; &lt;&lt; std::endl;
+            throw std::bad_alloc{};
+        }
+        ++allocated_count;
+        void *mem = malloc(size);
+        if (mem == nullptr) {
+            std::cerr &lt;&lt; &quot;malloc() returned nullptr for &quot; &lt;&lt; size &lt;&lt; &quot; bytes&quot; &lt;&lt; std::endl;
+            throw std::bad_alloc{};
+        }
+        std::cerr &lt;&lt; &quot;Allocated &quot; &lt;&lt; size &lt;&lt; &quot; bytes at &quot; &lt;&lt; mem &lt;&lt; std::endl;
+        return mem;
+    }
+
+    static void dealloc(void *mem) noexcept {
+        --allocated_count;
+        std::cerr &lt;&lt; &quot;Freed mem at &quot; &lt;&lt; mem &lt;&lt; std::endl;
+        free(mem);
+    }
+
+    static void allocated_report_atexit() {
+        if (allocated_count != 0) {
+            std::cerr &lt;&lt; &quot;Memory leak: &quot; &lt;&lt; allocated_count &lt;&lt; &quot; chunk(s) still allocated&quot; &lt;&lt; std::endl;
+        }
+    }
+    
+    static void init() {
+        atexit(allocated_report_atexit);
+    }
+};
+
+unsigned MAllocator::allocated_count = 0;
+
+
+void * operator new(size_t size) {
+    return MAllocator::alloc(size);
+}
+
+void operator delete(void *mem) noexcept {
+    return MAllocator::dealloc(mem);
+}
+
+int main() {
+    MAllocator::init();
+    delete new int;
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    {
+        std::string s = &quot;hello vilag alma korte barack szilva dinnye&quot;;
+    }
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    delete new std::string(&quot;hello vilag alma korte barack szilva dinnye&quot;);
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    delete new std::set&lt;int&gt;{1, 2, 3, 4, 5, 6, 7};
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    try {
+        new int[123456789];
+    } catch (std::bad_alloc &amp;b) {
+        std::cout &lt;&lt; &quot;Caught std::bad_alloc&quot; &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+    new int;
+    std::cout &lt;&lt; &quot;=====\n&quot;;
+}
+</code></pre>
+</div>
+</details>
+
+<div class="megjegyzes csik">
+    
+<h3>Implementációs részletek</h3>
+    
+<p>Előfordulhat, hogy a fordító figyelmeztetést ad, miszerint saját <code>operator delete(void*)</code>
+implementáció esetén <code>operator delete(void*, size_t)</code> függvényt is kell írni.
+Az <code>operator delete(void *, size_t)</code> változatról előadáson külön nem esett szó. Ezt használhatja a fordító
+akkor, ha tudja valahonnan felszabadításkor a terület méretét is (ami nyilvánvalóan megegyezik a foglalt mérettel). Lényeg, hogy
+a kettőt együtt kell megvalósítani. Ha szeretnél később elmélyedni a témában, az <a href="../deletesize/index.html">operator delete(void*, size_t) függvényről</a> szóló írásban olvashatsz erről.</p>
+
+<p>Hasonlóképp, létezik külön <code>operator new[]</code> és <code>operator delete[]</code> is. Ha tömbök foglalásakor
+és felszabadításakor nem látod, hogy lenne kimenete a programodnak, írd meg ezeket is – akár a nem tömbös változatokra
+visszavezetve.</p>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A „placement new” szintaxis">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A „placement new” szintaxis<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Emlékezz vissza az előadáson bemutatott „placement new” szintaxisra! Ez arra
+jó, hogy egy már lefoglalt, de még memóriaszemetet tartalmazó memóriaterületre
+„ráhívjunk” egy konstruktort, hogy ott egy objektum keletkezzen. Így lehet
+objektumot létrehozni memóriafoglalás nélkül, de természetesen a helyet nekünk
+kell biztosítanunk. Az így létrehozott objektum destruktorának hívásáért is a
+programozó felel, de az működik szokványos tagfüggvényként is:</p>
+
+<pre   ><code class="language-cbub">class Foo { /* ... */ };
+
+unsigned char mem[sizeof(Foo)];
+Foo *f = new (mem) Foo{}; // ctor
+
+f-&gt;do_something();
+
+f-&gt;~Foo(); // dtor</code></pre>
+
+<p>A feladat egy olyan verem (stack) osztályt írni, amely:</p>
+<ul>
+    <li><code>push()</code> tagfüggvénye megjegyzi a paraméterként kapott értéket,
+    <li><code>pop()</code> tagfüggvénye visszaadja a legutóbb beszúrt értéket (törölve azt a veremből),
+    <li>a konstruktora átveszi a verem maximális méretét,
+    <li>az elemeket pedig belül egy olyan tömbben tárolja, amelyet a <code>malloc()</code> függvénnyel
+        foglalt.
+</ul>
+
+<p>A verem osztály másoló konstruktorát írd meg! Az értékadó operátorával ne töltsd az időt, azt csak tiltsd le. A példányosító 
+típusnak ne használd az alapértelmezett konstruktorát vagy értékadó operátorát, sőt tételezd fel, hogy nincs is neki egyik sem! A
+teszteléshez használhatod az alábbi <code>Noisy</code> osztályt.</p>
+
+<p>(Figyelem: ennek a feladatnak semmi köze az előzőhöz! Nem az <code>operator new</code> memóriafoglaló függvény
+átdefiniálásával kell megoldani, sőt azzal nem is lehet.)</p>
+
+<details >
+<summary>A <code>Noisy</code> osztály kódja</summary>
+<div>
+<pre   ><code class="language-cbub">class Noisy {
+  public:
+    explicit Noisy(int i) : i_{i} {
+        std::cout &lt;&lt; &quot;Noisy{&quot; &lt;&lt; i &lt;&lt; &quot;} ctor\n&quot;; count++;
+    }
+    Noisy(Noisy const &amp;o) : i_{o.i_} {
+        std::cout &lt;&lt; &quot;Noisy copy ctor &quot; &lt;&lt; i_ &lt;&lt; &quot;\n&quot;; count++;
+    }
+    Noisy&amp; operator=(Noisy const &amp;o) = delete;
+    ~Noisy() {
+        std::cout &lt;&lt; &quot;Noisy dtor &quot; &lt;&lt; i_ &lt;&lt; &quot;\n&quot;; count--;
+        i_ = rand();    /* ! */
+    }
+    static void report() {
+        std::cout &lt;&lt; count &lt;&lt; &quot; instance(s).\n&quot;;
+    }
+  private:
+    int i_;
+    static int count;
+};
+
+int Noisy::count = 0;</code></pre>
+
+<p class="megjegyzes">A destruktor jelölt sorával kapcsolatban egy megjegyzés. Ezt az értékadást a fordító kioptimalizálhatja; minek is adnánk értéket 
+egy tagváltozónak a destruktorban, ha ez az objektum meg fog szűnni mindjárt. A memóriaterületét senki nem kellene olvassa már az 
+objektum élettartamának vége után. Ha mégis, akkor az egy hibás kódrészlet (definiálatlan működésű); azt pedig nem kell biztosítania a 
+fordítónak, hogy a hibás kódra determinisztikus viselkedésű programot generáljon.</p>
+
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;new&gt;
+#include &lt;stdexcept&gt;
+
+#define DEBUG 1
+
+
+template &lt;typename T&gt;
+class Stack {
+  public:
+    Stack(size_t max_size);
+    Stack(Stack const &amp;orig);
+    Stack &amp; operator=(Stack const &amp;orig) = delete;
+    ~Stack();
+    void push(T const &amp;what);
+    T pop();
+    bool empty() const;
+  private:
+    size_t size_;
+    size_t max_size_;
+    T *pData_;
+};
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::Stack(size_t max_size) {
+    size_ = 0;
+    max_size_ = max_size;
+    /* itt nem szabad new T[]-t irni, mert az lefuttatna max_size_ darab T
+     * objektum default konstruktorat is. csak memoria kell, objektumok nincsenek. */
+    pData_ = (T*) malloc(sizeof(T) * max_size_);
+}
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::Stack(Stack&lt;T&gt; const &amp;orig) {
+    size_ = orig.size_;
+    max_size_ = orig.max_size_;
+    /* ez sem new T[], hanem csak malloc, hogy csak memoria legyen. egyelore. */
+    pData_ = (T*) malloc(sizeof(T) * max_size_);
+    /* itt masolodnak az objektumok is. ez nem lehet pdata[i] = orig.pdata[i], mert
+     * pdata[i] meg memoriaszemet, es kulonben annak az operator=-jet hivnank! */
+    for (size_t i = 0; i != size_; ++i)
+        new (&amp;pData_[i]) T{orig.pData_[i]};
+}
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::~Stack() {
+    /* destruktorok futtatasa */
+    for (size_t i = 0; i != size_; ++i)
+        pData_[i].~T();
+    /* memoria felszabaditasa. ez nem lehet delete[]. */
+    free(pData_);
+}
+
+
+/* Push element onto stack. */
+template &lt;typename T&gt;
+void Stack&lt;T&gt;::push(T const &amp;what) {
+    if (size_ + 1 &gt; max_size_)
+        throw std::length_error(&quot;stack tele&quot;);
+    /* a memoria mar megvan, csak egyelore memoriaszemet van a tarolt elem helyen.
+     * ezert nem operator=-t hivunk, hanem konstruktort! */
+    new (&amp;pData_[size_]) T{what};
+    size_++;
+}
+
+
+/* Pop element from top of the stack. */
+template &lt;typename T&gt;
+T Stack&lt;T&gt;::pop() {
+    if (size_ == 0)
+        throw std::length_error(&quot;stack ures&quot;);
+    T saved{pData_[size_-1]};
+    /* itt lefut a destruktor, de a memoriaterulet marad! az kulon lett malloc()-olva. */
+    pData_[size_-1].~T();
+    size_--;
+    return saved;
+}
+
+
+template &lt;typename T&gt;
+bool Stack&lt;T&gt;::empty() const {
+    return size_ == 0;
+}
+
+
+int main() {
+    Stack&lt;char&gt; s{100};
+    char c;
+    while (std::cin.get(c))
+        s.push(c);
+    while (!s.empty())
+        std::cout &lt;&lt; s.pop();
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Verem nyújtózkodó tömbbel">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Verem nyújtózkodó tömbbel<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írd át a fenti vermes feladat osztályát úgy, hogy ne kelljen megadni maximális méretet!
+Ha kell, a verem méretezze át a tároláshoz használt tömböt az alábbi módon:</p>
+
+<ul>
+    <li>Ha teli verembe kell beszúrni, megduplázza a méretét,
+    <li>ha kiszedés után negyedére zsugorodott a használt terület a foglalthoz
+    képest, akkor pedig felezze meg a méretét.
+</ul>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;new&gt;
+#include &lt;stdexcept&gt;
+
+#define DEBUG 1
+
+
+template &lt;typename T&gt;
+class Stack {
+  public:
+    Stack();
+    Stack(Stack const &amp;orig);
+    Stack &amp; operator=(Stack const &amp;orig) = delete;
+    ~Stack();
+    void push(T const &amp;what);
+    T pop();
+    bool empty() const;
+  private:
+    size_t size_;
+    size_t allocated_;
+    T *pData_;
+    void resize(size_t new_allocated);
+};
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::Stack() {
+    size_ = 0;
+    allocated_ = 1;
+    pData_ = (T*) malloc(sizeof(T) * allocated_);
+}
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::Stack(Stack&lt;T&gt; const &amp;orig) {
+    size_ = orig.size_;
+    allocated_ = orig.allocated_;
+    pData_ = (T*) malloc(sizeof(T) * allocated_);
+    for (size_t i = 0; i != size_; ++i)
+        new (&amp;pData_[i]) T{orig.pData_[i]};
+}
+
+
+template &lt;typename T&gt;
+Stack&lt;T&gt;::~Stack() {
+    for (size_t i = 0; i != size_; ++i)
+        pData_[i].~T();
+    free(pData_);
+}
+
+
+/* Reallocate stack's objects, move data to new memory area. */
+template &lt;typename T&gt;
+void Stack&lt;T&gt;::resize(size_t new_allocated) {
+    if (allocated_ == new_allocated || new_allocated &lt; size_)
+        return;
+#if DEBUG
+    std::cerr &lt;&lt; &quot;Resizing from &quot; &lt;&lt; allocated_ &lt;&lt; &quot; to &quot; &lt;&lt; new_allocated &lt;&lt; std::endl;
+#endif
+    T *newPData = (T*) malloc(sizeof(T) * new_allocated);
+    for (size_t i = 0; i != size_; ++i) {
+        new (&amp;newPData[i]) T{pData_[i]};
+        pData_[i].~T();
+    }
+    free(pData_);
+    allocated_ = new_allocated;
+    pData_ = newPData;
+}
+
+
+/* Push element onto stack. */
+template &lt;typename T&gt;
+void Stack&lt;T&gt;::push(T const &amp;what) {
+    if (size_ + 1 &gt; allocated_)
+        resize(allocated_ * 2);
+    new (&amp;pData_[size_]) T{what};
+    size_++;
+}
+
+
+/* Pop element from top of the stack. */
+template &lt;typename T&gt;
+T Stack&lt;T&gt;::pop() {
+    if (size_ == 0)
+        throw std::length_error(&quot;ures stack&quot;);
+    T saved{pData_[size_-1]};
+    pData_[size_-1].~T();
+    size_--;
+    if (size_ &lt;= allocated_ / 4)
+        resize(allocated_ / 2);
+    return saved;
+}
+
+
+template &lt;typename T&gt;
+bool Stack&lt;T&gt;::empty() const {
+    return size_ == 0;
+}
+
+
+int main() {
+    Stack&lt;char&gt; s;
+    char c;
+    while (std::cin.get(c))
+        s.push(c);
+    while (!s.empty())
+        std::cout &lt;&lt; s.pop();
+}
+
+</code></pre>
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f04/index.html#feladat_operator_new">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

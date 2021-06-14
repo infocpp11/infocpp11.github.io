@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Sablon metaprogramozás II.</title>
+<meta property="og:title" content="TEST InfoC++11 :: Sablon metaprogramozás II.">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Sablon metaprogramozás: fordítási idejű kiértékelés, rekurzió, jobbrekurzió.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Sablon metaprogramozás: fordítási idejű kiértékelés, rekurzió, jobbrekurzió.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Sablon metaprogramozás II.">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Sablon metaprogramozás II.</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Sablon metaprogramozás: fordítási idejű kiértékelés, rekurzió, jobbrekurzió.</p>
+</div>
+
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első három feladatot meg kell oldani.</p>
+<p>Javaslat a munkához: sablon kódot kell írni. Számíts arra, hogy rengeteg lesz hiba esetén a hibaüzenet,
+és nem lesznek túl informatívak! Ne találgass-tippelgess... Legyél szuper figyelmes a szintaxissal kapcsolatban!</p>
+<p>Mivel a 10. héten „megjelent az igény” a plágiumtesztre, a beküldött megoldások ilyen szempontból
+is vizsgálva lesznek.</p>
+</blockquote>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Fibonacci</a>
+                      <li><a href="index.html#2" class="">Jobbrekurzió</a>
+                      <li><a href="index.html#3" class="">A legnagyobb</a>
+                      <li><a href="index.html#4" class="">Mit csinál a függvény?</a>
+                      <li><a href="index.html#5" class="">Mit csinál a sablon?</a>
+                      <li><a href="index.html#6" class="">A template metaprogramozás sűrűje</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Fibonacci">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Fibonacci<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A Fibonacci-féle sorozat definíciója az alábbi:</p>
+
+<pre class="sorsurit11">
+     ┌
+     │ n, ha n&lt;2
+F(n) ┤
+     │ F(n-2)+F(n-1), amúgy
+     └
+</pre>
+
+<h3>Fibonacci, mint régen</h3>
+
+<p>Írj egy egyszerű, rekurzív C++ függvényt, amely meghatározza az <code>n</code>-edik számot! Írasd ki egy
+ciklusban az első negyven számot! Magyarázd meg, hogy a negyvenedik szám
+felé közelítve miért lesz egyre lassabb a kiírás! Van ötleted, hogyan lehetne gyorsítani?</p>
+
+<pre class="screenshot">
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+...
+fib(38) = 39088169
+fib(39) = 63245986
+fib(40) = 102334155
+</pre>
+
+<h3>Fibonacci, sablon metaprogramozással I.</h3>
+
+<p>Írj most C++ sablon metaprogramozást használó programot, amely valamely Fibonacci számot számítja ki!
+A megírt kód egy osztályt kell tartalmazzon, amelynek sablonparamétere, hogy a sor hányadik elemére vagyunk
+kíváncsiak. Így:</p>
+
+<pre   ><code class="language-c">/* ... */
+
+int main() {
+    std::cout &lt;&lt; Fib&lt;40&gt;::value &lt;&lt; std::endl;
+}</code></pre>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Figyeld meg a szintaktikát! A <code>value</code> az osztály statikus tagváltozója kell legyen. Emlékezz
+vissza arra is, hogy ennek a változónak fordítási idejű konstansnak kell lennie!</p>
+</div>
+</details>
+
+<p>Írd ki így a negyvenedik, és az ötvenedik számot! Hogyan lehetséges az, hogy az ötvenedik
+számot fordítási időben kiszámoló program <em>lefordítása</em> ugyanolyan gyors, mint a negyvenediket vagy
+a huszadikat kiszámolóé?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">template &lt;int n&gt;
+struct Fib {
+    static constexpr unsigned long long value = Fib&lt;n-1&gt;::value + Fib&lt;n-2&gt;::value;
+};
+
+
+template &lt;&gt;
+struct Fib&lt;0&gt; {
+    static constexpr unsigned long long value = 0;
+};
+
+
+template &lt;&gt;
+struct Fib&lt;1&gt; {
+    static constexpr unsigned long long value = 1;
+};</code></pre>
+<p>A fordítás azért gyors, mert a fordító eltárolja a futása közben az egyszer már lefordított osztályokat.
+Ha többször fordítjuk le ugyanazt az osztályt, akkor másodjára már nem fog kódot generálni.</p>
+</div>
+</details>
+
+<h3>Fibonacci, sablon metaprogramozással II.</h3>
+
+<p>Sablonokat példányosítani csak fordítási időben lehet, mert a sablonparamétereknek fordítási idejű konstansoknak
+kell lenniük. Emiatt ez a kód nem működhet, mivel a <code>for()</code> ciklus futási időben dolgozna:</p>
+
+<pre   ><code class="language-cbub">int main() {
+    for (int i = 0; i &lt;= 40; ++i)
+        std::cout &lt;&lt; Fib&lt;i&gt;::value &lt;&lt; std::endl;    // nem működik
+}</code></pre>
+
+<p>Hogyan lehetne olyan programot írni mégis sablon metaprogramozással, amely az első feladathoz hasonlóan kiírja
+az első negyven tagját a sorozatnak? Írj egy ilyet!</p>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>A lényeg, hogy szükség van egy olyan függvényre, amely a kiírást elvégzi, és amelynek szokványos paramétere helyett
+sablonparamétere a kiírandó szám sorszáma. A ciklus rekurzióvá változik, a rekurziót pedig egy üres függvénytörzs
+állítja meg.</p>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">template &lt;int i&gt;        /* &quot;ciklusváltozó&quot; */
+void print_fib() {
+    std::cout &lt;&lt; &quot;fib(&quot; &lt;&lt; i &lt;&lt; &quot;) = &quot; &lt;&lt; Fib&lt;i&gt;::value &lt;&lt; std::endl;   /* &quot;ciklustörzs&quot; */
+    print_fib&lt;i+1&gt;();   /* ++i */
+}
+
+
+template &lt;&gt;
+void print_fib&lt;41&gt;() {
+                        /* i &lt;= 40 */
+}
+
+
+int main() {
+    print_fib&lt;0&gt;();     /* i = 0 */
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Jobbrekurzió">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Jobbrekurzió<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előadáson láttuk, hogy bizonyos feladatoknál a szokványos, általános rekurzív megoldást érdemes jobbrekurzívra átírni. A 
+jobbrekurzióban a rekurzív függvényhívás után, a rekurzióból kifelé jövet, már nem csinálunk semmit: az ilyen függvények 
+<pre   ><code class="language-c">T f() {
+    ...;
+    return f();
+}</code></pre>
+alakúak. Egy függvény jobbrekurzívvá tétele általában segédparaméterek bevezetésével érhető el.
+Ez a segédparaméter általában épp az, amelyik az iteratív megoldásban egy akkumulátor lenne, amit egy ciklus változtat:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">/* nem jobbrekurzív, mert fact(n-1)
+ * után még van egy n* szorzás! */
+int fact(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n*fact(n-1);
+}
+
+
+</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">/* jobbrekurzív */
+int fact(int n, int acc) {
+    if (n == 0)
+        return acc;
+    else
+        return fact(n-1, acc*n);
+}
+
+int fact(int n) {
+    return fact(n, 1);
+}</code></pre>
+</div>
+</div>
+
+<p>Alakítsd jobbrekurzívvá a lenti függvényt! Írd meg sablon metaprogramozással is: pl. <code>PowInt&lt;2, 10&gt;::value</code>
+értéke legyen 1024!</p>
+
+<pre   ><code class="language-c">int powint(int base, unsigned exp) {
+    return exp == 0 ? 1 : base * powint(base, exp-1);
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+int powint(int base, unsigned exp, int acc) {
+    return exp == 0 ? acc : powint(base, exp-1, base*acc);
+}
+int powint(int base, unsigned exp) {
+    return powint(base, exp, 1);
+}
+
+template &lt;int base, unsigned exp, int acc&gt;
+struct PowIntHelper : PowIntHelper&lt;base, exp-1, base*acc&gt; {
+    /* megoldható lenne példányosítással is, lásd a következő feladat megoldását */
+};
+template &lt;int base, int acc&gt;
+struct PowIntHelper&lt;base, 0, acc&gt; {
+    static constexpr int value = acc;
+};
+
+template &lt;int base, unsigned exp&gt;
+struct PowInt {
+    static constexpr int value = PowIntHelper&lt;base, exp, 1&gt;::value;
+};
+
+int main() {
+    std::cout &lt;&lt; powint(2, 10) &lt;&lt; std::endl;
+    std::cout &lt;&lt; PowInt&lt;2, 10&gt;::value;
+}</code></pre>
+</div>
+</details>
+
+<p>Adott alább Euklidész legnagyobb közös osztót számító, iteratív algoritmusa. Írd meg ezt jobbrekurzív formában! (Figyeld meg a <code>t</code>
+változó szerepét! Fog az kelleni?) Írd meg ezt is sablon metaprogramként is!</p>
+
+<pre   ><code class="language-c">int gcd(int a, int b) {
+    while (b &gt; 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+int gcd(int a, int b) {
+    if (b &gt; 0)
+        return gcd(b, a % b);
+    else
+        return a;
+}
+
+template &lt;int a, int b&gt;
+struct GCD {
+    /* megoldható lenne örökléssel is, lásd az előző feladat megoldását */
+    static constexpr int value = GCD&lt;b, a % b&gt;::value;
+};
+template &lt;int a&gt;
+struct GCD&lt;a, 0&gt; {
+    static constexpr int value = a;
+};
+
+int main() {
+    std::cout &lt;&lt; gcd(30, 12) &lt;&lt; std::endl;
+    std::cout &lt;&lt; GCD&lt;30, 12&gt;::value &lt;&lt; std::endl;
+}</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A legnagyobb">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A legnagyobb<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi maximumkeresés:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+int greatest(int arr[], int size) {
+    int max = arr[0];
+    for (int i = 1; i != size; ++i)
+        if (arr[i] &gt; max)
+            max = arr[i];
+    return max;
+}
+
+int main() {
+    int a[] = { 4, 87, 2, 65, 89, 1 };
+    std::cout &lt;&lt; greatest(a, 6) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Írd át ezt rekurzív függvénnyé! Egy számsor legnagyobb eleme megegyezik az első elemmel, vagy a többi elem közül a 
+legnagyobbikkal. A függvényednek nem kell jobbrekurzívnak lennie, sőt a későbbi feladat egyszerűbb is, ha nem jobbrekurzívat 
+írsz.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int greatest(int arr[], int size) {
+    if (size == 1)
+        return arr[0];
+    else
+        return std::max(arr[0], greatest(arr+1, size-1));
+}
+
+int main() {
+    int a[] = { 4, 87, 2, 65, 89, 1 };
+    std::cout &lt;&lt; greatest(a, 6) &lt;&lt; std::endl;
+}</code></pre>
+</div>
+</details>
+
+<p>Ennek tapasztalataiból kiindulva, írj sablon metaprogramot, amelyikben
+a <code>Greatest</code> nevű metafüggvény a sablonparaméterei közül kiválasztja
+a legnagyobb egész számot! Pl. <code>Greatest&lt;3, 9, 8, 5&gt;::value</code>
+értéke <code>9</code> kell legyen.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+template &lt;int A, int B&gt;
+class Max {
+    public:
+        static constexpr int value = A&gt;B ? A : B;
+};
+
+template &lt;int HEAD, int ... TAIL&gt;
+class Greatest {
+    public:
+        static constexpr int value = Max&lt;HEAD, Greatest&lt;TAIL...&gt;::value&gt;::value;
+};
+
+template &lt;int HEAD&gt;
+class Greatest&lt;HEAD&gt; {
+    public:
+        static constexpr int value = HEAD;
+};
+
+
+int main() {
+    std::cout &lt;&lt; Greatest&lt;4, 87, 2, 65, 89, 1&gt;::value &lt;&lt; std::endl;
+}</code></pre>
+<p>A <code>Max</code> osztály két szám közül a nagyobbikat adja.</p>
+<p>A <code>Greatest</code> osztály specializációja azt az esetet kezeli, amikor már
+csak egy számmal kell dolgozni (ilyenkor nincs már azt mivel összehasonlítani).</p>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mit csinál a függvény?">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Mit csinál a függvény?<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mit csinál az alábbi függvény? Az általa visszaadott függvény, amely hívásmódjában kompatibilis az első paramétereként
+megadott függvénnyel (ugyanolyan paraméterek és visszatérési érték), miben viselkedik másképpen? Írj kódot a működés
+bemutatására!</p>
+
+<pre   ><code class="language-c">template &lt;typename RET, typename... ARGS&gt;
+auto memoized_func(RET (*func)(ARGS...)) -&gt; std::function&lt;RET(ARGS...)&gt; {
+    std::map&lt;std::tuple&lt;ARGS...&gt;, RET&gt; retvals;
+
+    auto memoized = [=] (ARGS... args) mutable -&gt; RET {
+        auto args_tuple = std::make_tuple(args...);
+        auto found = retvals.find(args_tuple);
+        if (found != retvals.end())
+            return found-&gt;second;
+
+        auto retval = func(args...);
+        retvals.insert(make_pair(args_tuple, retval));
+        return retval;
+    };
+
+    return memoized;
+}</code></pre>
+
+<p>Extra kérdések: Mikor érdemes ilyet használni? Mikor nem szabad ilyet használni?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Becsomagolja a paraméterként adott függvényt egy másik függvénybe, amely ellenőrzi azt, hogy
+hívták-e már pontosan azokkal a paraméterekkel, mint amiket most lát. Ha igen, akkor nem értékeli ki
+újra a függvényt, hanem csak visszatér az eltárolt értékkel. Ha nem, akkor meghívja és eltárolja
+a visszaadott értékét, hogy legközelebb már ne kelljen.</p>
+<pre   ><code class="language-c">double sin_with_print(double x) {
+    std::cout &lt;&lt; &quot;sin_with_print(x) called\n&quot;;
+    return sin(x);
+}
+
+int main() {
+    auto msin = memoized_func(sin_with_print);
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(2.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(2.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+}</code></pre>
+<pre class="screenshot">
+sin_with_print(x) called
+0.841471                <span class="bubble"><code>sin(1.0)</code> először</span>
+0.841471
+sin_with_print(x) called
+0.909297                <span class="bubble"><code>sin(2.0)</code> először</span>
+0.909297
+0.841471
+0.841471
+</pre>
+<p>Akkor érdemes használni, ha a függvény kiértékelése lassú – sokkal lassabb, mint amennyi ideig
+a <code>map</code>-ben keresés tart. Nem szabad használni, ha a meghívott függvénynek mellékhatása
+van, mert a mellékhatás csak egyszer fog megtörténni (adott paraméterek mellett mindig az első
+híváskor).</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mit csinál a sablon?">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Mit csinál a sablon?<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mit csinál ez a két osztálysablon? Próbáld ki, hogy példányosítod valamilyen kicsi
+egész számmal (papíron vagy jegyzettömbben)! Pl. mivel egyenértékű a <code>gens&lt;4&gt;::type</code> belső típus?</p>
+
+<pre   ><code class="language-c">template&lt;int ...&gt;
+struct seq { };
+
+template&lt;int N, int ...S&gt;
+struct gens : gens&lt;N-1, N-1, S...&gt; { };
+
+template&lt;int ...S&gt;
+struct gens&lt;0, S...&gt; {
+    using type = seq&lt;S...&gt;;
+};</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* gens&lt;4&gt; -&gt; N = 4, S = üres */
+class gens&lt;4&gt; : gens&lt;3, 3&gt; { };
+
+/* gens&lt;3, 3&gt; -&gt; N = 3, S = 3 */
+class gens&lt;3, 3&gt; : gens&lt;2, 2, 3&gt; { };
+
+/* gens&lt;2, 2, 3&gt; -&gt; N = 2, S = 2, 3 */
+class gens&lt;2, 2, 3&gt; : gens&lt;1, 1, 2, 3&gt; { };
+
+/* gens&lt;1, 1, 2, 3&gt; -&gt; N = 1, S = 1, 2, 3 */
+class gens&lt;1, 1, 2, 3&gt; : gens&lt;0, 0, 1, 2, 3&gt; { };
+
+/* gens&lt;0, 0, 1, 2, 3&gt; -&gt; specializáció! nincs N, S = 0, 1, 2, 3 */
+class gens&lt;0, 1, 2, 3&gt; {
+    using type = seq&lt;0, 1, 2, 3&gt;;
+};</code></pre>
+<p>És ezt a <code>type</code> belső típust megörökik az előző, meg az azelőtti stb. osztályok,
+tehát végül <code>gens&lt;4&gt;::type</code> = <code>seq&lt;0, 1, 2, 3&gt;</code>. A
+<code>gens&lt;N&gt;</code> osztály előállítja <code>seq</code> osztály sablonparamétereként a <code>0 ... N-1</code>
+természetes számokat.</p>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A template metaprogramozás sűrűje">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A template metaprogramozás sűrűje<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <code>std::tuple</code> osztálysablonnak bármennyi sablonparamétere lehet: az ott megadott típusú adatokat
+tudja eltárolni. Pl. <code>std::tuple&lt;int, double&gt;</code> egy egész és egy valós számot tárol. Ha adott
+egy ilyen objektum <code>t</code> néven, <code>std::get&lt;0&gt;(t)</code> veszi ki belőle az egész számot,
+<code>std::get&lt;1&gt;(t)</code> pedig a valósat.</p>
+
+<p>Tegyük fel, hogy van egy függvényük, amely épp egy <code>int</code> és egy <code>double</code> paramétert vár.
+És azt, hogy van egy <code>tuple</code>-ünk, amelyben egy egész és egy valós szám van. A feladat: meghívni a függvényt
+a <code>tuple</code>-ben tárolt adatokkal. Egészen pontosan, a feladat: írni egy olyan osztályt, amely képes eltárolni
+egy tetszőleges típusú (paraméterezésű) függvényre mutató pointert, továbbá a függvény paraméterezésének megfelelő
+objektumokat tartalmazó <code>tuple</code>-t – hogy aztán valamikor azt a függvényt, azokkal a paraméterekkel, meg
+lehessen hívni. Így tetszőlegesen eltárolható egy „felparaméterezett” függvény, hogy később, egy tetszőelges időpontban
+meg lehessen hívni.</p>
+
+<p>Az alábbi kód ezt a problémát oldja meg. Elemezd a kódot, értsd meg a működését!</p>
+
+<pre   ><code class="language-c">#include &lt;tuple&gt;
+#include &lt;iostream&gt;
+
+
+template&lt;int ...&gt; struct seq {};
+template&lt;int N, int ...S&gt; struct gens : gens&lt;N-1, N-1, S...&gt; {};
+template&lt;int ...S&gt; struct gens&lt;0, S...&gt;{ using type = seq&lt;S...&gt;; };
+
+
+double foo(int x, float y, double z) {
+    return x + y + z;
+}
+
+
+template &lt;typename Ret, typename ...Args&gt;
+struct save_it_for_later {
+    Ret (*func)(Args...);
+    std::tuple&lt;Args...&gt; params;
+
+    template&lt;int ...S&gt;
+    Ret callFunc(seq&lt;S...&gt;) {
+        return func(std::get&lt;S&gt;(params) ...);
+    }
+
+    Ret delayed_dispatch() {
+        return callFunc(typename gens&lt;sizeof...(Args)&gt;::type());
+    }
+};
+
+
+int main(void) {
+    std::tuple&lt;int, float, double&gt; t = std::make_tuple(1, 1.2, 5);
+    save_it_for_later&lt;double, int, float, double&gt; saved = {foo, t};
+
+    std::cout &lt;&lt; saved.delayed_dispatch() &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A C++14 tartalmaz <a href="../cpp1417/index.html#cpp14template">ehhez hasonló eszközöket</a> is.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

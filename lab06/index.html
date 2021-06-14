@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Jobbérték referenciák</title>
+<meta property="og:title" content="TEST InfoC++11 :: Jobbérték referenciák">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Tulajdonos szemantika és hatékonyság: mozgató konstruktorok és jobbérték referenciák alkalmazása.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Tulajdonos szemantika és hatékonyság: mozgató konstruktorok és jobbérték referenciák alkalmazása.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Jobbérték referenciák">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Jobbérték referenciák</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Tulajdonos szemantika és hatékonyság: mozgató konstruktorok és jobbérték referenciák alkalmazása.</p>
+</div>
+
+
+<blockquote>
+<h3>A laborokhoz</h3>
+<p>A laborok mellé minden héten lesz kiírva egy beadandó az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Másolások optimalizálása</a>
+                      <li><a href="index.html#2" class="">Tulajdonos szemantika: a fájl</a>
+                      <li><a href="index.html#3" class="">std::move</a>
+                      <li><a href="index.html#4" class="">Hatékonyság: a mátrix</a>
+                      <li><a href="index.html#5" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Másolások optimalizálása">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Másolások optimalizálása<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++ számára minden objektum értéket jelent. A nyelv úgy tekinti, hogy egy objektum és annak másolata egyforma, 
+megkülönböztethetetlen – ahogyan az a beépített típusoknál is van. Ezért a szabvány azt mondja, hogy a fordítók számára 
+megengedett a másolatok számának csökkentése. Például ha egy függvényből objektummal térünk vissza, akkor a lokális változó 
+másolása és megszűntetése helyett ügyeskedhetnek azzal, hogy eleve a visszatérési érték számára fenntartott helyen hozzák létre 
+az objektumot. Ezt úgy nevezik, hogy „copy elision” vagy „return value optimization”, és a szabvány még akkor is megengedi, ha 
+a másoló konstruktornak mellékhatása van. A G++ és a Clang++ fordítóknál alapbeállítás szerint engedélyezve van ez az 
+optimalizációs lehetőség. Kikapcsolni a <code>-fno-elide-constructors</code> paraméterrel lehet.</p>
+
+<p class="megjegyzes">Vigyázat – a 3.4-es Clang fordító <code>-fno-elide-constructors</code> paraméter mellett néha
+hibás kódot generál! 3.5-ös verzióra már kijavították ezt a hibát.</p>
+
+<p>Másold be a fejlesztőkörnyezetbe az alábbi kódrészletet! Ebben a szokásos, mindenért kiabáló osztály objektumait
+adogatjuk ide-oda függvényeknek, függvényekből. Futtasd le a kódot „copy elision” optimalizációval és anélkül!
+Magyarázd meg az összes függvény (és függvényhívás) futási eredményét!</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+
+class Noisy {
+  public:
+    Noisy() { std::cout &lt;&lt; &quot;Noisy ctor\n&quot;; }
+    ~Noisy() { std::cout &lt;&lt; &quot;Noisy dtor\n&quot;; }
+    Noisy(Noisy const &amp;) { std::cout &lt;&lt; &quot;Noisy copy\n&quot;; }
+    Noisy(Noisy &amp;&amp;) noexcept { std::cout &lt;&lt; &quot;Noisy move\n&quot;; }
+};
+
+
+Noisy create_noisy_on_return() {
+    return Noisy();
+}
+
+Noisy create_noisy_from_local() {
+    Noisy y;
+    return y;
+}
+
+Noisy create_noisy_with_move() {
+    Noisy y;
+    return std::move(y);    /* ilyet nem írunk!!! de miért? */
+}
+
+void do_something_with_noisy_cref(Noisy const &amp;y) {
+}
+
+void do_something_with_noisy_value(Noisy y) {
+}
+
+void do_something_with_noisy_rref(Noisy &amp;&amp; y) {
+}
+
+int main() {
+    std::cout &lt;&lt; &quot;create_noisy_on_return()\n&quot;;
+    create_noisy_on_return();
+    std::cout &lt;&lt; &quot;create_noisy_from_local()\n&quot;;
+    create_noisy_from_local();
+    std::cout &lt;&lt; &quot;create_noisy_with_move()\n&quot;;
+    create_noisy_with_move();
+
+    std::cout &lt;&lt; &quot;do_something_with_noisy_cref()\n&quot;;
+    do_something_with_noisy_cref(Noisy());
+    std::cout &lt;&lt; &quot;do_something_with_noisy_value()\n&quot;;
+    do_something_with_noisy_value(Noisy());
+    std::cout &lt;&lt; &quot;do_something_with_noisy_rref()\n&quot;;
+    do_something_with_noisy_rref(Noisy());
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>create_noisy_on_return()</code> és <code>create_noisy_from_local()</code> függvényekben tud RVO-t
+használni a fordító. Ha optimalizálhatja a másolásokat, akkor itt egyáltalán nem történik se másolás, se
+mozgatás.</p>
+<p>A <code>create_noisy_with_move()</code> függvény egy tipikus kódolási hibát mutat. A lokális változóknál
+nem kell külön engedélyezni a mozgatást a visszatérési értékben; ha nem engedélyezzük, akkor is mozgatás
+történik, ha van ilyen konstruktor. Az <code>std::move()</code>-ot kiírva viszont letiltjuk a visszatérési
+érték optimalizációját, mivel azt csak akkor tudja alkalmazni a fordító, ha egy változónevet adunk meg a
+<code>return</code> utasításnál.</p>
+<p>A <code>do_something_with_noisy_cref()</code> függvénynél biztosan nem látunk másolást, mert referencia
+paraméterű. A <code>do_something_with_noisy_value()</code> függvénynek értékparamétere van, de lehet, hogy itt sem
+látunk másolást. Mivel a jobbérték objektumnak nincs neve, biztos, hogy senki más nem látja, ezért
+„elhasználható” a függvény paramétereként. Érdekes, hogy emiatt az optimalizáció miatt néha gyorsabb lehet
+a program értékparaméterrel, mint referenciaparaméterrel.</p>
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Tulajdonos szemantika: a fájl">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Tulajdonos szemantika: a fájl<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi osztály:</p>
+
+<pre   ><code class="language-c">/* FILE* RAII */
+class FilePtr {
+  public:
+    explicit FilePtr(FILE *fp = nullptr) : fp_{fp} {}
+    ~FilePtr() {
+        close_if_open();
+    }
+    FilePtr &amp; operator=(FILE *fp) {
+        close_if_open();
+        fp_ = fp;
+        return *this;
+    }
+    operator FILE* () const {
+        return fp_;
+    }
+
+    /* nem másolható */
+    FilePtr(FilePtr const &amp;) = delete;
+    FilePtr &amp; operator=(FilePtr const &amp;) = delete;
+
+  private:
+    FILE *fp_;
+    
+    void close_if_open() {
+        if (fp_ != nullptr)
+            fclose(fp_);
+        fp_ = nullptr;
+    }
+};</code></pre>
+
+<p>Ez egy régebbi laborfeladat megoldása. A lényege az, hogy automatikus erőforráskezelést biztosít a 
+<code>FILE*</code>-okhoz, azaz automatikusan bezárja a nyitott fájlokat.</p>
+
+<pre   ><code class="language-c">int main() {
+    FilePtr fp;
+    
+    /* nagyjából így használható: */
+    fp = fopen(&quot;hello.txt&quot;, &quot;wt&quot;);
+    fprintf(fp, &quot;Hello vilag&quot;);
+}</code></pre>
+
+<p>A másoló konstruktora és másoló értékadó operátora le van tiltva, mert nem lehet két olyan <code>FilePtr</code>, amely 
+ugyanazt a nyitott fájlt reprezentálja. (Nem dolgozhatnak ugyanazon a <code>FILE*</code>-on, mert akkor mindketten megpróbálnák 
+<code>fclose()</code>-olni.)</p>
+
+<h3>Feladatok</h3>
+
+<ul>
+<li>Írd át úgy az osztályt, hogy ő maga nyissa meg a fájlt is, és konstruktorparamétere legyen a megnyitandó
+fájl neve és a megnyitás módja! Tárold el a megnyitott fájl nevét is egy <code>std::string</code>-ben! Ha nem sikerült a megnyitás, dobj kivételt!
+<pre   ><code class="language-c">FilePtr fp{&quot;hello.txt&quot;, &quot;wt&quot;};</code></pre>
+<li>Oldd meg, hogy lehessen függvényből nyitott fájllal visszatérni!
+<pre   ><code class="language-c">FilePtr open_for_writing(char const *name) {
+    return FilePtr{name, &quot;wt&quot;};
+}
+
+FilePtr fp = open_for_writing(&quot;hello.txt&quot;);
+fprintf(fp, &quot;Hello vilag&quot;);</code></pre>
+<li>Oldd meg, hogy az így kapott visszatérési értéket az értékadó operátor is
+tudja kezelni! Figyelj arra, hogy zárd be a régi fájlt az értékadáskor!
+<pre   ><code class="language-c">FilePtr fp;
+fp = open_for_writing(&quot;hello.txt&quot;);
+fprintf(fp, &quot;Hello vilag&quot;);
+fp = open_for_writing(&quot;hello2.txt&quot;);
+fprintf(fp, &quot;Hello vilag&quot;);</code></pre>
+<li>Csinálj tömböt a nyitott fájlokból!
+<pre   ><code class="language-c">std::vector&lt;FilePtr&gt; files;
+files.push_back(open_for_writing(&quot;hello.txt&quot;));
+files.push_back(open_for_writing(&quot;hello2.txt&quot;));
+fprintf(files[0], &quot;hello.txt&quot;);
+fprintf(files[1], &quot;hello.txt&quot;);</code></pre>
+Lehet ilyet? Miért lehet, hogyan van ilyesmire felkészítve az <code>std::vector</code>?
+</ul>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Ehhez mozgató konstruktort és értékadó operátort kell csinálni. Ezek paraméterébe
+jobbérték referencia kell, de figyelni kell arra, hogy a jobbérték referencián keresztül
+az objektumot balértéknek látjuk (mert neve van). Így <code>std::move</code>-olni kell
+legalább a sztringet, hogy annak a tartalmát is mozgatni lehessen, másolás helyett.</p>
+<p>Az <code>std::vector</code>-nak (és a többi szabványos tárolónak) vannak jobbértéket
+átvevő beszúró függvényei, pl. <code>push_back(T&amp;&amp;)</code>.</p>
+<pre   ><code class="language-c">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+/* FILE* RAII */
+class FilePtr {
+  public:
+    FilePtr(char const *filename, char const *mode)
+      : fp_{fopen(filename, mode)}
+      , name_{filename} {
+        if (fp_ == nullptr)
+            throw std::runtime_error(&quot;no such file&quot;);
+        std::cerr &lt;&lt; &quot;Opened &quot; &lt;&lt; name_ &lt;&lt; std::endl;
+    }
+    ~FilePtr() {
+        close_if_open();
+    }
+    /* nem másolható */
+    FilePtr(FilePtr const &amp;) = delete;
+    FilePtr &amp; operator=(FilePtr const &amp;) = delete;
+    /* de mozgatható */
+    FilePtr(FilePtr &amp;&amp; the_other) noexcept
+      : fp_{std::move(the_other.fp_)}
+      , name_{std::move(the_other.name_)} {
+        the_other.fp_ = nullptr;
+    }
+    FilePtr &amp; operator=(FilePtr &amp;&amp; rhs) noexcept {
+        if (fp_ != rhs.fp_) {
+            close_if_open();
+            /* a pointernél nem lenne muszáj move-olni, de a sztringnél érdemes! */
+            fp_ = std::move(rhs.fp_);
+            name_ = std::move(rhs.name_);
+            rhs.fp_ = nullptr;
+        }
+        return *this;
+    }
+
+    operator FILE* () const {
+        return fp_;
+    }
+  private:
+    FILE *fp_;
+    std::string name_;
+
+    void close_if_open() {
+        if (fp_ != nullptr) {
+            fclose(fp_);
+            std::cerr &lt;&lt; &quot;Closed &quot; &lt;&lt; name_ &lt;&lt; std::endl;
+        }
+        fp_ = nullptr;
+        name_.clear();
+    }
+};
+
+
+/* ne lehessen ilyet csinálni (az operator FILE* miatt lehetne) */
+void fclose(FilePtr) = delete;
+
+
+FilePtr open_for_writing(char const *name) {
+    return FilePtr{name, &quot;wt&quot;};
+}
+
+
+int main() {
+    std::vector&lt;FilePtr&gt; files;
+    files.push_back(open_for_writing(&quot;hello.txt&quot;));
+    files.push_back(open_for_writing(&quot;hello2.txt&quot;));
+    fprintf(files[0], &quot;hello.txt&quot;);
+    fprintf(files[1], &quot;hello.txt&quot;);
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="std::move">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        std::move<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Egy sztring osztály mozgató konstruktorát kellene megírni. Működik az alábbi
+programrész? Mi a furcsa benne? (Tipikus hiba.)</p>
+
+<pre   ><code class="language-c">class String {
+  private:
+    char *data;
+  public:
+    String(String &amp;&amp;) noexcept;
+};
+
+String::String(String &amp;&amp; the_other) noexcept {
+    data = std::move(the_other.data);
+    the_other.data = nullptr;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A programrész működni fog: a pointer átmásolódik az új objektumba, és a régi objektum pointere
+kinullázódik. A furcsaság, vagy inkább hiba, benne az <code>std::move</code> helytelen használata.
+Ebben a kontextusban egyáltalán nincsen rá szükség. Amikor egy sztringtől elvesszük az erőforrást,
+akkor a sztring a jobbérték, nem pedig az objektum; a sztringre mondjuk azt, hogy <em>belőle</em>
+az erőforrás kivehető. A pointernél már semmi értelme a jobbértékké konvertálásnak; a beépített
+típusok amúgy sem mozgathatóak, csak másolhatóak. (Mit jelentene egy <code>int</code> mozgatása?)</p>
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hatékonyság: a mátrix">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Hatékonyság: a mátrix<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A feladatod egy mátrix osztályt írni, amely a C++11 tanult nyelvi elemeit is használja:
+jobbérték referenciák, inicializáló listák és így tovább.</p>
+
+<h3>Specifikáció, első feladatcsomag</h3>
+<ul>
+<li>Az osztály belül ne használjon kétdimenziós dinamikus tömböt, csak egydimenziósat.
+Ebbe legyenek sorfolytonosan, <code>y*szélesség+x</code> képlettel leképezve a számok!
+<pre   ><code class="language-c">class Matrix {
+  private:
+    size_t w_, h_;
+    double *data_;
+};</code></pre>
+<li>A mátrixot lehessen inicializálni szélesség, magasság paraméterrel. Ilyenkor legyen kitöltve
+0-val.
+<li>Lehessen inicializálni alapértelmezett konstruktorral is, ilyenkor ne foglaljon
+le erőforrást.
+<li>Lehessen indexelni a függvényhívó operátorral: <code>m(2, 3)</code> a 2. oszlop, 3. sor
+hivatkozása legyen (1-től indexelve). Túlindexelés esetén dobjon kivételt.
+<li>Írj a mátrixnak kiíró operátort, amely megjeleníti a képernyőn!
+</ul>
+
+<p>Így már látod majd a mátrixokat, tudod ellenőrizni az eredményeket.</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">Matrix m{3, 3};
+m(1, 1) = 9;  m(2, 3) = 5;
+std::cout &lt;&lt; m;</code></pre>
+</div>
+<div>
+<pre class="screenshot">
+9   0   0
+0   0   0
+0   5   0
+</pre>
+</div>
+</div>
+
+<h3>Konstruktorokkal kapcsolatos feladatok</h3>
+<ul>
+<li>Legyen másoló konstruktora, értékadó operátora is a mátrixnak!
+<li>Tegyél kiírást az előbbi függvényekbe, és próbáld ki, az <code>std::swap()</code>
+függvény (<code>#include &lt;algorithm&gt;</code>) hogyan cserél meg ilyenkor két mátrixot!
+<li>Írj mozgató konstruktort és értékadó operátort a mátrixnak!
+<li>Tegyél ezekbe is kiírást, és próbáld ki újra az <code>std::swap()</code> függvényt!
+<li>Írj két mátrixot összeadó operátort! Ha nem egyforma méretűek, ez dobjon kivételt;
+ha egyformák, akkor térjen vissza az összegükkel!</li>
+</ul>
+
+<p>Az összeadás optimalizálható, ha az egyik operandus jobbérték. Például az <code>a+b+c</code>
+összeadás <code>(a+b)+c</code>-ként értékelődik ki, tehát a <code>c</code> egy jobbértékhez
+adódik hozzá. Ennek a jobbértéknek ugyanakkora mátrixnak kell lennie, mint a <code>c</code>.
+Ezért a dinamikus memóriakezelést meg lehet spórolni; az újrafoglalás helyett a jobbértékben lévő
+tömböt újra lehet hasznosítani az összeg objektum számára.</p>
+
+<h3>Az összeadás optimalizálása</h3>
+<ul>
+<li>Írd meg ilyen módon a jobbérték+balérték mátrixösszeadást!
+<li>Vezesd ezután vissza a balérték+jobbérték összeadást erre a függvényre! Például ez kell hívódjon az <code>a+(b+c)</code> 
+kifejezésnél. Ellenőrizd, hogy tényleg a jobbérték+balérték függvény hívódik-e, nem az eredeti balérték+balérték függvény!
+<div class="megjegyzes">
+<p>Ha az összeadását tagfüggvényként valósítottad meg, nem gond, mert az is túlterhelhető
+balérték és jobbérték objektumra. Így kell csinálni:</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+class X {
+  public:
+    void f() &amp; { std::cout &lt;&lt; &quot;lval\n&quot;; }
+    void f() &amp;&amp; { std::cout &lt;&lt; &quot;rval\n&quot;; }
+};
+
+int main() {
+    X x;
+    x.f();     /* lval */
+    X{}.f();   /* rval */
+}</code></pre>
+</div>
+<li>Mi történik ennél a kifejezésnél: <code>(a+b)+(c+d)</code>? Oldd meg, hogy ez is működjön!
+</ul>
+
+<h3>Az inicializáló listás feladat</h3>
+<ul>
+<li>Oldd meg, hogy működjön ez a kódrészlet!
+<pre   ><code class="language-c">Matrix m{3, 3, {
+    9, 0, 0,
+    0, 0, 0,
+    0, 5, 0
+}};</code></pre>
+</ul>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az összes feladat megoldása. A kommentek magyaráznak, ahol kell. A teszteléshez érdemes kikapcsolni a másolások 
+optimalizálását (<code>-fno-elide-constructors</code>), akkor látszik az összes copy és move.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;initializer_list&gt;
+#include &lt;algorithm&gt;
+#include &lt;cassert&gt;
+
+/* másolás/mozgatás üzenetek: 0 vagy 1 */
+#define DEBUG 1
+
+class Matrix {
+  public:
+    /* létrehozás */
+    Matrix();
+    Matrix(size_t w, size_t h);
+    Matrix(size_t w, size_t h, std::initializer_list&lt;double&gt; init);
+
+    /* az öt függvény */
+    ~Matrix();
+    Matrix(Matrix const &amp;the_other);
+    Matrix &amp; operator=(Matrix const &amp;rhs);
+    Matrix(Matrix &amp;&amp; the_other) noexcept;
+    Matrix &amp; operator=(Matrix &amp;&amp;rhs) noexcept;
+
+    /* hogy csinálni is lehessen vele valamit */
+    size_t get_w() const { return w_; }
+    size_t get_h() const { return h_; }
+    /* konstans indexelés */
+    double const &amp; operator()(size_t x, size_t y) const;
+    /* nem konstans indexelés: ugyanaz, mint a konstans, csak a const levarázsolva */
+    double &amp; operator()(size_t x, size_t y) {
+        return const_cast&lt;double &amp;&gt;(const_cast&lt;Matrix const &amp;&gt;(*this)(x, y));
+    }
+    
+    /* összeadások */
+    friend Matrix operator+(Matrix const &amp;a, Matrix const &amp;b);
+    friend Matrix operator+(Matrix &amp;&amp;a, Matrix const &amp;b);
+
+  private:
+    size_t w_;
+    size_t h_;
+    double *data_;
+    class Uninitialized {};
+    Matrix(size_t w, size_t h, Uninitialized);
+};
+
+
+/* az alapértelmezett konstruktor által létrehozott mátrixnak nincs erőforrása.
+ * így fog kinézni a mozgató konstruktor által kiürített mátrix is.
+ * a nullptr-re a delete[] hatástalan, így a destruktorban is jó lesz. */
+Matrix::Matrix()
+: w_{0}
+, h_{0} {
+    data_ = nullptr;
+}
+
+
+/* ez a konsturktor privát, csak a kódduplikáció elkerülésére van.
+ * létrehozza a mátrix tömbjét, de nem inicializálja. */
+Matrix::Matrix(size_t w, size_t h, Uninitialized)
+: w_{w}
+, h_{h} {
+    data_ = new double[w_*h_];
+}
+
+
+/* alapértelmezett konstruktor. nullákkal inicializálja. */
+Matrix::Matrix(size_t w, size_t h)
+: Matrix{w, h, Uninitialized{}} {
+    std::fill(data_, data_ + w_*h_, 0.0);
+}
+
+
+/* adott számokkal inicializálás. */
+Matrix::Matrix(size_t w, size_t h, std::initializer_list&lt;double&gt; init)
+: Matrix{w, h} {
+    /* ellenőrizzük, hogy tényleg akkora-e az init lista, mint a mátrix.
+     * ha nem, programozói hiba. azért nem érdemes itt kivételt, mert
+     * ez nem futási időben derül ki, hanem már a kódban el van rontva. */
+    assert(w*h == init.size()); 
+    std::copy(init.begin(), init.end(), data_);
+}
+
+
+Matrix::~Matrix() {
+    delete[] data_;
+}
+
+
+/* létrehozza a privát konstruktorral a megfelelő méretű tömböt.
+ * utána már csak be kell másolnia a számokat. */
+Matrix::Matrix(Matrix const &amp;the_other)
+: Matrix{the_other.w_, the_other.h_} {
+    std::copy(the_other.data_, the_other.data_ + w_*h_, data_);
+#if DEBUG
+    std::cerr &lt;&lt; w_ &lt;&lt; &quot;x&quot; &lt;&lt; h_ &lt;&lt; &quot; matrix copied\n&quot;;
+#endif
+}
+
+
+/* op= = dtor+copy */
+Matrix &amp; Matrix::operator=(Matrix const &amp;rhs) {
+    if (this == &amp;rhs)
+        return *this;
+    /* ha nem akkora, amekkorából értéket adunk, átméretezés */
+    if (w_ != rhs.w_ || h_ != rhs.h_) {
+        delete[] data_;
+        w_ = rhs.w_;
+        h_ = rhs.h_;
+        data_ = new double[w_*h_];
+    }
+    /* a számokat másolni mindig kell */
+    std::copy(rhs.data_, rhs.data_ + w_*h_, data_);
+    return *this;
+}
+
+
+Matrix::Matrix(Matrix &amp;&amp;the_other) noexcept {
+    /* ez olyan lesz, mint a másik */
+    w_ = the_other.w_;
+    h_ = the_other.h_;
+    data_ = the_other.data_;
+    /* a másik meg üres, mint a default ctoros */
+    the_other.w_ = 0;
+    the_other.h_ = 0;
+    the_other.data_ = nullptr;
+#if DEBUG
+    std::cerr &lt;&lt; w_ &lt;&lt; &quot;x&quot; &lt;&lt; h_ &lt;&lt; &quot; matrix moved\n&quot;;
+#endif
+}
+
+
+Matrix &amp; Matrix::operator=(Matrix &amp;&amp;rhs) noexcept {
+    if (this == &amp;rhs)
+        return *this;
+    /* itt nem varázsolunk a méretekkel, mert csak le kell nyúlni a tömböt */
+    delete[] data_;
+    w_ = rhs.w_;
+    h_ = rhs.h_;
+    data_ = rhs.data_;
+    rhs.w_ = 0;
+    rhs.h_ = 0;
+    rhs.data_ = nullptr;
+    return *this;
+}
+
+
+/* indexelő operátor. vigyázat, 1-től kell indexelni, mint matek órán! */
+double const &amp; Matrix::operator()(size_t x, size_t y) const {
+    if (x &lt; 1 || x &gt; w_ || y &lt; 1 || y &gt; h_)
+        throw std::out_of_range{&quot;invalid index for matrix&quot;};
+    return data_[(y-1)*w_ + (x-1)];
+}
+
+
+std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Matrix const &amp;m) {
+    for (size_t y = 1; y &lt;= m.get_h(); ++y) {
+        os &lt;&lt; &quot;[&quot;;
+        for (size_t x = 1; x &lt;= m.get_w(); ++x)
+            os &lt;&lt; std::setw(4) &lt;&lt; m(x, y);
+        os &lt;&lt; &quot;   ]\n&quot;;
+    }
+    return os;
+}
+
+
+/* az összeadásnál nem indexelgetünk. csak egymástól függetlenül
+ * össze kell adni az összes számot és kész. */
+Matrix operator+(Matrix const &amp;a, Matrix const &amp;b) {
+    if (a.w_ != b.w_ || a.h_ != b.h_)
+        throw std::out_of_range{&quot;matrix sizes do not match in operator+&quot;};
+    Matrix sum{a.w_, a.h_, Matrix::Uninitialized{}};
+    for (size_t i = 0; i != a.w_*a.h_; ++i)
+        sum.data_[i] = a.data_[i] + b.data_[i];
+    return sum;
+}
+
+
+/* ha az egyik operandus balérték, akkor lenyúlhatjuk a tömbjét.
+ * std::move-olni kell, mert a-n keresztül balértéknek látszik!
+ * (úgy is írhatnánk, hogy a[i]+=b[i], aztán return std::move(a).) */
+Matrix operator+(Matrix &amp;&amp;a, Matrix const &amp;b) {
+    if (a.w_ != b.w_ || a.h_ != b.h_)
+        throw std::out_of_range{&quot;matrix sizes do not match in operator+&quot;};
+    Matrix sum{std::move(a)};
+    for (size_t i = 0; i != a.w_*a.h_; ++i)
+        sum.data_[i] += b.data_[i];
+    return sum;
+}
+
+
+/* ha a másik a jobbérték, akkor egyszerűen megcseréljük őket-
+ * ez oké, mert kommutatív az összeadás. move kell! */
+Matrix operator+(Matrix const &amp;a, Matrix &amp;&amp;b) {
+    return std::move(b)+a;
+}
+
+
+/* ha csak a fenti függvények lennének, jobbérték+jobbérték
+ * ambiguous lenne. viszont mindegy, melyikből mozgatunk. */
+Matrix operator+(Matrix &amp;&amp;a, Matrix &amp;&amp;b) {
+    return std::move(a)+b;
+}
+
+
+int main() {
+    Matrix m{2, 3, {
+        1, 2,
+        3, 4,
+        5, 6,
+    }};
+    const Matrix n{2, 3, {
+        2, 3,
+        4, 5,
+        6, 7,
+    }};
+    
+    std::cout &lt;&lt; m;
+    std::cout &lt;&lt; m + n;
+    std::cout &lt;&lt; (m+n)+m;   /* jobb+bal */
+    std::cout &lt;&lt; m+(n+m);   /* bal+jobb */
+    std::cout &lt;&lt; (m+n)+(n+m);   /* jobb+jobb */
+}
+</code></pre>
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f06/index.html#feladat_stdmove">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

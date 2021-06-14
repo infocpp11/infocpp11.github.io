@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Összetett példa: Digitális rendszerek szimulációja C++-ban</title>
+<meta property="og:title" content="TEST InfoC++11 :: Összetett példa: Digitális rendszerek szimulációja C++-ban">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Digitális rendszerek szimulációja C++-ban. Ebben a példában a szálkezelés célja, hogy az
+egyes függvények látszólag egymás mellett fussanak; mindegyiknek saját verme lehessen.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Digitális rendszerek szimulációja C++-ban. Ebben a példában a szálkezelés célja, hogy az
+egyes függvények látszólag egymás mellett fussanak; mindegyiknek saját verme lehessen.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Összetett példa: Digitális rendszerek szimulációja C++-ban">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Összetett példa: Digitális rendszerek szimulációja C++-ban</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.05.12.</p>
+<p class="kivonat">Digitális rendszerek szimulációja C++-ban. Ebben a példában a szálkezelés célja, hogy az
+egyes függvények látszólag egymás mellett fussanak; mindegyiknek saját verme lehessen.</p>
+</div>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A SystemC-ről</a>
+                      <li><a href="index.html#2" class="">A példa: saját szimulációs kernel</a>
+                      <li><a href="index.html#3" class="">A program működése – a forráskód lényeges részei</a>
+                      <li><a href="index.html#4" class="">Letöltés</a>
+                      <li><a href="index.html#5" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A SystemC-ről">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A SystemC-ről<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A SystemC egy szimulációs keretrendszer, amelyben digitális rendszerek modellezhetők, és a működésük eseményvezérelt alapon
+szimulálható. A SystemC-ben az egyes részrendszereinket (legyenek azok egyszerű kapuk vagy összetett processzorok) C++-ban írhatjuk
+le. Az így kapott kódot a szimulációs motorral, ún. <em>szimulációs kernellel</em> együtt lefordítva egy futtatható programot kapunk, amely elvégzi
+a szimulációt.</p>
+
+<p>Az alábbi kódrészletek jellegzetes SystemC modulokat mutatnak. A bal oldali egy 10 ns periódusidejű órajelgenerátor, a jobb
+oldali pedig egy 3 ns kapukésleltetési idejű inverter.</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">class ClkGen: public sc_module {
+    sc_out&lt;bool&gt; output;
+    void clk();
+    /* ... */
+};
+
+void ClkGen::clk() {
+    while (true) {
+        wait(5, SC_NS);
+        output.write(true);
+        wait(5, SC_NS);
+        output.write(false);
+    }
+}</code></pre>
+<img class="kozep" src="clock.svg" style="height: 4em;" alt="órajelgenerátor rajza">
+</div>
+<div>
+<pre   ><code class="language-c">class Inverter: public sc_module {
+    sc_in&lt;bool&gt; input;
+    sc_out&lt;bool&gt; output;
+    void invert();
+    /* ... */
+};
+
+void Inverter::invert() {
+    while (true) {
+        wait();
+        wait(3, SC_NS);
+        output.write(!input.read());
+    }
+}</code></pre>
+<img class="kozep" src="inverter.svg" style="height: 4em;" alt="inverter rajza">
+</div>
+</div>
+
+<p>Az órajelgenerátor működése egyszerű. 5 ns várakozás után a kimenetét 1-be állítja, aztán újabb 5 ns várakozás után 
+0-ba, és ez folytatódik a végtelenségig. Az inverter is végtelen ciklust tartalmaz. Az üres paraméterű 
+<code>wait()</code> megvárja, hogy az inverter bemenete megváltozzon. A következő sor még vár 3 ns-ot (ez a kapukésleltetési 
+idő), végül a kimenet beállítása után újra várakozni kezd a bemenet újabb megváltozására. Az inverter <code>input</code> nevű bemenetét egy itt nem 
+szereplő, az inverter konstruktorában lévő kódrészlet teszi az <code>invert()</code> függvény érzékenységi listájára, ami 
+alapján a szimulációs kernel tudja, hogy a várakozást ezen bemenet megváltozásának hatására kell befejezni.</p>
+
+<p>Bár a fenti függvények működése magától értetődik, a C++ szempontjából egyáltalán nem azok. Mindkét függvény <em>végtelen
+ciklust</em> tartalmaz, tehát ha egyszer meghívják őket, akkor soha nem térnek vissza. De vajon működhet ez másképp? Az inverter
+szimulációja nem működhet úgy, hogy a szimulációs kernel a bemenet megváltozása után meghívja az <code>invert()</code>
+függvényt, az pedig dolga végeztével visszaadja a vezérlést a szimulációs kernelnek. Mi történne akkor, ha a szimuláció
+következő 3 ns időtartamában más is történik? Az sem lehet, hogy a hívási lánc fordítva működik, hogy az inverter indítja el a
+szimulációt a <code>wait()</code> hívással: nem csak egy inverterünk lehet a modellben. Ha ezek mind egymást hívnák, előbb-utóbb
+megtelne a verem a vissza nem térő függvények miatt.</p>
+
+<p>Az órajelgenerátor működése még érdekesebb. Ennél az órajel állapotát (épp 1 vagy 0 a kimenet) nem egy változó, hanem a
+program végrehajtása közbeni <em>aktuális sor</em> tárolja. Ha épp a második sornál tart a végrehajtás, 1 lesz a kimenet, ha a negyediknél,
+akkor nulla. Ebből a függvényből nem is szabad visszatérni, hiszen ha ezt a függvényt újra meg kellene hívni, akkor újra kellene
+kezdeni a függvénytörzs végrehajtását, az első sorától.</p>
+
+<p>Ha meg akarjuk oldani, hogy a függvények végtelen ciklusok legyenek, hogy soha ne térjenek vissza, ahhoz C++-ban
+<em>szálkezelést</em> kell használnunk.</p>
+
+
+<div class="megjegyzes">
+<h3>Continuation, coroutine</h3>
+<p>Vannak programozási nyelvek, amelyekben el lehet menteni változóba, hogy éppen hol tart a program 
+végrehajtása (milyen hívási láncolaton keresztül jutottunk az adott helyre, hányadik sorban vagyunk éppen) – ez az ún. 
+<em>continuation</em>. Léteznek olyan nyelvek is, amelyekben lehetséges ún. korutinokat (coroutine) létrehozni, amelyek
+meg tudják szakítani a saját működésüket, átadva a vezérlést másnak – hogy aztán később ugyanott folytatódjon a kód
+végrehajtása, ahol abbamaradt (így kooperatív multitaszk valósítható meg).</p>
+<p>A 2020-as szabványtól kezdve korutinok létrehozására <a href="index.html#coroutine">a C++ is képes</a>. Az itt vázolt feladat
+azzal az eszközzel is megoldható lenne.</p>
+</div>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A példa: saját szimulációs kernel">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A példa: saját szimulációs kernel<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A mostani összetett példánk egy ehhez hasonló működésű program lesz. Nem egy teljes értékű digitális szimulátorról van szó,
+hanem csak egy leegyszerűsített változatról, amelyben csak két órajelgenerátor működik majd eltérő periódusidővel. Az órajelgenerátor modulok
+forráskódja azonban a fentihez hasonló lesz, végtelen ciklust és várakozásokat tartalmazó függvény. A kimeneti fájl
+VCD (value change dump) formátumú lesz, amelyet a digitális áramkörök szimulátorai elterjedten használnak.</p>
+
+<img src="gtkwave.png" class="kozep arnyek" alt="a digitális szimulátorunk kimenete a GTKWave-ben: két órajel">
+
+<p>A szimulátorban összesen három szál fog futni. Az első a szimulációs kernel, ez egyben maga a főprogram is. A másik két szál
+pedig a két órajelgenerátor modulhoz tartozik. A működés tehát a szálak elalvásán, felébredésén, és egymást értesítésén fog
+alapulni. Egyszerre mindig csak egy modul, azaz egy szál lesz aktív. Amikor egy modul elalszik a <code>wait()</code> hatására,
+akkor átadja majd a vezérlést a szimulációs kernelnek. A szimulációs kernel ekkor megkeresi, hogy melyik a soron következő modul,
+és felébreszti azt; miközben önmaga elalszik, hogy várjon, amíg a modul elvégzi a dolgát. Ahogy ez megtörtént, a modul
+felébreszti a szimulációs kernelt, és így tovább. A program egyébként így csak
+egy processzormagon fog futni, hiába többszálú. De nem a gyors végrehajtás miatt indítunk most szálakat, hanem hogy a programbeli
+állapotukat meg tudjuk őrizni: ki hol tart a saját végtelen ciklusában.</p>
+
+<img class="kozep" src="utemezes.svg" style="height: 7em;" alt="a digitális szimulátorunk szálainak ütemezése">
+
+<p>A programban megadott idők (az órajel frekvenciája) nem keverendők össze a valós idővel! Lesz belül egy szimulált idő. Az 
+időpontot ns egységekben mérjük, az események pedig diszkrét időben, egész ns-kor történnek. A szimulációs kernel a történő 
+eseményeket a jövőbeli bekövetkezés ideje szerint rögzíti, és ütemezi azok végrehajtását. Mindig azt a modult ébreszti majd
+föl, amelyhez a legközelebbi esemény van ütemezve. Amikor egy modul elalszik egy jelzett időre, a kernel egy várakozási sorba
+teszi majd az ehhez tartozó felébredési eseményt. A várakozási sor tehát egy prioritásos sor, idő szerint növekvő sorrendbe
+rendezve, legelöl a leghamarabbi eseménnyel.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A program működése – a forráskód lényeges részei">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A program működése – a forráskód lényeges részei<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A szimuláció futását a szimulációs kernel (<code>Kernel</code> osztály) vezérli, a várakozási sorba betett és onnan kivett események alapján. Minden eseményhez (<code>Event</code>) egy modul tartozik (<code>Module</code>), amelyet az adott eseménynél
+fel kell ébreszteni.</p>
+
+<div class="sticky">Az eseménykezelés<br>adatszerkeszete</div>
+<pre   ><code class="language-c">class Kernel {
+    int sim_time = 0;
+
+    struct Event {
+        int sim_time;
+        Module* module;
+        bool operator&lt; (Event const&amp; e) const {
+            return this-&gt;sim_time &gt; e.sim_time;
+        }
+    };
+    std::priority_queue&lt;Event&gt; events;
+};</code></pre>
+
+<p>Az <code>std::priority_queue</code> magától sorbarendezi az eseményeket, így mindig elég csak a legfölső eseményt kivenni a
+várakozási sorból. Mivel azelőtt esemény már nem történt, a szimulációs időt annak az eseménynek a bekövetkezési idejére lehet
+állítani, aztán pedig fölébreszteni az adott modult – átadni neki a vezérlést. Innentől kezdve a modul fog dolgozni, egészen addig,
+amíg el nem végezte az összes dolgát:</p>
+
+<div class="sticky">Az események<br>kezelése</div>
+<pre   ><code class="language-c">void Kernel::simulate(int interval) {
+    int stop = sim_time + interval;
+    while (sim_time &lt; stop &amp;&amp; !events.empty()) {
+        Event current_event = events.top();
+        events.pop();
+        sim_time = current_event.sim_time;
+
+        yield_to(*current_event.module);
+    }
+}</code></pre>
+
+<p>Az egyszerűsített programban a modulok adott ideig tudnak várakozni. A várakozás azt jelenti, hogy a szimulációs kernel számára
+jelezni kell a jövőbeli időpontot, amikor a modult újra fel kell ébreszteni. Ezután a kernel visszakapja a vezérlést:</p>
+
+<div class="sticky">Modul<br>alvása</div>
+<pre   ><code class="language-c">void Module::wait(int interval) {
+    Kernel::instance().schedule_event(interval, *this);
+    yield_to(Kernel::instance());
+}</code></pre>
+
+<div class="sticky">Esemény<br>ütemezése</div>
+<pre   ><code class="language-c">void Kernel::schedule_event(int interval, Module&amp; module) {
+    events.push(Event{sim_time+interval, &amp;module});
+}</code></pre>
+
+<div class="megjegyzes">
+<h3>Egyke (singleton) tervezési minta a C++-ban</h3>
+<p>A programban a szimulációs kernel egyébként egy egyke (singleton). Az egyke tervezési mintát C++-ban privát konstruktorral,
+statikus <code>instance()</code> tagfüggvénnyel és egy statikus lokális változóval lehet legegyszerűbben megvalósítani.
+A kernel egyetlen példánya akkor jön létre, amikor a vezérlés először áthalad a statikus lokális változó definícióján, vagyis
+a <code>instance()</code> függvény első hívásakor:</p>
+
+<pre   ><code class="language-c">class Kernel {
+    private:
+        Kernel() = default;
+        Kernel(Kernel const&amp;) = delete;
+
+    public:
+        static Kernel&amp; instance() {
+            static Kernel instance;
+            return instance;
+        }
+};</code></pre>
+</div>
+
+
+
+<p>Az eddigi kódrészletekből látható, hogy mind a kernel, mind a modulok elaltathatók, felébreszthetők. Ezt a tulajdonságot
+legjobb egy külön osztályban megvalósítani (<code>Synchronizable</code>), hogy mindkét osztály örökölhesse. Mivel az egyes szálak
+egymást fogják felébreszteni, szükségünk van egy <code>condition_variable</code>-re; annak használatához egy <code>mutex</code>-re,
+illetve a spontán felébredés elkerüléséhez egy egyszerű <code>bool</code> típusú változóra.</p>
+
+<pre   ><code class="language-c">class Synchronizable {
+    private:
+        std::mutex mtx;
+        std::condition_variable cv;
+        bool run = false;
+
+    public:
+        void sleep() {
+            std::unique_lock&lt;std::mutex&gt; lock{mtx};
+            cv.wait(lock, [=] { return run; });
+            run = false;
+        }
+
+        void wakeup() {
+            std::unique_lock&lt;std::mutex&gt; lock{mtx};
+            run = true;
+            cv.notify_one();
+        }
+
+        void yield_to(Synchronizable&amp; other) {
+            other.wakeup();
+            this-&gt;sleep();
+        }
+};
+
+class Module: public Synchronizable {
+    /* ... */
+};
+
+class Kernel: public Synchronizable {
+    /* ... */
+}</code></pre>
+
+
+<p>A szimuláció indulásakor a kernelnek meg kell mutatni a modulokat. A kernel ilyenkor nem tárolja el azok adatait
+ebben az egyszerű példában, viszont minden egyes modulhoz tartoznia kell egy szálnak, amelyik aludni és dolgozni fog
+a megfelelő időpillanatokban. A szálak alvó állapotban kell kezdjék az életüket, hogy a kernel tudja vezérelni az első
+felébredésüket is. Vagyis minden modul tulajdonképp egy <code>this-&gt;sleep()</code>-pel kell induljon. Ezt OOP tervezésben
+egy függvénysablonnal oldanánk meg, de még egyszerűbb a dolgunk, ha a kernel a szálként egy olyan lambda függvényt indít
+el egy alvással kezd:</p>
+
+<pre   ><code class="language-c">/* szál indítása az adott modulhoz */
+void Kernel::register_module(Module&amp; module) {
+    std::thread t{[&amp;] {
+        module.sleep();
+        module.do_stuff();
+    }};
+    t.detach();
+
+    schedule_event(0, module);
+}</code></pre>
+
+<p>A keretrendszer tulajdonképpen ennyi. Az összes modult a fenti <code>Module</code> ősosztályból kell származtatni.
+Feltéve, hogy a <code>logger</code> objektum írja a fájlba a szimulációs eredményt, egy órajelgenerátor kódja:</p>
+
+<pre   ><code class="language-c">class Clock: public Module {
+    private:
+        char wire;      /* órajelgenerátor neve */
+        int interval;   /* jelváltások közötti idő, ns */
+
+    public:
+        Clock(char wire, int interval): wire(wire), interval(interval) {
+            logger.new_wire(wire);
+            Kernel::instance().register_module(*this);
+        }
+
+        void do_stuff() override {
+            while (true) {
+                logger.value_change(wire, 0);
+                wait(interval);
+                logger.value_change(wire, 1);
+                wait(interval);
+            }
+        }
+};</code></pre>
+
+<p>A szimulációban két órajelgenerátort hozunk létre, eltérő periódussal, és ezeket szimuláljuk
+200 ns ideig:</p>
+
+<pre   ><code class="language-c">int main() {
+    Clock a{'a', 5};
+    Clock b{'b', 12};
+
+    Kernel::instance().simulate(200);
+}</code></pre>
+
+<p>Így keletkezik a VCD fájl, amelyik a jelváltásokat mutatja.</p>
+
+<div class="sticky">Futási eredmény<br>VCD fájl.<br><a href="index.html#gtkwave">GTKWave</a> olvassa.</div>
+<pre class="screenshot">
+$var wire 1 a a $end
+$var wire 1 b b $end
+#0
+0a
+#0
+0b
+#5
+1a
+#10
+0a
+#12
+1b
+#15
+1a
+[...]
+</pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Letöltés">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Letöltés<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A teljes program letölthető innen: <a href="clocks.zip">clocks.zip</a>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="gtkwave">GTKWave hullámforma nézegető: <a href="http://gtkwave.sourceforge.net/">http://gtkwave.sourceforge.net/</a>.</li>
+    <li id="coroutine"><a href="https://isocpp.org/files/papers/N4663.pdf">C++ Extensions for Coroutines</a>.</li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

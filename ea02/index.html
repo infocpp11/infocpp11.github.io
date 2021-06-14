@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Osztályhierarchiák C++11-ben</title>
+<meta property="og:title" content="TEST InfoC++11 :: Osztályhierarchiák C++11-ben">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Az öröklés és néhány jellegzetes tervezési elv a C++11-ben. Privát virtuális függvények, non-virtual interface. Override, final kulcsszavak. Virtuális konstruktorok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Az öröklés és néhány jellegzetes tervezési elv a C++11-ben. Privát virtuális függvények, non-virtual interface. Override, final kulcsszavak. Virtuális konstruktorok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Osztályhierarchiák C++11-ben">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+    <a id="eavirtual" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Osztályhierarchiák C++11-ben</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Az öröklés és néhány jellegzetes tervezési elv a C++11-ben. Privát virtuális függvények, non-virtual interface. Override, final kulcsszavak. Virtuális konstruktorok.</p>
+</div>
+
+<img src="muveletekx.svg" class="float" style="width: 14em;">
+
+<p>A feladatunk így hangzik: „Tervezzünk 
+osztályhierarchiát, amelynek segítségével négy alapműveletből álló, egyváltozós 
+matematikai függvények tárolhatók! Legyenek ezek a kifejezések kiírhatóak, 
+kiértékelhetőek, és aztán később majd deriválhatóak is.” Ilyen kifejezés például
+az 4*(5+x): ez egy konstans és egy összeg szorzata, ahol az összeg operandusa
+egy konstans és egy változó.</p>
+
+<p>Az ehhez hasonló, gyakran matematikai példák azért érdekesek, mert a legtöbb 
+objektumorientált tervezési elv „matematikai tisztaságban” bemutatható rajtuk 
+keresztül. Ahogyan az örökléssel kapcsolatos C++11 nyelvi elemek is.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Kifejezések</a>
+                      <li><a href="index.html#2" class="">A konstansok</a>
+                      <li><a href="index.html#3" class="">A változó</a>
+                      <li><a href="index.html#4" class="">Az összeg és a szorzat: kétoperandusú műveletek</a>
+                      <li><a href="index.html#5" class="">Az összeg és a szorzat, most már tényleg</a>
+                      <li><a href="index.html#6" class="">Deriválás: nem is olyan nehéz</a>
+                      <li><a href="index.html#7" class="">Egyszerűsítés: ((0*(3+x))+(5*(0+1))) = 5</a>
+                      <li><a href="index.html#8" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kifejezések">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="kifejezesfa" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Kifejezések<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az OOP tervezés egyik ökölszabálya, hogy a feladat megfogalmazásában lévő 
+főnevekből lesznek az osztályok, az igékből meg a tagfüggvények. A feladat 
+általánosságban kifejezésekről beszélt, és azt mondta, ezekkel a kifejezésekkel 
+lehet műveleteket végezni, kiírni, kiértékelni őket. Ez arra utal, hogy kell 
+legyen egy kifejezés osztály a következő tagfüggvényekkel:</p>
+
+<pre   ><code class="language-cbub">class Expression {
+  public:
+    /* returns value of expression at x */
+    virtual double evaluate(double x) const = 0;
+
+    virtual ~Expression() = default;    // C++11
+
+  private:
+    /* outputs expression as string to stream os */
+    virtual void print(std::ostream &amp;os) const = 0;
+
+    friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Expression const &amp;e);
+};
+
+
+/* pass print request to virtual print() method */
+std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Expression const &amp;e) {
+    e.print(os);
+    return os;
+}</code></pre>
+
+<p>A kiértékelés és a kiírás tagfüggvényei virtuálisak, mivel a kifejezés típusától
+függő működésük lesz. Sőt tisztán virtuálisak, mert amíg nem tudjuk pontosan, milyen
+típusú kifejezésről van szó, addig a működésüket sem tudjuk megadni. Az
+<code>Expression</code> osztály így egy <strong>absztrakt alaposztály</strong> (abstract base class). Az
+egyik célja, hogy közös ősként szolgáljon a leszármazottak számára: a C++ számára is
+ki kell fejeznünk a kifejezések közötti kapcsolatokat, hogy utána engedje pl. a pointerek
+konverzióit. Másik célja pedig az, hogy ígéreteket tegyen a leszármazottak nevében:
+„ha te egy kifejezés szeretnél lenni, akkor tudnod kell, hogyan kell téged kiértékelni
+és kiírni”. Az osztály a tisztán virtuális függvényeken kívül semmit nem tartalmaz;
+az ilyen osztályt interfésznek is szokták nevezni. Némely nyelvekben erre külön nyelvi
+elem van; a C++ tisztán virtuális függvényekkel fejezi ezt ki.</p>
+
+<p>Az <code>Expression</code> osztály tartalmaz egy destruktort is. Ez csak azért
+van ott, hogy jelezzük a fordítónak, virtuális destruktort szeretnénk. A programunkban
+az öröklődések miatt sok <code>Expression*</code> pointert fogunk használni; fel kell készülnünk
+arra, hogy valaki egy ilyen típusú pointert <code>delete</code>-el. Ökölszabályként
+elmondható ez is: ha egy osztályban akár csak egyetlen egy virtuális függvény is van,
+akkor biztos, hogy <strong>virtuális destruktor</strong> kell neki.</p>
+
+<p class="megjegyzes">Ezt az ökölszabályt kicsit lehet pontosítani is: egy alaposztály
+destruktora legyen publikus és virtuális, vagy legyen <a href="index.html#mill18">védett (protected) és
+nemvirtuális</a>. Az utóbbi esetben a destruktor védettsége megakadályozza az ősosztály
+pointere felőli <code>delete</code>-elést, ami nem virtuális destruktor esetén problémát
+jelentene.</p>
+
+<p>A destruktorba amúgy nem tennénk semmit, bár deklarálni mindenképp kell, hogy a virtuális voltát jelezni
+tudjuk. Régen ezt egy üres függvénytörzzsel oldottuk meg. A C++11 óta <code>= default</code>-ot is lehet a
+függvény mögé írni, ezzel jelezve, hogy az a destruktor, amit amúgy magától is írna a fordító helyettünk,
+<a href="index.html#defaultdelete">megfelelő és elfogadjuk</a>. Ez jobb is, mint az üres függvénytörzset kiírni. <a href="../ea06/index.html#implicitmove">Később majd lesz róla szó</a>, miért.</p>
+
+<p>Az osztályhoz tartozó kiíró operátor csak annyit tesz, hogy a kifejezés virtuális
+<code>print()</code> függvényének továbbpasszolja a kérést. Bár a kiíró operátor maga
+globális függvény, és mint olyan, nem lehetne virtuális, ezzel a trükkel mégis
+hasonló működést lehet elérni. A virtuális függvény pedig <strong>priváttá is tehető,</strong> mert azzal általában senki másnak nem lesz dolga, csak
+a kiíró operátornak.
+
+<p>A privát korlátozás azért előnyös, mert így <a href="index.html#virtuallyyours">könnyebb jól
+használni az osztályt</a>: a programozó, aki új osztályt szeretne származtatni ebből, látni fogja, hogy
+1), meg kell valósítania a függvényt (mert tisztán virtuális), ugyanakkor tudja azt is, hogy 2) semmi egyéb dolga
+nincsen vele (mert privát). Ezt a tervezési elvet <strong>NVI-nek</strong> hívják (Non Virtual Interface). Az NVI név arra utal,
+hogy egy jól megtervezett osztály interfészén (publikus részén) nem kellene virtuális függvények legyenek, hanem csak a
+privát részen. Ezt azonban nem mindig tartjuk be.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A konstansok">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A konstansok<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Hozzunk létre egy konkrét típust is, legyen ez a konstans! A konstans egyfajta
+kifejezés, amely kiírva egy számként jelenik meg, kiértékelve pedig mindig
+ugyanazt a számot adja. C++98-ban ezt így fogalmaznánk meg:</p>
+
+<pre   ><code class="language-c">class Constant : public Expression {
+  public:
+    Constant(double c): c_(c) {}
+
+    virtual double evaluate(double) const {
+        return c_;
+    }
+
+  private:
+    double c_;
+
+    virtual void print(std::ostream &amp;os) const {
+        os &lt;&lt; c_;
+    }
+};</code></pre>
+
+<p>A konstans publikusan öröklődik a kifejezésből. Ez az öröklődés fejezi azt ki, 
+hogy a konstans típus a kifejezés altípusa. Vagy másképpen: bármikor, amikor egy 
+kifejezés objektumra van szükségünk, oda jó kell legyen egy konstans típusú 
+objektum is. Ezt a cserélhetőséget, behelyettesítőséget az angol nyelvű 
+szakirodalom LSP-nek nevezi, Liskov Substitution Principle, Barbara Liskov után, 
+aki ezt az elvet először leírta. Vigyázat: <strong>csak a publikus öröklés</strong> az igazi, OOP értelemben vett öröklés!
+Csak  az fejez ki „minden micsoda micsoda” jellegű kapcsolatot. A C++-os privát öröklés
+OOP értelemben nem öröklés, másra való, de erről majd később.</p>
+
+<p>Az osztály megvalósítja a két örökölt, absztrakt függvényt, így már konkrét osztállyá
+válik; <code>Constant</code> típusú objektumot már hozhatunk létre a programban.
+A konstruktora, bár nem látszik, meghívja az ős konstruktorát is (ha nem írunk
+semmit, az alapértelmezett konstruktora hívódik); a destruktora úgyszint.</p>
+
+<p>Mindez működne C++11-ben is, de nézzük meg most azt, hogyan írnánk le
+az új verzióban az előzőnél pontosabban, amit szeretnénk:</p>
+
+<pre   ><code class="language-cbub">class Constant final : public Expression { // C++11
+  public:
+    Constant(double c): c_{c} {} // C++11
+
+    virtual double evaluate(double) const override { // C++11
+        return c_;
+    }
+
+  private:
+    double c_;
+
+    virtual void print(std::ostream &amp;os) const override {
+        os &lt;&lt; c_;
+    }
+};
+
+
+int main() {
+    Expression *c = new Constant{5.1}; // C++11
+    std::cout &lt;&lt; *c;
+    delete c;
+}</code></pre>
+
+<p>Szembetűnő változás az <code>override</code> és a <code>final</code>
+kulcsszavak megjelenése. Az <code>override</code> szóval a <strong>virtuális függvényeket
+lehet megjelölni,</strong> és azt jelezzük vele a fordítónak, hogy az ősosztályban kell
+lennie egy ugyanilyen nevű függvénynek, amit most felül szándékozunk írni.</p>
+
+<p>Kicsit furcsán hangzik, de ez arra való, nehogy „véletlenül” létrehozzunk egy virtuális függvényt.
+Ilyen könnyen előfordulhat egy nagyobb osztályhierarchia refaktorálása közben; ha az alaposztály
+egy virtuális függvényének fejlécét megváltoztatjuk, akkor a leszármazottban megadott függvények már
+új tagot vezetnének be, nem pedig az ős függvényét írnák felül. Márpedig ha az alaposztály változik ilyen módon,
+akkor valószínű a leszármazottnak is változniuk kell; <code>override</code> esetén tud majd szólni a fordító.
+Nagy segítség ez egy refaktorálás közben, mert látjuk, hol vannak befejezetlen részek.</p>
+
+<p>Az ellen is véd, ha rosszul implementáljuk a leszármazottat, pl. az <code>evaluate()</code> végéről a <code>const</code>-ot
+lefelejtjük. Jelen példában mondjuk amúgy sem fordulna le a program, mert akkor az osztály
+absztrakt lenne, és nem tudnánk példányosítani sehol. Viszont egy nagyobb projektben
+könnyen lehet, egy nem tisztán virtuális függvény felüldefiniálását rontjuk el hasonló módon. Az
+<code>override</code> nélkül csak a tesztelés közben derülne ki a hiba (azt látjuk, hogy mindig az ős függvénye
+hívódik), így viszont már fordítási időben.</p>
+
+<p>A <code>final</code> kulcsszót az osztály neve vagy virtuális függvény
+neve után használhatjuk. Azt jelenti, hogy végleges, azaz tovább már nem módosítható.
+Osztály esetén erre a leszármazást fogja tiltani a fordító, virtuális függvény esetén
+pedig a leszármazottakban a további felülírást. A <code>Constant</code> osztályt
+nem arra tervezzük, hogy le lehessen belőle származni a továbbiakban, ezért
+megjelölhetjük <code>final</code>-ként.</p>
+
+<p class="megjegyzes">Miért jó az, ha nem engedjük, hogy az osztályból le lehessen származni? Egyszerűen azért, mert az osztályok 
+kétfélék: vagy arra tervezzük, hogy ősosztály legyen, vagy nem. Ha nem, akkor viszont előbb-utóbb gond lesz a leszármazásból. 
+Gondoljunk például arra, ha egy osztálynak nincs virtuális destruktora. Vagy egy <code>std::vector&lt;T&gt;::iterator</code>-ra: ez 
+lehet osztályként is implementálva, de lehetne akár egy egyszerű <code>T*</code> is. Jobb, ha senki nem próbál leszármazni 
+belőle.</p>
+
+<p class="megjegyzes">A <code>final</code> és <code>override</code> „kulcsszavak” egyébként nem is igazi kulcsszavai a nyelvnek, 
+hanem csak ezeken a helyeken van speciális jelentésük (context specific keyword, CSK). Így például nevezhetünk 
+<code>final</code>-nek egy változót. Ezzel szemben pl. a <code>class</code> igazi kulcsszó, <code>class</code> nevű változó nem 
+létezhet.</p>
+
+<p>A kevésbé szembetűnő, viszont annál furcsább változás, a konstruktorhívásoknál 
+a kerek zárójelek <code>()</code> helyett használt kapcsos zárójel 
+<code>{}</code>. Ezeket a konstruktorhívások paraméterei köré tehetjük; az új 
+nyelvi elem neve: <em>uniform initialization syntax</em>. Előnye, hogy egyformán 
+inicializálhatók vele az objektumok, akár van konstruktoruk, akár nincs; és hogy 
+nem keverhető össze szintaktikailag a függvényekkel.</p>
+
+<blockquote class="megjegyzes">
+<h3>Miért volt szükség az új inicializáló szintaxisra?</h3>
+<p>A régi C++-nak sok szintaktikai problémája volt az objektumok inicializálása körül. Az egyik
+legzavaróbb az volt, hogy a konstruktorhívás gyakran összekeverhető volt a
+függvénydeklarációval (the most vexing parse). Tegyük fel, hogy van egy <code>Complex</code> osztályunk, és
+néhány további kódsor:</p>
+<pre   ><code class="language-c">class Complex {
+  public:
+    Complex(double re = 0.0, double im = 0.0);
+};
+
+Complex c1(2.3, 3.4);
+Complex c2(2.3);
+Complex c3();</code></pre>
+
+<p>A <code>c1</code>-es sorral egy objektumot adunk meg, meghívva az osztály kétparaméterű konstruktorát. Ez történik a 
+<code>c2</code>-es sornál is, kihasználva az alapértelmezett <code>im = 0.0</code> paramétert. Viszont nem ez történik a 
+<code>c3</code>-as sorban: ott nem a 0 értékű számot hozzuk létre a <code>re = 0.0</code> alapértelmezést is kihasználva, hanem 
+helyette egy <code>c3()</code> nevű függvényt deklarálunk, paraméter nélkül, <code>Complex</code> visszatérési értékkel. Itt 
+kötelezően el kell hagyni az üres zárójelpárt, hogy tényleg az alapértelmezett konstruktort kapjuk: <code>Complex c3;</code> az 
+objektumdefiníció.</p>
+
+<p>Ez azért is zavaró, mert ezzel szemben egy <code>c1</code>-gyel megegyező értékű, ideiglenes objektumot a <code>Complex(2.3, 
+3.4)</code> szintaktikával, a 0 értékű ideiglenes objektumot a <code>Complex()</code> szintaktikával kell létrehoznunk (pl. 
+<code>std::cout &lt;&lt; Complex()</code>), és az utóbbinál nem hagyható el az üres zárójelpár. És ez csak a legegyszerűbb példa 
+volt. Fejlesztő legyen a talpán, aki az alábbi kódrészletnél elsőre megmondja, hogy a <code>c2</code> függvény lesz, nem pedig 
+objektum! Csak keressük, hol az a konstruktor, amelyik két <code>Complex</code>-et vesz át, mert a fordító elfogadja a sort.</p>
+
+<pre   ><code class="language-c">Complex c1(2.3);
+Complex c2(Complex(c1), Complex());</code></pre>
+<p>A régi szintaxis különbözött a struktúráknál használt inicializáló
+listától is. Ha egy osztálynak definiáltunk konstruktort, a kerek zárójelet
+kellett használjuk, azonban ha nem, akkor pedig a C-s inicializálást:</p>
+<pre   ><code class="language-c">struct Complex {
+    double re, im;
+};
+Complex c1 = {2.3, 3.4};</code></pre>
+<p>Az új, kapcsos zárójeles szintaxis előnye, hogy sehol nem keverhető össze
+a függvényekkel. Sok helyen azt is lehetővé teszi, hogy a típus kiírását elhagyjuk:</p>
+<pre   ><code class="language-cbub">class Complex {
+  public:
+    Complex(double re = 0.0, double im = 0.0);
+};
+
+Complex fv1() {
+    return {2.3, 3.4};  // C++11
+}
+
+void fv2(Complex);
+
+Complex c1{2.3, 3.4}, c2{2.3}, c3{}, c4 = {2.3, 3.4}; // C++11
+
+fv2({2.3, 3.4}); // C++11</code></pre>
+<p>Érdemes a két függvénynél leírtakat összevetni a C99 compound literal szintaxisával,
+egész hasonlítanak.</p>
+<p>A kapcsos zárójeles szintaxis további újdonsága, hogy a konverziókat is szigorúbban veszi. Míg a kerek zárójeles esetben
+megengedett volt az „adatvesztéses” (narrowing) konverzió, a kapcsos zárójeles inicializálás már nem engedi meg azt.
+Ez lényegtelen, értelmetlen dolognak tűnhet, de gondoljunk arra, hogy ilyen kódrészleteket
+nem csak explicite lehet leírni, hanem sablonok példányosítása közben is „kialakulhat”
+ilyen.</p>
+<pre   ><code class="language-c">int i1 = 3.4;       /* szabad, de 3 lesz */
+int i2(3.4);        /* ez is 3 lesz */
+int i3{3.4};        /* fordítási hiba */
+unsigned i4{-2};    /* fordítási hiba */</code></pre>
+</blockquote>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A változó">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="variable" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A változó<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A kifejezéses programunkban egyváltozós függvényeket szeretnénk megadni. A változó
+is egy kifejezés, amely kiírva „x”-ként jelenik meg, kiértékelve pedig mindig azt
+az értéket adja, ahol kiértékeljük:</p>
+
+<pre   ><code class="language-c">class Variable final : public Expression {
+  public:
+    virtual double evaluate(double x) const override {
+        return x;
+    }
+
+  private:
+    virtual void print(std::ostream &amp;os) const override {
+        os &lt;&lt; 'x';
+    }
+};</code></pre>
+
+<p>Furcsa egy osztály lett, olyan mintha nem csinálna semmit, mivel nincs 
+adattagja. Az ősosztályából nem örökölt, ő maga meg nem adott hozzá sajátot. De 
+ne gondoljuk azt, hogy egy <code>Variable</code> objektum üres, igenis tartalmaz 
+információt: mégpedig azt, hogy ő egy <code>Variable</code>, nem pedig egy 
+<code>Constant</code>. A típusa az információ, és az, 
+hogy a virtuális függvényeket másképp implementálja, mint a többiek.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az összeg és a szorzat: kétoperandusú műveletek">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="nvi" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Az összeg és a szorzat: kétoperandusú műveletek<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az összeget és a szorzatot vizsgálva rájöhetünk, hogy két nagyon hasonló
+műveletről van szó. Mindkettőre igaz, hogy:</p>
+
+<ul>
+    <li>Két operandussal dolgoznak.
+    <li>A kiértékelésük előtt ki kell értékelni a két operandusukat. (A különbség csak
+    annyi, hogy az így kapott két értékkel mást kell csinálni.)
+    <li>A kiírásuk így működik: első operandus kiírása, műveleti jel, második operandus
+    kiírása.
+</ul>
+
+<p>Ez azt sugallja, hogy kellene nekik egy közös ős, amiből aztán leszármazhatnak,
+és ők maguk csak a különbségeket kell megvalósítsák virtuális függvényként.</p>
+
+<img src="uml.svg" class="kozep" style="width: 24em" alt="A kifejezések osztálydiagramja">
+
+<p>A kétoperandusú osztály tehát hivatkozik két másik kifejezés objektumra. 
+Azoknak a típusát nem ismerjük, de ez nem gond; mind a kiértékelés, mind a kiírás 
+virtuális függvények, és hívásukkor majd tudják, mi a teendő. (A leszármazott 
+tartalmazza az őst: az ilyet az OOP-ben kompozit objektumnak 
+nevezzük.) A kódolásnál arra kell figyelni, hogy bár csak két operandus van, nem 
+egy nagy tárolóról van szó, ez mégis egy heterogén kollekció: a két kifejezés objektumra 
+pointert kell tárolnunk. Rögzítsük most a tervezésnél azt is, hogy a két 
+hivatkozott kifejezés objektumért a kétoperandusú objektum fog felelni: ha az 
+utóbbi megszűnik, az előbbieknek is meg kell szűnniük.</p>
+
+<pre   ><code class="language-cbub">class TwoOperand : public Expression {
+  public:
+    /* create object, adopt dynamically allocated expressions */
+    TwoOperand(Expression *lhs, Expression *rhs) : lhs_{lhs}, rhs_{rhs} {}
+
+    ~TwoOperand() {
+        delete lhs_;
+        delete rhs_;
+    }
+
+    /* no copy construction */
+    TwoOperand(TwoOperand const &amp;) = delete; // C++11
+
+    /* no copy assignment */
+    TwoOperand &amp; operator=(TwoOperand const &amp;) = delete; // C++11
+
+    virtual double evaluate(double x) const override final { // C++11
+        return do_operator(lhs_-&gt;evaluate(x), rhs_-&gt;evaluate(x));
+    }
+
+  private:
+    virtual void print(std::ostream &amp;os) const override final {
+        os &lt;&lt; '(' &lt;&lt; *lhs_ &lt;&lt; get_operator() &lt;&lt; *rhs_ &lt;&lt; ')';
+    }
+
+    /* subclass has to provide function to return its operator char */
+    virtual char get_operator() const = 0;
+
+    /* subclass has to provide function to do the calculation */
+    virtual double do_operator(double lhs, double rhs) const = 0;
+
+    /* left and right hand side operands */
+    Expression *lhs_, *rhs_;
+};</code></pre>
+
+<p>A tagfüggvények vizsgálatát csoportosítva érdemes megtenni. Az első csoportba
+a konstruktorok és a destruktor tartoznak, a második csoportba pedig a virtuális
+függvények.</p>
+
+<p>A konstruktor triviális. A neki adott két kifejezésre mutató pointert 
+eltárolja. Mint azt fentebb eldöntöttük, ezek dinamikusan foglalt kifejezések 
+lesznek, amik máshol nem lehetnek hivatkozva, ezért a destruktor fel is 
+szabadítja őket. Máris használjuk az ősosztály virtuális destruktorát!</p>
+
+<p>Külön magyarázatot érdemel a másoló konstruktor és az értékadó operátor. A 
+C++-os osztályok tervezésénél ökölszabály az, ha egy osztálynak szüksége van az 
+1) destruktor, 2) másoló konstruktor, 3) értékadó operátor közül bármelyikre, 
+akkor valószínűleg szüksége van mind a háromra. Láthatóan az ökölszabály itt is 
+érvényes: egy kétoperandusú objektum lemásolásakor a másolat saját operandusokkal 
+kell rendelkezzen, mert a destruktora fel akarja majd szabadítani azokat. Tehát 
+az objektum másolatában nem lehet a pointerek másolata (sekély másolat), és ezért kellene egy 
+saját másoló konstruktor is. Egyelőre ezt nem tervezzük használni, és az értékadó 
+operátort sem. A gond csak az, ha erről a két tagfüggvényről nem nyilatkozunk az 
+osztályban, akkor a fordító megírja őket helyettünk, jelen esetben pont rosszul.</p>
+
+<div class="megjegyzes">
+<p>Ez a C++11-ben már elavultnak számít (deprecated). A szabvány azt 
+mondja, hogy egy olyan osztálynak, aminek a felhasználó saját destruktort 
+definiál, a fordító csak figyelmeztetés mellett szabad automatikusan másoló 
+konstruktort és értékadó operátort írjon, mivel valószínűleg helytelen.
+Ezért esetleg az <code>Expression</code> alaposztályt írhatjuk így:</p>
+<pre   ><code class="language-c">class Expression {
+    /* ... */
+
+    Expression() = default;
+    Expression(Expression const &amp;) = default;
+
+    virtual ~Expression() = default;
+};</code></pre>
+<p>Jelezve, hogy <a href="index.html#defaultdelete">az általa írt másoló konstruktort elfogadjuk</a>. Az
+alapértelmezett konstruktort is – erre azért van szükség, mert amelyik
+osztály konstruktorairól nyilatkozunk, annak eredendően nem írna
+alapértelmezetett.</p>
+</div>
+
+<p>A rossz másoló konstruktor pedig létezik, és ha létezik, előbb-utóbb valaki 
+használni is fogja. Akár véletlenül is: elég csak lefelejteni a referencia
+<code>&amp;</code> jelét egy függvényparaméterben. A C++11-es <code>= delete</code> 
+nyelvi elemmel jelezhetjük a fordító és az osztály használói számára, hogy azt a 
+függvényt szándékosan nem írtuk meg, nem akarjuk, hogy létezzen. Így egy <code>
+TwoOperand</code> objektum lemásolása nem futási időben fog kísérteties 
+memóriahibákhoz vezetni, hanem már fordítási időben jelentkezik.</p>
+
+<div class="megjegyzes">
+<p>Ez a nyelvi elem konverziók tiltására is használható. Az alábbi kód pl.
+5-öt ír ki a kimenetre, mivel a szokásos <code>double</code>&rarr;<code>int</code>
+automatikus konverzió eldobja a tizedespont utáni számjegyeket:</p>
+<pre   ><code class="language-c">void print(int i) { std::cout &lt;&lt; i; }
+print(5.3);</code></pre>
+<p>A kódot egy törölt függvénnyel kiegészítve viszont már nem fordul le a kód.
+Ezzel jelezzük a fordítónak, hogy gondoltunk a függvényre, de az a célunk, hogy
+ne létezzen:</p>
+<pre   ><code class="language-c">void print(double d) = delete;</code></pre>
+</div>
+
+<p>A két alaposztályból örökölt függvény, az <code>evaluate()</code> és a 
+<code>print()</code> megvalósítása <code>final</code>. Mint az fentebb is 
+szerepelt, a kiértékelés az összes kétoperandusú függvénynél egyformán működik, 
+csak az operátor (összeadás, szorzás) más. Ha ezt az operátort egy virtuális 
+<code>do_operator()</code> függvénnyel helyettesítjük, amelyet majd a 
+leszármazottól várunk el, akkor az <code>evaluate()</code> megvalósítása 
+véglegessé tehető. A kiírásnál ugyanez történik: zárójel, bal oldali 
+részkifejezés, operátor, jobb oldali részkifejezés, zárójel. Ez minden 
+kétoperandusúnál így van, akkor <code>final</code>. A leszármazottak dolga csak 
+annyi marad, hogy megadják az operátort jelképező karaktert a 
+<code>get_operator()</code> tagfüggvény megvalósításán keresztül.</p>
+
+<p>Az <code>evaluate()</code> és a <code>print()</code> tagfüggvények jelen 
+formáját függvénysablonnak nevezik (OOP-értelemben, nem 
+<code>template</code>-értelemben). A függvénysablon azt jelenti, hogy van egy 
+kötött tevékenységsorozat, amelyben egy lépést kicserélhetővé teszünk, tipikusan 
+egy virtuális függvény segítségével.</p>
+
+<p class="megjegyzes">Érdekessége egy adott tagfüggvény <code>final</code> jelzőjének, hogy a fordítónak segíthet a kód 
+optimalizálásában is. Jelen példában, ha adott egy <code>Expession*</code> pointer (vagy referencia), az azon keresztül hívott 
+<code>-&gt;evaluate()</code> függvényhívást virtuálisként kell kezelni, mivel nem lehet tudni, hogy az <code>Expression</code> 
+statikus típus mögött milyen konkrét objektum van dinamikusan (futási időben). Azonban ha egy objektumra <code>TwoOperand*</code> 
+pointer (vagy leszármazottja) mutat, akkor biztosan a <code>TwoOperand::evaluate()</code> függvényt kell majd hívni, hiszen a 
+leszármazottak nem írhatták azt felül. Ez nem csak azt jelenti, hogy a virtuális (indirekt) mechanizmus elmaradhat, hanem <a href="../inline/index.html">inline-olásra</a> is lehetőség adódik.</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az összeg és a szorzat, most már tényleg">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="osszeg_es_szorzat" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Az összeg és a szorzat, most már tényleg<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előző, <code>TwoOperand</code> osztályba fektetett munkánk most megtérül.
+Ha meg kell valósítanunk az összeg osztályt, már csak ennyit kell írnunk:</p>
+
+<pre   ><code class="language-cbub">class Sum final : public TwoOperand {
+  public:
+    using TwoOperand::TwoOperand; // C++11
+
+  private:
+    virtual char get_operator() const override {
+        return '+';
+    }
+    
+    virtual double do_operator(double lhs, double rhs) const override {
+        return lhs + rhs;
+    }
+};</code></pre>
+
+<p>A szorzat (<code>Product</code>) osztály ugyanilyen, csak mindkét <code>+</code>
+helyére <code>*</code>-ot kell írni.</p>
+
+<p>Az osztály egy új, C++11 nyelvi elemet használ: az új szabvány szerint a 
+konstruktorok is örökölhetők. A szintaktika jelentése: a <code>TwoOperand</code> 
+konstruktorai legyenek használhatók a <code>Sum</code>-hoz is. Ez a fordító 
+számára nem triviális lépés, mert ettől még kell konstruktort írnia; de ezt 
+ugyanúgy megteszi, mintha a másoló vagy az alapértelmezett konstruktor megírását 
+bíztuk volna rá. A konstruktorok öröklése annak a körülményes leírását rövidíti, 
+hogy az új osztály ugyanolyan paraméterű konstruktorokkal kell rendelkezzen, mint 
+az őse, és ezeknek a konstruktoroknak semmi más dolguk nincs, mint 
+továbbpasszolni az ős konstruktorának a paramétereket. Tehát a fenti 
+<code>using</code>-os sor lényegében ennek a szemléletesebb kifejezése:</p>
+
+<pre   ><code class="language-c">Sum(Expression *lhs, Expression *rhs) : TwoOperand{lhs, rhs} {}</code></pre>
+
+<p>A két osztállyal eljutottunk oda, hogy már tudunk működő 
+kifejezéseket létrehozni. Próbáljuk ki a programot! Az <code>5*(3+x)</code> 
+kifejezést így tudjuk megadni:</p>
+
+<pre   ><code class="language-c">int main() {
+    Expression *c = new Product{
+                        new Constant{5},
+                        new Sum{
+                            new Constant{3},
+                            new Variable
+                        }
+                    };
+    std::cout &lt;&lt; &quot;f(x) = &quot; &lt;&lt; *c &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;f(3) = &quot; &lt;&lt; c-&gt;evaluate(3) &lt;&lt; std::endl;
+    delete c;
+}</code></pre>
+
+<pre class="screenshot">
+f(x) = (5*(3+x))
+f(3) = 30
+</pre>
+
+<p>Az eddig megírt kódrészletek letölthetők innen:
+<a href="expression1.cpp">expression1.cpp</a>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Deriválás: nem is olyan nehéz">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="heterogen_clone" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Deriválás: nem is olyan nehéz<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<table class="float">
+<caption>Deriválási szabályok</caption>
+<thead>
+<tr><th>Függvény<th>Derivált
+</thead>
+<tr><td>c<td>0
+<tr><td>x<td>1
+<tr><td>a+b<td>a'+b'
+<tr><td>ab<td>a'b+ab'
+</table>
+
+<p>A feladat, hogy tanítsuk meg a programot a kifejezések (függvények) 
+deriválására is, először bonyolultnak hangzik. Mivel azonban a kifejezések 
+objektumokból állnak, az egyes objektumok pedig mind ismerik a saját típusukat, 
+könnyen beláthatjuk, hogy a táblázatban látható deriválási szabályok hamar 
+beépíthetők a programba. A deriválás alapszabályai ugyanis éppen azokra a 
+típusokra vonatkoznak, amelyek a programunkban is implementáltunk; a bal oldali 
+oszlop mutatja azt, hogy melyik osztályról van szó, a jobb oldali azt, hogy 
+hogyan viselkedik.</p>
+
+<p>Minden kifejezés deriválható: ez azt jelenti, hogy a kifejezés ősosztályban 
+kell lennie egy <code>derivative()</code> függvénynek. Egy kifejezés deriváltja 
+egy másik kifejezés, tehát a metódus visszatérési értéke is egy kifejezés kell 
+legyen. Egészen pontosan egy kifejezésre mutató pointer, mert nem tudhatjuk, 
+pontosan milyen típusa lesz, és ezért indirekciót kell használni. Sőt dinamikusan 
+foglalt kifejezés kell legyen a visszatérési érték, mert a függvényben jön létre, 
+ugyanakkor a függvény vissztatérte után is megmarad. Végül pedig azt is tudjuk, 
+hogy ugyan egy kifejezés deriválásakor nem tudjuk, hogy milyen kifejezésről van 
+szó, ő maga viszont ismeri saját magát, és a saját maga deriválási szabályát: 
+szóval a deriválás virtuális függvény. Vegyük ezért föl az új tagot az ősbe:</p>
+
+<pre   ><code class="language-c">class Expression {
+    virtual Expression * derivative() const = 0;
+};</code></pre>
+
+<p>Ha most megpróbáljuk lefordítani a programot, nem fog menni. A C++98-ból 
+megszokott módon szól a fordító az implementálatlan, tisztán virtuális függvények 
+miatt is; de a C++11-ben megadott <code>final</code> osztályoknál is külön 
+jelezni fog, hogy egy osztály nem lehet final, ha még absztrakt. Rá vagyunk 
+kényszerítve, hogy implementáljuk mindenhol a függvényt. A táblázat alapján ez 
+könnyű:</p>
+
+<pre   ><code class="language-c">Expression * Constant::derivative() const { /* c -&gt; 0 */
+    return new Constant{0};
+}
+
+Expression * Variable::derivative() const { /* x -&gt; 1 */
+    return new Constant{1};
+}
+
+Expression * Sum::derivative() const {      /* a+b -&gt; a'+b' */
+    return new Sum{lhs_-&gt;derivative(), rhs_-&gt;derivative()};
+}
+
+Expression * Product::derivative() const {  /* ab -&gt; a'b+ab' */
+    return new Sum{
+               new Product{lhs_-&gt;derivative(), rhs_},
+               new Product{lhs_, rhs_-&gt;derivative()}
+           };
+}</code></pre>
+
+<p>Ez jól számolja a deriváltat (a kiírt kifejezés kézzel egyszerűsíthető, ellenőrizhető),
+csak van egy kis bökkenő: a felszabadításnál lefagy.</p>
+
+<pre   ><code class="language-c">Expression *cd = c-&gt;derivative();
+std::cout &lt;&lt; &quot;f'(x) = &quot; &lt;&lt; *cd &lt;&lt; std::endl;
+delete cd;</code></pre>
+<pre class="screenshot">
+f'(x) = ((0*(3+x))+(5*(0+1)))
+Segmentation fault
+</pre>
+
+<p>A problémát egy memóriakezelési hiba okozza, amelyik a <code>Product::derivative()</code>
+függvényben rejtőzik. Azt mondtuk ugyanis a <code>TwoOperand</code> osztálynál, hogy
+a konstruktora mindig két dinamikusan foglalt objektumot fog kapni (<code>lhs</code> és <code>rhs</code>),
+amelyeket örökbe is kell fogadnia. A <code>Product::derivative()</code> függvényben megsértjük
+ezt a szabályt, mert olyan kifejezések pointereit adjuk a <code>Product{}</code>
+konstruktoroknak, amelyek nem kerülhetnek a tulajdonába. Ez pont ugyanaz a probléma, amiért
+eredetileg a <code>TwoOperand</code> osztály másoló konstruktorát is letiltottuk.</p>
+
+<p>Tehát míg az <code>lhs_-&gt;derivative()</code> és 
+<code>rhs_-&gt;derivative()</code> paraméterek rendben vannak, az 
+<code>lhs_</code> és <code>rhs_</code> pointerek másolata, azaz sekély másolat (shallow copy) helyett 
+a kifejezések mély másolatát (deep copy) kellene eltárolni az új 
+<code>Product</code> objektumokban. <em>Ugyanolyan</em> kifejezéseket, de nem <em>ugyanazokat</em>
+a kifejezéseket:</p>
+
+<pre   ><code class="language-c">Expression * Product::derivative() const {
+    return new Sum{
+               new Product{lhs_-&gt;derivative(), rhs_-&gt;clone()},
+               new Product{lhs_-&gt;clone(), rhs_-&gt;derivative()}
+           };
+}</code></pre>
+
+<p>A <code>clone()</code> függvény hatására minden fajta kifejezésnek a saját 
+típusának megfelelő dinamikus, mély másolattal kell visszatérnie. Változó másolata
+változó, szorzat másolata szorzat és így tovább. Ezért az alaposztályban 
+definiálunk egy <code>clone()</code> virtuális függvényt, amelyet minden 
+osztályban úgy valósítunk meg, hogy a saját másoló konstruktorát használja. Azaz 
+<code>Constant</code> osztályban <code>new Constant(*this)</code> lesz, 
+<code>Product</code> osztályban <code>new Product(*this)</code>, és így tovább. A 
+<code>TwoOperand</code> osztályban törölt (<code>= delete</code>) másoló 
+konstruktort is most már meg tudjuk valósítani. Pont ez a <code>clone()</code> 
+függvény hiányzott ahhoz, hogy az működni tudjon, mivel a <code>TwoOperand</code> 
+nem tudja, hogy a két operandusa milyen típusú. A megvalósítások:</p>
+
+<pre   ><code class="language-c">class Expression {
+    /* return dynamically allocated copy of expression */
+    virtual Expression * clone() const = 0;
+};
+
+
+virtual Constant * Constant::clone() const {
+    return new Constant{*this};
+}
+
+virtual Variable * Variable::clone() const {
+    return new Variable{*this};
+}
+
+TwoOperand::TwoOperand(TwoOperand const &amp; the_other)
+    : Expression{*this}
+    , lhs_{the_other.lhs_-&gt;clone()}, rhs_{the_other.rhs_-&gt;clone()} {
+}
+
+virtual Sum * Sum::clone() const {
+    return new Sum{*this};
+}
+
+virtual Product * Product::clone() const {
+    return new Product{*this};
+}</code></pre>
+
+<p>Ezt a jellegzetes C++ tervezési mintát, a <code>clone()</code> függvényt virtuális konstruktornak (virtual constructor)
+szokták becézni. Bár nyelvileg nem konstruktorról van szó (a szó szerint vett konstruktor nem lehet virtuális), a szerepe mégis
+hasonló. Leggyakrabban heterogén kollekció másolásánál használjuk. Érdekesség, hogy a leszármazottakban a
+<code>clone()</code> visszatérési értéke nem feltétlenül kell <code>Expression *</code> legyen, hanem lehet valamely
+leszármazott pointere is (neve: <em>covariant return type</em>); jelen esetben természetesen a saját osztály típusa. Ez itt-ott
+megkönnyítheti a <code>clone()</code> használatát, ha egy objektum típusáról pontosabb információnk van annál, minthogy az egy
+kifejezés.</p>
+
+<p>Az újabb változat linkje:
+<a href="expression2.cpp">expression2.cpp</a>.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Egyszerűsítés: ((0*(3+x))+(5*(0+1))) = 5">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+    <a id="kifejezes_egyszerusites" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Egyszerűsítés: ((0*(3+x))+(5*(0+1))) = 5<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Már csak egy feladatunk van. Az <code>(5*(3+x))</code> kifejezés deriválása közben a 
+<code>((0*(3+x))+(5*(0+1)))</code> kifejezést kaptuk, ami elég ijesztően néz ki ahhoz képest, 
+hogy konstans 5-tel egyenlő. A további deriválás után egy még bonyolultabb 
+kifejezést kapunk, pedig annak már nulla az értéke. Egyszerűsíteni kellene ezeket 
+a kifejezéseket.</p>
+
+<p>Az egyszerűsítés nem olyan egzakt fogalom, mint a deriválás. Egy kifejezésnek
+pontosan egy deriváltja van, nincs azonban „legegyszerűbb” formája. Legfeljebb
+egy olyan alakja, amit a legegyszerűbbnek tartunk vagy szoktunk meg. Attól függően,
+hogy mi a dolgunk a kifejezéssel, lehet hasznosabb például az <code>x<sup>2</sup>-1</code>
+forma vagy az <code>(x+1)(x-1)</code> forma. A mostani program ezért csak néhány
+alapvető egyszerűsítési lépést fog elvégezni: az egyes műveletek nullelemeit, egységelemeit
+fogja kezelni, és a konstansokon végzett műveleteket elvégezni. A deriváltat figyelve
+látszik, hogy már ez is sokat segítene.</p>
+
+<div class="columns">
+<div>
+<table>
+<caption>Egyszerűsítés: összeg</caption>
+<thead><tr><th>Minta<th>Egyszerűsített</thead>
+<tr><td>a+0<td>a
+<tr><td>0+a<td>a
+<tr><td>c<sub>1</sub>+c<sub>2</sub><td>c<sub>3</sub>
+</table>
+</div>
+<div>
+<table>
+<caption>Egyszerűsítés: szorzat</caption>
+<thead><tr><th>Minta<th>Egyszerűsített</thead>
+<tr><td>a*0<td>0
+<tr><td>0*a<td>0
+<tr><td>1*a<td>a
+<tr><td>a*1<td>a
+<tr><td>c<sub>1</sub>*c<sub>2</sub><td>c<sub>3</sub>
+</table>
+</div>
+</div>
+
+<p>Az egyszerűsítés használatához ez lehetne az első ötletünk:</p>
+
+<pre   ><code class="language-cbub">Expression *e = new Sum{new Constant{3}, new Constant{4}};
+e-&gt;simplify();
+std::cout &lt;&lt; *e;    // 7
+delete e;</code></pre>
+
+<p>Ez azonban semmiképpen nem tud így működni. Ebben a kódrészletben
+azt várjuk a kifejezés legfelső összeg objektumáról, hogy cserélje le magát
+egy konstans objektumra. Ez azonban lehetetlen; ha az összeg objektumot egy
+másik objektumra cseréljük, annak a memóriacíme meg kellene változzon, és
+vele együtt az <code>e</code> pointernek is módosulnia kellene. Ehelyett
+várjuk el inkább a kifejezésektől azt, hogy adjanak egy <em>új</em> kifejezést
+ilyenkor, amely saját maguk egyszerűsített változata:</p>
+
+<pre   ><code class="language-cbub">Expression *e = new Sum{new Constant{3}, new Constant{4}};
+Expression *e_s = e-&gt;simplify();
+std::cout &lt;&lt; *e_s;    // 7
+delete e_s;
+delete e;</code></pre>
+
+<p>Az interfész új függvénye ezért ugyanolyan fejlécű lesz, mint a deriválás.
+Ehhez egy alapértelmezett verziót is adhatunk, mégpedig azt, hogy a függvény
+visszatéri az adott objektum klónjával: így megvalósítani csak ott kell, ahol
+ténylegesen lehet egyszerűsíteni is. Minden más objektum örökölheti a
+„nem egyszerűsíthető” megvalósítást:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    /* ... */
+    
+    /* return dynamically allocated, simplified version */
+    virtual Expression * simplify() const {
+        return clone();
+    }
+};</code></pre>
+
+<p>Az összetett kifejezések egyszerűsítésénél az első lépés a részkifejezések,
+pl. az összeg két tagjának egyszerűsítése. Ha azok már a legegyszerűbb ismert
+formára vannak hozva, akkor érdemes csak megvizsgálni a típusukat. Ezt a vizsgálatot
+a <code>dynamic_cast&lt;&gt;</code> operátorral lehet megtenni. Ez <em>futási időben</em>
+ellenőrzi az objektum virtuális függvénytábláját, ami alapján látja, hogy helyes-e
+a cast, vagy nem. Ha pointert castoltunk, akkor null pointert ad vissza egy helytelen
+cast esetén. A null értékű pointerhez C++11-ben <a href="index.html#nullptr">egy új kulcsszót vezettek be</a>,
+ez a <code>nullptr</code>.</p>
+
+<blockquote class="megjegyzes">
+<h3>Nem volt jó a <code>NULL</code>?</h3>
+<p>A <code>NULL</code> sosem volt kulcsszó. Eredendően C-ben ez a <em>makró</em>
+sem létezett, hanem a <code>0</code> egész szám jelképezte a null pointert. A
+legtöbb helyen ezzel nincs is gond, hiszen a fordító a használatból ki tudja találni,
+hogy pointerről van szó:</p>
+<pre   ><code class="language-c">int *p = 0;
+if (p != 0) ...</code></pre>
+<p>Ez azonban nincs mindenhol így. Vannak helyzetek, ahol a típus nem található ki
+automatikusan. Ilyen például a változó argumentumszámú függvények paraméterlistája,
+mint pl. a <code>printf()</code>-é. Az alábbi sor például hibás, mert a 0 érték
+egész számként (valószínű 4 bájtos) adódik át, ahelyett hogy null értékű pointerré
+lenne konvertálva (valószínű 8 bájtos):</p>
+<pre   ><code class="language-cbub">printf(&quot;%p&quot;, 0); // HIBÁS</code></pre>
+<p>Ezért az <code>stddef.h</code>-ban ezért a <code>NULL</code> makrót <code>(void*)0</code>-ként
+definiálták, ami működött is, mert C-ben a <code>void*</code> pointer bármilyen más
+típusú pointerré átalakítható:</p>
+<div class="sticky">C</div>
+<pre   ><code class="language-cbub">#define NULL ((void*)0)</code></pre>
+<p>Nincs ez így C++-ban. Ez a nyelv szigorúbban kezeli a típusokat, és nem engedi meg
+azt, hogy tetszőleges típusú pointerré alakítsunk egy <code>void*</code> pointert. Így
+ha ugyanaz lenne a <code>NULL</code> makró kifejtése, mint C-ben, az alábbi
+sor fordítási hibához vezetne, mivel egy <code>void*</code>&rarr;<code>int*</code>
+konverziót várna el:</p>
+<div class="columns">
+<div>
+<pre   ><code class="language-c">int *p = NULL;</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">int *p = ((void*) 0);</code></pre>
+</div>
+</div>
+<p>Így C++98-ban ezt eldobták, és a <code>cstddef</code>-beli makró is csak a C-kompatibilitás
+miatt volt meg, és így is <em>lehetett</em> definiálva:</p>
+<div class="sticky">C++98</div>
+<pre   ><code class="language-cbub">#define NULL (0)</code></pre>
+<p>Ezzel azonban megint visszajön a <code>printf()</code>-es probléma. Sőt, sablonoknál
+is gondot jelenthet, hiszen váratlanul <code>int</code> típussal példányosodhatnak
+pointer helyett.</p>
+<p>Az egyes fordítóknál ezt különféle, saját kiterjesztésekkel igyekeztek
+megoldani, de a C++11 előtt ez nem volt egységes. A C++11-ben viszont bevezették a
+<code>nullptr</code> kulcsszót: ez egy olyan null pointer literálist ad meg, amely
+bármely más pointerré konvertálható. A típusa <code>std::nullptr_t</code>.</p>
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">int *p = nullptr;</code></pre>
+<p>Hasonló ez a <code>bool</code>–<code>int</code> problémához. Eltérő a viselkedés, eltérő
+értékkészlet – nem érdemes egy meglévő típust megpróbálni ráhúzni, mert csak bajok lesznek.</p>
+
+</blockquote>
+
+<p>A kifejezések egyszerűsítését a <code>Constant</code> típusú objektumokra építjük,
+ezért <code>Constant*</code>-gá kell castolni a pointert. Utána a <code>Constant</code>
+osztály újonnan fölvett, <code>get_value()</code> tagfüggvényével lekérdezhetjük
+azok értékét. (Éppen az <code>evaluate()</code> is jó lenne, mert bárhol kiértékelhetjük
+a konstanst, ugyanazt kapjuk, de így kicsit érthetőbb a kód.)</p>
+
+<pre   ><code class="language-c">Expression * Sum::simplify() const {
+    Expression *lhs_simpl = lhs_-&gt;simplify();
+    Expression *rhs_simpl = rhs_-&gt;simplify();
+    Constant *lhs_cons = dynamic_cast&lt;Constant *&gt;(lhs_simpl);
+    Constant *rhs_cons = dynamic_cast&lt;Constant *&gt;(rhs_simpl);
+    if (lhs_cons != nullptr &amp;&amp; lhs_cons-&gt;get_value() == 0.0) {  /* 0 + a = a */
+        delete lhs_simpl;   /* = 0.0 */
+        return rhs_simpl;
+    }
+    if (rhs_cons != nullptr &amp;&amp; rhs_cons-&gt;get_value() == 0.0) {  /* a + 0 = a */
+        delete rhs_simpl;   /* = 0.0 */
+        return lhs_simpl;
+    }
+    if (lhs_cons != nullptr &amp;&amp; rhs_cons != nullptr) {   /* c + c = c */
+        double new_value = lhs_cons-&gt;get_value() + rhs_cons-&gt;get_value();
+        delete lhs_simpl;
+        delete rhs_simpl;
+        return new Constant{new_value};
+    }
+    return new Sum{lhs_simpl, rhs_simpl};
+}</code></pre>
+
+<p>A felismert egyszerűsítési lehetőségeknél figyelni kell arra, hogy
+a nem használt objektumokat felszabadítsuk. A <code>c+c</code> esetben például
+mindkét egyszerűsített oldalt el kell dobni, csak az összeg marad meg, egy teljesen
+új konstans objektumként.</p>
+
+<p>A szorzat egyszerűsítése ehhez hasonló. A harmadik változat linkje:
+<a href="expression3.cpp">expression3.cpp</a>.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ol>
+<li id="virtuallyyours"><a href="http://www.drdobbs.com/conversations-virtually-yours/184403760">Jim Hyslop and Herb Sutter: Conversations: Virtually Yours.</a>
+<li id="mill18"><a href="http://www.gotw.ca/publications/mill18.htm">Herb Sutter: Virtuality.</a>
+C/C++ Users Journal, 19(9), September 2001.
+<li id="defaultdelete"><a href="http://www.stroustrup.com/C++11FAQ.html#default">Bjarne Stroustrup: C++11 FAQ: control of defaults: default and delete</a>.
+<li id="nullptr"><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2431.pdf">Herb Sutter and Bjarne Stroustrup: A name for the null pointer: nullptr</a>.
+<li id="virtualfinaloverride"><a href="https://www.fluentcpp.com/2020/02/21/virtual-final-and-override-in-cpp/">Virtual, final and override in C++</a>.
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

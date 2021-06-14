@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Lambda kifejezések</title>
+<meta property="og:title" content="TEST InfoC++11 :: Lambda kifejezések">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Magasabb rendű függvények. Az std::bind és std::ref manipulátorok. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Magasabb rendű függvények. Az std::bind és std::ref manipulátorok. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Lambda kifejezések">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Lambda kifejezések</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Magasabb rendű függvények. Az std::bind és std::ref manipulátorok. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.</p>
+</div>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Magasabb rendű függvények</a>
+                      <li><a href="index.html#2" class="">Függvények manipulációja: std::ref és std::bind</a>
+                      <li><a href="index.html#3" class="">Lambda kifejezések</a>
+                      <li><a href="index.html#4" class="">Funarg problémák: a szögletes zárójelpár szerepe</a>
+                      <li><a href="index.html#5" class="">A lambda kifejezések típusa és az std::function sablon</a>
+                      <li><a href="index.html#6" class="">Összetett példa: emeletek és lakók</a>
+                      <li><a href="index.html#7" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Magasabb rendű függvények">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Magasabb rendű függvények<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A függvény az egyik legalapvetőbb absztrakciós eszközünk a programozásban. Segítségével tudjuk az algoritmikai egységeket,
+részfeladatokat absztrahálni: különválasztani egymástól, névvel ellátni, több helyről is elérhetővé tenni. A legegyszerűbb
+programjainkat is függvényekből építjük fel.</p>
+
+<p>Gyakran előfordul, hogy egy függvénytörzs valamely részét szeretnénk kicserélni, például egy rendező algoritmusnak egy
+rendezési relációt szeretnénk megadni paraméterként. Ebben az esetben a függvénynek paraméterként átadott adat egy programrész:
+egy kifejezés, amelyet ki kell értékelnie. Másképp fogalmazva, a függvénynek átadott adat maga is egy függvény. A függvényekkel,
+függvényeken dolgozó függvényeket magasabb rendű függvényeknek nevezzük (higher order procedures). Ilyen a következő JavaScript
+kódrészlet deriváló függvénye is.</p>
+
+<pre   ><code class="language-js">function deriv(f) {
+    var dx = 0.001;
+    function derived(x) {
+        return (f(x+dx) - f(x)) / dx;
+    }
+
+    return derived;
+}</code></pre>
+
+
+<p> Tehát függvény is lehet paraméter, és lehet akár visszatérési érték is. Láttuk a <a href="../ea05/index.html#funarg">funarg problémák kapcsán</a>, hogy az ilyesmi implementációja nem
+triviális. A példában a derivált függvénynek látnia kell azt a környezetet, ahol létrehozták. A <code>dx</code>
+és az <code>f</code> változó értékét ismernie kell a meghívása pillanatában is, pedig a paramétere csak az
+<code>x</code>.</p>
+
+<p>A C és a C++ nyelvekben a függvények csak másodrendű szerepet töltenek be: ez a két nyelv közvetlenül nem képes arra, hogy a
+függvényeket adatként kezelje. A C-ben a függvényekre mutató pointereken keresztül meg tudunk hivatkozni egy lefordított
+kódrészletet, de a függvényhívásnak kontextusa nincs: csak a konkrét függvényparaméterekkel tudunk kommunikálni vele. </p>
+
+<p>C++-ban az ehhez hasonló működést tudjuk imitálni olyan objektumokkal, amelyek rendelkeznek függvényhívó operátorral (functor). 
+Ezekbe az objektumokba akármilyen adatot betehetünk, a használatnál pedig végülis mindegy, hogy egy függvényre mutató pointerről 
+vagy objektumról van szó – ha használhatjuk rajta a kerek zárójel <code>()</code> operátort, függvénynek fogjuk érzékelni. Ezt a 
+módszert általában sablonfüggvényekkel szoktuk használni. A nehézsége, hogy nekünk kell végiggondolnunk a memóriakezelést. Van a 
+függvénynek kontextusa? Ha igen, mely változókat kell látnia? Mikor jönnek létre ezek a változók, mikor szűnnek meg? Referencia 
+vagy érték szerint kell őket látni?</p>
+
+<p>A C++11 lambda kifejezés nyelvi eleme, és a <code>functional</code> fejlécfájl sablonjai ezen problémák megoldásában 
+segítenek.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvények manipulációja: std::ref és std::bind">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Függvények manipulációja: std::ref és std::bind<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az STL-ben rengeteg alapalgoritmushoz találunk sablon implementációt. Az <code>std::for_each</code>
+egy iterátorok által megadott tartomány összes elemére meghív egy függvényt, az <code>std::copy</code>
+tartományok között másol, az <code>std::count_if</code> bizonyos tulajdonságú elemeket számlál meg,
+az <code>std::accumulate</code> összegzi az elemeket, az <code>std::sort</code> rendez, és így tovább.
+Lássunk néhány (kitenyésztett) példát ezek használatára!</p>
+
+
+
+
+
+<h3>Az <code>std::ref()</code> függvény</h3>
+
+<p>Az STL <code>std::for_each</code> függvénysablonja egy tartomány összes elemére meghívja a harmadik paraméterként
+megadott függvényt:</p>
+
+<div class="sticky">C++11</div>
+
+<pre   ><code class="language-c">template&lt;class InputIterator, class Function&gt;
+  Function for_each(InputIterator first, InputIterator last, Function fn)
+{
+    while (first != last) {
+        fn(*first);
+        ++first;
+    }
+    return std::move(fn);
+}</code></pre>
+
+<p>Észrevehetjük, hogy ez értékként veszi át a meghívandó függvényt. Ha sima függvényről van szó (azaz globális függvényre
+mutató pointerről), akkor ez lényegtelen. Ha azonban függvényobjektumról, akkor viszont fontos lehet. Tegyük fel, hogy van egy
+függvényobjektumunk, ami a neki paraméterként átadott értékeket sorszámozva írja ki:</p>
+
+<pre   ><code class="language-cbub">class IntPrinter {
+  private:
+    int count = 0;
+  public:
+    void operator() (int i) {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;. &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+};
+
+int main() {
+    int arr1[] = { 5, 9, 2, 4 };
+    int arr2[] = { 33, 97, 41, 73, 14 };
+    std::for_each(std::begin(arr1), std::end(arr1), IntPrinter{});
+    std::for_each(std::begin(arr2), std::end(arr2), IntPrinter{});  // :(
+}</code></pre>
+
+<p>Ha a számok több tartományból vannak, két <code>for_each</code> hívásra van szükség. Ezekhez azonban nem hozhatunk létre
+különálló <code>IntPrinter</code> objektumokat, mert mindegyiknél újraindul a számozás. Ha egyetlen <code>IntPrinter</code>
+objektumunk van, az érték szerinti paraméterátadás akkor is bekavar, mivel azt az egyetlen egy objektumot mindig lemásolja a
+hívás, és mindig újraindul a sorszámozás. Ezt a problémát hivatott megoldani az <code>std::for_each</code>
+visszatérési értéke. Ezért adja vissza a megváltozott függvényobjektumot. Ebben a példában így kellene ezt használnunk:</p>
+
+<pre   ><code class="language-c">int arr1[] = { 5, 9, 2, 4 };
+int arr2[] = { 5, 8, 4, 7, 9 };
+IntPrinter p;
+p = std::for_each(std::begin(arr1), std::end(arr1), p); /* 1. 2. 3. 4. */
+p = std::for_each(std::begin(arr2), std::end(arr2), p); /* 5. 6. 7. 8. 9. */</code></pre>
+
+<p>Van azonban egy másik megoldás is. Érezzük, arra lenne szükség, hogy az <code>std::for_each</code> függvénynek
+a <code>p</code> objektumot referencia szerint adjuk át, csak sajnos az úgy lett megírva, hogy érték szerint
+várja a függvényt. Ennek a problémának a megoldására való a C++11 <code>std::ref()</code> adaptere. Ennek paramétere
+egy becsomagolandó függvényobjektum referenciája; a visszatérési értéke pedig egy olyan funktor, amely minden
+hívást továbbít az eredeti függvényobjektumnak, de referenciával hivatkozza azt.
+Így az érték szerinti paraméterátadás nem fogja a <code>p</code>-t másolni:</p>
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">int arr1[] = { 5, 9, 2, 4 };
+int arr2[] = { 5, 8, 4, 7, 9 };
+IntPrinter p;
+std::for_each(std::begin(arr1), std::end(arr1), std::ref(p)); /* 1. 2. 3. 4. */
+std::for_each(std::begin(arr2), std::end(arr2), std::ref(p)); /* 5. 6. 7. 8. 9. */</code></pre>
+
+
+
+<h3>Az <code>std::bind()</code> függvény</h3>
+
+<p>Az alábbi kódban növekvő sorba rendezzük egy tömb elemeit.</p>
+
+<pre   ><code class="language-cbub">#include &lt;algorithm&gt;
+#include &lt;iterator&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    int arr[] = { 7, -4, 8, -3, -7, 9, 2, 4 };
+    std::sort(std::begin(arr), std::end(arr));  // rendezés
+    for (auto i : arr)
+        std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+}</code></pre>
+
+<p>Az <code>std::sort</code>-nál alapértelmezett a növekvő sorrendbe történő rendezés. Ehhez az <code>std::less</code> 
+osztálysablont példányosítja a tároló elemeinek típusával, és létrehoz a kapott osztályból egy objektumpéldányt: egy 
+függvényobjektumot, amely az összehasonlításokat fogja végezni. A fent jelölt sor egyenértékű ezzel:</p>
+
+<pre   ><code class="language-cbub">std::sort(std::begin(arr), std::end(arr), std::less&lt;int&gt;{});</code></pre>
+
+<p>Vizsgáljuk meg jobban az <code>std::less</code> sablont! Az <code>std::less&lt;int&gt;{}</code> objektum függvényhívó operátora 
+kétparaméterű: a két összehasonlítandó egész számot veszi át. Tegyük fel, hogy meg szeretnénk számolni a tömbben a negatív számokat 
+az <code>std::count_if</code> függvénnyel. Az arra képes, hogy megmondja, egy tartományban hány olyan elem van, amely megfelel egy 
+feltételnek (predikátumnak, predicate). Érezzük, hogy ehhez valahogyan használható lenne az <code>std::less</code>, mert az 
+megmondhatná, hogy kisebb-e a szám a nullánál. A probléma az, hogy az <code>std::count_if</code> egy unáris, egyparaméterű 
+predikátumot vár, a számlálásban <code>if (pred(x))</code> alakú a kód. Míg az <code>std::less</code> bináris, kétparaméterű 
+predikátum, a rendezésben <code>if (pred(x, y))</code> módon hívva.</p>
+
+<p>Ez a probléma általánosítható: gyakran a bináris predikátumból unáris predikátumot szeretnénk
+létrehozni. Még általánosabban: egy valahány paraméterű függvényt nála kevesebb paraméterű függvénnyé szeretnénk
+alakítani, az előbbi függvény némelyik paraméterét fix értékre lekötve (bind). C++11-ben
+erre való az <code>std::bind</code> nevű variadikus függvény. Ez első paramétereként a manipulálandó
+függvényt kapja. Többi paramétereként pedig annyi értéket, amennyit az eredeti függvény várt. Vagy értékek helyett az <code>
+std::placeholders::_1</code>, <code>_2</code>... helyőrző szimbólumok valamelyikét, amelyek a megtartandó paramétereket helyettesítik. A
+sorrend a manipulált függvény paramétersorrendjével kell megegyezzen. A keletkező függvény annyi paraméterű lesz, ahány
+helyőrzőt használtunk; a többi paraméter a megadott konstansokkal lesz helyettesítve.</p>
+
+<p>Visszatérve az eredeti problémára: hogy tudunk a <code>less(x, y)</code>-ból <code>negative(x)</code>-et
+csinálni? Egyszerűen, mert a negatív azt jelenti, hogy kisebb nullánál. Kódban: <code>negative(x)</code> ugyanaz, mint <code>less(x, 0)</code>.
+Vagyis a <code>less()</code> első paramétere az lesz, amit a <code>negative()</code> kapott, a második pedig mindig <code>0</code>.
+Az <code>std::bind()</code> segítségével könnyen létrehozható ez a függvény:</p>
+
+<div class="sticky">C++11</div>
+
+<pre   ><code class="language-c">#include &lt;functional&gt;
+
+auto less = std::less&lt;int&gt;{};
+auto negative = std::bind(less, std::placeholders::_1, 0);      /* less(p1, 0) */
+
+std::cout &lt;&lt; negative(-1) &lt;&lt; std::endl;  /* igaz */
+std::cout &lt;&lt; negative(1) &lt;&lt; std::endl;   /* hamis */
+
+int arr[] = { 7, -4, 8, -3, -7, 9, 2, 4 };
+std::cout &lt;&lt; std::count_if(std::begin(arr), std::end(arr), negative);   /* 3 db */</code></pre>
+
+<p>Az <code>std::bind</code> tetszőlegesen sok paraméterhez és értékhez használható (variadic template). Segítségével
+bármennyi érték bármilyen sorrendben átadható, pl.</p>
+
+<div class="sticky">C++11</div>
+
+<pre   ><code class="language-c">using namespace std::placeholders;
+auto less = std::less&lt;int&gt;{};
+
+auto negative = std::bind(less, _1, 0);     /* negative(p1) → less(p1, 0) */
+auto positive = std::bind(less, 0, _1);     /* positive(p1) → less(0, p1) */
+auto greater = std::bind(less, _2, _1);     /* greater(p1, p2) → less(p2, p1) */</code></pre>
+
+<p class="megjegyzes">Az <code>std::bind()</code> visszatérési értékének típusát a szabvány nem adja meg, ezért egyszerűbb
+<code>auto</code>-t használni. Általában valami függvényobjektumról van szó. Ha kell, ez eltárolható egy
+<code>std::function&lt;F&gt;</code> objektumban, ahol <code>F</code> a keletkező függvény típusa, pl. <code>bool (int, int)</code>
+a fenti <code>greater</code> esetén, vagy <code>bool (int)</code> a <code>negative</code> esetén. Az
+<code>std::function&lt;&gt;</code> sablonról lentebb lesz szó. Az <code>std::greater&lt;&gt;</code> sablon meg egyébként beépítetten is
+létezik.</p>
+
+<p>Az <code>std::bind</code> arra is jó, hogy egy osztály tagfüggvényét összekössük egy konkrét objektummal. Az
+így keletkező függvényobjektum önálló függvényként használható, nem csak objektummal együtt. Ehhez a <code>bind</code>
+első paramétere egy tagfüggvény mutató kell legyen, a második pedig az az objektum, vagy annak az objektumnak a címe,
+amelyikhez kötni szeretnénk azt. Például ha szeretnénk egy olyan unáris predikátumot (egyparaméterű funktort) létrehozni,
+amely akkor tér vissza igazzal, ha a paraméterként adott szám eleme egy halmaznak:</p>
+
+<pre   ><code class="language-cbub">std::set&lt;int&gt; s1 = { 3, 6, 9, 12 };
+auto element_of_s1 = std::bind(&amp;std::set&lt;int&gt;::count, &amp;s1, std::placeholders::_1);
+
+std::cout &lt;&lt; element_of_s1(3) &lt;&lt; std::endl;
+std::cout &lt;&lt; element_of_s1(4) &lt;&lt; std::endl;</code></pre>
+
+<p class="megjegyzes">Kis csalás a fenti kódban, hogy a <code>set::count</code> tagfüggvény nem igazzal vagy hamissal, hanem 1-gyel
+vagy 0-val tér vissza. Az <code>element_of_s1(x)</code> hívás visszatérési értéke megegyezik <code>s1.count(x)</code> visszatérési
+értékével. De logikai értékként tekintve ez egyenértékű a keresett válasszal.</p>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Lambda kifejezések">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="lambda" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Lambda kifejezések<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A predikátumok írásakor sokszor nagyon kényelmetlen az, hogy a használatuk helyétől távol kell megírni egy függvényt. Vegyünk 
+példának megint a rendezést! Az alábbi kód akkor lenne a legolvashatóbb, ha az <code>std::sort()</code> harmadik paramétereként 
+egyszerűen beírhatnánk azt, hogy <code>a &gt; b</code>, ahogy a <em>range-based</em> <code>for()</code> ciklus törzsébe is 
+közvetlenül beírhattuk a kiírás műveletet:</p>
+
+<pre   ><code class="language-cbub">#include &lt;algorithm&gt;
+#include &lt;iterator&gt;
+#include &lt;iostream&gt;
+
+bool greater(int a, int b) {
+    return a &gt; b;
+}
+
+int main() {
+    int arr[] = { 7, 4, 8, 3, 7, 9, 2, 4 };
+    std::sort(std::begin(arr), std::end(arr), greater);
+    for (auto i : arr)
+        std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;   // 9 8 7 7 4 4 3 2
+}</code></pre>
+
+<p>A külön függvény távol van a kódban, és fölöslegesen látszik a globális névtérben.
+Ez az, amit megelégeltek a C++-ban, és a C++11-ben lett ennek kiváltására egy új nyelvi elem.
+Ennek neve lambda kifejezés (lambda expression). A fenti csökkenő sorrendű rendezés lambda
+kifejezés használatával így írható:</p>
+
+<div class="sticky">C++11</div>
+
+<pre   ><code class="language-c">std::sort(std::begin(arr), std::end(arr),
+          [](int a, int b) { return a &gt; b; }
+);</code></pre>
+
+<p>A „lambda” név a funkcionális programozásból ered, ahol a függvényeket a λ karakterrel szokás jelölni. Több olyan nyelv is
+van, ahol konkrétan a <code>lambda</code> kulcsszó a függvények definícióját jelzi. Ilyen értelemben a lambda
+kifejezés egy névtelen függvényt ad meg: <em>egy függvényként használható objektumot hozunk létre.</em>
+A példában ez az <code>std::sort()</code> harmadik paramétere,
+most szándékosan egy különálló sorba került. A kifejezés egyes részei az alábbiakat jelentik:</p>
+
+<ul>
+    <li><code>[]</code>: a szögletes zárójelpár vezeti be a lambda kifejezést. Ez az ún. <em>lambda introducer</em> vagy <em>capture
+    clause</em>, amelyről lentebb részletesen lesz szó.
+    <li><code>(int a, int b)</code>: ezek a létrehozott függvény paraméterei.
+    <li><code>{ return a &gt; b; }</code>: ez pedig a függvény törzse.
+</ul>
+
+<p>Egy lambda függvénynek akárhány paramétere lehet. Ha nincs paraméter, akkor a formális paramétereket körbezáró, üres
+zárójelpár <code>()</code> akár el is hagyható. Az alábbi programrész két dobókocka összegével húsz dobást szimulál:</p>
+
+<pre   ><code class="language-c">int dice[20];
+std::generate(std::begin(dice), std::end(dice),
+    [] { return rand()%6 + 1 + rand()%6 + 1; }
+);</code></pre>
+
+<p class="megjegyzes"><code>std::generate()</code>: sorozatosan hívja a harmadik paraméterben megadott függvényt,
+és a visszatérési értékeket eltárolja a tartományba.</p>
+
+<p>A visszatérési típust a lambdáknál általában nem kell megadni, az <code>auto</code> változómegadáshoz hasonlóan működik.
+A fordító olyan visszatérési értékűnek tekinti a lambdát, mint amilyen típusa a benne lévő <code>return</code>
+utasításnál megadott kifejezésnek van. Ha mást szeretnénk, akkor az <em>trailing return type</em> szintaxissal megadható.
+Az alábbi példákban egy <code>const char *</code> &rarr; <code>std::string</code> konverzió miatt,
+illetve érték helyett referenciával visszatérés miatt:</p>
+
+<pre   ><code class="language-c">[] (int i) -&gt; std::string { return i % 2 == 0 ? &quot;paros&quot; : &quot;paratlan&quot;; }</code></pre>
+<pre   ><code class="language-c">[] (int &amp;a, int &amp;b) -&gt; int&amp; { return a &gt; b ? a : b; }</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Funarg problémák: a szögletes zárójelpár szerepe">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="lambdacapture" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Funarg problémák: a szögletes zárójelpár szerepe<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Észrevehetjük, hogy a lambda kifejezéssel függvényt definiálunk függvényben. Vajon mit jelent ez a változók láthatósága és 
+élettartama szempontjából? Látja-e egyáltalán a lambda kifejezéssel megadott függvény az őt befoglaló függvény változóit? Ha 
+látja, akkor a lambda kifejezés létrehozásának pillanatában, vagy a meghívás pillanatában tárolt értéküket látja, azaz érték 
+vagy referencia szerint éri el őket? Mi lesz ezekkel a belül is használt változókkal, ha a külső függvény már visszatért?</p>
+
+<p>Nézzünk meg néhány programrészletet, ahol ezek a problémák előjönnek! A lenti példában a belső függvény létrehozása után 
+megváltoztatjuk az általa is hivatkozott <code>j</code> változó értékét. Kérdés, mit ír ki a kódrészlet: 2-t vagy 5-öt? Ha a lambda 
+objektum érték szerint tárolja a változókat, akkor a létrehozáskori értéket fogja látni. Ha pedig referencia szerint, akkor a 
+létrehozása után történt változásokat is érzékelni fogja.</p>
+
+<pre   ><code class="language-cbub">int j = 2;
+auto func = [] () { // ?
+    return j;
+};
+
+j += 3;
+std::cout &lt;&lt; func();</code></pre>
+
+<p>A választás nem triviális, mert egyik sem jó minden esetben. Ha referencia szerint látja a változókat a függvény, akkor
+például a többszálúság esetén lehet gondunk. Az alábbi programrészben két külön tevékenységet indítanánk el párhuzamosan,
+amelyek mindketten a <code>local</code> nevű változón dolgoznak. Mi történik, ha ezek módosítják ennek az értékét? Hogyan
+függ a végrehajtás eredménye a több szál ütemezésétől?</p>
+
+<div class="sticky">Nem igazi<br>C++ kód</div>
+<pre   ><code class="language-cbub">void fv() {
+    Stuff local = ...;
+    parallel( []{ do_stuff(local); } );
+    parallel( []{ do_other_stuff(local); } );
+}</code></pre>
+
+<p>Néha az érték szerint megjegyzett változó a legváratlanabb esetekben okozhat gondokat. Az alábbi programrészben
+egy vektorban a <code>find()</code> hívás megkeresi a 42-es szám első előfordulását, aztán előállít egy függvényt,
+amely onnantól kezdve tud megkeresni egy másik számot. Ez a függvény azonban csak addig lesz működőképes, amíg a
+vektor át nem méretezi magát: az átméretezés miatt az iterátorok érvénytelenné válnak, hiába tároltuk el őket.</p>
+
+<div class="sticky">Nem igazi<br>C++ kód</div>
+<pre   ><code class="language-cbub">vector&lt;int&gt; v = ...;
+auto firstit = find(v.begin(), v.end(), 42);
+auto findnextfunc = [](int i){ return find(firstit, v.end(), i); };</code></pre>
+
+<p>A C++-ban a lambda függvényekben <em>nem válnak a külső függvény lokális változói automatikusan elérhetővé</em>. Nekünk kell
+megmondanunk, melyik változót szeretnénk látni; és azt is, hogy melyiket érték, melyiket referencia szerint. (De ezt C++-ban már
+megszoktuk: választhatunk és választanunk is kell.) A lambda kifejezés típusa ettől függően egy olyan függvényobjektum lesz,
+amelybe a hivatkozott változók értékei belemásolódnak, vagy amelybe a hivatkozott változó referenciája kerül. Érték
+esetén a létrehozáskori pillanatképet látjuk (snapshot), referenciák esetén pedig utólag a változásokat is (living view).
+Ezt adja meg a <em>capture clause</em>, a lambda kifejezés szögletes zárójeles része. A lehetőségek az alábbiak:</p>
+
+<ul>
+    <li><code>[]</code>: nem látjuk a létrehozó függvény változóit.
+    <li><code>[x, &amp;y]</code>: az <code>x</code> változót érték szerint (capture by value), az <code>y</code> változót referencia szerint (capture by reference) tároljuk.
+    <li><code>[=]</code>: minden hivatkozott változót érték szerint. Ilyenkor a fordító megkeresi a hivatkozott változókat,
+        és csak azokat teszi bele a lambda objektumba (implicit capture).
+    <li><code>[&amp;]</code>: minden hivatkozott változót referencia szerint.
+    <li><code>[&amp;, x]</code>: mindent referencia szerint; kivétel az <code>x</code>-et, azt érték szerint.
+    <li><code>[=, &amp;x]</code>: mindent érték szerint; kivétel az <code>x</code>-et, azt referencia szerint.
+    <li><code>[this]</code>: osztályban, a kapott függvény annak az objektumnak a tagfüggvényeként fog viselkedni,
+        amelyikben létrehoztuk. Vigyázat: a <code>this</code> egy pointer, ezért a befoglaló objektumot referencia
+        szemantikával fogjuk látni! <a href="../cpp1417/index.html#cpp14lambda">C++17-ben</a> <code>[*this]</code> is lehetséges.
+    <li><code>[x = 0]</code>: csak a lambda belsejében létező változó. Kezdeti értékét kötelező megadni, az <code>x</code>
+        változó pedig <code>auto</code>-ként meghatározott típusú lesz. C++14 óta.
+</ul>
+
+<p>Az alsó szintaxis teszi lehetővé azt, hogy egy lambda objektumba mozgassunk egy objektumot. Ehhez <code>[x = 
+std::move(x)]</code> formában kell használni. <code>x =</code>, tehát a lambdában jön létre egy változó; <code>std::move(x)</code>, 
+tehát jobbértékből lesz inicializálva. Ezek után a külső függvényben az <code>x</code> objektum már üres lesz, mert a lambda 
+létrehozásakor a <em>capture specifier</em>-ben megadott kifejezések kiértékelődnek, tehát <code>x</code> mozgató konstruktora is 
+lefut.</p>
+
+
+
+<h3>Példák érték és referencia szerinti tárolásra</h3>
+
+<p><em>Példa referencia szerinti tárolásra.</em> A következő lambda kifejezéssel megszámoljuk, hány összehasonlításra volt szükség a rendezéshez:</p>
+
+<pre   ><code class="language-cbub">int arr[] = { 4, 7, 18, 16, 14, 16, 7, 13, 10, 2, 3};
+int n = 0;
+std::sort(std::begin(arr), std::end(arr),
+    [&amp;n](int a, int b) { ++n; return a &lt; b; }   // referencia szerint
+);
+std::cout &lt;&lt; n &lt;&lt; &quot; összehasonlítás&quot;;</code></pre>
+
+<p><em>Példa érték szerinti tárolásra.</em> Az alábbi lambda kifejezéssel a felhasználó által adott <code>center</code> számtól való távolság szerint
+rendezzük sorba a tömb elemeit. A hívás pillanatában a <code>center</code> változónak már nem is kellene léteznie, mert másolat készül róla.</p>
+
+<pre   ><code class="language-cbub">int arr[] = { 4, 7, 18, 16, 14, 16, 7, 13, 10, 2, 3 };
+int center;
+std::cin &gt;&gt; center;
+std::sort(std::begin(arr), std::end(arr),
+    [center](int a, int b) {
+        return abs(center-a) &lt; abs(center-b);   // érték szerint
+    }
+);</code></pre>
+
+<p>A lambda objektumba érték szerint eltárolt változók konstansnak számítanak – mondhatni, a létrehozott függvény objektum
+függvényhívó operátora konstans tagfüggvény. Ha azt szeretnénk, hogy a függvény törzsében meg tudjuk azokat változtatni, akkor
+ún. <code>mutable</code> lambdát kell létrehoznunk, ugyanezzel a kulcsszóval. Pl.:</p>
+
+<pre   ><code class="language-c">int arr[] = { 4, 7, 18, 16, 14, 16, 7, 13, 10, 2, 3};
+std::for_each(std::begin(arr), std::end(arr),
+    [count = 0] (int i) mutable {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;. &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+);</code></pre>
+
+<h3>A lambda kifejezések jelentése</h3>
+
+<p>Minden alkalommal, amikor egy lambda kifejezést kiértékelünk, létrehozunk egy objektumot, amelybe
+eltároljuk a szögletes zárójelben megadott változókat.
+Egy lambda kifejezés megírása és kiértékelése nem más, mint egy osztály definíciója (fordítási időben)
+és az osztály konstruktorának hívása (futási időben). Például ez a kódrészlet:</p>
+
+<pre   ><code class="language-c">int i = 1, j = 2;
+auto my_lambda = [i, &amp;j](int k) { return i * ++j - k; };
+my_lambda(3);</code></pre>
+
+<p>Lényegében nem különbözik attól, mintha ezt írtuk volna:</p>
+
+<pre   ><code class="language-c">class MyLambda {
+  private:
+    int i;
+    int &amp;j;
+  public:
+    MyLambda(int i, int &amp;j): i{i}, j{j} {}
+    int operator() (int k) const {
+        return i * ++j - k;
+    }
+};
+ 
+int i = 1, j = 2;
+auto my_func = MyLambda{i, j};
+my_func(3);</code></pre>
+
+<p>Ne felejtsük el, hogy a lambda kifejezés nem más, mint ennek a programozási technikának a szintaktikai támogatása. Egy
+olyan szintaxis, amellyel a hosszadalmas, gépies osztálydefiníciót és a függvényobjektum létrehozását röviden, egy helyen le tudtuk
+írni. Egy <em>syntactic sugar</em>, nem pedig elvi újdonság!</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A lambda kifejezések típusa és az std::function sablon">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="stdfunction" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A lambda kifejezések típusa és az std::function sablon<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ahány lambda kifejezésünk van a programban, annyiféle paraméterük lehet, és annyiféle belsőváltozó-listával
+rendelkezhetnek. Sejthetjük, hogy a lambda objektumoknak inkompatibiliseknek kell lenniük egymással, és ez
+így is van. Minden egyes lambda kifejezés egy egyedi típusú objektumot hoz létre, amelynek a fordító által
+generált, a forráskódban láthatatlan nevű típusa van. Ezért kellett a fenti kódban a lambda objektumot
+egy <code>auto</code> típusú változóban eltárolni: mert amúgy nem tudtuk volna megnevezni a típusát.</p>
+
+<p>Ez alól csak azok a lambdák kivételek, amelyeknek a változólistája teljesen üres: mivel ezek az
+őket létrehozó függvénynek semmilyen lokális változóját nem látják; tulajdonképp olyanok, mint a globális függvények.
+Az üres változólistával rendelkező, tehát kontextus nélküli lambdák függvénypointerré konvertálhatóak. Így akár egy C-ben
+írt függvénynek is adhatunk lambda kifejezést paraméterként, a lényeg csak az, hogy üres változólistával
+<code>[]</code> kezdődjön. Egy példa (bár C++-ban a C-s <code>qsort()</code> függvényt nem szokás már használni):</p>
+
+<pre   ><code class="language-cbub">int arr[] = { 7, 4, 8, 3, 7, 9, 2, 4 };
+qsort(arr, sizeof(arr)/sizeof(arr[0]), sizeof(arr[0]),
+    [] (void const *pa, void const *pb) {
+        return *static_cast&lt;int const *&gt;(pa) - *static_cast&lt;int const *&gt;(pb);
+    }
+);
+for (auto i : arr)
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;</code></pre>
+
+<p>Ha nem ismerjük a lambda objektum típusát, mert nem tudjuk a nevét, akkor hogyan lehet olyan függvényt
+csinálni, amelyik egy lambda kifejezés értékével tér vissza? Ennek a problémának a megoldására találták ki az
+<code>std::function</code> nevű függvénysablont (<code>#include &lt;functional&gt;</code>). Ez a sablon konstruktorával
+és a sablon értékadó operátorával <em>érték szerint</em> le tud másolni bármilyen függvényszerű dolgot. Így érték szerint
+átadhatóvá tesz bármilyen funktort vagy lambda objektumot – lényegében <em>type erasure</em>-t valósít meg a függvényként
+viselkedő típusok számára. Az <code>std::function</code> sablon egyetlen sablonparamétere a hívandó
+függvény típusa (call signature), amely önmagában kicsit furcsán néz ki (egy függvényfejlécből elhagyva a függvény neve),
+de egy példa többet mond:</p>
+
+<pre   ><code class="language-cbub">#include &lt;functional&gt;
+#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+
+class Linear {
+    double a_, b_;
+  public:
+    Linear(double a, double b): a_{a}, b_{b} {}
+    double operator() (double x) { return a_*x + b_; }
+};
+
+int main() {
+    std::function&lt;double(double)&gt; f;    // double param, double vissza
+
+    f = sin;
+    std::cout &lt;&lt; f(1.2) &lt;&lt; std::endl;   /* sin(1.2); */
+
+    f = Linear{1.2, 3.4};
+    std::cout &lt;&lt; f(6) &lt;&lt; std::endl;     /* 1.2*6 + 3.4 */
+
+    f = [](double x) { return x*x; };
+    std::cout &lt;&lt; f(3.14) &lt;&lt; std::endl;  /* 3.14*3.14 */
+}</code></pre>
+
+<p>Ez a függvénysablon elfedi a függvény objektumok, függvénypointerek közötti szintaktikai különbséget is.
+Használható visszatérési érték típusaként ott, ahol egy lambda objektummal szeretnénk visszatérni. Ezzel már meg tudjuk
+valósítani a JavaScript nyelven írt deriváló függvényünket C++11-ben:</p>
+
+<pre   ><code class="language-c">#include &lt;functional&gt;
+#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+
+std::function&lt;double(double)&gt; derive(std::function&lt;double(double)&gt; f) {
+    double dx = 0.001;
+    auto derived = [=] (double x) {
+        return (f(x+dx) - f(x)) / dx;
+    };
+
+    return derived;
+}
+
+int main() {
+    auto my_cos = derive(sin);
+
+    for (double x = 0; x &lt; 3.14; x += 0.1)
+        std::cout &lt;&lt; cos(x) - my_cos(x) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Az <code>std::function</code> paraméter által biztosított absztrakció miatt a <code>derive()</code> függvényünk
+nem feltétlenül kell sablon legyen. A paramétere tetszőleges típus lehet, amely <code>double(double)</code>
+függvényként használható, mivel minden ilyen típussal inicializálható az <code>std::function&lt;double(double)&gt;</code> paraméter.</p>
+
+<p class="megjegyzes">Pro tipp. Az <code>std::function</code> belső működése mögött dinamikus memóriakezelés van, mivel az
+általa tárolt tetszőleges típusú függvénypointer vagy -objektumnak akár a mérete is típusonként eltérő lehet. Ezért egy
+<code>std::function</code> másolása lassú művelet – meggondolandó, hogy konstans referenciával adjuk át paraméterként.</p>
+
+<blockquote class="megjegyzes">
+<h3>Érdekességként: rekurzív lambda?</h3>
+<p>A lambdák névtelen függvények. Ezért lambdával papírforma szerint nem lehet rekurziót csinálni, mert
+a rekurzív híváshoz tudni kellene a függvény nevét – márpedig ha nincs név, nem tudunk hivatkozni rá. Ha ilyenre van szükségünk,
+egyszerűbb rendes függvényként megírni, és legfeljebb a használatát csomagolni egy lambdába. Ennek ellenére, az
+<code>std::function</code> sablonnal megoldható egy helyen a rekurzív lambda létrehozása:</p>
+<pre   ><code class="language-c">std::function&lt;int(int)&gt; fib;
+fib = [&amp;fib] (int n) {
+    return n &lt; 2 ? n : fib(n-1) + fib(n-2);
+};</code></pre>
+<p>Ez nem túl hasznos, viszont a megoldás módja annál tanulságosabb. A <code>fib</code> objektum a létrejötte pillanatában
+üres (mint egy null pointer), még nem tartalmaz semmilyen függvényt. A létrehozásának célja csak az, hogy neve lehessen a függvénynek, és ez
+a név a lambda kifejezés kiértékelésének pillanatában már létezzen. A lambda létrehozása után történik meg az értékadás,
+akkor másolódik be a függvényobjektumba a lambda objektum. Ezért kell a <code>fib</code> változót referencia szerint hivatkoznia!
+Ha lemásolná, akkor még az értékadás előtti, üres állapotáról készítene másolatot. Írhatnánk a két sort egyben is, ilyen
+formában:</p>
+<pre   ><code class="language-c">std::function&lt;int(int)&gt; fib = [&amp;fib] (int n) {
+    return n &lt; 2 ? n : fib(n-1) + fib(n-2);
+};</code></pre>
+<p>Ez ugyanazt jelenti. A lambda kifejezés kiértékelésének pillanatában a <code>fib</code> objektumnak még nincs
+értéke (később lesz inicializálva), de referenciája már létezhet. Az így létrehozott <code>fib</code>
+objektum nem másolható, mert a belsejében saját magára van referencia.</p>
+</blockquote>
+
+<blockquote class="megjegyzes">
+<h3>Nyelvészeknek: függvénysablonok és lokális típusok</h3>
+<p>A lefordított programot vizsgálva látszik a lambda objektum névtelen típusa. A hozzá tartozó függvényhívó
+operátornak lennie kell valahol. A fordító által ezekhez rendelt nevek egyediek, a tartalmazó függvényhez kötődnek:</p>
+<pre   ><code class="language-c">int main() {
+    int i = 2;
+    auto f = [=] { return i; };
+    f();
+}</code></pre>
+<pre class="screenshot">
+$ nm -C myprog
+[...]
+0000000000400650 T main
+0000000000400680 t main::$_0::operator()() const    <span class="bubble">a lambdáé</span>
+</pre>
+<p>C++98-ban nem lehetett egy függvényben, lokálisan megadott típussal példányosítani
+egy függvénysablont vagy osztálysablont. Ott ez nem működött:</p>
+<pre   ><code class="language-c">int main() {
+    class X {};
+    std::vector&lt;X&gt; xvec;
+}</code></pre>
+<p>C++11-ben már lehet ilyet. Ezzel bonyolultabbak lettek a fordítók, de muszáj volt megengedni ezt. A lambda kifejezések szinte
+mindig függvények belsejében szerepelnek, tehát csak lokálisan megadott típussal rendelkezhetnek. És pont azt szeretnénk, hogy
+a sablonfüggvényeket (pl. az <code>std::sort()</code> függvénysablont) példányosítani lehessen velük!</p>
+</blockquote>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Összetett példa: emeletek és lakók">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="ea_solver" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Összetett példa: emeletek és lakók<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi feladat.</p>
+
+<p class="csik">Baker, Cooper, Fletcher, Miller és Smith egy ötemeletes ház különböző emeletein laknak. Baker nem a legfölső
+emeleten lakik, Cooper pedig nem az alsó szinten. Fletcher lakhelye sem a legalsó szinten van, de nem is a legfölsőn. Miller
+magasabban lakik, mint Cooper. Smith nem Fletcherrel szomszédos emeleten lakik, ahogy Cooper és Fletcher sem emelet-szomszédok.
+A kérdés: melyik emelet kié?</p>
+
+<div class="sticky">Letölthető:<br><a href="solver.cpp">solver.cpp</a></div>
+
+<p>Tehát bizonyos változók (itt: Baker, Cooper, Fletcher, Miller, Smith) különböző értékeket vehetnek föl (itt:
+1, 2, 3, 4, 5), és az összes variációból a feladatban megadott megkötések egyetlen egyet jelölnek ki (itt:
+Baker = 3, Cooper = 2, Fletcher = 4, Miller = 5, Smith = 1). Mivel egy feladattípusról van szó, a favágó
+megoldása helyett ezért inkább írjunk most egy olyan keretrendszert, amely általánosságban képes ilyenek
+megoldására, és utána oldjuk meg ezt a konkrét feladatot a keretrendszer segítségével!</p>
+
+<h3>Terv – elnevezések</h3>
+
+<p>A leendő keretrendszerünk használatát valahogy így képzelhetjük el, egyelőre pszeudokód formájában:</p>
+
+<pre>
+Solver s
+
+baker = s.add_variable( {1, 2, 3, 4, 5} )
+cooper = s.add_variable( {1, 2, 3, 4, 5} )
+fletcher = s.add_variable( {1, 2, 3, 4, 5} )
+
+s.add_constraint( &lambda;{baker &ne; cooper} )
+s.add_constraint( &lambda;{|cooper-fletcher| &ne; 1} )
+
+s.solve( &lambda;{print(baker, cooper, fletcher)} )
+</pre>
+
+
+<p>Lesz egy <code>Solver</code> objektum, amely végig fogja pörgetni az összes változók összes lehetséges
+értékeit, azaz előállítja az összes variációt. Minden változó megadása egy halmaz megadását jelenti a
+<code>Solver</code> számára, amely annak a változónak a lehetséges értékeit tartalmazza. A <code>Solver</code>
+megjegyzi a halmazt, és visszatér egy olyan objektummal, amely a változó aktuális értékét reprezentálja majd a
+megoldás keresése közben.</p>
+
+<p>Ha megvannak a változókat reprezentáló objektumok, akkor megadhatjuk a megkötéseket is:
+<code>ConstraintFunc</code>. Minden megkötés egy kifejezés (pl. Baker ≠ Cooper), amely igazra vagy hamisra
+értékelődik ki; igazra, ha a megkötés teljesül, és hamisra, ha a változók értékei megsértik az adott
+megkötést.</p>
+
+<table class="nincsfuggolegescsik">
+    <thead>
+        <tr><th>Baker<th>Cooper<th>Fletcher<th>Miller<th>Smith<th>Jó?
+    </thead>
+        <tr><td>1<td>1<td>1<td>1<td>1<td><i class="ikon nem"></i>
+        <tr><td>1<td>1<td>1<td>1<td>2<td><i class="ikon nem"></i>
+        <tr><td colspan="6">...
+        <tr><td>3<td>2<td>4<td>5<td>1<td><i class="ikon igen"></i>
+        <tr><td colspan="6">...
+        <tr><td>5<td>5<td>5<td>5<td>5<td><i class="ikon nem"></i>
+</table>
+
+<p>A megkötések megadása után elindítjuk a <code>Solver</code>-t. Ez végigszalad az összes változó összes
+lehetséges értékein (az összes halmaz Descartes-szorzata). Az egyes variációknál a megkötések vizsgálata a
+<code>ConstraintFunc</code> függvények meghívását jelenti. A megoldás kereséséhez megadunk egy további függvényt is:
+<code>ActivityFunc</code>. Ez az a tevékenység, azaz függvény, amelyet a <code>Solver</code> majd meghív akkor,
+amikor megoldást talált.</p>
+
+<p>A fenti példában ez azt jelenti, hogy az { 1, 2, 3, 4, 5 } halmazt megadjuk a <code>Solver</code>-nek, mire visszaad egy objektumot,
+amely Baker-t reprezentálja. Utána megmutatjuk neki még négyszer ugyanezt a halmazt, hogy megkapjuk Cooper-t, Fletcher-t stb.,
+akik mind ugyanilyen sorszámú emeleten lakhatnak ebben a feladatban. A <code>Solver</code> az eltárolt halmazokhoz iterátorokat hoz
+létre, amelyek megoldáskeresés közben az épp vizsgált variációt adják meg. Az egyes <code>ConstraintFunc</code> függvények ezeket közvetve
+látni fogják, hogy az adott variációt ellenőrizni tudják.</p>
+
+<img src="solver_internals.svg" class="kozep" style="width: 44em;">
+
+<p>Az említett függvények több paraméterrel is rendelkezhetnének. Pl. egy megtalált helyes variáció esetén a meghívott
+<code>Activity</code> függvény megkaphatná paraméterként a találat értékeit. Ezt azonban nehéz kezelni, mert nem tudjuk előre,
+hány változó lesz. Használjuk ki ezért azt, hogy egy lambda objektumban tetszőlegesen sok változót elrejthetünk! Írjuk elő, hogy
+az <code>ActivityFunc</code> egy <code>void()</code> alakú függvényobjektum kell legyen! Ha a <code>Solver</code> használója valamelyik változója
+értékét látni szeretné az <code>ActivityFunc</code>-ban, majd beleteszi a lambda objektumba.</p>
+
+<p>Írjuk elő azt is, hogy a <code>ConstraintFunc</code> is legyen paraméter nélküli <code>bool()</code> alakú
+függvényobjektum! Egy alkalmas lambda kifejezés becsomagolhatja a változókat reprezentáló objektumokat is.
+Végül pedig, hogy lássuk, a lambda függvények bármire képesek, legyenek a változók (Baker, Cooper stb.) is
+függvények! Ezek szerint az egyes halmazok megadása után a <code>Solver</code> vissza fog adni olyan
+függvényeket, amelyeket ha meghívunk, a változók megoldáskeresés közben épp aktuális értékét látjuk.</p>
+
+<h3>Implementáció</h3>
+
+<p>A <code>Solver</code> a sablonparaméterében adott típusokkal fog dolgozni. A paraméterként megadott
+adatokat, a változók lehetséges értékeit belül <code>std::vector</code> típusú tárolókban tárolja a
+<code>variables_</code> nevű tömbben. A bejárás közben minden ilyen tárolóhoz szükség lesz egy iterátorra is,
+ezért létrehozunk egy iterátorokból álló tömböt is: <code>iterators_</code>.</p>
+
+<pre   ><code class="language-c">template &lt;typename VALUETYPE&gt;
+class Solver {
+  public:
+    using VariableFunc = std::function&lt;VALUETYPE const &amp;()&gt;;
+    using ConstraintFunc = std::function&lt;bool()&gt;;
+    using ActivityFunc = std::function&lt;void()&gt;;
+
+  private:
+    std::vector&lt;std::vector&lt;VALUETYPE&gt;&gt; variables_;
+    std::vector&lt;ConstraintFunc&gt; constraints_;
+    std::vector&lt;typename std::vector&lt;VALUETYPE&gt;::const_iterator&gt; iterators_;</code></pre>
+
+<p>A hozzáadás után a <code>Solver</code> visszaad majd egy <code>VariableFunc</code> típusú függvényt,
+amelyet meghívva lekérdezhetőek megoldáskeresés közben a változója mindenkori értékei.</p>
+
+<p>A lenti <code>add_variable()</code> függvény kezeli egy új változó létrehozását. A változó létrehozásához el
+kell tárolni a paraméterként kapott értékeket, és vissza kell adni azt a függvényt, amelyet meghívva a változó
+megoldáskeresés közbeni értékét látjuk. Ez az egysoros lambda függvény. Itt most kicsit előre kell gondolkozni:
+azért kell a <code>Solver</code> objektum tagváltozójává tenni az iterátorok tömbjét is, hogy ebben a lambda
+függvényben már hivatkozni lehessen rá. A függvény dolga tulajdonképpen csak ennek az iterátornak a
+dereferálása. De ha az iterátor csak a tesztelést végző függvényben jönne létre lokális változóként, akkor ez a
+lambda nem látná azt! A lambda kifejezés két értéket tárol el: a <code>this</code> pointert, hogy lássa az őt
+létrehozó <code>Solver</code>-t, és azt a tömbindexet, ahányadik helyre az új változó került. Így tudni fogja,
+melyik iterátorról van szó.</p>
+
+<pre   ><code class="language-c">    VariableFunc add_variable(std::vector&lt;VALUETYPE&gt; values) {
+        variables_.push_back(std::move(values));
+        size_t pos = variables_.size()-1;
+        return [this, pos] () -&gt; VALUETYPE const &amp; {
+            return *iterators_[pos];
+        };
+    }</code></pre>
+
+<p>A visszakapott változókat reprezentáló függvényeket használva adhatja meg a hívó a
+<code>ConstraintFunc</code>-okat, amelyek igaz/hamis függvények. Ezek mutatják majd, hogy teljesül-e egy
+bizonyos előírás vagy nem. <code>ConstraintFunc</code> hozzáadásakor egyelőre nincs teendő; ezeket a
+kifejezéseket majd csak a megoldáskeresés közben kell kiértékelni. Úgyhogy csak bekerülnek a
+<code>constraints_</code> tömbbe:</p>
+
+<pre   ><code class="language-c">    void add_constraint(ConstraintFunc constraint) {
+        constraints_.push_back(std::move(constraint));
+    }</code></pre>
+
+<p>Alább látható a megoldás keresése. Ha eközben a <code>Solver</code> osztály egy olyan variációra akad, amely
+teljesíti az összes feltételt, akkor a <code>do_what</code> függvényt fogja meghívni. A teszteléshez a
+következőket csinálja:</p>
+
+<ol>
+    <li>Először is, létrehozza a munkaiterátorokat, mindegyiket a megfelelő tömb elejére állítva.
+    <li>Aztán elindít egy ciklust, amelynek akkor lesz vége, ha az összes variációt végigpróbálta.
+    <li>Minden variációnál végig kell nézni a megkötéseket, hogy mindegyik teljesült-e.
+        Az <code>std::all_of</code> végigmegy a tárolón, és akkor ad igazat, ha a harmadik paraméterként adott
+        predikátum igazat válaszol mindegyik elemre. A predikátum itt: meg kell hívni a függvényeket,
+        a <code>ConstraintFunc</code>-okat.
+    <li>Ha mindegyik igaz volt, akkor el kell végezni a kért tevékenységet.
+    <li>Végül pedig, léptetni kell az iterátorokat. A legelsővel kell kezdeni, és ha az a végére ért, akkor
+        a tartomány elejére állítani vissza, és léptetni a következőt: mint egy túlcsordulás a +1 hozzáadásánál.
+        Akkor kell vége legyen a 2-es ciklusnak, ha a legutolsó iterátor is „túlcsordult”.
+</ol>
+
+<pre   ><code class="language-cbub">    void solve(ActivityFunc do_what) {
+        iterators_.clear();
+        for (auto &amp; v : variables_)
+            iterators_.push_back(v.begin()); // 1
+
+        bool end = false;
+        while (!end) { // 2
+            bool satisfied = std::all_of(
+                constraints_.begin(), constraints_.end(),
+                [] (ConstraintFunc const &amp; cons) { return cons(); }   // 3
+            );
+            if (satisfied)
+                do_what();  // 4
+
+            bool carry = true;
+            for (size_t i = 0; i &lt; variables_.size(); ++i) {
+                ++iterators_[i]; // 5
+                carry = iterators_[i] == variables_[i].end();
+                if (carry)
+                    iterators_[i] = variables_[i].begin();
+                else
+                    break;
+            }
+            end = carry;
+        }
+        
+        iterators_.clear();
+    }</code></pre>
+
+<p>Ennyi a <code>Solver</code> kódja. A használata pedig a következő. Először is, létre kell hozni egy példányt.</p>
+
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; s;</code></pre>
+
+<p>Baker, Cooper, Fletcher, Miller és Smith mind az 1–5 emeletek valamelyikén laknak. Itt kapjuk meg az öt
+függvényt, amelyek tesztelés közben megadják majd a tesztelés alatt álló értékeket. Tehát pl. a <code>baker()</code>
+hívás értéke majd az 1...5 számok valamelyike lesz – de egyelőre ezeket a függvényeket nem szabad meghívni.</p>
+
+<pre   ><code class="language-c">    auto baker = s.add_variable({1, 2, 3, 4, 5});
+    auto cooper = s.add_variable({1, 2, 3, 4, 5});
+    auto fletcher = s.add_variable({1, 2, 3, 4, 5});
+    auto miller = s.add_variable({1, 2, 3, 4, 5});
+    auto smith = s.add_variable({1, 2, 3, 4, 5});</code></pre>
+
+<p>Első megkötés: a srácok mind különféle emeleten laknak. Ennek egyszerű kódbeli megfogalmazásához az öt függvényt betesszük
+egy tömbbe (egészen pontosan: egy inicializáló listába), hogy iterálni lehessen rajtuk. Minden párt meg kell vizsgálni; ha
+valamelyik pár épp egyforma számot ad, akkor nem teljesül a feltétel, hogy különféle emeleteken laknak. A feltétel függvényének
+megadásakor a változókat reprezentáló függvények bátran tárolhatóak érték szerint, mindig ugyanaz a lambda fog másolódni, amely
+ugyanazon <code>Solver</code> ugyanazon indexedik iterátorát látja.</p>
+
+<pre   ><code class="language-c">    auto guys = { baker, cooper, fletcher, miller, smith };
+    s.add_constraint([=] () -&gt; bool {
+        for (auto egyik = guys.begin(); egyik != guys.end(); ++egyik)
+            for (auto masik = egyik+1; masik != guys.end(); ++masik)
+                if ((*egyik)() == (*masik)())
+                    return false;
+        return true;
+    });</code></pre>
+
+<p>Baker nem a legfölső emeleten lakik, Cooper pedig nem az alsó szinten.</p>
+
+<pre   ><code class="language-c">    s.add_constraint([=] { return baker() != 5; });
+    s.add_constraint([=] { return cooper() != 1; });</code></pre>
+
+<p>Fletcher lakhelye sem a legalsó szinten van, de nem is a legfölsőn.</p>
+
+<pre   ><code class="language-c">    s.add_constraint([=] { return fletcher() != 1 &amp;&amp; fletcher() != 5; });</code></pre>
+
+<p>Miller magasabban lakik, mint Cooper. Smith nem Fletcherrel szomszédos emeleten lakik, ahogy Cooper és Fletcher sem emelet-szomszédok.</p>
+
+<pre   ><code class="language-c">    s.add_constraint([=] { return miller() &gt; cooper(); });
+    s.add_constraint([=] { return abs(smith() - fletcher()) != 1; });
+    s.add_constraint([=] { return abs(cooper() - fletcher()) != 1; });</code></pre>
+
+<p>Melyik emelet kié? Ha találat van, akkor írjuk ki a neveket a hozzájuk tartozó emeletek sorszámával.</p>
+
+<pre   ><code class="language-c">    auto print_all = [=] {
+        std::cout &lt;&lt; &quot;Baker &quot; &lt;&lt; baker() &lt;&lt; std::endl
+                  &lt;&lt; &quot;Cooper &quot; &lt;&lt; cooper() &lt;&lt; std::endl
+                  &lt;&lt; &quot;Fletcher &quot; &lt;&lt; fletcher() &lt;&lt; std::endl
+                  &lt;&lt; &quot;Miller &quot; &lt;&lt; miller() &lt;&lt; std::endl
+                  &lt;&lt; &quot;Smith &quot; &lt;&lt; smith() &lt;&lt; std::endl;
+    };
+    s.solve(print_all);
+}</code></pre>
+
+
+<pre class="screenshot">
+Baker 3
+Cooper 2
+Fletcher 4
+Miller 5
+Smith 1
+</pre>
+
+<div class="megjegyzes">
+<p>Az érdekesség kedvéért letölthető a program JavaScriptben is: <a href="solver.html">solver.html</a>.
+Ez gyakorlatilag tükörfordítása a C++11-es változatnak. Némelyik helyen csak annyi a változás, hogy a <code>[=]</code>
+<em>capture specifier</em> <code>function()</code>-re van cserélve.</p>
+</div>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li><a href="http://vimeo.com/23975522">http://vimeo.com/23975522</a> – Herb Sutter előadása a lambda kifejezésekről.
+</ul>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

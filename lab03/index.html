@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Típusok használata</title>
+<meta property="og:title" content="TEST InfoC++11 :: Típusok használata">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Típusok, I/O manipulátorok, operátorok átdefiniálása.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Típusok, I/O manipulátorok, operátorok átdefiniálása.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Típusok használata">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Típusok használata</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Típusok, I/O manipulátorok, operátorok átdefiniálása.</p>
+</div>
+
+
+<p>Gyakorlófeladatok a típusokról szóló előadáshoz. A lényeg mindenhol, hogy 
+olyan típusokat hozzunk létre, olyan operátorokat adjunk meg, amelyekkel
+aztán szintaktikailag világos, könnyen érthető programokat tudunk írni.</p>
+
+<blockquote>
+<h3>Feltöltés</h3>
+<p>A laborhoz kiírt beadandó a szokásos helyen van, az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A TimeInterval osztály</a>
+                      <li><a href="index.html#2" class="">Sztring konverzió</a>
+                      <li><a href="index.html#3" class="">Bináris literális utótag operátor</a>
+                      <li><a href="index.html#4" class="">Operátorok, konverziók: az okos Float</a>
+                      <li><a href="index.html#5" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A TimeInterval osztály">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A TimeInterval osztály<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<pre   ><code class="language-c">TimeInterval i1{65};
+std::cout &lt;&lt; i1 &lt;&lt; std::endl;           // 1h 5m
+
+std::cout &lt;&lt; (5_h + 79_m) &lt;&lt; std::endl; // 6h 19m</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+
+<p>Egyszerűbb az összeadás, ha belül csak egy <code>int</code> tárolódik;
+az osztály mindig csak percekkel dolgozik.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+ 
+class TimeInterval {
+  public:
+    explicit TimeInterval(int interval) : interval_{interval} {}
+    TimeInterval operator+ (TimeInterval rhs) const {
+        return TimeInterval(this-&gt;interval_ + rhs.interval_);
+    }
+    int get_hour() const { return interval_ / 60; }
+    int get_min() const { return interval_ % 60; }
+  private:
+    int interval_;
+};
+ 
+std::ostream &amp; operator&lt;&lt; (std::ostream &amp; os, TimeInterval t) {
+    os &lt;&lt; t.get_hour() &lt;&lt; &quot;h &quot; &lt;&lt; t.get_min() &lt;&lt; &quot;m&quot;;
+    return os;
+}
+ 
+TimeInterval operator&quot;&quot; _h (unsigned long long h) {
+    return TimeInterval(h * 60);
+}
+ 
+TimeInterval operator&quot;&quot; _m (unsigned long long m) {
+    return TimeInterval(m);
+}
+ 
+int main() {
+    TimeInterval i1(65);
+    std::cout &lt;&lt; i1 &lt;&lt; std::endl;           // 1h 5m
+    
+    std::cout &lt;&lt; (5_h + 79_m) &lt;&lt; std::endl; // 6h 19m
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sztring konverzió">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Sztring konverzió<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C++14-ben már létezik <code>std::string</code>-gé alakító operátor: a <code>"hello"s</code> kifejezés
+típusa <code>std::string</code>. Írj egy ugyanígy működő <code>_s</code> operátort! Ha mindent jól csinálsz:</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; &quot;hello&quot;_s + &quot; vilag&quot; &lt;&lt; std::endl;         /* hello vilag */
+std::cout &lt;&lt; &quot;hello\0vilag&quot;_s.length() &lt;&lt; std::endl;    /* 11 */</code></pre>
+
+<p>Vajon lehet ez az <code>_s</code> operátor <code>constexpr</code>? Miért?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Olyan operátort kell írni, amely paraméterként átveszi a sztring méretét is. Egyrész különbözteti meg
+az <code>"123"_xyz</code> és az <code>123_xyz</code> operátort (overload az <code>_xyz</code> operátorra),
+másrészt pedig így lehet lezáró nulla is a sztringben. Ez kell a második sorhoz.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+std::string operator&quot;&quot; _s (char const *str, size_t siz) {
+    return std::string(str, str + siz);
+}
+
+int main() {
+    std::cout &lt;&lt; &quot;hello&quot;_s + &quot; vilag&quot; &lt;&lt; std::endl;         /* hello vilag */
+    std::cout &lt;&lt; &quot;hello\0vilag&quot;_s.length() &lt;&lt; std::endl;    /* 11 */
+}</code></pre>
+<p>Nem lehet <code>constexpr</code>, mert az <code>std::string</code> dinamikus memóriakezelést használ.</p>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Bináris literális utótag operátor">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Bináris literális utótag operátor<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írj bináris utótag operátort! Milyen formában érdemes átvennie ennek az értéket, nyers (raw), azaz sztring, vagy szám 
+(cooked) formában?</p>
+
+<pre   ><code class="language-c">int main() {
+    std::cout &lt;&lt; 1111_binary &lt;&lt; std::endl;      /* 15 */
+    std::cout &lt;&lt; 10000000_binary &lt;&lt; std::endl;  /* 128 */
+    std::cout &lt;&lt; 10110111010111110111_binary &lt;&lt; std::endl;  /* 751095 */
+}</code></pre>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Az átalakításhoz használj Horner-elrendezést! Akkor nem kell tudni előre, hány számjegy lesz. Tízes számrendszeren bemutatva:</p>
+<p class="kozep"><code>12345 = ((((1)·10 + 2)·10 + 3)·10 + 4)·10 + 5</code></p>
+</div>
+</details>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+
+<p>Sztringként átvéve egyszerű a megvalósítás, akár indexelni is tudjuk a számjegyeket. Nem jó ötlet feldolgozott formában átvenni 
+a karaktereket, mert akkor a fordító tízes számrendszerben értelmezi a számot, és könnyen túlcsordult értéket kaphatunk: binárisan 
+egy szám sok számjegyből áll.</p>
+
+<pre   ><code class="language-c">unsigned long long operator&quot;&quot; _binary(char const *str) {
+    unsigned long long result = 0;
+    for (size_t i = 0; str[i] != '\0'; ++i)
+        result = result&lt;&lt;1 | (str[i]=='1' ? 1 : 0);
+    return result;
+}</code></pre>
+<p>Egyébként a bináris literális a <a href="../cpp1417/index.html#cpp14literalisok">C++14-be ez bekerült</a>,
+a hexa <code>0x</code> prefix mintájára <code>0b</code> prefixként.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Operátorok, konverziók: az okos Float">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Operátorok, konverziók: az okos Float<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A lebegőpontos (<code>float</code>, <code>double</code>) értékeken végzett 
+számítások nem pontosak. Vannak számok, amelyeket a kettes alapú normálalakban 
+nem lehet ábrázolni. Emiatt két <code>float</code> vagy <code>double</code> 
+egyenlőségét nem szabad vizsgálni, mert váratlan eredményt adhat.</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+int main() {
+    std::cout &lt;&lt; std::setprecision(20) &lt;&lt; 9.95; // 9.9499999999999992895
+}</code></pre>
+
+<p>A feladatod egy olyan <code>Float</code> osztályt írni, amely figyelembe veszi 
+a pontatlanságokat az összehasonlításoknál. Az „egyenlő-e” legyen „ε sugarú körön 
+belül van”, a „nagyobb-e” legyen „legalább ε-nyival nagyobb” és így tovább. 
+Minden egyéb viselkedésében egyezzen meg egy <code>Float</code> objektum a 
+beépített <code>float</code>-tal!</p>
+
+<pre   ><code class="language-c">Float f1 = 1.0f, f2 = 1.00001f;
+std::cout &lt;&lt; (f1 == f2);    /* igaz */</code></pre>
+
+<ol class="feladatok">
+<li><p>Rajzolj fel egy számegyenest papíron, és jelölj be rajta egy <code>f</code>
+számot. Rajzold be, hogy mely tartományokat kell <code>f</code>-nél kisebbnek, 
+egyenlőnek, és nagyobbnak tekinteni. Ebből az ábrából dolgozz!</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<img src="float_rajz.svg" style="height: 8em" class="kozep">
+</div>
+</details>
+
+<li><p>Írd meg a <code>Float</code> osztályt! Maga az osztály minél kisebb legyen, 
+törekedj arra, hogy később inkább globális függvényeket használj az operátorok 
+megvalósításához. Milyen konverziókat kell definiálni a <code>Float</code> 
+osztályhoz? Melyiknek ajánlatos explicitnek lennie, és miért? Írd meg egyelőre 
+<em>csak</em> a kisebb <code>&lt;</code> operátort! ε=10<sup>-4</sup>.
+Ennek a kódrészletnek kell működnie:</p>
+
+<pre   ><code class="language-c">Float f1 = 1.0f,
+      f2 = 1.00001f,
+      f3 = 100;
+
+std::cout &lt;&lt; (f1 &lt; f2) &lt;&lt; std::endl;    /* hamis */
+std::cout &lt;&lt; (f1 &lt; f3) &lt;&lt; std::endl;    /* igaz */</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A konstruktor ne legyen explicit, hogy bármilyen beépített valós érték az okos 
+párjává konvertálódhasson. Az <code>operator float</code> viszont jobb, ha 
+explicit, hogy külön ki kelljen írni a konverziót, amikor vissza akarjuk butítani 
+az értéket.</p>
+</div>
+</details>
+
+<li><p>Írd meg az összeadás, kivonás operátorokat! Írd meg a <code>+=</code> és
+<code>-=</code> operátorokat úgy, hogy visszavezeted őket az előzőekre! Írd meg
+a kiírás <code>&lt;&lt;</code> operátort is! Ha ezek készen vannak, az alábbi
+kódrészlet is működni fog. Ellenőrizd az eredményt!</p>
+
+<pre   ><code class="language-c">f1 = f2 + f3;
+
+for (Float f = 0.999; f &lt; 1.001; f += 0.0001) {
+    std::cout &lt;&lt; f &lt;&lt; '\t' &lt;&lt; (f &lt; 1.0) &lt;&lt; std::endl;
+}</code></pre>
+
+<li><p>Az ε legyen egy konstans változóban tárolva. Hol érdemes tárolni ezt a változót?
+Ha eddig nem változóként adtad meg, akkor add meg úgy, és javítsd ki a <code>&lt;</code> operátort!</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>Float</code> osztályban, statikus adattagként. A 
+<code>constexpr</code> fordítási időben kiértékelhető konstanst jelent. Statikus 
+adattag inicializálható osztályon belül is, ha megkapja a <code>constexpr</code> 
+jelzőt.</p>
+<pre   ><code class="language-c">class Float {
+    static constexpr float epsilon = 1e-4f;
+};</code></pre>
+</div>
+</details>
+
+<li><p>Írd meg a többi összehasonlító operátort is! Összesen öt függvény kell, de
+mindegyik egysoros: <code>&gt;</code>, <code>&lt;=</code>,
+<code>&gt;=</code>, <code>==</code>, <code>!=</code>. Vezesd vissza mindet
+a <code>&lt;</code> operátorra! Teszteld őket a fenti ciklussal!</p>
+
+<li><p>Írd meg az egyoperandusú <code>+</code> és <code>-</code> operátorokat,
+hogy ilyet lehessen írni:</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; -f1;</code></pre>
+
+<li><p>Van-e futási idejű költsége a <code>Float</code> osztálynak a <code>float</code>-okhoz
+képest?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Memóriafoglalásban: <code>sizeof(float)==sizeof(Float)</code>, tehát nincs.</p>
+<p>Sebességben: az összehasonlítás legyen fair! Ha egy olyan változathoz hasonlítjuk a programot,
+ahol kézzel mindig kiírtuk az ε sugarú összehasonlítást, akkor nincs. Használjunk optimalizálást
+és <code>inline</code> függvényeket!</p>
+</div>
+</details>
+
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+
+class Float {
+  public:
+    Float() = default;
+    Float(float value) : value_(value) {}
+    explicit operator float() const { return value_; }
+
+    static constexpr float epsilon = 1e-4f;
+
+  private:
+    float value_;
+};
+
+
+Float operator+(Float f1, Float f2) {
+    return float(f1) + float(f2);
+}
+
+Float &amp; operator+=(Float &amp;f1, Float f2) {
+    return f1 = f1 + f2;
+}
+
+Float operator-(Float f1, Float f2) {
+    return float(f1) - float(f2);
+}
+
+Float &amp; operator-=(Float &amp;f1, Float f2) {
+    return f1 = f1 - f2;
+}
+
+/* egyoperandusú */
+Float operator-(Float f) {
+    return -float(f);
+}
+
+/* kisebb */
+bool operator&lt;(Float f1, Float f2) {
+    return float(f1) &lt; float(f2)-Float::epsilon;
+}
+
+/* nagyobb: &quot;kisebb&quot; fordítva */
+bool operator&gt;(Float f1, Float f2) {
+    return f2&lt;f1;
+}
+
+/* nagyobb vagy egyenlő: nem kisebb */
+bool operator&gt;=(Float f1, Float f2) {
+    return !(f1&lt;f2);
+}
+
+/* kisebb vagy egyenlő: nem nagyobb */
+bool operator&lt;=(Float f1, Float f2) {
+    return !(f1&gt;f2);
+}
+
+/* nem egyenlő: kisebb vagy nagyobb */
+bool operator!=(Float f1, Float f2) {
+    return f1 &gt; f2 || f1 &lt; f2;
+}
+
+/* egyenlő: nem nem egyenlő */
+bool operator==(Float f1, Float f2) {
+    return !(f1 != f2);
+}
+
+/* kíirás */
+std::ostream &amp; operator&lt;&lt; (std::ostream &amp; os, Float f) {
+    return os &lt;&lt; float(f);
+}
+
+/* beolvasás */
+std::istream &amp; operator&gt;&gt; (std::istream &amp; is, Float &amp; f) {
+    float raw_f;
+    is &gt;&gt; raw_f;
+    f = raw_f;
+    return is;
+}
+
+
+int main() {
+    Float f1 = 1.0f,
+          f2 = 1.00001f,
+          f3 = 100;
+    
+    std::cout &lt;&lt; (f1 &lt; f2) &lt;&lt; std::endl;    /* hamis */
+    std::cout &lt;&lt; (f1 &lt; f3) &lt;&lt; std::endl;    /* igaz */
+
+    f1 = f2+=f3;
+
+    for (Float f = 0.999; f &lt; 1.001; f += 0.0001) {
+        std::cout &lt;&lt; f &lt;&lt; '\t' &lt;&lt; (f &lt; 1.0) &lt;&lt; std::endl;
+    }
+    
+    std::cout &lt;&lt; -f1;
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f03/index.html#feladat_tipusok">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

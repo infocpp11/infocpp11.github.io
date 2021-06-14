@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 1. hét: C99 nyelvi elemek</title>
+<meta property="og:title" content="TEST InfoC++11 :: 1. hét: C99 nyelvi elemek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 1. hét: C99 nyelvi elemek">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 1. hét: C99 nyelvi elemek">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="1. hét: C99 nyelvi elemek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">1. hét: C99 nyelvi elemek</h1>
+
+
+<h3>main() és main(void)</h3>
+
+<p>Mi a különbség a <code>main()</code> és a <code>main(void)</code> között?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Attól függ, melyik nyelven. Az <code>f()</code> C-ben azt jelenti, hogy a
+függvény tetszőlegesen sok, tetszőleges típusú paramétert vehet át. Ez nem jó
+semmire, csak történelmi okokból megmaradt. Az <code>f(void)</code> pedig azt,
+hogy a függvény nem kaphat paramétert. Ezzel szemben az <code>f()</code> és
+az <code>f(void)</code> C++-ban ugyanazt jelenti: a függvény nem kaphat paramétert.
+C++-ban az <code>f()</code> formát szokás használni, de a C kompatibilitás miatt
+elfogadja az <code>f(void)</code>-ot is.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+<h3>C99: tostring_ratio() I.</h3>
+
+<p>Az <a href="../ea01/index.html#structratio">előadás C99 tört osztályához</a> kapcsolódóan.</p>
+
+<p>A <code>printf()</code> hátránya, hogy nem tudjuk neki megtanítani a saját
+típusainkat. Sztringet viszont tud kiírni, ezért az alábbi, nem túl jó ötletünk adódhat.
+Mi a baja a kódrészletnek? Mit írnak ki a <code>printf()</code>-ek?</p>
+
+<pre   ><code class="language-c">char const *tostring_ratio(Ratio r) {
+    static char buf[100];
+    sprintf(buf, &quot;%d/%d&quot;, r.num, r.den);
+    return buf;
+}
+
+/* ... */
+printf(&quot;r1 = %s\n&quot;, tostring_ratio(r1));
+printf(&quot;%s + %s = %s\n&quot;, tostring_ratio(r1), tostring_ratio(r2), tostring_ratio(r3));</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A baj, hogy csak egyetlen egy <code>buf[]</code> karaktertömb van. Ez az első
+<code>printf()</code>-nél még nem gond. De mire meghívódik a második <code>printf()</code>,
+addigra ugyanaz a tömb többször is felül lett írva, <code>r1</code>, <code>r2</code> és
+<code>r3</code> sztring reprezentációjával. Mivel mindhárom hívás ugyanannak a tömbnek
+a címével tér vissza, a <code>printf()</code> háromszor fogja ugyanazt a törtet kiírni.
+Hogy melyiket, azt nem lehet tudni, mivel a függvényparaméterek kiértékelési sorrendje
+kötetlen, és nem tudjuk, az <code>r1</code>, <code>r2</code> vagy <code>r3</code>-hoz
+tartozó <code>tostring_ratio()</code> hívódik utoljára.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>C99: tostring_ratio() II.</h3>
+
+<p>A fentieken felbuzdulva megpróbálhatjuk kijavítani a <code>tostring_ratio()</code>
+függvényt. Melyik alábbi próbálkozás, miért hibás?</p>
+<pre   ><code class="language-c">char const *tostring_ratio_1(Ratio r) {
+    char buf[100];
+    sprintf(buf, &quot;%d/%d&quot;, r.num, r.den);
+    return buf;
+}</code></pre>
+<pre   ><code class="language-c">char const *tostring_ratio_2(Ratio r) {
+    char *buf = (char*) malloc(100 * sizeof(char));
+    sprintf(buf, &quot;%d/%d&quot;, r.num, r.den);
+    return buf;
+}</code></pre>
+<pre   ><code class="language-c">char const *tostring_ratio_3(Ratio r) {
+    enum { BUFS = 10 };
+    static char buf[BUFS][100];
+    static int i = 0;
+    i = (i+1) % BUFS;
+    sprintf(buf[i], &quot;%d/%d&quot;, r.num, r.den);
+    return buf[i];
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A <code>tostring_ratio_1()</code> azért, mert a <code>buf[]</code> lokális változó,
+ami a függvényből visszatéréskor megszűnik. A hívónak egy érvénytelen pointert (dangling
+pointer) adunk. A <code>tostring_ratio_2()</code> ugyan megoldja, hogy minden hívásnál
+külön tömb legyen, de azt a hívónak fel kell majd szabadítania, és így a függvény
+eddigi használati módja válik helytelenné, ti. nincs felszabadítva a memóriaterület.
+A <code>tostring_ratio_3()</code> pedig csak addig működik, amíg nem akarunk egy
+<code>printf()</code>-ből tíznél több törtet kiírni.</p>
+</div>
+</details>
+
+
+
+<h3>C99: tostring_ratio() III.</h3>
+
+<p>Észrevehetjük, hogy megoldást jelenthet, ha minden egyes tört objektumnak saját
+sztring puffere van. Ezt legegyszerűbben úgy érhetjük el, ha a puffert betesszük
+az objektumba. Eltekintve attól, hogy mekkora pazarlást művel az alábbi kód –
+helyes egyáltalán?</p>
+<pre   ><code class="language-c">struct Ratio {
+    int num;
+    int den;
+    char buf[100];
+};
+
+char const *tostring_ratio(Ratio r) {
+    sprintf(r.buf, &quot;%d/%d&quot;, r.num, r.den);
+    return r.buf;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Helytelen. Az <code>r</code> paraméter a függvény lokális változója; a
+visszatéréskor az <code>r.buf</code> megszűnik.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>C99: tostring_ratio() IV.</h3>
+
+<p>Megoldható akkor a probléma? Lehet olyan <code>tostring_ratio()</code> függvényt
+csinálni C-ben, ami mentes ezektől a memóriakezelési hibáktól?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Esetleg úgy, hogy a hívó biztosítja a sztring helyét. De ezzel sajnos nem kerülünk
+közelebb a kényelmes használathoz:</p>
+<pre   ><code class="language-c">char const *tostring_ratio(Ratio r, char *buf) {
+    sprintf(buf, &quot;%d/%d&quot;, r.num, r.den);
+    return buf;
+}
+
+/* ... */
+char buf1[100], buf2[100], buf3[100];
+printf(&quot;r1 = %s\n&quot;, tostring_ratio(r1, buf1));
+printf(&quot;%s + %s = %s\n&quot;,
+    tostring_ratio(r1, buf1), tostring_ratio(r2, buf2), tostring_ratio(r3, buf3));</code></pre>
+</div>
+</details>
+
+
+
+<h3>C99: tostring_ratio() V.</h3>
+
+<p>A fent említett törtes programot az alábbi függvénnyel egészítjük ki. Ez egy törtet alakít
+sztringgé, és a sztringet a paraméterként kapott pufferbe teszi:</p>
+<pre   ><code class="language-c">char const *tostring_ratio(Ratio r, char *buf) {
+    sprintf(buf, &quot;%d/%d&quot;, r.num, r.den);
+    return buf;
+}</code></pre>
+<p>Helyes-e az (1)-es hívás? Mi lenne, ha a sémát felismerve a (2)-vel jelölt makrót írnánk? Így helyes a
+program? Véleményezd is a kódot!</p>
+<pre   ><code class="language-c">/* 1 */
+printf(&quot;%s + %s = %s\n&quot;, tostring_ratio(r1, (char[24]){0}),
+        tostring_ratio(r2, (char[24]){0}), tostring_ratio(r3, (char[24]){0}));
+
+/* 2 */
+#define TOSTRING_RATIO(R) (tostring_ratio((R), (char[24]){0}))
+printf(&quot;%s + %s = %s\n&quot;, TOSTRING_RATIO(r1), TOSTRING_RATIO(r2), TOSTRING_RATIO(r3));</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A program helyes, mert az összetett literálisként megadott tömb élettartama a
+blokk végéig tart. Így létezni fog akkor is, amikor a <code>printf()</code>
+megkapja a címet – ugyanazt a címet, amit a <code>tostring_ratio()</code> megkapott,
+és változatlanul visszaadott (még ha a mutatott memóriatartalom változott is). A makró is helyes, mert pont ugyanarra fejtődik ki,
+ami az eredeti kód is volt.</p>
+<p>Az ötlet működőképes, de két hátulütője van. Az egyik, hogy a névtelen
+tömbök mindig inicializálásra kerülnek, és ez felesleges, mert a függvény úgyis
+felülírja a tartalmukat. A másik, hogy a makrót könnyű rosszul használni; egy
+óvatlan pillanatban leírt <code>return TOSTRING_RATIO(r)</code> már hibás.</p>
+</div>
+</details>
+
+
+
+
+<h3>C++: Nincs setter</h3>
+
+<p>Az <a href="../ea01/index.html#structratio">előadás tört osztályához</a> kapcsolódóan.</p>
+
+<p>Teljesen igaz-e az a kijelentés a fenti szövegben, hogy egy <code>Ratio</code> objektum
+számlálóját és nevezőjét a) a C++ kód jelenlegi állapotában: nem tudjuk megváltoztatni, b) a C kódban: nem
+szabad megváltoztatnunk?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem igaz. Értékadással meg lehet/szabad változtatni. De ez nem gond, mert értéket adni
+csak egy másik <code>Ratio</code> objektumból lehet, és annak is a konstruktorral
+kellett létrejönnie.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>C99 és C++: Adattagok sorrendje</h3>
+
+<p>Mi történik, ha megcseréljük a <code>num</code> és a <code>den</code> tagváltozók
+definícióját a) a C programban, b) a C++ programban?</p>
+<pre   ><code class="language-c">struct Ratio {
+    int den;
+    int num;
+};</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A C++ programnak semmi baja nem lesz. A C program viszont elromlik, mivel az alábbi
+sor nem név szerint, hanem sorrendjük szerint hivatkozik a tagváltozókra:</p>
+<pre   ><code class="language-c">Ratio new = { num/a, den/a };</code></pre>
+</div>
+</details>
+
+
+
+
+
+<h3>C99 és C++: Törtek egyenlősége</h3>
+
+<p>Mikor egyenlő két tört? Írd meg a két törtet összehasonlító függvényt C-ben és C++-ban is!</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Elég összehasonlítani a számlálókat és a nevezőket, mivel a törtek már egyszerűsítve vannak.</p>
+<pre   ><code class="language-c">int equal_ratio(Ratio r1, Ratio r2) {
+   return r1.num == r2.num &amp;&amp; r2.den == r2.den;
+}</code></pre>
+<pre   ><code class="language-c">bool operator==(Ratio r1, Ratio r2) {
+    return r1.num() == r2.num() &amp;&amp; r1.den() == r2.den();
+}</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>C++: Setter függvények mindenhol</h3>
+
+<p>Az OOP-t gyakran kis, egyszerű osztályokon keresztül kezdik tanítani, mint ez
+a tört is: komplex szám, időpont, dátum. Ezeken keresztül jól meg lehet tanulni a
+nyelv szintaktikáját: privát és publikus tagok, setter és getter függvények és
+a többiek. Jó ötlet-e a C++ tört osztálynak <code>.set_num()</code> és
+<code>.set_den()</code>, számlálót és nevezőt beállító metódust írni?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Rossz ötlet. Törteket lehet összeadni, összeszorozni, de olyan műveletről
+nem hallott még senki, hogy „x-re cseréljük egy tört számlálóját”. Ha mégis ilyet
+szeretnénk, ahhoz nem kell új tagfüggvény, megoldható a mostani osztállyal is:</p>
+<pre   ><code class="language-c">Ratio new_numerator(Ratio r, int num) {
+    return Ratio(num, r.den());
+}</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>C++: Teljes tört osztály</h3>
+
+<p>Az <a href="../ea01/index.html#structratio">előadás tört osztályához</a> kapcsolódóan.</p>
+
+<p>Dolgozd ki a C++ tört osztályt! Valósítsd meg a <code>+</code> (egyoperandusú),
+<code>+=</code>, <code>-</code> (egy- és kétoperandusú), <code>-=</code>,
+<code>*</code>, <code>*=</code>, <code>/</code>, <code>/=</code>, <code>&gt;&gt;</code> (beolvasás),
+<code>(double)</code> cast operátorokat! Figyelj a referenciák helyes használatra!
+Mennyi a legkevesebb új tagfüggvény (szintaktikai értelemben), amennyivel ez megoldható?
+Oldd meg úgy a feladatot, hogy a lehető legkevesebb legyen!</p>
+
+<p>Figyelj arra, mit jelentenek az „egyoperandusú” és „kétoperandusú” szavak! Ezek nem az operátorokat megvalósító függvények 
+paraméterszámát adják meg. Például egyoperandusú mínusz az ellentett: <code>-x</code>, és kétoperandusú mínusz a kivonás: 
+<code>a-b</code>.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egyet, a cast-ot. A C++ szintaktikai szabályai szerint az kötelezően tagfüggvény.
+A többi lehet globális is, és jobb is úgy megírni őket. Például:</p>
+<pre   ><code class="language-c">/* ez tag */
+Ratio::operator double() const {
+    return (double) num_ / (double) den_;
+}
+
+/* minden más visszavezethető a konstruktorra és a két getterre */
+Ratio &amp; operator+=(Ratio &amp;r1, Ratio r2) {
+    r1 = r1 + r2;
+    return r1;
+}
+
+/* egyoperandusú - (negálás) */
+Ratio operator-(Ratio r) {
+    return Ratio(-r.num(), r.den());
+}
+
+/* a konstruktor egyszerűsíti is a beolvasott törtet! */
+std::istream &amp; operator&gt;&gt;(std::istream &amp;is, Ratio &amp;r) {
+    int num, den;
+    char c;
+    is &gt;&gt; num &gt;&gt; c &gt;&gt; den;
+    r = Ratio(num, den);
+    return is;
+}</code></pre>
+<p>A fenti kódrészletek a szintaktikát hivatottak bemutatni. Egy „komoly” változatnál
+figyelni kellene, hogyan kezeljük a nullával osztást (hibás nevező) és az előjeleket.</p>
+</div>
+</details>
+
+
+
+
+<h3>C++: Komplex osztály</h3>
+
+<p>A törteket nem nagyon érdemes máshogy ábrázolni, mint számlálóval és nevezővel.
+A komplex számoknál azonban már kétféle választási lehetőségünk van: algebrai
+alakban, <code>re + im×j</code>, vagy trigonometrikus alakban
+<code>r × e<sup>jφ</sup></code> is tárolhatjuk a számot. Ha gyakran kell összeadni
+és kivonni, az előbbi célravezetőbb; ha a szorzás és az osztás a gyakori művelet,
+akkor az utóbbi. Írj két külön C++ komplex osztályt, az egyik algebrai, a másik trigonometrikus
+alakot használjon! Írd meg a négy alapműveletet is átdefiniált operátorral!
+Hogyan lehet elérni azt, hogy a négy alapművelet kódja ne függjön a belső
+reprezentációtól, sőt akár azt, hogy karakterről karakterre megegyezzenek az
+operátorfüggvények?</p>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az alábbi két osztály tökéletesen csereszabatos. És igen, a konstruktorok
+szándékosan privát elérésűek. Mivel akár valós és képzetes részből, akár hosszból
+és szögből szeretnénk létrehozni egy komplex számot, mindkét esetben két
+<code>double</code> lenne a konstruktor paramétere, sajnos nem tudjuk kihasználni
+a függvénynév túlterhelést. Marad a névvel rendelkező konstruktor, mint szokásos
+nyelvi fordulat (named constructor idiom). A statikus tagfüggvények nyelvileg
+is részét képezik az osztálynak, így elérik a privát konstruktort.</p>
+<pre   ><code class="language-c">class Complex {
+  public:
+    static Complex make_complex_reim(double re, double im) {
+        return Complex(re, im);
+    }
+    static Complex make_complex_rfi(double r, double fi) {
+        return Complex(r*cos(fi), r*sin(fi));
+    }
+
+    double get_re() const {
+        return re_;
+    }
+    double get_im() const {
+        return im_;
+    }
+    double get_r() const {
+        return sqrt(re_*re_ + im_*im_);
+    }
+    double get_fi() const {
+        return atan2(im_, re_);
+    }
+
+  private:
+    double re_, im_;
+    Complex(double re, double im): re_(re), im_(im) {}
+};</code></pre>
+<pre   ><code class="language-c">class Complex {
+  public:
+    static Complex make_complex_reim(double re, double im) {
+        return Complex(sqrt(re*re+im*im), atan2(im, re));
+    }
+    static Complex make_complex_rfi(double r, double fi) {
+        return Complex(r, fi);
+    }
+
+    double get_re() const {
+        return r_*cos(fi_);
+    }
+    double get_im() const {
+        return r_*sin(fi_);
+    }
+    double get_r() const {
+        return r_;
+    }
+    double get_fi() const {
+        return fi_;
+    }
+
+  private:
+    double r_, fi_;
+    Complex(double r, double fi): r_(r), fi_(fi) {}
+};</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+<h3>C99: return 0;</h3>
+
+<p>Az alábbi C99 programban nem volt <code>return 0</code> a főprogram végén. Baj ez?</p>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    printf(&quot;Hello world!\n&quot;);
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Nem. A C99-ben és a C++-ban a <code>main()</code> speciális függvény. Ha kihagyjuk
+belőle a <code>return</code>-t, a fordító úgy veszi, 0-val tért vissza. A C89-ben ez
+még nem volt így.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>C99: Tömb literálisok</h3>
+
+<p>Adott az alábbi függvény:</p>
+
+<pre   ><code class="language-c">void print_chars(char const *p) {
+    while (*p != '\0') {
+        putchar(*p);
+        p++;
+    }
+    puts(&quot;&quot;);
+}</code></pre>
+
+<p>Az alábbi módokon hívjuk meg. Helyesek ezek a kódok?</p>
+<pre   ><code class="language-c">char const *chars1(void) {
+    return &quot;hello&quot;;
+}
+
+char const *chars2(void) {
+    return (char[]) { 'h', 'e', 'l', 'l', 'o', '\0' };
+}
+
+print_chars(chars1());
+print_chars(chars2());</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az első igen, a második nem. Az elsőben globális változó a karaktertömb, a másodikban
+lokális.</p>
+</div>
+</details>
+
+<p>És ez?</p>
+<pre   ><code class="language-c">char const *chars2(void) {
+    static char const *p = (char[]) { 'h', 'e', 'l', 'l', 'o', '\0' };
+    return p;
+}</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Így már le sem fordítható a kódrészlet. A függvény statikus lokális, azaz
+adatszegmensben tárolt, globális élettartamú <code>p</code> pointeréhez olyan
+inicializáló érték kellene, amely fordítási idejű konstans. Mivel azonban a megadott
+tömb a veremben van, a címe nem konstans. A <code>static</code> kulcsszóval amúgy
+sem a tömb, hanem a pointer élettartamát változtatjuk, hiszen az a <code>p</code>
+definíciójához tartozik.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>C99: Változóval megadott típusú pointer</h3>
+
+<p>Vajon mi történik akkor, ha rossz típusú, változóval megadott méretű tömböt adunk
+értékül egy hasonló pointernek? Pl. az alábbi kód ránézésre rossz, de mi történik
+futási időben?</p>
+<pre   ><code class="language-c">int arr[3][5];
+n = 7;
+int (*parr)[n] = arr;</code></pre>
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A „szokásos”: definiálatlan. Valószínűleg helytelenül fog működni a programunk.
+A fordító nem ellenőrzi ezt az értékadást; ránk van bízva, hogy helyesen használjuk.</p>
+</div>
+</details>
+
+
+
+
+<h3>C99: változóval megadott méretű tömb egy struktúrában</h3>
+
+<p>Definiálj struktúrát, amely egy tetszőleges szélességű és magasságú, valós számokat
+tartalmazó kétdimenziós mátrixot, és annak méreteit tárolja!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Vigyázat! VLA csak veremben lehet!</p>
+<div class="columns">
+<div>
+<pre   ><code class="language-c">/* jó megoldás */
+struct Matrix {
+    int width, height;
+    double **data;
+};</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">/* rossz megoldás */
+struct Matrix {
+    int width, height;
+    double data[width][height];
+};</code></pre>
+</div>
+</div>
+</div>
+</details>
+
+
+
+
+<h3>C99: flexibilis tömb egy struktúrában</h3>
+
+<p>Definiálj struktúrát, amely egy tetszőleges szélességű és magasságú, valós számokat
+tartalmazó kétdimenziós mátrixot, és annak méreteit tárolja!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Vigyázat! A flexibilis tömb nem lehet kétdimenziós!</p>
+<div class="columns">
+<div>
+<pre   ><code class="language-c">/* jó megoldás lehet */
+struct Matrix {
+    int width, height;
+    double **data;
+};</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">/* rossz megoldás */
+struct Matrix {
+    int width, height;
+    double data[][];
+};</code></pre>
+</div>
+</div>
+</div>
+</details>
+
+
+
+
+<h3>C99: flexibilis tömböt tartalmazó struktúra paraméterként</h3>
+
+<p>Mi történik, ha egy flexibilis tömböt tartalmazó struktúrát érték
+szerint adunk át egy függvénynek? Visszatérhet-e egy függvény egy flexibilis tömböt tartalmazó struktúrával?</p></li>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Csak a flexibilis tag előtti része másolódik, mivel az ilyen struktúra
+(szinte) minden szempontból úgy viselkedik, mint a flexibilis tag nélküli változata.
+A tömb nem másolódhat, mivel annak méretéről a fordítónak nincs tudomása.</p>
+</div>
+</details>
+    
+                  </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

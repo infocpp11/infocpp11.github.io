@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 5. hét: Objektumok élettartama</title>
+<meta property="og:title" content="TEST InfoC++11 :: 5. hét: Objektumok élettartama">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 5. hét: Objektumok élettartama">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 5. hét: Objektumok élettartama">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="5. hét: Objektumok élettartama">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">5. hét: Objektumok élettartama</h1>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Változók élettartama</a>
+                      <li><a href="index.html#2" class="">Okos pointerek</a>
+                      <li><a href="index.html#3" class="">Heterogén kollekció</a>
+                      <li><a href="index.html#4" class="">Pontot érő szorgalmi feladatok az első nagy házihoz</a>
+                      <li><a href="index.html#5" class="">További szorgalmi feladatok az első nagy házihoz</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Változók élettartama">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_elettartam" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Változók élettartama<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Hanoi tornyai</h3>
+
+<p>Adott az alábbi forráskód, amely a Hanoi tornyai feladványt oldja meg:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+ 
+void hanoi(int n, char honnan, char seged, char hova) {
+    if (n == 0)
+        return;
+    hanoi(n-1, honnan, hova, seged);
+    std::cout &lt;&lt; &quot;rakj 1-et: &quot; &lt;&lt; honnan &lt;&lt; &quot;-&gt;&quot; &lt;&lt; hova &lt;&lt; std::endl;
+    hanoi(n-1, seged, honnan, hova);
+}
+ 
+int main() {
+    hanoi(4, 'A', 'B', 'C');
+
+    return 0;
+}</code></pre>
+
+<p>Hogy lehet megoldani azt, hogy minden lépés mellé ki legyen írva annak sorszáma? Pl. 3 korongra így:</p>
+
+<pre class="screenshot">
+1. lepes: rakj 1-et: A->C
+2. lepes: rakj 1-et: A->B
+3. lepes: rakj 1-et: C->B
+4. lepes: rakj 1-et: A->C
+5. lepes: rakj 1-et: B->A
+6. lepes: rakj 1-et: B->C
+7. lepes: rakj 1-et: A->C
+</pre>
+
+<p>Mutass minél többféle, egymástól eltérő elvű megoldást! (A rekurzió maradjon meg.) Mi a megoldásokban a közös?</p>
+
+<p>Figyelj arra, hogy az elkészített függvények használatának módja – lényegében a fejléce – ugyanaz legyen, mint az eredeti 
+függvényé (korongok száma, oszlop1, oszlop2, oszlop3)! Ez persze nem jelenti azt, hogy nem írhatsz segédfüggvényeket ettől eltérő 
+paraméterezéssel. Ne csinálj tárolót, nincs rá szükség: a függvény olyan sorrendben állítja elő a lépéseket, ahogy a kimenetre is 
+azoknak kerülniük kell. A tároló kapcsán amúgy is meg kellene oldanod egy olyan problémát, ami anélkül is felmerül, és a feladat 
+lényege.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Okos pointerek">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="feladat_okosptr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Okos pointerek<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>A kifejezésfa okos pointerrel és egyszerűsítéssel</h3>
+
+<p>A kifejezések <a href="../ea02/index.html#kifejezes_egyszerusites">az előadáson bemutatott kódban</a> egyszerűsíteni
+is tudták magukat. Pl.
+<code>valami+0 = valami</code>, <code>konstans+konstans = konstans</code> és hasonló
+minták felismerésével. Az összeadás osztálynál ez így nézett ki:</p>
+
+<pre   ><code class="language-c">virtual Expression * simplify() const override {
+    Expression * lhs_simpl = lhs_-&gt;simplify();
+    Expression * rhs_simpl = rhs_-&gt;simplify();
+    Constant * lhs_cons = dynamic_cast&lt;Constant *&gt;(lhs_simpl);
+    Constant * rhs_cons = dynamic_cast&lt;Constant *&gt;(rhs_simpl);
+    if (lhs_cons != nullptr &amp;&amp; lhs_cons-&gt;get_value() == 0.0) {  /* 0 + a = a */
+        delete lhs_simpl;   /* = 0 */
+        return rhs_simpl;
+    }
+    if (rhs_cons != nullptr &amp;&amp; rhs_cons-&gt;get_value() == 0.0) {  /* a + 0 = a */
+        delete rhs_simpl;   /* = 0 */
+        return lhs_simpl;
+    }
+    if (lhs_cons != nullptr &amp;&amp; rhs_cons != nullptr) {   /* c + c = c */
+        double new_value = lhs_cons-&gt;get_value() + rhs_cons-&gt;get_value();
+        delete lhs_simpl;
+        delete rhs_simpl;
+        return new Constant{new_value};
+    }
+    return new Sum{lhs_simpl, rhs_simpl};
+}</code></pre>
+
+<p>Láthatóan elég nagy gondot okozott a kézi memóriakezelés: ha valamelyik egyszerűsített
+részkifejezésre nem volt szükség (pl. mert 0 értékű), akkor explicite törölni kellett azt
+a <code>delete</code> operátorral.</p>
+
+<p>Építsd be a labor feladatában elkészített programodba az egyszerűsítést! A konstans és a
+változó nem egyszerűsíthető (önmagát adja), az összeg és a szorzat viszont igen.
+Az <code>std::shared_ptr</code>-ekhez van egy <code>dynamic_pointer_cast()</code>
+segédfüggvény is a <code>&lt;memory&gt;</code> fejlécfájlban:
+<code>dynamic_pointer_cast&lt;X&gt;(p)</code> ugyanazt csinálja okos pointerekre,
+mint amit a <code>dynamic_cast&lt;X*&gt;(p)</code> nyers pointerekre.</p>
+
+<p>A szorzat egyszerűsítése:</p>
+<pre   ><code class="language-c">virtual Expression * simplify() const override {
+    Expression * lhs_simpl = lhs_-&gt;simplify();
+    Expression * rhs_simpl = rhs_-&gt;simplify();
+    Constant * lhs_cons = dynamic_cast&lt;Constant *&gt;(lhs_simpl);
+    Constant * rhs_cons = dynamic_cast&lt;Constant *&gt;(rhs_simpl);
+    if (lhs_cons != nullptr &amp;&amp; lhs_cons-&gt;get_value() == 0.0) {  /* 0 * a = 0 */
+        delete rhs_simpl;
+        return lhs_simpl;   /* = 0 */
+    }
+    if (rhs_cons != nullptr &amp;&amp; rhs_cons-&gt;get_value() == 0.0) {  /* a * 0 = a */
+        delete lhs_simpl;
+        return rhs_simpl;   /* = 0 */
+    }
+    if (lhs_cons != nullptr &amp;&amp; lhs_cons-&gt;get_value() == 1.0) {  /* 1 * a = a */
+        delete lhs_simpl;   /* = 1 */
+        return rhs_simpl;
+    }
+    if (rhs_cons != nullptr &amp;&amp; rhs_cons-&gt;get_value() == 1.0) {  /* a * 1 = a */
+        delete rhs_simpl;   /* = 1 */
+        return lhs_simpl;
+    }
+    if (lhs_cons != nullptr &amp;&amp; rhs_cons != nullptr) {   /* c * c = c */
+        double new_value = lhs_cons-&gt;get_value() * rhs_cons-&gt;get_value();
+        delete lhs_simpl;
+        delete rhs_simpl;
+        return new Constant{new_value};
+    }
+    return new Product{lhs_simpl, rhs_simpl};
+}</code></pre>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A teljes megoldás: <a href="expression_shared_simplify.cpp">expression_shared_simplify.cpp</a>.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>SmartPtr fordítási hiba</h3>
+
+<p>Adott az alábbi intruzív okos pointer megvalósítás.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+
+template &lt;typename T&gt;
+class SmartPtr;
+
+
+class RefCntd {
+    int counter = 0;
+    template &lt;typename T&gt; friend class SmartPtr;
+};
+
+
+template &lt;typename T&gt;
+class SmartPtr {
+    T* pobj;
+    
+  public:
+    explicit SmartPtr(T* pobj = nullptr)
+        : pobj(pobj)
+    {
+        if (pobj)
+            ++pobj-&gt;RefCntd::counter;
+    }
+    SmartPtr(SmartPtr const &amp;) = delete;    /* lusta */
+    SmartPtr&amp; operator=(SmartPtr const &amp;) = delete;    /* lusta */
+    
+    ~SmartPtr() {
+        if (pobj)
+            if (--pobj-&gt;RefCntd::counter == 0)
+                delete pobj;
+    }
+};
+
+class X : public RefCntd {
+  public:
+    X() {
+        std::cout &lt;&lt; &quot;Hello\n&quot;;
+    }
+    ~X() {
+        std::cout &lt;&lt; &quot;Bye\n&quot;;
+    }
+};
+
+int main() {
+    SmartPtr&lt;X const&gt; ptr(new X);
+}</code></pre>
+
+<p>A kód nem fordul. Miért? Egyáltalán kellene fordulnia, vagy koncepcionálisan is hibás? Ha érdemes javítani, akkor hogyan, és miért jogos az a javítás?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A probléma az, hogy a főprogramban az <code>X const</code> példányosítás miatt a <code>SmartPtr</code>
+adattagja <code>X const *</code> típusú lesz, és ezért a <code>--pobj-&gt;RefCntd::counter</code> kifejezés
+konstans változót próbálna módosítani.</p>
+<p>A legjobb megoldás az, ha a referenciaszámlálót <code>mutable</code> adattaggá változtatjuk:</p>
+<pre   ><code class="language-c">class RefCntd {
+    int mutable counter = 0;
+    /* ... */
+};</code></pre>
+<p>A <code>mutable</code> jelző azt mondja, hogy az objektum <code>const</code> volta nem kell érvényes legyen az adattagra.
+Jelen esetben ez jogos, mert a referenciaszámláló ugyan technikailag része az objektumnak, de igazából cska metaadat.</p>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Heterogén kollekció">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="feladat_polimorf" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Heterogén kollekció<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Polimorf típus</h3>
+
+<p>Tudjuk, hogy <a href="../orokles/index.html#heterogen_kollekcio">heterogén kollekcióhoz</a> szükségünk van egy indirekcióra az 
+objektumok eltérő típusa és mérete miatt. Ez kényelmetlen, mert a plusz indirekció és az ismeretlen típus is nehézkessé teszi az 
+objektumok érték szerinti kezelését. A másolás megoldható egy <code>clone()</code> <a href="../ea02/index.html#heterogen_clone">segédfüggvénnyel</a>, amit virtuális konstruktorként emlegetünk, még ha valójában nem is konstruktor. Az érték szerint 
+kezeléshez pedig az előadáson készítettünk egy <a href="../ea05/index.html#polymorphic_value">segédosztályt</a>, amely 
+másoláskor az objektum <code>clone()</code> függvényét hívja:</p>
+
+
+<pre   ><code class="language-cbub">template &lt;typename BASE&gt;
+class PolymorphicValue {
+  private:
+    BASE *ptr_;
+  public:
+    explicit PolymorphicValue(BASE *ptr = nullptr): ptr_{ptr} {}
+    ~PolymorphicValue() {
+        delete ptr_;
+    }
+    PolymorphicValue(PolymorphicValue const &amp; masik) {
+        if (masik.ptr_ != nullptr)
+            ptr_ = masik.ptr-&gt;clone(); // itt a lényeg
+        else
+            ptr_ = nullptr;
+    }
+    /* ... */
+};</code></pre>
+
+<p>Ezzel persze egy új elvárásunk van a tartalmazni kívánt típus felé: legyen <code>clone()</code> függvénye:</p>
+
+<pre   ><code class="language-cbub">class Shape {
+  public:
+    virtual Shape * clone() const = 0;
+    /* ... */
+};
+class Triangle: public Shape { /* ... */ };
+class Rectangle: public Shape { /* ... */ };
+
+PolymorphicValue&lt;Shape&gt; s1(new Rectangle);
+PolymorphicValue&lt;Shape&gt; s2 = s1;        // p1.ptr_-&gt;clone()</code></pre>
+
+<p>Erre azért van szükség, mert a <code>PolymorphicValue</code> osztály konstruktora <code>Shape *</code> paramétert kap, és nem 
+ismeri a lemásolandó objektum típusát. Az intruzív megvalósítás azonban nem előnyös: A <code>PolymorphicValue</code> feladata, a 
+memóriakezelés egy része bekerült a <code>Shape</code> osztályba és annak leszármazottaiba.</p>
+
+<p>Viszont ha más megközelítéssel indulnánk neki a feladat megoldásának, ismerhetné a típust. Ha sablon lenne a 
+<code>PolymorphicValue</code> konstruktora, akkor átvehetné érték szerint is az objektumot, amelyet tartalmazni kell, és ismert 
+lenne a típusa is:</p>
+
+<pre   ><code class="language-cbub">PolymorphicValueV2&lt;Shape&gt; s1( Rectangle{} );    // template-es ctor
+PolymorphicValueV2&lt;Shape&gt; s2( Triangle{} );
+
+PolymorphicValueV2&lt;Shape&gt; s3 = s1;          // Rectangle copy ctor, Triangle copy ctor
+PolymorphicValueV2&lt;Shape&gt; s4 = s1;
+
+s3-&gt;get_area();                             // Shape* és Shape&amp;
+(*s3).get_area();</code></pre>
+
+<p>Oldd meg, hogy ez így működjön! Ehhez szükséged lesz egy <a href="../ea03/index.html#type_erasure">type erasure</a>-re is, 
+amiről előadáson esett szó. Ha mindent jól csinálsz, a <code>clone()</code> függvény törölhető lesz; a 
+<code>PolymorphicValueV2</code> osztályod közvetlenül a tartalmazott objektum másoló konstruktorát fogja használni, és semmilyen 
+egyéb függvényt nem vár annak interfészén.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Pontot érő szorgalmi feladatok az első nagy házihoz">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="feladat_nhf1szorgalmi" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Pontot érő szorgalmi feladatok az első nagy házihoz<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ezek a feladatok az <a href="https://cpp11.local/nhf/#nhf1">első nagy házit</a> egészítik ki. A jelzett feladatok plusz
+pontért adhatóak be.</p>
+
+<h3>Plusz pontért beadható: Helyettesítő objektum az indexeléshez</h3>
+
+<p>Tekintsük a következő kódrészletet:</p>
+
+<pre   ><code class="language-c">MyString a = &quot;hello&quot;;
+MyString b = a;
+std::cout &lt;&lt; b[1];          /* e */
+
+a[1] = 'a';
+b[1] = b[4];
+std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b; /* hallo hollo */</code></pre>
+
+<p>Ebben a másolat objektumot megindexeljük, ami hatására meghívódik az indexelő operátora. De a két indexelő közül (konstans és 
+nem konstans) a nem konstans fog meghívódni, mivel a <code>b</code> objektumnak nincs <code>const</code> minősítője. Ez pedig 
+sajnos különválasztja a két sztringet, pedig nem is módosul a <code>b</code> értéke az első kiírásnál. A probléma az, hogy az 
+indexelés pillanatában még nem tudjuk, hogy a következő művelet egy írás vagy egy olvasás lesz, úgyhogy igazából az indexelő 
+operátor még nem tudja eldönteni, hogy külön kell-e választani a két sztringet (copy-on-write) vagy nem.</p>
+
+<p>A helyzetet úgy tudod megoldani, ha egy helyettesítő (proxy) objektumot használsz. Az indexelő operátornak nem egy karakter 
+referenciájával kell visszatérnie, hanem egy olyan objektummal, amely a sztring megindexelt karakterét reprezentálja. Ez az 
+objektum tudja, hogy melyik sztring melyik karakteréről szól. Az írás és az olvasás a helyettesítő objektumon már külön műveletnek 
+fog látszani. Lehet olyan értékadó operátort írni neki, amely karaktert vesz át (erre ő a kapott karaktert beleírja a hivatkozott 
+sztringbe, esetleg közben szétválasztja a sztringeket), és kaphat olyan konverziós operátort is, amely ezt karakterré alakítja – 
+értelemszerűen ilyenkor kiolvasva a hivatkozott sztring hivatkozott karakterét.</p>
+
+<p>Ha végeztél, ellenőrizd, hogy nem vétettél-e OOP tervezési hibát. A proxy objektumnak nem dolga dinamikus tömbökkel bíbelődni.
+Egyetlen feladata, hogy az írást és az olvasást megkülönböztesse; a tényleges memóriaműveleteket már a <code>MyString</code>
+osztálynak kell elvégeznie. Ha nem ilyen lett a kódod, refaktoráld!</p>
+
+
+
+
+<h3>Plusz pontért beadható: egyformán inicializált sztringek</h3>
+
+<p>Adott az alábbi kódrészlet:</p>
+
+<pre   ><code class="language-c">MyString a = &quot;helló világ&quot;;
+MyString b = &quot;helló világ&quot;;</code></pre>
+
+<p>Az eddigi kódváltozatban ez nem egy, hanem két tömböt hoz létre – tehát a memóriában kétszer van benne
+ugyanaz a tömb. Ez a redundancia elkerülhető, ha a létrehozáskor a sztringek mindig megnézik, hogy létezik-e
+már ugyanolyan tartalmú szöveg, mint amilyen értéket fel kell venniük. Ha igen, akkor elég csak azt
+meghivatkozni. Ehhez azonban ismerni kell az összes szöveg objektumot. Valamilyen módon, például egy
+láncolt listában (vagy jobb ötlet: keresőfában) nyilvántartást kell vezetni arról, hogy milyen szöveg
+objektumok léteznek. A feladat ezt implementálni; ehhez használhatsz STL tárolót is.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További szorgalmi feladatok az első nagy házihoz">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        További szorgalmi feladatok az első nagy házihoz<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Kivételkezelés</h3>
+
+<p>Vizsgáld meg <em>exception safety</em> szempontból, és ha kell, javítsd a <code>MyString</code> osztályodat! Valósítsd meg az 
+összes sztringműveletet úgy, hogy <a href="../ea08/index.html#noexcept">erős garanciát, atomi működést</a> biztosítsanak!
+Sehol nem szabad olyannak történnie, ha bármelyik memóriafoglalás (<code>new</code> vagy <code>malloc</code>) hibát jelez, akkor
+a sztring objektum megsérül, az abban tárolt adat elveszik, vagy memóriaszivárgás keleketkezik.</p>
+
+
+
+
+<h3>Az indirekciók számának csökkentése</h3>
+
+<p>Az alapértelmezett megvalósítás szerint a <code>MyString</code> objektumokhoz tartozó <code>StringValue</code> objektumokat
+dinamikusan foglaljuk. Így oldható meg, hogy azok száma független lehessen a <code>MyString</code> objektumok számától.
+A hivatkozott karaktertömböket pedig szintén dinamikusan kell foglalnunk, mert azoknak pedig a mérete lehet eltérő.
+Ezt mutatja a következő ábra, ahol a kékkel színezett dobozok a dinamikusan foglalt területeket jelzik.</p>
+
+<img src="mystring_din_1.svg" class="kozep" style="height: 10em;" alt="Dinamikus memóriaterületek a MyString osztályban">
+
+<p>Mindez nem túl hatékony. A foglaláshoz kétszer kell a <code>new</code> operátort használnunk. Egy adott karakter eléréséhez
+pedig két indirekción kell keresztülmennünk; az elsővel még csak a <code>StringValue</code> objektumhoz jutunk, amelyből
+egy újabb pointer kiolvasása és dereferálása árán kapjuk csak meg a karaktert.</p>
+
+<p>A feladat ezen indirekciók számát csökkenteni. Ez a referenciaszámláló, az esetlegesen eltárolt sztringméret és a karakterlánc 
+egy memóriaterületre helyezésével oldható meg. Mindez azt is jelenti, hogy az ehhez lefoglalt terület méretét a szöveg méretének 
+figyelembe vételével kell kiszámítani:</p>
+
+<img src="mystring_din_2.svg" class="kozep" style="height: 10em;" alt="Dinamikus memóriaterületek a MyString osztályban">
+
+<p>A <code>MyString</code> objektumokban eltárolt pointerek így különböző méretű memóriaterületekre mutatnak, amelyek
+már érték szerint tartalmaznak minden adatot.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg13" width="11.839cm" height="4.4791cm" version="1.1" viewBox="399 358 220 75.248" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata id="metadata17">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="Háttér" transform="translate(-1 -4.3758)" stroke="#000" stroke-width="2">
+  <path id="line4" d="m400 400h60" fill="none"/>
+  <path id="polygon6" d="m460 440v-80l80 40z" fill="#fff" fill-rule="evenodd"/>
+  <path id="ellipse8" d="m560 400a10 10 0 0 1-10 10 10 10 0 0 1-10-10 10 10 0 0 1 10-10 10 10 0 0 1 10 10z" fill="#fff"/>
+  <path id="line10" d="m560 400h60" fill="none"/>
+ </g>
+</svg>

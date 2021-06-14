@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 11. hét: Paraméterlisták és -továbbítás, ...</title>
+<meta property="og:title" content="TEST InfoC++11 :: 11. hét: Paraméterlisták és -továbbítás, ...">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 11. hét: Paraméterlisták és -továbbítás, ...">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 11. hét: Paraméterlisták és -továbbítás, ...">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="11. hét: Paraméterlisták és -továbbítás, ...">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">11. hét: Paraméterlisták és -továbbítás, ...</h1>
+
+
+<p>A félév időbeosztásától függően a metaprogramozás témakörre egy vagy két labor szokott jutni.
+Ezért előfordulhat, hogy itt a laborfeladatok is szerepelnek.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Pont-pont-pont</a>
+                      <li><a href="index.html#2" class="">Paramétertovábbítás</a>
+                      <li><a href="index.html#3" class="">Rekurzív sablonok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Pont-pont-pont">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_pontpontpont" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Pont-pont-pont<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>N dimenziós tömb</h3>
+
+<p>Ez itt egy tömb:</p>
+
+<pre   ><code class="language-c">Vector&lt;double&gt; v(12);
+v[10] = 3.14;</code></pre>
+
+<p>Ez pedig egy mátrix (amelyben a szögletes zárójel operátor helyett a kerek zárójel operátort használjuk indexelésre, mert annak <a href="https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op">bármennyi paramétere lehet</a>):</p>
+
+<pre   ><code class="language-c">Matrix&lt;double&gt; m(3, 4);
+m(1, 2) = 3.14;</code></pre>
+
+<p>Általánosítva, egy N dimenziós tömböt így képzelhetnénk el:</p>
+
+<pre   ><code class="language-c">Array&lt;double, 5&gt; a(3, 5, 6, 4, 2);  // 3×5×6×4×2-es tömb
+a(1, 3, 4, 2, 0) = 3.14;</code></pre>
+
+<p>Az első sablonparaméter a tárolt adatok típusa, a második pedig a dimenziók száma. A konstruktorban adjuk meg a tömb méreteit: pontosan annyi darab egész szám kell legyen, ahány dimenzió van. Az indexeléshez használt függvényhívó operátor szintén pontosan annyi egész számot vár paraméterként, ahány dimenzió van.</p>
+
+<p>Készítsd el az <code>Array</code> osztályt! Ügyelj arra, hogy a fordítási időben kideríthető hiba (helytelen argumentumszám vagy -típus) fordítási hibát eredményezzen!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A megoldás két helyen is C++17 elemet használ, <strong>folding expression</strong>-t: <code>(... &amp;&amp; B)</code>
+és <code>(1 * ... * sizes)</code>. De ezeket nagyon könnyű lenne megírni rekurzívan is.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;type_traits&gt;
+#include &lt;vector&gt;
+#include &lt;array&gt;
+
+/* And&lt;true, false, true, ...&gt;::value */
+template &lt;bool ... B&gt;
+class And : public std::bool_constant&lt;(... &amp;&amp; B)&gt; {};
+
+/* AllInt&lt;size_t, int, long&gt;::value */
+template &lt;typename... TS&gt;
+class AllInt : public And&lt;std::is_convertible&lt;TS, size_t&gt;::value...&gt; {};
+
+template &lt;typename T, size_t DIM&gt;
+class Array {
+    private:
+        /* ez tárolja, hogy melyik irányban mekkora méretű */
+        std::array&lt;size_t, DIM&gt; sizes;
+        /* ez a tényleges adattömb, leképezve 1 dimenzióra */
+        std::vector&lt;T&gt; data;
+
+    public:
+        template &lt;typename... ARGS,
+                  typename = typename std::enable_if&lt;AllInt&lt;ARGS...&gt;::value&gt;::type,
+                  typename = typename std::enable_if&lt;sizeof...(ARGS)==DIM&gt;::type&gt;
+        Array(ARGS ... sizes)
+            : sizes{size_t(sizes)...}
+            , data((1 * ... * sizes))
+        {
+        }
+
+        template &lt;typename... ARGS,
+                  typename = typename std::enable_if&lt;AllInt&lt;ARGS...&gt;::value&gt;::type,
+                  typename = typename std::enable_if&lt;sizeof...(ARGS)==DIM&gt;::type&gt;
+        T &amp; operator() (ARGS ... indices_)
+        {
+            std::array&lt;size_t, DIM&gt; indices = { size_t(indices_) ... };
+            /* ijesztően néz ki, hogy minden indexelésnél ezt csináljuk, de
+             * megijedés helyett érdemes megnézni a lefordított, optimalizált kódot! */
+            size_t idx = indices[0];
+            for (size_t i = 1; i &lt; DIM; ++i)
+                idx = idx*sizes[i-1] + indices[i];
+            return data[idx];
+        }
+};
+
+int main() {
+    Array&lt;double, 2&gt; a(3, 4);
+    
+    for (int i = 0; i &lt; 3; ++i)
+        for (int j = 0; j &lt; 4; ++j)
+            a(i, j) = (i+1)*(j+1);
+            
+    for (int i = 0; i &lt; 3; ++i) {
+        for (int j = 0; j &lt; 4; ++j)
+            std::cout &lt;&lt; std::setw(10) &lt;&lt; a(i, j);
+        std::cout &lt;&lt; std::endl;
+    }
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Paramétertovábbítás">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="feladat_forward" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Paramétertovábbítás<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Saját std::ref</h3>
+
+<p>Írd meg az std::ref-et! Emlékeztetőül: ez arra jó, hogy létrehozzon egy funktort, amely egy másik funktorra hivatkozik, de referencia szerint. Így a létrehozott funktor akárhányszor másolható, mindig az eredeti fog dolgozni. Ahogy az std::ref is működik:</p>
+
+<pre   ><code class="language-c">class IntPrinter {
+  private:
+    int count = 0;
+  public:
+    void operator() (int i) {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;. &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+};
+ 
+int arr1[] = { 5, 9, 2, 4 };
+int arr2[] = { 5, 8, 4, 7, 9 };
+IntPrinter p;
+std::for_each(std::begin(arr1), std::end(arr1), std::ref(p));     /* 1. 2. 3. 4. */
+std::for_each(std::begin(arr2), std::end(arr2), std::ref(p));     /* 5. 6. 7. 8. 9. */</code></pre>
+
+<p>Figyelj arra, hogy a becsomagolt függvényobjektumnak tetszőlegesen sok(féle) függvényhívó operátora lehet, és ezeknek típushelyesen kell továbbadni a paramétereket! (Az std::ref() egyébként nem osztály, hanem egy gyártófüggvény.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* Ez itt a referencia objektum */
+template &lt;typename FUNCTOR&gt;
+class RefProxy {
+  private:
+    /* Amely a függvényobjektumot referencia szerint tartalmazza */
+    FUNCTOR &amp;f;
+  public:
+    /* A konstruktora eltárolja a referenciát */
+    RefProxy(FUNCTOR &amp; f) : f(f) {}
+
+    /* És ha bármilyen paraméterekkel meghívják */
+    template &lt;typename... ARGS&gt;
+    auto operator() (ARGS &amp;&amp; ... args)
+      /* Akkor egy ugyanolyan típusú értékkel tér vissza, mint
+       * amilyennel a függvényobjektum visszatérne */
+      -&gt; decltype(f(std::forward&lt;ARGS...&gt;(args...)))
+    {
+        /* És továbbpasszolja a paramétereket
+         * a hivatkozott függvényobjektumnak */
+        return f(std::forward&lt;ARGS...&gt;(args...));
+    }
+};
+
+
+/* Ez a függvény hozza létre a RefProxy-t. Tulajdonképpen csak
+ * azért van, hogy kitalálja a FUNCTOR típusát. */
+template &lt;typename FUNCTOR&gt;
+auto make_refproxy(FUNCTOR &amp; f) -&gt; RefProxy&lt;FUNCTOR&gt; {
+    return RefProxy&lt;FUNCTOR&gt;{f};
+}</code></pre>
+</div>
+</details>
+
+
+
+<h3>Saját std::function</h3>
+
+<p>Írd meg az std::function-t! Ha mindent jól csinálsz, akkor az alábbi kódban az std::function helyére my_function-t írhatsz majd:</p>
+
+<pre   ><code class="language-c">#include &lt;functional&gt;
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+int main() {
+    std::function&lt;double(double)&gt; f;
+    
+    if (!f)
+        std::cout &lt;&lt; &quot;Egyelőre nullptr&quot; &lt;&lt; std::endl;
+    
+    f = sin;
+    std::cout &lt;&lt; sin(2.3) &lt;&lt; &quot;==&quot; &lt;&lt; f(2.3) &lt;&lt; std::endl;
+    
+    f = [] (double x) { return x*x; };
+    std::cout &lt;&lt; 2.3*2.3 &lt;&lt; &quot;==&quot; &lt;&lt; f(2.3) &lt;&lt; std::endl;
+    
+    f = std::bind(pow, std::placeholders::_1, 4);
+    std::cout &lt;&lt; pow(2.3, 4) &lt;&lt; &quot;==&quot; &lt;&lt; f(2.3) &lt;&lt; std::endl;
+
+    auto f2 = f;    /* másolható */
+    std::cout &lt;&lt; pow(2.3, 4) &lt;&lt; &quot;==&quot; &lt;&lt; f2(2.3) &lt;&lt; std::endl;
+    
+    f = nullptr;
+    try {
+        f(2.3);
+    } catch (std::bad_function_call &amp;e) {
+        std::cout &lt;&lt; &quot;Megint nullptr&quot; &lt;&lt; std::endl;
+    }
+}</code></pre>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Ehhez az osztályodnak egy olyan operator= kell, amelyik tetszőleges objektumot (függvénypointert, lambdát, ...) át tud venni, és le tud másolni. Ezért a lemásolt objektumot be kell majd csomagolnod egy osztályba, aminek típusa a lemásolt objektumtól függ. Hogy erre lehessen hivatkozni, a különféle elképzelhető csomagoló osztályokhoz szükség van egy közös ősosztályra.</p>
+
+<p>Figyelj arra, hogyan adod át a becsomagolt függvénynek a paramétereket! Meg arra is, hogy egy std::function lemásolásakor lemásolódik a bele csomagolt funktort is. Ez azért fontos, mert a funktornak belső állapota lehet. Az std::function ilyen jellegű viselkedését is tudnia kell az osztálynak.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>Saját std::function – még egyszer</h3>
+
+<p>Előbb oldd meg a fenti feladatot.</p>
+
+<p>Ha megvan, akkor nézd át a kódod, mennyit foglalkoztál memóriakezeléssel. Ha sokat, akkor egy okos pointerre van szükséged.
+(Melyikre?) Használj ilyet, ügyelve arra, hogy a lehető legkevesebb erőforráskezelő függvényt (másoló konstruktor, destruktor stb.)
+kelljen megírnod!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egy <code>std::unique_ptr</code> kell. A <code>function</code> objektum másoló konstruktorát ilyenkor is meg kell írni
+(mert klónozni kell benne), viszont a mozgató konstruktor és a destruktor lehet <code>default</code>. Ugyanez a helyzet az értékadó
+operátorokkal, amelyek megírhatók egyben, <em>move and swap</em> segítségével.</p>
+</div>
+</details>
+
+
+
+
+
+
+<h3>Mit csinál a függvény?</h3>
+
+<p>Mit csinál az alábbi függvény? Az általa visszaadott függvény, amely hívásmódjában kompatibilis az első paramétereként
+megadott függvénnyel (ugyanolyan paraméterek és visszatérési érték), miben viselkedik másképpen? Írj kódot a működés
+bemutatására!</p>
+
+<pre   ><code class="language-c">template &lt;typename RET, typename... ARGS&gt;
+auto memoized_func(RET (*func)(ARGS...)) -&gt; std::function&lt;RET(ARGS...)&gt; {
+    std::map&lt;std::tuple&lt;ARGS...&gt;, RET&gt; retvals;
+
+    auto memoized = [=] (ARGS... args) mutable -&gt; RET {
+        auto args_tuple = std::make_tuple(args...);
+        auto found = retvals.find(args_tuple);
+        if (found != retvals.end())
+            return found-&gt;second;
+
+        auto retval = func(args...);
+        retvals.insert(make_pair(args_tuple, retval));
+        return retval;
+    };
+
+    return memoized;
+}</code></pre>
+
+<p>Extra kérdések: Mikor érdemes ilyet használni? Mikor nem szabad ilyet használni?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Becsomagolja a paraméterként adott függvényt egy másik függvénybe, amely ellenőrzi azt, hogy
+hívták-e már pontosan azokkal a paraméterekkel, mint amiket most lát. Ha igen, akkor nem értékeli ki
+újra a függvényt, hanem csak visszatér az eltárolt értékkel. Ha nem, akkor meghívja és eltárolja
+a visszaadott értékét, hogy legközelebb már ne kelljen.</p>
+<pre   ><code class="language-c">double sin_with_print(double x) {
+    std::cout &lt;&lt; &quot;sin_with_print(x) called\n&quot;;
+    return sin(x);
+}
+
+int main() {
+    auto msin = memoized_func(sin_with_print);
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(2.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(2.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+    std::cout &lt;&lt; msin(1.0) &lt;&lt; std::endl;
+}</code></pre>
+<pre class="screenshot">
+sin_with_print(x) called
+0.841471                <span class="bubble"><code>sin(1.0)</code> először</span>
+0.841471
+sin_with_print(x) called
+0.909297                <span class="bubble"><code>sin(2.0)</code> először</span>
+0.909297
+0.841471
+0.841471
+</pre>
+<p>Akkor érdemes használni, ha a függvény kiértékelése lassú – sokkal lassabb, mint amennyi ideig
+a <code>map</code>-ben keresés tart. Nem szabad használni, ha a meghívott függvénynek mellékhatása
+van, mert a mellékhatás csak egyszer fog megtörténni (adott paraméterek mellett mindig az első
+híváskor).</p>
+</div>
+</details>
+
+
+
+
+
+<h3>PHP list() I. – a könnyebbik fele</h3>
+
+<p>A PHP-ban egy sztringben adott, valamilyen szeparátor karakterrel elválasztott adatokat egyetlen egy sorral „ki lehet csomagolni” egy rakat változóba. Például:</p>
+
+<pre   ><code class="language-c">list($a, $b) = explode(&quot; &quot;, &quot;3 4.5&quot;);   // $a = &quot;3&quot;; $b = &quot;4.5&quot;;</code></pre>
+
+<p>Tekintsünk most el a szeparátor karakter megadásától, vegyük azt fixen szóköznek. A feladat egy olyan C++ függvényt írni, amely a fenti nyelvi szerkezethez hasonlóan tetszőlegesen sok, tetszőleges típusú változó értékét ki tudja venni egy sztringből, ráadásul típushelyesen. Például:</p>
+
+<pre   ><code class="language-c">int a;
+double b;
+unpack(&quot;3 4.5&quot;, a, b);  // a = 3; b = 4.5;</code></pre>
+
+<p>Útmutatás: a sztring darabolásához is használhatsz istringstream-et. Használd az egyes típusok &gt;&gt; operátorát! A felbontandó sztring futási időben is keletkezhet, így biztosan nem fordítási időben kell darabolni.</p>
+
+<p>A feladatnak van egy morcosabb második része is.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Klasszikus megoldás:</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+void set_vars(std::istringstream &amp;) {
+}
+
+template &lt;typename HEAD, typename... TAIL&gt;
+void set_vars(std::istringstream &amp; is, HEAD &amp; arg, TAIL &amp;... tail) {
+    is &gt;&gt; arg;
+    set_vars(is, tail...);
+}
+
+template &lt;typename... ARGS&gt;
+void unpack(std::string const &amp; words, ARGS &amp; ... args) {
+    std::istringstream is(words);
+    set_vars(is, args...);
+}
+
+
+int main() {
+    int a;
+    double b;
+
+    unpack(&quot;3 4.5&quot;, a, b);
+    std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b;
+}</code></pre>
+
+<p>Esetleg C++17-ben:</p>
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">template &lt;typename ... ARGS&gt;
+void unpack(std::string const &amp; str, ARGS &amp; ... args) {
+    std::istringstream is(str);
+    (is &gt;&gt; ... &gt;&gt; args);
+}</code></pre>
+
+<p>Vagy C++11-ben, a <code>swallow{}</code>-os trükkel:</p>
+<pre   ><code class="language-c">template &lt;typename ... ARGS&gt;
+void unpack(std::string const &amp; str, ARGS &amp; ... args) {
+    std::istringstream is(str);
+    
+    using swallow = int[];
+    swallow{0, (void(is &gt;&gt; args), 0)...};
+}</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>PHP list() II. – a nehezebbik fele</h3>
+
+<p>A feladat hasonló, mint az első részben, de most olyan kódot kell írnod, amelynek a szintaktikája már teljesen megegyezik a PHP-s list() nyelvi szerkezetével:</p>
+
+<pre   ><code class="language-c">int a;
+double b;
+list(a, b) = explode(&quot;3 4.5&quot;);</code></pre>
+
+<p>Útmutatás: indulj ki a list() függvényből! Ennek létre kell hoznia egy referenciákat tartalmazó segédobjektumot, amely a feldarabolt sztringet át tudja venni az értékadó operátorával. Felhasználhatod az std::tuple osztályt is. Vigyázat, ez jóval nehezebb feladat, mint az első fele!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">#include &lt;sstream&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;tuple&gt;
+
+template &lt;typename ... TYPES&gt;
+class List {
+    private:
+        std::tuple&lt;TYPES &amp; ...&gt; refs;
+        
+        template &lt;int N&gt;
+        void unpack(std::istringstream &amp; is) {
+            if constexpr (N != sizeof...(TYPES)) {
+                is &gt;&gt; std::get&lt;N&gt;(refs);
+                unpack&lt;N+1&gt;(is);
+            }
+        }
+    
+    
+    public:
+        List(TYPES &amp; ... args) : refs(args...) {}
+        
+        void operator=(std::string s) {
+            std::istringstream is(s);
+            unpack&lt;0&gt;(is);
+        }
+};
+
+template &lt;typename ... TYPES&gt;
+auto list(TYPES &amp; ... args) {
+    return List&lt;TYPES &amp; ...&gt;(args...);
+}
+
+std::string explode(std::string s) {
+    return s;
+}
+
+int main() {
+    int a;
+    double b;
+    list(a, b) = explode(&quot;3 4.5&quot;);
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+<h3>Python x,y = y,x</h3>
+
+<p>Pythonban az alábbi sor megcseréli két változó tartalmát:</p>
+
+<pre   ><code class="language-python">x,y = y,x</code></pre>
+
+<p>Ez a trükk C++11-ben is használható. Ha nem is a vessző operátorral, mert az C++-ban teljesen mást jelent, az std::tie() és std::make_tuple() függvények segítségével megoldható:</p>
+
+<pre   ><code class="language-c">std::tie(x, y) = std::make_tuple(y, x);</code></pre>
+
+<p>A feladatod: írj tetszőleges kódrészletet, amely szabványos std::pair osztályt használva megoldja a feladatot:</p>
+
+<pre   ><code class="language-python">my_func_1(x, y) = my_func_2(y, x);</code></pre>
+
+<p>A trükk az, hogy a függvények becsomagolják a változókat valamilyen segédobjektum(ok)ba, amely(ek) értékadó operátora fogja elvégezni az értékek másolását. Ha jó a megoldásod, akkor ez nem csak cserére használható, hanem bármilyen adatpárok értékadására, pl. a,b = c,d mintájára.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Rekurzív sablonok">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Rekurzív sablonok<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>A legnagyobb</h3>
+
+<p>Adott az alábbi maximumkeresés:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+int greatest(int arr[], int size) {
+    int max = arr[0];
+    for (int i = 1; i != size; ++i)
+        if (arr[i] &gt; max)
+            max = arr[i];
+    return max;
+}
+
+int main() {
+    int a[] = { 4, 87, 2, 65, 89, 1 };
+    std::cout &lt;&lt; greatest(a, 6) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Írd át ezt jobbrekurzív függvénnyé! Az <code>if()</code> elágazást érdemes előbb egy <code>?:</code> operátoros kifejezéssel
+helyettesíteni.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int greatest(int arr[], int size, int max) {
+    if (size == 0)
+        return max;
+    else
+        return greatest(arr+1, size-1, arr[0] &gt; max ? arr[0] : max);
+}
+int greatest(int arr[], int size) {
+    return greatest(arr+1, size-1, arr[0]);
+}</code></pre>
+</div>
+</details>
+
+<p>Utána pedig írd át sablon metaprogrammá, amelyben a <code>Greater</code> nevű sablon akárhány számot kaphat
+sablonparaméterként! A különálló maximumkereső, és a rekurziót indító két függvényből két külön osztály lesz.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+template &lt;int max, int... numbers&gt;
+struct GreatestHelper;
+
+template &lt;int max, int head, int... tail&gt;  // 1
+struct GreatestHelper&lt;max, head, tail...&gt; {
+    static constexpr int value = GreatestHelper&lt;(head &gt; max) ? head : max, tail...&gt;::value;
+};
+
+template &lt;int max&gt;
+struct GreatestHelper&lt;max&gt; {               // 2
+    static constexpr int value = max;
+};
+
+template &lt;int head, int... tail&gt;
+struct Greatest {
+    static constexpr int value = GreatestHelper&lt;head, tail...&gt;::value;
+};
+
+int main() {
+    std::cout &lt;&lt; Greatest&lt;4, 87, 2, 65, 89, 1&gt;::value &lt;&lt; std::endl;
+}</code></pre>
+<p>A fenti kódban a <code>Greatest</code> osztály indítja el a rekurziót, a <code>GreatestHelper</code> osztály 
+példányosításával. A <code>GreatestHelper</code> osztály első paramétere, a <code>max</code> nevű, a rekurzióban használt 
+gyűjtőparaméter; a megvizsgált számok közül ez tárolja a legnagyobbat. (A rekurzió indulásakor ez a sorozat első elemét 
+kapja.)</p>
+<p>A segédosztálynak két specializációja van. Az 1-gyessel jelöltet használja a fordító akkor, ha legalább két sablonparaméter 
+van (a gyűjtőparaméter és a vizsgálandó számok), a 2-es változatot pedig akkor, ha már nincs vizsgálandó szám. Az eredeti 
+osztálydeklaráció célja csak annyi, hogy megadja a fordító számára a sablonparamétereket, utána már lehet specializálni az 
+osztályt.</p>
+<p>Természetesen működne az a módszer is, ahol az általános eset a legalább két paraméterű, az egyetlen specializáció pedig
+a pontosan két paraméterű. De így tartalmaz a megoldás egy kis kódduplikációt, tehát a fenti megoldás szebb.</p>
+<pre   ><code class="language-c">template &lt;int max, int head, int... tail&gt;
+struct GreatestHelper {
+    static constexpr int value = GreatestHelper&lt;(head &gt; max) ? head : max, tail...&gt;::value;
+};
+template &lt;int max, int head&gt;
+struct GreatestHelper&lt;max, head&gt; {
+    static constexpr int value = head &gt; max ? head : max;
+};</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>Mit csinál a sablon?</h3>
+
+<p>Mit csinál ez a két osztálysablon? Próbáld ki, hogy példányosítod valamilyen kicsi
+egész számmal (papíron vagy jegyzettömbben)! Pl. mivel egyenértékű a <code>gens&lt;4&gt;::type</code> belső típus?</p>
+
+<pre   ><code class="language-c">template&lt;int ...&gt;
+struct seq { };
+
+template&lt;int N, int ...S&gt;
+struct gens : gens&lt;N-1, N-1, S...&gt; { };
+
+template&lt;int ...S&gt;
+struct gens&lt;0, S...&gt; {
+    using type = seq&lt;S...&gt;;
+};</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* gens&lt;4&gt; -&gt; N = 4, S = üres */
+class gens&lt;4&gt; : gens&lt;3, 3&gt; { };
+
+/* gens&lt;3, 3&gt; -&gt; N = 3, S = 3 */
+class gens&lt;3, 3&gt; : gens&lt;2, 2, 3&gt; { };
+
+/* gens&lt;2, 2, 3&gt; -&gt; N = 2, S = 2, 3 */
+class gens&lt;2, 2, 3&gt; : gens&lt;1, 1, 2, 3&gt; { };
+
+/* gens&lt;1, 1, 2, 3&gt; -&gt; N = 1, S = 1, 2, 3 */
+class gens&lt;1, 1, 2, 3&gt; : gens&lt;0, 0, 1, 2, 3&gt; { };
+
+/* gens&lt;0, 0, 1, 2, 3&gt; -&gt; specializáció! nincs N, S = 0, 1, 2, 3 */
+class gens&lt;0, 1, 2, 3&gt; {
+    using type = seq&lt;0, 1, 2, 3&gt;;
+};</code></pre>
+<p>És ezt a <code>type</code> belső típust megörökik az előző, meg az azelőtti stb. osztályok,
+tehát végül <code>gens&lt;4&gt;::type</code> = <code>seq&lt;0, 1, 2, 3&gt;</code>. A
+<code>gens&lt;N&gt;</code> osztály előállítja <code>seq</code> osztály sablonparamétereként a <code>0 ... N-1</code>
+természetes számokat.</p>
+</div>
+</details>
+
+
+
+
+<h3>A template metaprogramozás sűrűje</h3>
+
+<p>Az <code>std::tuple</code> osztálysablonnak bármennyi sablonparamétere lehet: az ott megadott típusú adatokat
+tudja eltárolni. Pl. <code>std::tuple&lt;int, double&gt;</code> egy egész és egy valós számot tárol. Ha adott
+egy ilyen objektum <code>t</code> néven, <code>std::get&lt;0&gt;(t)</code> veszi ki belőle az egész számot,
+<code>std::get&lt;1&gt;(t)</code> pedig a valósat.</p>
+
+<p>Tegyük fel, hogy van egy függvényük, amely épp egy <code>int</code> és egy <code>double</code> paramétert vár.
+És azt, hogy van egy <code>tuple</code>-ünk, amelyben egy egész és egy valós szám van. A feladat: meghívni a függvényt
+a <code>tuple</code>-ben tárolt adatokkal. Egészen pontosan, a feladat: írni egy olyan osztályt, amely képes eltárolni
+egy tetszőleges típusú (paraméterezésű) függvényre mutató pointert, továbbá a függvény paraméterezésének megfelelő
+objektumokat tartalmazó <code>tuple</code>-t – hogy aztán valamikor azt a függvényt, azokkal a paraméterekkel, meg
+lehessen hívni. Így tetszőlegesen eltárolható egy „felparaméterezett” függvény, hogy később, egy tetszőelges időpontban
+meg lehessen hívni.</p>
+
+<p>Az alábbi kód ezt a problémát oldja meg. Elemezd a kódot, értsd meg a működését!</p>
+
+<pre   ><code class="language-c">#include &lt;tuple&gt;
+#include &lt;iostream&gt;
+
+
+template&lt;int ...&gt; struct seq {};
+template&lt;int N, int ...S&gt; struct gens : gens&lt;N-1, N-1, S...&gt; {};
+template&lt;int ...S&gt; struct gens&lt;0, S...&gt;{ using type = seq&lt;S...&gt;; };
+
+
+double foo(int x, float y, double z) {
+    return x + y + z;
+}
+
+
+template &lt;typename Ret, typename ...Args&gt;
+struct save_it_for_later {
+    Ret (*func)(Args...);
+    std::tuple&lt;Args...&gt; params;
+
+    template&lt;int ...S&gt;
+    Ret callFunc(seq&lt;S...&gt;) {
+        return func(std::get&lt;S&gt;(params) ...);
+    }
+
+    Ret delayed_dispatch() {
+        return callFunc(typename gens&lt;sizeof...(Args)&gt;::type());
+    }
+};
+
+
+int main(void) {
+    std::tuple&lt;int, float, double&gt; t = std::make_tuple(1, 1.2, 5);
+    save_it_for_later&lt;double, int, float, double&gt; saved = {foo, t};
+
+    std::cout &lt;&lt; saved.delayed_dispatch() &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A C++14 tartalmaz <a href="../cpp1417/index.html#cpp14template">ehhez hasonló eszközöket</a> is.</p>
+
+
+<h3>Rekurzió</h3>
+
+<p>Sablon metaprogramokban listákat is kellhet tárolnunk: általában erre egy segédosztály
+sablonparamétereit szoktuk használni. Például:</p>
+
+<pre   ><code class="language-c">template &lt;int...&gt;
+class Szamok {};
+
+using Hatvanyok = Szamok&lt;1, 2, 4, 8, 16&gt;;</code></pre>
+
+<p>A feladat: írj ehhez hasonló osztályt, amely a sablonparamétereiben adott számok
+összegét, illetve a számsor hosszát is megadja statikus tagváltozóként! Például:</p>
+
+<pre   ><code class="language-c">int main() {
+    std::cout &lt;&lt; SumLen&lt;1,2,3&gt;::value;      /* 1+2+3 = 6 */
+    std::cout &lt;&lt; SumLen&lt;1,2,3&gt;::length;     /* 3 db szám */
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">template &lt;int... S&gt;
+class SumLen;
+
+template &lt;int X, int... XS&gt;
+class SumLen&lt;X, XS...&gt; {
+  private:
+      using Rest = SumLen&lt;XS...&gt;;
+
+  public:
+    static constexpr int value  = X + Rest::value;
+    static constexpr int length = 1 + Rest::length;
+};
+
+template &lt;&gt;
+class SumLen&lt;&gt; {
+  public:
+    static constexpr int value  = 0;
+    static constexpr int length = 0;
+};</code></pre>
+</div>
+</details>
+
+
+
+<h3>Paraméterként</h3>
+
+<p>Írd meg úgy az előző programot, hogy a <code>SumLen</code> osztály
+csak a műveleteket végezze, a <code>Szamok</code> osztály pedig csak a tárolást!
+Ebben az esetben a <code>SumLen</code> paraméterként kell kapja a <code>Szamok</code>
+osztályt:</p>
+
+<pre   ><code class="language-c">int main() {
+    std::cout &lt;&lt; SumLen&lt;Szamok&lt;1,2,3&gt;&gt;::value;
+    std::cout &lt;&lt; SumLen&lt;Szamok&lt;1,2,3&gt;&gt;::length;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A megoldásban a <code>SumLen</code> osztálynak egy sablonparamétere van csak, egy típus.
+Egy <code>Szamok&gt;X, XS...&gt;</code> paraméterű részleges specializáció lehet az, amelyik
+az egyetlen egy sablonparaméterből, a típusból „ki tudja csomagolni” ezeket az egész számokat.</p>
+<pre   ><code class="language-c">template &lt;int... S&gt;
+class Szamok;
+
+template &lt;typename SZAMOK&gt;
+class SumLen;
+
+template &lt;int X, int... XS&gt;
+class SumLen&lt;Szamok&lt;X, XS...&gt;&gt; {
+  private:
+    using Rest = SumLen&lt;Szamok&lt;XS...&gt;&gt;;
+
+  public:
+    static constexpr int value  = X + Rest::value;
+    static constexpr int length = 1 + Rest::length;
+};
+
+template &lt;&gt;
+class SumLen&lt;Szamok&lt;&gt;&gt; {
+  public:
+    static constexpr int value  = 0;
+    static constexpr int length = 0;
+};</code></pre>
+</div>
+</details>
+
+
+
+
+
+<h3>N-edik típus</h3>
+
+<p>Írj sablon osztályt, amelyik átvesz egy egész számot és egy típuslistát sablonparaméterként!
+Az osztály feladata, hogy a listából kiválassza valamelyik típust; az annyiadik sorszámút, amennyi
+a megadott egész szám.</p>
+
+<p>Például: <code>NthType&lt;0, int, double char&gt;::Type</code>-nál ez <code>int</code>.
+<code>NthType&lt;2, int, double, char&gt;</code>-nál pedig <code>char</code>.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Lásd a következő két feladatnál.</p>
+</div>
+</details>
+
+
+
+<h3>Típusok listája</h3>
+
+<p>Definiálj osztályt, amelynek sablonparamétereit típusnevek tárolására lehet használni!</p>
+
+<pre   ><code class="language-c">using MyTypes = TypeList&lt;int, double, char&gt;;</code></pre>
+
+<p>Definiálj metafüggvényt, amellyel a típuslistából lekérdezhető valamelyik típus!
+(Ez nem teljesen ugyanaz, mint az előző feladatnál; itt nem a típusnevek adják a függvény
+paramétereit, hanem a típusneveket egy osztály sablonparaméterében tárolod.)</p>
+
+<pre   ><code class="language-c">using SecondType = typename NthType&lt;MyTypes, 2&gt;::type;
+static_assert(std::is_same&lt;char, SecondType&gt;);</code></pre>
+
+<p>Írj függvényt, amellyel lekérdezhető, hogy a listában szerepel-e egy adott típus!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>C++17-ben ez nagyon könnyű folding expression segítségével. A típusokat tartalmazó
+osztály nélkül:</p>
+<pre   ><code class="language-c">template &lt;typename T, typename ... LIST&gt;
+struct IsTypeInList {
+    static constexpr bool value = (std::is_same&lt;T, LIST&gt;::value || ...);
+};</code></pre>
+<p>Klasszikus megoldás rekurzióval:</p>
+<pre   ><code class="language-c">template &lt;typename T, typename ... LIST&gt;
+struct IsTypeInList;
+
+template &lt;typename T&gt;
+struct IsTypeInList&lt;T&gt; {    /* üres listára */
+    static constexpr bool value = false;
+};
+
+template &lt;typename T, typename HEAD, typename ... TAIL&gt;
+struct IsTypeInList&lt;T, HEAD, TAIL...&gt; { /* egy elemű vagy annál hosszabb listára */
+    /* az első az, vagy a többi közt kell legyen */
+    static constexpr bool value =
+        std::is_same&lt;T, HEAD&gt;::value || IsTypeInList&lt;T, TAIL...&gt;::value;
+};</code></pre>
+</div>
+</details>
+
+<p>Definiálj metafüggvényt, amelyik megadja, hogy a típuslistában csak különféle típusok szerepelnek-e!</p>
+
+<pre   ><code class="language-c">constexpr bool b1 = AllTypesDifferent&lt;TypeList&lt;int, double, char&gt;&gt;::value;
+static_assert(b1 == true);
+
+constexpr bool b2 = AllTypesDifferent&lt;TypeList&lt;int, double, int&gt;&gt;::value;
+static_assert(b2 == false);</code></pre>
+
+
+
+
+<h3>Milyen értéket ad a függvény?</h3>
+
+<p>Amikor az <code>std::bind</code> segítségével létrehozunk egy új függvényt, akkor annak visszatérési
+értéke megegyezik az eredeti függvényével. Például <code>std::bind(sqrt, 2)</code> egy nulla paraméterű
+függvényt hoz létre, amely mindig az <code>sqrt(2)</code> értékét adja: <code>double</code> értékű függvény
+jött létre, mert a becsomagolt <code>double sqrt(double)</code> függvény is ilyet adott.</p>
+
+<p>Írj sablon osztályt, aminek paramétere egy függvény fejléce (call signature), és megadja, hogy milyen
+visszatérési értékkel rendelkezik ez a függvény! Például <code>RetType&lt;double(int)&gt;::type</code>
+esetén adjon <code>double</code>-t.</p>
+
+<p>Specializáld az osztályt, hogy működjön függvénypointerrel és <code>std::function</code>-nel is!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Lásd a következő két feladatnál.</p>
+</div>
+</details>
+
+
+
+
+<h3>Mi a függvény paramétere?</h3>
+
+<p>Adott az alábbi függvény:</p>
+
+<pre   ><code class="language-c">void f(int i, double d);</code></pre>
+
+<p>Ha ebből az <code>std::bind</code> segítségével kreálunk egy másikat, az <code>f2</code> nevűt:</p>
+
+<pre   ><code class="language-cbub">using namespace std::placeholders;
+auto f2 = std::bind(f, _2, _1);    // f2(a, b) -&gt; f(b, a)</code></pre>
+
+<p>Akkor <code>f2</code> egy <code>f2(double, int)</code> paraméterezéssel hívható függvény lett, mert
+az első paraméteréből az <code>f</code> második paramétere lesz (ami <code>double</code>), és második
+paraméteréből az <code>f</code> első paramétere (ami <code>int</code>).</p>
+
+<p>Írj segédosztályt, amelyik egy függvényről képes megmondani, hogy milyen típuső annak a valahányadik
+paramétere! Pl. <code>NthArg&lt;0, void(int, double)&gt;::type</code> legyen <code>int</code>, mert
+a paraméterlistán <code>int</code> az első adat.</p>
+
+<p>Specializáld az osztályt, hogy működjön függvénypointerre és <code>std::function</code> típusra is!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;type_traits&gt;
+#include &lt;functional&gt;
+
+/* NthType - N-edik típus kiválasztása egy listából */
+namespace {
+    template &lt;unsigned N, typename... TYPES&gt;
+    class NthTypeImpl;
+
+    template &lt;typename HEAD, typename ... TAIL&gt;
+    class NthTypeImpl&lt;0, HEAD, TAIL...&gt; {
+        public:
+            using type = HEAD;
+    };
+
+    template &lt;unsigned N, typename HEAD, typename ... TAIL&gt;
+    class NthTypeImpl&lt;N, HEAD, TAIL...&gt; : public NthTypeImpl&lt;N - 1, TAIL...&gt; {};
+}
+
+template &lt;unsigned N, typename... TYPES&gt;
+using NthType = typename NthTypeImpl&lt;N, TYPES...&gt;::type;
+
+/* RetVal - Mi a függvény visszatérési értéke? */
+namespace {
+    template &lt;typename T&gt;
+    class RetValImpl;
+
+    template &lt;typename RET, typename ... ARGS&gt;
+    class RetValImpl&lt;RET(ARGS...)&gt; {
+        public:
+            using type = RET;
+    };
+
+    template &lt;typename CALLSIG&gt;
+    class RetValImpl&lt;CALLSIG*&gt; : public RetValImpl&lt;CALLSIG&gt; {};
+
+    template &lt;typename CALLSIG&gt;
+    class RetValImpl&lt;std::function&lt;CALLSIG&gt;&gt; : public RetValImpl&lt;CALLSIG&gt; {};
+}
+
+template &lt;typename T&gt;
+using RetVal = typename RetValImpl&lt;T&gt;::type;
+
+/* NthArg - Mi a függvény N-edik paramétere? */
+namespace {
+    template &lt;unsigned N, typename T&gt;
+    class NthArgImpl;
+    
+    template &lt;unsigned N, typename RET, typename ... ARGS&gt;
+    class NthArgImpl&lt;N, RET(ARGS...)&gt; {
+        public:
+            using type = NthType&lt;N, ARGS...&gt;;
+    };
+
+    template &lt;unsigned N, typename CALLSIG&gt;
+    class NthArgImpl&lt;N, CALLSIG*&gt; : public NthArgImpl&lt;N, CALLSIG&gt; {};
+
+    template &lt;unsigned N, typename CALLSIG&gt;
+    class NthArgImpl&lt;N, std::function&lt;CALLSIG&gt;&gt; : public NthArgImpl&lt;N, CALLSIG&gt; {};
+}
+
+template &lt;unsigned N, typename T&gt;
+using NthArg = typename NthArgImpl&lt;N, T&gt;::type;
+
+
+int main() {
+    /* is_same_v = C++17. Ha nem akar fordulni, akkor is_same&lt;X, Y&gt;::value. */
+    static_assert(std::is_same_v&lt;char, NthType&lt;2, int, double, char&gt;&gt;);
+    static_assert(std::is_same_v&lt;int, RetVal&lt;int()&gt;&gt;);
+    static_assert(std::is_same_v&lt;int, RetVal&lt;int(*)()&gt;&gt;);
+    static_assert(std::is_same_v&lt;int, RetVal&lt;std::function&lt;int()&gt;&gt;&gt;);
+    static_assert(std::is_same_v&lt;double, NthArg&lt;2, void(int, char, double)&gt;&gt;);
+}</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Saját tuple I.</h3>
+
+<p>Írj <code>my_tuple</code> osztályt, mint az <code>std::tuple</code>! Ennek tetszőlegesen sok sablonparamétere lehet, és olyan
+típusú adatokat tárol, mint amilyeneket itt kapott. Pl. <code>my_tuple&gt;int, char&gt;</code> egy egész számot és egy karaktert
+tartalmaz. Az egyes adatelemeket lehessen a <code>my_get&lt;n&gt;(t)</code> függvénnyel elérni!</p>
+
+<pre   ><code class="language-c">my_tuple&lt;int, char&gt; t(5, 'X');
+
+std::cout &lt;&lt; my_get&lt;0&gt;(t);       // 5
+my_get&lt;1&gt;(t) = 'Y';</code></pre>
+
+<p>A feladat megoldásához rekurzívan kell példányosítania a <code>my_tuple</code> osztálynak adattagként saját magát: mindig
+az egyik adattagot tartalmazva sajátjaként, és a többit rekurzívan.</p>
+
+<p>Ellenőrizd, hogy az előbb megírt osztályod referenciákat is tud-e tárolni!</p>
+
+<pre   ><code class="language-c">int a, int b;
+my_tuple&lt;int &amp;, int &amp;&gt; t(a, b);
+
+assert(&amp;a == &amp;my_get&lt;0&gt;(t));
+assert(&amp;b == &amp;my_get&lt;1&gt;(t));</code></pre>
+
+
+
+
+<h3>Saját tuple II.</h3>
+
+<p>Írj <code>my_make_tuple</code> függvényt, amelyik érték szerint eltárolja a neki paraméterként adott adatokat egy
+<code>my_tuple</code> objektumban! Írj <code>my_tie</code> függvényt, amelyik referencia szerint tárolja el azokat!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+/* Saját tuple I. */
+template &lt;typename ...&gt;
+class my_tuple;
+
+/* üres tuple, megállítja a rekurziót */
+template &lt;&gt;
+class my_tuple&lt;&gt; {};
+
+template &lt;typename HEAD, typename ... TAIL&gt;
+class my_tuple&lt;HEAD, TAIL...&gt; {
+  private:
+    /* az első paraméternek megfelelő adat */
+    HEAD data;
+    /* a többi adat egy egyszerűbb tuple-ben */
+    my_tuple&lt;TAIL...&gt; more_data;
+  public:
+    my_tuple() {}
+    template &lt;typename HEADP, typename ... TAILP&gt;
+    my_tuple(HEADP &amp;&amp; head, TAILP &amp;&amp; ... tail)
+        : data(std::forward&lt;HEADP&gt;(head))
+        , more_data(std::forward&lt;TAILP&gt;(tail)...) {}
+    
+    /* erre a my_tuple_get-nek lesz szüksége.
+     * lehetne valami publikus getter is, de a rekurzív
+     * példányosítás implementációs kérdés. */
+    template &lt;size_t, typename ...&gt;
+    friend class my_tuple_get;
+};
+
+/* segédosztály a my_tuple_get függvényhez,
+ * mert részleges specializációra van szükség */
+template &lt;size_t IDX, typename ... TAIL&gt;
+class my_tuple_get;
+
+template &lt;size_t IDX, typename HEAD, typename ... TAIL&gt;
+struct my_tuple_get&lt;IDX, HEAD, TAIL...&gt; {
+    static auto &amp; my_get(my_tuple&lt;HEAD, TAIL...&gt; &amp; t) {
+        return my_tuple_get&lt;IDX-1, TAIL...&gt;::my_get(t.more_data);
+    }
+};
+
+template &lt;typename HEAD, typename ... TAIL&gt;
+struct my_tuple_get&lt;0, HEAD, TAIL...&gt; {
+  public:
+    static auto &amp; my_get(my_tuple&lt;HEAD, TAIL...&gt; &amp; t) {
+        return t.data;
+    }
+};
+
+/* a megírandó my_get függvény delegál a my_tuple_get
+ * osztály statikus tagfüggvényének */
+template &lt;size_t IDX, typename ... T&gt;
+auto &amp; my_get(my_tuple&lt;T...&gt; &amp; t) {
+    return my_tuple_get&lt;IDX, T...&gt;::my_get(t);
+}
+
+/* Saját tuple II. */
+template &lt;typename ... T&gt;
+auto my_make_tuple(T ... data) {
+    return my_tuple&lt;T...&gt;(std::move(data)...);
+}
+
+template &lt;typename ... T&gt;
+auto my_tie(T &amp;... data) {
+    return my_tuple&lt;T &amp;...&gt;(data...);
+}
+
+
+int main() {
+    my_tuple&lt;int, double&gt; t1;
+    my_tuple&lt;int, double&gt; t2(5, 1.2);
+    auto t3 = my_make_tuple(5, 1.2);
+    
+    my_get&lt;0&gt;(t1) = 2;
+    std::cout &lt;&lt; my_get&lt;1&gt;(t2) &lt;&lt; std::endl;
+    std::cout &lt;&lt; my_get&lt;1&gt;(t3) &lt;&lt; std::endl;
+    
+    int a = 2, b = 3;
+    auto t4 = my_tie(a, b);
+    my_get&lt;1&gt;(t4) = 5;
+    std::cout &lt;&lt; b;
+}</code></pre>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

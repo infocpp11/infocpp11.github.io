@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Az operator delete(void *p, size_t s) függvény</title>
+<meta property="og:title" content="TEST InfoC++11 :: Az operator delete(void *p, size_t s) függvény">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A felszabadított memóriaterületek méretét néha ismerjük. Miért jó ez? Hogy jelenik meg a programban? Hogyan következtet erre a fordító?">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A felszabadított memóriaterületek méretét néha ismerjük. Miért jó ez? Hogy jelenik meg a programban? Hogyan következtet erre a fordító?">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Az operator delete(void *p, size_t s) függvény">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Az operator delete(void *p, size_t s) függvény</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.03.04.</p>
+<p class="kivonat">A felszabadított memóriaterületek méretét néha ismerjük. Miért jó ez? Hogy jelenik meg a programban? Hogyan következtet erre a fordító?</p>
+</div>
+
+<p>A dinamikus memóriakezelés mögötti adminisztráció elég összetett. A <code>malloc</code>–<code>free</code>, vagy épp 
+<code>operator new</code>–<code>operator delete</code> függvénypárosnak egy lineáris, összefüggő memóriaterülettel kell 
+gazdálkodnia. Ebből a memóriaterületből kell szeleteket adniuk a hívónak, és ugyanitt kell végezniük az adminisztrációt is: a 
+foglalt és szabad területek nyilvántartását.</p>
+
+<p>Ezek hatékonysága kritikus a program futási sebességének szempontjából, hiszen gyakori műveletről van szó. A feladat 
+megoldására több <em>allokátor</em> algoritmus is létezik: <em>slice allocator</em>, <em>slab allocator</em>, <em>buddy blocks</em> 
+stb. kulcsszavakra keresve sok információt lehet ezekről találni. Különösen érdekes az az eset, amikor egyforma méretű blokkokból 
+kell nagyon sokat foglalni. Ilyen lehet sok egyforma típusú objektum létrehozása. Vagy egy terminál emulátor (konzol ablak), 
+amelyben akár több ezer sort is görgethetünk visszafelé. Ebben az egyes sorok mérete az ablak szélességétől függ, de amúgy
+mindegyik egyforma..</p>
+
+<p>Egyes alkalmazásoknál gyakran felszabadításkor is ismerjük a lefoglalt memóriaterület méretét. Ez pedig az allokátor
+számára hasznos információ lehet, mert előfordulhat, hogy egyszerűsítésre vagy optimalizációra ad lehetőséget. Éppen ezért
+az <code>operator delete(void *)</code> függvénynek van egy olyan <em>overloadja</em> is, amelyik átveszi a méretet is
+paraméterként: <code>operator delete(void *, size_t)</code>.</p>
+
+<p>Ha kellően új a fordítónk, akkor ezt használja is. Mivel implementációfüggő dolgokról van szó, fontos információnak
+számít, hogy az alábbi kimeneteket GCC 7.4-es fordítóval fordított programok adták.</p>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A felszabadított terület mérete</a>
+                      <li><a href="index.html#2" class="">Mi a helyzet tömbök esetén?</a>
+                      <li><a href="index.html#3" class="">Öröklés esetén is lehet tudni a bájtok számát?</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A felszabadított terület mérete">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A felszabadított terület mérete<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük a következő programocskát:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+void * operator new (size_t s) {
+    void *p = malloc(s);
+    std::cout &lt;&lt; &quot;Allocated &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    return p;
+}
+
+void operator delete (void *p) noexcept {
+    std::cout &lt;&lt; &quot;Freed block at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+void operator delete (void *p, size_t s) noexcept { // cím + méret
+    std::cout &lt;&lt; &quot;Freed &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+int main() {
+    void *p = operator new(sizeof(int)); // 1
+    operator delete(p);
+
+    int *pi = new int; // 2
+    delete pi;
+}</code></pre>
+
+<pre class="screenshot">
+Allocated 4 bytes at 0x55708820ae70 <span class="bubble">1</span>
+Freed block at 0x55708820ae70
+
+Allocated 4 bytes at 0x55708820ae70 <span class="bubble">2</span>
+Freed 4 bytes at 0x55708820ae70
+</pre>
+
+<p>Az első esetben közvetlenül hívjuk a függvényeket; a foglaláskor paraméterként szerepel a méret is, a felszabadításkor nem. 
+Láthatóan viszont a második esetben, amikor a fordító hívta a függvényeket, akkor a felszabadításkor megadta a terület méretét.</p>
+
+<p>Itt hamar felmerül egy kérdés: <em>honnan tudja</em>, hogy mekkora a lefoglalt terület mérete? Mindig azt szoktuk mondani, hogy 
+egy pointerről sosem lehet tudni, hogy mekkora területre mutat, hiszen csak egy memóriaterület elejét jelöli meg, végét nem. Most 
+valahogyan a fordító mégis meg tudta adni a felszabadító függvénynek is, hogy 4 bájt a foglalás mérete.</p>
+
+<p>A válasz nagyon egyszerű: biztos lehetett benne, a pointer egyetlen egy darab <code>int</code> objektumra mutat, amelynek 4 bájt 
+a mérete. A típus biztosan <code>int</code>, ez kiderül a pointer típusából. Azt is lehet tudni, hogy nem tömbről van szó, hiszen 
+akkor a programozónak a <code>delete[]</code> operátort <em>kellett volna</em> használnia, nem a sima <code>delete</code>-et.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mi a helyzet tömbök esetén?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Mi a helyzet tömbök esetén?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Foglaljunk tömböket most! A következő forráskód a <code>new</code> és a <code>delete</code> helyett a beépített 
+<code>new[]</code> és a <code>delete[]</code> operátorokat írja felül. Aztán pedig foglal és felszabadít tömböket,
+méghozzá 1) beépített típusú, 2) objektum és 3) destruktorral rendelkező objektum típusú elemekből:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+void * operator new[] (size_t s) {
+    void *p = malloc(s);
+    std::cout &lt;&lt; &quot;Allocated &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    return p;
+}
+
+void operator delete[] (void *p) noexcept {
+    std::cout &lt;&lt; &quot;Freed block at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+void operator delete[] (void *p, size_t s) noexcept {
+    std::cout &lt;&lt; &quot;Freed &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+class A { // nincs destruktor (triviális)
+  public:
+    int i;
+};
+
+class B { // van destruktor
+  public:
+    int i;
+    ~B() { std::cout &lt;&lt; &quot;.&quot;; }
+};
+
+int main() {
+    int *pi = new int[11]; // 1
+    delete[] pi;
+    
+    A *pa = new A[11]; // 2
+    delete[] pa;
+    
+    B *pb = new B[11]; // 3
+    delete[] pb;
+}</code></pre>
+
+<pre class="screenshot">
+Allocated 44 bytes at 0x55a096b4ae70 <span class="bubble">1</span>
+Freed block at 0x55a096b4ae70
+
+Allocated 44 bytes at 0x55a096b4ae70 <span class="bubble">2</span>
+Freed block at 0x55a096b4ae70
+
+Allocated 52 bytes at 0x55a096b4b2b0 <span class="bubble">3</span>
+..........Freed 52 bytes at 0x55a096b4b2b0
+</pre>
+
+<p>Mi történik az egyes esetekben?</p>
+
+<ul>
+    <li>Az első esetben 11 <code>int</code>-et foglalunk le. A foglaláskor ugyan ismert a méret, a felszabadításkor
+        viszont nem, mert nem tudni, hogy a pointer „mögött” mekkora tömb van.</li>
+    <li>Ugyanez a helyzet a második esetben, az <code>A</code> típusú objektumok foglalásakor. A lefoglalt
+        terület amúgy ugyanakkora, mint az előbb, mert az objektumban csak egy <code>int</code> adattag van.</li>
+    <li>Ettől eltér viszont a harmadik eset, a <code>B</code> objektumok tömbje. A lefoglalt terület mérete nagyobb
+        valamiért (44 helyett 52 bájt), és a felszabadítás is megkapja a foglalt terület méretét.</li>
+</ul>
+
+<p>A különbséget a <em>destruktor</em> megjelenése okozza. Mivel a <code>B</code> osztálynak van destruktora,
+a fordítónak fel kell készülnie a tömb felszabadítására. A foglaláskor, vagyis a <code>new B[11]</code> végrehajtásakort
+<em>feljegyzi a tömb méretét</em> a tömb elé. Ezért lett nagyobb a memóriaterület: 44 bájt kell a 11 darab
+<code>B</code> objektumnak, és még 8 bájt egy <code>size_t</code>-nek, ahova az elemszámot teszi. Ezt pedig felszabadításkor
+kiolvassa, hogy meg tudja hívni a 11 destruktort. Ha pedig a tömb elemszáma ismert, abból a tömb mérete könnyedén
+kiszámítható újra, és akkor már hívható akár az <code>operator delete[](void *, size_t)</code> függvény is.</p>
+
+<p>Vagyis ha nincs destruktora az osztálynak, akkor a lefoglalt területen csak az objektumok vannak:</p>
+
+<img src="new-array-no-dtor.svg" style="width: 24em;" class="kozep" alt="Dinamikusan foglalt tömb, ha nincs destruktor">
+
+<p>Ha van destruktor, akkor pedig egy kicsit nagyobb memóriaterületet kell foglalni, mert fel kell jegyezni az objektumok
+számát is. A hívás eredménye természetesen ilyenkor is a tömb elején lévő objektumra mutat:</p>
+
+<img src="new-array-dtor.svg" style="width: 28em;" class="kozep" alt="Dinamikusan foglalt tömb, ha van destruktor">
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Öröklés esetén is lehet tudni a bájtok számát?">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Öröklés esetén is lehet tudni a bájtok számát?<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Leszármazással közben új adattagokat adhatunk hozzá az osztályhoz, és emiatt a különféle leszármazottak objektumai
+eltérő méretűek lehetnek. Ezt a foglalás közben könnyű figyelembe venni, hiszen ott a <code>new</code> kifejezésnél mindig
+pontosan ismert az objektum típusa:</p>
+
+<pre   ><code class="language-cbub">Shape *s1 = new Rectangle(10, 20);      // sizeof(Rectangle)
+
+Shape *s2 = new Circle(30);             // sizeof(Circle)</code></pre>
+
+<p>Mi a helyzet a felszabadításnál? Mint az kiderül, ott is könnyedén meghatározható a foglalt objektum mérete – annak
+ellenére, hogy a rá mutató pointerből statikusan csak az ősosztály ismert. Egy kicsit hosszúra sikerült, de amúgy
+triviális tesztprogram a következő:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+void * operator new (size_t s) {
+    void *p = malloc(s);
+    std::cout &lt;&lt; &quot;Allocated &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    return p;
+}
+
+void operator delete (void *p, size_t s) noexcept {
+    std::cout &lt;&lt; &quot;Freed &quot; &lt;&lt; s &lt;&lt; &quot; bytes at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+void operator delete (void *p) noexcept {
+    std::cout &lt;&lt; &quot;Freed block at &quot; &lt;&lt; p &lt;&lt; std::endl;
+    free(p);
+}
+
+class Shape {
+  public:
+    virtual ~Shape() = default;
+};
+
+class Rectangle : public Shape {
+  public:
+    double a, b;
+    Rectangle(double a, double b): a(a), b(b) {}
+    ~Rectangle() { std::cout &lt;&lt; &quot;Rectangle dtor&quot; &lt;&lt; std::endl; }
+};
+
+class Circle : public Shape {
+  public:
+    double r;
+    Circle(double r): r(r) {}
+    ~Circle() { std::cout &lt;&lt; &quot;Circle dtor&quot; &lt;&lt; std::endl; }
+};
+
+Shape * create_shape() {
+    std::cout &lt;&lt; &quot;(R)ectangle or (C)ircle? &quot;;
+    char c;
+    std::cin &gt;&gt; c;
+    if (c == 'R')
+        return new Rectangle(10, 20);
+    else
+        return new Circle(30);
+}
+
+int main() {
+    Shape *p;
+    
+    p = create_shape();
+    delete p;
+    
+    p = create_shape();
+    delete p;
+}</code></pre>
+
+
+<pre class="screenshot">
+(R)ectangle or (C)ircle? R  <span class="bubble">1</span>
+Allocated 24 bytes at 0x55a299fa8690
+Rectangle dtor
+Freed 24 bytes at 0x55a299fa8690
+
+(R)ectangle or (C)ircle? C  <span class="bubble">2</span>
+Allocated 16 bytes at 0x55a299fa8690
+Circle dtor
+Freed 16 bytes at 0x55a299fa8690
+</pre>
+
+<p>A program lényege, hogy csak futási időben dől el az objektumok típusa: a felhasználó adja meg, hogy épp kört vagy téglalapot
+szeretne létrehozni. Így lehetetlen, hogy a fordító ismerje a felszabadítandó terület méretét a <code>delete p</code>-knél. Ennek
+ellenére látszik, hogy mégis kideríti valahonnan ezt az információt.</p>
+
+<p>Vajon honnan? A kérdésre egyszerű a válasz: ahonnan minden más információt kiolvas futási időben az objektumról, vagyis 
+(közvetve) <em>a virtuális függvénytáblából</em>. Az objektum virtuális függvénytábla pointere egy olyan globális adatszerkezetre 
+mutat rá, amelyik az adott <em>osztály</em> tulajdonságait írja le. Az egyes virtuális függvények címe mellett ebben akár az 
+objektum mérete is feljegyezhető.</p>
+
+<p>Hogy ez miként történik, az persze megint implementációs kérdés. Valójában a felszabadítás általában összefügg az objektum 
+destruktorának futtatásával, ezért érdemes a destruktorba beépíteni ezt az információt. Viszont mivel nem minden objektum 
+dinamikusan foglalt, ez általánosságban nem tehető ez meg. Emiatt a fordító ezekhez az objektumokhoz <em>két destruktort</em> 
+generál. Ezek a következőek:</p>
+
+<ul>
+    <li><em>Base destructor</em> vagy <em>complete object destructor</em>: ezt a destruktort hívja akkor, amikor nincs szükség
+        dinamikus memória felszabadítására. Például amikor explicit destruktorhívás van a kódban: <code>p-&gt;~T()</code>,
+        vagy amikor veremben lévő objektumot kell megszüntetni.</li>
+    <li><em>Deleting destructor</em>: ezt pedig akkor hívja, amikor dinamikusan volt foglalva az objektum, tehát egy
+        <code>delete p</code> kifejezés hatására. Ez pont ugyanúgy működik, mint az előző, hívja az adattagok destruktorait,
+        csak végül csinál egy <code>operator delete(this, sizeof(típus))</code> függvényhívást is. Mivel a <em>virtuális</em>
+        destruktorból osztályonként külön példány létezik, a megadott méret mindig más lehet.</li>
+</ul>
+
+<p>Mindez szépen látszik a fordító által generált kódból:</p>
+
+<pre class="screenshot">
+Rectangle::~Rectangle() [deleting destructor]:
+        sub     rsp, 24
+        mov     QWORD PTR [rsp+8], rdi
+        call    Rectangle::~Rectangle() [complete object destructor]
+        mov     rdi, QWORD PTR [rsp+8]
+        mov     esi, 24     <span class="bubble">24 bájt</span>
+        add     rsp, 24
+        jmp     operator delete(void*, unsigned long)
+
+Circle::~Circle() [deleting destructor]:
+        sub     rsp, 24
+        mov     QWORD PTR [rsp+8], rdi
+        call    Circle::~Circle() [complete object destructor]
+        mov     rdi, QWORD PTR [rsp+8]
+        mov     esi, 16     <span class="bubble">16 bájt</span>
+        add     rsp, 24
+        jmp     operator delete(void*, unsigned long)
+</pre>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

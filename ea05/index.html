@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Objektumok élettartama</title>
+<meta property="og:title" content="TEST InfoC++11 :: Objektumok élettartama">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Szabad és kötött változók. Funarg problémák. Pointer és referencia szemantika. Temporális változók és destruktorok. Okos pointerek, referenciaszámlálás.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Szabad és kötött változók. Funarg problémák. Pointer és referencia szemantika. Temporális változók és destruktorok. Okos pointerek, referenciaszámlálás.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Objektumok élettartama">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Objektumok élettartama</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Szabad és kötött változók. Funarg problémák. Pointer és referencia szemantika. Temporális változók és destruktorok. Okos pointerek, referenciaszámlálás.</p>
+</div>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Szabad és kötött változók</a>
+                      <li><a href="index.html#2" class="">A funarg problémák</a>
+                      <li><a href="index.html#3" class="">Érték és pointer szemantika</a>
+                      <li><a href="index.html#4" class="">Okos pointerek: tulajdonos szemantika</a>
+                      <li><a href="index.html#5" class="">Okos pointerek: polimorf típus</a>
+                      <li><a href="index.html#6" class="">Okos pointerek: referenciaszámlálás</a>
+                      <li><a href="index.html#7" class="">Referenciaszámlálás: körkörös hivatkozások</a>
+                      <li><a href="index.html#8" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Szabad és kötött változók">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Szabad és kötött változók<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi, egyszerű, matematikai függvényt.</p>
+
+<pre class="kozep">
+f(<em>x</em>) = <em>x</em> * y
+</pre>
+
+<p>Ez egy egyváltozós függvény, azaz egy <em>paramétere</em>
+van. A függvény értéke egy <em>kifejezés</em> értéke, amely az <code>x</code> paramétertől
+és az <code>y</code> változó értékétől függ.</p>
+
+<p>A két név, <code>x</code> és <code>y</code> szerepe a függvényben nagyon különbözik.
+Az <code>x</code> egy ún. kötött változó (bound variable), amely egy olyan nevet ad meg,
+amely a függvényhívás pillanatában kötődik valamilyen értékhez.
+Az <code>x</code> nevet a teljes függvénydefinícióban kicserélhetjük bármilyen másik névre
+anélkül, hogy a definíció jelentése megváltozna:</p>
+
+<pre class="kozep">
+f(<em>w</em>) = <em>w</em> * y
+</pre>
+
+<p>A kötött változó által reprezentált érték teljesen független a környezettől, minden
+egyéb definíciótól – természetesen amíg nincs névütközés. A kötés viszont csak a függvény belsejében érvényes; a névnek csak abban a kódrészletben van meg ez az értelme (bound within that context).</p>
+
+<p>Nincs ez így az <code>y</code> esetében, amely egy szabad változó
+(free variable). Ha azt kicseréljük egy másik névre, egy egészen más függvényt
+kapunk:</p>
+
+<pre class="kozep">
+f(<em>x</em>) = <em>x</em> * a
+</pre>
+
+<p>A szabad változók, mint itt az <code>y</code> vagy az <code>a</code>, értéke is
+kell valahonnan származzon. Legegyszerűbben egy másik függvényből, ha mondjuk az <code>f()</code>
+függvényt egy külső függvény belsejében definiáljuk. Jelöljük ezt valahogy
+így:</p>
+
+<pre class="kozep">
+g(<em>y</em>) = { f(<em>x</em>) = <em>x</em> * <em>y</em>, ... }
+</pre>
+
+<p>A <code>...</code>-tal jelölt helyen kiértékelve pl. az <code>f(2)</code> kifejezést,
+<code>x</code> értéke kötött lesz <code>f()</code> miatt, <code>y</code> értéke pedig
+<code>g()</code> miatt.</p>
+
+<p>A függvény <em>definíciója</em> tehát nem csinál mást, mint megmondja,
+hogy az adott kifejezés kiértékelésekor <em>mely változónevek a kötöttek,</em> és
+melyek a szabad változók. A C programozáshoz szokott gondolkodásunknak ez furcsa,
+de a különféle élettartamú és láthatóságú változókra (automatikus, statikus,
+dinamikus, lokális, globális) <em>elméletben</em> semmi szükség nincsen. A
+létezésüknek csak gyakorlati okai vannak, amik mind-mind implementációs kérdések,
+nem pedig elméleti jelentőségűek.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A funarg problémák">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="funarg" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A funarg problémák<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A gépünk memóriája véges, ezért szeretnénk tudni, mikor, melyik változókra
+nincsen már szükség a függvények kiértékelése során. Alan Turing jött rá arra,
+hogy a kötött változók egy <strong>lineáris verem adatszerkezettel</strong> kezelhetők. Amikor belép a
+függvény törzsébe a végrehajtás, létrejön a változó (kötött név); a függvény
+hívójához pedig nem lehet úgy visszatérni, hogy ne szűnne meg a változó (újra
+szabaddá válik a név). Ez pontosan megfelel egy verembe történő beszúrásnak (push) és az
+abból való törlésnek (pop). Turing először ezeket a művelteket BURY-nek és
+UNBURY-nek nevezte (eltemetni, kiásni).</p>
+
+<p>A helyzet azonban nem ilyen egyszerű. Gondolhatnánk, hogy mindig a verem
+legtetején találjuk meg a változókat, de ez nincs így.</p>
+
+<h3>A „downwards funarg” probléma</h3>
+
+<p>Tekintsük az alábbi, Hérón-féle módszerrel gyökvonást végző algoritmus
+JavaScript kódját. A módszer lényege: addig finomítjuk a tippelt gyököt, amíg
+elég jó nem lesz. A finomítás egy átlagolással végezhető el, mert az igazi gyök a
+tipp és szám/tipp között van.</p>
+
+<div class="sticky">JavaScript</div>
+<pre   ><code class="language-js">function heron(x) {
+    function good_enough(guess) {
+        return Math.abs(guess*guess - x) &lt; 0.001;
+    }
+    function improve(guess) {
+        return (guess + x/guess)/2.0;
+    }
+
+    var guess = 1.0;
+    while (!good_enough(guess))
+        guess = improve(guess);
+    return guess;
+}</code></pre>
+
+<p>Amikor meghívunk egy függvényt, a veremben keletkezik egy <strong>keret</strong> (stack frame,
+vagy más néven activation record). Ez kerül a verem tetejére, és ez tartalmazza a
+kötött nevekhez tartozó értékeket. Elsősorban a változókat itt keressük. A fenti
+kódban azonban a <code>heron()</code> függvénynek van két belső függvénye is.
+Ezek látják a külső függvény változóit, mert azon <em>belül</em> lettek
+definiálva (lexical scoping). Ha pl. meghívjuk az <code>improve()</code>
+függvényt, ahhoz is létrejön majd egy keret. Így már összesen két keretünk van.
+Az <code>improve()</code> függvényen belüli <code>guess</code> a legfelső
+keretben keresendő, az <code>x</code> viszont nem, az eggyel lentebb.</p>
+
+<p>Egy elérni kívánt változó a veremben bármilyen mélyre kerülhet.
+Akár úgy, hogy nagyobb mélységben ágyazzuk egymásba a függvényeket, vagy úgy, hogy
+egymást hívják. Extrém esetben „végtelen” távol, sőt ez akár futási időben derülhet
+csak ki: egy rekurzív függvényben. A fabejárás jó példája annak, hogy a külső függvény <code>nodes</code> változója egyre
+messzebb kerül a verem tetejétől:</p>
+
+<div class="sticky">JavaScript</div>
+<img src="stack.svg" style="height: 12em" class="float">
+<pre   ><code class="language-js">function count_tree_nodes(root) {
+    var nodes = 0;
+
+    function do_count(root) {
+        if (!root)
+            return;
+        ++nodes;
+        do_count(root.left);
+        do_count(root.right);
+    }
+
+    do_count(root);
+    return nodes;
+}</code></pre>
+
+<p>A probléma neve: „downwards funarg problem”. A „funarg” szóösszevonás
+a paraméterekre utal: function argument. Viszonylag egyszerűen megoldható,
+szokás szerint indirekcióval. A Pascal nyelvben például a belső függvények egy
+rejtett paraméterrel rendelkeznek. Ezen keresztül, indirekten érik el a külső
+függvény változóit. Ez az ún. „static link”, vagy „uplevel reference”. Lényegében
+egy pointer a külső függvény változóit tartalmazó keretre.</p>
+
+<p>A C nyelvben egy egyszerűbb megoldást választottak: <strong>megtiltották a függvények
+egymáson belül történő definiálását</strong>. Így szintaktikailag nem képes semelyik függvény a másik
+függvény változóira hivatkozni, tehát nem állhat elő ilyen helyzet. Így születtek meg
+a globális és lokális változók is: a C-ben nem tetszőlegesen sok szinten lehetnek
+változók (a belső függvény számára az ő külső függvényének „lokális” változója
+„globálisnak” látszik), hanem mindössze két szinten: a mindenki által látható
+globális, és a senki más által nem látható lokális változók. Mivel a globálisok
+nem a veremben vannak, ezért mindig lehet tudni a címüket, amely állandó.</p>
+
+<p>C++-ban hasonló a helyzet, bár ott tagfüggvények is vannak. A tagfüggvények
+egy adott objektum változóit úgy látják, mintha azok globális változók lennének,
+a lokális változóként értelmezhető paramétereik mellett. Ilyen szempontból az
+objektumok olyanok, mintha a globális változókat csoportosítanánk, a <code>this</code>
+pointer pedig mintha egy statikus link lenne az adott változócsoportra (objektumra).
+Tagfüggvény lehet akár rekurzív is, olyankor a <code>this</code> pointer változatlanul
+adódik át, hogy a tetszőleges mélység ellenére mégis ugyanazok a változók legyenek
+rajta keresztül elérhetőek.</p>
+
+<h3>Az „upwards funarg” probléma</h3>
+
+<p>Tekintsünk egy másik JavaScript függvényt. Ez megint olyan lesz, amit
+ilyen formában C/C++-ban nem lehet leírni. Ez a függvény egy neki paraméterként
+adott egyváltozós, matematikai <code>f()</code> függvény numerikus deriváltjával
+tér vissza, a differenciálhányadost 0,001 lépésközű differenciahányadossal
+közelítve. Itt a paraméter és a visszatérési érték is egy függvény, de ez ne
+zavarjon meg minket: a függvény is csak egy típus, amihez adatok (a benne lévő matematikai kifejezés)
+és műveletek (kiértékelés adott helyen) tartoznak.</p>
+
+<div class="sticky">JavaScript</div>
+<pre   ><code class="language-js">function deriv(f) {
+    var dx = 0.001;
+    function derived(x) {
+        return (f(x+dx) - f(x)) / dx;
+    }
+
+    return derived;
+}
+
+var my_cos = deriv(Math.sin);
+var x = my_cos(1.234);</code></pre>
+
+<p>Az előzőek alapján itt látunk egy „downwards funarg” problémát: a belső,
+<code>derived()</code> nevű függvény el kell érje a külső függvény <code>f</code>
+és <code>dx</code> nevű változóját. De van itt egy másik probléma is, egy ún.
+„upwards funarg problem”. Nevezetesen az, hogy miután a <code>derived()</code>
+függvényből visszatértünk, és visszaadtuk a derivált függvényt, előbb-utóbb
+azt valaki meg akarja majd hívni. És az említett változóknak, <code>f</code>-nek
+és <code>dx</code>-nek a híváskor még léteznie kell majd!</p>
+
+<p>Ez egy nehezebb probléma, mint az előző, mert ez nem csak a változók
+láthatóságával kapcsolatos, hanem már az <strong>élettartamával</strong> is. Ha visszatérünk egy
+függvényből, törölni kell a hozzá tartozó keretet. Itt pedig
+azt látjuk, hogy ennek ellenére a változók értékét meg kellene tartani. Legalább
+addig, amíg valaki a visszatérési értékként adott függvényre (vagy annak másolatára)
+hivatkozni tud. A verem itt már nem lehet jó.</p>
+
+<p>Az egyes nyelvek megint eltérőképpen oldják meg ezt a problémát. Némelyik nyelv
+úgy, hogy ezeket a változókat nem szabadítja föl, hanem automatikus
+szemétgyűjtést biztosít (garbage collection). A szemétgyűjtő algoritmus
+megvizsgálja a program összes változóját, hogy melyik melyikre tud hivatkozni, és
+így találja meg a már szükségtelen példányokat. Más nyelvek pedig egyszerűen nem
+foglalkoznak a problémával. Legalábbis annyiban, hogy ilyenkor elvárják a
+programozótól, hogy maga oldja meg a
+problémát valahogyan, egyértelműen jelezve a kódban, hogy mikor foglal memóriát,
+és mikor szabadítja föl. A visszatérési értékek ezekben a nyelvekben lemásolódnak, de
+a belül lévő változók élettartamát a programozónak kell kezelnie.
+Így született meg a dinamikus, azaz kézi memóriakezelés.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Érték és pointer szemantika">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="ertekespointer" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Érték és pointer szemantika<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A dinamikus memóriakezeléssel nem csak az a baj, hogy a változók
+felszabadításáért nekünk kell felelni. Hanem az is, mert hogy az emiatt behozott
+indirekció által a változók viselkedése szemantikailag
+megváltozik.</p>
+
+<p>Az indirekcióval elválasztjuk egymástól a változó
+<em>identitását</em> és a <em>nevét.</em> Érték szemantika (value type)
+esetén a változó lemásolása egy új identitást jelent.
+Pointer vagy referencia szemantika (reference type) esetén pedig nem:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">int i = 6;
+int j = i;   /* új int */
+i = 7;       /* j változatlan */
+j = 5;       /* i változatlan */</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">int i = 6;
+int *j = &amp;i; /* nincs új int */
+i = 7;       /* a *j is változik */
+*j = 5;      /* i is változik */</code></pre>
+</div>
+</div>
+
+<p>A programunk objektumokat kezel, amelyek hivatkozásának módját viszont
+elsősorban az <strong>objektum jellege, szerepe</strong> kellene meghatározza, nem pedig az, hogy a nyelv
+és a fordító mire képes technikailag. Van, ahol csak az objektumok értéke számít, máskor pedig
+entitásként viselkednek. Például a valós számokból álló mátrixok
+érték típusúak, és nem szeretnénk őket pointer szemantikával kezelni csak azért,
+mert a fordítási időben nem ismert méretű tömbhöz pointert kell használnunk. Bár
+két egyforma számokból álló mátrix egyformának tekinthető a kifejezésekben, ha
+értéket szeretnénk adni egy mátrix objektumnak, meg szeretnénk változtatni a
+benne lévő számokat, akkor saját identitással is kell rendelkezzen. Így ha
+lemásoljuk, akkor egy új, az eredetitől független mátrixnak kell létrejönnie.
+Röviden: örülünk az indirekciónak, hasznos, de csak akkor, ha mi választottuk.
+Máskor nagyon zavaró tud lenni.</p>
+
+<p>Mindig problémát jelent, ha egy változónál nem választhatunk
+egyértelműen az érték és a referencia szemantika között. A C-ben és a C++-ban a
+tömbök problémásak. Létrehozáskor választhatunk, hogy értéket (új tömböt, számokkal) vagy
+referenciát (pointert egy meglévő tömbre) szeretnénk. Paraméterátadáskor azonban már kötelező a
+referencia szemantikát használnunk, és tudjuk is, mennyi gond van ebből. Más
+nyelvekben az objektumok viselkednek így: PHP-ban, Javaban, JavaScriptben,
+C#-ban a beépített típusok mind érték, az objektumok viszont kötelezően mind referencia
+szemantikájúak, ami újfajta problémákat jelent. Pl. Javaban a <code>java.util.Date</code>
+osztálynál: bár a dátum, mint fogalom, érték jellegű, a <code>java.util.Date</code> osztálynak
+mégis vannak setter függvényei. És mivel összetett típus, egy <code>d1 = d2</code> formájú értékadás csak a
+referenciát másolja. Ha nem lenne mutábilis a dátum objektum, ez nem lenne gond, hogy csak a referencia másolódik. Így
+viszont gond, és immutábilisnak kellene lennie, mint a <code>java.lang.String</code>-nek.</p>
+
+<h3>Az indirekció elrejtése</h3>
+
+<p>A C++ operátorai, és különösen konstruktorai, destruktorai lehetővé teszik azt,
+hogy a legtöbb helyen a technikai kényszerűségből alkalmazott indirekciót elfedjük.
+Például a mátrixunk számait tároló tömbre <em>hivatkozó</em> pointert becsomagolhatjuk
+egy mátrix objektumba. A mátrix objektum indexelhető tud lenni, mintha igazi tömb lenne.
+Ugyanakkor a másoló konstruktora és a destruktora által ugyanúgy tud viselkedni,
+mint egy beépített, érték szemantikával rendelkező típus. Másoláskor mély másolat
+(deep copy) jön létre, a számok is másolódnak; a megszűntekor pedig a hozzá tartozó
+memóriaterület megszűnik. C++-ban ezeket a típusokat ugyanolyan könnyű kezelni,
+mint a beépítetteket. A külső erőforrásokat kezelő objektumokból ugyanolyan egyszerű
+temporális, névtelen objektumokat is létrehozni, mint egy egyszerű <code>int</code>-ből.
+Gondoljunk bele, egy ehhez hasonló kód mennyire egyszerű lenne <code>int</code>-ekkel,
+és mennyire bonyolult lenne C-ben <code>Matrix</code>-okkal:</p>
+
+<pre   ><code class="language-c">Matrix a, b, c, d;
+
+d = a * b + c * 3 - d * 2;</code></pre>
+
+<p>Ugyanez a lényege az <code>std::string</code>-nek is. Kényszerűségből a sztringhez
+dinamikus tömböt kell használnunk. A sztring osztály másoló konstruktorának és destruktorának
+megfelelő módon történő definiálásával viszont a sztring értékként képes viselkedni.</p>
+
+<p>Ez fölvet néhány problémát a temporális objektumok élettartamával, és a generált kód
+hatékonyságával kapcsolatban. Ezekről egy <a href="../temporalis/index.html">külön írásban lehet olvasni</a>.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Okos pointerek: tulajdonos szemantika">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="tulajdonosszemantika" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Okos pointerek: tulajdonos szemantika<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A RAII (resource acquisition is initialization) elv azon alapszik, hogy az
+objektumok destruktoraira feladatokat bízhatunk. A dinamikus memóriakezelés kapcsán
+a legkézenfekvőbb, amit várhatunk, az az, hogy egy objektum feleljen egy dinamikusan
+foglalt, másik objektum felszabadításáért. A terv a következő:</p>
+
+<ul>
+    <li>Foglalunk dinamikusan egy <code>T</code> típusú objektumot. A <code>new</code> kifejezésből kapunk
+    egy <code>T *</code> pointert. Ezt szeretnénk automatikusan felszabadítani majd, ha
+    már nem kell: ha már nem hivatkozik rá pointer.
+    <li>Ezt a pointert betesszük egy másik, automatikus memóriakezelésű objektumba, egy
+    ún. okos pointerbe (smart pointer), pl. <code>UniquePtr&lt;T&gt;</code>.
+    <li>Az okos pointert a verembe tesszük, esetleg másik objektumba. Így automatikusan
+    fut a destruktora, amely felszabadíthatja a <code>T</code>-t is.
+    <li>Az okos pointert osztálysablonból generáljuk, hogy minden típushelyes legyen
+    (nem <code>void *</code>-ozunk!), és olyan operátorokat adunk neki, amelyek által
+    pointerként tud viselkedni.
+</ul>
+
+<p>Az automatikus felszabadítás sok helyen egyszerűsíti a kódot, pl. függvények belsejében,
+vagy objektumok adattagjaként:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">void func() {
+    UniquePtr&lt;SomeObj&gt; x(new SomeObj{});
+
+    if (/* ... */)
+        return;
+    if (/* ... */)
+        throw /* ... */;
+    /* ... */
+    return;
+} // sehol nem kell delete</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">class MyClass {
+  private:
+    UniquePtr&lt;SomeObj&gt; x_;
+  public:
+    /* ... */
+    MyClass() : x_(new SomeObj{}) {
+    }
+
+    ~MyClass() = default;   // nem kell
+};</code></pre>
+</div>
+</div>
+
+<p>Egyértelművé teszi a memóriakezelést ott is, ahol függvény pointer típusú
+visszatérési értékével kell dolgozni. Nyers pointernél sose tudjuk, mi a helyzet.
+Ha a függvény okos pointerrel tér vissza, akkor viszont egyértelmű: ha eltároljuk
+az okos pointert, megmarad az objektum, ha nem, magától megszűnik.</p>
+
+<pre   ><code class="language-cbub">T * foo();  // fel kell szabadítani? nem kell? free? delete? delete[]?
+
+UniquePtr&lt;T&gt; foo(); // nincs kérdés</code></pre>
+
+
+
+
+
+<h3>Az alapok</h3>
+
+<p>Az <code>UniquePtr</code> osztály konstruktora, destruktora, és a pointer
+viselkedést biztosító tagfüggvényei egyszerűek:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class UniquePtr {
+  public:
+    explicit UniquePtr(T *ptr = nullptr): ptr_(ptr) {}
+    ~UniquePtr() { delete ptr_; }
+    T &amp; operator*() const { return *ptr_; }
+    T * operator-&gt;() const { return ptr_; }
+    /* ... */
+  private:
+    T *ptr_;
+}</code></pre>
+
+<div class="megjegyzes">
+<p>A nyíl operátor működésében különleges. Annak egy pointert kell
+visszaadnia, mivel az operátor alkalmazása után a fordító a kapott
+értéken újra a nyíl operátort próbálja meg alkalmazni (és ezt egyébként
+addig teszi, amíg szükséges). Ha van egy okos pointerünk, azon a nyíl
+operátor ezt jelenti:</p>
+<pre   ><code class="language-c">ptr-&gt;x
+(ptr.operator-&gt;())-&gt;x</code></pre>
+</div>
+
+<h3>Másoló konstruktor?</h3>
+
+<p>Az izgalmak a másoló konstruktornál kezdődnek. A másoló konstruktor
+nem lehet a fordító által implicit megírt változat, mert az lemásolja a nyers
+pointert. A pointer lemásolása által már két <code>UniquePtr</code> mutatna
+<em>ugyanarra</em> az objektumra, és amikor megszűnnek, mindketten megpróbálnák
+felszabadítani ugyanazt az objektumot: <code>delete ptr_</code>.</p>
+
+<p>Ugyanakkor azt sem tehetjük meg, hogy a másoló konstruktorban lemásoljuk az objektumot:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class UniquePtr {
+  public:
+    UniquePtr(UniquePtr const &amp;the_other) {
+        ptr_ = new T(*the_other.ptr_);  // HELYTELEN
+    }
+};</code></pre>
+
+<p>Egyrészt mert nem ez a célunk (pointer szemantikát szeretnénk megvalósítani,
+nem érték szemantikát), másrészt pedig nem tudhatjuk, hogy a mutatott objektum
+micsoda. Lehet <code>T</code>, de lehet <code>T</code> valamely leszármazottja is.</p>
+
+<p>Ezért a lemásolt pointertől <em>el kell venni</em> az objektumot. Az új
+pointer fog mutatni rá, a régi pedig üres lesz, null értékű. Ha másik pointer jön
+létre, ugyanoda mutatva, akkor nem lemásolódik, hanem átadódik a hivatkozás az
+újnak. Így ezek az okos pointerek tulajdonos szemantikát (ownership semantics)
+valósítanak meg: mindig pontosan egy <code>UniquePtr</code> hivatkozhat a
+dinamikusan foglalt objektumra, és azt az objektum tulajdonosának nevezzük.</p>
+
+<p>Mindez nem valósítható meg a másoló konstruktorral, hiszen a másolás azt jelentené, hogy az eredetivel egyező viselkedésű 
+objektumot hozunk létre, amely azonban az eredetit nem változtatta meg. Más problémák is vannak itt, amikre egy <a href="../autoptr/index.html">külön írás tér ki</a> – és amik miatt a C++98-ból ismert <code>std::auto_ptr</code> osztályt 
+törölték a szabványból. A lényeg azonban ez: meg kell különböztetni egymástól a másolást és az áthelyezést. A C++11-ben van erre 
+megoldás, amit <a href="../ea06/index.html#uniqueptr">később fogunk megvizsgálni</a>.</p>
+
+<blockquote>
+<h3>A C++11 <code>std::unique_ptr&lt;T&gt;</code> osztály</h3>
+<p>Az <code>std::unique_ptr</code> osztálysablon (<code>#include &lt;memory&gt;</code>) a fentiekhez hasonlóan működik:
+tulajdonos szemantikát valósít meg egy dinamikusan foglalt <code>T</code> objektumra, vagy <code>T</code> leszármazottjára.</p>
+</blockquote>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Okos pointerek: polimorf típus">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="polymorphic_value" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Okos pointerek: polimorf típus<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Létrehozhatunk olyan okos pointert is, amely másolódáskor a hivatkozott értéket is lemásolja. Ezzel a pointer szemantika 
+érték szemantikává alakul. Akkor lehet ez hasznos, ha az érték pontos típusát nem ismerjük, például
+heterogén kollekciónál.</p>
+
+<p>Tegyük fel, hogy van egy osztályhierarchiánk, pl. egy alakzat ősosztály, háromszög és téglalap leszármazottal. Tudjuk, ha 
+ezekből heterogén kollekciót szeretnénk építeni, akkor a tárolónak pointereket kell tárolnia. (Több okból: mert az alakzatok 
+mérete eltérő, mert amúgy szeletelődnének, és mert az ősosztály lehet, hogy absztrakt.) Az indirekció miatt az alakzat 
+objektumok a tárolón kívülre kerülnek. Ezért külön változóként hozzuk létre őket, vagy esetleg dinamikus memóriakezelést 
+használunk:</p>
+
+<pre   ><code class="language-cbub">class Shape { /* ... */ };
+class Triangle: public Shape { /* ... */ };
+class Rectangle: public Shape { /* ... */ };</code></pre>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">std::vector&lt;Shape*&gt; shapes;
+Rectangle r;
+shapes.push_back(&amp;r); // 1</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">std::vector&lt;Shape*&gt; shapes;
+
+shapes.push_back(new Rectangle); // 2</code></pre>
+</div>
+</div>
+
+<p>A probléma mindezzel az, hogy így a ténylegesen tárolt objektumok (pointerek) nem ugyanazok, mint a tárolandó objektumok 
+(alakzatok), és ettől teljesen megváltozik a tároló viselkedése.</p>
+
+<ul>
+    <li>A tároló és a tárolandó objektumok élettartama nincs összekötve. Ha megszűnik egy objektum, a címe benne maradhat a 
+    tárolóban (1-es változatnál könnyű ilyen hibát elkövetni). Ha megszűnik a tároló, nem szűnnek meg az objektumok (2-es 
+    változatnál potenciális kódolási hiba).
+
+    <li>Ezen felül, a tárolt objektumokat referencia szemantikával érjük el, pedig a tárolóval egyező módon identitással kellene 
+    rendelkezzenek. Ha lemásolódik a tároló, nem másolódnak le az objektumok, és így a másolatok változtatása (pl. az alakzatok 
+    átszínezése) visszahat az eredetiekre.
+
+</ul>
+
+<p>A megoldást itt is egy helyettesítő objektum jelenti, amely lemásolódáskor lemásolja a mutatott 
+értéket is. Ilyen szempontból talán nem is nevezhető pointernek. Annyiban viszont igen, legalábbis
+a lenti megvalósítás, hogy a benne lévő nyers pointer lehet <code>nullptr</code> értékű, és így a
+helyettesítő objektum lehet üres is. Sablonként megfogalmazva, általánosságban:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class PolymorphicValue {
+  private:
+    T *ptr_;
+  public:
+    explicit PolymorphicValue(T *ptr = nullptr): ptr_{ptr} {
+    }
+    ~PolymorphicValue() {
+        delete ptr_;
+    }
+    PolymorphicValue(PolymorphicValue const &amp; masik) {
+        if (masik.ptr_ != nullptr)
+            ptr_ = masik.ptr-&gt;clone(); // itt a lényeg
+        else
+            ptr_ = nullptr;
+    }
+    /* ... */
+};</code></pre>
+
+<p>Az alap konstruktor és a destruktor nem igényelnek magyarázatot. A lényeg a másoló konstruktorban van. Ez feltételezi, hogy a 
+sablonparaméter típusnak van egy <code>clone()</code> nevű virtuális függvénye, amely a hierarchiának megfelelő típusú másolatot 
+(téglalap, háromszög, ...) készíti a mutatott objektumról. Ha van objektum, lemásolja, ha nincs, akkor a másolat 
+ugyanúgy üres, mint az eredeti. A szokásos <code>*</code> és <code>-&gt;</code> operátorokat itt is megírjuk,
+hogy a tárolt objektumot el tudjuk érni:</p>
+
+<pre   ><code class="language-cbub">std::vector&lt;PolymorphicValue&lt;Shape&gt;&gt; shapes;
+
+shapes.push_back(PolymorphicValue&lt;Shape&gt;{new Rectangle{ /* ... */ }});
+shapes.push_back(PolymorphicValue&lt;Shape&gt;{new Triangle{ /* ... */ }});
+
+for (size_t i = 0; i != shapes.size(); ++i)
+    shapes[i]-&gt;draw();
+    
+std::vector&lt;PolymorphicValue&lt;Shape&gt;&gt; shapes_copy = shapes; // 2 × clone</code></pre>
+
+<p>A fenti osztály csak egy részlete a teljesnek. Az értékadó operátort a szokásos módon meg kellene írni. Az öröklés miatt 
+néhány sablon konstruktorra is szükség lenne, hiszen ha <code>U*</code>&rarr;<code>T*</code> konverzió létezik (<code>U</code> 
+leszármazottja <code>T</code>-nek), akkor a <code>PolymorphicValue&lt;U&gt;</code>&rarr;<code>PolymorphicValue&lt;T&gt;</code> konverzióra is 
+szükség lehet.</p>
+
+    <p class="megjegyzes">C++11-ben már nem kell szóközt tenni a
+    sablont bezáró két <code>&gt;&gt;</code> közé. Ezért lehetett
+    „<code>vector&lt;PolymorphicValue&lt;Shape&gt;&gt;</code>”-t írni, a végén
+    „<code>&gt;&nbsp;&gt;</code>” helyett.</p>
+
+    <p class="megjegyzes">Kicsit zavaró lehet, hogy a helyettesítő objektumban tárolt alakzatot
+    a <code>*</code> vagy a <code>-&gt;</code> operátorral lehet elérni, ennek ellenére maga a helyettesítő
+    objektum nem pointerként, hanem értékként viselkedik. Régóta tervben van az <code>operator.()</code>
+    bevezetése a C++-ba, de az a projekt eddig mindig elakadt valahol. Itt nagyon kényelmes
+    lenne, hiszen <code>shapes[i]-&gt;draw()</code> helyett <code>shapes[i].draw()</code>-t írhatnánk.</p>
+
+    <p class="megjegyzes">A <code>clone()</code> függvény egyébként <a href="index.html#polymorphic">kiszervezhető külön osztályba</a> is. 
+    Talán egyszer majd lesz ehhez hasonló viselkedésű <code>std::polymorphic</code> segédosztály.</p>
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Okos pointerek: referenciaszámlálás">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="sharedptr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Okos pointerek: referenciaszámlálás<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha igazi, referencia szemantikával viselkedő okos pointereket szeretnénk – olyanokat, amelyek másolhatóak is, azaz többen is 
+mutathatnak ugyanarra az objektumra –, arra is van megoldás. Számon kell tartani azt minden így kezelt objektum esetében, hogy 
+hány okos pointer mutat rá. Ez a legtöbb programban szükséges lehet, mert sokszor több programrész is hivatkozik ugyanarra az 
+objektumra, és nem lehet minden objektumhoz egyértelmű tulajdonost hozzárendelni.</p>
+
+<p>A referenciaszám nem a pointerekhez tartozik, hanem a kezelt objektumhoz. Több okos pointer is hivatkozhat ugyanarra az 
+objektumra (ők az ún. <em>sharing group</em>), és mindegyik ugyanazt a referenciaszámot kell lássa.
+Ezért az objektum mellett a számlálót is pointer szemantikával kell látni, vagyis arra is pointer kell mutasson.</p>
+
+<img class="kozep" src="okosptr.svg" style="width: 22em;">
+
+<p>A referenciaszámláló egyszerűen egy egész szám:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SharedPtr {
+  private:
+    T *ptr_;
+    int *refcount_;
+};</code></pre>
+
+<p>Ha van objektum, kell számláló is. Ha nincs objektum, nem kell számláló sem. Egy okos pointer létrehozásakor a
+referenciaszámlálót 1-re kell állítani. Ez abból következik, hogy amikor az objektumot épp lefoglaltuk, az új okos pointerünk az
+első, aki mutatni kezdett az objektumra:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SharedPtr {
+  public:
+    explicit SharedPtr(T *ptr = nullptr) : ptr_{ptr} {
+        if (ptr_)
+            refcount_ = new int{1};
+        else
+            refcount_ = nullptr;
+    }
+};</code></pre>
+
+<p>Másoláskor a lemásolt <code>SharedPtr</code> itt már lehet a szokásos módon konstans. Ha a mutatott objektumra, akkor meg 
+kell növelni a referenciaszámlálót, mivel ilyenkor az új okos pointer bekerül abba a csoportba (sharing group), akik közösen
+kezelik az objektumot:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SharedPtr {
+  public:
+    SharedPtr(SharedPtr const &amp;the_other)
+      : ptr_{the_other.ptr_}, refcount_{the_other.refcount_} {
+        if (ptr_)
+            ++ *refcount_;
+    }
+};</code></pre>
+
+<p>A destruktor pedig, ha van objektum, csökkenti a referenciaszámlálót. Ilyenkor a számláló 0-ra is csökkenhet, ami azt 
+jelenti, hogy ez volt az utolsó olyan okos pointer, amelyik arra az objektumra mutatott:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SharedPtr {
+  public:
+    ~SharedPtr() {
+        if (ptr_) {
+            -- *refcount_;
+            if (*refcount_ == 0) {
+                delete refcount_;
+                delete ptr_;
+            }
+        }
+    }
+};</code></pre>
+
+<p>A többi függvény (<code>operator*</code>, <code>operator=</code> stb.) a szokásos módon implementálható.</p>
+
+<pre   ><code class="language-c">int main() {
+    SharedPtr&lt;int&gt; p{new int};
+    std::cout &lt;&lt; p.get_refcount() &lt;&lt; std::endl;
+    {
+        SharedPtr&lt;int&gt; p2{p};
+        std::cout &lt;&lt; p.get_refcount() &lt;&lt; std::endl;
+        std::cout &lt;&lt; p2.get_refcount() &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; p.get_refcount() &lt;&lt; std::endl;
+}</code></pre>
+
+<pre class="screenshot">
+1 <span class="bubble">p1</span>
+
+2 <span class="bubble">p2 létezése alatt</span>
+2 
+
+1 <span class="bubble">újra csak p1</span>
+deleting
+</pre>
+
+<blockquote>
+<h3>A C++11 <code>std::shared_ptr&lt;T&gt;</code> osztály</h3>
+<p>Az <code>std::shared_ptr</code> osztálysablon (<code>#include &lt;memory&gt;</code>) így működik: a 
+referenciaszámlálós okos pointer '11 óta már része a szabványnak.</p>
+</blockquote>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Referenciaszámlálás: körkörös hivatkozások">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+    <a id="weak_ptr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Referenciaszámlálás: körkörös hivatkozások<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Képzeljük el a következő helyzetet. A programunkban játékosok vannak: <code>Player</code>, amelyek csapatokba szerveződnek: 
+<code>Team</code>. A csapat pointerekkel hivatkozik a játékosokra, és a játékosok pointerrel hivatkoznak vissza a csapatukra. Ha ezeket a pointereket okos pointerrel adjuk meg, memóriaszivárgást kapunk. A 
+játékos nem fog felszabadulni, mert okos pointer mutat rá a csapatból; a csapat nem fog felszabadulni, mert okos pointer mutat 
+rá a játékosból.</p>
+
+<img src="team.svg" style="height: 14em" class="kozep">
+
+<p>Hasonló lenne a helyzet, ha megpróbálnánk egy duplán láncolt listát építeni okos pointerekből,
+mondván hogy akkor nem kell majd bajlódnunk a destruktorokkal. Valahogy így:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">/* HIBÁS */
+struct ListElem {
+    std::shared_ptr&lt;ListElem&gt; prev;
+    std::shared_ptr&lt;ListElem&gt; next;
+};</code></pre>
+</div>
+<div>
+<img src="lista.svg" style="width: 24em;" class="kozep">
+</div>
+</div>
+
+<p>Ezek az elemek sem szabadulnának föl soha. Hiába szűnne meg a lista eleje mutató: az első listaelem nem szabadulna föl, mert a második még hivatkozik rá; a második pedig nem szabadulna föl, mert az első még hivatkozik rá. És ugyanígy a többinél.</p>
+
+<p>A probléma technikailag <strong>körkörös</strong> (cyclic) hivatkozásként jelenik meg. De nem önmagában a körkörösséggel van baj, hanem azzal, hogy az okos
+pointerek <strong>birtoklást</strong> fejeznek ki. Meg kell különböztetnünk egymástól a birtokos és
+a nem birtokos hivatkozást. Az utóbbit „gyenge” hivatkozásnak vagy pointernek szokták nevezni (weak pointer vagy weak
+reference). Mit jelent ez? Ha egy objektumra gyenge hivatkozásunk van, attól még az objektum bármikor megszűnhet. Viszont
+ellenőrizni tudjuk majd, <strong>létezik-e még vagy már nem</strong>.</p>
+
+<p>A C++11-ben van ilyen osztály is. Az <code>std::shared_ptr</code> birtokos hivatkozást fejez ki, az 
+<code>std::weak_ptr</code> pedig nem birtokos hivatkozást. A fenti példában, tulajdonosban <code>std::shared_ptr</code> kell, a birtokolt objektum pedig 
+<code>std::weak_ptr</code>-rel tud visszahivatkozni a tulajdonosára:</p>
+
+<pre   ><code class="language-c">class Team {
+    std::shared_ptr&lt;Player&gt; p1, p2, p3;
+};
+
+class Player {
+    std::weak_ptr&lt;Team&gt; team;
+};</code></pre>
+
+<p>Az osztályokba épített konverzió lehetővé teszi azt, hogy egy <code>shared_ptr</code>-ből <code>weak_ptr</code> keletkezzen:
+
+<pre   ><code class="language-c">shared_ptr&lt;X&gt; sp{new X};
+
+weak_ptr&lt;X&gt; wp = sp;</code></pre>
+
+<p>A <code>weak_ptr</code> nem használható önmagában, hanem előbb vissza kell alakítani <code>shared_ptr</code>-ré. A 
+<code>weak_ptr</code> objektum <code>lock()</code> tagfüggvényének visszatérési értéke ugyanarra az objektumra mutató 
+<code>shared_ptr</code>. Ez a művelet lehet, hogy null pointert ad, mert a <code>weak_ptr</code> nem fejez ki tulajdonjogot, 
+ezért a hivatkozott objektum időközben megszűnhetett. Ha nem nullt adott, akkor viszont az új <code>shared_ptr</code> egy 
+számlált referenciát jelent az objektumra, tehát amíg az megvan, addig az objektum is marad.</p>
+
+<p>A <code>weak_ptr</code>-ek bevezetésével megszűnik a <strong>dangling pointer</strong>-ek, azaz már nem létező objektumokra
+mutató pointerek problémája. Az alábbi programkód bemutatja ezt, a szükséges tagfüggvényekkel együtt, amelyeket érdemes 
+ismerni:</p>
+
+<pre   ><code class="language-c">/* null értékű pointer */
+std::shared_ptr&lt;int&gt; sp;
+
+/* az új integer tulajdonosa lesz */
+sp.reset(new int);
+*sp = 10;
+
+/* wp1 is arra az integerre mutat, de nem tulajdonosa */
+std::weak_ptr&lt;int&gt; wp1 = sp;
+
+/* a régi int törlése, új objektum birtoklása */
+sp.reset(new int);
+*sp = 5;
+
+/* wp2 az új intre mutat, de nem tulajdonos */
+std::weak_ptr&lt;int&gt; wp2 = sp;
+
+/* a wp1 már üres lesz! (expired) */
+if (std::shared_ptr&lt;int&gt; tmp = wp1.lock()) {
+    std::cout &lt;&lt; *tmp &lt;&lt; '\n';
+}
+else {
+    std::cout &lt;&lt; &quot;wp1 üres\n&quot;;
+}
+
+/* a wp2 a második integerre mutat (5) */
+if (std::shared_ptr&lt;int&gt; tmp = wp2.lock()) {
+    std::cout &lt;&lt; *tmp &lt;&lt; '\n';
+}
+else {
+    std::cout &lt;&lt; &quot;wp2 üres\n&quot;;
+}</code></pre>
+
+<p>A <code>weak_ptr</code> objektumok helyes működéséhez már nem elég az, ha a referenciaszámláló egy sima <code>int</code>. De 
+nem is sokkal bonyolultabb a működés. Az <code>int</code> és a nyers pointer helyett itt egy menedzser objektum van, amely 
+tárolja a dinamikus objektum címét, a rá mutató birtokos <code>shared_ptr</code> és nem birtokos <code>weak_ptr</code> okos 
+pointerek számát:</p>
+
+<img src="sharedweak.svg" style="height: 9.5em" class="kozep">
+
+
+<p>A menedzser objektum az első <code>shared_ptr</code> objektummal együtt jön létre, amikor az megkapja a dinamikusan foglalt, 
+kezelt objektum pointerét. Ilyenkor a birtokosok száma 1, a nem birtokos pointerek száma pedig 0. Amikor a 
+<code>shared_ptr</code> lemásolódik egy másik <code>shared_ptr</code>-be, másoló konstruktorral vagy értékadó operátorral, akkor 
+a birtokosok száma 2-re nő. Amikor pedig egy <code>weak_ptr</code> objektum jön létre belőle, akkor a nem birtokos hivatkozások 
+száma nő meg 1-re. Ezt a pillanatot mutatja az ábra.</p>
+
+<p>Bármikor, ha egy <code>shared_ptr</code> már nem ide mutat, a birtokosok száma eggyel csökken. A 
+<code>weak_ptr</code> objektumok megszűnte a másik számlálót csökkenti. Amikor a birtokos számláló 0-ra csökken, a kezelt 
+objektumot felszabadítja az utolsó megszűnő <code>shared_ptr</code>. Ha ebben a pillanatban a másik számláló is 0, akkor a 
+menedzser objektum is megszűnik, és így minden memóriaterület felszabadult. Ha viszont a <code>weak_ptr</code>-ek száma még nem 
+0, akkor a menedzser objektum megmarad, csak a kezelt objektumra mutató pointere nullptr lesz. <strong>Amikor mindkét 
+számláló nullára csökken</strong>, akkor szüntethető meg a menedzser objektum. </p>
+
+<p>Összefoglalva, a kezelt objektum addig marad életben, amíg 
+<code>shared_ptr</code> mutat rá, a menedzser objektum pedig addig, amíg akár <code>shared_ptr</code>, akár 
+<code>weak_ptr</code> hivatkozik rá.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li><a href="https://www.youtube.com/watch?v=80BZxujhY38">CppCon 2018: Herb Sutter “Thoughts on a more powerful and simpler C++ (5 of N)”</a></li>
+    <li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">JavaScript Module Pattern: In-Depth</a> –
+        érdekesség a JavaScript modulokról, a függvények és láthatóságok használatáról.
+    <li><a href="http://nullprogram.com/blog/2015/02/17/">Generic C Reference Counting</a> – referenciaszámlálás C-ben.
+    <li>Bjarne Stroustrup: The Design and Evolution of C++. Addison-Wesley, 1994.
+    <li><a href="http://www.umich.edu/~eecs381/handouts/C++11_smart_ptrs.pdf">Using C++11’s Smart Pointers</a>, David Kieras, EECS Department, University of Michigan.
+    <li id="polymorphic"><a href="https://skillsmatter.com/skillscasts/9539-a-polymorphic-value-type-for-c-plus-plus">Skillcast: A polymorphic value-type for C++</a>.</li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Template</title>
+<meta property="og:title" content="TEST InfoC++11 :: Template">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A sablonok használata">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A sablonok használata">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Template">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Template</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A sablonok használata</p>
+</div>
+
+<p>A sablonok alapvető célja a C++ nyelvben, hogy a fordítóra bízhassuk a programkódunk generálását abban az
+esetben, amikor csak típusok miatt másolnánk a kódot.</p>
+
+<p>Gondoljunk egy tömbi algoritmusra, például a rendezésre: egész számok tömbje, valós számok tömbje, sztringek
+tömbje... Mindegyiket ugyanúgy kell rendezni, csak a cserélgetett adatok típusa más. Vagy egy tárolóra: egész
+számok listája, valós számok listája, sztringek listája... A lista építése (elem létrehozása, pointerek beállítása),
+az ehhez tartozó algoritmusok teljesen függetlenek attól, hogy mi a tárolt adat.</p>
+
+<p>A sablonok ilyen problémák megoldásában, azaz a generikus programozásban segítenek.</p>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Függvénysablonok</a>
+                      <li><a href="index.html#2" class="">Függvénysablonok használata</a>
+                      <li><a href="index.html#3" class="">A sablonparaméterek automatikus levezetése</a>
+                      <li><a href="index.html#4" class="">Függvénysablonok specializációja</a>
+                      <li><a href="index.html#5" class="">Generikus rendezőfüggvény</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvénysablonok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Függvénysablonok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Emlékezzünk vissza: a C++ megengedi azt, hogy ugyanolyan nevű, de eltérő típusú és számú paraméterekkel
+rendelkező függvényeket hozzunk létre. Emiatt könnyedén írhatunk olyan <code>max()</code> függvénycsaládot,
+amely tagjai két szám közül megadják a nagyobbikat:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">int max(int x, int y) {
+    return x &gt; y ? x : y;
+}</code></pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">double max(double x, double y) {
+    return x &gt; y ? x : y;
+}</code></pre>
+</div>
+</div>
+
+<p>Ha van olyan típusunk, amelyre szintén használható a nagyobb operátor <code>&gt;</code>, akkor ez a
+kódrészlet ugyanolyan jó lesz arra is. Ha például írtunk egy tört (racionális szám) osztályt, amelynek
+ez az operátora definiált, akkor arra is működne a <code>return</code> után megadott kifejezés, csak
+írnunk kéne egy harmadik példányt a függvényből..</p>
+
+<p>Ami ezen a ponton nagyon szembetűnő, hogy a függvények törzse egyforma. Copy-paste-eltünk,
+és ez soha nem jelent jót.</p>
+
+<pre class="bentebb kicsinyit" style="display: none; white-space: pre; overflow: hidden;" id="flash1id"><code class="language-cbub">  int  max(  int  x,   int  y) {
+    return x &gt; y ? x : y;
+}</code></pre>
+
+<pre class="bentebb kicsinyit" style="white-space: pre; overflow: hidden;" id="flash2id"><code class="language-cbub">double max(double x, double y) {
+    return x &gt; y ? x : y;
+}</code></pre>
+
+<script>
+var melyik = true;
+setInterval(function() {
+    melyik = !melyik;
+    document.getElementById('flash1id').style.display =  melyik ? "block":"none";
+    document.getElementById('flash2id').style.display = !melyik ? "block":"none";
+}, 1000);
+</script>
+
+<p>A típusnév cseréjét a fejlesztőkörnyezet „keresés és csere” műveletével is elvégezhetnénk, de érezzük, hogy ezt
+akár a fordító is megoldhatná helyettünk.</p>
+
+<p><em>Erre valók a sablonok C++-ban.</em></p>
+
+<p>Sablon kódban kifejezhetjük azt, hogy egy kódrészletben – jelen esetben egy függvényben – valamelyik
+típust nem ismerjük. Tehát hogy az majd később fog kiderülni, és cserélhetővé szeretnénk tenni. Ezt így tudjuk megtenni:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;   // T helyére egy típus kerül majd
+T max(T x, T y) {
+    return x &gt; y ? x : y;
+}</code></pre>
+
+<p>A függvénysablont a <code>template</code> kulcsszóval kell bevezetni. Utána pedig a kacsacsőrök
+között a sablonparamétereket kell megadni, ugyanolyan szintaxissal, ahogy a függvényeknél azt
+megszoktuk (típus és név). Jelen esetben a <code>T</code> nevű sablonparaméter típusát a
+<code>typename</code> kulcsszó adja meg; ez jelenti azt, hogy oda majd egy konkrét típust kell beírni.</p>
+
+<p>Itt a <code>T</code> annak a típusnak a neve, ahova lényegében bármi behelyettesíthető. Ha a <code>T</code>
+helyére <code>int</code>-et írunk, visszakapjuk az első függvényt, ha pedig <code>T = double</code>, akkor a másodikat.
+Csakhogy most nem nekünk kell majd megírni ezeket, hanem a fordító generálja majd őket teljesen automatikusan
+a fenti sablonból.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvénysablonok használata">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Függvénysablonok használata<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A függvénysablonok egészen addig nem lesznek lefordítva, amíg nem használjuk őket. Tehát amíg nem derül ki az,
+hogy a <code>T</code> helyére mit kell írni. A típus megadásával konkrét függvények keletkeznek; ezt a
+lépést a sablon <em>példányosításának</em> nevezzük. A függvény hívásakor kacsacsőrök között adhatjuk meg azt,
+hogy mik legyenek a konkrét sablonparaméterek:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+template &lt;typename T&gt;   // T helyére egy típus kerül majd
+T max(T x, T y) {
+    return x &gt; y ? x : y;
+}
+
+int main() {
+    std::cout &lt;&lt; max&lt;int&gt;(2, 5) &lt;&lt; std::endl;
+    std::cout &lt;&lt; max&lt;double&gt;(3.14, 1.7) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A <code>max&lt;int&gt;(2, 5)</code> kifejezéssel a fordító tudtára adjuk a következőket:</p>
+<ol>
+    <li>Szükségünk van a <code>max()</code> függvénysablonnak egy olyan változatára, amelyben
+        a <code>T</code> helyére mindenhova <code>int</code> került.</li>
+    <li>És szeretnénk is meghívni az így kapott függvényt a <code>2, 5</code> paraméterekkel.</li>
+</ol>
+
+<p>A példányosítási kérés hatására a fordító automatikusan előállítja a megfelelő specializációt (példányt),
+behelyettesítve a sablon kódba a paramétereket. Olyan, mintha ezt a specializációt magunk megírtuk
+volna – de nem kellett, mert triviális, és automatikusan történt. A háttérben ez a függvény íródott meg:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;     // specializáció
+int max&lt;int&gt;(int x, int y) {    // arra az esetre, amikor T = int
+    return x &gt; y ? x : y;
+}</code></pre>
+
+<p>Látható, hogy az így előálló függvényben már nincs zsákbamacska a típusok helyén, lefordítható a kód.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A sablonparaméterek automatikus levezetése">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A sablonparaméterek automatikus levezetése<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Kicsit kényelmetlennek tűnhet a fenti kódban, hogy ki kell írnunk a <code>max()</code> függvény
+hívásakor a sablonparamétereket is:</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; max&lt;int&gt;(2, 5) &lt;&lt; std::endl;
+std::cout &lt;&lt; max&lt;double&gt;(3.14, 1.7) &lt;&lt; std::endl;</code></pre>
+
+<p>A kódot vizsgálva hamar fölmerül az a kérdésünk is: nem lehetne automatikusan kitalálni a sablonparamétereket?
+A <code>2</code> és az <code>5</code> paraméterek
+<code>int</code> típusúak, a <code>3.14</code> és az <code>1.7</code> pedig mindketten <code>double</code>
+típusúak. Levezethette volna a fordító magától is, hogy az első esetben <code>T = int</code>-et,
+a második esetben pedig <code>T = double</code>-t kell használni a <code>max()</code> sablonhoz.</p>
+
+<p>Szerencsére ilyen is van. A fordító ki tudja találni a függvény hívásából, milyen sablonparaméterekre
+van szükség. Ezt automatikus sablonparaméter-levezetésnek, vagy dedukciónak nevezzük (template argument
+deduction). Vagyis bőven elegendő ennyit írunk:</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; max(2, 5) &lt;&lt; std::endl;
+std::cout &lt;&lt; max(3.14, 1.7) &lt;&lt; std::endl;</code></pre>
+
+<p>A levezetésnek szigorú szabályai vannak; ha a fordító ellentmondásra jut, akkor vissza fogja utasítani
+a kódot. Ilyenre legegyszerűbb példa a következő kódrészlet:</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; max(2.28, 7) &lt;&lt; std::endl;     // fordítási hibát okoz</code></pre>
+
+<pre class="screenshot">
+max.cpp:4:3: note: template argument deduction/substitution failed:
+max.cpp:9:29: note: deduced conflicting types for parameter ‘T’ (‘double’ and ‘int’)
+</pre>
+
+<p>A hibaüzenet oka: a <code>max()</code> függvényünk <code>(T x, T y)</code> fejléce azt mondja, hogy két egyforma típusú 
+paraméterrel lehet használni a függvényt. Az első paraméterből, a <code>2.28</code>-ból viszont it  <code>T = double</code> 
+következne, a másodikból, a <code>7</code>-ből pedig <code>T = int</code>. Ez ellentmondás, és mivel a fordító nem tudja,
+mi a célunk, nem is akar állást foglalni. Ha szeretnénk eltérő típusú paraméterekkel meghívni a függvényt, akkor
+explicite meg kell adnunk a sablonparamétert:</p>
+
+<pre   ><code class="language-cbub">std::cout &lt;&lt; max&lt;double&gt;(2.28, 7) &lt;&lt; std::endl;</code></pre>
+
+<p>Ugyanez a probléma egyébként már előjöhetett a túlterhelt függvénynevek esetében is. Ha visszagondolunk
+a kézzel megírt, copy-paste-elt <code>max()</code> függvényeinkre, azoknál is lehetséges volt ilyen:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+int max(int x, int y) {
+    return x &gt; y ? x : y;
+}
+
+double max(double x, double y) {
+    return x &gt; y ? x : y;
+}
+
+int main() {
+    std::cout &lt;&lt; max(2.28, 7) &lt;&lt; std::endl;     // fordítási hibát okoz
+}</code></pre>
+
+<pre class="screenshot">
+max.cpp:17:29: error: call of overloaded ‘max(double, int)’ is ambiguous
+max.cpp:8:5: note: candidate: int max(int, int)
+max.cpp:12:8: note: candidate: double max(double, double)
+</pre>
+
+<p>Tehát ebben nincs semmi meglepő.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvénysablonok specializációja">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Függvénysablonok specializációja<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Találós kérdésként tegyük föl: vajon mit ír ki az alábbi program, almát vagy körtét?</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+template &lt;typename T&gt;
+T max(T x, T y) {
+    return x &gt; y ? x : y;
+}
+
+int main() {
+    std::cout &lt;&lt; max(&quot;alma&quot;, &quot;korte&quot;) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A helyzet az, hogy nem igazán lehet megmondani. Azt várnánk, hogy a körte szó jelenik meg
+(az a „nagyobb”, az van hátrébb az ábécében), de sajnos nem ez a helyzet. Vezessük végig, mi is jár a fordító fejében!</p>
+
+<p>A főprogrambeli <code>max("alma", "korte")</code> hívásból kell kiindulnunk. Ebben a kifejezésben
+egy függvényhívás szerepel. A <code>max()</code> azonban nem függvény, hanem csak sablon, sőt a
+sablonparaméterei nincsenek megadva. Ezért le kell vezetni azokat.</p>
+
+<p>Paraméterként a függvény két
+karaktertömböt kap (az almát és a körtét). Tömböt függvénynek átadni a tömb elejére mutató pointerrel
+lehet, tehát a két átadott paraméter típusa <code>char const *</code> kell legyen. Ezek egyformák,
+ráillik a <code>(T x, T y)</code> sémára, tehát a fordító létrehozza automatikusan a specializációt, és meghívja a függvényt:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+char const * max&lt;char const *&gt;(char const * x, char const * y) {
+    return x &gt; y ? x : y;   // hibás
+}</code></pre>
+
+<p>A gond csupán csak az, hogy ezt nem azt csinálja, mint amit szeretnénk. Az <code>x &gt; y</code> kifejezés itt két pointert
+hasonlít össze; ezzel nem azt kérdezzük, hogy melyik sztring van előrébb az ábécében, hanem azt, hogy melyik
+sztring van előrébb a memóriában. Aminek a szótárbeli sorrendhez úgy igazán semmi köze, és amúgy is előre
+megjósolhatatlan.</p>
+
+<p>A C stílusú sztringek (nullával lezárt karaktertömbök) összehasonlítására a <code>strcmp()</code> függvényt
+kellene használnunk. Valahogyan azt kellene itt megmagyaráznunk a fordítónak, hogy a <code>max()</code> függvénysablon
+általában jó mindenféle típusra, kivéve a <code>T = char const *</code> esetén – mert ilyenkor valami egészen mást
+kell csinálni.</p>
+
+<p>Ezt tudjuk megtenni egy explicit specializációval, amelynek a szintaxisa és megvalósítása ebben
+a konkrét esetben az alábbi:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+char const * max&lt;char const *&gt;(char const * x, char const * y) {
+    return strcmp(x, y) &gt; 0 ? x : y;
+}</code></pre>
+
+<p>Nézzük meg jobban, hogy kell egy ilyet megírni!</p>
+<ol>
+    <li>A kód egy <code>template &lt;&gt;</code> sorral indul. Jelezzük, hogy egy sablonról (annak specializációjáról)
+        van szó, itt azonban már változni képes sablonparaméterek nincsenek. Ezt fejezi ki az üres kacsacsőrpár.</li>
+    <li>A függvény nevétől jobbra jelezzük azt is, hogy ez a <code>max</code> nevű függvénysablon specializációja
+        arra az esetre, amikor <code>T = char const *</code>. Ezt kötelező kiírni, mert más típusokra
+        is megadhatnánk specializációt, és itt derül ki, melyikről van itt szó.</li>
+    <li>Egyébiránt pont ugyanúgy megírjuk a függvényt, ahogy bármelyik másikat.</li>
+</ol>
+
+<p>A teljes, kipróbálható program így néz ki:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+
+template &lt;typename T&gt;
+T max(T x, T y) {
+    return x &gt; y ? x : y;
+}
+
+template &lt;&gt;
+char const * max&lt;char const *&gt;(char const * x, char const * y) {
+    return strcmp(x, y) &gt; 0 ? x : y;
+}
+
+int main() {
+    std::cout &lt;&lt; max(2, 5) &lt;&lt; std::endl;
+    std::cout &lt;&lt; max(&quot;alma&quot;, &quot;korte&quot;) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A valóság amúgy nem olyan szép sajnos, mint ahogyan innen nézve tűnik. Előbb-utóbb ezzel megütnénk
+a bokánkat. A <code>char *</code> és a <code>char const *</code> különböző típusoknak számítanak, tehát
+a <code>char *</code>-ra még mindig az alap sablont (base template) használná a fordító.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Generikus rendezőfüggvény">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="generikusfv" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Generikus rendezőfüggvény<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fentiek alapján már könnyedén írhatunk egy generikus rendezőfüggvényt. Ez bármilyen típusú elemekből álló
+tömböt növekvő sorrendbe tud tenni. (Az <code>algorithm</code> fejlécben definiált <code>std::swap()</code>
+függvény is generikus. Két bármilyen, de egyforma típusú változó tartalmának megcserélésére való.)</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+template &lt;typename T&gt;
+void rendez(T *tomb, size_t meret) {
+    for (size_t i = 0; i &lt; meret-1; ++i) {
+        size_t min = i;
+        for (size_t j = i+1; j &lt; meret; ++j)
+            if (tomb[j] &lt; tomb[min])    // összehasonlítás
+                min = j;
+        std::swap(tomb[i], tomb[min]);
+    }
+}
+
+int main() {
+    int tomb[5] = { 9, 6, 8, 7, 2 };
+    rendez(tomb, 5);
+    for (size_t i = 0; i &lt; 5; ++i)
+        std::cout &lt;&lt; tomb[i] &lt;&lt; ' ';
+}</code></pre>
+
+<p>A függvény belsejében implementált minimumkereső algoritmus kapcsán sejthetjük, hogy itt elő fog jönni
+ugyanaz a probléma, mint az előbb. A kisebb operátor <code>&lt;</code> karaktertömbökre mutató pointerek
+esetén nem azt az összehasonlítást végzi, amire nekünk szükség van.</p>
+
+<p>De más probléma is van ám azzal a
+relációs jellel... Mi lenne, ha nem növekvő, hanem csökkenő sorrendbe szeretnénk tenni az elemeket?
+És ha olyan elemeket tartalmazna a tömb, amelyeket több szempont szerint is lehet rendezni?
+Pl. emberek név szerint, kor szerint, magasság szerint. Vagy színek fényesség szerint (sötétek
+előre, világosak hátra), esetleg színárnyalat szerint (pirosas színek előre, zöldebbek hátra). A rendezés
+algoritmusa mindig ugyanaz, csak jelzett sorban lévő feltételt cserélgetnénk.</p>
+
+<p>Ez a feladattípus és a megoldása a Prog1-ben már szerepelt. Az összehasonlító függvényt paraméterként
+kell átadni. Ez a függvény, egy bináris predikátum (binary predicate) fogja megadni azt, hogy egy adott
+elem előrébb kell-e kerüljön a tömbben vagy hátrébb egy másik elemhez képest. Bináris, mert két paraméterű,
+és predikátum, mert igaz vagy hamis a visszatérési értéke: akkor igaz, ha előrébb való a tömbben az első paramétereként
+megadott elem a másodiknál, amúgy pedig hamis.</p>
+
+<p>A függvényt át tudjuk adni függvényre mutató pointerként is:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void rendez(T *tomb, size_t meret, bool (*elorebb)(T, T)) { // fv ptr
+    /* ... */
+    if (elorebb(tomb[j], tomb[min]))
+    /* ... */
+}
+
+bool kisebb(int a, int b) {
+    return a &lt; b;
+}
+
+int main() {
+    int tomb[5] = { 9, 6, 8, 7, 2 };
+    rendez(tomb, 5, kisebb);
+    /* ... */
+}</code></pre>
+
+<p>Látszik, hogy a predikátum függvény, amelyre az <code>elorebb</code> pointer mutat, két <code>T</code>-t
+vesz át paraméterként. Mivel a tömb <code>int</code> típusú elemekből áll, <code>T = int</code> példányosítással
+fog próbálkozni a fordító, amiből a <code>rendez()</code> függvénysablon alábbi fejléce adódik:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void rendez&lt;int&gt;(int *tomb, size_t meret, bool (*elorebb)(int, int));</code></pre>
+
+<p>Ez helyes is, mivel a <code>kisebb()</code> függvény pontosan olyan paraméterezésű, mint amilyenre az
+<code>elorebb</code> nevű pointer mutatna.</p>
+
+<p>Gond csak akkor adódik, ha nem pontosan ilyen. Mi lenne akkor a helyzet, ha olyan összehasonlító függvényünk
+lenne, amelyik konstans referenciával venné át a paramétereit, nem pedig érték szerint? Vagy akkor, ha nem is
+összehasonlító függvényt adnánk át, hanem egy függvényobjektumot (funktort), amelynek függvényhívó operátora
+végzi az összehasonlítást? (A kerek zárójel is csak egy operátor: <code>operator()</code>, az is megírható
+egy saját típusra, ahogy a plusz <code>+</code> és a shift <code>&lt;&lt;</code> operátort is megírhattuk.) Az
+ilyenekre nem mutathatnánk rá az előbbi pointerrel, amelyik azt mondja, hogy a paramétereit
+érték szerint átvevő függvényre mutat.</p>
+
+<p>Legjobb ezért, ha azt mondjuk, hogy a rendező függvény harmadik paramétereként <em>bármit</em> átvehet, bármilyen
+típusú objektumot. Ez ugyanúgy <code>typename</code> típusú sablonparaméterrel tudjuk megoldani, ahogyan azt a
+legelső példában a <code>max()</code> függvénynél is láttuk. Természetesen ez egy másik típus lesz, nem <code>T</code>,
+mint a tömb elemei; adjuk neki mondjuk az <code>F</code> nevet! A rendezést végző függvényünk az alábbi formát ölti
+(teljes, kipróbálható kód):</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+
+template &lt;typename T, typename F&gt;
+void rendez(T *tomb, size_t meret, F elorebb) {
+    for (size_t i = 0; i &lt; meret-1; ++i) {
+        size_t min = i;
+        for (size_t j = i+1; j &lt; meret; ++j)
+            if (elorebb(tomb[j], tomb[min]))
+                min = j;
+        std::swap(tomb[i], tomb[min]);
+    }
+}
+
+bool int_kisebb(int a, int b) {
+    return a &lt; b;
+}
+
+bool sztring_nagyobb(std::string const &amp; a, std::string const &amp; b) {
+    return a &gt; b;
+}
+
+template &lt;typename T&gt;
+void tomb_kiir(T *tomb, size_t meret) {
+    for (size_t i = 0; i &lt; meret; ++i)
+        std::cout &lt;&lt; tomb[i] &lt;&lt; ' ';
+    std::cout &lt;&lt; std::endl;
+}
+
+int main() {
+    int szamok[5] = { 9, 6, 8, 7, 2 };
+    rendez(szamok, 5, int_kisebb);
+    tomb_kiir(szamok, 5);
+    
+    std::string szavak[3] = { &quot;barack&quot;, &quot;korte&quot;, &quot;alma&quot; };
+    rendez(szavak, 3, sztring_nagyobb);
+    tomb_kiir(szavak, 3);
+}</code></pre>
+
+<p>A rendez függvény mindkét hívásánál a konkrét paraméterekből vezeti le a fordító a sablonparamétereket.
+A <code>szamok[]</code> tömb esetén <code>T = int</code> és <code>F = bool(*)(int, int)</code> adódik,
+tehát a legyártott függvény fejléce az alábbi:</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void rendez&lt;int, bool(*)(int, int)&gt;(int *tomb, size_t meret, bool (*elorebb)(int, int));</code></pre>
+
+<p>A <code>szavak[]</code> tömb esetén pedig <code>T = std::string</code> és <code>F = bool(*)(std::string const &amp;, std::string const &amp;)</code> lesz a levezetés eredménye. A specializáció fejléce tehát az alábbi lesz (nem is baj,
+hogy ezt nem kellett kézzel leírni, hanem a fordító végezte el a munkát):</p>
+
+<pre   ><code class="language-cbub">template &lt;&gt;
+void rendez&lt;std::string, bool(*)(std::string const &amp;, std::string const &amp;)&gt; (std::string *tomb, size_t meret, bool (*elorebb)(std::string const &amp;, std::string const &amp;));</code></pre>
+
+<p>Érdemes megfigyelni a fenti kódban a <code>tomb_kiir()</code> függvénysablont is. Az is bármilyen tömbre képes
+példányosodni. Egyetlen kitétel, hogy a tömb elemein használható legyen a <code>&lt;&lt;</code> operátor a kiíráshoz
+– ha ez teljesül, a függvény el tudja végezni a dolgát.</p>
+
+<p>Ez a típusszemlélet a programozásban a <em>duck typing</em>:
+ami úszik és hápog, az kacsa. Ami kiírható, az jó lesz ennek a <code>tomb_kiir()</code> függvénynek. Ami pedig
+használható bináris predikátumként, az jó lesz a <code>rendez()</code> függvénynek, legyen az akármi is.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

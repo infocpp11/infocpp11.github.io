@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: vector::push_back II.</title>
+<meta property="og:title" content="TEST InfoC++11 :: vector::push_back II.">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Miért mozgatja az std::vector push_back() függvénye előbb az új adatot, és csak utána a régieket?">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Miért mozgatja az std::vector push_back() függvénye előbb az új adatot, és csak utána a régieket?">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="vector::push_back II.">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">vector::push_back II.</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Miért mozgatja az std::vector push_back() függvénye előbb az új adatot, és csak utána a régieket?</p>
+</div>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Előbb az új, aztán a régiek</a>
+                      <li><a href="index.html#2" class="">Nem mindegy a sorrend</a>
+                      <li><a href="index.html#3" class="">Az elmozgatott objektum állapota</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Előbb az új, aztán a régiek">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Előbb az új, aztán a régiek<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A témával kapcsolatos írás <a href="../pushback1/index.html">első részében</a> arról
+volt szó, hogy az <code>std::vector</code> egy <code>push_back()</code> hívás esetén az új adatot
+előbb másolja be a tömbbe, mint ahogyan a régi adatokat egy esetlegesen létrehozott új tömbbe áthelyezi.
+Felokosítva a <code>Noisy</code> osztályt, hogy rendelkezzen mozgató konstruktorral is (amelyik a „kiürülő”,
+elmozgatott objektumok tartalmát -1-re állítja), ez jól látszik:</p>
+
+<pre   ><code class="language-cbub">std::vector&lt;Noisy&gt; v(3);
+
+Noisy n{5};
+v.push_back(n);</code></pre>
+
+<pre class="screenshot">
+Noisy copy ctor 5   <span class="bubble">új elem</span>
+Noisy move ctor 0
+Noisy move ctor 0   <span class="bubble">régiek áthelyezése</span>
+Noisy move ctor 0
+Noisy dtor -1
+Noisy dtor -1       <span class="bubble">a régi tömb</span>
+Noisy dtor -1
+</pre>
+
+<p>Ha a <code>push_back()</code> függvény jobbértéket, azaz temporális objektumot kap, akkor ugyanez
+a helyzet: előbb az új elem kerül az új tömbbe, és csak aztán a régiek:</p>
+
+<pre   ><code class="language-cbub">v.push_back(Noisy{5});</code></pre>
+
+<pre class="screenshot">
+Noisy{5} ctor       <span class="bubble">temporálisé</span>
+
+Noisy move ctor 5
+Noisy move ctor 0
+Noisy move ctor 0
+Noisy move ctor 0   <span class="bubble">a <code>push_back()</code> belseje</span>
+Noisy dtor -1
+Noisy dtor -1
+Noisy dtor -1
+
+Noisy dtor -1       <span class="bubble">temporálisé</span>
+</pre>
+
+<p>A kérdés: vajon miért? Miért kell a temporálist is előbb mozgatni, amikor az független a tömbtől,
+és így igazából mindegy lenne a sorrend?</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Nem mindegy a sorrend">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Nem mindegy a sorrend<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A válasz egyszerű: nem, nem mindegy a sorrend. Mégpedig azért nem, mert a paraméterként kapott jobbérték
+objektum nem biztos, hogy temporális! Lehet olyan objektumról is szó, amelyet jobbértéknek tekintünk, amelyből
+az elmozgatást kifejezetten megengedtük. Mégpedig egy <code>std::move()</code> függvénnyel. És ha így van,
+akkor a jobbértéknek tekintett objektum lehet akár a tömb része is:</p>
+
+<pre   ><code class="language-c">std::vector&lt;Noisy&gt; v = { Noisy{1}, Noisy{2}, Noisy{3} };
+
+v.push_back(std::move(v[1]));</code></pre>
+
+<p>Ez azért érdekes, mert ebben az esetben nem egy, hanem két mozgatás érinti ugyanazt az objektumot:</p>
+
+<ul>
+    <li>Egyrészt a hívó kérte, hogy kerüljön egy új objektum a tömb végére, mégpedig a <code>v[1]</code>
+        tartalmát átemelve.</li>
+    <li>Másrészt pedig a vektornak lehet szüksége emiatt átméretezésre, de az is érinti a
+        <code>v[1]</code>-et.</li>
+</ul>
+
+<p>Vagyis a hívó kérése ez:</p>
+
+<img src="push_back_move_1.svg" class="kozep" style="width: 12em;" alt="push_back és move – a hívó kérése">
+
+<p>A vektor sajátosságai miatt a technikai megvalósítás pedig ez lesz:</p>
+
+<img src="push_back_move_2.svg" class="kozep" style="width: 12em;" alt="push_back és move – a technikai megvalósítás">
+
+<p>Fontos, hogy azt a hívó nem tudhatja, hogy a vektor mikor méreteződik át; ez a vektor döntése. A hívás
+végeredménye viszont <em>ettől a döntéstől független kell legyen</em>. Az teljesen biztos, hogy a 2-es
+számot tartalmazó objektum a tömb végére kell kerüljön.</p>
+
+<p>Ezért a paraméterként kapott objektumot (amely egyébként a tömb <code>v[1]</code> eleme is – ilyen a
+referenciák természete) fogja előbb mozgatni, az kerül legelőször az új tömb végére. Csak utána mozgatja át a
+többi elemet a tömbbe. Ilyenkor az eredeti tömb 1-es indexű eleme már üres (egyszer már el lett mozgatva),
+vagyis az új helyre is egy üres objektum kerül. Végül pedig a 3 elemű tömb megszűnik.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az elmozgatott objektum állapota">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Az elmozgatott objektum állapota<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A <a href="../ea06/index.html#objektumelettartam">jobbérték referenciákkal</a> kapcsolatos
+előadásban szó volt az objektumok élettartamáról: nevezetesen hogy a mozgató konstruktorok miatt nem csak
+a „létezik” és a „nem létezik” állapot létezik, hanem lehetséges üres, mozgató konstruktor által kiürített
+objektum létezése is. Az ilyenre a destruktort meg kell hívni, vagy új értéket adni neki.</p>
+
+<p>Azt látjuk a fenti vektoros példa kapcsán, hogy előfordulhat, egy objektum tartalmát kétszer mozgatjuk:
+egész pontosan, hogy egy objektumból kétszer próbáljuk meg kivenni annak tartalmát. Vajon ilyet szabad
+csinálni? A fenti <code>push_back(std::move(v[1]))</code> hívás csak akkor lehet helyes, ha igen. De
+láthatóan erre a készítők gondoltak.</p>
+
+<p>Érdemes ennek kapcsán megemlíteni néhány fogalmat, amelyik a C/C++ szabványokban is rendszeresen előkerül:</p>
+
+<blockquote>
+<dl>
+    <dt>Implementáció által definiált (implementation defined)</dt>
+    <dd>Olyan dolgok, amelyeket nem köt meg a szabvány, pl. mert géptípustól függenek. Ilyen
+        egy <code>int</code> mérete: architektúrától függ, ugyanakkor egyértelműen adott és dokumentált.</dd>
+    
+    <dt>Nem specifikált (unspecified)</dt>
+    <dd>Amikor azt mondjuk, hogy valami nem specifikált, akkor ugyan nem mondjuk meg, hogy pontosan
+        minek kell történnie bizonyos helyzetben, de akármi történik, az nem vezethet a program
+        működésképtelenségéhez. Ilyen például a függvényparaméterek kiértékelési sorrendje:
+        <code>f(get_num(), get_num())</code> – itt nem tudhatjuk, melyik szám lesz az első, melyik
+        a második paraméter. A fordító döntése.</dd>
+
+    <dt>Nem definiált (undefined)</dt>
+    <dd>Ennél sincs megmondva, hogy minek kell történnie, de itt a program működésképtelenségéhez,
+        kiszámíthatatlanságához juthatunk. Ilyen egy inicializálatlan változó értékének
+        használata, vagy egy null pointer dereferálása.</dd>
+</dl>
+</blockquote>
+
+<p>Az elmozgatott objektum tartalma <em>nem specifikált</em>. Azaz lehet benne bármi (ahogy épp az
+adott objektumnál kényelmes vagy hatékony lehet a megvalósítás), nem mondjuk meg, hogy mi. Ezt a nem
+specifikált, üres tartalmat akár másodjára is el lehet mozgatni. Viszont azt szándékosan nem mondjuk
+rá, hogy a tartalma nem definiált: egy objektum kiürítése, vagy másodjára elmozgatása nem okozhatja
+a program elszállását.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

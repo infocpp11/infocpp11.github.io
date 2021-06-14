@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Öröklés</title>
+<meta property="og:title" content="TEST InfoC++11 :: Öröklés">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Az öröklés és a vele kapcsolatos tudnivalók a C++-ban.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Az öröklés és a vele kapcsolatos tudnivalók a C++-ban.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Öröklés">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Öröklés</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Az öröklés és a vele kapcsolatos tudnivalók a C++-ban.</p>
+</div>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+<p>Az öröklés és a vele kapcsolatos tudnivalók a C++-ban.</p>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Téglalapok és körök: alakzatok</a>
+                      <li><a href="index.html#2" class="">Az új osztályok használata, polimorfizmus</a>
+                      <li><a href="index.html#3" class="">Új típus létrehozása: a sokszög</a>
+                      <li><a href="index.html#4" class="">Mi az, ami öröklés, és mi az, ami nem</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Téglalapok és körök: alakzatok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Téglalapok és körök: alakzatok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+
+<blockquote>
+<p>„Csináljunk egy osztályhierarchiát, amelyik <em>téglalapok</em> és <em>körök</em> adatait képes tárolni. Ezekből az <em>alakzatokból</em> egy ábrát készítünk a képernyőn. Elvárásaink, hogy képesek legyenek elmozdulni vízszintes és függőleges komponensével adott vektorral. Képesek legyenek kirajzolni magukat, és megmondani a területüket. A téglalapokat a bal felső és jobb alsó sarkaikkal adjuk meg, a köröket pedig a középpontjukkal és a sugarukkal. Legyen lehetőség arra, hogy ilyen téglalapokat és köröket vegyesen tároljunk egy tömbben.”</p>
+</blockquote>
+
+<p>A fenti feladatkiírásban szerepel három kulcsszó, amelyek az egyes leírt objektumok közötti kapcsolatot fejezi ki. Ezek a téglalap, a kör és persze az alakzat. Közöttük a hierarchia jelen esetben elég nyilvánvaló; a téglalap is egy alakzat, a kör is egy alakzat. Minden alakzatnak mondhatjuk azt, hogy mozduljon el (9,3) vektorral a képernyőn. Ezzel szemben viszont szélessége csak egy téglalapnak van, a körnek nincs; ahogy sugara is csak a körnek van, a téglalapnak nincs.</p>
+
+<p>Láthatjuk azt, ha külön, függetlenül adjuk meg a téglalap és a kör osztályt, akkor elég sok programrészt meg kell majd ismételnünk; és mivel a téglalap és a kör a C++ számára különböző dolog, külön problémát jelent, hogyan lehetne őket vegyesen tárolni egy tömbben. Kapcsolatba kell hoznunk őket. Az osztályok közötti ilyen jellegű kapcsolatot <em>örökléssel</em> (inheritance) fejezzük ki: minden téglalap egyben alakzat is, és minden kör egyben alakzat is. Az alakzat osztály leszármazottja (subclass, derived class) a kör osztály, és ugyancsak <em>leszármazottja</em> a téglalap osztály. Másképpen: a téglalapnak <em>alaposztálya</em> vagy <em>ősosztálya</em> az alakzat (base class vagy parent class). Első körben annyit nyerünk ezzel, hogy egy adag gépelést megspórolunk; a téglalapokra és körökre nézve közös tulajdonságokat ugyanis már az alakzatokra nézve általánosan megfogalmazhatjuk (code reuse). A nagyobb nyereség a <em>polimorfizmus</em>, vagyis hogy a téglalapok illetve a körök tudnak alakzatként is viselkedni, ha egy olyan műveletet kell végezni, amely értelmes mindkét fajta síkidomra. Ha egy függvény egy alakzatot vár a paraméterként, akkor adhatunk neki egy téglalapot vagy egy kört is, mert a C++ számára is kifejeztük a közöttük lévő kapcsolatot.</p>
+
+<p>Vegyük sorra a tulajdonságaikat:</p>
+<ul>
+    <li>Téglalap: (x1,y1), (x2,y2) sarkok, szín
+        <ul>
+        <li>rajzol: 4 db szakasz</li>
+        <li>mozgatás: eltűnés; (x1,y1), (x2,y2) – mindkettőhöz +(xd,yd); megjelenés</li>
+        <li>terület: (x2-x1)*(y2-y1)</li>
+        </ul>
+    </li>
+    <li>Kör: (xk,yk), sugár, szín
+        <ul>
+            <li>rajzol: kör</li>
+            <li>mozgatás: eltűnés; (xk,yk) középpontokhoz +(xd,yd); megjelenés</li>
+            <li>terület: r<sup>2</sup>*pi</li>
+        </ul>
+</ul>
+
+<p>Ez már kezdi mutatni az öröklődést. Minden, ami téglalap, az alakzat is; van pozíciója és mozgatás függvénye is, ugyanis azokat örökli az ősosztályából, az alakzat osztályból. Írjuk meg, amit eddig tudunk.</p>
+
+<pre   ><code class="language-cbub">class Alakzat {
+  protected: // 4
+    int x, y;
+    int szin;
+  public:
+    Alakzat(int xp, int yp); // 6
+};
+
+/* a Téglalap öröklődik az Alakzatból: */
+class Teglalap: public Alakzat { // 2
+    int sz, m;
+  public:
+    Teglalap(int x1, int y1, int x2, int y2);
+    int terulet() const {
+        return sz * m;
+    }
+};
+
+/* a Kör öröklődik az Alakzatból: */
+class Kor: public Alakzat { // 3
+    int r;
+  public:
+    Kor(int xk, int yk, int sug);
+    double terulet() const {
+        return r * r * 3.14;
+    }
+};
+
+Alakzat::Alakzat(int xp, int yp) { // 1
+    x = xp;
+    y = yp;
+    szin = 1;
+}
+
+Teglalap::Teglalap(int x1, int y1, int x2, int y2)
+    : Alakzat(x1, y1) { // 5
+    sz = x2 - x1;
+    m = y2 - y1;
+}
+
+Kor::Kor(int xk, int yk, int sug)
+    : Alakzat(xk, yk) {
+    r = sug;
+}</code></pre>
+
+<p>Az alakzat osztályhoz lett egy egyszerű konstruktor, amelyik az alakzat pozícióját állítja be a képernyőn (1). A téglalap osztályt örökléssel deklaráltam, vagyis kifejeztem a kódban, hogy a téglalap az egyfajta alakzat (2), ugyanez igaz a körre is (3). Publikus öröklést használok, ami azt jelenti, hogy a téglalap nyilvánosan vállalja, hogy alakzat; vagyis például egy alakzatot váró függvénynek át lehet majd adni. A protected kulcsszó (4) azt jelenti, hogy a tagváltozók kívülről nem elérhetőek, de a leszármazott osztályok tagfüggvényei láthatják. Privát esetén egy téglalap tagfüggvény nem látná például az x változót.</p>
+
+<p class="megjegyzes">Létezik privát öröklés is, de arra nagyjából semmi nem érvényes ebből az írásból, és teljesen mást jelent. Ott nem feltétlenül teljesül a minden-leszármazott-ős-is (minden bogár rovar) kijelentés sem. Általában ha öröklésről beszélnek, publikus öröklést értenek alatta.</p>
+
+<p>Külön magyarázatot érdemel az (5) jelű inicializáló lista. Minden, ami téglalap, az egyben alakzat is. Ha létrehozunk egy téglalapot (az adott sor a téglalap konstruktor része), akkor létrejön egy alakzat is. Az alakzat pedig hogy jön létre? A konstruktorával. Hogy a fordító tudja, hogy az alakzat konstruktornak (amelyből egyetlen egy van, a két int paraméterű, lásd (6)) milyen paramétereket adjon, az inicializáló listán feltüntetjük, hogy hogyan kell létrejönnie a téglalap objektum „alakzat darabjának”. Ha nem adunk meg ilyet, akkor az alakzatot a default, paraméter nélküli konstruktorával próbálná létrehozni, olyan pedig nincs, vagyis jelen esetben kötelező használni ezt. Ami egyébként józan ésszel is látható, mert különben honnan tudná a gép, hogy a négy paraméter közül melyik lesz az alakzat pozíciója? Ha az alakzatnak többféle konstruktora van, akkor pedig így választhatjuk ki, hogy melyikkel jöjjön létre. Azt mondjuk, hogy a leszármazott osztály (téglalap) meghívja az alaposztályának (alakzat) a konstruktorát.</p>
+
+<p>A feladat szerint minden alakzat ki kell tudja számolni a területét; meg is írtuk a körre és a téglalapra ezt, de az alakzatoknál erre nézve semmilyen említést nem tettünk. Ez bajos, mert egy alakzatokat tároló tömbnek nem tudjuk majd minden elemére azt mondani, hogy a területét kérjük; ehhez a fordító számára már az alaposztályban említést kellett volna tennünk a terület függvényről. A terület kiszámítása jelen formában a téglalapoknál és a köröknél mintha két teljesen különálló, egymástól független függvény lenne, a gép számára úgy tűnik, mintha csak véletlenül neveztük volna el őket ugyanúgy. Az alakzatnál viszont <em>semmit nem tudunk írni</em> a terület kiszámításáról, mert az az egyes alakzat fajták esetén más lesz. A két kulcs gondolat a <em>„fajták esetén más”</em> és a <em>„semmit nem tudunk írni”</em>. A következő dolgot írjuk ezért a kódban:</p>
+
+<pre   ><code class="language-cbub">class Alakzat {
+    virtual double terulet() const = 0; // 1
+};
+
+class Teglalap: public Alakzat {
+    double terulet() const {
+        return sz * m;
+    }
+};
+
+class Kor: public Alakzat {
+    double terulet() const {
+        return r * r * 3.14;
+    }
+};</code></pre>
+
+<p>Hogy a közös nevezőt megtaláljuk, a téglalap terület függvénye is double lett. Fontosabb viszont az alakzat osztályban a függvény <em>virtuális</em> (1) megadása. A virtuális fejezi azt ki, hogy az egyes síkidomok, téglalap és kör, <em>tudni fogják magukról</em>, nekik hogyan kell számolniuk a területüket. Ha egy függvénynek átadunk egy alakzatot (pontosabban egy alakzat referenciát, mert nem akarjuk lemásolni egy téglalapnak csak az alakzatokra általában érvényes adatait, hanem nekünk az egész téglalapra szükségünk van), akkor a függvény abból csak azt látja, hogy egy alakzattal van dolga, nem tudja, hogy kör vagy téglalap. Az alakzatnak önmagáról kell tudnia, hogy egy téglalap vagy egy kör, és a területe hogyan számolódik.</p>
+
+<p>Általában ha deklarálunk egy függvényt, akkor meg is kell írni azt, az alakzat területéről viszont <em>semmit nem tudunk mondani</em>. Ezért a sor végére a C-sen szűkszavú „=0”-t biggyesztjük, jelezve ezzel a fordítónak, hogy ezt a függvényt nem fogjuk megvalósítani, ne is keresse. Nem is tudjuk, mert nincsen értelme. Az ilyen függvény neve <em>tisztán virtuális függvény</em> (pure virtual function). Ettől az alakzat osztály egy <em>absztrakt alaposztállyá</em> vált (abstract base class), ami a hétköznapi logika szempontjából is stimmel. Az alakzat egy elvont fogalom; nem kérdezhetem meg, mennyi egy alakzat területe, ha nem mondom meg, hogy milyen alakzatról van szó. Minden alakzatra lesz területképlet, ezért már az alaposztályban említést teszünk róla. Nincs olyan területképlet, amely az összes alakzatra működne, megírni itt még nem lehet. Csak később, a származtatott osztályoknak lesz ilyenjük. A téglalap alakú alakzatokra már van képlet, és a kör alakúakra is van. Mivel elvont osztály lett belőle, a gép innentől kezdve nem is enged majd minket példányt létrehozni belőle (pl. <code>Alakzat a;</code>), mivel nem tudna terület függvényt kapcsolni hozzá, mi viszont azt ígértük, hogy minden alakzatnak van terület függvénye.</p>
+
+<p>Az alakzat mozgatása a terület számításával szemben az összes alakzatnál ugyanúgy működik. Letörlöm a képernyőről az alakzatot, átállítom a koordinátáit, és újra megjelenítem:</p>
+
+<pre   ><code class="language-cbub">void Alakzat::mozgat(int xd, int yd) {
+    rajzol(0);     /* kirajzolom feketével, vagyis háttérszínnel */
+    x += xd;
+    y += yd;
+    rajzol(szin);  /* kirajzolom a rajz színével. */
+}</code></pre>
+
+<p>Ha meg tudnánk mondani, hogyan kell letörölni a képernyőről egy alakzatot, és hogyan kell újra kirajzolni azt, akkor mozgatni is tudnánk. Az alakzat osztályban viszont nem mondhatjuk azt, hogy rajzoljuk ki feketével, meg rajzoljuk ki a saját színével… Mert azt sem tudjuk, hogy néz ki. Ez az előző problémától alig különbözik, a megoldása ugyanaz; egy tisztán virtuális függvény. Az alakzat osztályban deklaráljuk, hogy lesz egy ilyen, a leszármazott osztályok pedig majd meg is valósítják azt. Úgy mozgatjuk az alakzatot (és az összes alakzatot úgy mozgatjuk!), hogy kirajzoljuk háttérszínnel, utána megváltoztatjuk a pozícióját, aztán kirajzoljuk a szokásos színnel.</p>
+
+<pre   ><code class="language-cbub">class Alakzat {
+    void mozgat(int dx, int dy);
+    virtual void rajzol(int szin) = 0;
+};
+
+class Teglalap: public Alakzat {
+    virtual void rajzol(int szin); // 1
+};
+
+class Kor: public Alakzat {
+    virtual void rajzol(int szin); // 2
+};
+
+void Teglalap::rajzol(int szin) {
+    kepernyo.vonal(x, y, x + sz, y, szin);
+    kepernyo.vonal(x, y, x, y + m, szin);
+    …
+}
+
+void Kor::rajzol(int szin) {
+    kepernyo.kor(x, y, r, szin);
+}</code></pre>
+
+<p>Az alakzat osztály mozgat függvénye nem virtuális. Azt nem definiáljuk át a leszármazott osztályokban, az összes alakzatra ugyanúgy működik. Érdemes megfigyelni, hogy a tisztán virtuális függvény segítségével az alakzat előre tudott gondolkodni; hivatkozhatott egy olyan függvényre, amelyet nem ismer, hanem majd csak a leszármazottai valósítják meg. Az egyes leszármazott osztályokban a <code>rajzol()</code> függvény deklarációját újra szerepeltetni kell (1 és 2), ezzel jelezve a fordítónak, hogy az adott osztály megírja (vagy újradefiniálja) a megadott függvényt.</p>
+
+<p class="megjegyzes">Ha nem virtuális egy felüldefiniált függvény, az olyan, mintha „véletlenül” lenne a leszármazott osztálynak egy ugyanolyan nevű függvénye, de annak olyankor semmi köze az alaposztálybeli függvényhez! A polimorfizmust (hogy alakzatot váró függvénynek téglalapot adhatunk) olyankor nem tudjuk kihasználni. Ezért általában az osztályokban lévő, ugyanolyan szerepű, de eltérő működésű függvények, mint pl. a rajzolás és a terület számítása, virtuálisak. Vannak objektum orientált nyelvek, amelyekben csak virtuális függvények vannak.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az új osztályok használata, polimorfizmus">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="heterogen_kollekcio" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Az új osztályok használata, polimorfizmus<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Kezdjünk valamit ezekkel az alakzatokkal, gyűjtsük őket össze egy tömbben. A tömb (vagy bármilyen más tároló) neve ilyenkor <em>heterogén kollekció</em>, ugyanis eltérő típusú (heterogén) objektumokat gyűjt (kollekció) össze. Itt is kell egy közös nevezőt találnunk, mert egy tömb csak teljesen egyforma típusú dolgokat tárolhat. Az biztos, hogy ez nem a téglalap és nem a kör, csak az alakzat lehet. Az alakzatokat magukat viszont nem tárolhatjuk a tömbben, mert akkor elveszítenénk a körökre és téglalapokra nézve specifikus adatokat. A megoldás az alakzatokra mutató pointer, az minden lehetséges típusra nézve közös.</p>
+
+<pre   ><code class="language-cbub">/* 20 elemű, alakzat pointereket tartalmazó tömb */
+Alakzat *rajztabla[20];
+
+rajztabla[0] = new Teglalap(10, 20, 50, 70); // 1
+rajztabla[1] = new Kor(15, 30, 17);
+rajztabla[2] = …
+
+double osszterulet = 0;
+for (int i = 0; i &lt; 20; ++i)
+    osszterulet += rajztabla[i]-&gt;terulet(); // 4
+for (int i = 0; i &lt; 20; ++i)
+    rajztabla[i]-&gt;mozgat(3, 4); // 3
+
+for (int i = 0; i &lt; 20; ++i)
+    delete rajztabla[i]; // 2</code></pre>
+
+<p>Dinamikusan foglaljuk az objektumokat (1), úgyhogy a <code>delete</code> operátorral kell felszabadítani őket (2).</p>
+
+<p>A (4)-as sorban összeadjuk az összes alakzat területét. Itt fontos megfigyelni, hogy a rajztábla típusa alakzatokra mutató pointereket tároló tömb; ennek egy eleme alakzatra mutató pointer. A pointer miatt egyrészt a nyíl operátorral kell hívni a függvényeket, de ami fontosabb, hogy mindenhol látszólag az alakzat osztály terület függvényét hívjuk: <code>Alakzat::terulet()</code>.  Ha nem lenne virtuális a terület számítása, akkor a fordító bele akarná drótozni fixen ugyanazt a képletet minden alakzatra a lefordított programba. Ez viszont nem jó, mert minden alakzatnak más a formája; az alakzatnak magának kell tudnia, hogy mi módon számítódik a területe. Fordítás közben nem lehet eldönteni. Arról nem is beszélve, az egyes alakzatok például menüből lehettek kiválasztva a <em>program futása közben</em>, és akkor végképp nem állnak rendelkezésre a típusaik a fordítás alatt.</p>
+
+<p>A mozgat függvényt bele lehet drótozni, az mindig ugyanúgy működik; csak egy <code>Alakzat::mozgat()</code> létezik. Ezért annak nem kellett virtuálisnak lennie, már a fordításkor látszik, hogy melyik függvényről van szó. Alakzat objektumra mutató pointerre hívjuk meg a mozgat függvényt, ami rendben is van, mert nekünk az <code>Alakzat::mozgat()</code> kell. A területnél nem tudtuk, hogy a <code>Teglalap::terulet()</code> vagy a <code>Kor::terulet()</code> fog kelleni; itt tudjuk. A <code>mozgat()</code> ugyan hív virtuális függvényt, de ez már nem a <code>for()</code> ciklus vagy az alakzat pointer dolga.</p>
+
+<p>Összefoglalva, két esetben van szükség virtuális függvényre:</p>
+<ul>
+    <li>Ha egy leszármaztatott osztály függvényét szeretnénk meghívni az alaposztály pointerén vagy referenciáján keresztül. Ilyen a területszámítás a heterogén kollekcióban (4).</li>
+    <li>Ha az ősosztály valamelyik metódusában egy másik, csak később megvalósított függvényről beszél. Ilyen a rajzolás az <code>Alakzat::mozgat()</code> függvényben.</li>
+</ul>
+
+<p class="megjegyzes">Ez a két dolog persze igazából nem különbözik: az <code>Alakzat::mozgat()</code> függvényben az alaposztály pointerén keresztül
+érjük el a leszármazott osztály <code>rajzol()</code> függvényét. Csak ott a pointer történetesen a <code>this</code>.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Új típus létrehozása: a sokszög">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Új típus létrehozása: a sokszög<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Származtassunk egy új fajta alakzatot, legyen ez a sokszög. Az alakzat osztály minden alakzatnak tárolja a pozícióját a képernyőn; ezért a sokszög osztály belső reprezentációjának válasszuk azt, hogy minden pontját ehhez a ponthoz képest viszonyítunk, vagyis ehhez képest eltolásokat tárolunk. Ez lehetővé teszi azt, hogy a <code>mozgat()</code> függvény megmaradjon, és helyesen működjön a sokszögre is.</p>
+
+<pre   ><code class="language-cbub">class Sokszog: public Alakzat {
+    int csucsok;
+    int *xe;
+    int *ye;
+  public:
+    Sokszog(… valami paraméterek);
+    ~Sokszog();
+    double terulet() const {
+        return … hadd ne :) … ;
+    }
+    void rajzol(int szin);
+};
+
+Sokszog::Sokszog(… valami paraméterek) {
+    …
+    xe = new int[csucsok];
+    ye = new int[csucsok];
+}
+
+Sokszog::~Sokszog() {
+    delete[] xe;
+    delete[] ye;
+}</code></pre>
+
+<p>Hoppá, ennek lett destruktora is! A dinamikus adat miatt muszáj neki. (Meg persze másoló konstruktor és <code>operator=</code> is kellene, hiszen tudjuk, hogy ha a három közül valamelyik kell, akkor általában mindegyik.) És ebből baj is lesz, ha azt írjuk, hogy</p>
+
+<pre   ><code class="language-cbub">rajztabla[4] = new Sokszog(… valami paraméterek);
+…
+delete rajztabla[4];</code></pre>
+
+<p>mert rajztábla az alakzatra mutató pointereket tartalmaz, vagyis a <code>delete rajztabla[4]</code> az <code>Alakzat::~Alakzat()</code> destruktort hívja. A megoldás: virtuális destruktor. A sokszög tudni fogja magáról, hogy neki fel kell szabadítania a tömböket. A körnek és a téglalapnak nincs semmi teendője. Hogy egy függvény virtuális, azt viszont már az alaposztályban jeleznünk kell, vagyis:</p>
+
+<pre   ><code class="language-cbub">class Alakzat {
+    …
+    virtual ~Alakzat() {}
+}</code></pre>
+
+<img class="float" src="orokles.png" style="width: 24em;">
+
+<p>Az alakzat destruktora üres, mert nincsen dolga. Nem tisztán virtuális függvény, meg van valósítva (üres kapcsos zárójelek), csak épp nem csinál semmit. Ezt az üres destruktort örökli a téglalap és a kör is, a sokszög viszont hozzátesz új funkciókat ehhez (jelen esetben a semmihez), felszabadítja a dinamikus tömbjeit. Fontos, hogy erre már az alakzat megírásakor gondolni kell; általában véve jó ötletnek számít, ha egy alaposztálynak virtuális destruktort csinálunk. Sőt ha egy osztálynak van virtuális függvénye, akkor szinte egészen biztos, hogy a destruktora is virtuális kell legyen.</p>
+
+<p>Az öröklési viszonyokat ábrázoló rajz jelölésben hasonlít az UML szabványhoz. A három részre osztott téglalapok fejléce az osztály nevét mutatja; középső része a tagváltozókat, alsó része pedig a metódusokat. Fontos, hogy az öröklést ábrázoló nyíl az ősosztály felé mutat, nem pedig a leszármazott osztály felé! Az ábrát egyébként az ingyenes Doxygen program csinálta, a fenti forráskód részletekből teljesen automatikusan.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mi az, ami öröklés, és mi az, ami nem">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Mi az, ami öröklés, és mi az, ami nem<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Öröklést akkor kell használni, amikor egy „minden micsoda micsoda” jellegű relációt szeretnénk kifejezni az objektumok között. Minden bogár rovar; egy rovar paramétert váró függvénynek adhatunk egy bogarat. Ha valaki arra kér, fogjunk egy rovart, akkor foghatunk egy cserebogarat. Fordítva persze nem igaz; egy bogár paramétert váró függvénynek nem fog engedni a fordító átadni egy rovart. Ezen kívül minden téglalap alakzat. Minden nyomtató számítógép tartozék stb.</p>
+
+<p>Van néhány nem triviális eset. Ilyen például az autó és a motorja közötti kapcsolat. Beszélni szoktunk arról, hogy „beindítjuk az autót”, hogy felírjuk „az autó motorszámát”, hogy „hány lóerős az autó”. Kényelmesnek tűnhet ezért az autót a motorból származtatni, mondván, hogy akkor az autó a megfelelő tagváltozókat (motorszám, lóerő) és a megfelelő tagfüggvényeket (beindítás) örökölni fogja. Ez viszont általában így nem helyes. Az autó nem egyfajta motor. (A bicikli sem egyfajta biciklista!) Az autó <em>tartalmaz</em> egy motort. Ha a motorszámról beszélünk, akkor a motorjának a számáról beszélünk. Ha a teljesítményéről, akkor is a motorjáéról. Ha azt mondjuk, hogy beindítjuk az autót, akkor nem csak a motort indítjuk be, hanem egy rakat egyéb dolgot is csinálunk.</p>
+
+<pre   ><code class="language-cbub">class Auto {
+    char rendszam[10];
+    Motor mot;      /* !!! */
+    void indit() {
+        elektronika_init();
+        lampa_bekapcs();
+        mot.indit();
+    }
+};</code></pre>
+
+<p>Másik nem triviális eset a következő. A kör például nem egyfajta ellipszis, illetve az ellipszis sem egyfajta kör. A kör és az ellipszis között általában nincsen (publikus) öröklési kapcsolat! Azt gondolná az ember, hogy a kör egyfajta ellipszis, azzal a speciális tulajdonsággal, hogy egyforma a két féltengelye. Viszont ha az ellipszis (ősosztály) képes aszimmetrikusan nyúlni: <code>e.nyulik(2.0)</code> hatására az ellipszis kétszer olyan széles lesz, mint magas; a kör meg az ellipszisből öröklődik, akkor örökli a nyúlik függvényt is: <code>k.nyulik(2.0)</code>. Erre mi történjen?! Az ellipszis azt ígérte, hogy képes aszimmetrikusan nyúlni; a kör ezt nem tudja betartani. Akkor a kör nem egyfajta ellipszis.</p>
+
+<p>Ez a másik irányba sem működik: kör alaposztály, ellipszis leszármazott. Ha a körnek van egy <code>átmérő()</code> függvénye, amelyik a sugár duplájával tér vissza, az ellipszis ezt örökli. Hiába próbáljuk felüldefiniálni, nem tudunk értelmes működést kitalálni hozzá. A kör azt ígérte, hogy képes megadni az átmérőjét, a leszármazott osztályoknak is kell tudniuk ilyet. Vagyis az ellipszis nem egyfajta kör, legalábbis objektum orientált szempontból nem. (Megj.: a fenti alakzatos példában lehetne egy ellipszis osztály, amelyből egy kör öröklődne. Azért, mert az ellipszis nem csinál semmi olyat, amit egy kör ne tudna. A kör konstruktor egyforma féltengelyeket adna az ellipszisnek. De onnantól kezdve, ha pl. nyújtó metódust írunk neki, már nem öröklődhet.) Ugyanez a helyzet a madarakkal és a struccokkal kapcsolatban is. Ha kijelentjük, hogy a madarak képesek repülni, akkor a strucc nem madár. Vagyis, ha a madár osztálynak van egy <code>repül()</code> függvénye, amelyik nem jelez hibát, nem dob kivételt, akkor a strucc osztály nem származhat a madár osztályból.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

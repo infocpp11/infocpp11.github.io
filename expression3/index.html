@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: III. rész: Az enum-alapú Visitor</title>
+<meta property="og:title" content="TEST InfoC++11 :: III. rész: Az enum-alapú Visitor">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A Visitor tervezési minta egy egyszerű enum típusú tagváltozó segítségével is megvalósítható. Ehhez típus szerinti switch()-re van szükség, de ez a switch() egyetlen egy helyen jelenik csak meg a kódban.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A Visitor tervezési minta egy egyszerű enum típusú tagváltozó segítségével is megvalósítható. Ehhez típus szerinti switch()-re van szükség, de ez a switch() egyetlen egy helyen jelenik csak meg a kódban.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="III. rész: Az enum-alapú Visitor">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">III. rész: Az enum-alapú Visitor</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A Visitor tervezési minta egy egyszerű enum típusú tagváltozó segítségével is megvalósítható. Ehhez típus szerinti switch()-re van szükség, de ez a switch() egyetlen egy helyen jelenik csak meg a kódban.</p>
+</div>
+
+<p>Az <a href="../expression2/index.html">előző részben</a> refaktorált kódban a Visitor tervezési mintát 
+használva vált szét a kifejezések adatszerkezete a kifejezésfán végezhető műveletektől. A tervezési minta lényege az, hogy
+egy virtuális függvényhívás segítségével a kifejezések típusai szerint különböző függvényeket tudunk hívni. A kifejezések
+típusai szerinti műveletek függvényeit pedig felsoroljuk a Visitor osztályokban.</p>
+
+<p>Apropó felsorolás – azt szoktuk mondani, hogy a virtuális függvények arra valók, hogy az egyes típusokban különféle
+működéseket valósítsunk meg. Tehát lényegében arra, hogy a leszármazási hierarchiában a típus szerinti <code>switch()</code>-elést
+elkerüljük, mert az nem OOP szemléletű, és nehezen karbantartható kódot eredményez. No de igaz ez a Visitor mintát használva?
+Nem egészen. Sőt igazából nem.</p>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az enum alapú Visitor</a>
+                      <li><a href="index.html#2" class="">Karbantarthatóság?</a>
+                      <li><a href="index.html#3" class="">Adatszerkezet</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az enum alapú Visitor">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az enum alapú Visitor<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nézzük át a mostani Visitor megvalósításunkat. A kifejezések interfészén előírunk egy függvényt, amelyet minden leszármazottnak
+meg kell valósítania:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    virtual void accept_visitor(ExpressionVisitor &amp;v) = 0;
+    /* ... */
+};</code></pre>
+
+<p>Ez az a függvény, amely a Visitor-okban a típus szerinti függvényeket visszahívja:</p>
+
+<pre   ><code class="language-c">class ExpressionVisitor {
+  public:
+    virtual void visit_constant(Constant &amp;) = 0;
+    virtual void visit_variable(Variable &amp;) = 0;
+    virtual void visit_sum(Sum &amp;) = 0;
+    virtual void visit_product(Product &amp;) = 0;
+    /* ... */
+};</code></pre>
+
+<p>A kifejezés <code>accept_visitor()</code> meghívásának egyetlen célja, hogy ez az esetszétválasztás megtörténjen. Sőt
+ha minden művelethez ennek az osztálynak a leszármazottait használjuk, akkor igazából ez az egyetlen egy hely a programban,
+ahol ez az esetszétválasztás megtörténik: az <code>accept_visitor()</code> függvény meghívásakor. Akárhány új műveletet
+vettünk fel, ezt már nem kellett újra megcsinálnunk.</p>
+
+<p>Töröljük ki ezért az <code>accept_visitor()</code> függvényeket a kifejezésekből, és tegyünk be helyette egy felsorolt
+típusú változót, amely a kifejezés típusát mutatja. Ezt a változót minden leszármazottban inicializálnunk kell majd
+a megfelelő értékűre:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    enum Type {
+        CONSTANT,
+        VARIABLE,
+        SUM,
+        PRODUCT,
+    };
+    Type const type;
+
+    Expression(Type type) : type(type) {}
+    /* ... */
+};</code></pre>
+
+<p>A <code>type</code> változónak konstansnak kell lennie, nem csak a megosztott memóriakezelésünk miatt, hanem általában is,
+hiszen egy objektum típusa soha nem változhat meg az élete során.</p>
+
+<p>Vigyük végig ezt a változtatást az összes osztályon! A fordító jelezni fogja, ha valahol hibázunk, mert a törölt
+<code>accept_visitor()</code> függvények <code>override</code>-osak voltak, az <code>Expression</code> osztálynak pedig megszűnik
+az alapértelmezett, paraméter nélküli konstruktora.</p>
+
+<p>Ezek után pedig egészítsük ki az <code>ExpressionVisitor</code> ősosztályt a típus szerinti <code>switch()</code>-et tartalmazó
+függvénnyel:</p>
+
+<pre   ><code class="language-c">class ExpressionVisitor {
+  protected:
+    void visit(Expression &amp; e) {
+        switch (e.type) {
+            case Expression::CONSTANT:
+                visit_constant(static_cast&lt;Constant &amp;&gt;(e));
+                break;
+            case Expression::VARIABLE:
+                visit_variable(static_cast&lt;Variable &amp;&gt;(e));
+                break;
+            case Expression::SUM:
+                visit_sum(static_cast&lt;Sum &amp;&gt;(e));
+                break;
+            case Expression::PRODUCT:
+                visit_product(static_cast&lt;Product &amp;&gt;(e));
+                break;
+        }
+    }
+  private:
+    virtual void visit_constant(Constant &amp;) = 0;
+    virtual void visit_variable(Variable &amp;) = 0;
+    virtual void visit_sum(Sum &amp;) = 0;
+    virtual void visit_product(Product &amp;) = 0;
+    /* ... */
+};</code></pre>
+
+<p>Ez a függvény megkapja a kifejezést, és a típus vizsgálata után rögtön tudja, mi a teendője: a megfelelő <code>visit_xxx()</code>
+függvényt meghívni. Egy <code>static_cast</code>-ra most szükségünk van.</p>
+
+<p>Vegyük észre, hogy ez az új <code>visit()</code> függvény nem virtuális. A leszármazottaknak nem kell már ezt implementálniuk,
+csak meghívniuk, amikor egy adott kifejezést fel akarnak dolgozni. Mivel ez a függvény lesz az egyetlen, amelyik a
+<code>visit_xxx()</code> típus szerinti függvényeket meghívja, azok akár lehetnek privátak is, az
+<a href="../ea02/index.html#nvi">NVI (non-virtual interface)</a> C++ tervezési elvnek megfelelően.
+Ha ezt meg tudjuk tenni, az tényleg azt jelenti, hogy csak itt végzünk típus szerinti esetszétválasztást!
+(Egyébként az <code>Expression</code> objektumok <code>type</code> adattagja lehetne privát is, az <code>ExpressionVisitor</code>
+pedig az osztály barátja, hogy csak ő lássa a típust jelző adattagot.)</p>
+
+<p>Egy-két apró változtatás mellett még egy fontos dolgunk van: a Visitor leszármazottaiból az <code>e.accept_visitor(*this)</code>
+hívásokat ki kell törölni, mert nincsen már rá szükség. Helyette az <code>ExpressionVisitor</code> ősosztály <code>visit()</code>
+függvényét hívjuk meg, mert most már az végzi az esetszétválasztást:</p>
+
+<pre   ><code class="language-c">class ExpressionPrinter final: public ExpressionVisitor {
+  public:
+    void print(Expression &amp;e) {
+        visit(e);
+    }
+    /* ... */
+};</code></pre>
+
+<p>Az elkészült változat letölthető innen: <a href="expression_enum.cpp">expression_enum.cpp</a>.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Karbantarthatóság?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Karbantarthatóság?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Kérdés, hogy ezzel a kód karbantarthatósága hogy változik. A típus szerinti <code>switch()</code>-re azt szokták mondani, hogy
+az ennek az ellensége, de most a tervezési mintának köszönhetően ez egyetlen egy helyre került. </p>
+
+<p>Mi a teendőnk, ha új műveletet szeretnénk?</p>
+<ul>
+    <li>Egyetlen dolgunk van: leszármazni az <code>ExpressionVisitor</code> osztályból, és megvalósítani a kifejezésekre jellemző
+    műveleteket. Ez ugyanolyan egyszerű, mint eddig.</li>
+</ul>
+
+<p>Mi a teendőnk, ha új típust szeretnénk?</p>
+<ul>
+    <li>Először is, le kell származni az ősosztályból, és megvalósítani az új osztályt. Ezt eddig is meg kellett volna tennünk.</li>
+    <li>Az előzőhöz szükségünk lesz az ősosztály módosítására, mivel a felsorolt típust ki kell egészítenünk egy új értékkel.
+        Ez többlet munka az eddigiekhez képest, cserébe viszont nem kell <code>accept_visitor()</code> függvényt írnunk a
+        leszármazottban.</li>
+    <li>Az esetszétválasztást végző függvényben lesz egy új, de triviális sorunk. Elméletben ez elfelejthető, a gyakorlatban
+        viszont szinte minden fordító jelezni szokta azt, ha <code>enum</code> típusú értékre <code>switch()</code>-elés esetén
+        a halmaz valamelyik elemét kifelejtettük.
+    <li>Meg kell írnunk a Visitor leszármazottakban az új típust kezelő függvényeket – de ez a virtuális függvényeknél is
+        így lett volna.</li>
+</ul>
+
+<p>Tehát lényegében egy pont ugyanolyan jól karbantartható kódot kaptunk, mint amilyen a tisztán OOP-s megoldás is volt.
+Bár a megoldásunk típus <code>switch()</code>-et tartalmaz, de a Visitor mintának köszönhetően garantáltan csak egyetlen
+egy helyen a kódban. Manapság elég gyakori, hogy így implementálják a Visitor mintát, és nem a klasszikus OOP-s módszerrel.</p>
+
+<p>A program előző verziójából kispóroltam az egyszerűsítést, de érdemes egy kicsit elgondolkozni azon, hogy a típus ismerete
+mennyire leegyszerűsíti a dolgunkat. Az a kód sosem volt szép, a benne lévő <code>dynamic_cast</code>-ok miatt. Pedig azok
+kellettek, mert sok helyen azt akartuk vizsgálni, hogy milyen típusú objektumról van szó. Például a konstans+konstans eset
+vizsgálatához, a saját típuson kívül két további objektum típusát, azaz összesen már hármat. Erre nagyon nehéz lenne szép
+OOP-s megoldást találni. (Visitor<sup>2</sup>...) Most ezt a kódot érthetőbben írhatjuk:</p>
+
+<pre   ><code class="language-c">void ExpressionSimplifier::visit_sum(Sum &amp; s) {
+    auto lhs = /* ... */;
+    auto rhs = /* ... */;
+    if (lhs-&gt;type == Expression::CONSTANT &amp;&amp; rhs-&gt;type == Expression::CONSTANT) {
+        Constant &amp; c1 = static_cast&lt;Constant &amp;&gt;(*lhs);
+        Constant &amp; c2 = static_cast&lt;Constant &amp;&gt;(*rhs);
+        return std::make_shared&lt;Constant&gt;(c1.get_value() + c2.get_value());
+    }
+    /* ... */
+}</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Adatszerkezet">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Adatszerkezet<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Észrevehetjük, hogy az előző átalakítással a kifejezések tagfüggvényei teljesen eltűntek. Mindegyik osztály csak konstruktorokat
+és gettereket tartalmaz. A gettereknek nincs sok haszna, mert konstans adattagokat használtunk, de a tagfüggvények hiánya azt
+jelenti, hogy az osztályok most már igazából struktúrák. A kifejezés osztályhierarchia tisztán csak egy adatszerkezetet ad meg.
+Semmit nem csinál, mert minden műveletet a fát feldolgozó Visitor objektumok végeznek el.</p>
+
+<p>Ezért elvégezhetünk egy utolsó változtatást a kódon: a kifejezéseket struktúrákká alakíthatjuk, a Visitor leszármazottakból
+pedig a getter hívásokat törölhetjük. Egyetlen egy dologra kell figyelnünk: az <code>Expression</code> ősosztály virtuális
+destruktora meg kell maradjon! Erre szükségünk van, mint mindig: a kétoperandusú kifejezések okos pointereket tartalmaznak,
+és ezek destruktorait meg kell hívni. Viszont ha már van virtuális destruktorunk, akkor végülis van egy függvényünk, amit
+tisztán virtuálissá tehetünk, így az osztály absztrakt lehet. Csak ne felejtsük el definiálni is!</p>
+
+<pre   ><code class="language-c">struct Expression {
+    /* ... */
+    virtual ~Expression() = 0;
+};
+
+inline Expression::~Expression() {}</code></pre>
+
+<div class="megjegyzes csik">
+<h3>Tisztán virtuális destruktor?</h3>
+<p>A destruktor, bár speciális szerepű, automatikusan hívódó függvény, igazából ugyanolyan tagfüggvénye az osztálynak,
+mint bármelyik más. Ugyanazzal a szintaxissal hívható, lehet virtuális is – sőt, még akár tisztán virtuális is.</p>
+<p>Tudni kell azonban azt, hogy a fordító a leszármazott osztályok destruktorát automatikusan definiálni fogja majd, ha
+mi nem tettük meg. Vagy ha igen, akkor is beleérti majd azt, hogy az ősosztály destruktorát meg kell hívni. Emiatt,
+bár az ősben a destruktor tisztán virtuális, külön definiálnunk kell azt, hogy a leszármazottból legyen mit meghívni.</p>
+<p>Vajon lehet ilyet? Igen, lehet – egy tisztán virtuális függvénynek létezhet definíciója is, amit explicit minősítéssel,
+a virtuális függvényhívás mechanizmusának megkerülésével, meg is lehet hívni: <code>obj.Osztály::fv()</code>. Amikor
+a leszármazottban definiáljuk (vagy a fordító definiálja magától) a destruktort, akkor ez az explicit minősítés persze
+implicitté válik, mert a konstruktorok és a destruktorok futásakor a virtuális függvények nem virtuálisak. Tehát
+az egész végülis olyan, mintha a „<code>virtual ~Expression() = 0 {}</code>” kódot írnánk, csak ilyet nem írhatunk,
+mert ez szintaktikai hibás. Ezért külön, az osztályon kívül kell definiálni a függvényt, akár <code>{}</code>, akár
+<code>= default</code> jelöléssel.</p>
+<p>Olyankor szokás a destruktort tisztán virtuálisnak minősíteni, amikor absztrakt osztályt szeretnénk létrehozni, de nincs más
+függvény, amit tisztán virtuálissá tehetnénk. Destruktora minden osztálynak van, az ősosztályoknak pedig virtuális destruktora
+kell legyen – így az biztosan jó lesz erre. A kifejezésekkel épp így történt. A példányosítás megakadályozására
+egyébként használhatnánk egy <code>protected</code> konstruktort is.</p>
+</div>
+
+<p>A végleges változat kódja alább látható, vagy letölthető innen is: <a href="expression_enum.cpp">expression_public.cpp</a>.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+
+/* ADATSZERKEZET */
+
+struct Expression {
+    enum Type {
+        CONSTANT,
+        VARIABLE,
+        SUM,
+        PRODUCT,
+    };
+    Type const type;
+
+    Expression(Type type) : type(type) {}
+    
+    Expression(Expression const &amp;) = default;
+    Expression(Expression &amp;&amp;) = default;
+    Expression &amp; operator=(Expression const &amp;) = default;
+    Expression &amp; operator=(Expression &amp;&amp;) = default;
+    virtual ~Expression() = 0;
+};
+
+inline Expression::~Expression() {}
+
+
+struct Constant final : Expression {
+    double const c;
+
+    Constant(double c): Expression(CONSTANT), c(c) {}
+};
+
+
+struct Variable final : Expression {
+    Variable(): Expression(VARIABLE) {}
+};
+
+
+struct TwoOperand : Expression {
+    std::shared_ptr&lt;Expression&gt; const lhs, rhs;
+
+  protected:
+    TwoOperand(Type type, std::shared_ptr&lt;Expression&gt; lhs, std::shared_ptr&lt;Expression&gt; rhs)
+        : Expression(type), lhs(lhs), rhs(rhs) {}
+};
+
+
+struct Sum final : TwoOperand {
+    Sum(std::shared_ptr&lt;Expression&gt; lhs, std::shared_ptr&lt;Expression&gt; rhs)
+        : TwoOperand(SUM, lhs, rhs) {}
+};
+
+
+struct Product final : TwoOperand {
+    Product(std::shared_ptr&lt;Expression&gt; lhs, std::shared_ptr&lt;Expression&gt; rhs)
+        : TwoOperand(PRODUCT, lhs, rhs) {}
+};
+
+/* MŰVELETEK */
+
+class ExpressionVisitor {
+  protected:
+    void visit(Expression &amp; e) {
+        switch (e.type) {
+            case Expression::CONSTANT:
+                visit_constant(static_cast&lt;Constant &amp;&gt;(e));
+                break;
+            case Expression::VARIABLE:
+                visit_variable(static_cast&lt;Variable &amp;&gt;(e));
+                break;
+            case Expression::SUM:
+                visit_sum(static_cast&lt;Sum &amp;&gt;(e));
+                break;
+            case Expression::PRODUCT:
+                visit_product(static_cast&lt;Product &amp;&gt;(e));
+                break;
+        }
+    }
+  private:
+    virtual void visit_constant(Constant &amp;) = 0;
+    virtual void visit_variable(Variable &amp;) = 0;
+    virtual void visit_sum(Sum &amp;) = 0;
+    virtual void visit_product(Product &amp;) = 0;
+
+  public:
+    ExpressionVisitor() = default;
+    ExpressionVisitor(ExpressionVisitor const &amp;) = default;
+    ExpressionVisitor(ExpressionVisitor &amp;&amp;) = default;
+    ExpressionVisitor &amp; operator=(ExpressionVisitor const &amp;) = default;
+    ExpressionVisitor &amp; operator=(ExpressionVisitor &amp;&amp;) = default;
+    
+    virtual ~ExpressionVisitor() {}
+};
+
+
+class ExpressionPrinter final: public ExpressionVisitor {
+  private:
+    std::ostream &amp;os_;
+
+    void print_twooperand(TwoOperand &amp;t, char op) {
+        os_ &lt;&lt; '(';
+        print(*t.lhs);
+        os_ &lt;&lt; op;
+        print(*t.rhs);
+        os_ &lt;&lt; ')';
+    }
+
+    virtual void visit_constant(Constant &amp;c) override {
+        os_ &lt;&lt; c.c;
+    }
+    
+    virtual void visit_variable(Variable &amp;v) override {
+        os_ &lt;&lt; 'x';
+    }
+    
+    virtual void visit_sum(Sum &amp;s) override {
+        print_twooperand(s, '+');
+    }
+    
+    virtual void visit_product(Product &amp;p) override {
+        print_twooperand(p, '*');
+    }
+
+  public:
+    explicit ExpressionPrinter(std::ostream &amp;os) : os_(os) {}
+    
+    void print(Expression &amp;e) {
+        visit(e);
+    }
+};
+
+
+std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Expression &amp;e) {
+    ExpressionPrinter ep(os);
+    ep.print(e);
+    return os;
+}
+
+
+class ExpressionEvaluator final: public ExpressionVisitor {
+  private:
+    double x_;
+    double result_;
+
+    void evaluate_twooperand(TwoOperand &amp;t, double (*do_op)(double, double)) {
+        double left = evaluate(*t.lhs);
+        double right = evaluate(*t.rhs);
+        result_ = do_op(left, right);
+    }
+
+    virtual void visit_constant(Constant &amp;c) override {
+        result_ = c.c;
+    }
+    
+    virtual void visit_variable(Variable &amp;v) override {
+        result_ = x_;
+    }
+    
+    virtual void visit_sum(Sum &amp;s) override {
+        evaluate_twooperand(s, [](double a, double b) { return a+b; });
+    }
+    
+    virtual void visit_product(Product &amp;p) override {
+        evaluate_twooperand(p, [](double a, double b) { return a*b; });
+    }
+
+  public:
+    explicit ExpressionEvaluator(double x) : x_(x) {}
+    
+    double evaluate(Expression &amp;e) {
+        visit(e);
+        return result_;
+    }
+};
+
+/* KLIENS */
+
+int main() {
+    std::shared_ptr&lt;Expression&gt; c = 
+                    std::make_shared&lt;Product&gt;(
+                        std::make_shared&lt;Constant&gt;(5),
+                        std::make_shared&lt;Sum&gt;(
+                            std::make_shared&lt;Constant&gt;(3),
+                            std::make_shared&lt;Variable&gt;()
+                        )
+                    );
+    std::cout &lt;&lt; &quot;f(x) = &quot; &lt;&lt; *c &lt;&lt; std::endl;
+    ExpressionEvaluator ee(3);
+    std::cout &lt;&lt; &quot;f(3) = &quot; &lt;&lt; ee.evaluate(*c) &lt;&lt; std::endl;
+}
+</code></pre>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

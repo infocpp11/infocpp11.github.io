@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: II. rész: Adatszerkezet és tevékenységek</title>
+<meta property="og:title" content="TEST InfoC++11 :: II. rész: Adatszerkezet és tevékenységek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A kifejezésfákon dolgozó tevékenységek kiszervezése külön osztályokba: a Visitor (látogató) tervezési minta.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A kifejezésfákon dolgozó tevékenységek kiszervezése külön osztályokba: a Visitor (látogató) tervezési minta.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="II. rész: Adatszerkezet és tevékenységek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">II. rész: Adatszerkezet és tevékenységek</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A kifejezésfákon dolgozó tevékenységek kiszervezése külön osztályokba: a Visitor (látogató) tervezési minta.</p>
+</div>
+
+<p>Előzőleg <a href="../ea02/index.html#kifejezesfa">az előadáson bemutatott</a> kifejezésfás programot fejlesztettem 
+tovább, egy <a href="../expression1/index.html">okos pointerekre épülő memóriakezeléssel</a> egyszerűsítve a 
+programot. Az osztályhierarchia és a tevékenységek szétválasztása céljából a Visitor OOP tervezési mintát használom.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Adatszerkezet és műveletek?</a>
+                      <li><a href="index.html#2" class="">A Visitor minta egy egyszerű példán</a>
+                      <li><a href="index.html#3" class="">A tervezési minta alkalmazása a kifejezésfán</a>
+                      <li><a href="index.html#4" class="">A végeredmény</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Adatszerkezet és műveletek?">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Adatszerkezet és műveletek?<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Van egy dolog, ami nem igazán stimmel ezzel a programmal. Vessünk egy pillantást ennek megértéséhez a kétoperandusú
+kifejezések osztályára!</p>
+
+<pre   ><code class="language-c">class TwoOperand : public Expression {
+  public:
+    TwoOperand(std::shared_ptr&lt;Expression&gt; lhs, std::shared_ptr&lt;Expression&gt; rhs);
+    virtual double evaluate(double x) const override final;
+    virtual void print(std::ostream &amp;os) const override final;
+
+  private:
+    virtual char get_operator() const = 0;
+    virtual double do_operator(double lhs, double rhs) const = 0;
+
+  protected:
+    std::shared_ptr&lt;Expression&gt; const lhs_, rhs_;
+};</code></pre>
+
+<p>Azt vehetjük itt észre, hogy ennek az osztálynak két feladata van. Egyrészt egy adatszerkezetet ad meg: ebből épül majd a 
+kifejezések bináris fája. Másrészt pedig műveleteket definiál: kiértékelés, kiírás, ezeken kívül a többi osztályban volt még 
+deriválás és egyszerűsítés is. Ez azért probléma, mert így egy új műveletet nem tudunk anélkül hozzáadni, hogy ne kellene az összes 
+osztályt módosítani. Egy új művelethez az ősbe előbb egy virtuális függvényt tennénk, aztán megnyitnánk az összes leszármazottat,
+és implementálnánk azt a függvényt. Ezzel szemben, ha új típust veszünk föl (pl. hatványozás), akkor mindegyik eddigi lezárva
+marad, csak egy új osztályt írunk és kész. Nem csak egy új típus, hanem egy új művelet hozzáadása is ennyire egyszerű kellene
+legyen.</p>
+
+<p>Mindezt pontosan az okozza, hogy dupla szerepe van az osztálynak. Szét kellene valahogyan választani a kettőt: az
+adatszerkezetnek a műveletektől függetlenül kellene tudnia létezni, mégis valahogy a műveleteknek tudniuk kellene, hogy
+épp milyen típusú adaton (összeg, szorzat stb.) dolgoznak. Erre való a Visitor tervezési minta.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A Visitor minta egy egyszerű példán">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A Visitor minta egy egyszerű példán<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A látogató (Visitor) tervezési mintát egy másik, egyszerűbb példán szokás megmutatni.</p>
+
+<p>Tegyük fel, hogy az a feladatunk, hogy kapunk egy heterogén kollekciót (pl. alakzatok), és meg kell mondanunk, hogy az egyes 
+objektum típusokból (pl. kör, téglalap) hány darab van. Ehhez legegyszerűbb megoldásként csinálnánk egy struktúrát, benne
+a számlálókkal, aztán odaadnánk azt az összes alakzat valamelyik virtuális függvényének. A függvények pedig a típusnak megfelelő
+számlálót növelnék:</p>
+
+<pre   ><code class="language-c">struct ShapeCounter {
+    int circles = 0;
+    int rectangles = 0;
+};
+
+class Shape {
+  public:
+    virtual void count(ShapeCounter &amp; counter) = 0;
+};
+
+class Circle final : public Shape {
+  public:
+    virtual void count(ShapeCounter &amp; counter) override {
+        counter.circles += 1;
+    }
+};
+
+class Rectangle final : public Shape {
+  public:
+    virtual void count(ShapeCounter &amp; counter) override {
+        counter.rectangles += 1;
+    }
+};
+
+ShapeCounter c;
+for (auto shape : my_shapes)
+    shape-&gt;count(c);
+std::cout &lt;&lt; c.circles &lt;&lt; &quot; circles and &quot; &lt;&lt; c.rectangles &lt;&lt; &quot; rectangles.\n&quot;;</code></pre>
+
+<p>A probléma tehát az, hogy ehhez módosítani kellett az alakzatokat. És persze az is, hogy az egyes számlálókat
+növelő kódrészleteket szét kellett szórni ezekbe az osztályokba.</p>
+
+<p>Csináljunk ezért a <code>ShapeCounter</code> struktúrából osztályt! A műveleteket, a számlálók növelését tegyük
+át ebbe, bízzuk azt a <code>ShapeCounter</code> tagfüggvényeire!</p>
+
+<pre   ><code class="language-cbub">class ShapeCounter {
+  private:
+    int circles = 0;
+    int rectangles = 0;
+  public:
+    void count_circle() {
+        circles += 1;
+    }
+    void count_rectangle() {
+        rectangles += 1;
+    }
+};
+
+class Circle final : public Shape {
+  public:
+    virtual void count(ShapeCounter &amp; counter) override {
+        counter.count_circle();
+    }
+};
+
+class Rectangle final : public Shape {
+  public:
+    virtual void count(ShapeCounter &amp; counter) override {
+        counter.count_rectangle();
+    }
+};</code></pre>
+
+<p>Így a műveletek összegyűltek az osztályban, ez jó jelnek tűnik! Az alakzatokban lévő <code>count()</code>
+függvények pedig nagyon egyszerűek, csak annyi a dolguk, hogy meghívják a <code>ShapeCounter</code> megfelelő típushoz
+tartozó függvényét – mivel a saját típusukat ismerik a <code>Shape::count()</code> függvény virtuális volta miatt,
+<code>dynamic_cast</code> sem kell.</p>
+
+<p>A fenti elv a Visitor tervezési minta alapötlete: az alakzatokba, tehát a feldolgozni kívánt heterogén kollekció osztályaiba 
+(itt: <code>Circle</code>, <code>Rectangle</code>) szigorúan csak annyit írunk, hogy a műveletet végző, a heterogén kollekció 
+elemeit feldolgozó objektum (itt: a <code>ShapeCounter</code>) adott típusra jellemző függvényét meghívjuk (itt: 
+<code>count_circle()</code>, <code>count_rectangle()</code>). Ez azért érdekes, mert a <code>ShapeCounter</code> valami egészen más 
+is lehetne. A <code>count_circle()</code> és <code>count_rectangle()</code> függvények akár virtuális függvények is lehetnének, 
+<code>process_circle()</code> és <code>process_rectangle()</code> néven, egy <code>ShapeProcessor</code> ősosztály interfészét 
+megvalósítva. Az egyes alakzatokban lévő <code>process_xxx()</code> hívások a tevékenységektől már teljesen függetlenek. Az 
+alakzatok függvényei átadhatnák a <code>process_xxx()</code> függvényeknek saját magukat, így a feldolgozó objektum látná az 
+alakzatok adatait is. Így az alábbi kódot kapjuk:</p>
+
+<pre   ><code class="language-c">class ShapeProcessor {
+  public:
+    virtual void process_circle(Circle &amp; c) = 0;
+    virtual void process_rectangle(Rectangle &amp; r) = 0;
+};
+
+class Circle final : public Shape {
+  public:
+    virtual void accept_shapeprocessor(ShapeProcessor &amp; p) const override {
+        p.process_circle(*this);
+    }
+};
+
+class Rectangle final : public Shape {
+  public:
+    virtual void accept_shapeprocessor(ShapeProcessor &amp; p) const override {
+        p.process_rectangle(*this);
+    }
+};
+
+ShapeCounter counter;
+for (auto shape : my_shapes)
+    shape-&gt;accept_shapeprocessor(counter);   /* counter.count(shape); */
+
+ShapeDrawer drawer;
+for (auto shape : my_shapes)
+    shape-&gt;accept_shapeprocessor(drawer);    /* drawer.draw(shape); */</code></pre>
+
+<p>Ennek a kódnak érdemes jól megfigyelni, megérteni a működését. Amikor a heterogén kollekciót feldolgozzuk, minden alakzatnál
+két függvényhívás történik. Először is, meghívjuk az adott alakzat <code>accept_shapeprocessor()</code> függvényét, amely paraméterként
+kap egy <code>ShapeProcessor</code>-t. Ez az objektum fogja majd elvégezni a tevékenységet: számlálás, kirajzolás stb. Az
+<code>accept_shapeprocessor()</code> függvényhívás virtuális, a kör, téglalap stb. osztályok függvénytörzseibe jutunk általa, tehát
+olyan helyre a programban, ahol az alakzat konkrét típusa ismert. Itt tehát az adott <code>ShapeProcessor</code> alakzat
+típusa szerinti függvénye, <code>process_circle()</code>, <code>process_rectangle()</code> stb. meghívható. Ezen a ponton
+az alakzat típusok szerinti esetszétválasztás megtörtént. A meghívott <code>process_xxx()</code> függvények pedig szintén
+virtuálisak, azokat pedig az adott tevékenységet végző <code>ShapeProcessor</code> valósítja meg olyan módon, hogy az
+adott tevékenységet, a számlálást vagy a kirajzolást elvégezze. Ezek paraméterként kapják az alakzatot, ráadásul ismert
+típussal, és így tudnak dolgozni vele.</p>
+
+<p>Kényelmi céllal írhatunk még függvényeket a <code>ShapeProcessor</code>-ok számára, hogy az alakzatok feldolgozását
+elindítsuk. A <code>counter.count(shape)</code> például jobban kifejezi, hogy a számláló dolgozik az alakzaton, elvégre is
+a számláló az, aki a tevékenységet végzi, nem az alakzat.</p>
+
+<div class="megjegyzes csik">
+<h3>A Visitor tervezési minta mint a „multiple dispatch” megvalósítása</h3>
+
+<p>A függvényhívásoknál az angol szakirodalom <a href="../ea10/index.html#dispatch">„dispatch”-nek nevezi</a> azt az
+esetszétválasztás jellegű műveletet, amellyel objektumok típusa, tulajdonságai szerint választunk több művelet közül. A C++ két
+ilyen mechanizmust tartalmaz: az egyik a függvénynév-túlterhelés, a másik pedig a virtuális függvény. Az előbbi fordítási időben
+történik, míg az utóbbi futási időben. Túlterheléssel lehetséges több objektum típusa szerinti esetszétválasztást is csinálni
+(multiple dispatch), például <code>f(int|double, int|double)</code> mind a négy variációja létezhet. A virtuális függvény viszont csak
+egyetlen objektum típusa alapján választ (single dispatch): amelyik objektumnak a tagfüggvényéről van szó.</p>
+
+<p>A Visitor tervezési mintával lényegében futási idejű „multiple dispatch”-re nyílik lehetőség. Futási időben dőlhet el, hogy
+milyen alakzatról van szó, és az is, hogy mit csinálunk vele. Ezért kellett a két virtuális függvény: a két típus szerinti
+esetszétválasztást (alakzatok és tevékenységek) vezettük vissza két egymás utáni esetszétválasztásra (először az alakzat,
+aztán a tevékenység típusa szerint). Kellemes mellékhatás, hogy közben az alakzat osztályhierarchiától a tevékenységek is
+különváltak.</p>
+
+<p>A <code>ShapeProcessor</code> osztályokban elvileg lehetséges lenne az egyes <code>process_xxx()</code> függvényeket egyformán 
+elnevezni. Ez azért van így, mert az őket hívó, alakzatonkénti <code>accept_shapeprocessor()</code> függvényekben a 
+<code>*this</code> típusa az alakzat konkrét típusa szerinti, és a függvénynév túlterheléseket feloldó mechanizmus ki tudná 
+választani a megfelelőt közülük:</p>
+
+<pre   ><code class="language-c">class ShapeProcessor {
+  public:
+    virtual void process(Circle &amp; c) = 0;
+    virtual void process(Rectangle &amp; r) = 0;
+};</code></pre>
+
+<p>De ez nem annyira jó ötlet, igazából rontja a kód olvashatóságát, érhetőségét. Csak elrejtjük vele, hogy az
+<code>accept_processor()</code> függvényekben mi is történik igazából, mert mindegyikben <code>process(*this)</code>
+lesz formailag a kód, és nem fog látszani a különbség.</p>
+</div>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A tervezési minta alkalmazása a kifejezésfán">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A tervezési minta alkalmazása a kifejezésfán<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fentiek alapján az adatszerkezetet és a tevékenységeket el tudjuk választani egymástól. Két osztályhierarchiát
+fogunk kapni ezáltal: a kifejezésfa típusait (konstans, összeg, szorzat), és a tevékenységeket (kiírás, kiértékelés, deriválás).
+Új tevékenység hozzáadásához elegendő lesz csak a tevékenység ősosztályból, tehát a Visitor-ból leszármazni.</p>
+
+<p>Első lépésként a kifejezések ősosztályából az egyes tevékenységek virtuális függvényeit (<code>print()</code>, <code>evaluate()</code>
+stb.) törölhetjük. Az összeset helyettesíti az <code>accept_visitor()</code> függvény:</p>
+
+<pre   ><code class="language-cbub">class ExpressionVisitor;
+
+class Expression {
+  public:
+    virtual void accept_visitor(ExpressionVisitor &amp;v) = 0;  // print, evaluate, ... helyett
+
+    Expression() = default;
+    Expression(Expression const &amp;) = default;
+    Expression(Expression &amp;&amp;) = default;
+    Expression &amp; operator=(Expression const &amp;) = default;
+    Expression &amp; operator=(Expression &amp;&amp;) = default;
+
+    virtual ~Expression() {}
+};</code></pre>
+
+<p>Ezen felül, a tevékenységeket végző osztályok interfészét, a Visitor-t is definiáljuk:</p>
+
+<pre   ><code class="language-cbub">class Expression;
+class Constant;
+class Variable;
+class Sum;
+class Product;
+
+class ExpressionVisitor {
+  public:
+    virtual void visit_constant(Constant &amp;) = 0;            // ahányféle kifejezés van
+    virtual void visit_variable(Variable &amp;) = 0;
+    virtual void visit_sum(Sum &amp;) = 0;
+    virtual void visit_product(Product &amp;) = 0;
+    
+    ExpressionVisitor() = default;
+    ExpressionVisitor(ExpressionVisitor const &amp;) = default;
+    ExpressionVisitor(ExpressionVisitor &amp;&amp;) = default;
+    ExpressionVisitor &amp; operator=(ExpressionVisitor const &amp;) = default;
+    ExpressionVisitor &amp; operator=(ExpressionVisitor &amp;&amp;) = default;
+    
+    virtual ~ExpressionVisitor() {}
+};</code></pre>
+
+<p>Utána pedig két feladatunk van:</p>
+
+<ul>
+    <li><p>Az egyes konkrét kifejezés osztályokban az <code>accept_visitor()</code> függvényeket definiáljuk.
+    Ezek triviális, egy soros függvények, amelyeket a minta alapján kell elkészíteni; ha valamelyik kimarad,
+    a fordító szólni fog, mert az interfész függvényét mindenképpen implementálni kell. Például:</p>
+<pre   ><code class="language-c">void Constant::accept_visitor(ExpressionVisitor &amp;v) {
+    v.visit_constant(*this);
+}</code></pre>
+    
+    <li>A feldolgozó függvényeket pedig ki kell gyűjteni, a konkrét kifejezés osztályokból törölve, <code>Visitor</code>
+    leszármazottakba áthelyezve. Ha valamelyiket bent felejtenénk, a fordító szintén szólni fog, hiszen ezeket
+    a függvényeket a leszármazottakban mind <code>override</code> kulcsszóval adtuk meg.
+</ul>
+
+<p>Az utóbbi összetettebb feladat. Eddig a kifejezések virtuális függvényei paramétereket is kaphattak, pl.
+a <code>print(std::ostream &amp; os)</code> hogy hova kell kiírni a kifejezést, az <code>evaluate(double x)</code>
+pedig a függvénybe behelyettesítendő értéket. Most viszont a <code>visit_xxx()</code> függvényeknek nem lehet ilyen
+paramétere, mert a Visitor interfésze a tevékenységtől független kell legyen. Ezeket a paramétereket a kifejezéseket
+feldolgozó Visitor objektumokba kell tennünk, mint ahogy azt funktoroknál szoktuk. Például a kiírásnál így:</p>
+
+<pre   ><code class="language-cbub">class ExpressionPrinter final: public ExpressionVisitor {
+  private:
+    std::ostream &amp;os_;
+
+  public:
+    explicit ExpressionPrinter(std::ostream &amp;os) : os_(os) {}
+
+    void print(Expression &amp;e) {
+        e.accept_visitor(*this);
+    }
+    
+    virtual void visit_constant(Constant &amp;c) override {
+        os_ &lt;&lt; c.get_value();
+    }
+    
+    virtual void visit_variable(Variable &amp;v) override {
+        os_ &lt;&lt; 'x';
+    }
+    
+    virtual void visit_sum(Sum &amp;s) override {
+        print_twooperand(s, '+');
+    }
+    
+    virtual void visit_product(Product &amp;p) override {
+        print_twooperand(p, '*');
+    }
+
+  private:
+    void print_twooperand(TwoOperand &amp;t, char op) { // csak segédfüggvény
+        os_ &lt;&lt; '(';
+        print(*t.get_lhs());
+        os_ &lt;&lt; op;
+        print(*t.get_rhs());
+        os_ &lt;&lt; ')';
+    }
+};</code></pre>
+
+<p>A többi Visitor-nál is hasonlóan gondolkozhatunk. Az egyes <code>visit_xxx()</code> függvények tagváltozókon keresztül
+kommunikálhatnak egymással.</p>
+
+<p>A kétoperandusú kifejezések kiírásánál használtunk eddig egy trükköt: volt egy privát virtuális függvényünk, amellyel a
+kódduplikációt tudtuk elkerülni. Ilyesmire most is van lehetőség. Az <code>ExpressionPrinter</code> osztályunknak tetszőleges
+számú, tetszőlegesen paraméterezhető segédfüggvényt adhatunk. Fent a <code>visit_sum()</code> és a <code>visit_product()</code>
+függvények közösen a <code>print_twooperand()</code> privát függvényt használják. Ez talán még így kényelmesebb is, mert egy
+egyszerű paraméterezés könnyebben érthető, mint a sablonfüggvény. (A fenti kódban a bal és a jobb oldali kifejezés kiírásához
+elvileg egy újabb <code>Printer</code>-t kellene példányosítani, de ez nem fontos. Az új objektum csak ugyanazt az
+<code>std::ostream</code> referenciát tartalmazná, mint ez, tehát ugyanúgy viselkedne.)</p>
+
+
+<p>A kiírásnál volt egy másik trükk, amellyel a kiíró operátort látszólag virtuálissá tudtuk tenni. Ennek lényege az volt, hogy a 
+kiíró operátorból a kifejezés virtuális <code>print()</code> függvényét hívtuk. Erre továbbra is van lehetőség: a kiírás most egy 
+<code>ExpressionPrinter</code> példányosításával fog kezdődni. Az <code>ostream</code>-et ez a konstruktorparaméterben kapja meg,
+a kifejezést pedig a kiírást elindító tagfüggvényének paramétereként:</p>
+
+<pre   ><code class="language-c">std::ostream &amp; operator&lt;&lt;(std::ostream &amp; os, Expression &amp;e) {
+    ExpressionPrinter ep(os);
+    ep.print(e);
+    return os;
+}</code></pre>
+
+<p>A kiértékelést végző osztály hasonlóképp írható meg. Itt is összegyűlnek egy osztályba a kiértékelések metódusai.
+Az eredményt mindegyik függvény a <code>result_</code> tagváltozóba teszi, a kiértékelés befejezése után pedig
+onnan olvassa ki az <code>evaluate()</code> függvény az eredményt:</p>
+
+<pre   ><code class="language-cbub">class ExpressionEvaluator final: public ExpressionVisitor {
+  private:
+    double x_;
+    double result_;
+
+    void evaluate_twooperand(TwoOperand &amp;t, double (*do_op)(double, double)) {
+        double left = evaluate(*t.get_lhs());
+        double right = evaluate(*t.get_rhs());
+        result_ = do_op(left, right);
+    }
+
+  public:
+    explicit ExpressionEvaluator(double x) : x_(x) {}
+    
+    double evaluate(Expression &amp;e) {
+        e.accept_visitor(*this);
+        return result_;
+    }
+    
+    virtual void visit_constant(Constant &amp;c) override {
+        result_ = c.get_value();
+    }
+    
+    virtual void visit_variable(Variable &amp;v) override {
+        result_ = x_;
+    }
+    
+    virtual void visit_sum(Sum &amp;s) override {
+        evaluate_twooperand(s, [](double a, double b) { return a+b; });
+    }
+    
+    virtual void visit_product(Product &amp;p) override {
+        evaluate_twooperand(p, [](double a, double b) { return a*b; });
+    }
+};</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A végeredmény">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A végeredmény<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nézzük meg, mit nyertünk ezzel! Alapvetően a kód hosszabb lett, és látszólag bonyolultabb is,
+mert több osztályunk van, mint eddig. Viszont a karbantarthatóság szempontjából kifejezetten
+előnyös az átalakítás:</p>
+
+<dl>
+    <dt>Lokalitás</dt>
+    <dd>Eddig az egyes műveletekre jellemző függvények szét voltak szórva az osztályokban. Például
+    a kiértékelés lépései öt különböző osztályban is szerepeltek. Most az összes kiértékelő
+    függvény egy osztályban van, az <code>ExpressionEvaluator</code>-ban. Az összes kiírást végző
+    függvény pedig az <code>ExpressionPrinter</code>-ben. A lokalitás előnyös.</dd>
+    
+    <dt>Új művelet hozzáadása</dt>
+    <dd>Mi a helyzet új művelet hozzáadásakor? Eddig egy új művelet miatt a kifejezés ősosztályba
+    tisztán virtuális függvényt kellett tennünk, ami miatt az összes leszármazottat módosítanunk kellett.
+    Most viszont elég csak egy új <code>ExpressionVisitor</code> leszármazottat létrehozni, a kifejezések
+    osztályai változatlanok maradnak.</dd>
+    
+    <dt>Új típus hozzáadása</dt>
+    <dd>Az új típus (pl. hatványozás) hozzáadása eddig egy egyszerű
+    leszármazás volt; benne természetesen a kifejezések összes tagfüggvényét (<code>print()</code>,
+    <code>evaluate()</code> stb.) meg kellett valósítanunk. Most egy kicsit nehezebb a dolgunk, ugyanis
+    az új típus miatt egy új virtuális függvény fog kerülni az <code>ExpressionVisitor</code> interfészbe;
+    hatványozás esetén pl. ez a <code>visit_exponent(Exponent &amp; e)</code> lesz. Emiatt pedig az
+    összes Visitor-t módosítanunk kell – bár igaz, olyan függvénytörzseket fognak kapni, amiket
+    amúgy is meg kellett volna írni. Ez kódsorok számát tekintve több, de tervezésben lényegében
+    ugyanannyi feladat.</dd>
+    
+</dl>
+
+<p>Összefoglalva: ha inkább számítunk arra, hogy később új műveletet kell hozzáadni, akkor a Visitor minta
+alapján megírt program könnyebben karbantartható. Ha valószínűbb, hogy később új típusokat kell hozzáadni,
+akkor lehet jobb maradni a sima, virtuális függvényes változatnál.</p>
+
+<p>Az így refaktorált változat innen tölthető le: <a href="expression_visitor.cpp">expression_visitor.cpp</a>.
+Ez nem tartalmazza a deriválás, egyszerűsítés műveleteket, és a hatványozás típust sem. Az új típus
+és művelet hozzáadása kipróbálható rajta.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

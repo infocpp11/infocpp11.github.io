@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Windows 10 + Valgrind</title>
+<meta property="og:title" content="TEST InfoC++11 :: Windows 10 + Valgrind">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A valgrind memóriakezelés-nyomkövető telepítése Windows 10-re, CLion mellé.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A valgrind memóriakezelés-nyomkövető telepítése Windows 10-re, CLion mellé.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Windows 10 + Valgrind">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Windows 10 + Valgrind</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Bogár Bálint · <i class="ido"></i> 2020.05.28.</p>
+<p class="kivonat">A valgrind memóriakezelés-nyomkövető telepítése Windows 10-re, CLion mellé.</p>
+</div>
+
+<p>A <a href="https://www.valgrind.org/">Valgrind</a> keretrendszerrel egy program memóriakezelési hibái kereshetőek meg. A 
+telepítése és parancssori használata Linuxon nagyon egyszerű (csomagkezelőből telepíthető, aztán <code>valgrind 
+./program</code>), a Windowson történő használat, és fejlesztőkörnyezetekhez kapcsolás sajnos körülményesebb.</p>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az eszközökről</a>
+                      <li><a href="index.html#2" class="">JetBrains licensz igénylés</a>
+                      <li><a href="index.html#3" class="">CLion telepítése</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az eszközökről">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az eszközökről<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A CLion a JetBrains nevű cég által fejlesztett IDE (Integrated Development Environment) C és C++ programozási nyelvekhez. Az 
+IDE-k célja, hogy a szoftverfejlesztők munkáját támogassák különféle eszközökkel. A CLion szerkesztője úgynevezett „on-the-fly code 
+analysis”-t használ, ami annyit takar, hogy a fejlesztőkörnyezet a beírt kódot azonnal elemzi, jelzi a szintaktikai hibákat és 
+számos potenciális szemantikai hibát is (pl. inicializálatlan változó, végtelen ciklus, összehasonlítás helyett értékadás logikai 
+feltételben). A JetBrains a legtöbb fejlesztőkörnyezetéhez, így a CLion-höz is ingyenes hozzáférést biztosít az egyetemi 
+hallgatóknak és oktatóknak.</p>
+
+<p>A Valgrind egy ingyenes, memóriakezelési hibákat felderítő eszköz. 2017 óta a CLion támogatja a Valgrind használatát: 
+közvetlenül a fejlesztőkörnyezetből, jól érthető, grafikus formában böngészhetjük a Valgrind vizsgálatának eredményeit. Míg a 
+debugmalloc és memtrace könyvtárak jellemzően csak a szivárgó memória foglalásának sorát jelzik, itt végigkövethető, hogy milyen 
+függvényhívások során jutott el a program a problémás foglaláshoz.</p>
+
+<p>Tapasztalatok alapján az említett eszközök használata megkönnyíti és jelentősen felgyorsítja a hibakeresést, akkor amikor arra a 
+leginkább szükség van: a progházik beadásának napján (természetesen jóval a határidő előtt, a házi készítése során is rengeteg idő 
+spórolható).</p>
+
+<p>Van azonban egy apró bökkenő: a Valgrind Linux-ra készült és csak azon fut, így a Windows rendszerünkön futó CLion hiába tudja 
+nagyon profin megjeleníteni a Valgrind futásának eredményét, a Valgrind-nek nincs futási eredménye, hisz Windows-on nem fut. Emiatt 
+a telepítés egy bizonyos pontján feketemágiát kell alkalmaznunk, ami körülményessé és időigényessé teszi a telepítést, de cserébe a 
+használat valóban egy kattintásos lesz.</p>
+
+<p>Windowson a CLion-Valgrind összehangoláshoz az alábbi rendszerkövetelményeknek kell teljesülnie:</p>
+<ul>
+    <li>64 bites Windows 10 rendszer
+    <li>Windows 10 verzió legalább 1607 (Anniversary update)
+    <li>NEM lehet Windows 10 S (<a href="https://support.microsoft.com/hu-hu/help/4020089/windows-10-in-s-mode-faq">https://support.microsoft.com/hu-hu/help/4020089/windows-10-in-s-mode-faq</a>)
+</ul>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="JetBrains licensz igénylés">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        JetBrains licensz igénylés<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az alábbi oldalon igényelhető az ingyenes licensz: <a href="https://www.jetbrains.com/shop/eform/students">https://www.jetbrains.com/shop/eform/students</a>.</p>
+
+<p>Az igényléshez be kell bizonyítanunk a JetBrains-nek, hogy valóban kapcsolatban állunk az egyetemmel, ennek legegyszerűbb módja, 
+ha van .bme.hu-ra végződő e-mail címünk, ahova megerősítő e-mailt tudnak küldeni. Ilyet többféle módon is szerezhetünk:</p>
+
+<ul>
+    <li>@edu.bme.hu
+        <li><a href="https://login.bme.hu/">https://login.bme.hu/</a> címtárral belépve „Felhasználónév beállítása az oktatási Office 365-höz (edu.bme.hu)”.
+        <li><a href="https://www.office.com/">https://www.office.com/</a> oldalon belépés után az Outlook-ot megnyitva férünk hozzá a postafiókhoz.
+        <li>Hátrányok: a felhasználónév igénylésének átfutási ideje van (manuálisan ellenőrzik).
+    
+    <li>@sch.bme.hu
+        <li><a href="https://webmail.sch.bme.hu/">https://webmail.sch.bme.hu/</a> oldalon SCH account-al belépve férünk hozzá a postafiókhoz.
+</ul>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="CLion telepítése">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        CLion telepítése<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A CLion az alábbi oldalról tölthető le: <a href="https://www.jetbrains.com/clion/download/#section=windows">https://www.jetbrains.com/clion/download/#section=windows</a>. A telepítés alapvetően Next, Next, Finish jellegű.</p>
+
+<h3>A feketemágia</h3>
+
+<p>A varázslat, amit alkalmazni fogunk WSL (Windows Subsystem for Linux, <a href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux</a>) névre hallgat.</p>
+
+<p>Első lépésben aktiválni kell a WSL feature-t a Windows rendszeren.</p>
+
+<ul>
+    <li>Nyissunk egy rendszergazdai módban futó PowerShell-t:
+    <li>Start menü megnyitása után beírjuk, hogy PowerShell
+        <img class="kozep arnyek" src="01powershell.png">
+    <li>Jobb klikk &rarr; Futtatás rendszergazdaként/Run as Administrator
+    <li>Adjuk ki az alábbi parancsot (a konzolba jobb egérgombbal kattintva illeszthetünk be Ctrl+V helyett):
+        <code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code>
+    <li>Indítsuk újra a számítógépet!
+</ul>
+
+<h3>Linux telepítése</h3>
+
+<p>A WSL bekapcsolása után tetszőleges Linux disztribúció telepíthető, esetünkben ez egy Ubuntu lesz.</p>
+
+<ul>
+
+<li>Nyissuk meg a Microsoft Store alkalmazást, a keresőbe írjuk be, hogy Ubuntu. A találatok közül válasszuk ki az Ubuntu 18.04 LTS-t és telepítsük.
+
+<li>Ezután a Start menüben megjelenik az Ubuntu 18.04 LTS alkalmazás, indítsuk el.
+    <img class="kozep arnyek" src="02ubuntu.png">
+
+<li>Egy kis idő után felhasználónevet és jelszót állíthatunk be, ezekre a továbbiakban a segédlet [user], [password] módon hivatkozik.
+</ul>
+
+
+<p>Megjegyzés: A jelszó beállításánál úgy tűnhet, mintha nem írnánk semmit a konzolba, a Linux így rejti el a jelszót csillagozás helyett.</p>
+
+<h3>A szükséges programok telepítése Linux-ra</h3>
+
+<p>A rendszergazda módban futtatni kívánt parancsokat sudo-val kezdjük, ha a parancs beírása után az Ubuntu jelszót kér az előbb beállítottat adjuk meg.</p>
+<ul>
+    <li>Adjuk ki a következő parancsot: sudo apt update
+    <li>Telepítsük a fordítóprogramokat és a Valgrind-et az alább parancs kiadásával: sudo apt-get install cmake gcc clang gdb build-essential valgrind
+</ul>
+
+<p>A telepítés végeztével a Linux rendszerünkön elérhető az összes szükséges fordítóprogram és a Valgrind, ezek később az Ubuntu-t 
+megnyitva bármikor rendelkezésünkre állnak, de a célunk, hogy ezeket a Windows-on futó CLion is lássa és használja.</p>
+
+<h3>Külső hozzáférés a Linux-hoz</h3>
+
+<p>Ahhoz, hogy a CLion csatlakozni tudjon a friss, ropogós Linux rendszerünkhöz, mely el van látva minden földi jóval, az Ubuntu 
+rendszerünket ki kell nyissuk SSH2-ra.</p>
+
+<p>Ez szerencsére nem egy bonyolult feladat, mivel a JetBrains készített egy shell script-et: <a 
+href="https://github.com/JetBrains/clion-wsl/blob/master/ubuntu_setup_env.sh">https://github.com/JetBrains/clion-wsl/blob/master/ubuntu_setup_env.sh</a>, 
+mely gyakorlatilag mindent megcsinál helyettünk.</p>
+
+<p>Adjuk ki az alábbi parancsot:
+<code>wget https://raw.githubusercontent.com/JetBrains/clion-wsl/master/ubuntu_setup_env.sh &amp;&amp; bash ubuntu_setup_env.sh</code>
+</p>
+
+<p>Sikeres lefutás esetén a rendszerünk elérhető kívülről is, ez a következőképp ellenőrizhető:
+<code>ssh [username]@localhost -p2222</code>
+</p>
+
+<p>Ha minden jól ment, a Linux jelszavunk megadása után az alábbihoz hasonló kezdetű üzenet érkezik:</p>
+    <img class="kozep arnyek" src="03ssh.png">
+
+<p>Ezután az Ubuntu bezárható, a továbbiakban nem lesz rá szükségünk.</p>
+
+<h3>CLion beállítása</h3>
+
+<p>A CLion első indításakor aktiválhatjuk az igényelt licence-el, kiválaszthatjuk a témát, valamint a szükséges plugin-okat (az alapértelmezett plugin-ok elegek).</p>
+
+<p>A fordító beállítását az alábbi ablakban kell megtegyük (ha ezt első indításkor bezártuk, File &rarr; Settings &rarr; Build, Execution, Deployment &rarr; Toolchains):</p>
+    <img class="kozep arnyek" src="04toolchain_sablonvalasztas.png">
+
+<p>Válasszuk ki a WSL-t, ekkor az alábbi ablak kell fogadjon, jelezve, hogy az Ubuntu-t megtalálta, de semmi mást nem:</p>
+    <img class="kozep arnyek" src="05toolchain_rossz.png">
+
+<p>Kattintsunk a Credentials melletti fogaskerékre:</p>
+    <img class="kozep arnyek" src="06ssh_credentials.png">
+
+<p>A + gombra kattintás után megadhatjuk az SSL kapcsolódási adatokat, felhasználónévnek és jelszónak a Linux-os adatokat adjuk meg, a többi beállítás a fenti képen látható. Apply után az SSH Configurations ablakot bezárva a Toolchain adatai némi gondolkozás után kizöldülnek:</p>
+    <img class="kozep arnyek" src="07toolchain_jo.png">
+
+<p>Ekkor a CLion képes build-elni és futtatni a projekteket, de a Valgrind-ot még külön meg kell mondjuk neki, hogy hol találja. Ehhez a File &rarr; Settings &rarr; Build, Execution, Deployment &rarr; Dynamic Analysis Tools &rarr; Valgrind beállításnál a Valgrind executable mezőbe írjuk be a következőt: <code>/usr/bin/valgrind</code></p>
+    <img class="kozep arnyek" src="08valgrind_path.png">
+
+<p>Apply és készen vagyunk!</p>
+
+<h3>Használat</h3>
+
+<p>Programjainkat így háromféleképpen futtathatjuk, a képernyő jobb felső sarkában található gombokkal</p>
+<ul>
+ <li><img src="09run_button.png"> Lefordítja és lefuttatja a programot
+ <li><img src="10debug_button.png"> Fordít és futtat debuggerrel (töréspontoknál megáll)
+ <li><img src="11valgrind_button.png"> Fordít és futtat Valgrinddel
+</ul>
+
+<p>Utóbbi lehetőséget választva a képernyő alsó részén a Console mellett megjelenik egy Valgrind fül, mely memóriakezelési hiba esetén sárgán villog:</p>
+
+<img class="kozep arnyek" src="12valgrind_hibajelzes.png"> 
+
+<p>A fület megnyitva kilistázásra kerül az összes felfedett memóriakezelési hiba. Az alábbi példában a main-ből hívtam a rossz_fuggveny()-t, melynek feladata lett volna a foglalo_fuggveny()-ben foglalt memóriát dolga végeztével felszabadítani.</p>
+
+<img class="kozep arnyek" src="13valgrind_output.png"> 
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 9. hét: λ</title>
+<meta property="og:title" content="TEST InfoC++11 :: 9. hét: λ">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 9. hét: λ">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 9. hét: λ">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<link rel="stylesheet" href="hanoi.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+<script src="hanoi.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="9. hét: λ">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">9. hét: λ</h1>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">λ-kifejezések</a>
+                      <li><a href="index.html#2" class="">Feladatok a Solver osztályhoz</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="λ-kifejezések">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_lambda" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        λ-kifejezések<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Függvény építése RPN kifejezésből</h3>
+
+<p>Az RPN jelölésben (Reverse Polish Notation) az operátorokat az operandusokat után írjuk: <code>"2 3 +"</code> jelentése <code>2+3</code>, és <code>"2 3 + x *"</code> jelentése <code>(2+3)*x</code>. Egy ilyen kifejezés egy veremmel könnyen kiértékelhetjük. Pl. konstans feldolgozásához bedobjuk a verembe a számot, műveletnél pedig a verem tetején lévő két számot kell kivenni, elvégezni a műveletet, és az eredményt visszatenni a verembe. A műveletsor végére egyetlen egy szám kell legyen a veremben, ami az eredmény.</p>
+
+<p>Ha függvényt kell előállítani (<code>"2 3 + x *"</code> → <code>(2+3)*x</code>), akkor ugyanígy lehet gondolkodni, csak a veremben függvényeknek kell lenniük. Ebben a feladatban ezt kell megoldanod. Kell egy olyan függvényt írnod, amelyik megkapja a sztringet, és visszatér egy egyváltozós matematikai függvénnyel. Ez utóbbi bárhányszor meghívható, különböző x értékekkel:</p>
+
+<pre   ><code class="language-c">auto f = create_func_from_rpn(&quot;21.7 34.2 x * +&quot;);     // f = 21.7+34.2*x
+
+std::cout &lt;&lt; f(3) &lt;&lt; std::endl;                 // 21.7+34.2*3 értéke
+std::cout &lt;&lt; f(4) &lt;&lt; std::endl;                 // 21.7+34.2*4 értéke
+std::cout &lt;&lt; f(5) &lt;&lt; std::endl;                 // 21.7+34.2*5 értéke</code></pre>
+
+<p>Oldd meg ezt úgy, hogy 1) a sztringet csak egyszer dolgozod fel, a <code>create_func_from_rpn()</code> függvényhíváskor, 2) nem definiálsz saját osztályt, tisztán csak beépített eszközöket használsz! Írj <code>std::move</code>-ot, ahova csak lehet!</p>
+
+<details >
+<summary>Tipp (?)</summary>
+<div>
+<p>Egy képernyőre elfér a kód.</p>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;stack&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+ 
+std::function&lt;double(double)&gt; create_fun_from_rpn(std::string const &amp; rpn) {
+    std::istringstream is(rpn);
+    
+    std::stack&lt;std::function&lt;double(double)&gt;&gt; s;
+    std::string word;
+    while (is &gt;&gt; word) {
+        if (word == &quot;x&quot;) {
+            s.push([](double x) { return x; });
+        }
+        else if (word == &quot;+&quot;) {
+            auto rhs = std::move(s.top()); s.pop();
+            auto lhs = std::move(s.top()); s.pop();
+            s.push([lhs = std::move(lhs), rhs = std::move(rhs)](double x) {
+                return lhs(x) + rhs(x);
+            });
+        }
+        else if (word == &quot;*&quot;) {
+            auto rhs = std::move(s.top()); s.pop();
+            auto lhs = std::move(s.top()); s.pop();
+            s.push([lhs = std::move(lhs), rhs = std::move(rhs)](double x) {
+                return lhs(x) + rhs(x);
+            });
+        }
+        else {
+            double d = std::stod(word);
+            s.push([d](double x) { return d; });
+        }
+    }
+    
+    return std::move(s.top());
+}
+ 
+int main() {
+    std::cout &lt;&lt; &quot;Ird be a fuggvenyt RPN alakban!&quot; &lt;&lt; std::endl;
+    std::string line;
+    std::getline(std::cin, line);
+    auto f = create_fun_from_rpn(line);
+    
+    std::cout &lt;&lt; f(3) &lt;&lt; std::endl;
+    std::cout &lt;&lt; f(4) &lt;&lt; std::endl;
+    std::cout &lt;&lt; f(5) &lt;&lt; std::endl;
+}</code></pre>
+<p>A fenti kód mindenhol <code>std::move()</code>-ot használ a függvény objektumokra. A verem
+<code>.top()</code>-jai körül azért, mert a verembeli példány mindig törlődik
+– <code>.pop()</code>, vagy meg is szűnik – <code>return</code>. A lambdáknál
+pedig azért, mert a lambdába érték szerint szeretnénk tenni a függvényt,
+de belemozgatni is lehet, nem kell másolni.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Hanoi tornyai</h3>
+
+
+
+<div style="width: 20em;" class="float">
+<div>
+    <div id="hanoi1" class="hanoi"></div>
+    <div class="hanoialja"></div>
+</div>
+<div class="kozep">
+   <button onclick="infoc.hanoi1obj.start()">start</button>
+   <button onclick="infoc.hanoi1obj.kovetkezo()">következő</button>
+   <button onclick="infoc.hanoi1obj.folyamatos()">folyamatos</button>
+</div>
+</div>
+
+<p>Klasszikus példa a rekurzióra az ún. Hanoi tornyai játék. Ebben a korongokat át kell tenni az első rúdról a harmadikra,
+de úgy, hogy 1) egyszerre csak egy korongat mozgathatunk, 2) kicsi korongra nagyot nem tehetünk. A középső oszlop ideiglenes
+tárolónak használható.</p>
+
+<p>Négy korong esetén ez a lépéssorozat adja a megoldást: A→B, A→C, B→C, A→B, C→A, C→B, A→B, A→C, B→C, B→A,
+C→A, B→C, A→B, A→C, B→C. A látszólag bonyolult probléma rekurzív megoldása pár soros: n-1 korong mozgatása, alsó
+korong mozgatása, megint n-1 korong mozgatása.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+void hanoi(int n, char honnan, char seged, char hova) {
+    if (n == 0)
+        return;
+    hanoi(n-1, honnan, hova, seged);
+    std::cout &lt;&lt; &quot;Rakd a korongot &quot; &lt;&lt; honnan &lt;&lt; &quot; oszloprol &quot; &lt;&lt; hova &lt;&lt; &quot; oszlopra\n&quot;;
+    hanoi(n-1, seged, honnan, hova);
+}
+
+int main(void) {
+    hanoi(4, 'A', 'B', 'C');
+}</code></pre>
+
+<p>Írd át úgy a programot, hogy a <code>hanoi()</code> függvénynek ötödik paraméterként lehessen átadni,
+mit tegyen a kiírás helyett! Az <code>std::cout...</code> kezdetű sor helyett legyen egy függvényhívás,
+ahol a paraméterként átvett, <code>void(char, char)</code> alakú függvény megkapja a <code>honnan</code>
+és <code>hova</code> oszlopok jeleit!</p>
+
+<ul>
+    <li>Írd meg először úgy, hogy a <code>hanoi()</code> függvény sablon legyen. Az átvett függvény, az ötödik
+        paraméter miatt kell ennek sablonnak lennie.
+    <li>Hívd meg úgy a függvényt, hogy lambda kifejezésben az eredeti kiírást adod meg neki!
+    <li>Módosítsd a lambda kifejezést úgy, hogy be legyenek számozva a lépések!
+    <li>Írd meg úgy is, hogy sablonfüggvény helyett <code>std::function</code> paraméterű legyen a <code>hanoi()</code>
+        függvény! Működik úgy is, ha a lambda kifejezésben C++14-es <code>count = 0</code> capture-specifier-t használsz?
+        Mit kell tenni ahhoz, hogy működjön?
+</ul>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+template &lt;typename FUNC&gt;
+void hanoi(int n, char honnan, char seged, char hova, FUNC f) {
+    if (n == 0)
+        return;
+    hanoi(n-1, honnan, hova, seged, f);
+    f(honnan, hova);
+    hanoi(n-1, seged, honnan, hova, f);
+}
+
+int main(void) {
+    int count = 0;
+    hanoi(4, 'A', 'B', 'C', [&amp;count] (char honnan, char hova) {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;: rakd a korongot &quot; &lt;&lt; honnan &lt;&lt; &quot; oszloprol &quot; &lt;&lt; hova &lt;&lt; &quot; oszlopra\n&quot;;
+    });
+}</code></pre>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+
+/* a függvényt const &amp; kell átvenni, hogy a rekurzióban ne másolódjon le
+ * - mert akkor másolódna a számláló is! */
+void hanoi(int n, char honnan, char seged, char hova,
+           std::function&lt;void(char, char)&gt; const &amp; f)
+{
+    if (n == 0)
+        return;
+    hanoi(n-1, honnan, hova, seged, f);
+    f(honnan, hova);
+    hanoi(n-1, seged, honnan, hova, f);
+}
+
+int main(void) {
+    hanoi(4, 'A', 'B', 'C', [count = 0] (char honnan, char hova) mutable {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;: rakd a korongot &quot; &lt;&lt; honnan &lt;&lt; &quot; oszloprol &quot; &lt;&lt; hova &lt;&lt; &quot; oszlopra\n&quot;;
+    });
+}</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Feladatok a Solver osztályhoz">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Feladatok a Solver osztályhoz<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ezek a feladatok <a href="../ea09/index.html#ea_solver">az előadás Solver osztályához</a> kapcsolódnak.</p>
+
+<h3>Solver osztály – bármilyen típusra</h3>
+
+<p>Az előadás Solver osztálya letölthető a fenti a linkről. Ennek a változatnak van egy sablonparamétere: milyen típusú változókon dolgozik. Meg lehet úgy is oldani a feladatot, hogy erre ne legyen szükség: hogy a Solver különféle típusokon is tudjon dolgozni.</p>
+
+<p>(Ehhez az összetartozó tároló-iterátor párosokból egy osztályt kell csinálni, megszünetetve a párhuzamos
+tömböket. Utána az osztályt kell sablonná tenni, és a különféle <code>Variable&lt;T&gt;</code>-knek pedig egy közös őst kell létrehozni (<em>type erasure</em>), hogy az újdonsült tárolójukban heterogén kollekcióként lehessen tárolni őket.)</p>
+
+<p>Oldd meg így a feladatot! Ha mindent jól csinálsz, az alábbi programrész működni fog:</p>
+
+<pre   ><code class="language-c">int main() {
+    NewSolver t;
+
+    /* Bugyuta példa: kilistázza azokat a (szám;szó) párokat,
+     * amelyeknél hossz(szó) = szám */
+    auto size = t.add_variable({1,2,3,4,5});
+    auto word = t.add_variable({&quot;alma&quot;, &quot;korte&quot;, &quot;barack&quot;});
+    t.add_constraint([=] {
+        return size() == (int) strlen(word());
+    });
+    t.solve([=] {
+        std::cout &lt;&lt; &quot;strlen(&quot; &lt;&lt; word() &lt;&lt; &quot;) = &quot; &lt;&lt; size() &lt;&lt; std::endl;
+    });
+}</code></pre>
+
+
+<h3>Egyediek</h3>
+
+<p>Elég sok olyan feladatot adtunk a laborban <code>Solver</code>-nek, ahol előírtuk azt, hogy az összes tesztelt
+változó értéke különféle kell legyen: ilyen a <code>send+more=money</code> (minden betű értéke különbözik),
+és ilyen az emeletes házas feladat is (mindenki más emeleten lakik).</p>
+
+<p>Egészítsd ki a <code>Solver</code> osztályt megkötés mintákkal! Az egy ilyen minta lehet az, hogy bizonyos
+változók értéke nem lehet egyforma. Például:</p>
+
+<pre   ><code class="language-c">Solver&lt;int&gt; s;
+s.add_alldifferent_constraint({baker, cooper, fletcher, miller, smith});</code></pre>
+
+
+
+
+<h3>Permutáció</h3>
+
+<p>Néhány feladatnál, amit láttunk, ennél is szigorúbb megkötés van: minden értéket hozzá kell rendelnünk egy
+változóhoz, és pontosan annyi változó van, ahány érték. Matematikailag: nem a feltételeknek megfelelő
+variációt, hanem a feltételeknek megfelelő permutációt keresünk. Másképp fogalmazva, nem a halmazok
+Descartes-szorzatával előálló halmazban keressük a megoldást, hanem egyetlen egy halmaz lesz, és annak
+permutációi között.
+
+<p>A nyolckiránynő-probléma pont ilyen: tudjuk, hogy minden sorban egy királynő van, és azt is tudjuk, hogy
+mindegyik oszlophoz pontosan egy királynőt kell rendelni. De tulajdonképp ilyen volt az emeletes házas feladat
+is.</p>
+
+<p>Dolgozd át az osztályt úgy, hogy ne variációk, hanem permutációk keresésére legyen alkalmas, és azokat
+keresse hatékonyan! Vigyázz: ez egy teljes újragondolást jelent.</p>
+
+
+
+
+<h3>send + more = money</h3>
+
+<p>... ahol minden betű különböző, és persze <code>s</code> és <code>m</code> nem lehetnek 0 értékűek, mert
+akkor nem lennének 4, illetve 5 betűsek a számok. Rengeteg ilyen rejtvény van (kapcsolódó Wikipedia szócikk: <a
+href="https://en.wikipedia.org/wiki/Verbal_arithmetic">https://en.wikipedia.org/wiki/Verbal_arithmetic</a>).
+Némelyiknek egy megoldása van (crack + hack = error), másoknak több (four + five = nine).</p>
+
+<p>Írj C++ programot a <code>Solver</code> segítségével (vagy a permutációs változatával, vagy anélkül),
+amelyik általánosságban képes ilyeneket megoldani!</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

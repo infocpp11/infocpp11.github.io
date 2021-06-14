@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Bevezető és C99 nyelvi elemek</title>
+<meta property="og:title" content="TEST InfoC++11 :: Bevezető és C99 nyelvi elemek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="OOP a C és C++ nyelvekben. Struktúrák és tömbök a C99 nyelvben. C99 összetett literális. Változótól függő típusú pointerek.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="OOP a C és C++ nyelvekben. Struktúrák és tömbök a C99 nyelvben. C99 összetett literális. Változótól függő típusú pointerek.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Bevezető és C99 nyelvi elemek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Bevezető és C99 nyelvi elemek</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.04.06.</p>
+<p class="kivonat">OOP a C és C++ nyelvekben. Struktúrák és tömbök a C99 nyelvben. C99 összetett literális. Változótól függő típusú pointerek.</p>
+</div>
+
+<blockquote><p>Az előadáson az 1-5. részek szerepeltek, a többi érdekesség.</p></blockquote>
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Típusok és osztályok</a>
+                      <li><a href="index.html#2" class="">A Ratio osztály és az OOP</a>
+                      <li><a href="index.html#3" class="">C99 jelölt inicializáló adattagok és összetett típusok literálisai</a>
+                      <li><a href="index.html#4" class="">Még többet a C99 tömbökről!</a>
+                      <li><a href="index.html#5" class="">A C99 változó méretű tömbök (variable length array, VLA)</a>
+                      <li><a href="index.html#6" class="">A C99 flexibilis tömb adattag nyelvi eleme</a>
+                      <li><a href="index.html#7" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Típusok és osztályok">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="structratio" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Típusok és osztályok<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi két kódrészletet.</p>
+
+<div class="columns">
+<div>
+<pre  style="letter-spacing: -0.04em;" ><code class="language-c">#include &lt;stdio.h&gt;
+
+typedef struct Ratio Ratio;
+struct Ratio {     /* rational number */
+    int num;       /* numerator */
+    int den;       /* denominator */
+};
+
+Ratio make_ratio(int num, int den) {
+    /* Euclidean: gcd -&gt; a */
+    int a = num, b = den, t;
+    while (b != 0)
+        t = a%b, a = b, b = t;
+    Ratio new = { num/a, den/a };
+    return new;
+}
+
+Ratio plus_ratio(Ratio r1, Ratio r2) {
+    return make_ratio(
+        r1.num * r2.den + r2.num * r1.den,
+        r1.den * r2.den);
+}
+
+void print_ratio(Ratio r) {
+    printf(&quot;%d/%d&quot;, r.num, r.den);
+}
+
+int main(void) {
+    Ratio r1 = make_ratio(1, 10);
+    Ratio r2 = make_ratio(5, 10);
+    Ratio r3 = plus_ratio(r1, r2);
+    print_ratio(r1);
+    printf(&quot;+&quot;);
+    print_ratio(r2);
+    printf(&quot;=&quot;);
+    print_ratio(r3);
+    return 0;
+}</code></pre>
+</div>
+<div>
+<pre  style="letter-spacing: -0.08em;" ><code class="language-c">#include &lt;iostream&gt;
+
+class Ratio {       /* rational number */
+  public:
+    Ratio(int num, int den);
+    int num() const { return num_; }
+    int den() const { return den_; }
+  private:
+    int num_;       /* numerator */
+    int den_;       /* denominator */
+};
+
+Ratio::Ratio(int num, int den) {
+    /* Euclidean: gcd -&gt; a */
+    int a = num, b = den, t;
+    while (b != 0)
+        t = a%b, a = b, b = t;
+    num_ = num/a;
+    den_ = den/a;
+}
+
+Ratio operator+(Ratio r1, Ratio r2) {
+    return Ratio(
+        r1.num() * r2.den() + r2.num() * r1.den(),
+        r1.den() * r2.den());
+}
+
+std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, Ratio r) {
+    os &lt;&lt; r.num() &lt;&lt; '/' &lt;&lt; r.den();
+    return os;
+}
+
+int main() {
+    Ratio r1(1, 10);
+    Ratio r2(5, 10);
+    Ratio r3 = r1+r2;
+    std::cout &lt;&lt; r1 &lt;&lt; '+' &lt;&lt; r2 &lt;&lt; '=' &lt;&lt; r3;
+}</code></pre>
+</div>
+</div>
+
+<p>Mi a különbség a kettő között? Legfeljebb a nyelv. Az első láthatóan C-ben van írva, egy C++ fordítóval le sem lehetne 
+fordítani, mivel a <code>make_ratio() </code> függvény <code>new</code> lokális változójának neve C++-ban kulcsszó. A második kód 
+C++, használ az osztályokat, operátor átdefiniálást, konstruktort, és egyéb jellegzetes nyelvi elemeket is.</p>
+
+<p>De ez csak a felszín. Mi a különbség <em>tervezési szempontból</em> közöttük? A válasz: <em>semmi</em>. A két program egymásnak 
+tükörfordítása. Mindkét program <em>objektumorientált</em> (OO), még akkor is, ha a C változat egy nem objektumorientáltnak 
+tartott nyelven íródott. Az objektumorientáltság nem arra utal, hogy milyen programozási nyelvvel dolgozunk, hanem arra, hogyan 
+építjük fel a programunkat. Attól még, hogy nincsen a programban <code>class</code> kulcsszó, lehetnek benne osztályok.</p>
+
+<p>Az <em>osztály</em> nem más fogalom, mint a <em>típus</em>. Mindkettő egy lehetséges értékkészlet és műveletek összessége.
+Egy típusba (vagy osztályba) sorolhatók a racionális számok, egy típusba (vagy osztályba) a sztringek, a képernyőn megjelenő
+ablakok és így tovább. Mindegyik értékek (1/2, 9/4, szavak, képernyőpozíciók, színek, feliratok) és hozzájuk tartozó műveletek
+(összeadás, konkatenálás, mozgatás) összessége.</p>
+
+<p>A fenti C++ kódban tág értelemben véve nem csak a
+konstruktor, hanem az <code>operator+</code> és az <code>operator&lt;&lt;</code> is részei az osztálynak. Hiszen a törtek
+összeadása ugyanúgy művelete ennek az osztálynak, mint a létrehozás. Nem volt rá szükségünk, hogy nyelvileg is tagfüggvényként
+definiáljuk azt (<code>operator+</code> esetén ez a helyzet), vagy valamilyen szintaktikai okból egyáltalán nem tudtuk tagfüggvényként megadni
+(<code>operator&lt;&lt;</code> esetén pedig ez). A C kód <code>Ratio</code> struktúrája is egy osztály, a <code>make_ratio()</code>,
+<code>plus_ratio()</code>, <code>print_ratio()</code> pedig annak kvázi tagfüggvényei.</p>
+
+<p>Tovább is mehetünk. Az <code>stdio.h</code>-ban definiált <code>FILE</code> típus is tekinthető osztálynak. Ugyan nyelvi eszköz nem
+fejezi ki, de az <code>fopen()</code>, <code>fwrite()</code>, <code>fprintf()</code> attól még ennek az osztálynak a
+tagfüggvényei. A nullával lezárt, sztringként használt, nyelvi szinten <code>char*</code>-gal reprezentált típust is
+nevezhetnénk osztálynak, lehetséges értékekkel: szavak, szövegek; és hozzájuk tartozó műveletekkel: <code>strcat()</code>, <code>
+strlen()</code>, <code>strstr()</code>. Az elvégezhető műveletek határozzák ezt meg, nem a szintaktika: nem csak a tagfüggvényeket
+kell néznünk, hanem az összes függvényt. Mindezt az angol szakirodalomban így nevezik: „<a href="index.html#mill02">the interface principle</a>”.</p>
+
+<p>A típus és az osztály tehát ugyanaz, ahogy a változó és az objektum is. (A C szabvány mindenhol objektumokról beszél változók 
+helyett. Az objektum az ottani definíció szerint egy hely, ami adatot tárol.) A megkülönböztetést elméleti szempontból lényegtelen 
+dolgok miatt szoktuk tenni. Egy C-ről szóló könyvben inkább típust mondunk, egy C++-ról szóló könyvben pedig csak akkor használjuk 
+a típus szót, ha ki akarjuk fejezni, hogy esetleg szintaktikailag nem osztályról van szó. A C++ nyelv lehetővé teszi azt, hogy az 
+adatok (tagváltozók) és függvények (metódusok) közötti összetartozást nyelvi szinten is kifejezzük, de a nyelvi eszköz hiánya nem 
+kell megakadályozzon bennünket abban, hogy akár C-ben objektumorientált kódot írjunk. A nyelvi eszköz megléte csak annyit jelent, 
+hogy a C++ szintaktikailag egyszerűbbé teszi az így szervezett program leírását, és segít betartani az OOP megszokott tervezési 
+szabályait.</p>
+
+<p class="megjegyzes">Apró megjegyzés azért kívánkozik a fentiekhez. Van, ahol az objektum mégsem ugyanaz, mint a változó. Például 
+a referenciákat változóknak tekintjük, de nem objektumok. A temporális objektumok ugyan objektumok, de nincs nevük. Ezért nem 
+szoktuk őket változóknak nevezni, és kijelölt helyük sincsen a memóriában.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A Ratio osztály és az OOP">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A Ratio osztály és az OOP<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mitől lesz az egész számpárból tört objektum? Bár egy racionális szám két egész szám hányadosa, ez nem jelenti azt, hogy a
+racionális szám ugyanaz, mint egy két egész számból álló számpár. A racionális szám több ennél, mivel az (1;2) számpár nem ugyanaz,
+mint a (2;4), viszont az 1/2 tört ugyanaz, mint a 2/4. Ha két egész számról azt mondjuk, az egyik egy tört számlálója, a másik
+pedig a nevezője, akkor egy teljesen új dolgot kapunk, ami több, mint a részek összege. Ezt hivatott kifejezni a <code>Ratio</code>
+osztály konstruktora és a <code>make_ratio()</code> függvény. Ennek a függvénynek a bemenete a két egész szám, és a kimenete pedig
+az előállított új objektum, a tört.</p>
+
+<p>Amikor törtekkel műveleteket végzünk, rendszeresen közös nevezőre kell hozni a két törtet. Emiatt gyakran egyre nagyobb és 
+nagyobb számokkal dolgozunk. Papíron érdemes is folyamatosan egyszerűsíteni. Egy programban pedig szinte muszáj, nehogy 
+túlcsorduljanak az <code>int</code> változóink. Ennek az egyszerűsítésnek a legjobb helye a programban az a pont, ahol azt 
+mondjuk, hogy „itt van két egész szám, mostantól kezdve ezek együtt egy törtet alkotnak”, tehát a konstruktor. Figyeljük meg, 
+hogy ezzel a tervezési döntéssel – az egyszerűsítés konstruktorba helyezésével – garantáljuk azt, hogy a programunk összes 
+törtje mindig egyszerűsítve lesz. Ez a kódunk egyetlen olyan függvénye, amely látja és írni is tudja a számlálót és a 
+nevezőt, az a konstruktor. A C++-os, vagyis inkább az OOP-s gondolkodás hamarabb rávezet minket erre a helyes tervezési döntésre,
+hogy az egyszerűsítésnek a konstruktorban van a helye.</p>
+
+<p>A C++ kódban a létrehozás után kapott tört adattagjait már meg sem tudjuk változtatni, és ez így van rendjén. Mivel az 
+adattagok privátak, a nyelv biztosítja is, hogy ne férjünk hozzájuk sehol máshol a programban. C-ben csak a fegyelmünkön múlik, 
+hogy betartjuk-e a szabályokat:</p>
+
+<ol>
+    <li>Törtet csak a <code>make_ratio()</code>-val hozunk létre.</li>
+    <li>Tört adattagjait mindig csak olvassuk, soha nem írjuk.</li>
+</ol>
+
+<p>De amíg betartjuk ezeket, addig nincs gond. Mindezek az osztály használóira (OOP terminológiában: ügyfeleire) vonatkoznak. Az
+osztály tagfüggvényeire, vagyis azokra a kódrészletekre, amelyek közvetlenül hozzáférnek az osztály adattagjaihoz, egy egész más
+szabály érvényes. Mégpedig az, hogy biztosítaniuk kell, hogy a tört objektumban tárolt számláló és nevező relatív prímek, tehát
+a tört mindig egyszerűsítve van. Ez az osztály belső <em>invariánsa</em>.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C99 jelölt inicializáló adattagok és összetett típusok literálisai">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        C99 jelölt inicializáló adattagok és összetett típusok literálisai<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C-ben struktúra inicializálásakor a tömbök inicializálásához hasonló szintaktikát alkalmazhatunk: kapcsos zárójelek között 
+megadhatjuk az egyes adattagok értékét, ahogyan azt az alábbi sor is teszi. Ezt a C++ is megengedi, amennyiben nem definiálunk 
+konstruktort vagy destruktort egy struktúrához (és persze nem próbáljuk <code>new</code>-nak elnevezni a változónkat).</p>
+
+<pre   ><code class="language-c">Ratio new = { num/a, den/a };</code></pre>
+
+<h3>Designated initializer</h3>
+
+<p>Tudjuk, hogy a fenti kódrészlet egy veszélyforrás a programban. Az
+adattagokra név szerint szoktunk hivatkozni, de ebben a nyelvi szerkezetben erre
+nincs lehetőség: itt az adattagok deklarációjának sorrendje számít.
+Ha megcseréljük a deklarációban egy sorrendet, esetleg felveszünk egy új adattagot,
+a program azonnal felborul, rossz esetben hibaüzenetet sem kapunk.</p>
+
+<p>Ezt a hibalehetőséget kivédendő, bevezettek egy új szintaxist a C99-ben,
+amely lehetővé teszi, hogy az inicializálás helyén is név szerint hivatkozzunk
+rájuk. A szabvány ezeket <em>designated initializer</em>-eknek nevezi:</p>
+
+<pre   ><code class="language-c">Ratio half = { .num = 1, .den = 2 };</code></pre>
+
+<p>Így olvashatóbb és robusztusabb is a kód; ha változtatjuk a struktúrát, nem
+kell végigböngésznünk a kódot, hol inicializáljuk rosszul. Ez a szintaktika
+megengedi azt is, hogy tetszőleges sorrendben adjuk meg az
+adattagokat, vagy csak némelyik adattagot adjuk meg. A többi olyankor a tömbökhöz
+hasonlóan nulla lesz:</p>
+
+<pre   ><code class="language-c">/* így is 1/2 lesz */
+Ratio half = { .den = 2, .num = 1 };
+
+/* a nevező 1, a többi adattag 0 */
+Ratio zero = { .den = 1 };</code></pre>
+
+<p>Apropó tömbök. Ez a szintaktika a tömböknél is működik, ott szögletes zárójelek
+között kell megadnunk azokat a (fordítási idejű konstans) indexeket, amelyeket
+inicializálni szeretnénk. A többi nulla lesz:</p>
+
+<pre   ><code class="language-c">/* 1, 2, 0, 0, 0, 0, 0, ... */
+int arr1[10] = { 1, 2 };
+
+/* 0, 0, 5, 0, 3, 0, 0, ... */
+int arr2[10] = { [2] = 5, [4] = 3 };</code></pre>
+
+<h3>Compound literal</h3>
+
+<p>A C99-ben ennél tovább is mentek. A C nyelvben nincsenek konstruktorok, amelyeket
+függvényként használva objektumokat lehet létrehozni. Így bár egy struktúra változó
+létrehozásakor megadhattuk az értékeket, más kontextusban nem működött a struktúra,
+mint literális megadása:</p>
+
+<pre   ><code class="language-c">/* ezzel minden rendben */
+Ratio r1 = { 1, 2 };
+
+/* ez viszont nem működik */
+r1 = { 2, 3 };
+
+/* és ez sem */
+print_ratio({ 2, 3 });</code></pre>
+
+<p>Az egyetlen olyan összetett adattípus, amelynek megadásához külön szintaxis
+tartozott, a sztring volt C89-ben. Gondoljunk bele, a <code>"hello"</code>
+literális egy <code>char [6]</code> típusú értéket ad meg, ahogyan az
+<code>5</code> literális egy <code>int</code> típusút. Hogy ne kelljen az
+értékadást adattagonként elvégezni, vagy egy függvényhívás miatt változót
+létrehozni, a C99 megengedi azt, hogy egy cast operátorhoz hasonló szintaxissal
+megadjuk egy kapcsos zárójelpárról, hogy milyen összetett típusú értéket (compound
+literal) adunk meg vele:</p>
+
+<pre   ><code class="language-c">/* ezzel minden rendben */
+Ratio r1 = { 1, 2 };
+
+/* C99-ben már lehet ilyen értékadást is */
+r1 = (Ratio) { 2, 3 };
+
+/* és bárhol névtelenül létrehozhatjuk */
+print_ratio((Ratio) { 2, 3 });</code></pre>
+
+<p>Így az eredeti <code>make_ratio()</code> függvényünket így is írhatnánk:</p>
+
+<pre   ><code class="language-c">Ratio make_ratio(int num, int den) {
+    /* Euclidean: gcd -&gt; a */
+    int a = num, b = den, t;
+    while (b != 0)
+        t = a%b, a = b, b = t;
+    return (Ratio) { .num = num/a, .den = den/a };
+}</code></pre>
+
+
+<p>Ugyanez tömbökre is működik. Természetesen ott a típus megadásánál <code>típus[]</code>-t
+kell írnunk, nem <code>típus*</code>-ot, hiszen tömböt adunk meg, nem pointert. Például így:</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+
+void print_chars(char const *p) {
+    while (*p != '\0') {
+        putchar(*p);
+        p++;
+    }
+    printf(&quot;\n&quot;);
+}
+
+void print_ints(int const *p) {
+    while (*p != 0) {
+        printf(&quot;%d &quot;, *p);
+        p++;
+    }
+    printf(&quot;\n&quot;);
+}
+
+int main(void) {
+    print_chars( &quot;hello&quot; );
+    print_ints( (int[]) { 2, 3, 4, 0 } );
+}</code></pre>
+
+<p>Az így megadott objektumok automatikus memóriakezelésűek, ugyanaddig élnek,
+mint az ugyanabban a blokkban létrehozott változók. A fenti
+<code>print_ints()</code> függvényhívás tulajdonképp egy rövidítés ehhez:</p>
+
+<pre   ><code class="language-c">int main(void) {
+    /* ... */
+    int __névtelen_tömb__[] = { 2, 3, 4, 0 };
+    print_ints( __névtelen_tömb__ );
+    /* ... */
+}</code></pre>
+
+<p>Ne feledjük, ezek a nyelvi elemek csak a C-ben léteznek.
+De a C++-ban ott vannak a konstruktorok, amelyek többet tudnak ennél.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Még többet a C99 tömbökről!">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Még többet a C99 tömbökről!<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C++ számos nyelvi eszközt ad a kezünkbe ahhoz, hogy a saját típusainkat a
+beépített típusokhoz hasonló könnyedséggel kezelhessük. Az <code>operator[]</code>
+átdefiniálásának lehetősége, a másoló konstruktorok és a destruktorok például
+lehetővé teszik azt, hogy az <code>std::vector</code> osztály teljes értékű
+tömb típusként viselkedjen. A C nyelvben erre nincsen lehetőség, de
+a megfelelő nyelvi szerkezetekkel azért próbálják elérni azt, hogy kényelmes
+legyen az összetett típusok használata. A C99-ben a nyelvbe épített egyetlen
+tároló, a tömb lehetőségeit megpróbálták minél hatékonyabban kibővíteni.
+Térjünk most el a törtes példától, és nézzük meg az új nyelvi elemket!</p>
+
+<h3>A C99 függvénydeklarációkban használt <code>static</code> kulcsszó</h3>
+
+<p>A tömbök indexelését a C nyelv soha nem ellenőrzi. Ennek két oka van. Az egyik
+egyszerűen a teljesítmény: ha a program helyes, akkor sosem indexeli túl a
+tömbjeit, ezért felesleges futási időben ezzel bajlódni. A másik pedig az, hogy
+tömbműveleteknél legtöbbször nem is látjuk az eredeti tömb definícióját, hanem
+csak pointerekkel dolgozunk, amelyek a tömbbe mutatnak. Különösen igaz ez akkor,
+amikor tömböt függvénynek adunk át, ugyanis ott a paraméterátadás mindig indirekt.
+A függvények fejlécében megadott tömb típus alatt mindig pointert ért a
+nyelv, ezért az alábbi deklarációk teljesen egyenértékűek.</p>
+
+<pre   ><code class="language-c">void func(char arr[100]);
+void func(char arr[]);
+void func(char *arr);</code></pre>
+
+<p>A híváskor így mindig csak a tömb kezdőcímét látja a függvény. Ez
+azonban nem jelenti azt, hogy a hívás helyén ne ismerhetnénk a tömb méretét, és
+bizonyos esetekben ne ellenőrizhetnénk azt. Gyakori eset, hogy egy függvény azért
+vár paraméterként egy tömböt, hogy az általa előállított eredményt oda tegye. A
+tömbnek ilyenkor általában van egy minimális elvárt mérete: például ha egy
+éééé-hh-nn formátumú dátumot szeretnénk bele írni, ez a méret 11. Az ilyen
+eseteket a <code>static</code> kulcsszóval jelölhetjük meg a fordító számára:</p>
+
+<pre   ><code class="language-c">void date_tostring(Date d, char str[static 11]) {
+    sprintf(str, &quot;%04d-%02d-%02d&quot;, d.year, d.month, d.day);
+}
+
+char const *ratio_tostring(Ratio r, char str[static 24]) {
+    sprintf(str, &quot;%d/%d&quot;, r.num, r.den);
+    return str;
+}</code></pre>
+
+<p>Az így deklarált (fentebb definiált) függvényeknél a fordító, ha tudja, fordítási
+időben ellenőrzi, hogy</p>
+<ul>
+    <li>nem null pointert adunk-e át paraméterként,</li>
+    <li>hogy a hivatkozott tömbnek van-e annyi eleme, mint a megadott méret.</li>
+</ul>
+
+<p>Ha ezt nem tudja megtenni (mert pl. pointert adunk, nem tömböt), a függvény
+használója számára akkor is hasznos ez, dokumentációként. Ne feledjük: ez C99 nyelvi elem,
+ilyen C++-ban nincs.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A C99 változó méretű tömbök (variable length array, VLA)">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="c99vla" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        A C99 változó méretű tömbök (variable length array, VLA)<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A tömböket gyakran ideiglenes tárolónak használjuk, és elég gyakori az is,
+hogy bár fordítási időben nem, de futási időben előre ismerjük a létrehozandó
+tömb méretét. A C99 megengedi azt, hogy a veremben létrehozott tömböknél futási
+időben kiértékelődő kifejezéssel adjuk meg a tömb méretét. Az ilyen tömböket a
+szabvány VLA-nak nevezi (variable length array). (Vigyázat: bár a lenti
+kódrészletet a legtöbb C++ fordító megérti és lefordítja, a C++ szabvány semelyik
+változata szerint sem elfogadott! A C++-ban ilyen célra egy
+<code>std::vector&lt;int&gt;</code>-et kell használni.)</p>
+
+<pre   ><code class="language-c">int n;
+printf(&quot;Hány szám lesz?\n&quot;);
+scanf(&quot;%d&quot;, &amp;n);        /* garantáltan futási időben :) */
+int arr[n];</code></pre>
+
+<p>Az ehhez hasonló kódrészletek támogatása szinte elvárásunk lehet azután, hogy
+a C99-ben megengedték a változódefiníciók és az utasítások keverését (mixed
+declarations and code), vagyis hogy elengedték azt a megkötést, hogy az
+utasításblokkok tetején kell megadni a változókat. Az eszköz használatát senkinek
+nem kell bemutatni, mert tudjuk, ahol választhatunk a dinamikus (kézi) és az
+automatikus memóriakezelés között, ott mindig az utóbbit célszerű választani. Az
+így létrehozott tömbök egyébként teljesen ugyanúgy viselkednek, mint a
+konstanssal megadott méretű társaik; még a <code>sizeof</code> operátor is
+működik rajtuk. Azért sokat ne várjuk, az ilyen tömbök nem méreteződnek át
+mágikusan: minden VLA akkora marad megszűntéig, amekkora a létrehozása
+pillanatában volt.</p>
+
+<pre   ><code class="language-c">for (int i = 0; i != 10; ++i) {
+    int arr[rand() % 10 + 10];
+    printf(&quot;Most %d eleme lett.\n&quot;, (int) (sizeof(arr)/sizeof(arr[0])));
+}</code></pre>
+
+<p>A VLA-k mögött azonban több van, mint elsőre gondolnánk. Egy programozási nyelvnél nem „csak úgy” megy, hogy behozunk egy
+újfajta nyelvi elemet egy probléma megoldására és kész: gyakran helyette inkább olyan lehetőségeket kell a nyelvbe építeni,
+amiből már következik, hogy az áhított kódrészlet leírható.</p>
+
+<p class="megjegyzes">Gondoljunk például a <code>printf()</code>-re. A Pascal <code>writeln()</code> eljárása tetszőlegesen sok
+paramétert kaphat, mindegyiket kiírja a kimenetre. A C <code>printf()</code>-je ugyanerre képes. Azonban a Pascal <code>writeln()
+</code> eljárása egy különleges, <em>egyedi nyelvi elem;</em> a programozó nem tud olyan saját függvényeket írni, amelyek akárhány
+paramétert kaphatnak. C-ben a <code>printf()</code> nem nyelvi elem, hanem egy szokványos függvény. Helyette a <code>...</code>-tal
+jelölt, változó hosszúságú paraméterlista a nyelvi elem. Így C-ben tetszőlegesen írhatunk saját függvényeket is, amelyek bárhány
+paramétert kaphatnak.</p>
+
+<p>Lássuk, miről van szó! A C89-ben semmilyen körülmények között nem lehetett leírni olyan kódot, amelyben egy típus <em>mérete
+</em> nem fordítási idejű konstans. Vagyis nem csak az <code>int arr[n];</code> változódefiníció volt hibás, hanem helytelen
+volt a triviálisnak tűnő <code>sizeof(int[n])</code> kifejezés is. A C99-ben pedig ezen változtattak. Az új verzió azt engedi
+meg, hogy egy lokális változó, tömb típus elemszámát egy kifejezés adja meg. Mivel egy ilyen típusnak a méretét már ki is tudja
+számolni, ezért megengedi azt is, hogy a veremben ilyen típusú változót hozzunk létre. Emiatt szabad leírnunk az alábbi sorokat:
+</p>
+
+<pre   ><code class="language-c">int n;
+scanf(&quot;%d&quot;, &amp;n);
+
+int *my_heap_arr = (int*) malloc(sizeof(int[n]));
+int my_stack_arr[n];</code></pre>
+
+<p>A dolog onnantól válik izgalmassá, ha nem csak egy, hanem több dimenziós tömbökkel
+is dolgozunk. Ugyanis ezek összes dimenzióját megadhatjuk kifejezéssel. Ami önmagában
+megint triviálisnak hangzik, de a fordítónak meg kell oldania azt, hogy akárhány változó
+méretű dimenzió szerint lehessen indexelni. Ehhez pedig az kellett, hogy olyan pointert
+is lehessen létrehozni, amelynek típusa kifejezések értékeitől függ. Mert ha egy
+20×10-es tömb egyes soraira mutató pointer „10 elemű tömbökre mutató pointer” típusú,
+akkor egy m×n-es tömb soraira mutató pointer „n elemű tömbökre mutató pointer”
+kell legyen:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">int arr1[20][10];
+int (*parr1)[10];
+parr1 = arr1;</code></pre>
+</div>
+<div>
+<pre   ><code class="language-c">int arr2[m][n];
+int (*parr2)[n];
+parr2 = arr2;</code></pre>
+</div>
+</div>
+
+<p>A méretinformációra mindenképpen szükség van a pointer típusában, mert egy cím számításakor (pointer aritmetika), azaz pl. a
+<code>parr1+1</code> kifejezés kiértékelésekor tudnia kell a fordítónak, hány bájtot kell ugrani a memóriában. A <code>parr1+1</code>
+kifejezésnél <code>sizeof(int[10])</code>-et, mivel <code>*parr1</code> típusa <code>int[10]</code>; a <code>parr2+1</code> esetén
+pedig <code>sizeof(int[n])</code>-t, mivel <code>*parr2</code> típusa <code>int[n]</code>.</p>
+
+<img src="ketdimenzios.svg" class="kozep" style="height: 6em;">
+
+<p>Egy VLA-ra mutató pointer azért hasznos, mert így egy ilyen tömböt át tudunk adni függvénynek is paraméterként. Ehhez csak
+egy megfelelő függvénydefiníció kell, amelynél a függvény fejlécében jelezzük azt, hogyan függ a paraméterektől a pointer
+típusa. Az egyedüli korlátozás, hogy a méretet megadó paramétert <em>előbb</em> kell szerepeltetni, mint a pointert. Mire a
+pointer deklarációjával találkozik a fordító, addigra a méretet megadó kifejezés változói már ismertek kell legyenek:</p>
+
+<pre   ><code class="language-c">/* deklaráció */
+void print(int, int, char (*)[*]);
+
+/* definíció */
+void print(int height, int width, char (*arr)[width]) {
+    for (int y = 0; y != height; ++y) {
+        for (int x = 0; x != width; ++x)
+            putchar(arr[y][x]);
+        putchar('\n');
+    }
+}</code></pre>
+
+<p>A függvény definíciója a formális paraméterek neveit is tartalmazza. Ha csak deklarációt adunk meg, a nevek szerepeltetése
+nem kötelező; a kifejezéssel megadott pointer típusú paramétereknél is elhagyható a név. Mivel azonban a deklarációban
+<code>char(*)[]</code>-ot nem írhatunk (definiálatlan méretű tömb továbbra sem létezik!), valahogy jelölni kell azt, hogy a
+méret is meg lesz adva. Ezt a deklarációban a tömb mérete helyére beírt <code>*</code> karakterrel tudjuk megtenni. Vagyis a
+fenti függvénydeklaráció valami ilyesmit jelent: „A függvény vár két <code>int</code> típusú értéket és egy pointert. A pointer
+<code>char[]</code> tömbökre mutat, amelyek méretét a függvény majd valahonnan tudni fogja.” Hogy honnan tudja, az pedig már a
+függvény dolga, és azt a definíció adja meg.</p>
+
+<p>Talán mégis a legjobb, ha inkább a deklarációkba is beírjuk a változók nevét, és kifejezzük azt, hogy mi mitől függ, hiszen
+ez a függvény használóit segíti. De ne feledjük, a tömbök helyett mindig az első elemükre mutató pointer adódnak át paraméterként!
+Ezért az összes alábbi deklaráció egyenértékű:</p>
+
+<pre   ><code class="language-c">void print(int height, int width, char arr[height][width]);
+void print(int height, int width, char arr[*][width]);
+void print(int height, int width, char arr[*][*]);
+void print(int height, int width, char (*arr)[width]);
+void print(int height, int width, char (*arr)[*]);
+void print(int, int, char (*)[*]);</code></pre>
+
+<p>Az így átadott tömbnek egyébként nem kell feltétlenül VLA-nak lennie, hanem lehet konstans méretű tömb is. A C99 nyelv a
+változóval megadott típusú pointer által képessé vált arra is, hogy tetszőleges méretű (szélességű és magasságú) kétdimenziós
+tömböt adjon át függvényparaméterként.</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void print(int height, int width, char arr[height][width]) {
+    for (int y = 0; y != height; ++y) {
+        for (int x = 0; x != width; ++x)
+            putchar(arr[y][x]);
+        putchar('\n');
+    }
+}
+
+int main(void) {
+    char man[4][3] = {
+        { ' ', 'o', '/' },
+        { '/', '|', ' ' },
+        { ' ', '|', ' ' },
+        { '/', ' ', '\\' },
+    };
+    char diamond[2][2] = {
+        { '/', '\\' },
+        { '\\', '/' },
+    };
+
+    print(4, 3, man);
+    printf(&quot;\n&quot;);
+    print(2, 2, diamond);
+}</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A C99 flexibilis tömb adattag nyelvi eleme">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A C99 flexibilis tömb adattag nyelvi eleme<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C-ben gyakran dinamikus memóriakezelés használatára kényszerülünk, és ez lassíthatja a programot nem csak a foglaláskor,
+hanem az adatok elérése közben is. Tekintsük az alábbi két kódrészletet:</p>
+
+<div class="columns">
+<div>
+<h4>Statikus eset</h4>
+<pre  style="letter-spacing: -0.04em;" ><code class="language-c">typedef struct MyArrayStat {
+    size_t siz;
+    double data[200];
+} MyArrayStat;
+
+/* foglalás */
+MyArrayStat ma;
+
+
+
+
+/* használat */
+ma.data[12] = 37.3;</code></pre>
+</div>
+<div>
+<h4>Dinamikus eset</h4>
+<pre  style="letter-spacing: -0.04em;" ><code class="language-c">typedef struct MyDynArr {
+    size_t siz;
+    double *data;
+} MyDynArr;
+
+/* foglalás */
+MyDynArr *ma;
+ma = malloc(sizeof(MyDynArr));
+ma-&gt;data = malloc(sizeof(double[200]));
+ma-&gt;siz = 200;
+
+/* használat */
+ma-&gt;data[12] = 37.3;</code></pre>
+</div>
+</div>
+
+<p>Nézzük, mi történik az objektumok foglalásakor!</p>
+
+<h3>Statikus eset</h3>
+<ol>
+    <li>Az <code>ma</code> változó létrehozásakor a <em>stack pointer</em>
+    („meddig foglalt a verem”) arrébb állítódik <code>MyDynArr</code>
+    struktúra méretével.</li>
+</ol>
+
+
+<h3>Dinamikus eset</h3>
+<ol>
+    <li>Az <code>ma</code> pointer létrehozásakor a <em>stack pointer</em>
+    arrébb állítódik egy pointernyivel.</li>
+    <li>Az első <code>malloc()</code> hívás elkezdi vizsgálni a foglalt/szabad
+    területek nyilvántartását. Talál egy megfelelő méretű üres helyet. Bejelöli
+    foglaltnak, frissíti az adatszerkezetet. Visszatér a címével.</li>
+    <li>Ezt beírjuk az <code>ma</code> pointerbe.</li>
+    <li>A második <code>malloc()</code> hívás újból nekiáll helyet keresni. Ha
+    megvan a hely, bejelöli foglaltnak, frissíti az adatszerkezetet.</li>
+    <li>A cím bekerül az <code>ma-&gt;data</code> pointerbe.</li>
+</ol>
+
+<p>Ez csak egyszeri költség, a tömb létrehozásakor. Viszont mi történik
+egy elem elérésekor, pl. a fenti esetben, amikor a <code>37.3</code> bemásolódik
+a tömbbe? Ez érdekesebb, hiszen ez nem egyszeri költség, hanem a
+tömb minden egyes használatakor megtörténhet.</p>
+
+<h3>Statikus eset</h3>
+<ol>
+    <li>Az <code>ma</code> változó valahol a veremben van. A címéhez hozzáadódik
+    annyi bájt, ahányadik bájttól a struktúrában a <code>data[]</code> tömb kezdődik.
+    <em>Ez még fordítási időben elvégezhető.</em></li>
+    <li>Ezután jön egy címszámítás: az előző címhez hozzáadódik <code>index*sizeof(double)</code>.</li>
+    <li>Az így kapott helyre beíródik a <code>37.3</code>.</li>
+</ol>
+
+<h3>Dinamikus eset</h3>
+<ol>
+    <li>Kiolvasódik a memóriából az <code>ma</code> pointer értéke.</li>
+    <li>A statikus esethez hasonlóan kiszámolódik ehhez képest a <code>data</code> adattag címe,
+    de csak futási időben.</li>
+    <li>Ezután jön egy újabb <em>memóriaolvasási</em> művelet, mivel nem tudjuk, hogy
+    a <code>double[]</code> tömb hol van. Annak címét a <code>data</code>
+    pointer tárolja.</li>
+    <li>A pointer kiolvasása után jön a címszámítás, <code>index*sizeof(double)</code>.</li>
+    <li>És végül a kapott című helyre íródik az érték.</li>
+</ol>
+
+<p>Ez az indirekció költsége. A pointer változó értékét ki kell olvasni, mielőtt a címszámítást el tudjuk végezni, és ez egy
+plusz memóriaművelet lehet minden alkalommal. Ha magát a struktúrát is egy indirekción keresztül érjük csak el (esetleg
+dinamikusan van foglalva), akkor még rosszabb a helyzet.</p>
+
+<p>A C99 bevezetett egy új nyelvi eszközt, amellyel egyszerűbb esetekben az indirekciók és a dinamikus memóriafoglalások száma
+csökkenthető. A <em>flexible array member</em> egy olyan tömb egy struktúra utolsó adattagjaként, amelynek a mérete nem
+definiált:</p>
+
+<pre   ><code class="language-c">typedef struct MyArrayFlex {
+    size_t siz;
+    double data[];
+} MyArrayFlex;</code></pre>
+
+<p>Egy ilyen struktúrát nincs értelme a veremben foglalni. A struktúra méretébe a flexibilis tömb nem számít bele. A flexibilis
+tömb adattaggal azt jelezzük a fordítónak, hogy ott majd egy tömb lesz; a létrehozásáért mi felelünk. A fordító ilyenkor a tömb
+helyét meg tudja határozni, tehát indexelhetjük is a tömböt, csak létre kell hozni azt valahogyan. Ezt egy megfelelően
+összerakott <code>malloc()</code> hívással tehetjük meg, amelyben több helyet kérünk, mint amekkora a struktúra üresen lenne:</p>
+
+<pre   ><code class="language-c">MyArrayFlex *ma;
+
+ma = (MyArrayFlex*) malloc(sizeof(MyArrayFlex) + sizeof(double[200]));
+ma-&gt;siz = 200;
+ma-&gt;data[12] = 37.3;</code></pre>
+
+<p>Az így létrehozott tömbök több okból is gyorsabbak, mint az előbb bemutatott
+párjuk:</p>
+
+<ol>
+    <li>Gyorsabb foglalás és felszabadítás: két <code>malloc()</code> és két
+    <code>free()</code> helyett csak egy-egy van.</li>
+    <li>Gyorsabb adatelérés: a tömb hivatkozásakor eggyel kevesebb indirekció,
+    eggyel kevesebb memóriaművelet.</li>
+</ol>
+
+<p>Mivel egy speciális helyzetről van szó, sok korlátozás is van ennél a nyelvi eszköznél. A megkötések nagy része abból adódik,
+hogy a fordítónak el kell tudnia végezni a címszámítást a flexibilis tömbön:</p>
+
+<ol>
+    <li>Csak a struktúra végén lehet ilyen tömb. (Különben az utána lévő adattagokat
+    nem lehetne elhelyezni.)</li>
+    <li>Csak egy ilyen tömb lehet benne. (Különben nem lehetne tudni, melyik hol kezdődik.)</li>
+    <li>Ilyen tömböt tartalmazó struktúrát nem lehet másik struktúrába vagy tömbbe tenni.</li>
+    <li>Dinamikusan kell foglalnunk a struktúrát, különben nem tudjuk megadni a tömb méretét.</li>
+</ol>
+
+<p>Csak C99-ben van ilyen, C++-ban nincs.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ol>
+    <li id="mill02"><a href="http://www.gotw.ca/publications/mill02.htm">What's In a Class? - The Interface Principle</a>
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

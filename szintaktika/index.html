@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Szintaktikai szörnyűségek</title>
+<meta property="og:title" content="TEST InfoC++11 :: Szintaktikai szörnyűségek">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: Szintaktikai szörnyűségek">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: Szintaktikai szörnyűségek">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Szintaktikai szörnyűségek">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Szintaktikai szörnyűségek</h1>
+
+<p>A C nyelv nyelvtana nem a legegyszerűbbek közé tartozik, ha gépi elemzésről van szó. A C++ erre
+még rátett egy lapáttal. Ez az írás néhány többféleképpen értelmezhető, illetve félreérthető kódrészletet
+mutat be.</p>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Pointer vagy szorzás?</a>
+                      <li><a href="index.html#2" class="">Belső típus vagy statikus változó?</a>
+                      <li><a href="index.html#3" class="">Statikus változó vagy globális változó?</a>
+                      <li><a href="index.html#4" class="">Ahányféle zárójel...</a>
+                      <li><a href="index.html#5" class="">Hány dolgot jelent a &gt; karakter?</a>
+                      <li><a href="index.html#6" class="">A template kulcsszó függvényhívásoknál</a>
+                      <li><a href="index.html#7" class="">Függvény vagy objektum?</a>
+                      <li><a href="index.html#8" class="">Makrók és függvények</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Pointer vagy szorzás?">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Pointer vagy szorzás?<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A szorzást és az indirekciót is a <code>*</code> operátor jelöli. Vajon mit jelent az alábbi kódrészlet?</p>
+
+<pre   ><code class="language-c">A * B;</code></pre>
+
+<p>A válasz: mindkettő lehet. Ha <code>A</code> egy típus, akkor <code>B</code> egy ilyenre mutató pointer lesz:
+<code>int * p</code>, tehát a sor egy objektumdefiníció. Ha <code>A</code> egy változó, akkor <code>B</code>-nek
+már létező változónak kell lennie, és a kód egy szorzást jelent.</p>
+
+<p>Vegyük észre, mekkora különbség van a kettő között! Az első esetben ez a sor hozza létre a <code>B</code>
+változót. A második esetben már léteznie <em>kell</em>. Sőt ez a sor akár ugyanabban a függvényben kétszer is
+szerepelhet, két különböző értelemben:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+class X {};
+void operator*(X a, X b) {
+    std::cout &lt;&lt; &quot;szorzas\n&quot;;
+}
+
+X A, B;
+
+int main() {
+    A * B;
+
+    using A = int;
+    A * B;
+    B = new int;
+}</code></pre>
+
+<p>Ez azért nehezíti meg a fordítók (íróinak) életét, mert a sorról szintaktikai szabályok alapján
+nem dönthető el, hogy mit jelent, csak a szimbólumtábla (változónevek, típusnevek stb.) vizsgálatával.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Belső típus vagy statikus változó?">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Belső típus vagy statikus változó?<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi kódrészlet:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class A {
+    /* ... */
+};
+
+template &lt;typename T&gt;
+void fv() {
+    A&lt;T&gt;::B * C;
+}</code></pre>
+
+<p>Tehát adott egy sablon osztály, és egy sablon függvény. A függvény példányosítja a sablon osztályt
+valamilyen típussal, aztán <code>::B</code> és <code>* C</code>. Az eddigiekből tudhatjuk, hogy ez gyanús:
+<code>valami * valami</code> lehet szorzás és pointer is. Vajon melyik? Azt is mondtuk, hogy ez attól függ,
+mi van a <code>*</code> előtt, típus vagy változó. De vajon melyik? Ez meg attól függ, hogy mi van az <code>A</code>
+sablon osztályban, statikus változó (mert azt is a <code>::B</code> szintaxissal érjük el), vagy belső típus
+(azt is <code>::B</code> szintaxissal). Ha változó, akkor ez egy szorzás, ha típus, akkor <code>C</code> egy
+pointer lesz. Tehát például az alábbi kódrészletben pointer lesz, gondolhatnánk:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class A {
+  public:
+    using B = char;
+};
+
+template &lt;typename T&gt;
+void fv() {
+    A&lt;T&gt;::B * C;           // = char * C?
+}</code></pre>
+
+<p>A helyzet az, hogy nem. Ebből a kódrészletből nem látszik egyértelműen, hogy <code>C</code> pointer lesz.
+Ugyanis attól még, hogy az alap sablon osztálynak (base template) egy <code>B</code> nevű belső típusa van,
+nem biztos, hogy nem lesz olyan specializációja, amin belül <code>B</code> nem egy statikus változó:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+class A&lt;int&gt; {
+  public:
+    static int const B = 3;
+};</code></pre>
+
+<p>Ebben az esetben <code>A&lt;double&gt;::B</code> a <code>char</code> típus szinonimája, <code>A&lt;int&gt;::B</code>
+pedig egy konstans, aminek az értéke három. Ugyanez a helyzet az <code>fv()</code> sablonnal is: <code>double</code> és <code>int</code>
+példányosítás esetén látszólag mást jelent a kód. Az <code>A&lt;T&gt;::B</code> ezért egy ún. függő név (dependent name).</p>
+
+<p>A félreérthetőséget úgy oldották fel, hogy az ilyen függő neveket alapesetben statikus tagváltozónak tekintik. A fordítónak
+<a href="../typename/index.html">külön jelezni kell</a>, ha ilyenkor típusról beszélünk, a <code>typename</code>
+kulcsszóval:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void fv1() {
+    A&lt;T&gt;::B * C;           // szorzás
+}
+
+template &lt;typename T&gt;
+void fv() {
+    typename A&lt;T&gt;::B * C;  // pointer
+}</code></pre>
+
+<p>Erre <a href="../typename/index.html">sablon kódban</a> mindig figyelnünk kell.</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Statikus változó vagy globális változó?">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Statikus változó vagy globális változó?<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nézzük meg az <code>A&lt;B&gt;::C</code> alakú kódrészletet egy kicsit jobban. Vajon mit jelent az alábbi kód?</p>
+
+<pre   ><code class="language-c">A&lt;B&gt;::C</code></pre>
+
+<p>Ez egy <code>A</code> nevű sablonosztály lenne példányosítva <code>B</code> típussal, amin belül <code>C</code> egy statikus
+változó? Vagy inkább az <code>A &lt; B</code> kifejezés értékét vizsgáljuk, hogy nagyobb-e, mint a globális <code>::C</code>
+változó? Ez megint attól függ, hogy az <code>A</code> típus (sablon osztály) vagy változó neve.</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Ahányféle zárójel...">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Ahányféle zárójel...<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C-ben a <code>()</code>, <code>[]</code>, <code>{}</code> zárójeleket használtuk különféle célokra. C++-ban
+a <code>&lt;&gt;</code> karakterpárok is zárójelekként funkcionálnak sablon kódrészletekben. A gond a szokásos:
+ezeknek a karaktereknek más jelentése is van, operátorok nevei.</p>
+
+<p>Tegyük fel, hogy <code>X</code> egy sablon osztály,
+egy darab, <code>int</code> típusú sablonparaméterrel. Van két fordítási idejű egész konstansunk, <code>A</code> és <code>B</code>.
+Az <code>X</code> osztályt ezek közül a nagyobbiknak az értékével szeretnénk példányosítani:</p>
+
+<pre   ><code class="language-cbub">template &lt;int N&gt;
+class X {};
+
+enum { A = 5, B = 7 };
+
+int main() {
+    X&lt; A&gt;B ? A : B &gt; x;     // syntax error
+}</code></pre>
+
+<p>Ez nem fog menni. Az első <code>&gt;</code> karaktert a fordító a sablon bezáró zárójelének hiszi. Így,
+látszólag fölöslegesen, zárójeleznünk kell:</p>
+
+<pre   ><code class="language-cbub">X&lt; (A&gt;B ? A : B) &gt; x;       // ok</code></pre>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hány dolgot jelent a &gt; karakter?">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Hány dolgot jelent a &gt; karakter?<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A <code>&gt;</code> karakter nem csak a sablon kód bezáró zárójele és összehasonlító operátor. Két
+egymás utáni kacsacsőr <code>&gt;&gt;</code> egy másik operátort, a bitenkénti léptetés operátort
+reprezentáló token. Vagy mégsem.</p>
+
+<p>Az alábbi kódrészlet C++98-ban helytelennek számított, mert a fordító a két bezáró kacsacsőrt léptető
+operátornak hitte. Csak úgy lehetett lefordítani, ha szóközt tettünk közéjük.</p>
+
+<pre   ><code class="language-c">std::vector&lt;std::vector&lt;int&gt;&gt; v;</code></pre>
+
+<p>C++11-ben már le szabad írni ezt szóköz nélkül. A szintaktikai elemzés <em>után</em> dől csak el,
+hogy a <code>&gt;&gt;</code> karaktersorozatot hogyan értelmezi a fordító, egy operátorként vagy két zárójelként.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A template kulcsszó függvényhívásoknál">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A template kulcsszó függvényhívásoknál<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi kódsor. Ez ránézésre egy <em>objektumdefiníció</em>: az <code>std</code> névtérben megtalálható <code>function</code>
+osztálysablont példányosítja <code>int()</code> függvénytípussal, és az így megadott osztályból létrehoz egy objektumot <code>f
+</code> néven:</p>
+
+<pre   ><code class="language-c">std::function&lt;int()&gt; f;</code></pre>
+
+<p>No igen, de mindez csak akkor igaz, ha tényleg ilyen típusokról van szó. Mi a helyzet akkor, ha a <code>function</code> és
+az <code>f</code> nevek definíciója az alábbi? Ebben az esetben a kódsor egy <em>kifejezés</em>! <code>std::function</code>, a globális változó, kisebb-e
+<code>int()</code> nullánál, és az így kapott érték nagyobb-e <code>f</code>-nél.</p>
+
+<pre   ><code class="language-c">namespace std {
+    int function = 0;
+};
+
+int main() {
+    int f = 0;
+    std::function&lt; int() &gt; f;
+}</code></pre>
+
+<p>Ez ugyanaz a probléma, mint a <code>typename</code> kulcsszó esetében: ha nem tudjuk, mi az az <code>std</code>, akkor azt
+sem tudhatjuk, hogy az abban lévő <code>function</code> egy sablon, amit a kacsacsőrök példányosítanak. Lehetne változó is, és
+akkor a kacsacsőrök összehasonlítást jelentenének. Márpedig sablon kódnál nem tudhatjuk! Ezért ha egy sablonosztály statikus
+függvényét, vagy akár egy sablon típus sablon tagfüggvényét szeretnénk meghívni, akkor a <code>template</code> kulcsszóval
+jelezni kell, hogy egy sablonról van szó (innen fogja tudni a fordító, mit jelentenek a kacsacsőrök):</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T obj, T* pobj) {
+    T::template f&lt;int&gt;();       // statikus fv
+
+    obj.template g&lt;int&gt;();      // tagfv
+    pobj-&gt;template g&lt;int&gt;();
+}</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvény vagy objektum?">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Függvény vagy objektum?<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C++98-ban az osztályok nevei függvényként is használhatóak. Az <code>OsztályNeve(kifejezések...)</code> alakú
+kifejezés konstruktorhívást jelent. Ugyanígy kerek zárójellel kell megadni a névvel is rendelkező objektumok definíciója esetén
+a konstruktorparamétereket. Csakhogy...</p>
+
+<pre   ><code class="language-cbub">class Complex {
+    Complex(double re = 0, double im = 0);
+};
+
+Complex c1(2, 3);   // objektumdefiníciók
+Complex c2(2);
+
+Complex c3();       // függvénydeklaráció</code></pre>
+
+<p>Figyeljük meg az utolsó sort! Ez <code>típusnév név();</code> alakú. <code>int fv();</code> – ismerős? Akár egy 
+függvénydeklaráció is lehetne. Sőt tényleg az, mert a szintaktikai kétértelműséget úgy kerülték meg, hogy azt mondták, ami 
+függvénydeklaráció és objektumdefiníció is lehetne (tehát amire ráillik mindkét nyelvtani szabály), az függvénydeklaráció. A 
+paraméter nélküli esetben, ha objektumot szeretnénk, el kell hagynunk az üres zárójelpárt (amit amúgy függvénynél nem tehetnénk 
+meg). Ez csak azokon a helyeken van így, ahol nem biztos, hogy konstruktorhívásról van szó:</p>
+
+<pre   ><code class="language-cbub">Complex c3;                     // objektumdefiníció, tilos ()
+
+cout &lt;&lt; Complex();              // temportális objektum, kötelező ()
+
+Complex* p1 = new Complex;      // itt mindkettő jó
+Complex* p2 = new Complex();</code></pre>
+
+<p>Ez a hírhedt „most vexing parse” probléma, a C++ egyik legbosszantóbb szintaktikai kétértelműsége. Sok esetben
+lefordítható kódhoz juthatunk mindkét változattal:</p>
+
+<pre   ><code class="language-cbub">std::string s1;
+std::cout &lt;&lt; s1;     // sztring kiírása
+
+std::string s2();
+std::cout &lt;&lt; s2;     // bool(true) kiírása, mert függvénypointer-&gt;bool cast</code></pre>
+
+<p>Egy összetettebb példa, ami szintén függvény lesz, lent látható. A felső sor is lefordul (hiába nincs két komplex számot
+átvevő konstruktor!), mert érthető függvénydeklarációként. Az így írt függvénydeklaráció igazi jelentését az alsó sor mutatja:
+egy komplex számot, és egy függvénypointert átvevő függvény deklarációja. Az első azért lehetséges, mert ebben a kontextusban
+<code>Complex(c1)</code> és <code>Complex c1</code> ugyanazt jelenti; a <code>c1</code> nevű paraméter típusa komplex szám.
+(A zárójelnek itt precedenciamódosító hatása lenne, de épp nem csinál semmit. Kifejezésekben bárhova írhatunk zárójelet!
+A <code>main()</code> függvény fejlécét is írhatjuk <code>int (main)(int (argc), char** (argv))</code> alakban.) A második
+rész, a <code>Complex()</code> egy függvény típust ad meg (<code>Complex</code> visszatérési értékű, paraméter nélküli függvény),
+de paraméterátadáskor a függvény helyett függvényre mutató pointert értünk. Így végülis az egész érthető függvénydeklarációként.</p>
+
+<pre   ><code class="language-cbub">Complex c4(Complex(c1), Complex());       // a kód
+
+Complex c4(Complex c1, Complex(*)());     // a jelentése
+
+Complex c4((Complex(c1)), Complex());     // javítva: c4 objektum definíciója</code></pre>
+
+<p>Javítani a szokásos módon, zárójelezéssel lehet. <code>(Complex(c1))</code>, ezt nem lehet egy függvény paramétereként érteni,
+mert a formális paraméter megadása egy deklaráció típusnévvel kell kezdődjön, nem zárójellel. A fenti kódrészlet erőltetettnek tűnik, de ugyanilyen probléma
+bármikor könnyen előjöhet. A következő kódrészletben egy fájlból (itt: <code>std::cin</code>) olvasnánk be egész számokat
+egy vektorba, <code>istream_iterator</code>-ok segítségével. De nem megy, mert a jelzett sor szintaktikailag ugyanaz, mint
+a fenti: egy függvénydeklaráció.</p>
+
+<pre   ><code class="language-c">using namespace std;
+
+// ez hibás...
+vector&lt;int&gt; numbers(istream_iterator&lt;int&gt;(cin), istream_iterator&lt;int&gt;());
+
+copy(numbers.begin(), numbers.end(), ostream_iterator&lt;int&gt;(cout, &quot;\n&quot;));</code></pre>
+
+<p>Javítani zárójelezéssel, vagy C++11-ben <code>{}</code> szintaxissal lehet:</p>
+
+<pre   ><code class="language-c">// így már jó
+vector&lt;int&gt; numbers((istream_iterator&lt;int&gt;(cin)), istream_iterator&lt;int&gt;());
+
+// meg így is
+vector&lt;int&gt; numbers{istream_iterator&lt;int&gt;(cin), istream_iterator&lt;int&gt;()};</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Makrók és függvények">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Makrók és függvények<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Van egy sablon osztályunk, amelynek két <code>int</code> paramétere van. Mint pl. az alábbi <code>Max</code> osztály: ez
+statikus adattagként tartalmazza a két szám közül a nagyobbikat. Tesztelésképp kiírjuk az összehasonlítás eredményét
+(<code>print()</code>). Aztán szeretnénk automatizálni is a tesztet: az <code>assert</code> makró megszakítja a programot, ha
+hamis kifejezést kap.</p>
+
+<pre   ><code class="language-c">#include &lt;cassert&gt;
+#include &lt;iostream&gt;
+
+template &lt;int A, int B&gt;
+struct Max {
+    static const int value = A&gt;B ? A:B;
+};
+
+void print(bool b) {
+    std::cout &lt;&lt; (b ? &quot;igaz&quot; : &quot;hamis&quot;);
+}
+
+int main() {
+    print(Max&lt;5, 7&gt;::value == 7);
+    assert(Max&lt;5, 7&gt;::value == 7);
+}</code></pre>
+
+<p>A <code>print()</code>-es sorral semmi baja a fordítónak, azonban az <code>assert()</code>-es sor szintaktikai hibás.
+Miért? Pedig az <code>assert()</code> makrónak egy paramétere van!</p>
+
+<p>Hát igen, egy paramétere, de az előfeldolgozó nem ismeri a sablonokat, és az azok által használt <code>&lt;&gt;</code>
+zárójelezést. Ezért az azt hiszi, hogy az <code>assert()</code> makrót két paraméterrel próbáljuk hívni, az
+első <code>Max&lt;5</code>, a második pedig <code>7&gt;::value == 7</code>. Innen jön a hibaüzenet. A javításhoz
+be kell zárójeleznünk a kifejezést:</p>
+
+<pre   ><code class="language-c">assert((Max&lt;5, 7&gt;::value == 7));</code></pre>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

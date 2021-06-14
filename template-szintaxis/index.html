@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Template szintaxis</title>
+<meta property="og:title" content="TEST InfoC++11 :: Template szintaxis">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="A sablon osztályok és sablon függvények szintaxisa">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="A sablon osztályok és sablon függvények szintaxisa">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Template szintaxis">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Template szintaxis</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">A sablon osztályok és sablon függvények szintaxisa</p>
+</div>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Sablon osztályok és függvények definíciója</a>
+                      <li><a href="index.html#2" class="">A template kulcsszó egyéb jelentései</a>
+                      <li><a href="index.html#3" class="">Összefoglaló táblázat</a>
+                      <li><a href="index.html#4" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sablon osztályok és függvények definíciója">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Sablon osztályok és függvények definíciója<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A sablon kódban bizonyos típusokat (<code>class</code>, <code>typename</code>) vagy egész
+számokat, pointereket (<code>int</code>, ...) fordítási időben cserélhetünk ki. A függvényeket
+vagy az osztályokat a szokásos módon írhatjuk meg, azonban előttük, a <code>template</code>
+kulcsszó után, kacsacsőrök között meg kell adnunk a <em>sablonparamétereket</em>. A sablonparaméterek
+megadása hasonlóképp működik, mint az egyszerű függvényparamétereknél; név, típus sorrendben:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt; // név és típus, vö. int x
+class SomeClass {
+    /* ... */
+};</code></pre>
+
+<p>Ez a sablon elsődleges definíciója (base template). Egyszerre két szerepe is van. Először is,
+deklarálja a sablon nevét, és megadja a sablonparaméterek számát és típusát. Jelen esetben egy
+<code>SomeClass</code> nevű osztálysablonról van szó, amelynek egy sablonparamétere van,
+egy típus. Másodszor pedig, ez definiálja a sablont, azaz megadja azt a lefordítandó kódot, amelyben
+példányosításkor a sablonparaméterek konkrét értékekre cserélődnek.</p>
+
+<p>A sablonoknak létezhet ún. explicit, vagy <em>teljes specializációja</em> (full specialization,
+hivatalosan: explicit specialization). Ezzel meg tudunk adni bizonyos sablonparaméter-értékek esetére
+egy olyan kódrészletet, amely eltérő működésű, mint az elsődleges
+definícióban megadott. A teljes specializációt arról ismerjük meg, hogy a <code>template</code> kulcsszó
+után üres kacsacsőrpár áll <code>&lt;&gt;</code>, az osztály (vagy függvény) neve után pedig kacsacsőrök
+között meg van adva a sablonparaméter konkrét értéke:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+class SomeClass&lt;int&gt; {
+    /* ... */
+};</code></pre>
+
+<p>Az osztály neve után megadott sablonparaméter értékek pontosan olyan számúak és típusúak kell legyenek,
+mint az elsődleges definíciónál megadottak. Jelen esetben egyetlen <code>int</code> típus van megadva,
+ami stimmel is számban és típusban is. A <code>template &lt;typename T&gt;</code> szerint egyetlen paraméter
+kell legyen, egy típus neve, az most <code>int</code>.</p>
+
+<p>Végül pedig, az osztálysablonoknak létezhet <em>részleges specializációja</em> is. Ilyet olyan esetekben
+használhatunk, amikor a sablonparaméterek bizonyos részhalmazára szeretnénk megadni specializációt. Például
+ha az elsődleges definíciónál azt mondjuk, az egyik sablonparaméter egy típus, a részleges specializációnál
+tekinthetjük a típusokon belül a pointerek részhalmazát:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class SomeClass&lt;T*&gt; {
+    /* ... */
+};</code></pre>
+
+<p>Ez a szintaktika ötvözi az elsődleges definíció és az explicit specializáció elemeit. A <code>template</code>
+kulcsszó után meg van adva egy sablonparaméter, <code>&lt;typename T&gt;</code>, mivel ez még változhat.
+Az osztály neve után pedig a <code>&lt;T*&gt;</code> azt adja meg, hogy hogyan kell a sablonparamétereket
+az eredeti, elsődleges definíció paramétereire illeszteni. Mivel az elsődleges definíció azt mondta, hogy egy
+darab típusnévből fog állni a sablonparaméterek listája, itt is egy típusnévnek kell lennie; jelen esetben ez
+egy pointer.</p>
+
+<p>A részleges specializációnál általában már kevesebb sablonparaméter van, mint az elsődleges definíciónál.
+Például ha a sablonunk két típus sablonparaméterrel rendelkezik, megadhatunk egy részleges specializációt
+arra az esetre, amikot két egyező típust ad meg a használó:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T1, typename T2&gt; // Sablonparaméterek: két típus
+class SomeClass {
+};
+
+
+template &lt;typename T&gt;
+class SomeClass&lt;T, T&gt; {             // Két paraméter, de már csak egy típus
+};</code></pre>
+
+<p>Ez nincs szükségszerűen mindig így. Extrém, de egyáltalán nem szokatlan esetben előfordulhat az is, hogy
+a részleges specializációnak <em>több</em> sablonparamétere van, mint az elsődleges definícióban megadott
+paraméterek:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+class SomeClass {               // Sablonparaméter: egy típus
+    /* ... */
+};
+
+template &lt;typename RET, typename ARG&gt;
+class SomeClass&lt;RET (*)(ARG)&gt; { // Egy típus: valamilyen függvénypointer
+    /* ... */
+};</code></pre>
+
+<p>A fenti fogalmazás azonban elég pongyola volt. A specializációnak ugyanúgy egyetlen egy sablonparamétere
+van, mint ahogyan az elsődleges definícióban megadott sablon osztálynak: <code>typename T</code> – <code>RET (*)(ARG)</code>.
+Ez nem is lehet másképp! Csak most a <code>RET (*)(ARG)</code> függvénypointer típusban több típusnév is cserélgethető, a paraméter
+és a visszatérési érték típusa is. Az elsődleges definíció sablonparaméteréhez képest ez még így is részhalmaz,
+mert az összes típus halmazának részhalmaza az egyparaméterű függvényekre mutató függvénypointerek halmaza.</p>
+
+<p>Épp a függvények kapcsán fordul elő gyakran, hogy olyan sablont adunk meg, amelynek elsődleges definíciója
+egyáltalán nincs, csak részleges specializációja. Ez így néz ki:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename FUNCPTR&gt;
+class SomeClass;            // csak deklaráció
+
+template &lt;typename RET, typename ARG&gt;
+class SomeClass&lt;RET (*)(ARG)&gt; {
+    /* ... */
+};</code></pre>
+
+<p>Ezt a sablont csak egyparaméterű függvényre mutató pointerrel lehet példányosítani, semmilyen más típussal.
+Ha példányosításkor egy függvényre mutató pointer típust adunk meg, a fordító a részleges specializációt fogja
+használni, és annak a kódjában külön sablonparaméterekként látjuk a visszatérési érték és a paraméter típusát
+is. Ha bármi mással példányosítunk, akkor a fordító az elsődleges sablont választja ki, amihez viszont nincsen
+definíció, így a fordítás leáll.</p>
+
+<div class="megjegyzes">
+<p>Látszik, hogy az elsődleges definíciók és a specializációk szintaxisa nem túl logikus. Az előbbieknél
+a sablonparaméterek számát a <code>template</code> kulcsszó utáni kacsacsőrökben kell megadni, az utóbbiaknál
+pedig már az osztály vagy függvény neve után. Logikusnak tűnhet, hogy ezt egységesítsük:</p>
+<pre   ><code class="language-cbub">template &lt;typename T&gt; class MyClass;
+template &lt;typename T&gt; class MyClass&lt;T&gt; { /* ... */ };   // HIBÁS!</code></pre>
+<p>Ezt azonban nem lehet, nem engedi a szabvány. Ahogyan <a href="index.html#mill17">függvények részleges specializációját
+sem engedi</a> – azt azért nem, mert összeakadna egy másik nyelvi elemmel, a függvénynevek túlterhelésével.</p>
+</div>
+
+<p>Az elsődleges definíció hiánya a C++11-es változó argumentumszámú sablonoknál is teljesen szokásos dolog:</p>
+
+<pre   ><code class="language-cbub">template &lt;int... NUMBERS&gt;        // tetszőlegesen sok, 0...∞ darab integer
+class SomeClass;
+
+template &lt;int HEAD, int... TAIL&gt;
+class SomeClass&lt;HEAD, TAIL...&gt; { // specializáció az 1...∞ esetekre
+    /* ... */
+};
+
+template &lt;&gt;
+class SomeClass&lt;&gt; {              // specializáció a 0 paraméter esetére
+    /* ... */
+}</code></pre>
+
+<p>A nulla elem, és az egytől végtelenig bármennyi elem, közösen kiadják a nullától végtelenig bármennyi
+elem halmazt. Az első deklarációnak itt is csak annyi a szerepe, hogy megadja, hogyan hívják az osztályt, és
+milyen sablonparaméterei vannak.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A template kulcsszó egyéb jelentései">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A template kulcsszó egyéb jelentései<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fenti példákban a <code>template</code> kulcsszót mindig kacsacsőr követte. Ezt a zárójelpárt akkor is
+ki kell írni, ha az teljesen üres (a teljes specializációnál). Ha nem tesszük, akkor a kódrészlet teljesen
+mást jelent: explicit példányosítást. A sablonok általában automatikusan példányosodnak, igény szerint, minden
+fordítási egységben, ahol használják őket. Ezért kell a definíciókat is a fejlécfájlokba tenni. Ha explicit
+példányosítást használunk, akkor egy adott sablonfüggvény, vagy sablonosztály összes tagfüggvénye, példányosodik
+a fordítási egységben, akkor is, ha nem használjuk:</p>
+
+<pre   ><code class="language-c">template class SomeClass&lt;int&gt;;</code></pre>
+
+<p>Így ha csak néhány konkrét típussal használjuk a sablonunkat, a definíciója áthelyezhető lehet egy
+forrásfájlba (<code>.cpp)</code> a fejlécfájlból (<code>.h</code>). Ezáltal egy nagy projekt fordítása
+gyorsabb lehet.</p>
+
+<p>Ennek éppen az ellenkezőjét jelenti az, ha egy ilyen sor elé még az <code>extern</code> kulcsszót
+is tesszük C++11-ben: az kifejezetten tiltja a sablon példányosítását az adott fordítási egységben. Ahhoz,
+hogy egy ilyen program linkelhető legyen, egy másik fordítási egységben példányosítva kell lennie a hivatkozott
+sablonnak.
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Összefoglaló táblázat">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Összefoglaló táblázat<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<table>
+    <thead>
+    </thead>
+    <tr>
+        <th><code>template <em>&lt;typename T&gt;</em> T less(T, T);</code>
+        <td><code>template</code> után van kacsacsőr, deklarált név után nincs:
+        sablon osztály vagy függvény általános, elsődleges deklarációja: <code>;</code> vagy definíciója: <code>{ ... }</code>.
+    <tr>
+        <th><code>template <em>&lt;&gt;</em> int less<em>&lt;int&gt;</em>(int, int);</code>
+        <td><code>template</code> után és név után is van kacsacsőr:
+        sablon osztály vagy függvény specializációja. Lehet deklaráció <code>;</code>
+        és definíció <code>{ ... }</code> is.
+    <tr>
+        <th><code>template int less<em>&lt;int&gt;</em>(int, int);</code>
+        <td><code>template</code> után nincs, de a név után van kacsacsőr:
+        explicit példányosítás, azaz példányosítás kérése akkor is, ha
+        használattal az adott fordítási egységben nem találkozik a fordító.
+    <tr>
+        <th><code><em>extern</em> template int less<em>&lt;int&gt;</em>(int, int);</code>
+        <td>C++11, példányosítás tiltása az adott fordítási egységben, mivel
+        tudjuk, hogy máshol biztosan példányosodik a sablon, és linkelhető
+        lesz a program.
+</table>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="mill17"><a href="http://www.gotw.ca/publications/mill17.htm">Herb Sutter: Why Not Specialize Function Templates?</a> – miért nincs részleges specializáció függvényekhez?
+
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

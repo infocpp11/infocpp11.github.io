@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Érték és konstans referencia</title>
+<meta property="og:title" content="TEST InfoC++11 :: Érték és konstans referencia">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: Érték és konstans referencia">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: Érték és konstans referencia">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Érték és konstans referencia">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Érték és konstans referencia</h1>
+
+<blockquote>
+<p>Ez az írás egy emlékeztető a Prog2-höz!</p>
+</blockquote>
+
+
+<p>C++-ban van két paraméterátadási mód, amik eléggé hasonlítanak egymásra: az érték és a konstans referencia szerinti paraméterátadás. A legfőbb közös tulajdonságuk az, hogy a paraméterként átvett objektumot egyik esetben sem lehet megváltoztatni.</p>
+
+<pre   ><code class="language-c">void f(std::string const &amp; s) {
+    std::cout &lt;&lt; s[0];  /* ok */
+    s[0] = 'A';         /* fordítási hiba */
+}
+
+std::string s = &quot;almafa&quot;;
+f(s);</code></pre>
+
+<pre   ><code class="language-c">void f(std::string s) {
+    std::cout &lt;&lt; s[0];  /* ok */
+    s[0] = 'A';         /* ok, de a másolat változik */
+}
+
+std::string s = &quot;almafa&quot;;
+f(s);
+std::cout &lt;&lt; s;         /* még mindig kis a-val */</code></pre>
+
+<p>A „nem lehet megváltoztatni” azonban láthatóan mást jelent a két esetben. A konstans referencia esetén a változtatás fordítási hibához vezet, hiszen konstans objektumról van szó. Érték szerinti paraméterátadáskor viszont módosulhat az objektum – csak ez az objektum már nem a paramtéterként átvett példány, hanem annak a másolata, tehát az eredeti objektum nem módosul.</p>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Melyik?</a>
+                      <li><a href="index.html#2" class="">Temporális objektumok és konstans referenciák</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Melyik?">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Melyik?<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mire jó ez a megkülönböztetés? Gyakran olyan függvényt írunk, amely egy objektumot csak megvizsgál (angolul: observer), annak tartalmára kíváncsi. Például ha megszámlálnánk, hány szóköz van egy sztringben, akkor kíváncsiak vagyunk a sztring tartalmára, de a megszámlálás kedvéért a sztringet fölösleges lenne lemásolni. Ezért konstans referenciát használunk:</p>
+
+<pre   ><code class="language-c">int hany_szokoz(std::string const &amp; s) {
+    int db = 0;
+    for (size_t i = 0; i &lt; s.length(); ++i)
+        if (s[i] == ' ')
+            ++db;
+    return db;
+}</code></pre>
+
+<p>Ellenben ha egy olyan függvényre lenne szükségünk, amelyik egy sztringben a szóközöket alulvonásra cserélve állít elő egy új sztringet, akkor ez kevésbé praktikus paraméterátadási mód:</p>
+
+<pre   ><code class="language-c">std::string szokozbol_alulvonas(std::string const &amp; s) {
+    std::string uj = s;
+    for (size_t i = 0; i &lt; uj.length(); ++i)
+        if (uj[i] == ' ')
+            uj[i] = '_';
+    return uj;
+}</code></pre>
+
+<p>A fenti kódot ugyanis valamivel rövidebben is leírhattuk volna. Mégpedig így:</p>
+
+<pre   ><code class="language-c">std::string szokozbol_alulvonas(std::string s) {
+    for (size_t i = 0; i &lt; s.length(); ++i)
+        if (s[i] == ' ')
+            s[i] = '_';
+    return s;
+}</code></pre>
+
+<p>A lényeg itt az, hogy az érték szerinti paraméterátadással már eleve létrejön az a munkamásolat, amelyen dolgozhatunk – amely fölött szabadon rendelkezhetünk, mert annak módosítása nem hat majd ki a paraméterként átadott objektumra. Vagyis a függvénybe úgy érkezünk meg, hogy már adott egy sztringünk, amiben csak ki kell cserélnünk szóközre az alulvonásokat, és készen vagyunk.</p>
+
+<p>Ez a megoldás egyébként <em>jobb</em> is, mint az előző. Előfordulhat az, hogy a függvényünknek egy temporális objektumot kell adni:</p>
+
+<pre   ><code class="language-c">std::string a = &quot;...&quot;, b = &quot;...&quot;;
+
+std::string c = szokozbol_alulvonas(a + b);</code></pre>
+
+<p>Ebben az esetben a fordító optimalizálni tud: az összefűzött sztring, azaz a temporális objektum lemásolása helyett magát a temporális objektumot adhatja át paraméterként a függvénynek. Azért teheti ezt meg, mert a temporális objektum nem érhető el más módon: az <code>a + b</code> kifejezésben jött létre, és csak ott látszik, így aztán szabadon felhasználható.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Temporális objektumok és konstans referenciák">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Temporális objektumok és konstans referenciák<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Fölvet a fenti megkülönböztetés egy érdekes kérdést.</p>
+
+<p>Ha van egy változónk, amelyet átadunk a konstans referencia paraméterű <code>hany_szokoz()</code> függvénynek, a működés elég magától értetődő. A függvényhívás idejére létrejön egy referencia, amelyen keresztül az eredeti változót, objektumot látjuk.</p>
+
+<pre   ><code class="language-c">int hany_szokoz(std::string const &amp; s);
+
+std::string a = &quot;almafa&quot;;
+std::cout &lt;&lt; hany_szokoz(a);    /* std::string const &amp; s = a; */</code></pre>
+
+<p>Mi a helyzet akkor, ha ez a függvény egy temporális objektumot kap paraméterként?</p>
+
+<pre   ><code class="language-c">std::string a = &quot;...&quot;, b = &quot;...&quot;;
+std::cout &lt;&lt; hany_szokoz(a + b);</code></pre>
+
+<p>Azt várjuk, hogy ez működjön: miért ne számolhatnánk meg, a kapott sztringben hány szóköz van összesen? Ennek azonban ellentmondani látszik az, hogy a temporális objektum <em>nem névvel rendelkező változó</em>, márpedig referenciája csak változónak lehet.</p>
+
+<p>Fontos viszont, hogy igazából egyik függvény sem képes megváltoztatni a neki paraméterként átadott objektumot. Sem a konstans referencia, sem az érték paraméterű; az előbbi a konstans, az utóbbi pedig a másolás miatt. Tehát a <em>hívó</em> szempontjából mindegy, hogy konstans referencia vagy érték típusú paramétert vár a függvény.</p>
+
+<p>A paraméterátadás módját a függvény <em>feladata</em>, megvalósítása alapján választottuk ki, azaz hogy szükségünk volt-e munkamásolatra vagy nem. Ez egy implementációs kérdés, ami a függvény megíróját érdekli, a hívóját viszont nem. Ezért úgy döntöttek, hogy ebben a speciális esetben egy referencia lehessen hozzáköthető egy temporális objektumhoz is. De kizárólag abban az esetben, ha konstans referenciáról van szó, hiszen a hívó szempontjából ez fog ugyanúgy viselkedni, mint az értékparaméter. Így a <code>hany_szokoz(a + b)</code> helyesnek számít.</p>
+
+<p>Vegyük észre, hogy ennek tényleg csak abban az esetben van értelme, ha a referencia konstans. Itt egy olyan függvény, amely a szóban forgó sztringet módosítja (angolul: mutator):</p>
+
+<pre   ><code class="language-c">void sztringet_modosit(std::string &amp; s) {
+    s += '!';
+}</code></pre>
+
+<p>Ennek a függvénynek haszontalan lenne egy temporális objektumot adnunk. Mert a temporális objektum úgyis meg fog szűnni – minek akarnánk módosítani, ha a módosítás eredményét úgysem tudjuk már felhasználni sehogyan? Ezért a nem konstans referencia nem képes a temporális objektumhoz kötődni. Az alábbi kódrészlet fordítási hibát vált ki:</p>
+
+<pre   ><code class="language-c">std::string a = &quot;hello&quot;, b = &quot;vilag&quot;;
+sztringet_modosit(a + b);       /* fordítási hiba */</code></pre>
+
+<p>Sajnos az ilyen kódra a Microsoft C++ fordítója nem jelez hibát, hiába semmi értelme. (Bár ők sosem jeleskedtek a szabványok követésében.) Ez konkrétan az a „misfeature”, ami a legtöbb bosszúságot szokta okozni a házik beadásakor. Vajon miért jelez fordítási hibát a feladatbeadó rendszer, mikor otthon még jó volt? Hát azért, mert nem szabványos a megírt kód, és nem szabványos a fordító sem, amelyik azt elfogadta.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

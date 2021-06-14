@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: A nyelvi elemző használata</title>
+<meta property="og:title" content="TEST InfoC++11 :: A nyelvi elemző használata">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Néhány levezető feladat.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Néhány levezető feladat.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="A nyelvi elemző használata">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">A nyelvi elemző használata</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Néhány levezető feladat.</p>
+</div>
+
+
+
+
+<p>Válassz az alábbi feladatok közül!</p>
+
+<blockquote>
+<h3>A laborokhoz</h3>
+<p>A laborok mellé minden héten lesz kiírva egy beadandó az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Nagy házi feladat</a>
+                      <li><a href="index.html#2" class="">A parser framework használata</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Nagy házi feladat">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Nagy házi feladat<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha még nincs kész a nagy házi feladatod, dolgozhatsz azon is.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A parser framework használata">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A parser framework használata<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C nyelv hexadecimális számai (pl. 0x12, 0xdeafbeef, 0x00124) az alábbi szintaktikai szabályokkal adhatóak meg:</p>
+
+<pre>
+hex_num    ::= hex_prefix  hex_digit<em>+</em>
+hex_prefix ::= '0'  'x'
+hex_digit  ::= '0' <em>|</em> '1' <em>|</em> '2' ... 'd' <em>|</em> 'e' <em>|</em> 'f'
+</pre>
+
+<p>Ez azt jelenti, hogy egy hexadecimális szám (hex_num) elején egy prefix van (hex_prefix), utána pedig legalább egy,
+de tetszőlegesen sok (<em>+</em>) hexadecimális számjegy (hex_digit) lehet. A prefix alakja: egy 0 és egy x karakter (szimbólum) egymás után. A hexadecimális számjegy pedig a 0, 1, 2, stb. karakterek valamelyike (<em>|</em>).</p>
+
+<p>Ezt a keretrendszerben az alábbi kódrészlettel lehet megadni:</p>
+
+<pre   ><code class="language-c">rule hex_num, hex_prefix, hex_digit;
+
+hex_num &lt;&lt;= hex_prefix &lt;&lt; +hex_digit;
+hex_prefix &lt;&lt;= character(&quot;0&quot;) &lt;&lt; character(&quot;x&quot;);
+hex_digit &lt;&lt;= character(&quot;0123456789abcdef&quot;);</code></pre>
+
+<table>
+<thead>
+    <th>Jelentés<th>EBNF operátor    <th>Syntx (C++) operátor
+</thead>
+<tr><td>definíció<td>::=<td>&lt;&lt;=
+<tr><td>egymásra következés<td>␣ (szóköz)<td>&lt;&lt;
+<tr><td>&ge;1 ismétlés<td>postfix +<td>prefix +
+<tr><td>literális<td>'x'<td>character("x")
+</table>
+
+<p>A letölthető kódban (<a href="parser.cpp">parser.cpp</a>) arra is látsz példát, hogy egy szabály illeszkedéséhez (sztringrészlet felismeréséhez)
+hogyan lehet tevékenységet társítani, az indexelő operátor segítségével. A társított függvény <code>std::string const &amp;</code> típusú paraméterben megkapja a megtalált szövegrészletet.</p>
+
+
+
+
+<h3>A hexadecimális szám kiírása</h3>
+
+<p>Írd át úgy a programot, hogy ne a hexa prefixet írja ki a találat esetén a képernyőre (0x), hanem a megtalált
+hexa számot! Pl. 0xfce2 esetén ez fce2. Hova kell tenni a <em>semantic_action</em>-t?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Figyelni kell arra, hogy a kiíró függvényt nem a <code>hex_digit</code>-hez, hanem a <code>+hex_digit</code>-hez
+kell társítani. Különben nem a teljes számot kapja meg, hanem egyesével megkapja az összes hexa számjegyet. A
+társításnál ehhez kell egy zárójel, mivel a C++ <code>()</code> függvényhívó operátora magasabb precedenciájú, mint
+a prefix <code>+</code> operátora.</p>
+<pre   ><code class="language-c">auto print_hex_num = [] (std::string const &amp; s) {
+    std::cout &lt;&lt; &quot;Found hex num: &quot; &lt;&lt; s &lt;&lt; std::endl;
+};
+
+hex_num &lt;&lt;= hex_prefix &lt;&lt; (+hex_digit)(print_hex_num);</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>A hexadecimális szám konvertálása</h3>
+
+<p>Írd át a függvényedet úgy, hogy a megtalált hexa számot ne kiírja a képernyőre, hanem tegye azt be egy <code>int</code>
+típusú változóba! Ezt az <code>int</code> változót a lambda függvénynek látnia kell majd.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">rule hex_num, hex_prefix, hex_digit;
+
+int i;
+auto convert_hex = [&amp;i] (std::string const &amp; s) {
+    i = 0;
+    for (char c : s) {
+        i = i * 16 + (isdigit(c) ? c-'0' : c-'a'+10);
+    }
+};
+
+hex_num &lt;&lt;= hex_prefix &lt;&lt; (+hex_digit)(convert_hex);
+hex_prefix &lt;&lt;= character(&quot;0&quot;) &lt;&lt; character(&quot;x&quot;);
+hex_digit &lt;&lt;= character(&quot;0123456789abcdef&quot;);
+
+match_range context(text.begin(), text.end()), result;
+if (hex_num.match(context, result)) {
+    std::cout &lt;&lt; &quot;The number is: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+else std::cout &lt;&lt; &quot;Didn't match&quot; &lt;&lt; std::endl;</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Decimális számok</h3>
+
+<p>Írj nyelvtani szabályt decimális számok feldolgozására! A decimális számok legalább egy, de amúgy akárhány
+olyan számjegyből állnak, amelyek a 0, 1, ... 9 halmazból kerülnek ki. Írd meg ehhez is a konverziót!</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* DECIMÁLIS SZÁM */
+rule dec_num, dec_digit;
+
+int i;
+auto convert_dec = [&amp;i] (std::string const &amp; s) {
+    i = 0;
+    for (char c : s) {
+        i = i * 10 + c-'0';
+    }
+};
+dec_num &lt;&lt;= (+dec_digit)(convert_dec);
+dec_digit &lt;&lt;= character(&quot;0123456789&quot;);
+
+match_range context(text.begin(), text.end()), result;
+if (dec_num.match(context, result)) {
+    std::cout &lt;&lt; &quot;The number is: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+else std::cout &lt;&lt; &quot;Didn't match&quot; &lt;&lt; std::endl;</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Hexadecimális szám vagy decimális szám?</h3>
+
+<p>A parser a nyelvtani szabályok alapján fel tudja ismerni az is, hogy hexadecimális vagy decimális
+számot kapott. Egy szám az vagy hexadecimális szám (prefixszel), vagy decimális szám (prefix nélkül). Mindkettőhöz
+megvan már a szabály, csak választani kell közülük. Ezt az EBNF <code>|</code> operátora teszi, amelyet
+a C++-ban szintén <code>|</code> operátorként lehetett megvalósítani.</p>
+
+<p>Írj egy új szabályt, amely így definiál egy számot! A program így képes lesz arra, hogy automatikusan válasszon
+a kettő közül, sőt a meglévő hex&rarr;int és dec&rarr;int függvények segítségével át is alakítja azt.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int i;
+
+/* DECIMÁLIS SZÁM */
+rule dec_num, dec_digit;
+auto convert_dec = [&amp;i] (std::string const &amp; s) {
+    i = 0;
+    for (char c : s) {
+        i = i * 10 + c-'0';
+    }
+};
+dec_num &lt;&lt;= (+dec_digit)(convert_dec);
+dec_digit &lt;&lt;= character(&quot;0123456789&quot;);
+
+/* HEXADECIMÁLIS SZÁM */
+rule hex_num, hex_prefix, hex_digit;
+auto convert_hex = [&amp;i] (std::string const &amp; s) {
+    i = 0;
+    for (char c : s) {
+        i = i * 16 + (isdigit(c) ? c-'0' : c-'a'+10);
+    }
+};
+hex_num &lt;&lt;= hex_prefix &lt;&lt; (+hex_digit)(convert_hex);
+hex_prefix &lt;&lt;= character(&quot;0&quot;) &lt;&lt; character(&quot;x&quot;);
+hex_digit &lt;&lt;= character(&quot;0123456789abcdef&quot;);
+
+/* TETSZŐLEGES SZÁM, HEXA VAGY DECIMÁLIS */
+rule number;
+number &lt;&lt;= hex_num | dec_num;
+
+
+match_range context(text.begin(), text.end()), result;
+if (number.match(context, result)) {
+    std::cout &lt;&lt; &quot;The value is: &quot; &lt;&lt; i &lt;&lt; std::endl;
+}
+else std::cout &lt;&lt; &quot;Didn't match&quot; &lt;&lt; std::endl;</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Sztring vége szabály</h3>
+
+<p>Észreveheted, hogy a mostani program nem zavartatja magát, ha érvénytelen karaktereket talál egy sztring
+végén. Pl. a <code>"123"</code> sztringet ugyanúgy elfogadja százhuszonháromnak, mint a <code>"123x"</code>
+sztringet. Ez azért van, mert legfölső szabálynak a számot értelmező szabályt vettük; az eljutott a hármas
+számjegy utánig; és az <code>x</code>-et nem vette a megtalált szövegrész részének, de igazzal tért vissza,
+mert az előtte lévő számjegyeket tudta értelmezni. Azt kellene tehát mondanunk, hogy a szám karakterei
+után már más nem szabad szerepeljen. Ha csak a decimális számokra gondolunk, valahogy így:</p>
+
+<pre>
+dec_num &lt;&lt;= +dec_digit &lt;&lt; end_of_string();
+</pre>
+
+<p>Ehhez egy új szabályt, egy új <code>base_rule</code> leszármazottat kell bevezetni, amely az üres
+sztringre, és csak az üres sztringre illeszkedik. Írd meg ezt az osztályt, figyelve arra, hogy
+mi a <code>test()</code> virtuális függvény feladata! (Illeszkedés esetén igazzal tér vissza, és beállítja
+mind a <code>context</code>, mind a <code>matching_range</code> paramétereket). Egészítsd ki a számokat
+leíró nyelvtani szabályt úgy, hogy visszadobják a sztringet, ha szemét van a végén!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">class end_of_string : public base_rule {
+    private:
+        virtual bool test(match_range &amp;context, match_range &amp;matching_range) override {
+            if (context.first == context.second) {
+                matching_range = context;
+                return true;
+            }
+            return false;
+        }
+
+    public:
+        virtual std::shared_ptr&lt;base_rule&gt; clone() const override {
+            return std::shared_ptr&lt;base_rule&gt;(new end_of_string(*this));
+        }
+};</code></pre>
+</div>
+</details>
+
+
+
+
+<h3>Vessző operátor?</h3>
+
+<p>Az EBNF-ben az egymásra következést általában nem jelölik sehogy, vagyis szóközzel jelölik.
+Néha jelölik vesszővel is, pl. <code>hex_prefix ::= '0', 'x'</code>. Lehetne ezt C++-ban
+a <code>&lt;&lt;</code> operátor helyett <code>,</code> operátorral jelölni? Ha igen, kényelmesebb
+lenne vagy kényelmetlenebb lenne a keretrendszer használata? Miért?</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

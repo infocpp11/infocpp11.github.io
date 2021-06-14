@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Paraméterlisták és -továbbítás</title>
+<meta property="og:title" content="TEST InfoC++11 :: Paraméterlisták és -továbbítás">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Változó hosszúságú sablonparaméterlista. Sablonparaméterek típushelyes továbbítása. Az std::move és az std::forward függvények.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Változó hosszúságú sablonparaméterlista. Sablonparaméterek típushelyes továbbítása. Az std::move és az std::forward függvények.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Paraméterlisták és -továbbítás">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Paraméterlisták és -továbbítás</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Változó hosszúságú sablonparaméterlista. Sablonparaméterek típushelyes továbbítása. Az std::move és az std::forward függvények.</p>
+</div>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">C++11 változó hosszúságú sablonparaméterlista</a>
+                      <li><a href="index.html#2" class="">Saját, típushelyes printf()</a>
+                      <li><a href="index.html#3" class="">Bináris literálisok sablon metaprogramozással</a>
+                      <li><a href="index.html#4" class="">A 2ⁿ darab függvény problémája</a>
+                      <li><a href="index.html#5" class="">Template levezetési és összevonási szabályok</a>
+                      <li><a href="index.html#6" class="">A C++11 új levezetési és összevonási szabályai</a>
+                      <li><a href="index.html#7" class="">Az std::move() és az std::forward() függvények</a>
+                      <li><a href="index.html#8" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C++11 változó hosszúságú sablonparaméterlista">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        C++11 változó hosszúságú sablonparaméterlista<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A C nyelvben lehetett olyan függvényt írni, amely tetszőlegesen sok, tetszőleges típusú paramétert vett át: <code>...</code> 
+a függvény paraméterlistájában (variadic function). Ez a nyelvi eszköz C++-ban is létezik, azonban csak beépített típusokra használható, 
+objektumokra nem. A fő probléma az vele, hogy a paraméterlistának ezen a részén C++-ban nem lehetne eldönteni, hogy a függvény 
+érték- vagy referenciaparamétert vár. Meg persze az is, hogy ennek az eszköznek a szemlélete nem fér össze a nyelv általános 
+szemléletével, az erősen típusossággal. A változó hosszúságú paraméterlistán már C-ben is ki volt kapcsolva mindenféle 
+típusellenőrzés. Nem véletlen, hogy a <code>printf()</code>-nek is a formátumsztringben meg kellett adni a típusokat: 
+<code>%d</code>, <code>%f</code>, <code>%s</code>.</p>
+
+<p>Pedig ilyesmire gyakran lenne szükségünk. Képzeljünk el egy <code>printf()</code>-hez hasonló függvényt, amely a neki
+paraméterként adott objektumokat mind kiírja a szabványos kimenetre! Ezek az objektumok ismeretlen típusúak (ezért sablonra
+lesz szükség), és ismeretlen számúak. Első körben valahogy így közelíthetnénk meg a problémát:</p>
+
+<pre   ><code class="language-c">template &lt;typename ARG1&gt;
+void my_print(ARG1 arg1) {
+    std::cout &lt;&lt; arg1;
+}
+
+
+template &lt;typename ARG1, typename ARG2&gt;
+void my_print(ARG1 arg1, ARG2 arg2) {
+    std::cout &lt;&lt; arg1 &lt;&lt; arg2;
+}
+
+
+template &lt;typename ARG1, typename ARG2, typename ARG3&gt;
+void my_print(ARG1 arg1, ARG2 arg2, ARG3 arg3) {
+    std::cout &lt;&lt; arg1 &lt;&lt; arg2 &lt;&lt; arg3;
+}
+
+
+/* ... */</code></pre>
+
+<p>Látszik, hogy ez így nem fog menni: nem csak a függvény paraméterei lehetnek akárhányan, hanem a sablonparaméterek is.
+Szerencsére C++11-ben bevezették a változó hosszúságú sablonparaméter-listát is. Így lehet olyan függvénysablont vagy
+osztálysablont írni, amelynek bármilyen számú és típusú sablonparamétere lehet (variadic template). Ezt a sablonparaméterek
+listájában egy <code>...</code>-tal kell jelölni, amit a típus után írunk.</p>
+
+<pre   ><code class="language-c">template &lt;typename... ARGS&gt;
+void func(ARGS... args) {
+    std::cout &lt;&lt; sizeof...(args) &lt;&lt; &quot; paraméter.&quot; &lt;&lt; std::endl;
+}
+
+
+int main() {
+    func&lt;int, double&gt;(1, 2.3);
+    func(1, 2.3, 'a');
+}</code></pre>
+
+<p>A fenti <code>func()</code> függvénynek akárhány sablonparamétere, és ezen keresztül akárhány paramétere is lehet. A 
+deklaráció <code>typename...</code> kulcsszava adja meg a tetszőlegesen sok típusból álló listát. A függvény első hívásánál ezek 
+a sablonparaméterek explicite meg vannak adva. A második hívásnál pedig a szokásos módon a fordító vezeti le a típusokat a konkrét
+hívásból: ott a <code>func&lt;int, double, char&gt;()</code> függvény példányosodik.</p>
+
+<p>A függvény formális paraméterlistájában a <code>ARGS... args</code> „képzeletbeli” paraméter <em>reprezentálja</em> a tetszőlegesen 
+sok, érték szerint átvett paramétert. A függvény belsejében az <code>args</code> név ilyenkor nem egy konkrét változót jelöl, 
+hanem az összes átvett paramétert jelképező ún. paramétercsomagot (argument pack). A paramétercsomag méretét a 
+<code>sizeof...</code> operátorral tudjuk lekérdezni. (Vigyázat, ez a paraméterek számát adja, nem a bájtban mért méretüket!)</p>
+
+<p>A paramétercsomag tagjait külön-külön nem is tudjuk kezelni, hanem csak egyben tudjuk kifejteni az egész csomagot. A kifejtést 
+is a <code>...</code> operátor végzi: az <code>args...</code> kifejezést írva a csomag kifejtődik, ami <em>nagyjából</em> azt 
+jelenti, hogy a kifejezés helyére a fordító a paramétereket vesszővel elválasztva beírja. Ezt olyan
+kontextusban lehet megtenni, ahova amúgy is vesszővel elválasztott értékek kerülhetnének.</p>
+
+<p>Az eredeti példához visszatérve, ha szeretnénk egyesével kiírni a képernyőre ezeket a paramétereket, akkor a
+vesszővel elválasztás nem megfelelő:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename... ARGS&gt;
+void my_print(ARGS... args) {
+    std::cout &lt;&lt; args...;   // HIBÁS, ez lenne a jelentése: std::cout &lt;&lt; 1, 'a', 2.3;
+}
+
+
+int main() {
+    my_print(1, 'a', 2.3);
+}</code></pre>
+
+<p>Ehelyett a rekurziónál szokásos módszert kell alkalmaznunk: szétválasztanunk az első paramétert és a többit. Akkor az első
+paraméternek külön neve is van, hivatkozni tudunk rá, utána pedig a függvényt meghívjuk a többi paraméterrel. Ebben az esetben
+már megfelelő szintaktikailag és szemantikailag is, ha a <code>...</code> helyére egy vesszővel elválasztott listát képzelünk:</p>
+
+<pre   ><code class="language-c">template &lt;typename HEAD_ARG, typename... TAIL_ARGS&gt;
+void my_print(HEAD_ARG head, TAIL_ARGS... tail) {
+    std::cout &lt;&lt; head;
+    my_print(tail...);
+}</code></pre>
+
+<p>A rekurzió persze egyszer véget kell érjen, mégpedig akkor, amikor elfogynak a paraméterek. A mostani <code>func()</code>
+sablonnak legalább egy paramétere kell legyen, viszont a meghívott függvények között előbb-utóbb lesz egy olyan, amelynek már
+nincs paramétere. Ezért írunk egy olyan <code>my_print()</code> függvényt is, amely nem csinál semmit. Ez zárja majd le a rekurziót:</p>
+
+<pre   ><code class="language-c">void my_print() {
+    /* szándékosan üres */
+}</code></pre>
+
+<p>Így végül egy <code>my_print(1, 'a', 2.3)</code> kifejezés az alábbi hívásokat és kiírásokat indítja majd:</p>
+
+<pre   ><code class="language-cbub">my_print&lt;int, char, double&gt;(1, 'a', 2.3);   // 1
+my_print&lt;char, double&gt;('a', 2.3);   // a
+my_print&lt;double&gt;(2.3);  // 2.3
+my_print();</code></pre>
+
+<p>Az üres <code>my_print()</code> függvény szándékosan nem sablon. Lényegében a <code>my_print()</code> 
+függvénysablon teljes specializációjának szánjuk, arra az esetre, amikor a paraméterlista üres. A <code>my_print()</code>-nek
+viszont ilyen specializációja nem létezhetne, mert legalább egy sablonparamétere kell legyen, a <code>HEAD_ARG</code>.
+Csak a <code>TAIL_ARGS</code> az, ami üres lehet. A függvénynév túlterhelés (overload) azonban lehetséges, és ez
+most épp kapóra jön.</p>
+
+<div class="megjegyzes">
+<h3>Egy furcsa nyelvi trükk: <code>using swallow = int[];</code></h3>
+<p>A paramétercsomagot más módon is ki lehet fejteni. Az ilyen trükkök általában a nyelvi elemek furcsa kiforgatásai.
+Például ez is egy működő megoldás lehet:</p>
+<div class="sticky">C++11</div>
+<pre   ><code class="language-c">template &lt;typename... ARGS&gt;
+void print_stuff(ARGS... args) {
+    using swallow = int[];
+    swallow{(void(std::cout &lt;&lt; args), 0)..., 0};
+}</code></pre>
+<p>Itt definiálunk egy tömb típust: <code>swallow</code>. Aztán ennek a típusnak, mintha a konstruktorát
+hívnánk a tömbnek, létrehozzuk egy temporális példányát. Az első <code>0</code>-ra azért van szükség, hogy ne
+definiáljunk üres tömböt, ha egyáltalán nem lenne paraméter. A tömb többi elemeit pedig a <code>(void(std::cout
+&lt;&lt; arg), 0)</code> kifejezések értékei fogják meghatározni, amik mindig 0-k, mivel a bennük lévő vessző
+karakter egy vessző operátor, amelyik a jobb oldali értéket tekinti az egész kifejezés értékének. Közben a
+kiírások megtörténnek, a <code>&lt;&lt;</code> operátorok miatt.</p>
+<p>Ha mindez a trükközés nem lenne elég: a <code>void</code>-dá konvertálásra azért van szükség, hogy ne lehessen a függvény
+működését kívülről megzavarni egy <code>operator,(std::ostream&amp;, int)</code> függvény definiálásával.
+A második <code>0</code>-ra meg azért, hogy üres paraméterlista esetén ne jussunk szintaktikai hibához (üres tömb nem létezhet).
+Nem túl olvasható a kód, de működik...</p>
+</div>
+
+
+<div class="megjegyzes">
+<h3>Folding expressions</h3>
+<p>C++17-től a <a href="../cpp1417/index.html#cpp14template">folding expressions</a> nevű
+nyelvi elemmel <em>ezt a konkrét feladatot</em> még egyszerűbben megoldhatjuk:</p>
+<div class="sticky">C++17</div>
+<pre   ><code class="language-c">template &lt;typename... ARGS&gt;
+void print_stuff(ARGS... args) {
+    (std::cout &lt;&lt; ... &lt;&lt; args);
+}</code></pre>
+<p>A nyelvi elem hatására egy olyan kifejezést fejt ki a fordító, amelyben az <code>std::cout</code>-tal
+kezdődően, az összes paraméter <code>&lt;&lt;</code> operátorokkal egymás után van leírva. A
+kifejezést körbezáró kerek zárójel kötelező, a nyelvi elem része.</p>
+</div>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Saját, típushelyes printf()">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Saját, típushelyes printf()<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az eddigiek alapján már egy saját, típushelyes <code>printf()</code>-et is összerakhatunk, amely nem csak a
+beépített típusokat, hanem a felhasználó által definiáltakat is ismeri, sőt mindegyiket a saját
+<code>&lt;&lt;</code> operátorával írja ki. A függvény karakterenként halad a formátumsztringben, és ha
+<code>%</code> karaktert talál, akkor kiírja a formátumsztring utáni első paramétert, aztán meghívja magát a
+formátumsztring maradék és a paraméterlista maradék részével. A rekurzió leállási feltétele az, hogy elfogynak
+a paraméterek; a formátumsztring ilyenkor egy az egyben kiírható, mert elvileg már nem tartalmaz <code>%</code>
+jelet:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+
+void my_printf(char const *format) {
+    std::cout &lt;&lt; format;
+}
+
+ 
+template &lt;typename HEAD, typename... TAIL&gt;
+void my_printf(char const *format, HEAD head, TAIL... tail) {
+    if (*format == '%') {
+        std::cout &lt;&lt; head;
+        my_printf(format+2, tail...);
+    } else {
+        std::cout &lt;&lt; *format;
+        my_printf(format+1, head, tail...);
+    }
+}
+
+
+int main() {
+    std::string e = &quot;Ernőke&quot;;
+    my_printf(&quot;%_ %_ éves.&quot;, e, 5);
+}</code></pre>
+
+<p>A <code>%</code> karakter megtalálása után két karaktert is lehet a formátumsztringben ugrani, így az
+nagyjából kompatibilis lehet a régi <code>printf()</code>-ével, ahol a típust még jelölni kellett. A típusok
+jelölésére igazából nincs is szükség, azokat a sablonok útján a fordító automatikusan kezeli, ezért a példában
+egyszerűen egy alulvonás van a konverziót megadó karakter helyén.</p>
+
+<p>Az okosabb <code>printf()</code>-ek képesek arra, hogy átrendezzék a paraméterlistájukat. Ezt például akkor tudjuk
+kihasználni, amikor különböző nyelvekre fordítjuk le a programunkat: előfordulhat, hogy angolul, németül vagy franciául
+más sorrendben kell írni a mondatrészeket. Mivel a típust a sablonokat használó <code>my_printf()</code>-nek már nem
+kell megadnunk, a helyükön lévő karaktert használhatjuk sorszámnak is. Vegyünk egy magyar nyelvű példát:</p>
+
+<pre   ><code class="language-cbub">my_printf(&quot;%1 %2 éves.\n&quot;,      &quot;Ernőke&quot;, 5);    // Ernőke 5 éves.
+
+my_printf(&quot;%2 éves lett %1.\n&quot;, &quot;Ernőke&quot;, 5);    // 5 éves lett Ernőke.</code></pre>
+
+<p>Ezt a működést a legegyszerűbben úgy tudnánk megvalósítani, ha az összes paramétert betennénk egy tömbbe. A paraméterek azonban
+nem egyforma típusúak: az első egy sztring, a második pedig egy egész szám. De ez csak
+annyit jelent, hogy közvetlenül nem tudjuk őket tömbbe tenni. Mivel a kiírásnál amúgy is sztringgé alakul minden, az
+átalakítást elvégezhetjük előre is.</p>
+
+<p>Kerüljenek ezért a tömbbe a <em>sztringgé alakított</em> változatok!
+Mindehhez szükségünk lesz az alábbi segédfüggvényre:</p>
+
+<pre   ><code class="language-c">#include &lt;string&gt;
+#include &lt;sstream&gt;
+
+template &lt;typename T&gt;
+std::string to_string(T const &amp;valami) {
+    std::ostringstream os;
+    os &lt;&lt; valami;
+    return os.str();
+}</code></pre>
+
+<p>Ez a neki paraméterként átadott, tetszőleges típusú objektum <code>&lt;&lt;</code> operátorát használva sztringgé alakítja azt.
+Ha ez megvan, akkor már nincs más dolgunk, mint a <code>my_printf()</code> függvényünknek adott összes paramétert nem
+közvetlenül kifejteni, hanem az egyes paramétereket odaadni a <code>to_string()</code> függvénynek. Ez az alábbi módon
+tehető meg:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename... ARGS&gt;
+void my_printf(char const *format, ARGS const &amp; ... args) {
+    std::string strings[] = { to_string(args)... };    // !
+    
+    for (int i = 0; format[i] != '\0'; ++i) {
+        if (format[i] == '%') {
+            std::cout &lt;&lt; strings[format[i+1]-'1'];
+            i++;
+        } else {
+            std::cout &lt;&lt; format[i];
+        }
+    }
+}</code></pre>
+
+<p>A trükk a jelölt helyen van. A <code>...</code> operátort nem csak közvetlenül a paramétercsomag neve után
+használhatjuk, hanem egy kifejezés után is. Olyan ez, mint egy nagyon alacsony precedenciájú operátor. Ilyenkor
+azt jelenti, hogy a csomagban lévő paramétereket egyesével be kell helyettesíteni az előtte lévő kifejezésbe,
+és az így kapott kifejezéseket kell vesszővel elválasztva a kifejtés helyére írni. Az <code>"Ernőke", 5</code>
+paraméterek esetén így a tömböt az alábbi módon inicializálja a fordító:</p>
+
+<pre   ><code class="language-c">std::string strings[] = { to_string(&quot;Ernőke&quot;), to_string(5) };</code></pre>
+
+<p>Ennek hatására pedig a <code>to_string()</code> függvénysablon példányosodik <code>to_string&lt;char const *&gt;</code>
+és <code>to_string&lt;int&gt;</code> formában, majd elvégzi a konverziókat. A kapott tömb már egyszerűen indexelhető, bármikor
+bármelyik sztring kivehető belőle, akár többször is.</p>
+
+<p>A változó hosszúságú paraméterlista elemeinek kiértékelését gyakran bontjuk több függvényre, mint a fenti iteratív
+<code>print()</code> példában is. Így a paramétercsomag önálló paraméterekké fejthető ki.</p>
+
+<div class="megjegyzes">
+<h3>Hova kerül a <code>...</code>?</h3>
+<p>Tegyük fel, hogy az alábbi variadikus függvényeinket az <code>1, 'a', 2.3</code> paraméterekkel hívtuk meg.
+Mit ad meg ilyen esetben a <code>...</code> helye?</p>
+<pre   ><code class="language-cbub">template &lt;typename... ARGS&gt;
+void f(ARGS... args) {
+    using swallow = int[];
+    
+    swallow{ g1(args...) };        // g1(1, 'a', 2.3);
+
+    swallow{ g2(args)... };        // g2(1), g2('a'), g2(2.3)
+}</code></pre>
+<p>Vagyis ami után írjuk, az lesz ismételve vesszőkkel elválasztva. Ha a függvényhívás zárójelén belül, akkor az argumentumokat
+megkapja a függvény együtt. Ha a függvényhíváson kívül, akkor nem egy, hanem három függvényhívás lesz, azok viszont egyesével
+kapják a paramétereket.</p>
+
+<h3>Generikus lambdával</h3>
+<p>C++14 óta vannak <a href="../cpp1417/index.html#cpp14lambda">generikus lambdák</a> is, ahol a paraméter típusa <code>auto</code>. Egy ilyennel a sztringgé alakító függvényt
+könnyedén elrejthetjük a <code>my_printf()</code> belsejébe:</p>
+<pre   ><code class="language-c">template &lt;typename... ARGS&gt;
+void my_printf(char const *format, ARGS const &amp; ... args) {
+    auto to_string = [](auto const &amp; valami) {
+        std::ostringstream os;
+        os &lt;&lt; valami;
+        return os.str();
+    };
+
+    std::string strings[] = { to_string(args)... };
+    
+    for (int i = 0; format[i] != '\0'; ++i) {
+        if (format[i] == '%') {
+            std::cout &lt;&lt; strings[format[i+1]-'1'];
+            i++;
+        } else {
+            std::cout &lt;&lt; format[i];
+        }
+    }
+}</code></pre>
+</div>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Bináris literálisok sablon metaprogramozással">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Bináris literálisok sablon metaprogramozással<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mint azt láttuk régebben, a számokat a felhasználó által definiált literális utótag operátorai (literal suffix operator)
+több formában is átvehetik: nyersen (az egyes karaktereket) és előfeldolgozva (már számmá alakítva). Például ha szeretnénk
+egy <code>1101_binary</code> módon használható utótag operátort, azt az alábbi módokon is megírhatjuk:</p>
+
+<pre   ><code class="language-c">/* előfeldolgozva: ebben a példában nem célravezető,
+ * mert tízes számrendszerben előfeldolgozva hamar túlcsordul */
+unsigned long long int operator&quot;&quot; _binary (unsigned long long int p);
+
+/* nyersen: ebben a példában jobb megoldás */
+unsigned long long int operator&quot;&quot; _binary (char const *chars);</code></pre>
+
+<p>A szabvány ad egy harmadik, ezektől gyökeresen eltérő lehetőséget is: megengedi azt, hogy a függvényünk a feldolgozandó
+karaktereket <em>sablonparaméterként</em> vegye át. Ilyenkor egyéb paramétere nincs, mert a karaktereket a sablonparaméterek
+tartalmazzák:</p>
+
+<pre   ><code class="language-c">template &lt;char... ARGS&gt;
+unsigned long long operator&quot;&quot; _binary();</code></pre>
+
+<p>Például:</p>
+
+<pre   ><code class="language-c">/* a leírt kifejezés: */
+1101_binary;
+
+/* a hívott függvény: */
+operator&quot;&quot; _binary&lt;'1', '1', '0', '1'&gt;();</code></pre>
+
+<p>Ezeket a biteket ugyanúgy dolgozhatjuk fel, mint az előző <code>printf</code>-es rekurzív példa paramétereit: szétbontva
+a listát az első és a többi elemre. Ez most egy segédfüggvény lesz, hogy jobban látszódjon a működés.
+Az általános esetben a számítás könnyen elvégezhető: az első bitet, a lista fejét annyival kell balra léptetni, ahány bit jön még
+majd utána, vagyis ahány karakterből a lista farka áll:</p>
+
+<pre class="screenshot">
+1101    bemenet
+
+1...    HEAD
+ 101    TAIL
+</pre>
+
+<p>Az argumentumok számát <code>sizeof...</code> operátor megmondja. Az első bit kiszámítását
+a specializált függvény fogja végezni, a karakterből a <code>0</code> ASCII kódját kivonva. Csakhogy...
+</p>
+
+<pre   ><code class="language-cbub">template &lt;char HEAD, char... TAIL&gt;
+unsigned long long chars_to_binary() {
+    return chars_to_binary&lt;HEAD&gt;() &lt;&lt; sizeof...(TAIL) | chars_to_binary&lt;TAIL...&gt;();
+}
+
+
+template &lt;char HEAD&gt;
+unsigned long long chars_to_binary&lt;HEAD&gt;() {    // NEM MŰKÖDIK
+    return HEAD - '0';
+}
+
+
+template &lt;char... ARGS&gt;
+unsigned long long operator&quot;&quot; _binary() {
+    return chars_to_binary&lt;ARGS...&gt;();
+}</code></pre>
+
+<p>Ez nem fog működni, mivel a második függvénynél, a <code>chars_to_binary&lt;HEAD&gt;()</code>-nél
+a sablonparaméter változhat, pedig konkrét érték. Tehát ez egy részleges specializáció –
+és a szabvány szerint a függvényeknek csak teljes specializációja létezhet,
+<a href="index.html#mill17">részleges specializációja nem</a>.</p>
+
+<p>Két lehetőségünk van. Egyik, hogy teljes specializációt írunk az egy bitből álló esetekre. Ez itt
+vállalható, mert összesen kétféle bemenet van, a 0 és az 1. A megoldás előnye az egyszerűsége. Vegyük
+észre, hogy ebbe már a hibakezelés is be van építve: az <code>102_binary</code> kifejezés fordítási hibát fog
+eredményezni, mivel a <code>chars_to_binary&lt;'2'&gt;</code> specializáció nem létezik, az alap sablon
+pedig nem működik erre.</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+unsigned long long chars_to_binary&lt;'0'&gt;() {
+    return 0;
+}
+
+template &lt;&gt;
+unsigned long long chars_to_binary&lt;'1'&gt;() {
+    return 1;
+}</code></pre>
+
+<p>A másik lehetőség, hogy egy segédosztályra bízzuk a probléma megoldását, mivel a szabvány az osztályok
+részleges specializációját megengedi. (Ezt mindig így kell csinálni: ha függvény részleges specializációjára
+lenne szükségünk, akkor ki kell szervezni a függvényt egy segédosztály statikus tagfüggvényévé. A segédosztály
+pedig már kaphat részleges specializációt.) A <a href="../ea10/index.html#tmpfactorial">múltkori faktoriális függvényhez</a> hasonló a megoldás, az osztályba tett statikus változóval:</p>
+
+<pre   ><code class="language-c">template &lt;char HEAD, char... TAIL&gt;
+struct Binary {
+    static constexpr unsigned long long value =
+        Binary&lt;HEAD&gt;::value &lt;&lt; sizeof...(TAIL) | Binary&lt;TAIL...&gt;::value;
+};
+
+
+template &lt;char ONEBIT&gt;
+struct Binary&lt;ONEBIT&gt; {
+    static_assert(ONEBIT == '0' || ONEBIT == '1', &quot;bits are either 0 or 1!&quot;);
+    static constexpr unsigned long long value = ONEBIT-'0';
+};
+
+
+template &lt;char... ARGS&gt;
+constexpr unsigned long operator&quot;&quot; _binary() {
+    return Binary&lt;ARGS...&gt;::value;
+}</code></pre>
+
+<p>Itt a bitet jelképező karakter 0/1 ellenőrzését egy fordítási idejű hibakezelőre, a <code>static_assert</code>-re
+bízhatjuk, amelyben egy saját magunk által írt üzenetben jelezhetjük a fordítási hibát.</p>
+
+<p>Mindkét megoldás alkalmas arra, hogy a bennük szereplő összes függvényt és változót fordítási idejű
+<code>constexpr</code> konstanssá tegyük. A bitsorozat számmá alakítása még fordítási időben megtörténik.</p>
+
+<div class="megjegyzes">
+<h3>Elődeklaráció: <code>template &lt;char... DIGITS&gt; struct Binary;</code></h3>
+<p>A fenti <code>Binary</code> osztálysablonnak egy ilyen implementációja is elképzelhető:</p>
+<pre   ><code class="language-c">template &lt;char... DIGITS&gt;
+struct Binary;
+
+template &lt;&gt;
+struct Binary&lt;&gt; {
+    static constexpr unsigned long long value = 0;
+};
+
+template &lt;char HEAD, char... TAIL&gt;
+struct Binary&lt;HEAD, TAIL...&gt; {
+    static_assert(HEAD == '0' || HEAD == '1', &quot;bits are either 0 or 1!&quot;);
+    static constexpr unsigned long long value =
+        (HEAD-'0') &lt;&lt; sizeof...(TAIL) | Binary&lt;TAIL...&gt;::value;
+};</code></pre>
+<p>Itt az első, definiálatlan osztálysablonnak csak explicit specializációi léteznek. Az osztály deklarációjának
+a célja csak annyi, hogy a fordítóval tudassuk a sablon osztály paraméterezését. A középső, teljes specializáció adja a
+báziskritériumot (ha nincs bit, akkor az érték nulla), az alsó, részleges specializáció végzi a számítást. </p>
+<p>Ebben a változatban kicsit szebb a kód, mert a teljes logika az alsó a kódrészletben van. Amikor csak egyetlen bit van, 
+akkor is ez a specializáció lesz aktív, mert a <code>TAIL...</code> argumentumlista lehet üres is. A középső specializáció 
+éppen a legfelül deklarált <code>char... DIGITS</code> megadása arra az esetre, amikor a <code>DIGITS</code> lista üres.</p>
+</div>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A 2ⁿ darab függvény problémája">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="forwardingref" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        A 2ⁿ darab függvény problémája<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Idézzük fel az <code>std::shared_ptr</code> osztály működését! Ez egy <a href="../ea05/index.html#sharedptr">referenciaszámlált okos pointert</a> valósít meg. Az okos
+pointer objektumok nyilvántartják, hogy egy dinamikusan foglalt, ún. kezelt objektumra hány társukkal együtt mutatnak, hogy
+amikor az utolsó okos pointer is megszűnik, az felszabadíthassa a kezelt objektumot is. Így megkönnyítik a memóriakezelést abban
+az esetben, amikor a kezelt objektum felszabadításának felelőssége nem rendelhető egyértelműen semelyik objektumhoz vagy
+programmodulhoz.</p>
+
+<p>Általános ajánlás, hogy ahogyan létrejött egy dinamikusan foglalt objektum, érdemes azt rögtön egy automatikus memóriakezelésű
+objektumra bízni (RAII – <a href="../ea03/index.html#raii">resource acquisition is initialization</a>).
+Ha például létre szeretnénk hozni egy <code>String</code> típusú objektumot, és az azt kezelő <code>std::shared_ptr&lt;String&gt;</code> okos pointert, így írjuk:</p>
+
+<pre   ><code class="language-c">String *ptr = new String();
+std::shared_ptr&lt;String&gt; sptr(ptr);</code></pre>
+
+<p>Vagy még rövidebben:</p>
+
+<pre   ><code class="language-c">std::shared_ptr&lt;String&gt; sptr(new String());</code></pre>
+
+<p>Tudjuk, hogy mindez kivételkezelés szempontjából is helyes. Ha a <code>String</code> konstruktorában kivétel dobódik, akkor az
+objektum létre sem jött, amint pedig a <code>shared_ptr&lt;String&gt;</code> konstruktorába kerül a végrehajtás, az objektum már
+kezeltnek számít. A két művelet, az objektum létrehozása és okos pointerre bízása két annyira összetartozó művelet, hogy érdemes
+egy függvényt is írni rá:</p>
+
+<pre   ><code class="language-c">#include &lt;memory&gt;
+
+template &lt;typename T&gt;
+auto my_make_shared() {
+    return std::shared_ptr&lt;T&gt;(new T());
+}
+
+int main() {
+    auto p = my_make_shared&lt;String&gt;();
+    *p = &quot;hello&quot;;
+}</code></pre>
+
+<p>Mindez kiválóan működik, egészen addig, amíg az objektum konstruktorának nincsenek paraméterei. Mivel a <code>my_make_shared()</code>
+a <code>T</code> típusról nem tud semmit, az utóbbi konstruktorparamétereiről sem, így annak sablon típusnak kell lennie:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T, typename ARG&gt;
+auto my_make_shared(ARG arg) {    // 1 paraméter
+    return std::shared_ptr&lt;T&gt;(new T(arg));
+}</code></pre>
+
+<p>Ez így kényelmes, mert bár az első sablonparamétert, a létrehozandó objektum típusát ki kell majd írni, de a másodikat, a
+konstruktorparaméter típusát már nem – levezeti a fordító. Azonban lehetnek kétparaméterű, háromparaméterű stb. konstruktorok...
+Ismerős problémához jutunk:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T, typename ARG1, typename ARG2&gt;
+auto my_make_shared(ARG1 arg1, ARG2 arg2) {   // 2 paraméter
+    return std::shared_ptr&lt;T&gt;(new T(arg1, arg2));
+}
+
+
+template &lt;typename T, typename ARG1, typename ARG2, typename ARG3&gt;
+auto my_make_shared(ARG1 arg1, ARG2 arg2, ARG3 arg3) {    // 3 paraméter
+    return std::shared_ptr&lt;T&gt;(new T(arg1, arg2, arg3));
+}</code></pre>
+
+<p>Ezt megoldhatnánk <code>...</code>-tal, de előbb-utóbb egy másik problémába is bele fogunk ütközni. Ez nem a paraméterek
+számával, hanem a paraméterátadás módjával kapcsolatos. A fenti kód is, illetve az <code>ARGS... args</code> forma is a
+konstruktorparamétereket <em>érték szerint</em> veszi át. Előfordulhat, hogy a <code>T</code> konstruktora
+valamelyik paramétert referencia szerint venné át. Olyankor a <code>my_make_shared()</code>-en keresztül csak egy másolatot
+kapna, és helytelenül működne a program. Ha a <code>my_make_shared()</code> paraméterlistájába referenciát írunk: <code>ARGS
+&amp; ... args</code>, az így megadott referenciák nem köthetők sem jobbértékhez, sem konstanshoz. Tehát ez sem járható út, és
+ugyanígy a konstans referencia sem tökéletes megoldás. Sőt, még az is előfordulhat, hogy az egyes paramétereket eltérő szemantikával
+vennénk át, némelyiket érték, másokat referencia szerint (az olvashatóság kedvéért <code>template</code>-ek kiírása nélkül):</p>
+
+<pre   ><code class="language-cbub">auto my_make_shared(ARG1 &amp; arg1, ARG2 &amp; arg2);
+auto my_make_shared(ARG1 &amp; arg1, ARG2 const &amp; arg2);
+auto my_make_shared(ARG1 const &amp; arg1, ARG2 &amp; arg2);
+auto my_make_shared(ARG1 const &amp; arg1, ARG2 const &amp; arg2);</code></pre>
+
+<p>Látjuk, hogy <code>n</code> darab paraméterhez így <code>2<sup>n</sup></code> változat tartozna, <code>0...n</code>
+paraméterhez pedig összesen <code>2<sup>n+1</sup>-1</code> változatra lenne szükség. „Régen”, amikor delegáló függvénysablonokat
+írtak, programból generálták le ezeket a függvényeket.</p>
+
+<p>A C++11 újabb csavart hozott a történetbe. Itt már nem is <code>2<sup>n</sup></code> esetről beszélünk, hanem <code>3<sup>n</sup></code>-ről:
+balértékről, konstans balértékről és jobbértékről. (Csak azért nem <code>4<sup>n</sup></code>-ről, mert a konstans jobbérték referencia 
+létezhet, de haszontalan.) Ha a <code>my_make_shared()</code> függvénynek adott paraméter jobbérték, akkor a konstruktornak is 
+jobbérték típusú paramétert kellene továbbadni, ezért ebben az esetben még az <code>std::move</code> függvényre is szükség van. Egy 
+paraméter esetén ezekről a függvényekről lenne szó (az olvashatóság kedvéért megint a <code>template</code>-ek nélkül):</p>
+
+<pre   ><code class="language-cbub">auto my_make_shared(ARG &amp; arg) {
+    return std::shared_ptr&lt;T&gt;(new T(arg));
+}
+
+auto my_make_shared(ARG const &amp; arg) {
+    return std::shared_ptr&lt;T&gt;(new T(arg));
+}
+
+auto my_make_shared(ARG &amp;&amp; arg) {
+    return std::shared_ptr&lt;T&gt;(new T(std::move(arg)));   // move!
+}</code></pre>
+
+<p>Látjuk, hogy a helyzet tarthatatlan; kell egy olyan megoldás, amellyel az argumentumokat típushelyesen lehet a 
+sablonfüggvényben továbbítani: ha balértékek voltak, balértékként, ha jobbértékek, akkor pedig jobbértékként. Ezt a 
+szakirodalomban tökéletes argumentumtovábbításnak nevezik (perfect argument forwarding).</p>
+
+<h3>std::forward</h3>
+
+<p>Az <code>std::move()</code> függvénysablonhoz hasonlóan a C++11-be beépítettek egy <code>std::forward()</code>
+függvénysablont is, amelyik megoldja ezt a problémát. Ez a sablon arra képes, hogy bármilyen példányosító típus
+és típusmódosító (referencia, konstans stb.) esetén olyan típusúvá konvertálja a visszatérési értékét, mint ahogyan
+azt a paraméterátvevő függvény is látta. Ezzel úgy lehet egy hívott függvénynek továbbítani a hívó paramétereit,
+hogy azok a <em>nem vesztik el balérték/jobbérték jellegüket</em>. A használat módja az alábbi:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T, typename ARG&gt;
+auto my_make_shared(ARG &amp;&amp; arg) {
+    return std::shared_ptr&lt;T&gt;(new T(std::forward&lt;ARG&gt;(arg)));   // !
+}</code></pre>
+
+<p>Vagyis majdnem ugyanúgy kell írni, mint az <code>std::move()</code> hívását, csak annyi a különbség, hogy <em>meg kell adni
+sablonparaméterként a típust</em> is. Ez működik változó argumentumszám esetén is. Ebben az esetben a függvény összes
+paraméterét típushelyesen továbbítja a fordító a <code>T</code> konstruktorának, mivel minden egyes paramétert egy <code>std::forward()</code>
+hívásba helyettesít a kifejezés:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T, typename... ARG&gt;
+auto my_make_shared(ARG &amp;&amp; ... arg) {
+    return std::shared_ptr&lt;T&gt;(new T(std::forward&lt;ARG&gt;(arg)...));
+}</code></pre>
+
+<p>A fenti <code>template ARG &amp;&amp;</code> paraméterről azt gondolhatnánk, hogy egy jobbérték típusú paramétert jelent,
+de ez nem igaz. Az így megadott referenciákat <strong>paramétertovábbító referenciának</strong> (forwarding reference)
+vagy univerzális referenciának (universal reference) <a href="../cpp1417/index.html#autorefref">nevezik</a>.
+Nézzük meg, hogy mit jelent egy
+ilyen paraméter, mert ezen múlik az <code>std::forward</code> függvény működésének megértése!</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Template levezetési és összevonási szabályok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Template levezetési és összevonási szabályok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tudjuk, hogy a fordító a sablonfüggvények esetén a hívásból kitalálja a sablonparaméterek típusát
+(template argument deduction). Azt szoktuk mondani, hogy a levezetett sablonparaméter típus megegyezik a hívásnál megadott
+típussal.</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T what);
+
+func(2);    // func&lt;int&gt;(int)</code></pre>
+
+<p>Ez a kijelentés azonban közel sem mindig igaz. A kép ennél árnyaltabb. Például ha a függvényt egy tömb típusú paraméterrel 
+hívjuk meg, a fordító pointer típusúnak vezeti le a sablonparamétert. (Ennek neve angolul: <em>decaying; the array
+decays to a pointer.</em>) Ha pedig a híváskor átadott változó típusa konstans, akkor pedig a <code>const</code> minősítőt a 
+fordító elhagyja. Ezt is látjuk a tárgykód fájlt visszafejtve:</p>
+
+
+<div class="columns">
+<div>
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T what) {}
+
+int main() {
+    int arr[10];
+    func(arr);  // func&lt;int*&gt;(int*)
+}</code></pre>
+
+<pre class="screenshot">
+$ clang++ proba.cpp -c -o proba.o
+
+$ nm -C proba.o
+0000000000000000 T main
+0000000000000000 W void func<int*>(int*)
+</pre>
+</div>
+<div>
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T what) {}
+
+int main() {
+    int const j = 2;
+    func(j);    // func&lt;int&gt;(int)
+}</code></pre>
+
+<pre class="screenshot">
+$ clang++ proba.cpp -c -o proba.o
+
+$ nm -C proba.o
+0000000000000000 T main
+0000000000000000 W void func<int>(int)
+</pre>
+</div>
+</div>
+
+<p>Látszik, hogy nem igaz az, hogy a hívás helyén adott érték típusa lesz a sablonfüggvény típusa. Ugyanezt láttuk az
+<code>auto</code>, a <code>decltype()</code> és a <code>decltype(())</code> esetén is. Sőt az ezeknél
+alkalmazott levezetési szabályok még különböznek is a sablonfüggvényeknél alkalmazottaknál. De mindenhol úgy vannak kitalálva,
+hogy a legkisebb meglepetést okozzák, és hogy a kényelmes használatot segítsék elő.</p>
+
+<p>A típusok megadásánál olyan szabályokat is érvényesítenek a fordítók, amelyek némileg módosítják a forráskód
+jelentését annak szó szerinti értelméhez képest. Például, bár az alábbi forráskódot elfogadják:</p>
+
+<pre   ><code class="language-cbub">using MyType = int const;
+MyType const j = 2;         // ok</code></pre>
+
+<p>A következő forráskódot viszont visszautasítják, hiába jelenti szó szerint ugyanazt, mint a fenti:</p>
+
+<pre   ><code class="language-cbub">int const const j = 2;      // hibás</code></pre>
+
+<p>Ezt az összevonási szabályt is azért vezették be, hogy megkönnyítse a programozást. Egy 
+felhasználói típusnév, mint itt a <code>MyType</code>, nem feltétlenül utal arra, hogy <code>const</code> minősítővel rendelkezik.
+Ugyanez a helyzet a sablonparaméterek mögötti, sablonkód írásakor még nem ismert típussal: nem kellene probléma legyen egy
+dupla <code>const</code> kulcsszó. Nem is az, mert a kettőt összevonja a fordító (<code>const</code> collapsing).</p>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A C++11 új levezetési és összevonási szabályai">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="forwardingreference" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        A C++11 új levezetési és összevonási szabályai<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mint a fentiekből látjuk, a C++98-as szabályok alapján nem volt lehetőségünk arra, hogy a
+függvénysablonokkal megkülönböztessük a balérték és jobbérték típusú paramétereket. A nyelv logikája az, hogy
+nem a hívó, hanem a hívott dönti el, hogy értékként vagy referenciaként veszi át a paramétert, és így annak
+balértéksége vagy jobbértéksége a függvényben már nem látszik.</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T what);
+
+String s;
+func(s);            // String balérték, T = String
+
+func(String());     // String jobbérték, T = String</code></pre>
+
+
+<h3>Referencia referenciája?</h3>
+
+<p>A C++11-ben a paramétertovábbítás problémájának megoldására olyan új levezetési szabályokat kellett bevezetni, amely meg 
+tudja különböztetni egymástól a jobbértékeket (rvalue) és a balértékeket (lvalue).</p>
+
+<p>Mindkét szabály a jobbérték referenciákkal kapcsolatos. Az első egy új összevonási szabály, amely a 
+<code>const const</code>-hoz hasonlóan azt adja meg, hogy minek kell történnie akkor, amikor egy <em>referencia referenciája</em> 
+típus alakul ki a definiált típusneveken (<code>typedef</code>, <code>using</code>) keresztül. Alapvetően ilyen nem létezhetne,
+de új típusneveken keresztül „kialakulhat”:</p>
+
+<pre   ><code class="language-cbub">using IntRef = int &amp;;
+
+int i;
+IntRef &amp; j = i;         // int &amp;  &amp; j = i;</code></pre>
+
+<p>Ez C++98-ban még tilos volt, de C++11-ben már szabályos. Az összevonás szabályai az alábbiak:</p>
+
+<table class="nincsfuggolegescsik">
+<thead>
+    <tr><th>Melyik típus<th>Milyen referenciája<th>Eredmény
+</thead>
+    <tr><td>X &amp;<td>&amp;<td>X &amp;
+    <tr><td>X &amp;<td>&amp;&amp;<td>X &amp;
+    <tr><td>X &amp;&amp;<td>&amp;<td>X &amp;
+    <tr><td>X &amp;&amp;<td>&amp;&amp;<td>X &amp;&amp;
+</table>
+
+<p>Tehát az eredmény jobbértéksége logikai ÉS kapcsolatban van a típus és a kért referencia jobbértékségével: akkor lesz
+a kapott típus jobbérték referencia, ha jobbérték referencia jobbérték referenciája adódik. Minden más esetben balérték
+referencia típusú változót kapunk. Mindjárt meglátjuk, ez miért jó.</p>
+
+<h3>A paramétertovábbító referencia (forwarding reference)</h3>
+
+<p>A második a <em>jobbérték referencia típusú sablonparaméterek</em> esetén alkalmazott levezetési szabály. Ezt az alábbi
+szintaktika aktiválja:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void func(T &amp;&amp; what);</code></pre>
+
+<p>Azért nevezhetők ezek <em>univerzális referenciának</em> is, mert az így megadott, jobbérték referenciának
+látszó paramétertípus az automatikus levezetés során balérték és jobbérték referenciává is válhat. Ezt a híváskor az értékül adott
+paraméter típusa adja meg:</p>
+
+<table class="nincsfuggolegescsik">
+<thead>
+    <tr><th>Típus</th><th>Példa</th><th>Levezetett sablonparaméter</th></tr>
+</thead>
+    <tr><th>Balérték</th>  <td><code>String s1;<br>func(s1);</code></td> <td><code>T = String &amp;</code></td></tr>
+    <tr><th>Jobbérték</th> <td><code>func( String() );</code></td>    <td><code>T = String</code></td></tr>
+</table>
+
+<p>A szabály aktiválódása szigorú feltételekhez kötött. Egyik az, hogy a sablonfüggvény paramétere <code>T &amp;&amp;</code>
+formájú kell legyen, semmilyen más forma nem jó. A másik feltétel, hogy a sablonparamétereket a fordítónak kell
+levezetnie, a konkrét függvényhívásból.</p>
+
+<div class="megjegyzes">
+<h3>Mi az, ami nem paramétertovábbító referencia?</h3>
+<p>A fenti megkötésekkel vigyázni kell, mert vannak olyan esetek, amelyeknek látszólag megfelel egy kódrészlet, de jobban
+megnézve mégsem. Pl. az alábbi sablonparaméter akár a fordító által levezetett is lehet, de nem <code>T &amp;&amp;</code>,
+hanem <code>MyVector&lt;T&gt; &amp;&amp;</code> formátumú:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void func(MyVector&lt;T&gt; &amp;&amp; v);</code></pre>
+<p>A következő példa paramétere pedig bár <code>T &amp;&amp;</code> formátumú, de nem a hívásból levezetett, hanem az objektum típusából,
+amelynek a <code>push_back()</code> függvényét hívják:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class MyVector {
+  public:
+    void push_back(T &amp;&amp; what);
+};</code></pre>
+<p>Mindkét esetben egyszerű jobbérték referenciáról van szó.</p>
+</div>
+
+<h3>A két szabály együttes alkalmazása</h3>
+
+<p>Az új összevonási és levezetési szabályokat azért kellett látszólag ilyen bonyolultra kitalálni, mert kompatibilisnek kellett 
+maradni minden helyen a C++98 szemantikájával. Ne feledjük, bár jobbérték referenciák a C++11 előtt nem voltak, jobbértékek 
+léteztek eddig is! Olyan szabályokat kellett kitalálni, amik a régebben megírt kódrészletek jelentését sem változtatják meg. </p>
+
+<p>A két szabálynak együttesen van értelme. Ha a <code>T &amp;&amp;</code> paraméterű sablonfüggvény aktuális
+paramétere jobbérték (pl. egy temporális sztring), akkor a levezetési szabály alapján <code>T = String</code>
+adódik, amit a fejlécbe behelyettesítve a függvény fejléce <code>void func(String &amp;&amp; what)</code> formát ölti,
+jobbérték referenciával veszi át az ideiglenes objektumot:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T &amp;&amp; what);
+
+func(String());  // func&lt;String&gt;(String &amp;&amp; what)</code></pre>
+
+<p>Ha ugyanennek a függvénynek az argumentuma balérték, akkor a levezetési szabály alapján <code>T
+= String &amp;</code>, amiből a <code>void func(String &amp; &amp;&amp; what)</code> adódik első körben, de
+erre még alkalmazni kell a referenciák összevonási szabályát is. A végleges változat így <code>void func(String
+&amp; what)</code> lesz:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void func(T &amp;&amp; what);
+
+String s;
+func(s);  // func&lt;String &amp;&gt;(String &amp; what)</code></pre>
+
+<p>Valóban, a függvény balérték referenciával veszi át a balértéket.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::move() és az std::forward() függvények">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Az std::move() és az std::forward() függvények<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A két új típusszabály ismeretében az <code>std::move()</code> és az <code>std::forward()</code>
+függvénysablonok működése is érthetővé válik.</p>
+
+<h3>Az <code>std::forward()</code> függvény működése</h3>
+
+<p>Az <code>std::forward()</code> függvény célja az volt, hogy egy függvényben a paraméterként átvett értéket, annak
+<em>balérték/jobbérték tulajdonságát megőrizve</em> tudjuk továbbadni egy másik, hívott függvénynek. Az előbb bemutatott, általános
+gyártófüggvényt egyszerűsítsük most egy egyparaméteres változatra! Az <code>arg</code> paramétert
+szeretnénk az <code>std::forward()</code> segítségével úgy továbbadni a konstruktornak, ha az eredetileg balérték volt, a
+konstruktor balértéket lásson, ha jobbérték, akkor pedig jobbértéket; vagyis ha kétféle konstruktor van, akkor a fordító ennek
+megfelelően választhasson közülük.</p>
+
+<pre   ><code class="language-c">template &lt;typename T, typename ARG&gt;
+T * create_new(ARG &amp;&amp; arg) {
+    return new T(std::forward&lt;ARG&gt;(arg));
+}</code></pre>
+
+<p>Nézzük meg jobban a függvényt! Az első sablonparamétere, <code>T</code> a létrehozandó objektum típusa, a második,
+<code>ARG</code> pedig az objektum konstruktora paraméterének típusa. Az első sablonparamétert kötelező kiírni a hívásban, mert
+az aktuális paraméterekből nem vezethető le; a második sablonparaméter viszont levezethető a hívásból. Az automatikus levezetés és az
+<code>ARG &amp;&amp;</code> forma miatt ez a paraméter paramétertovábbító referencia típusú.</p>
+
+<p>Lássuk az <code>std::forward()</code> implementációját! A függvény fejléce és törzse az alábbi:</p>
+
+<pre   ><code class="language-c">template &lt;typename S&gt;
+S &amp;&amp; forward(typename std::remove_reference&lt;S&gt;::type &amp; arg) {
+    return static_cast&lt;S &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<div class="megjegyzes">
+<p>Az <code>std::remove_reference</code> segédosztály azt csinálja, amit a neve mond: a sablonparamétere típusából mindig
+levágja a referenciát. Ilyen egyszerűen, két részleges specializációval:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt; struct remove_reference      { using type = T; };
+template &lt;typename T&gt; struct remove_reference&lt;T&amp;&gt;  { using type = T; };
+template &lt;typename T&gt; struct remove_reference&lt;T&amp;&amp;&gt; { using type = T; };</code></pre>
+</div>
+
+<h3>Forward: balértékből balérték</h3>
+
+<p>Nézzük, hogyan adódik ki ennek a helyes, <code>ARG &amp;</code> vagy <code>ARG &amp;&amp;</code> típusú visszatérési
+értéke a <code>create_new()</code> függvényben! Tegyük fel először, hogy a <code>create_new()</code> függvényt egy
+balérték paraméterrel hívták meg, mint amilyen itt az <code>s1</code>:</p>
+
+<pre   ><code class="language-c">String s1;
+X * px = create_new&lt;X&gt;(s1);</code></pre>
+
+<p>A <code>create_new()</code> első paramétere <code>ARG &amp;&amp;</code> paramétertovábbító referencia,
+ezért az <code>ARG = String &amp;</code> sablonparamétert vezeti le a fordító. Az így specializált függvényben
+a <code>String &amp; &amp;&amp; &rarr; String &amp;</code> összevonás után balérték típusú lesz a
+paraméter:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+X * create_new&lt;X, String &amp;&gt;(String &amp; arg) {
+    return new X(std::forward&lt;String &amp;&gt;(arg));
+}</code></pre>
+
+<p>Ebben adott az <code>std::forward()</code> sablonparamétere, <code>S = String &amp;</code>. Behelyettesítve azt a 
+<code>forward()</code> definíciójába, az alábbi specializáció adódik:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+String &amp; &amp;&amp; forward&lt;String &amp;&gt;(typename std::remove_reference&lt;String &amp;&gt;::type &amp; arg) {
+    return static_cast&lt;String &amp; &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Az egyszerűsítések után:</p>
+
+<div class="sticky">forward<br>lvalue &rarr; lvalue</div>
+
+<pre   ><code class="language-c">template &lt;&gt;
+String &amp; forward&lt;String &amp;&gt;(String &amp; arg) {
+    return static_cast&lt;String &amp;&gt;(arg);
+}</code></pre>
+
+<p>Látszik, hogy ennek a függvénynek balérték a visszatérési értéke. Vagyis ha a <code>create_new()</code> balérték típusú
+paramétert kapott, akkor az <code>X</code> konstruktor is balérték paramétert fog kapni. A <code>forward</code> ilyenkor mintha
+ott sem lenne.</p>
+
+<h3>Forward: jobbértékből jobbérték</h3>
+
+<p>Nézzük most azt az esetet, ha a <code>create_new()</code> jobbérték paramétert kap! Ilyenkor az <code>ARG &amp;&amp;</code>
+formális paraméterezés miatt <code>ARG = String</code> adódik, így a specializált függvény az alábbi formát veszi fel:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+X * create_new&lt;X, String&gt;(String &amp;&amp; arg) {
+    return new X(std::forward&lt;String&gt;(arg));
+}</code></pre>
+
+<p>Ennek a jobbérték referencia típusú paramétere tényleg át tudja venni a jobbérték paramétert. Az <code>std::forward()</code>
+függvény sablonparamétere ebben az esetben <code>S = String</code> lesz, amit behelyettesítve:</p>
+
+<pre   ><code class="language-c">template &lt;typename S&gt;
+String &amp;&amp; forward(typename std::remove_reference&lt;String&gt;::type &amp; arg) {
+    return static_cast&lt;String &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Az egyszerűsítés után ennek végleges formája:</p>
+
+<div class="sticky">forward<br>rvalue &rarr; rvalue</div>
+
+<pre   ><code class="language-c">template &lt;typename S&gt;
+String &amp;&amp; forward(String &amp; arg) {
+    return static_cast&lt;String &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>A példányosítás az <code>std::move()</code>-hoz hasonló függvényt eredményezett, amelyik a balérték típusú paraméterét jobbértékké 
+konvertálja. Ebből az is látszik, ha a <code>create_new()</code> jobbérték típusú paramétert 
+kapott, az <code>X</code> konstruktora is jobbérték paramétert fog látni.</p>
+
+<p>Az <code>std::forward()</code> függvényt használva tehát a balérték paraméterből balérték lesz, a jobbértékből pedig jobbérték:
+<a href="http://hu.wikipedia.org/wiki/Quod_erat_demonstrandum">QED</a>.</p>
+
+<p class="megjegyzes">Most már látszik, hogy a <code>remove_reference</code> miért kell szerepeljen a függvény paraméterében: hogy
+muszáj legyen megadni a hívásnál a sablonparaméter típusát. Ha a paraméter egyszerűen csak <code>S &amp;</code> típusú lenne,
+akkor működne rá az automatikus (fordító általi) levezetés is, azonban nem működne helyesen.</p>
+
+
+
+<h3>Az <code>std::move()</code> függvény működése</h3>
+
+<p>A fentiekhez hasonló mágiát tartalmaz az <code>std::move()</code> függvény is. Ennek feladata az volt, hogy a paraméterként 
+átvett balértéket jobbértékké konvertálja. A definíciója az alábbi:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+typename std::remove_reference&lt;T&gt;::type &amp;&amp; move(T &amp;&amp; arg) {
+    return static_cast&lt;typename std::remove_reference&lt;T&gt;::type &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Ennek univerzális referencia a paramétere. Lássuk, hogy működik! Ha a paramétere balérték...</p>
+
+<pre   ><code class="language-c">String s1;
+std::move(s1);</code></pre>
+
+<p>... akkor a sablon <code>T &amp;&amp;</code> levezetési szabálya miatt <code>T = String &amp;</code> adódik. A specializáció így ezt
+a képzeletbeli formát ölti:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+typename std::remove_reference&lt;String &amp;&gt;::type &amp;&amp; move&lt;String &amp;&gt;(String &amp; &amp;&amp; arg) {
+    return static_cast&lt;typename std::remove_reference&lt;String &amp;&gt;::type &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Az ismert összevonási szabályok alkalmazása után látszik, hogy a visszatérési
+értéke jobbérték referencia, így tényleg balértékből jobbértéket csinált:</p>
+
+<div class="sticky">move<br>lvalue &rarr; rvalue</div>
+
+<pre   ><code class="language-c">template &lt;&gt;
+String &amp;&amp; move&lt;String &amp;&gt;(String &amp; arg) {
+    return static_cast&lt;String &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Ha pedig esetleg olyan paramétert kapna, amely már eleve jobbérték:</p>
+
+<pre   ><code class="language-c">std::move( String(&quot;hello&quot;) );</code></pre>
+
+<p>... akkor a <code>T &amp;&amp;</code> univerzális referencia típusú paramétere miatt <code>T = String</code>
+levezetésével specializálja automatikusan a fordító:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+typename std::remove_reference&lt;String&gt;::type &amp;&amp; move&lt;String&gt;(String &amp;&amp; arg) {
+    return static_cast&lt;typename std::remove_reference&lt;String&gt;::type &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Ebben a szokásos összevonásokat elvégezve az alábbi függvényhez jutunk:</p>
+
+<div class="sticky">move<br>rvalue &rarr; rvalue</div>
+
+<pre   ><code class="language-c">template &lt;&gt;
+String &amp;&amp; move&lt;String&gt;(String &amp;&amp; arg) {
+    return static_cast&lt;String &amp;&amp;&gt;(arg);
+}</code></pre>
+
+<p>Ez a függvény, jobbérték referencia paramétere lévén, képes átvenni a jobbérték típusú objektumot, és bár belül ez
+az objektum balértéknek látszik (van neve, <code>arg</code>-nak hívják), a visszatérési értékében megint jobbértékké alakítva látszik.</p>
+
+<p>Végeredményben tehát balértékből jobbérték lett, a jobbérték pedig jobbérték maradt. QED.</p>
+
+<p class="megjegyzes">Itt azért kellett <code>remove_reference</code> a függvény visszatérési értékében, hogy akármire
+is oldódott fel a sablonparaméter, a visszatérési érték biztosan jobbérték referencia legyen. Mert így a visszatérési
+értékben a <code>&amp;&amp;</code> biztos olyan típus mellett áll, amelyik nem referencia, tehát nem fog semmilyen összevonási
+szabály aktiválódni.</p>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_8">
+
+<a id="8" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">8</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#8"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="mill17"><a href="http://www.gotw.ca/publications/mill17.htm">Herb Sutter: Why Not Specialize Function Templates?</a> – miért nincs részleges specializáció függvényekhez?
+    <li><a href="http://en.cppreference.com/w/cpp/language/template_argument_deduction">Template argument deduction</a> – sablonparaméterek levezetési szabályai.
+    <li><a href="http://thbecker.net/articles/auto_and_decltype/section_01.html">C++ auto and decltype Explained</a> – a levezetési szabályokról, illetve a jobbértékekről és argumentumtovábbításról minden.
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

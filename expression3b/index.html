@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: III/b. rész: A Visitor minta más nyelvekben</title>
+<meta property="og:title" content="TEST InfoC++11 :: III/b. rész: A Visitor minta más nyelvekben">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Ez az írás megmutatja, hogy a Visitor tervezési mintát hogyan kell implementálni egy egész más felépítésű programozási nyelvben, a JavaScript-ben. Spoiler alert: sehogy, nincsen rá szükség. ">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Ez az írás megmutatja, hogy a Visitor tervezési mintát hogyan kell implementálni egy egész más felépítésű programozási nyelvben, a JavaScript-ben. Spoiler alert: sehogy, nincsen rá szükség. ">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="III/b. rész: A Visitor minta más nyelvekben">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">III/b. rész: A Visitor minta más nyelvekben</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Ez az írás megmutatja, hogy a Visitor tervezési mintát hogyan kell implementálni egy egész más felépítésű programozási nyelvben, a JavaScript-ben. Spoiler alert: sehogy, nincsen rá szükség. </p>
+</div>
+
+<p><a href="../ea02/index.html#kifejezesfa">A kifejezésfás programot</a> az előző
+írásokban a <a href="../expression2/index.html">Visitor OOP tervezési minta segítségével</a> refaktoráltuk,
+szétválaszthatóvá vált az adatszerkezet és az azon dolgozó algoritmusok.
+A sorozat befejező része kicsit (nagyon) eltávolodik a C++-tól, megmutatja, hogy egy
+teljesen más felépítésű, működésű programozási nyelvben hogyan oldható
+meg ugyanez a feladat. A választott nyelv a JavaScript.</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A Visitor tervezési minta és az osztály alapú OOP</a>
+                      <li><a href="index.html#2" class="">A prototipikus öröklés</a>
+                      <li><a href="index.html#3" class="">A kifejezéses példa JavaScript-ben</a>
+                      <li><a href="index.html#4" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A Visitor tervezési minta és az osztály alapú OOP">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A Visitor tervezési minta és az osztály alapú OOP<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Emlékeztetőként: a Visitor tervezési mintával szétválasztható egymástól a kódban egy adatszerkezet osztályhierarchiája az abban
+tárolt objektumokon végzett tevékenységektől. Az egyes tevékenységeket a minta szerint egy külön osztályhierarchia reprezentálja, így új
+tevékenység hozzáadásakor az adatszerkezet osztályait nem kell módosítani.</p>
+
+<p>A minta a tevékenységeket elvégző objektumokat nevezik látogatónak, azaz <code>Visitor</code>-nak. Az adatszerkezet 
+hierarchiájába ehhez egyetlen virtuális függvényt kell tenni: azt, amelyik fogadja a tevékenységet elvégző objektum 
+függvényhívását. Ez az <code>accept_visitor()</code> függvény, amelynek egyetlen dolga, hogy a <code>Visitor</code> a típusra 
+jellemző tevékenységét elvégző függvényét meghívja.</p>
+
+<div class="sticky">adatok<br>hierarchiája</div>
+<pre   ><code class="language-cbub">class Element {
+  public:
+    virtual void accept_visitor(Visitor &amp; v) = 0;
+};
+
+class ConcreteElement1 : public Element {
+  public:
+    virtual void accept_visitor(Visitor &amp; v) override {   // *
+        v.visit_concrete_element_1(*this);  // 1
+    }
+};
+
+class ConcreteElement2 : public Element {
+  public:
+    virtual void accept_visitor(Visitor &amp; v) override {   // *
+        v.visit_concrete_element_2(*this);  // 2
+    }
+};</code></pre>
+
+<p>Erre függvényhívásra azt is szokták mondani, hogy az elem a látogatót visszahívja. Ez azért van így, mert az elem 
+feldolgozását általában a látogató felől kezdeményezzük: <code>ConcreteVisitor::process()</code>. A programunk feladatától függően 
+ennek a függvénynek nem feltétlenül kell virtuálisnak lennie.</p>
+
+<div class="sticky">tevékenységek<br>hierarchiája</div>
+<pre   ><code class="language-cbub">class Visitor {
+  public:
+    virtual void visit_concrete_element_1(ConcreteElement1 &amp; e) = 0;
+    virtual void visit_concrete_element_2(ConcreteElement2 &amp; e) = 0;
+};
+
+class ConcreteVisitor : public Visitor {
+  public:
+    void process(Element &amp; e) {
+        e.accept_visitor(*this);    // *
+    }
+    virtual void visit_concrete_element_1(ConcreteElement1 &amp; e) override { // 1
+        /* ... */
+    }
+    virtual void visit_concrete_element_2(ConcreteElement2 &amp; e) override { // 2
+        /* ... */
+    }
+};</code></pre>
+
+<p>A kérdés persze felmerül, hogy szükségünk van-e minderre a mágiára, mert azért azt érezni lehet, hogy valami nincs rendjén.
+Sejtjük, hogy valami fundamentális probléma van, és az egymást oda-vissza hívó függvényekkel csak megkerüljük, nem megoldjuk
+a problémát.</p>
+
+<p>Az eredeti problémánk az volt, hogy egy kész, meglévő osztályhierarchiához szerettünk volna hozzáadni utólag új műveleteket,
+leginkább az osztályok módosítása nélkül. Az objektumorientált programozásban általában objektumokról beszélünk, közben a
+programunkban igazából osztályokat írunk. A fundamentális probléma az, hogy szétválasztottuk az objektumokat és az
+objektumok viselkedését egymástól. Tehát az, hogy megkülönböztetjük az objektumokat és az osztályokat.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A prototipikus öröklés">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A prototipikus öröklés<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A <em>klasszikus, osztály alapú OOP-ben</em> az osztály és az objektum két különböző fogalom. Az osztályok ebben egyfajta
+tervrajzként jelennek meg. Például ha <a href="index.html#jsprototype">szükségünk van a programunkban székekre</a>, akkor készítünk egy tervrajzot, az osztályt,
+amelyben leírjuk, hogyan néz ki egy szék. Utána pedig a szék objektumokat ez alapján példányosítjuk. Ebben a modellben egy karfás
+szék létrehozásához előbb készítenünk kell egy új tervrajzot a szék tervrajza alapján (ez a leszármazott osztály), hogy utána
+ténylegesen létre tudjuk hozni a karfás szék objektumokat.</p>
+
+<p>A <em>prototípus alapú OOP-ben</em> nincsenek külön osztályok és objektumok. Ebben ha szükségünk van egy székre, akkor fogunk
+egy üres objektumot, és hozzáadunk négy lábat meg egy háttámlát. Ha szükségünk van további székekre, akkor az előző mintájára
+készítjük el azokat. Ha pedig szükségünk van egy karfás székre, egyszerűen gyártunk egy széket, és rászereljük a két karfát is.</p>
+
+<p>Sejthető, hogy egy C++-ban nem menne egykönnyen – nem tehetjük meg, hogy üres objektumhoz adattagokat adunk hozzá. A prototípus
+alapú OOP a dinamikus természetű nyelvekre jellemző, az olyanokra, mint amilyen például a JavaScript is. Ezekben a nyelvekben
+a változók típusa, az objektumok adattagjainak száma stb. mind futási időben változhatnak. A következő példában a prototípusok
+használatát ezért JavaScript kódrészleteken keresztül mutatjuk be.</p>
+
+<p>Induljunk ki az alakzatos példából! Hozzunk létre egy alakzatot (shape), és tároljuk annak pozícióját, továbbá legyen az alakzatnak egy
+olyan függvénye is, amelyik kiírja a konzolra a pozíciót! Ennek leírásához létrehozunk egy üres objektumot az
+<code>Object.create()</code> függvénnyel, amelybe betesszük a koordinátákat és a függvényt:</p>
+
+<pre   ><code class="language-js">var shape = Object.create(null);
+shape.x = 1;
+shape.y = 2;
+shape.print_pos = function() {
+    console.log(&quot;Shape position: (&quot; + this.x + &quot;,&quot; + this.y + &quot;)&quot;);
+};</code></pre>
+
+<p>A létrehozott objektum máris működőképes, a tagfüggvénye meghívható:</p>
+
+<pre   ><code class="language-js">shape.print_pos();          /* Shape position: (1,2) */</code></pre>
+
+<p>Ezt az alakzat objektumot önmagában nem fogjuk használni, csak arra, hogy más objektumok számára minta, prototípus legyen.
+Például egy téglalap (rectangle) létrehozása így nézhet ki:</p>
+
+<pre   ><code class="language-js">var rectangle = Object.create(shape);   /* ! */
+rectangle.w = 3;
+rectangle.h = 4;
+rectangle.get_area = function() {
+    return this.w * this.h;
+};</code></pre>
+
+<img src="proto1.svg" class="float" style="width: 11em;">
+
+<p>Ennek a téglalapnak meghívhatjuk a területet kiszámító függvényét:</p>
+
+<pre  style="overflow: hidden;" ><code class="language-js">console.log(rectangle.get_area());  /* 12 */</code></pre>
+
+<p>A lényeg azonban nem ez, hanem az <code>Object.create(shape)</code> függvényhívás. Ezzel azt mondjuk, hogy szeretnénk
+létrehozni egy objektumot, <em>amelynek a prototípusa</em> a <code>shape</code> objektum. Emiatt a téglalapunknak is van
+<code>x</code> attribútuma és <code>print_pos()</code> függvénye:</p>
+
+<pre  style="overflow: hidden;" ><code class="language-js">console.log(rectangle.x);      /* 1 */
+rectangle.print_pos();         /* Shape position: (1,2) */</code></pre>
+
+<h3>Adattagok olvasása</h3>
+
+<p>Az eddigi kódunkban tehát a <code>rectangle</code> objektum prototípusa a <code>shape</code> objektum, a <code>shape</code>
+objektum pedig nem rendelkezik ilyennel. A prototípusnak az attribútumok elérésekor van szerepe. Ugyanis egy <em>objektum valamely
+adattagjának olvasásakor</em> nem csak az adott objektumot, hanem annak prototípusát is figyelembe veszi a JavaScript motor. Például
+a <code>rectangle.w</code> kifejezés értéke <code>3</code>, mert a <code>w</code> nevű attribútum megtalálható az objektumban.
+Ugyanakkor <code>x</code> nevű attribútum nincs benne. Ennek ellenére a <code>rectangle.x</code> kifejezésnek is van értéke,
+ami <code>1</code>. Ennek kikereséséhez előbb szintén a <code>rectangle</code> objektumot kell megvizsgálni, de mivel nincs
+benne az <code>x</code>, a keresést a prototípusában kell folytatni, ahol meg is lesz. A <code>rectangle.qqq</code> kifejezést
+nem lehet kiértékelni, mivel <code>qqq</code> sem a téglalapban, sem az alakzatban nincs, az alakzatnak pedig már
+nincs prototípusa. Így ennek értéke <code>undefined</code>.</p>
+
+<p>Hasonlóképp működik a függvények esetén is. A <code>rectangle.get_area()</code> meghívható, a <code>rectangle.print_pos()</code>
+is (amelyet a <code>shape</code>-ben lehet megtalálni). A <code>shape.get_area()</code> viszont nem kiértékelhető, mert abban az
+objektumban nincsen ilyen függvény.</p>
+
+<h3>Adattagok írása</h3>
+
+<img src="proto2.svg" class="float" style="width: 11em;">
+
+<p>Az adattagok írása egy kicsit másképp működik. Ha egy adattagot létrehozunk vagy módosítunk, akkor az a módosítás <em>mindig a
+konkrét objektumot</em> érinti, soha nem az ősét. Tehát egy <code>rectangle.x = 100;</code> sor hatására a <code>rectangle</code>
+objektum fog módosulni, nem pedig a <code>shape</code>:</p>
+
+<pre  style="overflow: hidden;" ><code class="language-js">rectangle.x = 100;</code></pre>
+
+<p>Ez egy fontos momentum. Azért kell ennek így lennie, mert a <code>rectangle.x</code> módosításával nyilvánvalóan a téglalap
+objektumot szerettük volna módosítani (áthelyezni), nem pedig annak prototípusát. Nem szeretnénk, hogy a művelet által <em>a többi
+objektum is megváltozzon,</em> amelynek a <code>shape</code> a prototípusa. A <code>rectangle.x</code> adattag olvasása
+viszont vissza fogja adni a beírt értéket, mert az adattag keresése a <code>rectangle</code> objektumtól indul, és már ott
+van <code>x</code>, nem is jut elé a <code>shape</code>-ig, mint az előbb.</p>
+
+<p>Ami érdekes, hogy ezek után a <code>rectangle.print_pos()</code> (100,2)-t ír ki. Az attribútumok keresése ugyanis mindig
+attól az objektumtól indul, amelyre a <code>this</code> mutat. A <code>rectangle.print_pos()</code> kifejezésnél a <code>this</code>
+a <code>rectangle</code> referenciája lesz, ezért a <code>print_pos()</code> függvényben <code>this.x</code> értéke <code>100</code> a
+<code>rectangle</code>-ből, <code>this.y</code> értéke pedig <code>2</code> a <code>shape</code>-ből.</p>
+
+<pre  style="overflow: hidden;" ><code class="language-js">rectangle.print_pos();         /* Shape position: (100,2) */</code></pre>
+
+<img src="proto3.svg" class="float" style="width: 11em;">
+
+<p>Az <code>rectangle.x = 100;</code> sorral tehát nem az összes alakzatot módosítjuk, hanem csak a konkrét téglalapot.
+Ha az őst, azaz a prototípust szerettük volna módosítani, akkor <code>shape.valami</code>-nek adtunk volna értéket. Például
+a <code>shape.color = 'black';</code> sor hatására az ősbe fog kerülni az új adattag, amit persze látni fogunk minden
+más objektumban is, amelynek a prototípusa a <code>shape</code>:</p>
+
+<pre  style="overflow: hidden;" ><code class="language-js">shape.color = 'black';
+console.log(rectangle.color);   /* black */</code></pre>
+
+<p>Látszik, hogy a két objektum között referencia jellegű kapcsolat van. A <code>shape</code> módosításával a <code>rectangle</code>
+is módosult. A prototípus módosítása <em>kihat az összes objektumra,</em> amelynek a szóban forgó objektum prototípusa. Sőt
+egy objektum létrehozása után, <em>utólag</em> is módosíthatjuk annak prototípus objektumát, és ez hatással lesz az objektumra!</p>
+
+<p>Mindezek miatt általában úgy szoktunk dolgozni, hogy külön kezeljük a prototípus objektumokat, és külön a programunk tényleges
+objektumait. A prototípus objektumokba tesszük a közös dolgokat (például a függvényeket), a programunk által manipulált adatok pedig
+a tényleges objektumok adattagjai lesznek. A prototípus objektumokat <em>nagyrészt</em> csak arra használjuk, hogy új objektumok
+létrehozásakor azok prototípusának jelöljük meg őket. Az előző példában az objektumhierarchiának igazából így kellett volna kinéznie:</p>
+
+<img src="proto4.svg" class="kozep" style="width: 38em;">
+
+<p>A <code>print_pos()</code> közös minden alakzatra, a <code>get_area()</code> csak a téglalapokra nézve. Az <code>x</code>,
+<code>y</code>, <code>w</code>, <code>h</code> adattag pedig egyedi az <code>r1</code> objektumban. (Klasszikus értelemben véve
+a <code>shape</code> és a <code>rectangle</code> osztályok, az <code>r1</code> pedig objektum lenne.)</p>
+
+<p>Így működik a prototípus alapú öröklés. Észre kell venni, hogy ez mennyi eddig megismert eszközt feleslegessé tesz. Nincsenek
+külön statikus tagváltozók: amit az objektumokba teszünk, azok egyediek, amit pedig a prototípusba, az közös. Nincsenek statikus
+függvények sem: egyszerűen csak olyan függvényeket írunk, amiben nem használjuk a <code>this</code>-t. A függvények automatikusan
+virtuálisak, hiszen a függvény is csak adat, aminek a keresése az objektumtól indul; a prototípus láncolatban legkésőbb definiált
+függvényt fogjuk megtalálni.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A kifejezéses példa JavaScript-ben">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A kifejezéses példa JavaScript-ben<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A prototipikus öröklés teljesen fölöslegessé teszi klasszikus OOP-ből ismert Visitor mintát, legalábbis eredeti célja szerint 
+biztosan. Itt ha egy objektumhierarchiánál szükségünk van egy új műveletre, akkor egyszerűen betesszük az új műveletet a prototípus 
+objektumokba, és már készen is vagyunk.</p>
+
+<p>Először létrehozzuk a hierarchiát (kifejezések):</p>
+
+<div class="sticky">kifejezések<br>hierarchiája</div>
+<pre   ><code class="language-js">var expression = Object.create(null);
+
+var constant = Object.create(expression);
+constant.create = function(c) {
+    var obj = Object.create(constant);
+    obj.c = c;
+    return obj;
+};
+
+var variable = Object.create(expression);
+variable.create = function() {
+    return Object.create(variable);
+};
+
+var twooperand = Object.create(expression);
+
+var sum = Object.create(twooperand);
+sum.create = function(lhs, rhs) {
+    var obj = Object.create(sum);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+};
+
+var product = Object.create(twooperand);
+product.create = function(lhs, rhs) {
+    var obj = Object.create(product);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+}</code></pre>
+
+<p>A gyártófüggvények az osztályokba kerültek, mint C++-ban a <code>static create()</code>-ek.</p>
+
+<p>Ezek után tetszőleges műveleteket adhatunk hozzá a prototípusokhoz:</p>
+
+<div class="sticky">eval()</div>
+<pre   ><code class="language-js">constant.eval = function(x) { return this.c; };
+variable.eval = function(x) { return x; };
+sum.eval = function(x) { return this.lhs.eval(x) + this.rhs.eval(x); };
+product.eval = function(x) { return this.lhs.eval(x) * this.rhs.eval(x); };</code></pre>
+
+<p>Ha kell, a szokásos technikával az ősökbe tehetünk közös segédfüggvényeket, mint itt
+a <code>twooperand</code>-ba:</p>
+
+<div class="sticky">print()</div>
+<pre   ><code class="language-js">constant.print = function() { document.write(this.c); };
+variable.print = function() { document.write('x'); };
+twooperand.print_helper = function(op) {
+    document.write('(');
+    this.lhs.print();
+    document.write(op);
+    this.rhs.print();
+    document.write(')');
+};
+sum.print = function() { this.print_helper('+'); };
+product.print = function() { this.print_helper('*'); };</code></pre>
+
+<p>Végül pedig, már csak használnunk kell a megépült hierarchiát:</p>
+
+<div class="sticky">használat</div>
+<pre   ><code class="language-js">var f = product.create(constant.create(5),
+                       sum.create(constant.create(3),
+                                  variable.create()));
+
+document.write(&quot;f(x) = &quot;);
+f.print();
+document.write(&quot;&lt;br&gt;&quot;);
+
+document.write(&quot;f(10) = &quot; + f.eval(10));
+document.write(&quot;&lt;br&gt;&quot;);</code></pre>
+
+<p>A létrehozott objektumok:</p>
+
+<img src="expression1.svg" class="kozep" style="width: 24em;">
+
+<p>A fenti kód letölthető innen: <a href="proto_teljes.html">proto_teljes.html</a>.</p>
+
+<script>
+
+/* hierarchia */
+var expression = Object.create(null);
+
+var constant = Object.create(expression);
+constant.create = function(c) {
+    var obj = Object.create(constant);
+    obj.c = c;
+    return obj;
+};
+
+var variable = Object.create(expression);
+variable.create = function() {
+    return Object.create(variable);
+};
+
+var twooperand = Object.create(expression);
+
+var sum = Object.create(twooperand);
+sum.create = function(lhs, rhs) {
+    var obj = Object.create(sum);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+};
+
+var product = Object.create(twooperand);
+product.create = function(lhs, rhs) {
+    var obj = Object.create(product);
+    obj.lhs = lhs;
+    obj.rhs = rhs;
+    return obj;
+}
+
+/* eval művelet */
+constant.eval = function(x) { return this.c; };
+variable.eval = function(x) { return x; };
+sum.eval = function(x) { return this.lhs.eval(x) + this.rhs.eval(x); };
+product.eval = function(x) { return this.lhs.eval(x) * this.rhs.eval(x); };
+
+/* print művelet */
+constant.str = function() { return ''+this.c; };
+variable.str = function() { return 'x'; };
+twooperand.str_helper = function(op) {
+    return '(' + this.lhs.str() + op + this.rhs.str() + ')';
+};
+sum.str = function() { return this.str_helper('+'); };
+product.str = function() { return this.str_helper('*'); };
+
+</script>
+
+<script>
+/* használat */
+function create_expression(str) {
+    var s = [];
+    var exprs = str.trim().split(/\s+/);
+    var e, lhs, rhs;
+    while (e = exprs.shift()) {
+        switch (e) {
+            case '+':
+                rhs = s.pop();
+                lhs = s.pop();
+                s.push(sum.create(lhs, rhs));
+                break;
+            case '*':
+                rhs = s.pop();
+                lhs = s.pop();
+                s.push(product.create(lhs, rhs));
+                break;
+            case 'x':
+                s.push(variable.create());
+                break;
+            default:
+                s.push(constant.create(+e));
+                break;
+        }
+    }
+    return s.pop();
+}
+
+function process_expression(str, result) {
+    try {
+        var e = create_expression(str);
+        var p = "f(x) = " + e.str();
+        var v = "f(10) = " + e.eval(10);
+        result.value = p + "\n" + v;
+    } catch (err) {
+        result.value = "Hibás a kifejezés?";
+    }
+}
+</script>
+
+
+
+
+<form class="kitolt">
+<p class="komment">
+Írj be egy <a href="https://hu.wikipedia.org/wiki/Ford%C3%ADtott_lengyel_jel%C3%B6l%C3%A9s">RPN</a> kifejezést! Pl. <code>3 x + 5 *</code>
+</p>
+<label>Kifejezés</label>
+<input type="text" name="expression"> 
+<textarea name="result" readonly>
+</textarea>
+
+<div class="gombok">
+<button type="button" onclick="process_expression(this.form.elements.expression.value, this.form.elements.result);">Megjelenít</button>
+</div>
+</form>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="jsprototype">Mehdi Maujood: <a href="http://alistapart.com/article/prototypal-object-oriented-programming-using-JavaScript">Prototypal Object-Oriented Programming using JavaScript</a></li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

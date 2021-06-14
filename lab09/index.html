@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Lambda kifejezések</title>
+<meta property="og:title" content="TEST InfoC++11 :: Lambda kifejezések">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Magasabb rendű függvények. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Magasabb rendű függvények. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Lambda kifejezések">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Lambda kifejezések</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.07.18.</p>
+<p class="kivonat">Magasabb rendű függvények. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.</p>
+</div>
+
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első négy feladatot meg kell oldani.</p>
+</blockquote>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Függvények, függvény objektumok és lambda kifejezések</a>
+                      <li><a href="index.html#2" class="">Függvényben függvény: a Hérón-féle gyökvonás</a>
+                      <li><a href="index.html#3" class="">Függvény rajzolása</a>
+                      <li><a href="index.html#4" class="">Deklaratív programozás: feladatok a Solver osztályhoz I.</a>
+                      <li><a href="index.html#5" class="">Deklaratív programozás: feladatok a Solver osztályhoz II.</a>
+                      <li><a href="index.html#6" class="">Függvényhívások naplózása</a>
+                      <li><a href="index.html#7" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvények, függvény objektumok és lambda kifejezések">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Függvények, függvény objektumok és lambda kifejezések<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <code>std::transform()</code> algoritmus egy iterátorokkal megadott tartomány (1-2. paraméter) minden elemére meghív
+egy függvényt (4. paraméter), és a függvény által adott értékeket egy iterátor által mutatott helyre másolja (3. paraméter).
+Például az alábbi kódban a vektor minden számából gyököt vonunk (a forrás és a cél tároló itt ugyanaz):</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int main() {
+    std::vector&lt;double&gt; v = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    
+    std::transform(v.begin(), v.end(), v.begin(), sqrt);
+    
+    for (auto i : v)
+        std::cout &lt;&lt; i &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Írd át a programot a következő módokon!</p>
+<ul>
+    <li>Írj <code>doubler()</code> nevű függvényt, amely visszatér a paraméterének duplájával!
+        Duplázd meg ezzel a vektor minden elemét.
+    <li>Írd meg ugyanezt úgy, hogy lambda kifejezést használsz a <code>transform()</code> hívásánál!
+    <li>Írd át úgy a lambda kifejezést, hogy egy felhasználó által megadott számmal tudd megszorozni
+        a tömb összes elemét!
+</ul>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* Duplázás lambdával */
+std::transform(v.begin(), v.end(), v.begin(), [](double x) { return 2*x; });
+
+/* Adott számmal szorzás, lambdával */
+double c;
+std::cin &gt;&gt; c;
+std::transform(v.begin(), v.end(), v.begin(), [c](double x) { return c*x; });</code></pre>
+</div>
+</details>
+
+<p>Az <code>std::multiplies&lt;T&gt;</code> osztálysablonból olyan függvényobjektum példányosítható, amely
+összeszorozza a neki átadott két számot. Pl. <code>std::multiplies&lt;int&gt;{} (2, 3)</code> értéke <code>6</code>.
+Az <code>std::bind()</code> függvénnyel ebből készíthető duplázó vagy konstanssal szorzó egyparaméterű függvény
+is, mégpedig úgy, hogy az egyik paraméterét fixen lekötjük 2-re vagy a kívánt konstansra.</p>
+<ul>
+    <li>Írd meg a duplázást az <code>std::multiplies</code> és az <code>std::bind</code> segítségével!
+    <li>Írd meg a felhasználó által megadott számmal szorzást is így!
+</ul>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* duplázás. a doubler változóra nem lenne szükség */
+auto doubler = std::bind(std::multiplies&lt;double&gt;{}, std::placeholders::_1, 2.0);
+std::transform(v.begin(), v.end(), v.begin(), doubler);
+
+/* c-vel szorzás. */
+double c;
+std::cin &gt;&gt; c;
+auto c_multiplies = std::bind(std::multiplies&lt;double&gt;{}, std::placeholders::_1, c);
+std::transform(v.begin(), v.end(), v.begin(), c_multiplies);</code></pre>
+</div>
+</details>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvényben függvény: a Hérón-féle gyökvonás">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Függvényben függvény: a Hérón-féle gyökvonás<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A lambda függvények látják az őt létrehozó függvények lokális változóit. Ez lehetőséget ad arra is,
+hogy egyszerűen ágyazzunk egymásba függvényeket.</p>
+
+<p>Adott az alábbi Javascript kód. Ez az egyik korábbi laboron megismert Hérón-féle gyökvonást valósítja meg.
+Írd át ezt C++-ra, a belső függvények helyett <code>auto f = [] { ... };</code> formában írt lambda függvényeket
+használva! Ne feledd, az átalakítás csak szintaktikai jellegű lesz; szemantikai változtatásra (pl. paraméterek
+száma) nincsen szükség.</p>
+
+<pre   ><code class="language-js">function heron(x) {
+    function good_enough(guess) {
+        return Math.abs(guess*guess - x) &lt; 0.001;
+    }
+    function improve(guess) {
+        return (guess + x/guess)/2.0;
+    }
+    var guess = 1.0;
+    while (!good_enough(guess))
+        guess = improve(guess);
+    return guess;
+}</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+double heron(double x) {
+    auto good_enough = [&amp;] (double guess) {
+        return std::abs(guess*guess - x) &lt; 0.001;
+    };
+    auto improve = [&amp;] (double guess) {
+        return (guess + x/guess) / 2.0;
+    };
+    
+    double guess = 1.0;
+    while (!good_enough(guess))
+        guess = improve(guess);
+    return guess;
+}
+
+int main() {
+    std::cout &lt;&lt; heron(2.0);
+}</code></pre>
+
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvény rajzolása">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Függvény rajzolása<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Alább a félév elején, laboron szerepelt függvényrajzoló program C++-os megvalósítása.
+Másold be ezt egy projektbe! A <code>main()</code> függvényt vizsgáld csak meg először, az
+lesz fontos.</p>
+
+<pre   ><code class="language-c">#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+class Page {
+  public:
+    Page(int w, int h) : w_(w), h_(h), page_(w*h) {
+        clear();
+    }
+
+    void clear() {
+        std::fill(page_.begin(), page_.end(), ' ');
+    }
+
+    void print() const {
+        for (int y = 0; y &lt; h_; ++y) {
+            for (int x = 0; x &lt; w_; ++x)
+                std::cout &lt;&lt; page_[y*w_ + x];
+            std::cout &lt;&lt; std::endl;
+        }
+    }
+
+    void setchar(int x, int y, char c) {
+        if (x &gt;= 0 &amp;&amp; x &lt; w_ &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; h_)
+           page_[y*w_ + x] = c;
+    }
+
+    int get_width() const {
+        return w_;
+    }
+
+    int get_height() const {
+        return h_;
+    }
+
+  private:
+    int w_, h_;
+    std::vector&lt;char&gt; page_;
+};
+ 
+ 
+void plot(Page &amp;p, char c, double (*f)(double)) {
+    for (int x = 0; x &lt; p.get_width(); ++x) {
+        double fx = (x - p.get_width()/2.0)/4.0;
+        double fy = f(fx);
+        int y = -(fy * 4.0) + p.get_height()/2;
+        p.setchar(x, y, c);
+    }
+}
+ 
+ 
+int main() {
+    Page p(75, 20);
+ 
+    plot(p, '#', std::sin);
+    plot(p, 'x', std::cos);
+    p.print();
+}</code></pre>
+
+<p>Figyeld meg a <code>plot()</code> függvényt! Ez függvényre mutató pointer típusú paraméterrel
+veszi át a kirajzolandó függvényt. Az átadott függvénynek így nincs kontextusa, nagyon nehéz
+paraméterezhető függvényeket csinálni, pl. <code>sin 2x</code>, <code>sin 3x</code> stb.</p>
+
+<p>Írd át úgy a <code>plot()</code> függvényt, hogy a <code>double (*)(double)</code> típusú paraméter helyén kaphasson egy lambda 
+függvényt is! Rajzolj ezzel <code>sin n*x</code> függvényt, ahol <code>n</code> értékét a felhasználó adja meg! Két megoldás van: 
+az egyik esetben a <code>plot()</code> függvénysablonná válik, a másik esetben pedig nem kell annak lennie. Melyik a két megoldás? 
+Próbáld ki mind a kettőt! Melyiknek mi az előnye?</p>
+
+<p class="megjegyzes">Itt ügyelned kell arra, hogy az <code>std::sin</code> valójában nem egy önálló függvény, hanem egy 
+<em>overload set</em> <code>std::sin(float)</code>, <code>std::sin(double)</code> stb. tagokkal. A függvénypointeres paraméter 
+esetén a fordító tudja, hogy ebből a halmazból melyik függvényt kell kiválasztania, hiszen <code>double(*)(double)</code> pointer 
+csak a <code>double</code> paraméterű függvényre mutathat, a <code>float</code> paraméterűre nem. Sablonok esetén ez nincs így, nem 
+fogja tudni, melyiket válassza, mert amíg nem választott függvényt, addig nem tudja feloldani a sablonparamétert sem – ugyanakkor a 
+sablonparaméter feloldását kellene előbb elvégeznie. Ilyenkor egy konverzió segít: <code>(double(*)(double))std::sin</code>.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Sablonként:</p>
+<pre   ><code class="language-cbub">template &lt;typename FUNC&gt;
+void plot(Page &amp;page, char c, FUNC f) {     // !
+    for (int x = 0; x &lt; page.get_width(); ++x) {
+        double fx = (x - page.get_width()/2.0)/4.0;
+        double fy = f(fx);
+        int y = -(fy * 4.0) + page.get_height()/2;
+        page.setchar(x, y, c);
+    }
+}</code></pre>
+<p><code>std::function</code> segítségével, nem sablonként:</p>
+<pre   ><code class="language-cbub">void plot(Page &amp;page, char c, std::function&lt;double(double)&gt; f) {    // !
+    for (int x = 0; x &lt; page.get_width(); ++x) {
+        double fx = (x - page.get_width()/2.0)/4.0;
+        double fy = f(fx);
+        int y = -(fy * 4.0) + page.get_height()/2;
+        page.setchar(x, y, c);
+    }
+}</code></pre>
+<p>A sablont használó változat gyorsabb lehet, mert a megrajzolandó függvény belefordítható a
+<code>plot()</code> belsejébe (inline). Az <code>std::function()</code>-t használó változat
+pedig kisebb, mert nem kell minden egyes megrajzolandó függvényhez (függvény típushoz) külön lefordítani.
+Az <code>std::sin()</code> is működik, mert a sablon példányosodhat függvénypointerrel is (visszakapva
+az eredeti kódot), és az <code>std::function</code> is képes függvényre mutató pointert becsomagolni.</p>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Deklaratív programozás: feladatok a Solver osztályhoz I.">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Deklaratív programozás: feladatok a Solver osztályhoz I.<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előadás <code>Solver</code> osztálya letölthető erről a linkről:
+<a href="solver.cpp">solver.cpp</a>, <code>template</code>-esítve.
+Emlékeztető: ez arra képes, hogy egy érték-n-esekből álló 
+halmazból kiválassza azokat az elemeket, amelyek bizonyos feltételeknek megfelelnek. Például:</p>
+
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; s;
+    
+    /* változók hozzáadása */
+    auto a = s.add_variable({1, 2, 3, 4, 5});
+    auto b = s.add_variable({1, 2, 3, 4, 5});
+    
+    /* feltételek hozzáadása */
+    s.add_constraint([=] { return a() % 2 == 0; });
+    s.add_constraint([=] { return b() &gt; a(); });
+    
+    /* keresés és megoldások kiírása */
+    s.solve([=] {
+        std::cout &lt;&lt; &quot;a=&quot; &lt;&lt; a() &lt;&lt; &quot;, b=&quot; &lt;&lt; b() &lt;&lt; std::endl;
+    });
+}</code></pre>
+
+<p>Ebben a kódban megkeressük azokat az <code>(a,b)∈{1,2,3,4,5}²</code> számpárokat, amelyeknél <code>a</code> páros, és <code>b&gt;a</code>.
+A <code>Solver</code> a sablonparaméterében megadott típusú értékekkel dolgozik. Az <code>add_variable()</code> ilyen értékekből álló
+vektort vesz át paraméterként. A hozzáadott feltételeknek pedig igaz értékkel kell visszatérniük, ha teljesülnek.</p>
+
+<p>Oldd meg az osztály használatával az alábbi feladatokat!</p>
+
+<h3>Pitagoraszi számhármasok</h3>
+
+<p>Melyek a 100-nál nem nagyobb számokból álló pitagoraszi számhármasok? (Tehát a&lt;b&lt;c és a<sup>2</sup>+b<sup>2</sup>=c<sup>2</sup>.)
+Ehhez érdemes egy külön programrésszel feltölteni egy vektort a számokkal.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; s;
+    
+    std::vector&lt;int&gt; v;
+    for (int i = 1; i &lt;= 100; ++i)
+        v.push_back(i);
+    
+    auto a = s.add_variable(v);
+    auto b = s.add_variable(v);
+    auto c = s.add_variable(v);
+    
+    s.add_constraint([=] { return a() &lt; b(); });
+    s.add_constraint([=] { return b() &lt; c(); });
+    s.add_constraint([=] { return a()*a() + b()*b() == c()*c(); });
+    
+    s.solve([=] {
+        std::cout &lt;&lt; a() &lt;&lt; ' ' &lt;&lt; b() &lt;&lt; ' ' &lt;&lt; c() &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+<p>Írj olyan lambda kifejezést, amelyik nem kiírja, csak megszámolja, hány ilyen számhármas van! (52 a megoldás.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">/* a számlálót referencia szerint kell! */
+int count = 0;
+s.solve([&amp;count] { ++count; });
+std::cout &lt;&lt; count &lt;&lt; &quot; megoldás.&quot; &lt;&lt; std::endl;</code></pre>
+</div>
+</details>
+
+
+<h3>Euler feladata</h3>
+
+<p>Egy gazda sertést, kecskét és juhot vásárolt, összesen 100 állatot, pontosan 600 aranyért. A sertés darabja 
+21 arany, a kecskéé 8 arany, a juhoké 3 arany. Hány darabot vett mindegyik állatból? (4 megoldás van,
+pl. 15, 6, 79 és 0, 60, 40.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; solver;
+    
+    std::vector&lt;int&gt; v;
+    for (int i = 0; i &lt;= 100; ++i)  /* 0 is lehet! */
+        v.push_back(i);
+    
+    auto s = solver.add_variable(v);
+    auto k = solver.add_variable(v);
+    auto j = solver.add_variable(v);
+    
+    solver.add_constraint([=] { return s() + k() + j() == 100; });
+    solver.add_constraint([=] { return s()*21 + k()*8 + j()*3 == 600; });
+    
+    solver.solve([=] {
+        std::cout &lt;&lt; s() &lt;&lt; ' ' &lt;&lt; k() &lt;&lt; ' ' &lt;&lt; j() &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+<img src="terkep.svg" class="float" style="width: 14em;">
+
+<h3>Térkép</h3>
+
+<p>Adott a képen látható térkép. Színezzük ki ezt <span style="color: blue">kék</span>, <span style="color: #cc0;">sárga</span>, <span style="color: red;">piros</span> színekkel úgy, hogy a szomszédos országok különféle
+színűek legyenek, és ha két ország határán <code>&lt;</code> jel van, akkor a két szín ábécé-rendben megadott sorrendben kövesse
+egymást! (Megoldás: A: sárga, B: piros, C: kék, D: kék, E: piros.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int main() {
+    Solver&lt;std::string&gt; s;
+    
+    auto a = s.add_variable({&quot;kek&quot;, &quot;sarga&quot;, &quot;piros&quot;});
+    auto b = s.add_variable({&quot;kek&quot;, &quot;sarga&quot;, &quot;piros&quot;});
+    auto c = s.add_variable({&quot;kek&quot;, &quot;sarga&quot;, &quot;piros&quot;});
+    auto d = s.add_variable({&quot;kek&quot;, &quot;sarga&quot;, &quot;piros&quot;});
+    auto e = s.add_variable({&quot;kek&quot;, &quot;sarga&quot;, &quot;piros&quot;});
+
+    /* a középső ország szomszédai */
+    s.add_constraint([=] { return a() != b() &amp;&amp; a() != c() &amp;&amp; a() != d() &amp;&amp; a() != e(); });
+    /* körben */
+    s.add_constraint([=] { return b() != c() &amp;&amp; c() != e() &amp;&amp; e() != d() &amp;&amp; d() != b(); });
+    /* a és b ábécésen */
+    s.add_constraint([=] { return a() &gt; b(); });
+    /* d és e */
+    s.add_constraint([=] { return e() &gt; d(); });
+    
+    s.solve([=] {
+        std::cout &lt;&lt; &quot;A: &quot; &lt;&lt; a() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;B: &quot; &lt;&lt; b() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;C: &quot; &lt;&lt; c() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;D: &quot; &lt;&lt; d() &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;E: &quot; &lt;&lt; e() &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Deklaratív programozás: feladatok a Solver osztályhoz II.">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Deklaratív programozás: feladatok a Solver osztályhoz II.<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Nyolckirálynő-probléma</h3>
+
+<p>Oldd meg a nyolckirálnyő-problémát a keretrendszerrel! A jól ismert feladat: egy sakktáblára 8 királynőt kell úgy elhelyezni, 
+hogy egyik se üsse a másikat (se közös sor, se közös oszlop, se közös átló). Összesen 92 megoldás van (ha különbözőnek tekintjük 
+a forgatással egymásba vihető megoldásokat). A keresés egyszerűsítéséhez, gyorsításához a feladat egy részét végezd el fejben: 
+mivel tudod, hogy minden sorban pontosan egy királynő lesz, a pozícióik tárolása helyett inkább tárold azt az egyes 
+királynőknél, hogy az adott királynő (az elsőtől a nyolcadikig) a saját sorában (szintén az elsőtől a nyolcadikig) hányadik 
+oszlopban van!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; s;
+    
+    /* oszlopok 1-től 8-ig */
+    std::vector&lt;int&gt; col;
+    for (int i = 1; i &lt;= 8; ++i)
+        col.push_back(i);
+
+    /* a 8 db királynő hozzáadása */
+    std::vector&lt;Solver&lt;int&gt;::VariableFunc&gt; queens;
+    for (int q = 0; q &lt; 8; ++q)
+        queens.push_back(s.add_variable(col));
+
+    /* a melyik-sorban-hol-a-királynő miatt eleve nincsenek egy sorban */
+
+    /* nem lehetnek egy oszlopban */
+    s.add_constraint([=] {
+        for (int i = 0; i &lt; 8; ++i)
+            for (int j = i+1; j &lt; 8; ++j)
+                if (queens[i]() == queens[j]())
+                    return false;
+        return true;
+    });
+
+    /* nem lehetnek egy átlón = a sorkoordináták és az
+     * oszlopkoordináták különbsége nem lehet azonos.
+     * egészen pontosan, ezek abszolút értékei nem. */
+    s.add_constraint([=] {
+        for (int i = 0; i &lt; 8; ++i)
+            for (int j = i+1; j &lt; 8; ++j)
+                if (abs(queens[i]() - queens[j]()) == abs(i-j))
+                    return false;
+        return true;
+    });
+
+    /* megoldások kiírása */
+    int count = 0;
+    s.solve([=, &amp;count] {
+        std::cout &lt;&lt; ++count &lt;&lt; &quot;. megoldás:&quot; &lt;&lt; std::endl;
+        /* 8 sor */
+        for (int q = 0; q &lt; 8; ++q) {
+            auto q_col = queens[q]();
+            /* 8 oszlop, ha itt van, akkor X, amúgy . */
+            for (int col = 1; col &lt;= 8; ++col)
+                std::cout &lt;&lt; (col == q_col ? 'X' : '.');
+            std::cout &lt;&lt; std::endl;
+        }
+        std::cout &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+<p>Írd át úgy a programot, hogy a 8 helyett mindenhol paramétert használsz, azaz oldd meg a feladatot n×n-es sakktáblára,
+n királynőre! (Ezt inkább kisebb táblákra próbáld ki. A 9×9-es már nagyon lassú.)</p>
+
+
+
+
+<h3>Send more money</h3>
+
+<pre class="sorsurit1">
+ send
++more
+─────
+money
+</pre>
+
+<p>... ahol minden betű más számjegyet jelöl. (Megoldás: 9567+1085=10652.)</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">int main() {
+    Solver&lt;int&gt; solver;
+
+    auto m = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto s = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto e = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto n = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto d = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto o = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto r = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+    auto y = solver.add_variable({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+
+    /* hogy a more és a money elején ne legyen 0 */
+    solver.add_constraint([=] {
+        return m() != 0;
+    });
+    /* hogy a send elején ne legyen nulla */
+    solver.add_constraint([=] {
+        return s() != 0;
+    });
+    /* mindegyik különbözik */
+    auto numz = { s, e, n, d, m, o, r, y };
+    solver.add_constraint([=] () -&gt; bool {
+        for (auto egyik = numz.begin(); egyik != numz.end(); ++egyik)
+            for (auto masik = egyik+1; masik != numz.end(); ++masik)
+                if ((*egyik)() == (*masik)())
+                    return false;
+        return true;
+    });
+    
+    /* egy kis rövidítés... */
+    auto send = [=] { return (((s())*10+e())*10+n())*10+d(); };
+    auto more = [=] { return (((m())*10+o())*10+r())*10+e(); };
+    auto money = [=] { return ((((m())*10+o())*10+n())*10+e())*10+y(); };
+    
+    /* ... hogy a lényeg aztán ilyen fancy lehessen */
+    solver.add_constraint([=] {
+        return send() + more() == money();
+    });
+    
+    /* ... és könnyen ki lehessen írni */
+    solver.solve([=] {
+        std::cout &lt;&lt; send() &lt;&lt; '+' &lt;&lt; more() &lt;&lt; '=' &lt;&lt; money() &lt;&lt; std::endl;
+    });
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Függvényhívások naplózása">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Függvényhívások naplózása<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az előadáson volt egy példa, amelyben egy matematikai függvényt deriváló C függvény szerepelt. Ez paraméterként
+egy <code>std::function&lt;double(double)&gt;</code> egyváltozós matematikai függvényt vett át, visszatérési értéke pedig
+egy ugyanilyen volt; az előbbi deriváltja.</p>
+
+<p>Írj egy olyan függvényt, amelyik visszaad a paramétereként megadott matematikai függvény helyett egy másikat,
+amely ugyanazt az értéket számítja ki, de kiegészíti a számítást egy naplózási lépéssel! Tehát minden hívásnál kiírja
+a képernyőre azt, hogy függvényhívás történt.</p>
+
+<pre   ><code class="language-c">int main() {
+    auto logged_sin = logged_func(sin, &quot;sin&quot;);
+    std::cout &lt;&lt; logged_sin(1.2) &lt;&lt; std::endl;
+}</code></pre>
+
+<pre class="screenshot">
+Called: sin(1.2)
+0.932039
+</pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">std::function&lt;double(double)&gt; logged_func(std::function&lt;double(double)&gt; func, std::string name) {
+    auto logged = [=] (double x) {
+        std::clog &lt;&lt; &quot;Called: &quot; &lt;&lt; name &lt;&lt; &quot;(&quot; &lt;&lt; x &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;
+        return func(x);
+    };
+    return logged;
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f09/index.html#feladat_lambda">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

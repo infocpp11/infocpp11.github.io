@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: void_t</title>
+<meta property="og:title" content="TEST InfoC++11 :: void_t">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="void_t: a template metaprogramozás egyik csodafegyvere">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="void_t: a template metaprogramozás egyik csodafegyvere">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="void_t">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">void_t</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">void_t: a template metaprogramozás egyik csodafegyvere</p>
+</div>
+
+<p>Walter E. Brown kitalált egy <a href="https://www.youtube.com/watch?v=a0FliKwcwXE">miniatűr sablon kódot</a>, ami ilyen
+egyszerűen hangzik:</p>
+
+<pre   ><code class="language-c">template &lt;typename...&gt;
+using void_t = void;</code></pre>
+
+<p>Olyan, mintha ez a kódrészlet nem csinálna semmit, de kiderül, hogy mégis: szinte csodafegyvernek nevezhető.</p>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A void_t működése: has_iterator</a>
+                      <li><a href="index.html#2" class="">További példák</a>
+                      <li><a href="index.html#3" class="">A void_t története</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A void_t működése: has_iterator">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A void_t működése: has_iterator<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mit csinál a fenti típusdefiníció? Lényegében semmit. Létrehoz egy sablon típusnevet (alias), amit bármilyen típussal
+vagy típusokkal példányosítunk, <code>void</code>-ot kapunk eredményül. Tehát <code>void_t&lt;void&gt; = void</code>,
+<code>void_t&lt;bool, double&gt; = void</code> és így tovább.</p>
+
+<p>Mire jó ez? Arra, hogy SFINAE-vel és specializációkkal együtt használjuk.</p>
+
+<p>Tegyük fel, hogy a feladatunk a következő. Egy olyan sablon osztályra van szükségünk, amelyik megmondja egy tárolóról,
+hogy az definiál-e iterátor típust. Például <code>A</code> nem ilyen, <code>B</code> viszont igen. Ezért a
+<code>has_iterator&lt;A&gt;::value</code> értéke hamis, <code>B</code>-vel ugyanennek a metafüggvénynek az értéke
+igaz kell legyen:</p>
+
+<pre   ><code class="language-c">class A {};
+class B {
+  public:
+    class iterator {};
+};
+
+int main() {
+    std::cout &lt;&lt; has_iterator&lt;A&gt;::value &lt;&lt; std::endl;   /* false */
+    std::cout &lt;&lt; has_iterator&lt;B&gt;::value &lt;&lt; std::endl;   /* true */
+}</code></pre>
+
+<p>A <code>void_t</code> használatával ez ilyen egyszerű:</p>
+
+<pre   ><code class="language-c">template &lt;typename...&gt;
+using void_t = void;
+
+template &lt;typename, typename = void&gt;
+class has_iterator : public std::false_type {};
+
+template &lt;typename C&gt;
+class has_iterator&lt;C, void_t&lt;typename C::iterator&gt;&gt; : public std::true_type {};</code></pre>
+
+<p>Nézzük meg jobban a fenti kódot! Adott a <code>has_iterator</code> osztály, amelynek sablonparamétere a vizsgálandó osztály
+lesz. Van egy második sablonparamétere is, de annak az alapértelmezett értéke <code>void</code>, és láthatóan a használatnál nem is
+kell kiírni. Adott ezen kívül ennek az osztálynak egy részleges specializációja, amelyben az első sablonparaméter még mindig bármi
+lehet, a második pedig a <code>void_t</code> alias. Látszik az is, hogy az alap sablon a <code>false_type</code>-ból örököl, a
+specializáció pedig a <code>true_type</code>-ból, így lesz a <code>value</code> tag értéke hamis vagy igaz, attól függően, hogy
+az alap sablont vagy a specializált sablont használta a fordító egy adott típusra.</p>
+
+<p>Próbáljuk meg példányosítani ezt az osztályt az <code>A</code>-val! Ebben az esetben a specializált változat elszáll, mivel
+<code>A::iterator</code> nem létezik. Ezért ezt a szokásos módon, a <a href="../ea10/index.html#sfinae">SFINAE
+szabály</a> alapján eldobja a fordító. Marad az alap sablon, amelyik a <code>false_type</code>-ból örököl,
+ezért <code>has_iterator&lt;A&gt;::value</code> értéke <code>false</code> lesz.</p>
+
+<p>Mi lesz a helyzet a <code>B</code>-vel példányosítás esetén? Ilyenkor a <code>B::iterator</code> is valid; <code>void_t&lt;B::iterator&gt;</code>
+értéke pedig <code>void</code>. Tehát a specializáció példányosítható. Igaz, az alap sablon is, de ilyenkor a fordító a specializációt
+fogja választani – mert az a specializált változat. Tehát <code>has_iterator&lt;B&gt;::value</code> értéke <code>true</code> lesz.</p>
+
+<p>És ennyi, meg van oldva a feladat.</p>
+
+<p>Itt már látszik egyébként, hogy a <code>void</code>-nak mi a jelentősége: igazából semmi, a <code>void</code> helyett lehetne
+bármilyen másik típust is használni. Lényeg, hogy ugyanazt a típust adjuk meg az alap sablonnál default paraméterként:
+<code>typename = void</code>, és a típusdefiníciónál: <code>using void_t = void</code>. Legegyszerűbb a <code>void</code>, mert
+nem jelent semmit.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További példák">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        További példák<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha meg szeretnénk nézni, van-e egy osztálynak statikus, paraméter nélkül hívható <code>create()</code> függvénye:</p>
+
+<pre   ><code class="language-c">template &lt;typename, typename = void&gt;
+class has_create : public std::false_type {};
+
+template &lt;typename C&gt;
+class has_create&lt;C, void_t&lt;decltype(C::create())&gt;&gt; : public std::true_type {};</code></pre>
+
+<p>Ha arra vagyunk kíváncsiak, van-e az osztálynak <code>x</code> nevű, <code>int</code> típusú adattagja:</p>
+
+<pre   ><code class="language-c">template &lt;typename, typename = void&gt;
+class has_x : public std::false_type {};
+
+template &lt;typename C&gt;
+class has_x&lt;C, void_t&lt;decltype(&amp;C::x)&gt;&gt; : public std::is_same&lt;int C::*, decltype(&amp;C::x)&gt; {};</code></pre>
+
+<p>Az <code>is_same</code> vizsgálat az adattag típusát ellenőrzi.</p>
+
+<p>Ha meg szeretnénk vizsgálni, az iterátorunk biztosít-e véletlen elérést (random access iterator),
+pl. rendelkezik-e az <code>iterator + integer</code>, <code>iterator - iterator</code> műveletekkel,
+amikre az algoritmusunknak szüksége van:</p>
+
+<pre   ><code class="language-c">template &lt;typename, typename = void&gt;
+class is_random_access : public std::false_type {};
+
+template &lt;typename I&gt;
+class is_random_access&lt;I, void_t&lt;decltype(I() + 0), decltype(I() - I())&gt;&gt; : public std::true_type {};</code></pre>
+
+<p>Látszik, hogy a <code>typename...</code> miatt bármennyi vizsgálandó kifejezést megadhatunk. Ha bármelyik részlet
+SFINAE miatt elszáll, a specializáció nem példányosítható, így tulajdonképpen a végső eredményt lényegében az egyes
+vizsgálatok eredményeinek logikai ÉS kapcsolata adja.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A void_t története">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A void_t története<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A <code>void_t</code> definíciója duplán C++11-es: a <code>typename...</code> miatt és a <code>template<> using</code> miatt is.
+De minden, ami a következő írásban szerepelni fog, működött volna C++98-ban is, csak akkoriban a <code>void_t</code>-t
+még nem találták fel. A C++98-as forma:</p>
+
+<pre   ><code class="language-c">template &lt;typename&gt;
+struct void_t {
+    using type = void;
+};</code></pre>
+
+<p>A működése ennek ugyanaz: adott egy típus, ami bármit kap, <code>void</code>-ot állít elő. Igaz, itt sablonparaméter is
+csak egy lehet, de SFINAE használatához ez általában elég.</p>
+
+<p>Kis történeti érdekesség, hogy eredendően ez a <code>void_t</code> trükk nem minden fordítóval működött. GCC-vel például igen,
+clang-gel pedig nem. Kiderült, hogy ez nem a fordítók hibája, ugyanis a szabvány nem adta meg egyértelműen, hogy egy ilyen kódban
+mi a teendő, és az egyes gyártók eltérőképpen értelmezték a szöveget. A szabványnál is, nem egy hibáról, hanem egy hiányosságról
+van szó. A fenti <code>has_iterator</code> metafüggvénynek ugyanis, ha a <code>B</code>-vel példányosítjuk, mindkét változata
+egyforma. Csak a deklarációkat tekintve:</p>
+
+<pre   ><code class="language-c">template &lt;typename, typename = void&gt;
+class has_iterator;                                     /* alap */
+
+template &lt;typename C&gt;
+class has_iterator&lt;C, void_t&lt;typename C::iterator&gt;&gt;;    /* specializáció */</code></pre>
+
+<p>B-t behelyettesítve, és a <code>void_t</code>-t kifejtve:</p>
+
+<pre   ><code class="language-c">template &lt;&gt;
+class has_iterator&lt;B, void&gt;;    /* alapból lett */
+
+template &lt;&gt;
+class has_iterator&lt;B, void&gt;;    /* specializációból lett */</code></pre>
+
+<p>Tehát az alap sablonnál és a részleges specializációnál is végeredményben egy ugyanolyan formájú teljes specializáció
+áll elő automatikusan – és az nem volt definiálva a C++98-ban, hogy ilyenkor mi a teendő. Azóta ezt már rögzítették: ilyenkor
+az eredeti sablonok közül a specializáltat kell választania a fordítónak.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

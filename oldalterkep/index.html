@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Oldaltérkép</title>
+<meta property="og:title" content="TEST InfoC++11 :: Oldaltérkép">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: Oldaltérkép">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: Oldaltérkép">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Oldaltérkép">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Oldaltérkép</h1>
+<ul>
+<li class="almenu ">Infó
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a><div class="kicsinyit">Koronavírussal kapcsolatos változások a tárgyban</div>
+
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a><div class="kicsinyit">Az ajánlott, ingyenesen letölthető fejlesztőkörnyezetek listája.</div>
+
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a><div class="kicsinyit">A valgrind memóriakezelés-nyomkövető telepítése Windows 10-re, CLion mellé.</div>
+
+<li><a  href="index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a><div class="kicsinyit">Elérhetőségek, köszönetnyilvánítás.</div>
+
+</ul>
+
+<li class="almenu ">Tananyag
+<ul>
+<li class="almenu ">Előadás
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a><div class="kicsinyit">OOP a C és C++ nyelvekben. Struktúrák és tömbök a C99 nyelvben. C99 összetett literális. Változótól függő típusú pointerek.</div>
+
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a><div class="kicsinyit">Az öröklés és néhány jellegzetes tervezési elv a C++11-ben. Privát virtuális függvények, non-virtual interface. Override, final kulcsszavak. Virtuális konstruktorok.</div>
+
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a><div class="kicsinyit">Egy erősen típusos nyelvben a típusok és a függvénynév túlterhelések segítségével egyszerűbben, célratörőbben, biztonságosabban fogalmazhatjuk meg a mondanivalónkat. Az egyes részfeladatainkat, megkötéseinket is új típusokkal modellezhetjük. Ez az írás néhány példát mutat meg, hogyan lehet ezeket az eszközöket használni.</div>
+
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a><div class="kicsinyit">Alacsony szintű memóriakezelés. New operátorok, tároló osztályok, iterátorok. Tömbök és referenciák. Inicializáló listák, az auto és a decltype kulcsszavak. Az std::begin és az std::end függvények. Paraméterátadási szabályok, tömbök referenciái.</div>
+
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a><div class="kicsinyit">Szabad és kötött változók. Funarg problémák. Pointer és referencia szemantika. Temporális változók és destruktorok. Okos pointerek, referenciaszámlálás.</div>
+
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a><div class="kicsinyit">Másolások problémája, tulajdonos szemantika. Jobbérték referenciák, mozgató konstruktorok.</div>
+
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a><div class="kicsinyit">Objektumok memóriaképe. Adattag pointerek. Standard-layout objektumok.</div>
+
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a><div class="kicsinyit">Kivételek és erőforráskezelés. Kivételbiztos kód, garanciák. Másoló és mozgató konstruktorok kivételkezelés mellett.</div>
+
+<li><a  href="../ea09/index.html">9. hét: λ</a><div class="kicsinyit">Magasabb rendű függvények. Az std::bind és std::ref manipulátorok. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.</div>
+
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a><div class="kicsinyit">Sablonok használata. Viselkedés- és típusinformációs osztályok. A SFINAE szabály. A sablon metaprogramozás elemei.</div>
+
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a><div class="kicsinyit">Változó hosszúságú sablonparaméterlista. Sablonparaméterek típushelyes továbbítása. Az std::move és az std::forward függvények.</div>
+
+<li><a  href="../ea12/index.html">12. hét: Concepts</a><div class="kicsinyit">Kitekintés: a concept nyelvi elem, amely a következő C++ szabvány, a C++20 része lesz.</div>
+
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a><div class="kicsinyit">Többszálú programok írása C++11. Szál és mutex segédosztályok.</div>
+
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a><div class="kicsinyit">Nyelvi elemzők írása és egy nyelvi elemző keretrendszer</div>
+
+</ul>
+
+<li class="almenu ">Labor
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a><div class="kicsinyit">OOP tervezés, OOP szemlélet erősítése.</div>
+
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a><div class="kicsinyit">Örökléssel kapcsolatos feladatok; főként ismétlés, gyakorlás.</div>
+
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a><div class="kicsinyit">Típusok, I/O manipulátorok, operátorok átdefiniálása.</div>
+
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a><div class="kicsinyit">Placement new, osztályok saját operator new függvényei, allokátorok.</div>
+
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a><div class="kicsinyit">Tulajdonos szemantika és hatékonyság: mozgató konstruktorok és jobbérték referenciák alkalmazása.</div>
+
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a><div class="kicsinyit">Funarg problémák kezelése C++ kódban. RAII és okos pointerek írása.</div>
+
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a><div class="kicsinyit">Kivételkezelés</div>
+
+<li><a  href="../lab09/index.html">9. hét: λ</a><div class="kicsinyit">Magasabb rendű függvények. Lambda kifejezések. Az std::function függvénysablon. Összetett példa a lambda kifejezések használatára.</div>
+
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a><div class="kicsinyit">Stratégia és típusinformációs osztályok írása.</div>
+
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a><div class="kicsinyit">Sablon metaprogramozás: fordítási idejű kiértékelés, rekurzió, jobbrekurzió.</div>
+
+<li><a  href="../lab12/index.html">12. hét: STL</a><div class="kicsinyit">Összetett feladatok, rövid megoldásokkal. Lényeg, hogy minél több elemet használjunk az STL-ből!</div>
+
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a><div class="kicsinyit">C++11 fordítók, parancssori fordítás és linkelés.</div>
+
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a><div class="kicsinyit">Néhány levezető feladat.</div>
+
+</ul>
+
+<li class="almenu ">Feladatok
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a><div class="kicsinyit">A tárgy anyagához szorosan nem kapcsolódó, nehezebb programozási feladatok.</div>
+
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu ">Prog2 emlékeztető
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a><div class="kicsinyit">A memória „típusairól” és a memóriakezelésről.</div>
+
+<li><a  href="../include/index.html">#include</a><div class="kicsinyit">Forrásfájlok és fejlécfájlok használata.</div>
+
+<li><a  href="../inline/index.html">inline</a><div class="kicsinyit">Inline C-ben és C++-ban</div>
+
+<li><a  href="../const/index.html">const</a><div class="kicsinyit">Mit jelent a const a tagfüggvényeknél? A paramétereknél, a visszatérési értéknél? Milyen programozási hibák ellen véd?</div>
+
+<li><a  href="../referenciak/index.html">Referenciák</a><div class="kicsinyit">Röviden a referenciákról és a pointerekkel való kapcsolatukról.</div>
+
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a><div class="kicsinyit">Operator overloading</div>
+
+<li><a  href="../tarolo/index.html">Tárolók</a><div class="kicsinyit">Tömb – egy egyszerű tároló osztály létrehozása</div>
+
+<li><a  href="../iterator/index.html">Iterátorok</a><div class="kicsinyit">Mik azok az iterátorok? Hogy működnek?</div>
+
+<li><a  href="../orokles/index.html">Öröklés</a><div class="kicsinyit">Az öröklés és a vele kapcsolatos tudnivalók a C++-ban.</div>
+
+<li><a  href="../stl/index.html">STL</a><div class="kicsinyit">STL és iostream gyorstalpaló</div>
+
+<li><a  href="../castok/index.html">Cast-ok</a><div class="kicsinyit">Néhány szó a cast-okról</div>
+
+<li><a  href="../template/index.html">Template</a><div class="kicsinyit">A sablonok használata</div>
+
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a><div class="kicsinyit">A sablon osztályok és sablon függvények szintaxisa</div>
+
+</ul>
+
+</ul>
+
+<li class="almenu ">Extrák
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a><div class="kicsinyit">Ajánlott olvasmány, könyvek, blogok</div>
+
+<li class="almenu ">C
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a><div class="kicsinyit">A C99 restrict kulcsszóról és az optimalizálásról néhány gondolat.</div>
+
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a><div class="kicsinyit">Objektumok memóriaképe I. A tartalmazás és az öröklés közötti összefüggés. Az öröklés megvalósítása C-ben. A virtuális függvények működése. C nyelvű OOP keretrendszerek.</div>
+
+</ul>
+
+<li class="almenu ">C++ elemek, eszközök
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a><div class="kicsinyit">C++14/17 újdonságok</div>
+
+<li><a  href="../void_t/index.html">void_t</a><div class="kicsinyit">void_t: a template metaprogramozás egyik csodafegyvere</div>
+
+<li><a  href="../string_view/index.html">std::string_view</a><div class="kicsinyit">Hány sztring osztályunk van egy projekten belül? Mennyi bosszúságot okoz ez? Hogy segíthetünk ezen?</div>
+
+<li><a  href="../deletesize/index.html">operator delete mérettel</a><div class="kicsinyit">A felszabadított memóriaterületek méretét néha ismerjük. Miért jó ez? Hogy jelenik meg a programban? Hogyan következtet erre a fordító?</div>
+
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a><div class="kicsinyit">Digitális rendszerek szimulációja C++-ban. Ebben a példában a szálkezelés célja, hogy az
+egyes függvények látszólag egymás mellett fussanak; mindegyiknek saját verme lehessen.</div>
+
+</ul>
+
+<li class="almenu ">Nyelvészet
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a><div class="kicsinyit">Templatelt osztályból öröklődés rejtelmei</div>
+
+<li><a  href="../temporalis/index.html">Temporális objektumok</a><div class="kicsinyit">Néhány történelmi érdekesség a temporális objektumok élettartamával, másolásával kapcsolatban.</div>
+
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a><div class="kicsinyit">Mi volt a baj a régi std::auto_ptr-rel? Miért került ki a szabványból? Hogy volt megvalósítva?</div>
+
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a><div class="kicsinyit">Legtöbb esetben egyszerűen hagyjuk a fordítónak, hogy a függvényhívásból levezesse a sablon függvényeink paramétereit. Néha azonban ez látszólag triviálisnak tűnő helyzetekben nem sikerül neki.</div>
+
+</ul>
+
+<li class="almenu ">Technikák
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a><div class="kicsinyit">Heterogén kollekciók és perzisztencia. Hogyan használunk virtuális függvényt a beolvasásnál, amíg azt sem tudjuk, milyen típusú objektum adatait kell beolvasni?</div>
+
+<li><a  href="../bittomb/index.html">Bittömb</a><div class="kicsinyit">Pakolt tömb indexelése</div>
+
+<li><a  href="../property/index.html">Property</a><div class="kicsinyit">C# stílusú „property” az objektumokban</div>
+
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a><div class="kicsinyit">Az std::setw-hez hasonló manipulátorok írása.</div>
+
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a><div class="kicsinyit">Az előadás példájának folytatása: az adattag pointereket type erasure-be csomagolva elérhetjük, hogy többféle típusú adattag esetén is tudjunk iterálni azokon.</div>
+
+<li><a  href="../pushback1/index.html">vector::push_back I.</a><div class="kicsinyit">Miért másolja az std::vector push_back() függvénye előbb az új adatot, és csak utána a régieket?</div>
+
+<li><a  href="../pushback2/index.html">vector::push_back II.</a><div class="kicsinyit">Miért mozgatja az std::vector push_back() függvénye előbb az új adatot, és csak utána a régieket?</div>
+
+<li><a  href="../milyentipus/index.html">Milyen típus?</a><div class="kicsinyit">Sablon osztály, amely a példányosító típus nevét tartalmazza sztringként.</div>
+
+</ul>
+
+<li class="almenu ">Kifejezésfa refaktor
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a><div class="kicsinyit">Az előadáson bemutatott kifejzésfa program refaktorálásának első része: a memóriakezelés.</div>
+
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a><div class="kicsinyit">Mellékszál a kifejezésfa program refaktorolásában: gyártófüggvények és CRTP.</div>
+
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a><div class="kicsinyit">A kifejezésfákon dolgozó tevékenységek kiszervezése külön osztályokba: a Visitor (látogató) tervezési minta.</div>
+
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a><div class="kicsinyit">A Visitor tervezési minta egy egyszerű enum típusú tagváltozó segítségével is megvalósítható. Ehhez típus szerinti switch()-re van szükség, de ez a switch() egyetlen egy helyen jelenik csak meg a kódban.</div>
+
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a><div class="kicsinyit">Ez az írás megmutatja, hogy a Visitor tervezési mintát hogyan kell implementálni egy egész más felépítésű programozási nyelvben, a JavaScript-ben. Spoiler alert: sehogy, nincsen rá szükség. </div>
+
+</ul>
+
+</ul>
+
+</ul>
+    
+                  </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

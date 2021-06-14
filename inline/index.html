@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: inline</title>
+<meta property="og:title" content="TEST InfoC++11 :: inline">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Inline C-ben és C++-ban">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Inline C-ben és C++-ban">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="inline">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">inline</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Inline C-ben és C++-ban</p>
+</div>
+
+<p>Néha nagyon rövid függvényeket írunk – olyan kicsiket, hogy úgy érezzük, fölöslegesek, lassítják a programunkat. Hogy a függvényhívással töltött idő (paraméterek átadása, ugrás, visszaugrás stb.) összemérhető a függvény feladatának végrehajtási idejével. Úgy érezzük emiatt, hogy nem lesz hatékony a program. Például ebben az osztályban:</p>
+
+<pre   ><code class="language-c">class Tort {
+  private:
+    int szaml, nev;
+  public:
+    Tort(int szaml, int nev);
+    int get_szaml() const {
+        return szaml;
+    }
+    int get_nev() const {
+        return nev;
+    }
+};</code></pre>
+
+<p>Elrejtjük az adatot, és aztán <em>függvényhívást kell csinálnunk ahhoz,</em> hogy kiolvassuk azt... Sőt a függvény még csak nem is csinál semmit! Nem lesz ez kárunkra? Megéri így az adatrejtés?</p>
+
+<p>Az <em>inlining</em>-nak nevezett optimalizációs technika miatt bőven megéri. Nem kell attól tartanunk, hogy ez lassítja a programot. Egy függvény <em>inline</em>-olása azt jelenti, hogy a függvény törzsét a fordító a lefordított programban <em>beilleszti a hívás helyére,</em> megspórolva ezzel a függvényhívás költségét.</p>
+
+<p>A C/C++ programkódokba írt <code>inline</code> kulcsszó is ezzel kapcsolatos. De egy függvény neve elé írt <code>inline</code> kulcsszó nem azt jelenti, hogy az a függvény <em>inline</em>-olva lesz. Akkor hogy is van ez?</p>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az inlining működése</a>
+                      <li><a href="index.html#2" class="">Az inline kulcsszó használata</a>
+                      <li><a href="index.html#3" class="">C++ nyelven</a>
+                      <li><a href="index.html#4" class="">C nyelven</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az inlining működése">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az inlining működése<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi kis programocskát:</p>
+
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+
+int szorzat(int x, int y) {
+    return x * y;
+}
+
+int main() {
+    int a, b;
+    scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+    int s = szorzat(a, b);
+    printf(&quot;%d&quot;, s);
+}</code></pre>
+
+<p>Vizsgáljuk meg a lefordított program Assembly kódját! Erre kiválóan alkalmas a <a href="https://godbolt.org/">Compiler Explorer</a> oldal, ahol egy online felületen tehetjük meg ezt. De parancssorból is könnyen megy, <code>gcc -S</code> hatására fájlba írja a fordító az Assembly kódot.</p>
+
+<p>A két függvényünk így fest – kivágva csak a releváns részeket:</p>
+
+<pre class="screenshot">
+szorzat(int, int):
+        push    rbp
+        mov     rbp, rsp
+        mov     DWORD PTR [rbp-4], edi
+        mov     DWORD PTR [rbp-8], esi
+        mov     eax, DWORD PTR [rbp-4]
+        imul    eax, DWORD PTR [rbp-8]  ; (2)
+        pop     rbp
+        ret
+
+main:
+        ...
+        call    scanf
+        mov     edx, DWORD PTR [rbp-12]
+        mov     eax, DWORD PTR [rbp-8]
+        mov     esi, edx
+        mov     edi, eax
+        call    szorzat(int, int)       ; (1)
+        ...
+        call    printf
+        ...
+</pre>
+
+<p>A legfontosabb két sort a számok jelölik. Az (1)-essel jelzett helyről ugrunk a főprogramból a <code>szorzat()</code> függvény belsejébe, itt történik meg a függvényhívás (<code>call</code>). Az előtte lévő néhány sor valósítja meg a paraméterátadást. A (2)-essel jelzett hely pedig maga a szorzás: <code>imul</code>, mint <em>multiplication,</em> szorozza össze a megadott számokat. Az összes többi utasítás a függvényhívás adminisztrációja; a <code>ret</code>, azaz <em>return</em> utasítás tér vissza a függvényből.</p>
+
+<p>Lényegében ez az, amit el szeretnénk kerülni. Látszik, hogy mennyi többlet teendő volt ahhoz képest, hogy az érdemi munka a függvényben egyetlen egy gépi utasítást jelent, az <code>imul</code>-t.</p>
+
+<p>Nézzük most meg ugyanezt a kódot <code>gcc -O2</code> paraméterrel fordítva, tehát optimalizálva! A releváns részek:</p>
+
+<pre class="screenshot">
+szorzat(int, int):
+        mov     eax, edi
+        imul    eax, esi                    ; (2)
+        ret
+
+main:
+        ...
+        call    scanf
+        mov     esi, DWORD PTR [rsp+12]
+        mov     edi, OFFSET FLAT:.LC0
+        xor     eax, eax
+        imul    esi, DWORD PTR [rsp+8]      ; (1)
+        call    printf
+        ...
+</pre>
+
+<p>Először is, látszik hogy a kód optimalizált. A (2)-essel jelzett helyen továbbra is ott a szorzást végző <code>imul</code> utasítás, de a <code>szorzat</code> függvény sokkal rövidebb lett, a fordító okosabban oldotta meg a paraméterátadást. A főprogramból viszont <em>teljesen eltűnt</em> a <code>call szorzat</code> hívás! Helyette a szorzó utasítás bekerült az (1)-es helyre. A függvény <em>inline</em>-olódott, és körülbelül nyolc utasítást megspóroltunk így.</p>
+
+<p>Végezzünk el még egy kísérletet! Tegyünk egy <code>static</code> kulcsszót a <code>szorzat()</code> függvény elé. Mint tudjuk, ez azt jelenti, hogy több forrásfájlból álló program esetén más forrásfájlból nem is szeretnénk elérni ezt a függvényt. Csak ebből az egy <code>szorzat.c</code> fájlból lesz meghívható, a többiben nem is látszik:</p>
+
+<pre   ><code class="language-c">static int szorzat(int x, int y) {
+    return x * y;
+}</code></pre>
+
+<p>Ebben az esetben a <em>teljes</em> lefordított program így néz ki:</p>
+
+<pre class="screenshot">
+.LC0:
+        .string "%d %d"
+.LC1:
+        .string "%d"
+main:
+        sub     rsp, 24
+        mov     edi, OFFSET FLAT:.LC0
+        xor     eax, eax
+        lea     rdx, [rsp+12]
+        lea     rsi, [rsp+8]
+        call    scanf
+        mov     esi, DWORD PTR [rsp+12]
+        mov     edi, OFFSET FLAT:.LC1
+        xor     eax, eax
+        imul    esi, DWORD PTR [rsp+8]  ; (1)
+        call    printf
+        xor     eax, eax
+        add     rsp, 24
+        ret
+</pre>
+
+<p>Ebben az (1)-essel jelölt helyen látjuk a szorzást. A <code>szorzat()</code> függvény pedig <em>teljesen eltűnt (!)</em> a programból. Önálló függvényként már nem is létezik, csak a főprogramba beépítve látjuk azt a műveletet, ami a forráskódban még külön függvényként létezett. A fordító teljesen kihagyhatja a függvényt a lefordított programból! Ahol használtuk, oda beépítette a törzsét. Máshonnan pedig nem hívhatjuk, tehát biztos lehet benne, hogy a lefordított programba fölösleges betenni.</p>
+
+<p>Vegyük észre, hogy ehhez az optimalizációhoz nem volt szükség az <code>inline</code> kulcsszóra! A fordító magától döntött úgy, hogy a függvénytörzset beépíti a főprogramba. Ahhoz viszont, hogy ez megtörténhessen, ismernie kellett a törzset. Látnia kellett, mi van a függvény belsejében. Ha a függvény egy másik forrásfájlban lenne definiálva, és itt csak a fejlécét ismerné, akkor erre nem lett volna lehetősége. Egyszerűen azért, mert nem tudja, mi van benne:</p>
+
+<div class="sticky">szorzas.h</div>
+<pre   ><code class="language-c">#ifndef SZORZAS_H_INCLUDED
+#define SZORZAS_H_INCLUDED
+
+int szorzat(int x, int y);
+
+#endif</code></pre>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az inline kulcsszó használata">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Az inline kulcsszó használata<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mégis, mire kell az <code>inline</code> kulcsszó, ha a fordító anélkül is alkalmazza a fent vázolt optimalizációt?</p>
+
+<p>Ennek megértéséhez azt kell elfogadni, hogy az <code>inline</code> szó nem az optimalizációt engedélyezi vagy javasolja a fordító számára. Hanem a létezése a C/C++ programok fordítási modelljének egyfajta mellékterméke: <em>ahhoz kell, hogy a függvény törzsét is a fejlécfájlba tehessük.</em> Nem csinál mást, nem való másra, csak tárolási osztályt (linkage) ad meg a függvény számára.</p>
+
+<p>Térjünk vissza az előző, szorzós függvényhez. Tegyük fel, hogy ezt a függvényt szeretnénk <em>inline</em>-olni. Ezért kénytelenek vagyunk a függvény törzsét is a <code>szorzas.h</code> fejlécfájlba tenni, mert különben a használat helyén nem fogja látni azt a fordító. Tehát a projekt fájljai így néznek ki:</p>
+
+<div class="sticky">szorzas.h</div>
+<pre   ><code class="language-c">#ifndef SZORZAS_H_INCLUDED
+#define SZORZAS_H_INCLUDED
+
+int szorzat(int x, int y) {
+    return x * y;
+}
+
+#endif</code></pre>
+
+<div class="columns">
+<div>
+<div class="sticky">szorzas.c</div>
+<pre   ><code class="language-c">#include &quot;szorzas.h&quot;
+
+
+/* szorzat() függvény
+ * itt most nincs */
+
+
+/* de további
+ * függvények lehetnek */</code></pre>
+</div>
+<div>
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &quot;szorzas.h&quot;
+
+int main() {
+    int a, b;
+    scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+    int s = szorzat(a, b);
+    printf(&quot;%d&quot;, s);
+}</code></pre>
+</div>
+</div>
+
+<p>Mi történik, ha megpróbáljuk így lefordítani ezt a projektet? A helyzet az, hogy nem fog működni. A fordítás során ugyanis a <code>szorzat.c</code>-ből keletkező <code>szorzat.o</code>-ba is, és a <code>main.c</code>-ből fordított <code>main.o</code>-ba is bekerül a <code>szorzat()</code> függvény. Az előfordított <code>szorzas.c</code> és <code>main.c</code> ugyanis a lent látható formát öltik. Bemásolódott mindkettőbe a <code>szorzas()</code> függvény törzse, mert az <code>#include</code>-dal mintha <em>copypaste</em>-eltünk volna a fejlécfájlt mindkettőbe:</p>
+
+<div class="sticky">szorzas.c<br>előfordítva</div>
+<pre   ><code class="language-c">int szorzat(int x, int y) {
+    return x * y;
+}</code></pre>
+<div class="sticky">main.c<br>előfordítva</div>
+<pre   ><code class="language-c">int szorzat(int x, int y) {
+    return x * y;
+}
+
+int main() {
+    int a, b;
+    scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+    int s = szorzat(a, b);
+    printf(&quot;%d&quot;, s);
+}</code></pre>
+
+<p>A linker számára tehát úgy fog tűnni, hogy a függvény kétszer van definiálva, és leáll:</p>
+
+<pre>
+$ gcc szorzas.o main.o -o prg
+main.o: In function `szorzat':
+main.c:(.text+0x0): multiple definition of `szorzat'
+szorzas.o:szorzas.c:(.text+0x0): first defined here
+collect2: error: ld returned 1 exit status
+</pre>
+
+<p>Megvizsgálva a keletkezett <em>object</em> fájlokat, látjuk, hogy igaza is van; a <code>szorzat()</code> függvényből tényleg kettő lett az <code>#include</code>-ok miatt. Jogosan kiabál tehát a linker:</p>
+
+<pre>
+$ nm szorzas.o
+0000000000000000 T szorzat
+
+$ nm main.o
+0000000000000013 T main
+0000000000000000 T szorzat
+</pre>
+
+<p>Hova is jutottunk így? Ha szeretnénk, hogy a fordító <em>inline</em>-oljon, akkor a fejlécfájlba kell tennünk a függvénytörzset is. Ha viszont a fejlécfájlba tesszük, akkor viszont nem fordítható le a programunk, mert látszólag többször van definiálva a függvény.</p>
+
+<p><em>Ennek az ellentmondásnak a feloldására való</em> az <code>inline</code> kulcsszó. Ha ezt a fejlécfájlban a kifejtett függvény elé írjuk, akkor a fordító tudomására hozzuk, hogy emiatt látja többször a függvény törzsét:</p>
+
+<div class="sticky">szorzas.h</div>
+<pre   ><code class="language-c">#ifndef SZORZAS_H_INCLUDED
+#define SZORZAS_H_INCLUDED
+
+inline int szorzat(int x, int y) {
+    return x * y;
+}
+
+#endif</code></pre>
+
+<p>Tehát ezzel nem azt kérjük a fordítótól, hogy <em>inline</em>-olja a függvényt, hanem csak azt jelezzük neki, hogy ennek a függvénynek a definíciójával (törzsével) valószínű többször is fog találkozni, de ez <em>nem hiba.</em> Szándékos részünkről, hogy az optimalizáció megtörténhessen.</p>
+
+<p>Innentől kezdve pedig a C és a C++ kicsit máshogy kezelik a dolgot.</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C++ nyelven">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        C++ nyelven<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C++-ban egy inline függvény hatására a tárgykód fájlba egy ún. <em>weak,</em> „gyenge” szimbólum kerül:</p>
+
+<pre>
+$ g++ main.cpp -c -o main.o
+
+$ nm -C main.o
+0000000000000000 T main
+0000000000000000 W szorzat(int, int)
+</pre>
+
+<p>Ez ugyanúgy egy lefordított függvénytörzset jelöl, mint amilyen a <code>main</code> is. De egy üzenet is egyben a linker számára, hogy ilyen nevű függvénnyel többször is fog találkozni, és a program linkelése során bármelyiket felhasználhatja. Ebben az esetben a programozó felel érte, hogy ne nevezzen el véletlenül különböző függvényeket ugyanúgy – ne feledjuk, az ODR (one definition rule) szabály továbbra is érvényes.</p>
+
+<p>A recept ezek alapján C++-ban az <code>inline</code> használatához:</p>
+<ul>
+    <li>Ha <em>inline</em>-olni szeretnénk a függvényt, akkor tegyük át azt törzzsel együtt a fejlécfájlba.</li>
+    <li>A fejlécfájlban tegyük elé az <code>inline</code> kulcsszót.</li>
+</ul>
+
+<p>És nincs több teendőnk. (Osztályok belsejében definiált függvények egyébként automatikusan <code>inline</code>-nak minősülnek, a sablonfüggvények pedig szintén.)</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="C nyelven">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        C nyelven<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>C-ben kicsit más a helyzet, ugyanis a C nyelvhez tartozó linker programokat nem akarták ezzel bonyolítani. Azok nem tudnak <code>W</code> típusú bejegyzéseket kezelni a tárgykód fájlokban. Ezért C-ben a programozó felel azért, hogy megjelölje valamelyik fordítási egységet, tehát valamelyik <code>.c</code> fájlt, amelybe a fordító <em>bele fogja tenni a függvény szokásos, nem inline módon lefordított változatát.</em> Ne feledjük: a függvény <em>inline</em>-olása optimalizációs kérdés, a fordító bármikor dönthet úgy, hogy nem teszi meg! Arról nem is beszélve, hogy <em>inline</em> függvényre is hivatkozhatunk pointerrel, márpedig akkor szokásos, önálló függvényként is szerepelnie kell valahol a memóriában.</p>
+
+<p>A megjelölés az <code>extern inline</code> kulcsszavakkal történik:</p>
+
+<div class="sticky">szorzas.h</div>
+<pre   ><code class="language-c">#ifndef SZORZAS_H_INCLUDED
+#define SZORZAS_H_INCLUDED
+
+inline int szorzat(int x, int y) {
+    return x * y;
+}
+
+#endif</code></pre>
+
+<div class="sticky">szorzas.c</div>
+<pre   ><code class="language-c">#include &quot;szorzas.h&quot;
+
+extern inline int szorzat(int x, int y);</code></pre>
+
+<p>A tárgykód fájlok ilyen esetben így néznek ki:</p>
+
+<pre>
+$ nm szorzas.o
+0000000000000000 T szorzat
+
+$ nm main.o
+0000000000000000 T main
+                 U szorzat
+</pre>
+
+<p>A <code>szorzas.o</code>-ban tehát a szokásos módon szerepel a lefordított függvény. A többi helyen pedig, ahol nem <em>inline</em>-olódott, <code>U</code>, azaz <em>undefined</em> szimbólumként jelenik meg a függvény; ezt a hivatkozást majd feloldja a linker.</p>
+
+<p>A recept C-ben:</p>
+<ul>
+    <li>Ha <em>inline</em>-olni szeretnénk a függvényt, akkor tegyük át azt, törzzsel együtt a fejlécfájlba.</li>
+    <li>A fejlécfájlban tegyük elé az <code>inline</code> kulcsszót.</li>
+    <li>Valamelyik forrásfájlban – tipikusan ott, ahol eredetileg a függvény volt – kérjük meg a fordítót a függvény szokásos lefordítására az <code>extern inline</code> kulcsszavakkal.</li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

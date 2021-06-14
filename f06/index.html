@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 6. hét: Jobbérték referenciák</title>
+<meta property="og:title" content="TEST InfoC++11 :: 6. hét: Jobbérték referenciák">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 6. hét: Jobbérték referenciák">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 6. hét: Jobbérték referenciák">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="6. hét: Jobbérték referenciák">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">6. hét: Jobbérték referenciák</h1>
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Az std::move használata</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::move használata">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_stdmove" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Az std::move használata<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>return std::move(*this);</h3>
+
+<p>Jobbérték + balérték mátrixösszeadás, tagfüggvényként megvalósítva.</p>
+
+<pre   ><code class="language-cbub">class Matrix {
+    double *data;
+    size_t w, h;
+  public:
+    /* ... */
+    Matrix operator+(Matrix const &amp; rhs) &amp;&amp; {
+        for (size_t i = 0; i &lt; w*h; ++i)
+            data[i] += rhs.data[i];
+
+        return std::move(*this);    // de miért?
+    }
+};</code></pre>
+
+<p>Miért úgy kell írni a jelölt sort, ahogy írva van?</p>
+
+
+
+
+<h3>Hova kell <code>std::move()</code>?</h3>
+
+<p>Adottak az alábbi algoritmusok. Tedd ki az <code>std::move()</code> hívásokat <em>mindenhova,</em>
+ahova lehet!</p>
+
+<pre   ><code class="language-c">/* megcseréli két változó tartalmát. */
+template &lt;typename T&gt;
+void swap(T &amp; a, T &amp; b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}</code></pre>
+
+<pre   ><code class="language-c">/* feltölti a [begin; end) tartományt a megadott értékkel. */
+template &lt;typename IT, typename VAL&gt;
+void fill(IT begin, IT end, VAL val) {
+    for (IT it = begin; it != end; ++it)
+        *it = val;
+}</code></pre>
+
+<pre   ><code class="language-c">/* egy lépéssel balra tolja a tömböt (pl. 1234 -&gt; 2341) */
+template &lt;typename T&gt;
+void rotate(T * tomb, size_t s) {
+    T temp = tomb[0];
+    for (size_t i = 1; i &lt; s; ++i)
+        tomb[i-1] = tomb[i];
+    tomb[s-1] = temp;
+}</code></pre>
+
+<pre   ><code class="language-c">/* a tömb elejére gyűjti a p tulajdonsággal rendelkező elemeket.
+ * visszaad egy iterátort, ami azt mutatja, meddig lett tele a tömb.
+ * specifikálatlan, hogy mi marad a tömb végén. */
+template &lt;typename IT, typename PRED&gt;
+IT remove_if(IT begin, IT end, PRED p) {
+    IT filled = begin;
+    while (filled != end &amp;&amp; p(*filled))
+        ++filled;
+    IT it = filled;
+    while (++it != end)
+        if (p(*it))
+            *filled++ = *it;
+    return filled;
+}</code></pre>
+
+
+<h3>Összefésülő rendezés</h3>
+
+<p>Az összefésülő rendezés (merge sort, lásd Prog1/Algel) lényege a következő:</p>
+
+<ul>
+<li>Rekurzívan rendezzük a tömb első és második felét.
+<li>Ezek után pedig a két különálló, rendezett tartományt összefésüljük egyetlen rendezett tartománnyá.
+</ul>
+
+<p>Alább egy megvalósítás <code>int</code>-ek tömbjére.</p>
+
+<pre   ><code class="language-c">void merge(int *in, int begin, int mid, int end, int *out) {
+    int i = begin, j = mid;
+    for (int c = begin; c &lt; end; ++c) {
+        if (i &lt; mid &amp;&amp; (j &gt;= end || in[i] &lt;= in[j])) {
+            out[c] = in[i];
+            i++;
+        } else {
+            out[c] = in[j];
+            j++;
+        }
+    }
+}
+ 
+void copy(int *in, int begin, int end, int *out) {
+    for (int c = begin; c &lt; end; ++c) {
+        out[c] = in[c];
+    }
+}
+
+void merge_sort(int *tomb, int begin, int end, int *temp) {
+    if (end - begin &lt; 2)
+        return;
+    int mid = (begin + end) / 2;
+    merge_sort(tomb, begin, mid, temp);
+    merge_sort(tomb, mid, end, temp);
+    merge(tomb, begin, mid, end, temp);
+    copy(temp, begin, end, tomb);
+}</code></pre>
+
+<p>Az összefésüléshez szükséges egy segédtömb: a két fél tartomány az összefésülés (merge) során a segédtömbbe kerül, ahonnan aztán 
+vissza kell másolni (copy). A fenti rendező függvény ezért elvárja a hívójától, hogy kapjon egy munkaterületet, amelyik az eredeti 
+tömb méretével megegyező méretű.</p>
+
+<p>Végezd el az alábbi módosításokat a kódon!</p>
+<ul>
+<li>Template-esítsd: ne inteken dolgozzon, hanem tetszőleges típusú elemeken. Természetesen a &lt;, &gt;= stb. operátorokat attól a típustól elvárhatod.
+<li>Csinálj egy csomagoló függvényt, amely lefoglalja magától a megfelelő méretű segédtömböt, hogy ezzel ne a hívónak kelljen bajlódnia!
+<li>Figyeld meg, hogy az összefésülésnél a segédtömbbe MÁSOLÓDNAK az objektumok, aztán onnan az eredeti helyükre visszaMÁSOLÓDNAK megint. Ezeknek a lépéseknek nem másolásnak, hanem mozgatásoknak kellene lenniük. Alakítsd át úgy a kódot, hogy
+    <ol>
+    <li>a segédtömb inicializálatlan memóriaterület legyen, amelyre 
+    <li>az összefésülés átmozgatja az objektumokat, és ahonnan végül a lecserélt copy függvény 
+    <li>az eredeti tömbbe, a végleges helyükre visszamozgatja azokat!
+    </ol>
+</ul>
+
+<p>A rendezendő tömb elemeitől nem várhatod el, hogy alapértelmezett konstruktoruk legyen: <code>T()</code> lehet, hogy nem 
+létezik. Ha segédfüggvényt írsz a rekurzió indításához, akkor már javítsd ki a paraméterezést is: a tömböt a szokásos módon kelljen 
+átadni, méret megjelölésével.</p>
+
+<p>Ügyelj arra, hol használsz konstruktort, destruktort és értékadást! A megoldásod az extrák menüpont alatt elérhető SuperNoisy 
+osztállyal is tesztelheted.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;utility&gt;
+#include &lt;iostream&gt;
+#include &lt;new&gt;
+#include &lt;string&gt;
+
+template &lt;typename T&gt;
+void osszefuz(T *tomb, int eleje, int kozepe, int vege, T *seged) {
+    /* összefűzés - átmozgatás az új tömbbe */
+    int i = eleje, j = kozepe;
+    for (int c = eleje; c &lt; vege; ++c) {
+        T *honnan;
+        if (i &lt; kozepe &amp;&amp; (j &gt;= vege || tomb[i] &lt;= tomb[j])) {
+            honnan = &amp;tomb[i];
+            i++;
+        } else {
+            honnan = &amp;tomb[j];
+            j++;
+        }
+        new (&amp;seged[c]) T(std::move(*honnan));
+        honnan-&gt;~T();
+    }
+    /* az összefűzött adatok visszamozgatása */
+    for (int c = eleje; c &lt; vege; ++c) {
+        new (&amp;tomb[c]) T(std::move(seged[c]));
+        seged[c].~T();
+    }
+}
+
+template &lt;typename T&gt;
+void osszefuz_rendez_belso(T *tomb, int eleje, int vege, T *seged) {
+    if (vege - eleje &lt; 2)
+        return;
+    int kozepe = (eleje + vege) / 2;
+    osszefuz_rendez_belso(tomb, eleje, kozepe, seged);
+    osszefuz_rendez_belso(tomb, kozepe, vege, seged);
+    osszefuz(tomb, eleje, kozepe, vege, seged);
+}
+
+template &lt;typename T&gt;
+void osszefuz_rendez(T *tomb, int meret) {
+    T *seged = (T*) ::operator new(sizeof(T) * meret);
+    osszefuz_rendez_belso(tomb, 0, meret, seged);
+    ::operator delete(seged);
+}
+
+int main() {
+    std::string tomb[4] = { &quot;alma&quot;, &quot;korte&quot;, &quot;barack&quot;, &quot;szilva&quot; };
+    osszefuz_rendez(tomb, 4);
+    for (auto s: tomb) {
+        std::cout &lt;&lt; s &lt;&lt; std::endl;
+    }
+}</code></pre>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

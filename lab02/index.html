@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: C++11 öröklés</title>
+<meta property="og:title" content="TEST InfoC++11 :: C++11 öröklés">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Örökléssel kapcsolatos feladatok; főként ismétlés, gyakorlás.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Örökléssel kapcsolatos feladatok; főként ismétlés, gyakorlás.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="C++11 öröklés">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">C++11 öröklés</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Örökléssel kapcsolatos feladatok; főként ismétlés, gyakorlás.</p>
+</div>
+
+
+<p>Az eheti feladatok örökléssel kapcsolatosak. Igyekezz használni a C++11 újdonságait, ahol lehet: <code>final</code>, <code>
+override</code>, <code>nullptr</code>, új inicializáló szintaxis!</p>
+
+<blockquote>
+<h3>A laborhoz</h3>
+<p>A laborhoz ki van írva egy beadandó az <a href="https://cpp11.local/admin">admin portálon</a>.
+Ide <strong>óra végén</strong> töltsd fel a forráskódokat (*.cpp, *.h)!
+A feladatokat ezért külön projektben oldd majd meg, ne írd felül a megoldásokat.
+</p>
+</blockquote>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Eratoszthenész szitája</a>
+                      <li><a href="index.html#2" class="">Kifejezések beolvasása I.</a>
+                      <li><a href="index.html#3" class="">Kifejezések beolvasása II.</a>
+                      <li><a href="index.html#4" class="">További feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Eratoszthenész szitája">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Eratoszthenész szitája<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<pre class="float">
+     2  3  <span class="athuzott">4</span>  5
+  <span class="athuzott">6</span>  7  <span class="athuzott">8</span>  <span class="athuzott">9</span> <span class="athuzott">10</span>
+ 11 <span class="athuzott">12</span> 13 <span class="athuzott">14</span> <span class="athuzott">15</span>
+ <span class="athuzott">16</span> 17 <span class="athuzott">18</span> 19 <span class="athuzott">20</span>
+ <span class="athuzott">21</span> <span class="athuzott">22</span> 23 <span class="athuzott">24</span> <span class="athuzott">25</span>
+</pre>
+
+<p>Eratoszthenész szitája prímszámokat keres. (Ismerős lehet általános iskolából és Prog1-ből is.) A módszer a következő. 
+Felírjuk a számokat valameddig. 2 prímszám, ezt megjegyezzük. Kihúzzuk a többszöröseit, mivel azok nem prímszámok. Ezután 3 a 
+következő, ami még nincs kihúzva. Az is prímszám, mivel nem találtunk ezidáig osztót hozzá. A többszörösei viszont nem prímek: kihúzzuk az összes 3-mal 
+oszthatót. 4-et már kihúztuk (2×2). 5 a következő prím, kihúzzuk n×5-öt stb.</p>
+
+<p>Ezt most nem tömbökkel, hanem egy gépsorral kell megvalósítanod. A gépsor minden eleme fel tud dolgozni egy számot: <code>
+process(int)</code>. A sor elemei lehetnek sziták (<code>Sieve</code>) vagy a sor végén lévő vödör (<code>Bucket</code>). A 
+sziták feldolgozáskor a számot elnyelik (ha osztható azzal a számmal, aminek a szűrésére létre lettek hozva), vagy továbbküldik. A sor végén
+lévő vödör kiírja a kapott számot (ha keresztüljutott a szitákon, prímszám kell legyen), és beszúr maga elé 
+egy olyan szitát, amely legközelebb már kiszűri a többszöröseit.</p>
+
+<img src="sieve.svg" class="kozep" style="height: 6em;">
+
+<p>A gépsorral egyesével, növekvő sorrendben kell megetetni a számokat. A rajz a 3-as szám feldolgozása utáni állapotot mutatja. 
+Ha a gépsorral megetetjük a 4-et, a 2-es szita elnyeli. Ha megetetjük vele az 5-öt, akkor az eljut a vödörhöz; a vödör kiírja, 
+és beszúr maga elé egy 5-ös szitát. A <code>Dummy</code> elem egy strázsa a duplán láncolt lista elején, a pointerműveletek
+egyszerűsítéséhez. Csak továbbítja a számot, egyéb dolga nincs. Kezdetben csak a <code>Dummy</code> létezik, és a vödör;
+az összes szita később jön létre.</p>
+
+<p>Valósítsd meg a programot, az alábbi lépésekkel <em>sorban</em> haladva!</p>
+
+<ol>
+    <li>Definiáld az ősosztályt (Element), amelynek tisztán virtuális függvénye a fent említett <code>void process(int)</code>.
+        Ugyanez az osztály egyben a láncolt lista pointereit is adja; add hozzá ehhez csak az adattagokat (<code>prev</code> és <code>next</code>).
+        Legyenek ezek publikusak.
+    <li>Készítsd el ennek a leszármazottait, amelyekben megvalósítod a <code>process()</code> függvényeket.
+        A Dummy csak továbbküldi a számot a következő elemnek. A Sieve vagy továbbküldi, vagy nem, attól függően, hogy
+        a benne tárolt szám osztója-e a feldolgozandó számnak. Végül pedig, a Bucket kiírja a kapott számot, mert ami
+        átment a láncon, az prímszám.
+    <li>Ezek után megépítheted a főprogramban a kezdeti gépsort, amelyben csak a Dummy és a Bucket vannak. Láncold ezeket
+        össze oda-vissza. Ez könnyen kell menjen, mert a lista pointerek publikusak.
+    <li>Ezen a ponton a Dummy-nak adott összes szám ki kell íródjon a képernyőre, mert az továbbadja őket az őt követő
+        Bucket elemnek, amely pedig kiírja őket.
+    <li>Miután ezt letesztelted, ki tudod már egészíteni a Bucket <code>process()</code> függvényét olyan módon, hogy befűzzön
+        maga elé egy Sieve elemet, amely szűrni fog.
+    <li>Ha ez is működik, kész vagy, már csak be kell dobálni a lista elején a számokat, a végén pedig kipotyognak a prímek.
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+
+<p>A pointerek a mintamegoldásban <code>public</code> változók. Elsőre <code>protected</code>-re gondolhatnánk, hogy a
+<code>Bucket</code> befűzhesse maga elé a <code>Sieve</code> objektumot. De egy osztály csak akkor látja a <code>protected</code>
+örökölt tagváltozókat, ha a saját típusáról van szó; ha másik fajtáról, akkor nem. (Mert lehet, hogy a másik leszármazott
+másképp használja azokat a változókat. Furcsa, de így van.) Legszebb megoldás természetesen az lenne, ha a lista építését az ős
+tagfüggvényei végeznék, lenne pl. <code>insert_before()</code> vagy hasonló.</p>
+
+<p>Az <code>Element</code> osztályban a <code>next</code> és a <code>prev</code> pointereknek alapértelmezett értéket adok. Ez 
+C++11 nyelvi elem (in-class member initializer). A fordító beépíti az inicializálásukat a konstruktorokba.</p>
+
+<p>Az ősosztály destruktora felszabadítja a következő listaelemet. Így elég a listafejet törölni (a <code>Dummy</code>-t), a 
+többi felszabadul.</p>
+
+
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+
+class Element {
+  public:
+    Element *prev = nullptr, *next = nullptr; // C++11
+
+    virtual ~Element() {
+        delete next;
+    }
+    virtual void process(int i) = 0;
+};
+
+
+class Dummy final: public Element { // C++11
+  public:
+    /* továbbküldi */
+    virtual void process(int i) override { // C++11
+        next-&gt;process(i);
+    }
+};
+
+
+class Sieve final: public Element {
+  private:
+    int divisor_;
+  public:
+    Sieve(int divisor) : divisor_{divisor} {} // C++11
+    /* ha nem osztható, továbbküldi */
+    virtual void process(int i) override {
+        if (i % divisor_ != 0)
+            next-&gt;process(i);
+    }
+};
+
+
+class Bucket final: public Element {
+  public:
+    /* ha eljutott idáig, kiírja, és beszúrja maga elé az új szitát */
+    virtual void process(int i) override {
+        std::cout &lt;&lt; i &lt;&lt; std::endl;
+        Element *newsieve = new Sieve{i}; // C++11
+        newsieve-&gt;prev = this-&gt;prev;
+        newsieve-&gt;next = this;
+        this-&gt;prev-&gt;next = newsieve;
+        this-&gt;prev = newsieve;
+    }
+};
+
+
+int main() {
+    Element *dummy = new Dummy;
+    Element *bucket = new Bucket;
+    dummy-&gt;next = bucket;
+    bucket-&gt;prev = dummy;
+    
+    /* sorban mennek bele a számok */
+    for (int i = 2; i &lt; 100; ++i)
+        dummy-&gt;process(i);
+    
+    delete dummy;    /* a destruktora intézi a többit */
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kifejezések beolvasása I.">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Kifejezések beolvasása I.<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>RPN = reverse polish notation, inverz lengyel jelölésmód. Ez azt jelenti, hogy a matematikai operátorokat és operandusaikat 
+nem a szokásos módon, középen a műveleti jellel írjuk: <code>2+3</code>, hanem a műveleti jelet a két operandus után téve:
+<code>2 3 +</code>. Ennek nagy előnye, hogy precedenciaszabályok és zárójelezés nélkül képes pontosan meghatározni a műveleti 
+sorrendet, mert mindig lehet tudni, hogy az operátor előtt álló két szám (vagy épp két művelet eredménye) az adott operátor 
+operandusa. Pl.</p>
+
+<div class="columns">
+<div>
+<img src="lengyel1.svg" class="kozep" style="height: 8em;">
+</div>
+<div>
+<img src="lengyel2.svg" class="kozep" style="height: 8em;">
+</div>
+</div>
+
+<p>Ha egy így megadott műveletsort kapunk, azt nagyon könnyű feldolgozni, csak egy verem kell hozzá. Olvasni kell
+egyesével a szavakat. Ha számot kapunk, akkor azt be kell tenni a verembe. Ha műveletet, akkor pedig ki kell venni
+a két legfelső számot a veremből, elvégezni rajtuk a műveletet, és visszatenni az eredményt. A műveletsor végére
+pontosan egy szám kell a veremben maradjon, az pedig nem más, mint a végeredmény.</p>
+
+<h3>Feladatok</h3>
+<ul>
+<li>Próbáld ezt ki, végezd el így papíron a két fenti műveletet!
+<li>Írj programot, amely így működik! Ehhez használd fel az <code>std::string</code>, az <code>std::stack</code>
+osztályokat, és az <code>std::stod</code> (C++11) függvényt! A programnak elég az összeadást és a szorzást tudnia. Puska:
+<pre   ><code class="language-c">std::string word;
+std::cin &gt;&gt; word;               /* egy szót olvas, szóköznél megáll */
+while (std::cin &gt;&gt; word) {      /* szavak fájl vége jelig */
+    // ...
+}
+stack.push(std::stod(word));    /* számmá alakít és betesz */
+std::cout &lt;&lt; stack.top();       /* legfelső */
+stack.pop();                    /* kivesz */</code></pre>
+</ul>
+
+<p class="megjegyzes">Előfordulhat, hogy a C++11-es <code>std::stod</code> nincs még benne a fejlesztőkörnyezeted
+szabványos könyvtárában. Ha nem találja, akkor használj helyette mást: <code>strtod()</code>, <code>sscanf()</code>,
+<code>istringstream</code>.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<div class="sticky">C++11</div>
+<pre   ><code class="language-cbub">#include &lt;stack&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+
+
+int main() {
+    std::stack&lt;double&gt; rpn;
+    std::string word;
+    /* fájl végéig olvassuk a szavakat */
+    while (std::cin &gt;&gt; word) {
+        if (word == &quot;+&quot;) {
+            /* ha +, a verem tetejére megy a legfölső két szám helyett az összegük */
+            double a = rpn.top();
+            rpn.pop();
+            double b = rpn.top();
+            rpn.pop();
+            rpn.push(a + b);
+        }
+        else if (word == &quot;*&quot;) {
+            /* ha *, akkor ugyanaz a szorzatukra */
+            double a = rpn.top();
+            rpn.pop();
+            double b = rpn.top();
+            rpn.pop();
+            rpn.push(a * b);
+        }
+        else {
+            /* amúgy egy szám, ami megy a verembe */
+            rpn.push(std::stod(word));
+        }
+    }
+    /* az eredmény a veremben lévő szám (elvileg 1 kell legyen) */
+    double res = rpn.top();
+    std::cout &lt;&lt; &quot;Eredmény: &quot; &lt;&lt; res;
+}
+</code></pre>
+</div>
+</details>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kifejezések beolvasása II.">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="kifejezes_beolvas" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Kifejezések beolvasása II.<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Innen letölthető az előadás kifejezéses programja:
+<a href="expression.cpp">expression.cpp</a>. Ezeket
+az osztályokat így kell használni:</p>
+
+<pre   ><code class="language-c">Expression *c = new Product{
+                    new Constant{5},
+                    new Sum{
+                        new Constant{3},
+                        new Variable
+                    }
+                };
+std::cout &lt;&lt; &quot;f(x) = &quot; &lt;&lt; *c &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;f(3) = &quot; &lt;&lt; c-&gt;evaluate(3) &lt;&lt; std::endl;
+
+Expression *cd = c-&gt;derivative();
+std::cout &lt;&lt; &quot;f'(x) = &quot; &lt;&lt; *cd &lt;&lt; std::endl;
+
+delete c;
+delete cd;</code></pre>
+
+<p>Dolgozd össze a két programot! Alakítsd át úgy az inverz lengyel logikás számológépedet,
+hogy az azonnali műveletvégzés helyett építsen fel egy kifejezést!</p>
+
+<ul>
+<li>Ehhez egy kifejezésekből álló vermet kell használnod (heterogén kollekció) a számokból álló
+verem helyett. A beolvasás ugyanúgy történik: ha számot lát, <code>new Constant</code>-ot
+dob a verembe, ha változót, <code>new Variable</code>-t, ha összeadást, akkor a két felső elemet
+kiveszi, és visszarak egy <code>new Sum</code>-ot, amibe beletette azokat; és így tovább.
+<li>A beolvasás végén egyetlen kifejezésnek kell lennie a veremben.
+<li>Írd ki a kifejezést! Ezzel most megírtad az inverz lengyel logikáról a szokásos jelölésre
+alakító programot.
+<li>Deriváld a kifejezést, és írd ki a derivált egyszerűsített változatát is! A programod most
+tetszőleges, lengyel logikával megadott kifejezéseket tud deriválni.
+</ul>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>A verem itt kifejezésfák heterogén kollekciója lesz. A <code>2 x + 8 x + *</code> kifejezésben,
+a második összeadás beolvasása után, de még a szorzás beolvasása előtt, az adatszerkezet így fest:</p>
+<img src="stack_expr.svg" class="kozep" style="width: 12em" alt="Kifejezésfák verme a kifejezés feldolgozása közben">
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A veremben itt <code>Expression*</code> pointereket kell tárolni. Ez a heterogén kollekció.
+A beolvasás végén egyetlen kifejezés van a veremben, és az a teljes, felépített kifejezésfa.</p>
+
+<pre   ><code class="language-c">#include &lt;stack&gt;
+#include &lt;sstream&gt;
+
+int main() {
+    std::stack&lt;Expression*&gt; rpn;
+    std::string word;
+    while (std::cin &gt;&gt; word) {
+        if (word == &quot;+&quot;) {
+            Expression *e1 = rpn.top();
+            rpn.pop();
+            Expression *e2 = rpn.top();
+            rpn.pop();
+            rpn.push(new Sum{e2, e1});
+        }
+        else if (word == &quot;*&quot;) {
+            Expression *e1 = rpn.top();
+            rpn.pop();
+            Expression *e2 = rpn.top();
+            rpn.pop();
+            rpn.push(new Product{e2, e1});
+        }
+        else if (word == &quot;x&quot;) {
+            rpn.push(new Variable{});
+        }
+        else {
+            rpn.push(new Constant{std::stod(word)});
+        }
+    }
+    Expression *e = rpn.top();
+    rpn.pop();
+    
+    std::cout &lt;&lt; &quot;f(x)=&quot; &lt;&lt; *e &lt;&lt; std::endl;
+    
+    Expression *d = e-&gt;derivative();
+    std::cout &lt;&lt; &quot;f'(x)=&quot; &lt;&lt; *d &lt;&lt; std::endl;
+    Expression *ds = d-&gt;simplify();
+    std::cout &lt;&lt; &quot;f'(x)=&quot; &lt;&lt; *ds &lt;&lt; std::endl;
+    
+    delete e;
+    delete d;
+    delete ds;
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="További feladatok">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        További feladatok<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Lásd <a href="../f02/index.html#feladat_kifejezesfa_lab">a feladatgyűjteményt</a>.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

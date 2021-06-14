@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Objektumok memóriaképe</title>
+<meta property="og:title" content="TEST InfoC++11 :: Objektumok memóriaképe">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Objektumok memóriaképe. Adattag pointerek. Standard-layout objektumok.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Objektumok memóriaképe. Adattag pointerek. Standard-layout objektumok.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Objektumok memóriaképe">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Objektumok memóriaképe</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.02.08.</p>
+<p class="kivonat">Objektumok memóriaképe. Adattag pointerek. Standard-layout objektumok.</p>
+</div>
+
+
+<p>Tudjuk, hogy egy struktúra (objektum) adattagjait a fordító egymás után helyezi el a memóriában. Sok szabályt vesz eközben
+figyelembe: az adattagok deklarációjának sorrendjét, azok típusát és méretét, a virtuális függvényeket, és a célhardver
+sajátosságait is. Ezekkel legtöbbször nem kell foglalkoznunk, hiszen az objektumaink adattagjait név szerint érjük el: az
+adattag hivatkozásakor a címszámítás, a struktúrán belüli hely (bájtokban mérve: ofszet) meghatározása automatikusan történik.</p>
+
+<p>Néha azonban figyelembe kell ezt vennünk. Például ha egy objektum állapotát szeretnénk
+fájlba menteni (az objektumot bájtsorozattá alakítani, szerializálni, utána pedig ezt menteni, „perzisztálni”),
+nem mindig tehetjük meg, hogy a memóriaterületét egy az egyben, bájtról
+bájtra kiírjuk, visszaolvassuk. Néhány olyan körülmény, ami ezt megakadályozza:</p>
+
+<ul>
+    <li>Az objektumok felépítése <em>platformfüggő</em>. Egy adott géptípuson, fordítóval, fordítóbeállítással létrehozott
+    program a saját bináris objektumait bár vissza tudhatja olvasni, de a fájlt hiába visszük át egy másik gépre,
+    amelyen más méretű az <code>int</code>, más a bájtsorrendje. A fájlt ott közvetlenül beolvasni és a memóriába írni
+    már nem lehet majd.
+    
+    <li>Az objektum nem csak nyers adat, hanem <em>pointereket</em> is tartalmazhat. A pointernek csak akkor van értelme, ha megvan
+    a mutatott adat is. Tehát minden alkalommal, amikor pointert tartalmazó objektumot szeretnénk elmenteni, akkor el
+    kell menteni az általa mutatott objektumokat is. (Vajon mi történik egy ciklikus, körbe-körbe láncolt listánál?) A
+    pointerek, mint számértékek viszont csak addig érvényesek, amíg a mutatott objektumok azon a bizonyos helyen vannak
+    a memóriában. A programot újraindítva, újabb dinamikus memóriakezelési kérés után máshol fogunk
+    memóriát kapni az operációs rendszertől.
+
+    <li>Ha az objektumnak <em>virtuális függvénye</em> van, vagy virtuálisan örököl, akkor van függvénytábla pointere
+    is. Ezt kiírhatjuk fájlba, de visszaolvasnunk már nem szabad. A függvénytábla címe fordítóként, verziónként, sőt
+    programfuttatásonként változhat (ti. hova került be a program a memóriába). Egy objektum függvénytábla pointerét
+    felülírva garantáltan tönkretesszük azt, és a következő függvényhívás szinte biztosan a program elszállásához vezet.
+</ul>
+
+<p>A C és a C++ nem támogatja a szerializációt: nem kapunk nyelvi támogatást annak 
+megvalósítására. Lássuk ezért, hogyan tudjuk viszonylag kevéssé fájdalmasan, általánosan megvalósítani azt. Ebben az előadásban
+az alapokról lesz szó – az objektumok memóriabeli megjelenéséről –, a reflexió megvalósításának egy egyszerű módjával
+pedig egy <a href="../reflexio/index.html">külön írás</a> foglalkozik.</p>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Bájtok mindenhol</a>
+                      <li><a href="index.html#2" class="">Az objektumok felépítése</a>
+                      <li><a href="index.html#3" class="">A származtatott objektumok</a>
+                      <li><a href="index.html#4" class="">Iterálás az adattagokon</a>
+                      <li><a href="index.html#5" class="">Mik azok a C++ adattag mutatók?</a>
+                      <li><a href="index.html#6" class="">Első kiegészítés: RTTI – run-time type information</a>
+                      <li><a href="index.html#7" class="">Második kiegészítés: Mik azok a tagfüggvény (metódus) mutatók?</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Bájtok mindenhol">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="objektumbajt" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Bájtok mindenhol<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsük az alábbi függvényt! Ez a paraméterként kapott objektum memóriaterületét írja ki bájtról bájtra.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;cstdint&gt;
+
+template &lt;typename T&gt;
+void print_obj_hex(T const &amp; obj) {
+    uint8_t const *ptr = reinterpret_cast&lt;uint8_t const *&gt;(&amp;obj);
+    for (size_t i = 0; i != sizeof(obj); ++i) {
+        std::cout &lt;&lt; std::hex &lt;&lt; std::setw(2) &lt;&lt; std::setfill('0')
+                  &lt;&lt; static_cast&lt;unsigned int&gt;(ptr[i]) &lt;&lt; ' ';
+    }
+    std::cout &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Az első sorban a kapott objektumra mutató pointert, vagyis az <code>&amp;obj</code> címet átalakítjuk <code>uint8_t</code>
+típusra mutató pointerré. Így tudjuk majd bájtonként elérni az objektum memóriaterületét. Azért kellett a 
+<code>reinterpret_cast</code> operátort használnunk, mert a <code>static_cast</code>-tal és a <code>dynamic_cast</code>-tal 
+ellentétben ez bármely két pointertípus között megengedi a konverziót, akkor is, ha azok eredendően nem kompatibilisek. A kapott 
+<code>ptr</code> pointert <code>0</code>-tól <code>sizeof(obj)-1</code>-ig indexelhetjük.</p>
+
+<pre   ><code class="language-c">int i = 0x11223344;
+print_obj_hex(i);</code></pre>
+
+<pre class="screenshot">
+44 33 22 11
+</pre>
+
+<p class="megjegyzes"> Az <code>std::hex</code> manipulátor hexadecimális módot állít be. Az <code>std::setw(2)</code> két karakter 
+szélesre állítja a kiírást, az <code>std::setfill('0')</code> pedig azt mondja meg, hogy <code>0</code> karakterekkel kell 
+kitölteni az üres helyett. Az <code>unsigned int</code>-té való alakításra azért volt szükség, mert különben nem számok, hanem 
+karakterek íródnának ki a képernyőre. <code>std::cout&lt;&lt;'A'</code> &rarr; A, <code>std::cout&lt;&lt;(int)'A'</code> &rarr; 65, 
+márpedig <code>ptr[i]</code> típusa karakter (az <code>uint8_t</code> csak egy <code>unsigned char</code>), tehát az előbbi 
+függvényváltozat aktiválódna. Visszasírhatjuk a <code>printf()</code>-et.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az objektumok felépítése">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="alignment" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Az objektumok felépítése<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Hozzunk létre egy egyszerű osztályt, amiben egész típusú adattagok vannak! Legyen ez mondjuk egy <code>Shape</code>, alakzat 
+osztály, amiből mindjárt származtatni is fogunk egy téglalapot. Nézzük meg, hogyan néz ki a hozzá tartozó memóriaterület!</p>
+
+<pre   ><code class="language-c">struct Shape {
+    Shape(int x, int y) : x(x), y(y) {}
+    int x, y;
+};
+
+int main() {
+    Shape b(0x1122, 0x3344);
+    print_obj_hex(b);
+    b.x = 0xFFFFFFFF;
+    print_obj_hex(b);
+}</code></pre>
+
+<pre class="screenshot">
+22 11 00 00 44 33 00 00
+ff ff ff ff 44 33 00 00
+</pre>
+
+<img src="1shape.svg" class="float" style="width: 5em;">
+
+<p>Az objektum két <code>int</code> típusú tagváltozót tartalmaz. Ezek itt négy bájtosak, ezért az objektum összesen 8 bájtot 
+foglal a memóriából. Az inicializáló értékek alapján ki tudjuk azt is következtetni, hogy a memóriaterület elején az 
+<code>x</code> tag, utána pedig az <code>y</code> tag található.</p>
+
+<p>Az objektumhoz egy bájttal több memóriaterület sem tartozik. A C/C++ nyelv ebben annyira hatékony, 
+amennyire csak lehet. Ezt a hatékonyságot azért kapjuk cserébe, hogy a nyelv <em>futási időben</em> már nem követi, hogy mit csinálunk. 
+Az objektumok mellett nem tárol metaadatokat („housekeeping information”), ami alapján futási időben pl. egy objektum típusát 
+lekérdezhetnénk, vagy ami alapján dinamikusan foglalt objektumokat automatikusan felszabadíthatnánk (szemétgyűjtés, garbage 
+collection). Csak a nyers adat.</p>
+
+<p>Mi történik, amikor egy objektum adattagjait használjuk? A tömbökkel kapcsolatban a C-s tanulmányok során hamar megtanuljuk a 
+címszámítás menetét (minden tömbindexelés egy címszámításból és egy dereferálásból áll). Ilyen <em>címszámítás az objektumok 
+adattagjainak elérésekor</em> is történik. Amikor azt írjuk, <code>b.x</code>, akkor a fordító olyan gépi utasításokat generál, 
+amelyek:</p>
+
+<ul>
+<li>Veszik a <code>b</code> objektum memóriacímét.
+<li>Hozzáadnak annyi bájtot, amennyire a <code>b</code> objektum elejétől kezdve az adattag található.
+    Ez az ún. eltolás vagy ofszet (offset).
+<li>Ezután írják vagy olvassák az adattagot, a kifejezéstől függően.
+</ul>
+
+<p>Az <code>x</code> adattag esetén az ofszet 0, az <code>y</code>-nál pedig 4 bájt. Az ofszeteket a
+fordító a struktúrát felépítő típusok tulajdonságai és azok sorrendje alapján határozza meg.</p>
+
+<h3>Az objektumok igazítása a memóriában (alignment)</h3>
+<p>Az adattagok elhelyezkedéséről két dolog állítható biztosan: 1) az adattagok a 
+memóriában deklarációjuk sorrendjében lesznek, 2) „ahogy a processzor szereti”. Gyakori például, 
+hogy gyorsabb a műveletvégzés akkor, ha a 4 bájtos <code>int</code> változók a 
+memóriában néggyel osztható címeken kezdődnek (alignment). Ezért az alábbi 
+objektumba a fordító 2×3 darab kitöltő (padding) bájtot tesz:</p>
+<pre   ><code class="language-c">struct S {
+    int x;
+    char c;
+    int y;
+    char d;
+};
+
+S b2 = {0x1122, 'c', 0x3344, 'd'};
+print_obj_hex(b2);</code></pre>
+<pre class="screenshot">
+22 11 00 00 <em>63</em> <em>7f 00 00</em> 44 33 00 00 <em>64</em> <em>00 00 00</em>
+</pre>
+<p>A színes bájtok mutatják a karaktereket és a kitöltő bájtokat.
+Az első karakter után a fordító itt azért hagyott ki helyet, hogy az <code>y</code>
+adattag néggyel osztható címen kezdődhessen. A második karakter után pedig azért, hogy ha
+<code>S</code> típusú objektumból tömböt hozunk létre, akkor a következő tömbelem <code>x</code>-e
+is néggyel osztható helyre kerüljön. Így történhet meg az, hogy az adattagok
+egyszerű átrendezésével egy kisebb objektumhoz juthatunk!</p>
+<pre   ><code class="language-c">struct S {
+    int x;
+    int y;
+    char c;
+    char d;
+};
+
+S b3 = {0x1122, 0x3344, 'c', 'd'};
+print_obj_hex(b3);</code></pre>
+<pre class="screenshot">
+22 11 00 00 44 33 00 00 <em>63 64</em> <em>00 00</em>
+</pre>
+<p>A kitöltő bájtok értéke memóriaszemét, és a programból nem tudjuk elérni őket,
+csak a <code>print_obj_hex()</code> függvényéhez hasonló mágiával.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A származtatott objektumok">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A származtatott objektumok<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Származtassunk most egy <code>Rectangle</code>, téglalap osztályt a
+<code>Shape</code> osztályból! Legyen ennek újabb két egész szám adattagja, szélesség és magasság:</p>
+
+<pre   ><code class="language-c">struct Rectangle : Shape {
+    Rectangle(int x, int y, int width, int height)
+        : Shape(x, y), width(width), height(height) {
+    }
+    int width, height;
+};
+
+Rectangle d1(0x1122, 0x3344, 0x5566, 0x7788);
+print_obj_hex(d1);</code></pre>
+
+<pre class="screenshot">
+22 11 00 00 44 33 00 00 <em>66 55 00 00 88 77 00 00</em>
+</pre>
+
+<p>A kiírt bájtok között az új objektum mind a négy adattagját felismerjük. Ami igazán érdekes és fontos ebben, az az, hogy egy 
+<code>Rectangle</code> objektum <em>eleje</em> úgy néz ki, mint egy <code>Shape</code> objektum:</p>
+
+<pre   ><code class="language-c">Shape b1(0x1122, 0x3344);
+Rectangle d1(0x1122, 0x3344, 0x5566, 0x7788);
+print_obj_hex(b1);
+print_obj_hex(d1);</code></pre>
+
+<pre class="screenshot">
+22 11 00 00 44 33 00 00
+22 11 00 00 44 33 00 00 66 55 00 00 88 77 00 00
+</pre>
+
+<img src="2shaperectangle.svg" class="float" style="width: 13em;">
+
+<p>A fordító úgy oldja meg az öröklést, hogy a leszármazott objektumba, annak
+elejére egy <em>ugyanolyan memóriaképű</em> objektumrészletet tesz, mint ahogyan az
+ősosztály egy objektuma is kinéz. Ez kell ahhoz, hogy az ősosztály lefordított
+tagfüggvényei működjenek a leszármazott objektumokon is. Mindegy, hogy
+ősosztálybeli, vagy leszármazott objektumot kap a tagfüggvény, mindkét esetben
+<em>ugyanazokat az ofszeteket</em> kell használnia. Például
+akár a <code>b1</code> objektumról, akár a <code>d1</code> objektumról van szó,
+az objektumok elejéhez képest 4 bájtnyira lesz az <code>y</code>
+adattag. </p>
+
+<p>Ennek azért is kell így lennie, mert az ősbeli tagfüggvények
+nem tudják, hogy leszármazotton vagy ősön dolgoznak-e. Sőt a fordító az ősbeli
+tagfüggvények lefordításának pillanatában általában nem is ismeri a leszármazottakat!
+Mindez nem csak a tagfüggvényeknél van így, hanem minden egyes
+objektumhivatkozásnál, minden egyes pointernél. Ha a <code>d1</code> objektum
+<code>Rectangle*</code> típusú memóriacímét <code>Shape*</code> típusúvá alakítjuk,
+akkor igazából nem történik semmi, ugyanazt a címet kapjuk. Ez a cím
+lenne a <code>this</code> pointer értéke is egy metódushívásnál.</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; &amp;d1 &lt;&lt; std::endl;
+std::cout &lt;&lt; static_cast&lt;Shape*&gt;(&amp;d1) &lt;&lt; std::endl;</code></pre>
+<pre class="screenshot">
+0x7fff28a401c8
+0x7fff28a401c8
+</pre>
+
+<p>Ez teszi lehetővé azt is, hogy <a href="../orokles_cben/index.html">öröklést valósítsunk meg C-ben</a>,
+még ha a szintaxis nem is lesz túl szép.</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Iterálás az adattagokon">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+    <a id="offsetof" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Iterálás az adattagokon<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Ha ki akarjuk írni egy objektum adattagjait, elég sablonos függvényt kell írnunk: minden egyes adattagon végig kell mennünk, 
+azoknak a <code>&lt;&lt;</code> operátorait használva. Felmerül a kérdés: nem lenne egyszerűbb egy ciklusban végigmenni az 
+adattagokon? A helyzet az, hogy nem – ez korántsem ilyen egyszerű. A C++-ban az objektumok adattagjait nem tudjuk „indexelni”, 
+ahogyan egy tömb elemeit. Ezért nem tudunk rajtuk iterálni sem. Menjünk vissza ezért egy pillanatra a C-hez, és nézzük meg, hogyan 
+lehet felhasználni a probléma megoldására az adattagok ofszetjeinek ismeretét.</p>
+
+<h3>Az ofszetek használata</h3>
+
+<p>Tudjuk azt, hogy egyforma típusú objektumok memóriaképe is egyforma. Egy osztályon belül ezért az ofszetek fix értékek. Az egyik 
+objektumon használt ofszet jó lesz a másik, ugyanolyan típusú objektumhoz is. Ha van egy objektumunk és egy ofszetünk, akkor egy 
+kis pointermágiával el tudjuk érni az adattagot is.</p>
+
+<p>Állítsuk elő az ofszetet! Ehhez nem kell más, minthogy fogunk egy objektumot, megnézzük egy adattagja memóriacímét; aztán ebből 
+a memóriacímből kivonjuk magának az objektumnak (az objektum „elejének”) a memóriacímét. Az adattag és az objektum pointere eltérő 
+típusú, ezeket nem vonhatjuk ki egymásból. Ezért közös típusúvá, <code>char*</code>-gá kell cast-olni őket. Már csak azért is, mert 
+<code>sizeof(char) == 1</code>, és a két memóriahely közötti távolságot bájtokban szeretnénk kapni:</p>
+
+<div class="sticky">Kicsit ijesztő,<br>de működni fog</div>
+<pre   ><code class="language-c">struct Point {
+    double x, y;
+};
+
+Point p;
+unsigned int x_offset = (char*)&amp;p.x - (char*)&amp;p;
+unsigned int y_offset = (char*)&amp;p.y - (char*)&amp;p;</code></pre>
+
+<p class="megjegyzes">Ez elvileg nem szabványos kód, de ettől most tekintsünk el.</p>
+
+<p>Ugyanezt visszafelé is meg tudjuk tenni: ha van egy objektumunk, a címétől arrébb kell ugrani annyi bájtot, amennyi az ofszet,
+és megkapjuk az adattag címét. Ezt már csak az adattag típusára kell cast-olni és dereferálni, máris látjuk az adattagot.
+Kódban ez egyszerűbb, mint elmondva:</p>
+
+<pre   ><code class="language-c">*(double*)((char*)&amp;p + x_offset) = 12;      /* p.x = 12; */
+*(double*)((char*)&amp;p + y_offset) = 38;      /* p.y = 38; */</code></pre>
+
+<h3>A null pointer trükk</h3>
+
+<p>Ahhoz, hogy az ofszetet kiszámítsuk, nincs szükségünk konkrét, létező objektumra. Elég egy képzeletbeli objektum is. Hogy
+lesz a képzeletbeli objektumnak memóriacíme? Persze sehogy, de mivel képzeletbeli, lehet egy dereferált null pointerről is szó.
+Amíg nem csinálunk <em>tényleges</em> írási vagy olvasási műveletet a null pointer által hivatkozott memóriaterületre, addig ez nem
+gond.</p>
+
+<div class="sticky">Nagyon ijesztő,<br>de működni fog</div>
+
+<p>Innen jön az ötlet: fogjunk egy <code>Point*</code> típusú null pointert, hivatkozzuk meg annak <code>x</code> vagy
+<code>y</code> adattagját; de ne írjuk vagy olvassuk ezt az attribútumot, hanem képezzük a címét! Ebből kivonva a
+képzeletbeli objektumunk címét (null pointer), megkapjuk a keresett ofszetet:</p>
+
+<pre   ><code class="language-c">unsigned int x_offset = (char*) &amp;((Point*)nullptr)-&gt;x - (char*) nullptr;
+unsigned int y_offset = (char*) &amp;((Point*)nullptr)-&gt;y - (char*) nullptr;</code></pre>
+
+<p>Ezt a fura kódot nem is szokás leírni, igazából erre való a beépített <code>offsetof</code> makró
+(<code>#include &lt;stddef.h&gt;</code>). Erre a célra a portabilitás miatt is inkább azt érdemes használni.</p>
+
+<p class="megjegyzes">Ez sem szabványos, de működni szokott. Az <code>offsetof</code> viszont szabványos.</p>
+
+<h3>Iterálás az adattagokon</h3>
+
+<p>Mivel az ofszet egy egyszerű egész szám, adatként tudjuk kezelni. Az adattagokat neveikkel együtt (később az is kellhet
+valamire) betehetjük egy tömbbe, amely tömbön iterálva aztán az adattagokon is tudunk iterálni:</p>
+
+<pre   ><code class="language-c">struct MemberData {
+    char const* name;
+    unsigned int offset;
+};
+
+MemberData point_member_data[] = {
+    { &quot;x&quot;, offsetof(Point, x) },
+    { &quot;y&quot;, offsetof(Point, y) },
+    { nullptr },
+};</code></pre>
+
+<pre   ><code class="language-c">Point p = { 2.1, 3.4 };
+
+for (size_t i = 0; point_member_data[i].name != nullptr; ++i) {
+    printf(&quot;p.%s = %g\n&quot;,
+           point_member_data[i].name,
+           * (double*) (((char*) &amp;p) + point_member_data[i].offset));
+}</code></pre>
+
+<pre class="screenshot">
+p.x = 2.1
+p.y = 3.4
+</pre>
+
+<p>Ha többféle típusunk van a leírandó osztályban, akkor a <code>MemberData</code> struktúrába
+fölvehetünk még egy <code>enum</code>-ot, amelyik leírja majd a típust:</p>
+
+<pre   ><code class="language-cbub">struct Point {
+    double x, y;
+    char* label;     // van egy sztring is (most C-ben)
+};
+
+enum MemberType {
+    TYPE_DOUBLE,
+    TYPE_STRING,
+};
+
+struct MemberData {
+    char const* name;
+    MemberType type;   // az attribútum típusa
+    unsigned int offset;
+};
+
+MemberData point_member_data[] = {
+    { &quot;x&quot;, TYPE_DOUBLE, offsetof(Point, x) },
+    { &quot;y&quot;, TYPE_DOUBLE, offsetof(Point, y) },
+    { &quot;label&quot;, TYPE_STRING, offsetof(Point, label) },
+    { nullptr },
+};
+
+int main() {
+    Point p = { 2.1, 3.4, &quot;P1&quot; };
+
+    for (size_t i = 0; point_member_data[i].name != nullptr; ++i) {
+        switch (point_member_data[i].type) {     // hogy kell kezelni?
+            case TYPE_DOUBLE:
+                printf(&quot;p.%s = %g\n&quot;,
+                       point_member_data[i].name,
+                       * (double*) (((char*) &amp;p) + point_member_data[i].offset));
+                break;
+            case TYPE_STRING:
+                printf(&quot;p.%s = \&quot;%s\&quot;\n&quot;,
+                       point_member_data[i].name,
+                       * (char**) (((char*) &amp;p) + point_member_data[i].offset));
+                break;
+        }
+    }
+}</code></pre>
+
+<div class="megjegyzes">
+<p>Vagy egy kicsit szebben, egy saját makróval, hogy a pointermágia ne legyen mindig a szemünk előtt:</p>
+
+<pre   ><code class="language-c">#define memberof(VAR,OFFSET,TYPE) (* (TYPE*)(((char*) &amp;VAR) + OFFSET))
+
+case TYPE_DOUBLE:
+    printf(&quot;p.%s = %g\n&quot;,
+           point_member_data[i].name,
+           memberof(p, point_member_data[i].offset, double));</code></pre>
+</div>
+
+<p>Gondoljunk bele, milyen hasznos egy ilyen leírás a programunk karbantarthatósága szempontjából!
+Példaként négyféle teendő a <code>Point</code> típushoz:</p>
+
+<ul>
+    <li>Szeretnénk fájlba írni az attribútumait: <code>printf %g</code>, <code>%s</code>.
+    <li>Szeretnénk fájlból visszaolvasni az attribútumait: <code>scanf %g &amp;x</code> és
+    <code>y</code> a koordinátákhoz, továbbá <code>malloc</code> és <code>scanf %s s</code> a sztringhez.
+    <li>Szeretnénk létrehozni egy dialógusablakot, amelyben a felhasználó látja és szerkesztheti
+    egy pont tulajdonságait: csúszkák a koordinátáknak, szövegbeviteli mező a névnek (és ezeket
+    az elemeket létrehozó függvényhívások valamilyen grafikus keretrendszerben).
+    <li>Szeretnénk a dialógusablakból kiolvasni a felhasználó által megadott adatokat (szintén
+    attribútumonként, attribútum típusonként különböző függvényhívással).
+</ul>
+
+<p>Ha így csináljuk, mindez automatikusan történhet. Ha módosítjuk a <code>Point</code> struktúrát,
+már csak a hozzá tartozó leíró struktúrát kell hozzáigazítani, és a program összes többi helyén
+érvényesül a változás!</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mik azok a C++ adattag mutatók?">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="memberptr" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Mik azok a C++ adattag mutatók?<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Figyeljük meg, milyen absztrakciót adnak a <code>MemberData</code> struktúrában tárolt ofszetek!</p>
+
+<ul>
+    
+    <li>Egy „normál” pointer egy <em> konkrét objektum</em> egy <em>konkrét adattagjára</em> mutat, például az 
+    <code>&amp;p1.x</code> a <code>p1</code> pont <code>x </code> adattagját hivatkozza.</li>
+    
+    <li>Az ofszetnél az objektumot eldobjuk: az ofszet egy <em>határozatlan objektum</em> egy <em>konkrét adattagját</em> képes 
+    hivatkozni.</li>
+
+</ul>
+
+<p>Mondhatjuk úgy is, hogy a <code>Point</code> osztálybeli objektumok <code>x</code> adattagjára
+hivatkozik az adott ofszet. Ahhoz, hogy egy tényleges változót (adattagot) kapjunk, szükségünk van egy <code>Point</code>
+objektumra is, de ez itt a lényeg: a dereferálásnál tudjuk megmondani azt is, hogy melyik <code>Point</code> objektumról
+beszélünk.</p>
+
+<p>C++-ban már a '98-as verzió óta van erre külön nyelvi elem. Az adattag mutatók (member pointer) pont ezt tudják: nem egy memóriában lévő objektumra,
+változóra mutatnak, hanem valamely osztálybeli objektumok adattagjaira. Így:</p>
+
+<pre   ><code class="language-c">struct Point {
+    double x, y;
+};
+
+double Point::* mp;    /* A Point osztály valamelyik double adattagja */
+Point p1, p2;
+
+mp = &amp;Point::x;        /* a pontok x koordinátája */
+p1.*mp = 3.2;          /* p1.x = 3.2; */
+p2.*mp = 4.5;          /* p2.x = 4.5; */
+
+mp = &amp;Point::y;        /* a pontok y koordinátája */
+p1.*mp = 6.7;          /* p1.y = 6.7; */
+p2.*mp = 7.8;          /* p2.y = 7.8; */</code></pre>
+<p>Az adattag mutató itt <code>double Point::*</code> típusú. Ehhez a mutatott változó típusa (itt: <code>double</code>) mellett hozzátartozik az osztály is (itt: <code>Point</code>),
+amelynek az adattagjáról beszélünk. A működés hátterébe belegondolva ez logikus is: az adattag mutatót mindig csak olyan típusú
+objektummal szabad használni, amilyen típus adattagjára hivatkozik. Vegyük észre, hogy a pointer értékadásoknál, azaz <code>x</code>
+és <code>y</code> adattagok meghivatkozásánál nincs szó konkrét objektumról: a <code>&amp;Point::x</code> kifejezésben a <code>Point</code>
+osztálybeli objektumokról általánosságban beszélünk.
+
+<p class="megjegyzes">Az adattag mutatók között egyébként az öröklésnek megfelelő konverzió is automatikus. Az érdekesség
+az, hogy az automatikus konverzió iránya fordított: a <code>Base</code> osztályból leszármazó <code>Derived</code> osztály
+esetén egy <code> T Base::*</code> típusú mutató alakítható automatikusan <code>T Derived::*</code> típusra. Logikus is, hiszen
+a leszármazottnak lesz biztosan olyan adattagja, mint amilyen az ősnek volt, nem pedig az ősnek volt biztosan olyanja, mint
+amilyenje a leszármazottnak is van.</p>
+
+
+<p>Ha az objektumra magára is (szokványos) pointer mutat, akkor a <code>.*</code> operátor helyett a <code>-&gt;*</code> operátort
+kell használni:</p>
+<pre   ><code class="language-c">double Point::* mp;
+Point p1;
+
+Point *pp1 = &amp;p1;
+mp = &amp;Point::x;
+
+pp1-&gt;*mp = 3.2;         /* pp1-&gt;x = 3.2 */</code></pre>
+
+<p>Ezzel a nyelvi elemmel C++-ban sokkal szebben meg tudjuk csinálni az osztály adattagjait leíró tömböt:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+struct Point {
+    double x, y;
+};
+
+struct PointMemberData {
+    char const* name;
+    double Point::* mptr;
+};
+
+PointMemberData point_members[] = {
+    { &quot;x&quot;, &amp;Point::x },
+    { &quot;y&quot;, &amp;Point::y },
+    { nullptr },
+};
+
+int main() {
+    Point p1 = { 2.3, 4.5 };
+
+    for (size_t i = 0; point_members[i].name; ++i) {
+        std::cout &lt;&lt; point_members[i].name
+                  &lt;&lt; &quot; = &quot;
+                  &lt;&lt; p1.*(point_members[i].mptr) &lt;&lt; std::endl;
+    }
+}</code></pre>
+
+<p>Figyeljük meg a szintaxist! Az adattag pointer maga is struktúrák tömbjéből kerül elő, a <code>point_members[i].mptr</code> 
+kifejezés révén. Ennek a zárójelezett kifejezésnek az értéke az adattag pointer, amely a <code>.*</code> operátor jobb oldali 
+operandusa. A bal oldali operandus <code>p1</code>, a vizsgált pont. A zárójelre szükség van, mert nem balról jobbra haladunk a 
+kiértékelésben.</p>
+
+<p>Ha meg akarjuk oldani azt is, hogy az adattagok eltérő típusúak lehessenek, akkor ezekhez az adattag mutatókhoz még
+egy <em>type erasure</em>-t is kell használnunk: <a href="../reflexio/index.html">reflexió C++-ban</a>.</p>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Első kiegészítés: RTTI – run-time type information">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Első kiegészítés: RTTI – run-time type information<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Láttuk, hogy a C++ objektumainkban egy bájtnyi extra adat nem tárolódik, ha nincsen virtuális függvényük.
+Éppen ezért, ha egy ilyen objektum memóriaterületét látjuk, nem tudjuk megmondani, milyen típusú objektumról van
+szó. Nem így akkor, ha van virtuális függvénye. Mivel minden osztály virtuális függvénytáblája egyedi, az objektumban
+tárolt, virtuális függvénytáblára mutató pointer vizsgálatával meg tudjuk mondani, milyen típusú objektumról van szó.
+Ezt az adattagot nem látjuk, de különféle operátorokkal tudunk némi információt kinyerni belőle.</p>
+
+<p>Mik ezek a lehetőségek? Tekintsük át őket az alábbi osztályhierarchián!</p>
+<pre   ><code class="language-c">class A {
+  public:
+    virtual ~A() {}
+};
+
+class B : public A {
+};
+
+class C : public A {
+};</code></pre>
+
+<h3>A függvényhívás operátora: virtuális függvény</h3>
+
+<p>Hozzáadunk egy virtuális függvényt, amellyel a típus lekérdezhető. Általában a lekérdezés
+helyett az elvégzendő tevékenységet szoktuk a függvénybe írni, de ez nem mindig célravezető.</p>
+
+<pre   ><code class="language-c">class A {
+  public:
+    virtual std::string get_type() const = 0;
+    virtual ~A() {}
+};
+
+class B : public A{
+    virtual std::string get_type() const { return &quot;B&quot;; }
+};
+
+class C : public A{
+    virtual std::string get_type() const { return &quot;C&quot;; }
+};
+
+int main() {
+    A* ptr = new C();
+    if (ptr-&gt;get_type() == &quot;B&quot;)
+        std::cout &lt;&lt; &quot;Obj is B&quot; &lt;&lt; std::endl;
+    if (ptr-&gt;get_type() == &quot;C&quot;)
+        std::cout &lt;&lt; &quot;Obj is C&quot; &lt;&lt; std::endl;
+}</code></pre>
+
+<h3>Cast operátor: <code>dynamic_cast</code></h3>
+
+<p>A <code>dynamic_cast</code> operátor null pointert ad akkor, ha helytelen típusúvá szeretnénk castolni egy pointert (vagy 
+referencia esetén kivételt dob). Az ellenőrzés futási időben történik.</p>
+
+<pre   ><code class="language-c">A* ptr = new B();
+if (B* bptr = dynamic_cast&lt;B*&gt;(ptr))
+    std::cout &lt;&lt; &quot;Obj is B&quot; &lt;&lt; std::endl;
+if (C* cptr = dynamic_cast&lt;C*&gt;(ptr))
+    std::cout &lt;&lt; &quot;Obj is C&quot; &lt;&lt; std::endl;</code></pre>
+
+<h3>RTTI – <code>typeid</code> operátor</h3>
+    
+<p>A <code>typeid</code> operátor egy <code>std::type_info</code> (<code>#include &lt;typeinfo&gt;</code>)
+típusú objektumot ad vissza egy változóról. Ezzel is megvizsgálhatjuk egy objektum dinamikus típusát:</p>
+
+<pre   ><code class="language-c">A* ptr = new B();
+if (typeid(*ptr) == typeid(B))
+    std::cout &lt;&lt; &quot;Obj is B&quot; &lt;&lt; std::endl;
+if (typeid(*ptr) == typeid(C))
+    std::cout &lt;&lt; &quot;Obj is C&quot; &lt;&lt; std::endl;</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Második kiegészítés: Mik azok a tagfüggvény (metódus) mutatók?">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Második kiegészítés: Mik azok a tagfüggvény (metódus) mutatók?<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nem csak adattagra, hanem metódusokra mutató pointerek is léteznek. Ezek típusához hozzátartozik a tagfüggvény fejléce 
+(paraméterek és visszatérési érték), és az osztály is. A meghívásuknál figyelni kell a zárójelezésre, mert a függvényhívás operátor 
+precedenciája magasabb, mint az indirekció operátoráé:</p>
+
+<pre   ><code class="language-c">class Button {
+  public:
+    void click(int x, int y);
+    void doubleclick(int x, int y);
+};
+
+void (Button::*event_fptr)(int, int);
+Button b1;
+
+event_fptr = &amp;Button::click;
+(b1.*event_fptr)(3, 5);     /* b1.click(3, 5); */
+event_fptr = &amp;Button::doubleclick;
+(b1.*event_fptr)(3, 5);     /* b1.doubleclick(3, 5); */</code></pre>
+
+<p>Az adattagokra és metódusokra mutató pointerek szintaktikája nehézkesnek tűnik elsőre, de ugyanúgy működnek, mint a szokványos
+pointerek. Ugyanoda kell rakni a <code>*</code> operátort és a precedenciát módosító zárójelet, mint azoknál, csak a csillag
+elé kerül az <code>Osztály::</code> vagy az <code>objektum.</code> jelölés:</p>
+
+<pre   ><code class="language-c">void (         *global_func_ptr)(int, int);
+void (MyClass::*member_func_ptr)(int, int);
+
+(       *global_func_ptr)(1, 2);
+(my_obj.*member_func_ptr)(1, 2);</code></pre>
+
+<p>Bár a szintaxis maga módján logikus, de a használat, elég nehézkes. Ezért vezették be C++17-ben az <code>std::invoke()</code>
+függvényt: <code>std::invoke(mfptr, objektum, további paraméterek)</code> formát használva olvashatóbb a programkód.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

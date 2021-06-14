@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: I. rész: Memóriakezelés</title>
+<meta property="og:title" content="TEST InfoC++11 :: I. rész: Memóriakezelés">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Az előadáson bemutatott kifejzésfa program refaktorálásának első része: a memóriakezelés.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Az előadáson bemutatott kifejzésfa program refaktorálásának első része: a memóriakezelés.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="I. rész: Memóriakezelés">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">I. rész: Memóriakezelés</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Az előadáson bemutatott kifejzésfa program refaktorálásának első része: a memóriakezelés.</p>
+</div>
+
+<p><a href="../ea02/index.html#kifejezesfa">Az előadáson</a> bemutatott kifejezésfás program egy igazi állatorvosi
+ló. A probléma viszonylag egyszerű, ugyanakkor matematikailag jól körülhatárolható, ezért a modellezése is egyszerű, és jól
+illeszkedik az OOP-s elvekhez. Nem véletlen, hogy <a href="index.html#sicp">több könyvben</a> is példának választják, a tárgy előadásanyagába
+is ezért került bele.</p>
+
+<p>Ebben az írássorozatban az előadáson elkészült kód több lépésből álló refaktorálását mutatom be. Az egyes részek:</p>
+<ul>
+    <li>A memóriakezelés automatizálása okos pointerekkel (ez az írás).</li>
+    <li>Egy kis kitérőt a <a href="../expression1b/index.html">gyártófüggvények és a CRTP</a> irányába.</li>
+    <li>A fákon végzett műveletek kiszervezése külső osztályokba a <a href="../expression2/index.html">Visitor tervezési minta</a> segítségével.</li>
+    <li>A Visitor tervezési minta megvalósítása <a href="../expression3/index.html">egy felsorolt típus segítségével</a>.</li>
+
+    <li>A Visitor tervezési minta <a href="../expression3b/index.html">más nyelvekben</a>.</li>
+    <!--<li>prototype</li>-->
+</ul>
+<p>Az írások elkészítését Arne Mertz <a href="index.html#simplify-cpp">Simplify C++</a> című blogja inspirálta – bár jópár
+helyen egész más tervezési döntések születtek nála, mint ebben a verzióban.</p>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A kiindulási alap: az eredeti kód</a>
+                      <li><a href="index.html#2" class="">Triviális destruktor</a>
+                      <li><a href="index.html#3" class="">Automatikus memóriakezelés</a>
+                      <li><a href="index.html#4" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A kiindulási alap: az eredeti kód">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A kiindulási alap: az eredeti kód<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<img src="muveletekx.svg" class="float" style="width: 14em;">
+
+<p>Az eredeti feladatunk így szólt: egy fát kell felépítenünk, amely négy alapműveletből felépített kifejezéseket tárol.
+Például a <code>4*(5+x)</code> műveletsort az ábrán látható fa írja le. Lényegében ez egy szintaxisfa; a fa hierarchiája
+adja meg, mely műveletekhez mely operandusok tartoznak, így nyelvtani szabályokra, az operátorok közötti precedenciák és
+asszociativitások meghatározására itt nincsen szükség.</p>
+
+<p>A fán különféle műveleteket kellett végeznünk, úgymint:</p>
+<ul>
+    <li>Kiírás infixes alakban, például az itt látható fánál ez a <code>4*(5+x)</code>, vagy az egyszerűség kedvéért
+        a <code>(4*(5+x))</code> sztring megépítését jelenti.
+    <li>Kiértékelés egy adott <code>x</code> helyen, pl. <code>f(3) = 4*(5+3) = 32</code>.</li>
+    <li>Szimbolikus deriválás az <code>x</code> változó szerint, új kifejezésfa előállítása.</li>
+    <li>Egyszerűsítés.</li>
+</ul>
+
+<p>A megoldást egy osztályhierarchia felépítése adta. (Letölthető innen: <a href="expression_eloadas.cpp">expression_eloadas.cpp</a>.)
+A kifejezés ősosztály leszármazottai a konstans, változó, összeg és szorzat.
+Az egyes műveletek pedig virtuális függvényekként implementálhatóak, mivel azok az egyes típusokra jellemző módokon végezhetőek:
+egy konstans kiírása egy valós szám kiírását jelenti, az összeg deriválása pedig egy másik összeg objektum előállítását, amibe
+a bal- és a jobb oldali részfa deriváltja került. Az absztrakt ősosztály lényegi része:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    virtual double evaluate(double x) const = 0;
+    virtual void print(std::ostream &amp;os) const = 0;
+    virtual Expression * derivative() const = 0;
+    virtual Expression * simplify() const = 0;
+
+    virtual ~Expression() {}
+};</code></pre>
+
+<p>Az eltérő típusú objektumok kezelése ránk kényszerített egy indirekciót. A kompozit műveletek (összeg, szorzat: kifejezések
+összege és szorzata) számukra ismeretlen típusú objektumokkal dolgoztak, amelyet kénytelenek voltak indirekten, pointer
+segítségével tárolni. Ugyan valószínűleg a fa egyes csomópontjait enélkül is dinamikusan foglaltuk volna, hiszen a csomópontok
+száma a program bemenetétől függ, ez mégis programozói többletmunkát jelentett. A kompozit objektumokhoz destruktort kellett írnunk,
+amely a tartalmazott objektumokat felszabadítja:</p>
+
+<pre   ><code class="language-c">class TwoOperand : public Expression {
+  public:
+    TwoOperand(Expression *lhs, Expression *rhs) : lhs_(lhs), rhs_(rhs) {}
+
+    ~TwoOperand() {
+        delete lhs_;
+        delete rhs_;
+    }
+    
+  protected:
+    Expression *lhs_, *rhs_;
+};</code></pre>
+
+<p>Ezzel egyben előírtuk azt is, hogy ezek építéséhez dinamikusan foglalt objektumokat kell felhasználni (a konstruktornak
+paraméterként adott két <code>Expression</code> kötelezően a <code>new</code> operátorral létrehozott kell legyen), továbbá
+az ősosztályban kért, új kifejezésfákat előállító műveletek (deriválás, egyszerűsítés) hasonlóképp kell viselkedjenek. (Viszont
+felhasználtuk a virtuális destruktort.) A dinamikus memóriakezelés további bonyodalmakat okozott több helyen is. A szorzat
+deriválásánál, amely az <code>(a*b)' = a'b*ab'</code> szabály alapján egy új fa építését jelenti, figyelnünk kellett, hogy
+ne csak a pointert másoljuk, mivel akkor kétszer hívódna a <code>delete</code> ugyanazokra az objektumokra:</p>
+
+<div class="sticky">HIBÁS<br>kód</div>
+<pre   ><code class="language-cbub">virtual Expression * Product::derivative() const override {
+    return new Sum(
+       new Product(lhs_-&gt;derivative(), rhs_),  // a fa nem másolódik
+       new Product(lhs_, rhs_-&gt;derivative())
+    );
+}</code></pre>
+
+<p>Hanem ilyenkor a részfákat is másoljuk, amihez pedig egy újabb virtuális függvényre, a <code>clone()</code>-ra volt
+szükségünk:</p>
+
+<pre   ><code class="language-cbub">virtual Expression * Product::derivative() const override {
+    return new Sum(
+       new Product(lhs_-&gt;derivative(), rhs_-&gt;clone()),  // így már másolódik
+       new Product(lhs_-&gt;clone(), rhs_-&gt;derivative())
+    );
+}</code></pre>
+
+<p>A nyers pointerek használata, <code>new</code>-olás, <code>delete</code>-elés önmagában is <em>code smell</em>, de a
+szintaxisfa használói számára is kényelmetlenséget, hibalehetőséget jelent. Például minden fa létrehozási művelet esetén,
+nem csak akkor, amikor ő maga írt <code>new</code>-t, hanem például egy deriválás esetén is, kézzel kell felszabadítania
+az objektumot egy <code>delete</code> kifejezéssel. Emiatt a következő sor memóriaszivárgást eredményez:</p>
+
+<pre   ><code class="language-c">Expression * e = ...;
+
+e-&gt;derivative()-&gt;print(std::cout);</code></pre>
+
+<p>És a kiíró (inserter) operátorral írt forma is:</p>
+
+<pre   ><code class="language-c">std::cout &lt;&lt; *(e-&gt;derivative());</code></pre>
+
+<p>Mivel a <code>derivative()</code> által visszaadott pointer nincs eltárolva, és a <code>print()</code>-en kívül
+a <code>delete</code>-nek is odaadva. De a fenti sorok írója számára nem túl természetes eltárolni a pointert, hiszen
+csak egyszer akarta használni az értékét, a derivált kifejezést.</p>
+
+<p>Lássuk, hogy fejleszthető ez a program!</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Triviális destruktor">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Triviális destruktor<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Első lépésként az ősosztály erőforráskezelését érdemes kicsit megvizsgálni. A vonatkozó kódrészlet:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    Expression() = default;
+    Expression(Expression &amp;) = default;
+
+    virtual ~Expression() {}
+};</code></pre>
+
+<p>Tudjuk, hogy polimorf osztálynak virtuális destruktor kell, ezért deklaráltunk egyet. A deklaráció hatására a fordító
+már nem írta azt meg, ezért definiálnunk is kellett azt, még akkor is, ha csak egy üres függvénytörzsről
+van szó.</p>
+
+<p>A destruktor deklarálásának azonban van egy kellemetlen mellékhatása. Tudjuk, hogy az
+<a href="../tarolo/index.html">erőforrásokat kezelő osztályoknak</a> általában
+a destruktora mellett másoló konstruktora és értékadó operátorra is van szüksége. Ez olyan általános érvényű
+szabály, ami miatt a C++11-ben a fordító már nem generál másoló konstruktort, ha a programozó által
+deklarált destruktort lát, mert valószínűleg nem lenne helyes. Ezért kellett szólni neki a másoló
+konstruktor melletti <code>= default</code> jelöléssel, hogy mi viszont tudjuk, hogy helyes, ezért engedélyt
+adunk a fordítónak a megírására. A másoló konstruktor deklarálása viszont azt jelenti, konstruktort deklarálunk
+– így eltűnt az alapértelmezett konstruktor, amit szintén „vissza kell hoznunk”.</p>
+
+<p>Tudjuk azt is, hogy az értékadó operátor (assignment operator) hasonlóan működik. Az ősosztályban úgysincs
+még adattag, azt hasonlóképp definiáltathatnánk a fordítóval. Ugyanez áll a jobbértékes konstruktorra és
+értékadásra is (move constructor és move assignment operator). Igazából mindegyik lehetne <code>default</code>,
+de nem törölhetjük ki őket, mert a destruktornak virtuálisnak kell lennie:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    Expression() = default;
+
+    Expression(Expression const &amp;) = default;
+    Expression(Expression &amp;&amp;) = default;
+    Expression &amp; operator=(Expression const &amp;) = default;
+    Expression &amp; operator=(Expression &amp;&amp;) = default;
+
+    virtual ~Expression() = default;
+};</code></pre>
+
+<p>Talán legjobb mindig <a href="index.html#ro5default">mind az öt függvény deklarációját kiírni,</a> még akkor is, ha mindegyiket
+<code>default</code>-oljuk. De ha egyet leírtunk az öt közül, akkor biztos mindről nyilatkoznunk kell.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Automatikus memóriakezelés">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Automatikus memóriakezelés<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nagyobb falat a memóriakezelés refaktorálása. De tudjuk, hogy okos pointereket használva egyszerűsödne a kód, az
+osztályok használói számára pedig jelentősen biztonságosabbá válna. Ha a <code>derivative()</code> függvény nem
+nyers pointerrel:</p>
+
+<pre   ><code class="language-c">class Expression {
+    virtual Expression * derivative() const = 0;
+};</code></pre>
+
+<p>Hanem okos pointerrel térne vissza:</p>
+
+<pre   ><code class="language-c">class Expression {
+    virtual SomeSmartPtr&lt;Expression&gt; derivative() const = 0;
+};</code></pre>
+
+<p>Akkor a memóriakezelés miatt neki sem kellene izgulnia: a visszaadott objektum destruktora tudná, mi a teendő
+a kifejezés objektummal.</p>
+
+<p>Okos pointert valószínű nem kell majd írnunk, használhatjuk a C++11 beépített osztályait is.
+A szabványos referenciaszámlált pointer (<a href="../ea05/index.html#sharedptr">std::shared_ptr</a>),
+és a tulajdonjoggal rendelkező pointer (<a href="../ea06/index.html#uniqueptr">std::unique_ptr</a>)
+is szóba jöhet, csak át kell gondolni, melyiket válasszuk.</p>
+
+<dl>
+    <dt><code>std::unique_ptr</code></dt>
+    <dd>
+    <p>Az <code>std::unique_ptr</code> természetes választás, mert eddig is tulajdonjoggal rendelkező volt az összes
+    pointerünk.</p>
+    </dd>
+
+    <dt><code>std::shared_ptr</code></dt>
+    <dd>
+    <p>A referenciaszámlálás használatának egy komolyabb hozománya is lehetne: kigyomlálhatnánk a <code>clone()</code>
+    függvényeket. Ugyanis akkor nem lenne gond, hogy a kifejezésfáknak közös részfái (a memóriában közös részfái!)
+    vannak, és nem kellene például a deriválásnál kifejezéseket másolgatni.</p>
+   
+    <p>Szerencsére a körkörös hivatkozásokkal biztosan nem lenne bajunk, mert kifejezésfákról van szó – fákban meg nem
+    lehet kör.</p>
+   
+    <p>Az erőforrásmegosztásnak viszont ára lenne: konstansként kellene kezeljük a fákat. Mert az nem lenne menő, ha
+    egy fát megváltoztatunk, és közben egy számunkra ismeretlen fát is módosítottunk. De eddig sem akartuk a fákat
+    módosítani, minden műveletünk új fát hozott létre. Ez vállalhatónak tűnik.</p>
+    </dd>
+</dl>
+
+<p>Az érdekessége miatt az <code>std::shared_ptr</code>-es megoldást választottam.</p>
+
+<p>A refaktort az ősosztálynál érdemes elkezdeni. Törölhető a <code>clone()</code>. Az <code>Expression *</code> visszatérési
+értékű függvények <code>std::shared_ptr&lt;Expression&gt;</code> értékűre cserélhetőek. A függvények szerepét magyarázó
+kommentek is frissíthetőek, nem kell már beleírni, hogy dinamikusan foglaltak a kifejezések:</p>
+
+<pre   ><code class="language-c">class Expression {
+  public:
+    /* returns value of expression at x */
+    virtual double evaluate(double x) const = 0;
+
+    /* outputs expression as string to stream os */
+    virtual void print(std::ostream &amp;os) const = 0;
+
+    /* return derivative expression */
+    virtual std::shared_ptr&lt;Expression&gt; derivative() const = 0;
+
+    /* return simplified version. */
+    virtual std::shared_ptr&lt;Expression&gt; simplify() const = 0;
+
+    /* ... */
+    virtual ~Expression() {}
+};</code></pre>
+
+<p>Ez a két apró változtatás nagyon sok mindent ki fog kényszeríteni. Az összes <code>clone()</code> függvény törlését (mivel
+azok mind <code>override</code>-dal vannak megadva), és a hívásait is. A visszatérési értékek típusának megváltoztatása miatt
+pedig az összes <code>derivative()</code>-re és <code>simplify()</code>-ra rá kell majd néznünk, és akkor már átdolgozzuk
+a kódjaikat is. Például egy viszonylag egyszerű függvény, a változó deriválása így fog kinézni, természetesen
+<code>std::make_shared&lt;&gt;()</code> használatával:</p>
+
+<pre   ><code class="language-cbub">class Variable final : public Expression {
+  public:
+    /* ... */
+    virtual std::shared_ptr&lt;Expression&gt; derivative() const override {
+        return std::make_shared&lt;Constant&gt;(1);                       // !
+    }
+};</code></pre>
+
+<p>De ne feledkezzünk meg az adattagok konstanssá tételéről sem! Ez fontos. A kifejezésfáknak a megosztott
+részfák miatt konstansoknak kell lenniük, és ezt így ellenőriztetni tudjuk a fordítóval:</p>
+
+<pre   ><code class="language-cbub">class Constant final : public Expression {
+  private:
+    double const c_;    //!
+
+  public:
+    Constant(double c): c_(c) {}
+    /* ... */
+};</code></pre>
+
+<p>A <code>TwoOperand</code> osztályból az összes erőforráskezelő függvény eltűnik. De ne feledjük, ennek
+az osztálynak van destruktora, amelyik a <code>shared_ptr</code>-ek destruktorát hívja, úgyhogy az ősben
+a virtuális destruktorra még mindig szükségünk van – ahogy mindig. Az egészből a két <code>shared_ptr</code>
+marad meg, de a bal és a jobb operandust amúgy is tárolnunk kellene:</p>
+
+<pre   ><code class="language-cbub">class TwoOperand : public Expression {
+  public:
+    TwoOperand(std::shared_ptr&lt;Expression&gt; lhs, std::shared_ptr&lt;Expression&gt; rhs)
+        : lhs_(lhs), rhs_(rhs) {}
+    
+    /* ... */
+
+  protected:
+    std::shared_ptr&lt;Expression&gt; const lhs_, rhs_;   // !
+};</code></pre>
+
+<p>A szorzat deriválásából is eltűnhet a <code>clone()</code>, és itt tényleg erőforrásmegosztásunk van:</p>
+
+<div class="sticky">előtte</div>
+
+<pre   ><code class="language-cbub">Expression* Product::derivative() const {
+    return new Sum(
+        new Product(lhs_-&gt;derivative(), rhs_-&gt;clone()),
+        new Product(lhs_-&gt;clone(), rhs_-&gt;derivative())
+    );
+}</code></pre>
+
+<div class="sticky">utána</div>
+
+<pre   ><code class="language-cbub">std::shared_ptr&lt;Expression&gt; Product::derivative() const {
+    return std::make_shared&lt;Sum&gt;(
+        std::make_shared&lt;Product&gt;(lhs_-&gt;derivative(), rhs_),    // !
+        std::make_shared&lt;Product&gt;(lhs_, rhs_-&gt;derivative())
+    );
+}</code></pre>
+
+<p>Végül pedig, a <code>simplify()</code>-okat kell rendbe tenni, de szerencsére azok is sokat egyszerűsödnek.
+Az eredeti kódok a <code>Constant</code> típusú objektumok kereséséhez <code>dynamic_cast&lt;&gt;</code>-ot használtak.
+Az nyelvi elem, csak nyers pointeren működik, viszont a <code>&lt;memory&gt;</code> header okos pointerekhez
+is biztosít hasonló függvényt, az <code>std::dynamic_pointer_cast&lt;&gt;()</code>-ot. Ezzel a minimalista
+egyszerűsítő algoritmusok hasonlóan megírható, ahogy eddig, csak az okos pointerek miatt már
+sokkal tisztábban. Eltűnik a sok <code>delete</code>:</p>
+
+<pre   ><code class="language-cbub">std::shared_ptr&lt;Expression&gt; Sum::simplify() const {
+    auto lhs_simpl = lhs_-&gt;simplify();
+    auto rhs_simpl = rhs_-&gt;simplify();
+    auto lhs_cons = std::dynamic_pointer_cast&lt;Constant const&gt;(lhs_simpl);
+    auto rhs_cons = std::dynamic_pointer_cast&lt;Constant const&gt;(rhs_simpl);
+    
+    if (lhs_cons != nullptr &amp;&amp; lhs_cons-&gt;get_value() == 0.0)    /* 0 + a = a */
+        return rhs_simpl;
+    if (rhs_cons != nullptr &amp;&amp; rhs_cons-&gt;get_value() == 0.0)    /* a + 0 = a */
+        return lhs_simpl;
+    if (lhs_cons != nullptr &amp;&amp; rhs_cons != nullptr)             /* c + c = c */
+        return std::make_shared&lt;Constant&gt;(lhs_cons-&gt;get_value()
+                                          + rhs_cons-&gt;get_value());
+    
+    return std::make_shared&lt;Sum&gt;(lhs_simpl, rhs_simpl);
+}</code></pre>
+
+<p>De a sok <code>delete</code> eltűnése nem csak azért fontos, mert látszólag rövidebb lett tőle a kód,
+hanem mert sokkal könnyebb megírni. Nem kell gondolkozni azon, hogy melyik kifejezést kell megtartani, melyiket
+nem – amelyiket nem használjuk, felszabadul magától.</p>
+
+<p>A főprogramunk ilyesmi lehet:</p>
+
+<pre   ><code class="language-c">int main() {
+    std::shared_ptr&lt;Expression&gt; c = std::make_shared&lt;Product&gt;(
+                        std::make_shared&lt;Constant&gt;(5),
+                        std::make_shared&lt;Sum&gt;(
+                            std::make_shared&lt;Constant&gt;(3),
+                            std::make_shared&lt;Variable&gt;()
+                        )
+                    );
+    std::cout &lt;&lt; &quot;f(x) = &quot; &lt;&lt; *c &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;f(3) = &quot; &lt;&lt; c-&gt;evaluate(3) &lt;&lt; std::endl;
+    
+    std::cout &lt;&lt; &quot;f'(x) = &quot; &lt;&lt; *(c-&gt;derivative()-&gt;simplify()) &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; &quot;f''(x) = &quot; &lt;&lt; *(c-&gt;derivative()-&gt;derivative()-&gt;simplify()) &lt;&lt; std::endl;
+}</code></pre>
+
+<p>A műveletek bátran láncolhatóak, mert a köztes lépésekben előállított fákat
+a <code>shared_ptr</code>-ek fel fogják szabadítani. Így már egy
+<code>-&gt;derivative()-&gt;derivative()-&gt;simplify()</code> sem okoz
+memóriaszivárgást.</p>
+
+<p>Az elkészült kód letölthető innen: <a href="expression_shared.cpp">expression_shared.cpp</a>.</p>
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ul>
+    <li id="sicp">Hal Abelson, Jerry Sussman and Julie Sussman: <a href="https://mitpress.mit.edu/sicp/">Structure and Interpretation of Computer Programs.</a>
+    <li id="simplify-cpp">Arne Mertz: <a href="http://arne-mertz.de/">Simplify C++</a>.
+    <li id="ro5default">Scott Meyers: <a href="http://scottmeyers.blogspot.hu/2014/03/a-concern-about-rule-of-zero.html">A Concern about the Rule of Zero</a>.
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

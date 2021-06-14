@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 3. hét: Típusok használata</title>
+<meta property="og:title" content="TEST InfoC++11 :: 3. hét: Típusok használata">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 3. hét: Típusok használata">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 3. hét: Típusok használata">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="3. hét: Típusok használata">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">3. hét: Típusok használata</h1>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Típusok használata</a>
+                      <li><a href="index.html#2" class="">Literálisok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Típusok használata">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_tipusok" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Típusok használata<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Indexelő objektum</h3>
+
+<p>Írj egy osztályt, amely egy 32 bites, előjel nélküli egészben: <code>uint32_t</code> (<code>#include &lt;cstdint&gt;</code>) tud 
+tárolni 32 igaz/hamis értéket! Az objektumot lehessen indexelni, és indexelésen keresztül valamelyik bit értékét lekérdezni és 
+beállítani!</p>
+
+<pre   ><code class="language-c">BoolArray b;        /* 32 db false */
+std::cout &lt;&lt; b[3];  /* 0 = false */
+b[3] = true;
+std::cout &lt;&lt; b[3];  /* 1 = true */</code></pre>
+
+<p>A nehézséget itt az jelenti, hogy a biteket tároló egész szám egyes bitjeire nem létezik referencia, és emiatt az indexelő 
+operátor nem térhet vissza egyszerűen egy <code>bool&amp;</code> típussal. Helyette egy segédobjektummal kell visszatérnie, amely 
+saját típussal rendelkezik, és amely a lekérdezést és az értékadást megfelelően átdefiniált operátorokkal kezelni tudja.</p>
+
+<p>Ha már működik a fenti, oldd meg, hogy a bitek közötti értékadás is működjön!</p>
+
+<pre   ><code class="language-c">b[3] = true;
+b[2] = b[3];
+std::cout &lt;&lt; b[2];  /* 1 = true, mert b[3] = true */</code></pre>
+
+
+
+<h3>Indexelő objektum – hibás gondolatmenet, de működik?</h3>
+
+<p>Adott az előző feladatnak az alábbi megoldása. A kód csak a segédobjektumot mutatja vázlatosan, jelenleg csak ez a lényeges
+rész.</p>
+
+<pre   ><code class="language-c">class BitArray::Proxy {
+  private:
+    BitArray &amp;ba;
+    int idx;
+
+  public:
+    Proxy(BitArray &amp;ba, int idx): ba(ba), idx(idx) {}
+
+    operator bool () const {
+        return ba.get(idx);
+    }
+
+    Proxy&amp; operator=(bool b) {
+        ba.set(idx, b);
+        return *this;
+    }
+
+    Proxy&amp; operator=(Proxy &amp;other) = delete;
+};</code></pre>
+
+<p>Ez egy hibás elgondolást mutat be. Mi az? És hogyan lehetséges, hogy a Proxy mégis működőképes így megvalósítva?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A hibás elgondolás az, hogy ennek törölve van az értékadó operátora. Ugyanis a két <code>Proxy</code> közötti értékadás
+lehetséges: <code>bitarray[0] = bitarray[1]</code>, ennek működnie kell. Az első bitet kell másolnia a nulladik bitbe,
+még akkor is, ha forráskód szintjén ez a <code>Proxy</code> objektumok értékadásának látszik.</p>
+
+<p>A problémát azért oldja meg mégis a <code>delete</code>-es sor (valószínűleg nem szándékosan), mert az nem csak azt fejezi ki a 
+fordítónak, hogy nem hívható az értékadó operátor, hanem azt is, hogy a paraméterezése a szokásostól eltérő. Észre kell venni, hogy 
+ebben a sorban nincs <code>const</code> szó; a paraméter <code>Proxy &amp;other</code> nem konstans referencia. Vagyis ez így két 
+dolgot jelent: a) ennek az osztálynak nem konstans objektumot vár az értékadó operátora, b) és mellesleg nem használható.</p>
+
+<p>A <code>bitarray[0] = bitarray[1]</code> sorban két <code>Proxy</code> keletkezik, és mindkettő temporális objektum. A 
+referencia típusa a jobb oldali, <code>bitarray[1]</code> temporális objektum miatt lényeges; a nem konstans referencia nem vehet 
+át temporális objektumot paraméterként. Ezért a fordító <em>számításba sem veszi</em> azt az operátort, amikor ezt az értékadást 
+megpróbálja feloldani. Helyette konverziót keres, és rátalál az <code>operator bool</code> + <code>operator=(bool)</code> párosra, 
+ami pedig épp azt csinálja, amit kell. A <code>delete</code>-elésnek nincs is jelentősége, működne anélkül is, egy kósza 
+deklarációval.</p>
+
+</div>
+</details>
+
+
+
+
+<h3>Telítéses aritmetika</h3>
+
+<p>Írj osztályt, amely telítéses aritmetikát (saturation arithmetic) valósít meg!</p>
+
+<p>Ebben a tárolt számok értékének van egy minimális és maximális értéke. Túlcsordulás (vagy alulcsordulás)
+esetén a határon a kapott érték sosem lép túl. Például ha az alsó határ 0, akkor <code>10-5 = 5</code>, de <code>5-7 = 0</code>.
+Vagy ha a felső határ 255, akkor <code>250 + 7 = 255</code>.</p>
+
+<p>A digitális jelfeldolgozásban (pl. hangfeldolgozásban) használt eszközök működnek így.</p>
+
+
+
+
+
+
+<h3>Számrendszerek</h3>
+
+<p>Nézd meg <a href="../manipulatorok/index.html">az extrákban az I/O manipulátorokkal kapcsolatos írást</a>! Ez az előadás mértékegységes példájának folytatása. Utána...</p>
+
+<p>a) Írj bináris szám kiíró I/O manipulátort! A használata legyen az alábbi:</p>
+<pre   ><code class="language-c">std::cout &lt;&lt; bin &lt;&lt; 0 &lt;&lt; std::endl;         /* 0 */
+std::cout &lt;&lt; bin &lt;&lt; 240 &lt;&lt; std::endl;       /* 11110000 */</code></pre>
+<p>Vajon mi lehet itt a bin típusa?</p>
+
+<p>b) Írj akárhányas számrendszerben kiíró I/O manipulátort!</p>
+<pre   ><code class="language-c">std::cout &lt;&lt; base(2) &lt;&lt; 240 &lt;&lt; std::endl;   /* 11110000 */
+std::cout &lt;&lt; base(7) &lt;&lt; 240 &lt;&lt; std::endl;   /* 462 */
+std::cout &lt;&lt; base(16) &lt;&lt; 240 &lt;&lt; std::endl;  /* F0 */</code></pre>
+<p>Melyik az első részkifejezés, amit ki kell értékelnie a fordítónak? Indulj ki ebből!</p>
+
+<p>Ügyelj arra, hogy a megvalósításban ne legyen <code>pow()</code> (egész számokkal kell dolgozni, a
+<code>pow()</code> pedig lebegőpontos számokkal dolgozik, pontatlanság lehet). Ezen kívül, ne legyen
+<code>std::to_string()</code> se! Legalábbis egyetlen számjegy sztringgé alakítására semmiképp, mivel
+akkor minden számjegyhez külön <code>std::string</code> objektum jönne létre.</p>
+
+
+
+<h3>Mértékegységek</h3>
+
+<p>Folytasd az <a href="../ea03/index.html#mertekegyseg">előadás mértékegységes programját</a>!</p>
+
+<ol>
+<li><p>Mekkora a Ferrari motorjának átlagos teljesítménye a programban megadott 
+gyorsítás közben? (A mozgási energiát az E=1/2*m*v<sup>2</sup> képletből tudod 
+kiszámolni; ennyi energiát adott le a motor 4 másodperc alatt.)</p>
+
+<li><p>A mértékegység osztály dimenzió nélküli változata (m<sup>0</sup>*kg<sup>0</sup>*s<sup>0</sup>)
+egy egyszerű valós számot ad meg, amely általában egy arányt jelképez. Például a hossz/hossz
+egy dimenzió nélküli számot ad. Specializáld úgy az osztályt, hogy a dimenzió nélküli
+mértékegységek konvertálhatók legyenek valós számmá, illetve automatikusan létrehozhatók
+legyenek valós számból!</p>
+
+<li><p>Az előző feladat megvalósítása után, működnek-e automatikusan a
+<code>valós*dimenziónélküli</code> (pl. <code>2.0*(v1/v2)</code>), és a
+<code>valós+dimenziónélküli</code> (pl. <code>1.0+(v1/v2)</code>) alakú kifejezések?
+Miért?</p>
+
+</ol>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Literálisok">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="feladat_literalisok" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Literálisok<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3><code>constexpr</code> minősítésű <code>_binary</code></h3>
+
+<p>Meg lehet oldani, hogy a <code>_binary</code> utótag operátor <code>constexpr</code>
+legyen? Ehhez az kell, hogy az utótag operátor függvénye egyetlen <code>return</code> utasításból
+álljon. (Egy ügyesen megírt rekurzív segédfüggvénnyel próbálkozz!)</p>
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az alábbi, <code>binary_val</code> függvény két részre bontja az átalakítandó
+számot. A szám már átalakított, bal oldali része a <code>left</code>, a maradék,
+át még nem alakított része a <code>right</code> paraméterben van. Pl. az 1101
+számnál az első számjegy átalakítása után <code>left=1</code>, <code>right="<em>1</em>01"</code>
+paraméterekkel hívódik a függvény. Egy lépésben egy számjegy átalakítása történik meg, ehhez a <code>left</code>-et
+eggyel balra kell léptetni, és beírni a <code>right</code> következő számjegyét:
+<code>left=1<em>1</em></code>, <code>right="01"</code> értékekkel hívni
+újra a függvényt. Ha <code>right</code> üres, nincs teendő.</p>
+<pre   ><code class="language-c">constexpr unsigned long long binary_val(unsigned long long left, char const *right) {
+    return right[0] == '\0'
+           ? left
+           : binary_val(left&lt;&lt;1 | (right[0]-'0'), right+1);
+}
+
+constexpr unsigned long long operator &quot;&quot; _binary(char const *str) {
+    return binary_val(0, str);
+}</code></pre>
+<p>A <code>binary_val()</code> törzse egy <code>return</code> utasításból áll, ezért
+<code>constexpr</code> lehet. Az <code>operator "" _binary()</code> törzse egy
+<code>return</code> utasításból áll, és csak <code>constexpr</code> függvényt hív,
+ezért ez is lehet <code>constexpr</code>.</p>
+</div>
+</details>
+
+
+<h3>Dátum literálisok I.</h3>
+
+<pre   ><code class="language-cbub">Date d = &quot;2013.08.11&quot;_date;
+std::cout &lt;&lt; d &lt;&lt; std::endl;                    /* 2013.08.11. */
+std::cout &lt;&lt; &quot;'99.08.11&quot;_date &lt;&lt; std::endl;     /* 1999.08.11. */
+std::cout &lt;&lt; &quot;'12.08.11&quot;_date &lt;&lt; std::endl;     /* 2012.08.11. */
+std::cout &lt;&lt; &quot;08.11.2013&quot;_date &lt;&lt; std::endl;    /* 2013.08.11. */</code></pre>
+
+
+
+<h3>Dátum literálisok II.</h3>
+
+<p>A feladat ugyanaz, mint az előbb – de fordítási időben kell megoldani, <code>constexpr</code>
+függvényekkel.</p>
+
+<p>Ha minden rendben van, akkor egy helyes megoldás esetén lehet
+<code>"'99.08.11"_date.getYear()</code> méretű globális tömböt létrehozni, vagy
+ezt a számot (1999) sablonparaméternek használni. Ezek persze értelmetlen példák,
+csak ötletként szerepelnek itt az ellenőrzésre, hogy tényleg fordítási időben fut-e
+a dátum értelmezése. A lényeg az, hogy mivel literálisról van szó, azt már fordítás
+közben is lehet (és érdemes) értelmezni, mert úgysem változik futás közben.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

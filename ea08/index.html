@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Kivételek és kivételbiztos kód</title>
+<meta property="og:title" content="TEST InfoC++11 :: Kivételek és kivételbiztos kód">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Kivételek és erőforráskezelés. Kivételbiztos kód, garanciák. Másoló és mozgató konstruktorok kivételkezelés mellett.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Kivételek és erőforráskezelés. Kivételbiztos kód, garanciák. Másoló és mozgató konstruktorok kivételkezelés mellett.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Kivételek és kivételbiztos kód">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Kivételek és kivételbiztos kód</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Kivételek és erőforráskezelés. Kivételbiztos kód, garanciák. Másoló és mozgató konstruktorok kivételkezelés mellett.</p>
+</div>
+
+
+<p>A kivételkezelés szintaktikáját megérteni könnyű. Talán még a szemantikáját is: eldobjuk a kivételt, és ugrunk oda, ahol majd
+el lesz kapva. A kivételkezelés azonban jóval több ennél. A kivételeket használó program teljesen más felépítésű, mint a
+kivételek használata nélkül megírt párja. A módszer lényegét úgy lehet igazán megérteni, ha összehasonlítjuk a két változatot.
+Ebben az előadásban ebből indulunk ki, utána pedig azt nézzük meg, mikre kell figyelni egy kivételekkel dobálózó programnál.</p>
+
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">A throw/catch vezérlési szerkezet</a>
+                      <li><a href="index.html#2" class="">Kivételek generálása és kezelése egy tárolóban</a>
+                      <li><a href="index.html#3" class="">A konstruktordelegálás szerepe a kivételkezelésben</a>
+                      <li><a href="index.html#4" class="">Kivételek tárolókban: a másoló értékadás</a>
+                      <li><a href="index.html#5" class="">Alap, erős, és noexcept garanciák</a>
+                      <li><a href="index.html#6" class="">Mozgató konstruktorok és kivételek</a>
+                      <li><a href="index.html#7" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A throw/catch vezérlési szerkezet">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        A throw/catch vezérlési szerkezet<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Gyakran könyvekben is lehet találkozni az alábbihoz hasonló kódrészletekkel.</p>
+
+<div class="sticky">Értelmetlen program<br>és rossz példa</div>
+<pre   ><code class="language-cbub">try {
+    if (b == 0.0)
+        throw std::runtime_error(&quot;division by zero&quot;);
+    std::cout &lt;&lt; &quot;a/b == &quot; &lt;&lt; a/b &lt;&lt; std::endl;
+} catch (std::exception &amp;e) {
+    std::cerr &lt;&lt; e.what();
+}</code></pre>
+
+<p>Ez a lehető legrosszabb módja a kivételkezelés bemutatásának. Nehéz is megmondani, hogy hol rossz, mert tulajdonképpen az egész
+rossz. Még ha működik is a program, a kivételkezelés egyszerűen nem erre való.</p>
+
+<h3>A vezérlésátadás</h3>
+
+<p>Mit mondhatunk a kivételekről?</p>
+
+<ol>
+<li>
+<p>A <code>throw/catch</code> páros egy <em>vezérlési szerkezetet</em> alkot.</p>
+
+<p>Az <code>if</code>-hez, <code>while</code>-hoz és függvényhívásokhoz hasonlóan a <code>throw</code> is egy vezérlésátadó
+utasítás. Ezzel is a programkód egy meghatározott részére tudunk ugrani. A <code>throw</code> tulajdonképpen egy olyan
+<code>goto</code>, amellyel közvetlenül a <code>catch</code> blokkhoz ugorhatunk. Ez a vezérlésátadás akár függvényhívásokon
+keresztül is történhet. A veremben „felfelé” haladunk, azaz valamelyik hívóhoz jutunk vele vissza.</p>
+
+<p>Bár gyakran <code>try</code>-<code>catch</code>-ként beszélünk erről, igazából nem a <code>try</code> és a <code>catch</code> a lényeg, hanem a <code>throw</code> és
+a <code>catch</code>. A <code>throw</code> mutatja, hogy honnan ugrunk, a <code>catch</code>, hogy hova. A <code>try</code> csak
+azért van, hogy megjelölje azt a blokkot, ahonnan a kivétel jöhet, olvashatóbbá tegye a kódot. Ez éppenséggel lehetne egy utasításblokk is, de
+külön kulcsszóval megjelölve a programozó számára is jobban látszik, hogy mi a cél. A hátultesztelő ciklus is be van vezetve egy <code>do</code>-val.</p>
+
+<li>
+<p>A függvények kivétel dobásával olyan hibát tudnak jelezni a hívójuk számára, amelyet érzékelni tudnak, de <em>kezelni nem.</em></p>
+
+<p>Az általános tapasztalat a programokban az, hogy a hiba érzékelésének helyén legtöbbször nem vagyunk képesek javítani
+is a hibát. Ha a függvényünk feladata az, hogy visszatérjen két szám hányadosával, és tudjuk azt is, hogy nullával nem lehet
+osztani, akkor a függvény nem tudja ellátni a feladatát a nulla értékű paraméternél:</p>
+
+<pre   ><code class="language-c">double divide(double a, double b) {
+    if (b == 0.0)
+        throw std::invalid_argument(&quot;division by zero&quot;);
+    return a/b;
+}</code></pre>
+
+<p>A hibát nem tudja kezelni, mert nem tudhatja, hogy a hívónak mihez van szüksége a hányados értékére. Visszatérnie viszont
+valamivel kellene, a visszatérési érték nem maradhat inicializálatlanul. Ezért kell a kivétel, hogy jelezze a hívó számára a
+hibát. Hogy szóljon neki, hogy nem lehetett megoldani a feladatot. A <code>catch</code> blokk pedig azon a helyen lesz, ahol már
+kezelhető a probléma. Ezért nem kerül egy függvénybe a <code>throw</code> és a <code>catch</code>: ha helyben le tudnánk kezelni
+a hibát, akkor egy sima <code>if</code> kellene csak.</p>
+
+<li>
+<p>A kivételkezelés arra jó, hogy <em>egyszerűsítsük a vezérlési szerkezeteket</em> a programunkban.</p>
+
+<p>A kivételkezelést C++-ban akkor tudjuk igazán kihasználni, ha RAII-t használunk, tehát ha az objektumaink destruktorai
+kezelik az erőforrásokat.
+
+</ol>
+
+<pre class="screenshot float">
+3 3
+
+3.4   9.2   0
+1.2   0     4.5
+-3    5.6   11
+</pre>
+
+
+<h3>A vezérlési szerkezet egyszerűsítése</h3>
+
+<p>Lássunk minderre egy nagyobb példát! Ehhez egy C-ben, kézi memóriakezeléssel megírt, hibát a visszatérési
+értékében jelző függvényt „upgrade”-elünk. Az új változat C++-os, automatikus memóriakezelésű, hiba esetén kivételt dobó függvény lesz.</p>
+
+<p>A függvényünk beolvas egy fájlt, amelyben egy mátrix tárolódik az oldalt látható módon. A szövegfájl első sorában lévő két egész szám a
+szélesség és a magasság, a többi sorban pedig a számok. A visszatérési értéke egy kétdimenziós dinamikus tömb (a méretet, tegyük
+fel, hogy valami varázslat útján megkapja a hívó).</p>
+
+<div class="sticky">C-ben,<br>kivételek nélkül</div>
+<pre   ><code class="language-c">double **read_matrix_1(char const *filename) {
+    FILE *fp = fopen(filename, &quot;rt&quot;);
+    if (fp == NULL)
+        return NULL;
+    int w, h;
+    if (fscanf(fp, &quot;%d %d&quot;, &amp;w, &amp;h) != 2) {
+        fclose(fp);
+        return NULL;
+    }
+    double **ret = (double **) malloc(sizeof(double *) * h);
+    if (ret == NULL) {
+        fclose(fp);
+        return NULL;
+    }
+    for (int y = 0; y &lt; h; ++y) {
+        ret[y] = (double *) malloc(sizeof(double) * w);
+        if (ret[y] == NULL) {
+            for (int yy = 0; yy &lt; y; ++yy)
+                free(ret[yy]);
+            free(ret);
+            fclose(fp);
+            return NULL;
+        }
+    }
+    for (int y = 0; y &lt; h; ++y) {
+        for (int x = 0; x &lt; w; ++x) {
+            if (fscanf(fp, &quot;%lf&quot;, &amp;ret[y][x]) != 1) {
+                for (int yy = 0; yy &lt; h; ++yy)
+                    free(ret[yy]);
+                free(ret);
+                fclose(fp);
+                return NULL;
+            }
+        }
+    }
+    fclose(fp);
+    return ret;
+}</code></pre>
+
+<p>Az erőforrások kézi kezelése nagyon nehézkessé teszi a programot. Minden egyes helyen, ahol hibát érzékelünk,
+vissza kell bontani mindent, amit addig felépítettünk – fel kell szabadítani a mátrix sorait, pointertömbjét, és be kell zárni
+a fájlt. Figyelembe kell venni azt is, hogy az építkezésben hol tartottunk; az elején még csak a fájl bezárásával kell
+foglalkozni, a végén mindennel.</p>
+
+<p>Írjuk át ezért úgy a programot, hogy a fájlkezelésre az <code>std::ifstream</code> osztályt
+használja (ennek destruktora bezárja a fájlt), a visszatérési érték pedig nem egy nyers pointer, hanem egy mátrix
+objektum!</p>
+
+<pre   ><code class="language-c">Matrix read_matrix_2(char const *filename) {
+    std::ifstream is;
+    is.open(filename);
+    if (!is.is_open())
+        throw std::runtime_error(&quot;nem nyitható meg&quot;);
+    int w, h;
+    if (!(is &gt;&gt; w &gt;&gt; h))
+        throw std::runtime_error(&quot;hibás méretek&quot;);
+    Matrix ret{w, h};
+    for (int y = 0; y &lt; h; ++y)
+        for (int x = 0; x &lt; w; ++x)
+            if (!(is &gt;&gt; ret(x, y)))
+                throw std::runtime_error(&quot;hibás számok&quot;);
+    return ret;
+}</code></pre>
+
+<p>A 40 soros programkód 15 sorossá vált (persze részben amiatt, hogy a foglalással nem kell bajlódni). Amit érdemes észrevennünk,
+az az, hogy most nem tudjuk null pointerrel jelezni a hibát. A függvény visszatérési értéke most egy mátrix. Ezzel a függvény
+<em>ígéretet tesz,</em> hogy ha meghívják, akkor ő vissza fog adni egy mátrix objektumot. Fájlkezelési hiba esetén azonban nem tud ilyet
+adni. Ezt nem úgy kell jeleznie, hogy nulla méretű mátrixot ad vissza, mert akkor adott vissza mátrixot. Úgy kell jeleznie,
+hogy semmit nem ad vissza, hanem helyette kivételt dob. (Ezzel mondja azt a hívónak, hogy tőle független körülmények miatt nem sikerül
+a kérés teljesítése.) A mátrix beolvasását a hívó is valószínűleg beépítette egy műveletsorba:</p>
+
+<pre   ><code class="language-c">try {
+    /* műveletsor, amelynek lépései egymásra épülnek */
+    Matrix h = read_matrix_2(&quot;matrix.txt&quot;);
+    std::cout &lt;&lt; h;
+} catch (...) {
+    /* ... */
+}</code></pre>
+
+<p>Ha nincs mátrix, akkor a műveletsor végrehajtásának meg kell szakadnia. Amikor a rendes visszatérési érték helyett egy
+kivétel objektum érkezik a függvényből, ez meg is történik, a vezérlés átadódik a <code>catch</code> blokkba. Éppen ez a lényeg!
+A hívónak ezért nem kell ellenőriznie azt, hogy hiba történt-e, és így sokkal tisztább a vezérlési szerkezete.</p>
+
+<p>Jelenleg a mátrixot beolvasó <code>read_matrix_2()</code> függvényünk még mindig ilyen, <em>tele van tűzdelve</em> a hibák ellenőrzésével: ha nem sikerült megnyitni a fájlt,
+ha nem sikerült beolvasni a méretet, ha nem sikerült beolvasni a számokat. A sikertelen fájlműveleteket azonban nem csak
+így tudjuk ellenőrizni, hanem úgy is, hogy az <code>std::istream</code> osztálytól kivételt kérünk hiba esetén. Ha így
+teszünk, a sok <code>if()</code> elmaradhat:</p>
+
+<pre   ><code class="language-c">Matrix read_matrix_3(char const *filename) {
+    std::ifstream is;
+    is.exceptions(std::ifstream::badbit
+                  | std::ifstream::eofbit
+                  | std::ifstream::failbit);
+    is.open(filename);
+    int w, h;
+    is &gt;&gt; w &gt;&gt; h;
+    Matrix ret{w, h};
+    for (int y = 0; y &lt; h; ++y)
+        for (int x = 0; x &lt; w; ++x)
+            is &gt;&gt; ret(x, y);
+    return ret;
+}</code></pre>
+
+<p>Látjuk, hogy így még egyszerűbb lett a vezérlési szerkezetünk; csak le kellett írnunk sorban a teendőket, ahogyan
+a mátrix beolvasását elvégezzük. <em>Ez a kivételkezelés igazi értelme.</em> Egyszerűbbé válik tőle a számítási folyamatunk
+leírása, egyszerűbbek a vezérlési szerkezetek. Ezért van szükségünk a kivételek mellé a destruktorokra is: ha
+azok nem lennének, akkor mindezt nem engedhetnénk magunknak, mert még mindig tele kellene legyen a programunk
+az erőforrások felszabadítását végző kódrészletekkel.</p>
+
+<p>Azokban a nyelvekben, ahol nincsenek destruktorok, ugyanez <code>finally</code> utasításblokkokkal történik: 
+<code>try</code>–<code>catch</code>–<code>finally</code>. <code>try</code>: a kritikus programrész, <code>catch</code>: ha kivétel 
+történt, <code>finally</code>: a programrész, amit akkor is végre kell hajtani, ha kivétel történt, és akkor is, ha nem. Továbbra 
+se felejtsük el, hogy <em>az erőforrás nem csak memória lehet,</em> hanem nyitott fájl, hálózati kapcsolat, adatbáziskapcsolat, a 
+videókártyán lefoglalt textúra és még sok minden egyéb dolog. Ezeknél az automatikus szemétgyűjtés nem segítene.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kivételek generálása és kezelése egy tárolóban">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Kivételek generálása és kezelése egy tárolóban<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Nézzük meg, hogy néz ki mindez egy erőforrást kezelő osztály szemszögéből, mint amilyen a fenti mátrix is!
+Az egyszerűség kedvéért tekintsünk egy egyszerű dinamikus tömb típust:</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Vector {
+  public:
+    /* ... */
+
+  private:
+    size_t size_;
+    T *data_;
+};</code></pre>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(size_t size) {
+    size_ = size;
+    data_ = new T[size_];
+}</code></pre>
+
+<p>Ennek egyparaméterű konstruktora adott méretű tömböt foglal. Ebben a konstruktorban, bár nem látszik rajta, több helyen is
+keletkezhet kivétel. Az egyik hely a <code>new</code> operátor memóriafoglalás része. Ha nincs elég memória, akkor ez egy
+<code>std::bad_alloc</code> típusú kivételt dob, amit szándékosan nem kapunk el. Ilyenkor nem jöhet létre a vektor sem.
+
+<div class="csik">
+<h3>Kivételdobás konstruktorból</h3>
+<p>A konstruktoroknak nincs visszatérési értéke, ezért konstruktorból csakis és kizárólag kivétel dobásával lehet hibát jelezni. Ha
+egy konstruktorból kivételt dobunk, akkor azzal <em>megakadályozzuk az objektum létrehozását.</em></p>
+</div>
+
+<p>A másik helyzet pedig az a pont, ahol a <code>T</code>-k alapértelmezett konstruktorai futnak. Ezeknek is lehetnek erőforrásaik,
+és előfordulhat, hogy valamelyik példány konstruktora kivételt dob. Az itt keletkező kivételekkel sem kell foglalkozni. A fordító a
+<code>new T</code> és a <code>new T[]</code> alakú kifejezések hatására olyan kódot generál, amelyben szükség esetén
+<strong>automatikusan megszünteti a már létrejött objektumokat,</strong> és felszabadítja a memóriaterületet. Ezt úgy is
+mondhatjuk, hogy a <code>new T</code> és a <code>new T[]</code> kifejezések hatása atomi (atomic), bonthatatlan: vagy lefoglalódik
+a terület és létrejönnek az objektumok, vagy nem történik meg ezek közül semmi.
+
+<p>Vegyük szemügyre a másoló konstruktort!</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(Vector&lt;T&gt; const &amp;the_other) {
+    size_ = the_other.size_;
+    data_ = new T[size_];
+    for (size_t i = 0; i != size_; ++i)
+        data_[i] = the_other.data_[i];    // kivétel?
+}</code></pre>
+
+<p>Ez először az előbbi konstruktorhoz hasonlóan lefoglalja a memóriaterületet. Ha ilyenkor kivétel keletkezik, azt nem
+kapjuk el, hanem szándékosan továbbengedjük itt is a hívóhoz. Viszont nem ilyen egyszerű a helyzet a tömb elemeinek másolásánál!
+Képzeljük el, hogy a tömbelemek sztringek, azaz <code>T = std::string</code>. A jelölt helyen az alapértelmezett konstruktorral
+létrehozott sztringeket felülírjuk a másik vektorban lévőkkel. Ezek valószínűleg már nem üres sztringek, tehát a ciklus minden
+egyes értékadása egy memóriafoglalással jár, ami potenciálisan sikertelen művelet. A <code>size_</code> darab értékadás közül
+<em>bármelyik</em> kivételt dobhat. Itt nem engedhetjük meg azt, hogy gondolkodás nélkül továbbengedjük a kivételt, ugyanis a
+<code>data_</code> tömböt már lefoglaltuk. Amíg nem futott le a <code>Vector</code> konstruktora <em>teljes egészében,</em>
+addig az objektum nem számít létezőnek, és így a destruktora sem fog lefutni!</p>
+
+<p>Csak az az objektum számít létezőnek, amelynek teljes egészében lefutott a konstruktora. Ha ezt a kivételt nem kapjuk
+el, memóriaszivárgást kapunk; a <code>new T[size_]</code> tömb megmarad. Ezért ezt muszáj elkapni, és ilyenkor a
+felszabadítást kézzel elvégezni, mégpedig így:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(Vector&lt;T&gt; const &amp;the_other) {
+    size_ = the_other.size_;
+    data_ = new T[size_];
+    try {
+        for (size_t i = 0; i != size_; ++i)
+            data_[i] = the_other.data_[i];
+    } catch (...) {
+        delete[] data_;     // igen, konstruktorban delete
+        throw;
+    }
+}</code></pre>
+
+<p>Ebben a kódrészletben az ismeretlen típusú (<code>...</code> van a helyén) kivételt elkapjuk, elvégezzük a memória
+felszabadítását, és végül az elkapott kivételt az üres <code>throw</code> kulcsszóval továbbdobjuk a hívónak.</p>
+
+<p>Majd mindjárt látunk minderre egy egyszerűbb megoldás is. Előbb még nézzük meg, mi a helyzet a mozgató konstruktorral!</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(Vector&lt;T&gt; &amp;&amp; v) noexcept {
+    this-&gt;size_ = v.size_;
+    v.size_ = 0;
+    this-&gt;data_ = v.data_;
+    v.data_ = nullptr;
+}</code></pre>
+
+<p>Itt csak néhány beépített típuson használt értékadás van, ez nem fog kivételt dobni. Ezért meg is tudjuk jelölni,
+hogy ebben a függvényben soha nem keletkezik kivétel. Ennek jelentőségéről mindjárt szó lesz még.</p>
+
+<p>Lássuk végül a destruktort!</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+Vector&lt;T&gt;::~Vector() {
+    delete[] data_;
+}</code></pre>
+
+<p>A destruktor <code>delete[]</code> sora meghívja a destruktorokat, és felszabadítja a memóriaterületet. A felszabadítás mindig
+egyszerű művelet, abból sok baj nem lehet, így ez valószínűleg nem dobhat kivételt. De ennek muszáj is így lennie! Ki kell kötnünk,
+hogy nem is szabad kivételt dobniuk, mert azok a kivételek szinte kezelhetetlenek lennének. Ha a <code>T</code>-k destruktora
+dobna, akkor a másoló konstruktorban, a másolás közben keletkezett kivétel utáni takarításban, a <code>delete[] data_</code> sornál
+egy újabb kivétel keletkezne.</p>
+
+<p>A destruktorokat az automatikusan kezelt objektumok felszabadításánál (stack unwinding) is magától hívja a fordító, ahogy 
+továbbítódik a hívó felé a kivétel. Olyankor sem szabad újabb kivételnek keletkeznie, mert ott még elkapni sem lehetne. Jegyezzük 
+ezért meg: <em>destruktorból soha nem szabad kivételt dobni.</em> A <code>noexcept</code>-et kiírni viszont itt nem kell, mivel a 
+fentiek miatt a fordító a destruktort automatikusan <code>noexcept</code>-nek tekinti, akkor is, ha nem írjuk ki ezt a 
+kulcsszót a végére.</p>
+
+
+<div class="csik megjegyzes">
+<h3>Így működik a <code>new T[]</code></h3>
+<p>Egy <code>new T[100]</code> alakú kifejezés leírásakor tulajdonképp a fordító egy hosszabb kódrészletet generál.
+Ez a kódrészlet ügyel arra, hogy a végrehajtás atomi legyen, tehát hajtódjon végre teljes egészében, vagy dobjon
+kivételt, és ne maradjon nyoma. A 100 elemű tömböt példának véve, a generált kódrészlet az alábbihoz hasonló működésű
+(kifejtve minden hibalehetőség kezelését):</p>
+<pre   ><code class="language-c">T* igy_mukodik_a_new() {
+    /* memória foglalása, és ha sikertelen, kivétel dobása.
+     * ezt az ::operator new csinálja. */
+    T *mem = memoria_foglal(sizeof(T) * 100);
+    if (mem == nullptr);
+        throw std::bad_alloc();
+
+    /* megvan a memóriaterület, konstruktorok hívása.
+     * ha bármelyik kivételt dob, az addig sikeres
+     * konstruktorokat meghívja, és a memóriát is felszabadítja. */
+    size_t i = 0;
+    try {
+        while (i &lt; 100) {
+            new (&amp;mem[i]) T();
+            i++;
+        }
+    } catch (...) {
+        while (i &gt; 0) {
+            --i;
+            mem[i].~T();
+        }
+        memoria_felszabadit(mem);
+        throw;
+    }
+
+    /* kész */
+    return mem;
+}</code></pre>
+
+<p>Hasonló a helyzet a <code>new T()</code> kifejezésnél is, egyetlen objektum dinamikus létrehozásakor. A memória foglalása is 
+lehet sikertelen, és a konstruktor hívása is lehet az. Ha a foglalás sikerült, de a konstruktor nem, akkor a felszabadítás 
+megtörténik automatikusan.</p>
+
+</div>
+
+<div class="csik megjegyzes">
+<h3>Miért ne dobjunk kivételt destruktorból?</h3>
+<p>Sok szemléletes példát lehet mutatni rá, miért nem szabad destruktorból kivételt dobni. A fenti
+példa mellett sokat mond ez az egyszerű kódrészlet is:</p>
+<pre   ><code class="language-c">T *p = new T[100];
+/* ... */
+delete[] p;</code></pre>
+<p>A <code>delete</code>-es sor 100 darab destruktort hív. Minek kellene történnie akkor, ha ezek közül
+a 13-adik egy <code>std::runtime_error</code>-t, a 29-edik egy <code>std::out_of_range</code>-et,
+a 87-edik pedig egy <code>std::logic_error</code>-t dobna? Egyáltalán mit jelentene az, ha egy destruktor kivételt dob:
+nem engedi magát az objektum megszüntetni?</p>
+</div>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A konstruktordelegálás szerepe a kivételkezelésben">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+    <a id="konstruktordelegalas" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A konstruktordelegálás szerepe a kivételkezelésben<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Láttuk, hogy a másoló konstruktorban el kellhet kapni egy kivételt, és fel kellhet szabadítani a memóriaterületet,
+ha hiba történik. A <code>delete[] data_</code> sor a destruktorhoz hasonló, de mégis kénytelenek
+voltunk ezt megtenni, mert amíg nem futott le teljes egészében a konstruktor, addig az objektum nem számít létezőnek, és
+így a destruktor törzse sem fut le.</p>
+
+<p>A konstruktorok delegálása esetén (C++11) egy kicsit más a helyzet. Ha egy konstruktorban az adattagok inicializálásának
+feladatát egy másik konstruktornak delegáljuk, akkor annak lefutása után az objektum már élőnek számít, és ha a kiegészítő
+konstruktortörzsben kivétel keletkezik, a <em>destruktor már akkor is fut</em>. Ezt az alábbi kis programrész szemlélteti:</p>
+
+<pre   ><code class="language-cbub">#include &lt;iostream&gt;
+
+class Test {
+  public:
+    Test() {}
+    Test(int i) : Test() {            // delegálás: alapértelmezett konstruktor
+        throw 1;
+    }
+    ~Test() {
+        std::cout &lt;&lt; &quot;hello vilag&quot;;   // ki fog íródni!
+    }
+};
+
+int main() {
+    try {
+        Test t(1);
+    } catch (...) {
+    }
+}</code></pre>
+
+<pre class="screenshot">
+hello vilag
+</pre>
+
+<p>Ebben a kódban az <code>int</code> paraméterű konstruktor csak egy kiegészítése az alapértelmezett konstruktornak.
+Ha az alapértelmezett konstruktor lefutott kivétel dobása nélkül, akkor a <code>Test</code> objektum már létrejött, és
+futhat a destruktora – így az eldobott kivételnél ez a destruktor meg is fog hívódni.</p>
+
+<p>Miért jó ez kivételkezelés szempontjából? Azért, mert az előbb a másoló konstruktorban épp a destruktor kódját kellett
+duplikálnunk. Ha a másoló konstruktorban az adattagok inicializálását egy másik konstruktornak delegáljuk, erre sem lesz
+szükség.</p>
+
+<p>A megvalósítás kétféleképpen képzelhető el. Az egyik lehetőség, hogy írunk egy alapértelmezett konstruktort, amelyik szinte
+semmit sem csinál, csak azért van, hogy delegálhassuk neki az adattagok létrehozását. A nullára inicializált adattagokat
+persze felülírjuk a másoló konstruktorban, de a kivételt külön már nem kell kezelni:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector() : size_(0), data_(nullptr) {
+}
+
+
+template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(Vector&lt;T&gt; const &amp;the_other)
+  : Vector()                            // emiatt már kapunk dtor-t!
+{
+    size_ = the_other.size_;
+    data_ = new T[size_];
+    for (size_t i = 0; i != size_; ++i)
+        data_[i] = the_other.data_[i];
+}</code></pre>
+
+<p>A másik lehetőség az, hogy eleve annak a konstruktornak delegáljuk az adattagok létrehozásának feladatát, amely
+arra való, hogy megadott méretű tömböt létrehozzon. Így az a <code>size_</code> tagváltozót is épp a megfelelő
+értékűre fogja beállítani. Így a másolás még egyszerűbb is:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(size_t size) {
+    size_ = size;
+    data_ = new T[size_];
+}
+
+
+template &lt;typename T&gt;
+Vector&lt;T&gt;::Vector(Vector&lt;T&gt; const &amp;the_other)
+  : Vector(other.size_)                 // lesz tömb
+{
+    for (size_t i = 0; i != size_; ++i)
+        data_[i] = the_other.data_[i];  // és lesz dtor, ha ez hibázik
+}</code></pre>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Kivételek tárolókban: a másoló értékadás">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Kivételek tárolókban: a másoló értékadás<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Vizsgáljuk meg az értékadó operátort is! Alapesetben abból szoktunk kiindulni, hogy az értékadó operátor
+a destruktorból és a másoló konstruktorból összerakható. Visszagondolva a kivételbiztossá tett másoló konstruktorra
+egy pillanatra, ezt írjuk:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt; &amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; const &amp;rhs) {
+    if (this != &amp;rhs) {
+        /* dtor, copypaste */
+        delete[] data_;
+        /* copy ctor, copypaste */
+        size_ = rhs.size_;
+        data_ = new T[size_];                   // kivétel?
+        try {
+            for (size_t i = 0; i != size_; ++i)
+                data_[i] = rhs.data_[i];        // kivétel?
+        } catch (...) {
+            delete[] data_;
+            throw;
+        }
+    }
+    return *this;
+}</code></pre>
+
+<p>Ha egy kicsit jobban megvizsgáljuk ezt, rájöhetünk, hogy ezer sebből vérzik. Először is, a <code>new T[size_]</code>
+kifejezés miatt keletkezhet egy kivétel. Ha ott keletkezik, akkor a <code>data_</code> pointer már nem kapja meg az új értéket.
+Ez nagyon nagy baj, mert akkor úgy térünk vissza a függvényből, hogy a vektor objektum már az új méretet tárolja (pedig az új
+objektumok még nem jöttek létre), <em>a <code>data_</code> pointere pedig érvénytelenné vált.</em> Ha ezek után indexeljük a vektort, halott
+memóriaterületre mutatunk, a destruktora pedig másodjára fogja a <code>T</code>-k destruktorát meghívni és memóriaterületét
+felszabadítani. Vagyis ez végzetes hiba: a vektor inkonzisztens állapotba került, az adatszerkezet megsérült, a programunk pedig innentől
+megjósolhatatlan működésű.</p>
+
+<p>Nézzük meg a függvény második felét is! A <code>T</code>-k értékadó operátorai is dobhatnak kivételt. Ha ilyen történik, akkor 
+az adatszerkezet ugyan nem sérül, de a tárolt objektumok helytelenek lesznek. Egy részük átmásolódott, míg másik részük megmaradt 
+az alapértelmezett konstruktor által létrehozott értéken. Sajnos a kivételt hiába kapjuk el, ezt már nem tudjuk kijavítani. Hiába 
+<code>delete[]</code>-ljük az új tömböt (a <code>catch</code>-beli <code>delete[]</code>, nem a másik)... Azzal csak még többet 
+ártunk, mert a vektor objektum is hibás lesz tőle.</p>
+
+<h3>Az értékadó operátor javítása</h3>
+
+<p>Látjuk azt, hogy az új objektumok létrehozása, másolása a kritikus művelet. Ez az, ami közben kivétel keletkezhet. A régi
+objektumok felszabadítása definíció szerint nem jelenthet problémát. A függvényt úgy tudjuk kijavítani, ha <em>megcseréljük a
+sorrendet:</em> a szokásos „lebontás, utána újbóli felépítés” sorrend helyett a „felépítés, utána lebontás” sorrendet kell inkább
+választanunk. Előbb túl kell esni a nehezén, a pointert és a méretet pedig a függvény végén beállítani. Amúgy is, általában jó
+ötlet változatlanul hagyni az objektum állapotát jelző tagváltozókat, amíg a tényleges változások meg nem történtek.</p>
+
+<p>Tehát: lemásoljuk a kapott objektumot, közben elvégezve a kritikus műveleteket, és ha minden rendben volt, csak akkor frissítjük
+a vektor állapotát. Másképp fogalmazva, előbbre kell vennünk a másoló konstruktorból puskázott részt, és utána jöhet a
+destruktorból puskázott rész. Valahogy így:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt; &amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; const &amp;rhs) {
+    if (this != &amp;rhs) {
+        /* előbb új állapot felépítése, kb. másoló konstruktor */
+        size_t newsize = rhs.size_;
+        T *newdata = new T[newsize];
+        try {
+            for (size_t i = 0; i != newsize; ++i)
+                newdata[i] = rhs.data_[i];
+        } catch (...) {
+            delete[] newdata;
+            throw;
+        }
+
+        /* utána régi állapot lebontása, destruktor */
+        delete[] data_;
+
+        /* végül adminisztráció */
+        size_ = newsize;
+        data_ = newdata;
+    }
+    return *this;
+}</code></pre>
+
+<p>Ez már így teljesen jó. Ha sikerül létrehoznia a másolatot, megtörténik az értékadás; ha nem sikerül, akkor pedig teljesen
+változatlan marad az objektum. Az egyetlen probléma a kódrészlettel a kódduplikáció; mindezt, amit látunk benne, már egyszer
+leírtuk a másoló konstruktorban és a destruktorban.</p>
+
+<h3>Másolás és csere</h3>
+
+<p>Bevethetünk itt egy trükköt. Ha létrehozunk egy vektort ebben
+a függvényben lokális változóként, akkor le fog futni egy konstruktor és egy destruktor is. Ezt a vektort inicializálhatjuk
+úgy, hogy az <code>rhs</code>-t kapja paraméterként, hogy ez pont a másoló konstruktort hívja:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt; &amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; const &amp;rhs) {
+    Vector&lt;T&gt; copy = rhs;
+    /* ... */              // sikeres másolás
+}</code></pre>
+
+<img src="csereelott.svg" class="kozep" style="width: 32em;">
+
+<p>Így a másoláshoz tartozó <em>összes</em> kritikus műveletet elvégeztük egyetlen egy sorban. Ha eljutottunk a jelölt részhez, 
+akkor addigra minden sikeresen lezajlott. Ez azt jelenti, hogy a <code>copy</code> nevű objektumban van egy teljes értékű 
+másolatunk az <code>rhs</code>-ről, ami pont úgy néz ki, mint ahogy az értékadás után a <code>*this</code>-nek is ki kell néznie. 
+Ez a függvény végén meg fog szűnni. <strong>A trükk lényege itt jön:</strong> a másolás után <strong>megcseréljük</strong> a 
+<code>copy</code> és a <code>*this</code> objektum tartalmát. Ezzel ellopjuk a <code>copy</code>-tól a másolatot, azokat az 
+adatokat, amikre szükségünk van, és belecsempésszük azokat az adatokat, amelyekre már nincs szükségünk. A régi adatok 
+megszüntetését így a <code>copy</code> destruktora fogja végezni:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt; &amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; const &amp;rhs) {
+    Vector&lt;T&gt; copy = rhs;
+    std::swap(size_, copy.size_);
+    std::swap(data_, copy.data_);
+    return *this;
+}   /* &lt;- copy dtora itt fut, mert kijövünk a blokkból! */</code></pre>
+
+<img src="csereutan.svg" class="kozep" style="width: 32em;">
+
+<p>A két csere pedig egyszerű művelet, ott már csak egy számpárt és egy pointerpárt kell kicserélni, aközben kivétel már nem
+keletkezhet.</p>
+
+<p>Ezt az értékadó operátort egyébként még ennél is egyszerűbben szokás írni. Mivel eleve szükségünk van egy másolatra a
+paraméterként átvett objektumról, megtehetjük azt is, hogy rögtön másolatként vesszük azt át, tehát érték szerint:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+Vector&lt;T&gt; &amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt; rhs) {
+    std::swap(size_, rhs.size_);
+    std::swap(data_, rhs.data_);
+    return *this;
+}</code></pre>
+
+<p>És ezzel megkaptuk a Tökéletes Értékadó Operátort. Ezt <em>másolás és cserének</em> nevezik (copy and swap idiom). Mint az látszik
+is, így egyszerűbb visszavezetni a másoló értékadást a másoló konstruktorra, mintha a másoló konstruktort próbálnánk
+meg az értékadásra visszavezetni. Már csak azért is, mert a konstruktort megírni sokkal egyszerűbb, annak nem kell
+azzal foglalkoznia, hogy az objektum régi állapotát megőrizze. Az értékadó operátorban ilyennel is kellene bajlódni, ezért
+az szükségképpen bonyolultabb.</p>
+
+<h3>Mozgatás és csere</h3>
+
+<p>Az értékparaméterrel rendelkező értékadó operátor érdekessége, hogy <em>mozgató értékadásnak</em>
+is használható (move and swap idiom). Vegyük észre, ha ez az operátor egy jobbértéket kap operandusként, akkor
+az <code>rhs</code> érték típusú paramétert nem a másoló konstruktor, hanem a <em>move ctor</em> fogja
+inicializálni (mivel az értékparamétert mindig valamelyik konstruktor inicializálja). Ilyenkor a jobbérték
+objektum erőforrásai áthelyeződnek az <code>rhs</code> objektumba; a cserék által pedig átkerülnek a
+<code>*this</code> objektumba, amelynek az értéket adjuk. Végül pedig, a másoló értékadáshoz hasonlóan a
+<code>*this</code> régi erőforrásai, mivel bekerültek az élettartamában lokális változóként viselkedő,
+paraméter <code>rhs</code>-be, megszűnnek a visszatérés után.</p>
+
+<p>Ha így írjuk meg az értékadó operátort, akkor nem kell külön másoló és mozgató értékadás függvényt írni, elég ez az egy! Az 
+erőforrást kezelő osztály <em>öt speciális függvénye helyett csak négyet</em> kell megírnunk, és ezek ráadásul még jobban is 
+működnek, mintha külön írtuk volna meg őket.</p>
+
+<p>Az ilyen értékadó operátorban az önértékadást sem kell ellenőrizni. Mivel az <code>rhs</code> egy objektum,
+nem pedig referencia, nem lehet azonos a <code>*this</code> objektummal. A kivételbiztos értékadó operátorok
+működésükből adódóan általában automatikusan <em>önértékadás-biztosak</em> is, mert mindkét problémát a másolás előtti
+felszabadítás okozta. Ha előbb létrehozzuk az erőforrás másolatát, és utána szabadítjuk csak fel a régit, az
+önértékadásnál sincs gond. A tapasztalat egyébként azt mutatja, hogy minden olyan értékadó operátor, amelyben
+önértékadásra kell vizsgálni, sántít.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Alap, erős, és noexcept garanciák">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+    <a id="noexcept" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Alap, erős, és noexcept garanciák<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Mint azt látjuk, a problémák megint a külső erőforrásokkal vannak. Ezek azok, amelyeknek a létrehozása problémás lehet, és
+akár egyéb műveleteik közben is kivételek keletkezhetnek. A külső erőforrásokat pedig legtöbbször egy pointeren keresztül látjuk.
+Scott Meyers (az Effective C++ könyvsorozat szerzője) szokta emiatt kb. ezt mondani a kivételkezelésről:</p>
+
+<blockquote>
+<p>Amikor a kivételkezelésről beszélek, két dolgot tanítok meg az embereknek:</p>
+<ul>
+    <li>A pointerek az ellenségeitek, mert számos problémához vezetnek, amelyek miatt okos pointereket és hasonló osztályokat tervezünk.
+    <li>A pointerek a barátaitok, mert a pointereken végzett műveletek nem dobnak kivételt.
+</ul>
+<p>Ezután pedig kellemes napot kívánok nekik. :)</p>
+</blockquote>
+
+<p>És tényleg. Ezért tudjuk a legtöbb függvényünket kivételbiztossá tenni a másolás és csere módszerével. Először megpróbáljuk
+egy másolaton elvégezni a kért műveletet, aztán ha tudjuk, hogy minden rendben volt, akkor egy egyszerű cserével a módosítandó
+objektum helyére tesszük a másolatot. Ezt a stratégiát nem csak az értékadó operátornál, hanem bármely más függvénynél is
+követhetjük.</p>
+
+<p>A probléma szokás szerint a mellékhatásokkal van. Ha az elvégzendő részműveleteknek valamilyen mellékhatása is van, előfordulhat,
+hogy azt már nem tudjuk visszavonni. Erre mutat példát az alábbi, egyszerű kódrészlet:</p>
+
+<pre   ><code class="language-c">void print(std::ostream &amp; os, X const &amp; x) {
+    os &lt;&lt; &quot;Value of x: &quot; &lt;&lt; x;
+}</code></pre>
+
+<p>A kiírás kritikus művelet, mert erőforrást módosít (a fájlt). Előfordulhat, hogy kivétel keletkezik közben. Ha a sztringet
+még sikerült kiírni, de utána az objektum kiírása közben hiba történik, meg vagyunk lőve: a sztring már megjelent a fájlban.
+Mi a helyzet, ha előbb a teljes kiírandó sztringet összerakjuk egy <code>std::ostringstream</code> objektumban?</p>
+
+<pre   ><code class="language-c">void print(std::ostream &amp; os, X const &amp; x) {
+    std::ostringstream buf;
+    buf &lt;&lt; &quot;Value of x: &quot; &lt;&lt; x;
+    os &lt;&lt; buf.str();
+}</code></pre>
+
+<p>Sajnos itt a kiírást csak látszólag tettük atomivá, ezért tökéletesnek ez a megoldás sem nevezhető. Az összerakott
+sztring minden egyes karakterének kiírása kritikus művelet; előfordulhat, hogy az összerakott sztring olyan hosszú, hogy csak az
+első fele fér a fájlba, azután betelik a lemez (vagy megszakad a hálózati kapcsolat). Márpedig a kiírás ilyenkor is csak félig történik meg.</p>
+
+<p>Tíz-tizenöt éve még nem nagyon foglalkoztunk a C++ kódokban a kivételekkel. A kivételek helyes kezelése viszont másfajta
+gondolkodásra kell hogy kényszerítsen bennünket. A C++ tanulmányaink kezdetén azt mondjuk, hogy az alábbi
+osztálynak nem kell értékadó operátort írni:</p>
+
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+struct MyPair {
+    T1 first;
+    T2 second;
+};</code></pre>
+
+<p>A kivételeket figyelembe véve viszont azt vehetjük észre, hogy még ennél az osztálynál is szükség lehet saját értékadó
+operátorra. A fordító magától olyan értékadó operátort ír, amely az egyes adattagok értékadó operátorát hívja, azonban ha
+a <code>second</code> adattag értékadó operátora kivételt dob, akkor a párnak csak az első fele másolódott át. Így hiába
+nincsenek dinamikus adattagok, szükségünk lehet egy ilyen értékadó operátorra:</p>
+
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+MyPair&lt;T1, T2&gt; &amp; MyPair&lt;T1, T2&gt;::operator= (MyPair&lt;T1, T2&gt; rhs) {
+    /* csere: elvileg egyszerű, és nem dob */
+    std::swap(this-&gt;first, rhs.first);
+    std::swap(this-&gt;second, rhs.second);
+    return *this;
+};</code></pre>
+
+<p>Manapság olyan függvényeket igyekszünk írni, amelyek garanciákat adnak a hívóik számára. A kivételeket figyelembe vevő
+függvények háromféle garanciát adhatnak:</p>
+
+<dl>
+    <dt>Alap garancia (basic guarantee)</dt>
+    <dd>Azt ígérik, ha valahol kivétel keletkezik, a program összes objektuma érvényes állapotban marad. Ez nem jelenti
+    azt, hogy nem voltak mellékhatások, csak annyit, hogy az objektumok nem sérültek meg, belülről konzisztens állapotban
+    vannak, és a destruktoruk lefuttatható. Viszont a program állapota nem ismert; például egy tömb átmásolása csak félig
+    történt meg.</dd>
+
+    <dt>Erős garancia (strong guarantee)</dt>
+    <dd>Az erős garanciát biztosító függvények azt ígérik, ha kivétel keletkezik az általuk végzett művelet közben, akkor
+    a program állapota nem változik. Ez azt jelenti, hogy a függvény hatása atomi: vagy teljes egészében megtörténik,
+    vagy egyáltalán nem. Sikertelenség esetén a program összes objektuma olyan állapotban kell legyen, mintha meg se
+    hívtuk volna a függvényt.</dd>
+
+    <dt>„Nem dobhat” garancia (noexcept/nothrow guarantee)</dt>
+    <dd>Ezek a függvények azt ígérik, hogy mindig sikeresek, és soha nem dobnak kivételt. A beépített típusokon (számok,
+    pointerek stb.) végzett összes művelet ilyen, és mint láttuk, ez nagyon fontos ahhoz, hogy kivételbiztos kódot
+    tudjunk írni.</dd>
+</dl>
+
+<p>A kivételt nem dobó függvényeket legjobb, ha megjelöljük a fordító számára is, a függvény fejlécének végén. Ezt C++98-ban még a
+<code>throw</code> kulcsszóval kellett: <code>throw()</code>, C++11-ben már a <code>noexcept</code> kulcsszóval kell. Ennek több
+helyen jelentősége is van, például a mozgató konstruktoroknál.</p>
+
+<div class="sticky">C++11</div>
+<h3>A <code>noexcept</code> kulcsszó működése</h3>
+<p>A <code>noexcept</code> kulcsszót két dologra használhatjuk:</p>
+<ul>
+    <li>Függvények fejlécében minősítőként megadhatjuk vele, hogy az adott függvény dobhat-e kivételt.
+    <li>Kifejezésekben olyan operátorként, amely megadja egy kifejezésről, hogy a kiértékelése közben keletkezhet-e kivétel.
+</ul>
+<p>A függvényfejlécben történő használatának legegyszerűbb módja az, ha a fejléc végére írjuk,
+a <code>const</code> tagfüggvényekhez hasonló minősítőként. Például a vektor méretének lekérdezését az alábbi módon írhatjuk,
+jelezve, hogy sosem fog kivételt dobni. Ugyanezt csináltuk a mozgató konstruktoroknál is:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+size_t Vector&lt;T&gt;::get_size() noexcept {
+    return size_;
+}</code></pre>
+<p>A függvények minősítőit a <code>noexcept</code> operátorral tudjuk megvizsgálni kifejezésekben. Az operátor
+zárójelben egy kifejezést vár, amelyet a fordító még fordítási időben megvizsgál. Ha úgy találja, hogy a kiértékelésekor használt
+összes művelet <code>noexcept</code> minősítésű, akkor a kifejezés értéke igaz lesz, amúgy pedig hamis:</p>
+<pre   ><code class="language-c">std::string a, b;
+
+if (noexcept(a.size())
+    std::cout &lt;&lt; &quot;A sztringek merete barmikor biztonsagosan lekerdezheto.\n&quot;;
+else
+    std::cout &lt;&lt; &quot;A meret lekerdezese kivetelt dobhat.\n&quot;;
+
+if (noexcept(a = b))
+    std::cout &lt;&lt; &quot;A sztringek ertekadasa mindig sikeres.\n&quot;;
+else
+    std::cout &lt;&lt; &quot;A sztringek ertekadasa kivetelt dobhat.\n&quot;;</code></pre>
+<p>A <code>noexcept</code> belseje a <code>sizeof</code> és a <code>decltype</code> operátorhoz hasonlóan ún. kiértékeletlen
+környezet (unevaluated context). A benne lévő kifejezést nem értékeli ki a fordító, csak megvizsgálja a hívott függvényeket.
+A fenti kódban így az <code>a</code> objektum változatlan marad.</p>
+<p>A függvényfejlécben történő használat esetén nem csak magában állhat az operátor, hanem ott is megadhatunk egy logikai típusra
+kiértékelődő kifejezést, amely megmondja, hogy az adott függvényt <code>noexcept</code>-nek kell tekinteni vagy nem. Például:</p>
+<pre   ><code class="language-c">template &lt;typename T1, typename T2&gt;
+struct MyPair {
+    T1 first;
+    T2 second;
+};
+
+template &lt;typename T1, typename T2&gt;
+void my_swap(MyPair&lt;T1, T2&gt; &amp; p1, MyPair&lt;T1, T2&gt; &amp; p2)
+    noexcept(noexcept(std::swap(p1.first, p2.first))
+             &amp;&amp; noexcept(std::swap(p1.second, p2.second)))
+{
+    std::swap(p1.first, p2.first);
+    std::swap(p1.second, p2.second);
+}</code></pre>
+<p>Ezzel azt mondjuk a fordítónak, hogy akkor tudunk kivétel keletkezése nélkül megcserélni két párt (megcserélve a bennük
+lévő adattagokat), ha az <code>std::swap()</code> függvény kivétel keletkezése nélkül meg tudja cserélni a <code>T1</code>-eket és
+a <code>T2</code>-ket is. Ez sablon kódnál nagyon hasznos, mert a példányosításnál használt típusokról a sablon kód
+írásakor még nem tudunk semmit.</p>
+
+<h3>Dobhat-e kivételt a <code>noexcept</code> függvény?</h3>
+
+<p>Fontos tudni, hogy pontosan mit jelent a <code>noexcept</code> minősítés. Ez ugyanis nem azt jelenti, hogy
+egy függvény soha nem dobhat kivételt, és azt különösen nem, hogy a fordító fordítási időben ellenőrizni akarná ezt.
+A <code>noexcept</code> azt jelenti, hogy a függvény nem <em>kellene</em> kivételt dobjon, és ha kivételt dob,
+akkor valami nagyon nagy baj van. Akkora baj, hogy amiatt meg kell szakítani a programot. A <code>noexcept</code> függvényben
+keletkező, vagy nem elkapott kivétel leginkább egy <code>assert()</code>-re hasonlít; az <code>assert()</code>-tel
+is a „lehetetlen” események bekövetkezését vizsgáljuk, azokét az eseményekét, amelyek programozási hibára utalnak.</p>
+
+<p>A <code>throw(IlyenKivetel, OlyanKivetel, AmolyanKivetel)</code> formátumú minősítést a C++11-ben azért nyugdíjazták,
+mert a gyakorlatban nem bizonyult hasznosnak. Sok más nyelvben, például a Javaban is, azt lehet látni, hogy elméletben
+nagyon szépen néz ki az ötlet, de a gyakorlatban inkább csak akadályozza a munkát, vagy arra kényszeríti a programozót,
+hogy megkerülje a nyelvi korlátot. A megkerülés pedig ott vagy <code>throw(Exception)</code> (bármit dobhat)
+minősítésekből, vagy üres <code>catch {}</code> blokkokból áll, amik egyszerűen elnyelik a kivételeket – ez pedig
+rontja a kód minőségét.</p>
+
+<p>A sablon kódoknál látszik a legjobban, hogy miért működésképtelen az ötlet C++-ban.
+Mit tudnánk írni kérdőjelekkel jelzett helyre, ha azt sem tudjuk, a <code>T</code> milyen típus lesz?</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+void func() throw(... ????? ...) {
+    T x;
+}</code></pre>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mozgató konstruktorok és kivételek">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+    <a id="moveifnoexcept" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Mozgató konstruktorok és kivételek<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Emlékezzünk vissza a múltkori, <a href="../ea04/index.html#myvector">profi memóriakezelésű vektorra</a>! Ennek lényege az 
+volt, hogy különválasztottuk egymástól a dinamikus memória foglalását és az ott elhelyezkedő objektumok inicializálását. A 
+vektorban ezért a dinamikus memóriaterületre mutató pointer mellett kétféle méret volt eltárolva. A <code>size_</code> adattag 
+mutatta, hogy meddig vannak a területen inicializálva az elemek, hol vannak ténylegesen objektumok, a <code>capacity_</code> pedig 
+azt, hogy mekkora a terület teljes mérete.</p>
+
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class MyVector {
+  private:
+    T *pData_;
+    size_t size_;
+    size_t capacity_;
+};</code></pre>
+
+<img src="vektor.svg" class="kozep" style="width: 30em;">
+
+<p>Ennek a vektornak a kivételeket is figyelembe vevő másoló konstruktorát így tudjuk megírni:</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+MyVector&lt;T&gt;::MyVector(MyVector&lt;T&gt; const &amp;the_other) {
+    size_ = the_other.size_;
+    capacity_ = the_other.capacity_;
+    pData_ = static_cast&lt;T*&gt;(::operator new(sizeof(T) * capacity_)); // kivétel?
+    size_t i;
+    try {
+        for (i = 0; i != size_; ++i)
+            new (&amp;pData_[i]) T(the_other.pData_[i]);                 // kivétel?
+    } catch (...) {
+        for (size_t j = 0; j != i; ++j)
+            pData_[j].~T();
+        ::operator delete(pData_);
+        throw;
+    }
+}</code></pre>
+
+<p class="megjegyzes">Figyelem! Itt most az előző programrészek <code>new[]</code>-ja helyett áttértünk placement new szintaxisra! 
+Ez az osztály <em>nem ugyanaz</em>, mint az előző vektor. Ennek a destruktora is másmilyen lenne. Lent ennek a 
+<code>reserve()</code> függvényéről lesz szó, amelyik előfoglalja a helyet a később létrejövő objektumoknak – a sima 
+<code>new[]</code> operátorral nem is lehetne ilyet megvalósítani.</p>
+
+<p>Vizsgáljuk meg a függvényt sorról sorra! Két helyen keletkezhet benne kivétel. Az első a foglalás (<code>::operator
+new</code>). Ha ez nem sikerül, a beépített függvény <code>std::bad_alloc</code> típusú kivételt dob, amit szándékosan nem
+kapunk el, hogy a hívó lássa, a vektor létrehozása nem sikerült. A másik hely pedig a <code>T</code>-k másoló konstruktorának
+hívása. Erről nem tudunk semmit, vagy dobhat valamit, vagy nem, de mivel erőforrást kezelünk, fel kell készülnünk rá. Ha dob,
+akkor a foglalt memóriát fel kell szabadítani kézzel, mert a <code>MyVector</code> még nem jött létre, és a destruktora ezért
+nem fut automatikusan.</p>
+
+<p>Ami fontos, hogy ezen kívül még a kézzel létrehozott <code>T</code>-ket is fel kell szabadítani. Mivel
+azok az objektumok „placement new” operátorral lettek lefoglalva, a destruktorok hívásáért is mi felelünk. Ha az
+<code>i</code>-edik indexű <code>T</code> másoló konstruktora hibát dobott, akkor a <code>0...i-1</code> indexen lévő elemek már
+létrejöttek, ezért azoknak a destruktorát meg kell hívni a memóriaterület felszabadítása előtt. Ha mindez megtörtént, akkor
+jutottunk el oda, hogy továbbdobhatjuk az ismeretlen típusú hibát. (Mindez megoldható lenne konstruktor delegálással is,
+de így jobban látszik, hogy mi történik.)</p>
+
+<p>Egy másik tagfüggvény, a <code>reserve()</code> feladata az volt, hogy átméretezze a dinamikus tömböt, megtartva az 
+objektumokat. Amióta ismerjük a <a href="../ea06/index.html#movector">mozgató konstruktorokat</a>, ezt valahogy így írhatnánk 
+(egyelőre kivételekre nem gondolva):</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void MyVector&lt;T&gt;::reserve(size_t newcap) {
+    if (newcap &lt; size_)
+        return;
+
+    T *newPData = static_cast&lt;T*&gt;(::operator new(sizeof(T) * newcap)); // ?
+    for (size_t i = 0; i != size_; ++i) {
+        new (&amp;newPData[i]) T(std::move(pData_[i]));                    // ?
+        pData_[i].~T();
+    }
+    ::operator delete(pData_);
+    capacity_ = newcap;
+    pData_ = newPData;
+}</code></pre>
+
+<p>Nézzük meg, itt mi történik egy kivétel keletkezésekor! Az új memóriaterület foglalása dobhat egy hibát. Ezt nem kapjuk el,
+jelezve a hívónak, hogy nincs hely; a hívó talán azért próbálja meg előfoglalni a helyet az objektumoknak, hogy később már
+ne keletkezzen hiba.</p>
+
+<p>Ha az új memóriaterület megvan, akkor elkezdhetjük <em>áthelyezni az objektumokat.</em> A <a href="../ea04/index.html#myvector">múltkori előadáson</a> bemutatott másoláshoz képest egy okosabb dolgot tudunk itt csinálni: mivel nem másolatot szeretnénk a 
+<code>T</code>-kről, hanem áthelyezni szeretnénk őket az új memóriaterületre, a mozgató konstruktort használjuk. Ehhez az 
+<code>std::move</code> függvénnyel jobbértéknek tekintjük a balérték tömbelemeket. Tudjuk azt is, hogy az objektum, amiből 
+mozgattunk, még élőnek számít, ezért a destruktorát még meg kell hívni.</p>
+
+<p>A lenti ábra egy köztes állapotot mutat, amikor az objektumok egy része már áthelyeződött az új tömbbe, a másik részük pedig még 
+mindig a régi helyen tárolódik. Kérdés: mi történik akkor, ha a mozgató konstruktor kivételt dob? Bár annak triviális a feladata, 
+mégis dobhat kivételt.</p>
+
+<img src="vektorreserve.svg" class="kozep" style="width: 36em;">
+
+<p>Ha ilyen történne, akkor nagyon nagy bajban lennénk. Miért is? Mert a régi helyről már elmozdítottuk az objektumokat. A mozgatás 
+<em>destruktív művelet,</em> módosítja az objektumot, amiből mozgatunk. Ha a ciklusban kivételt kapunk, akkor tudjuk, hogy a 
+<code>reserve()</code> művelet nem sikerült, és ezért – ha erős garanciát szeretnénk adni a hívónak – vissza kellene alakítanunk a 
+vektort az eredeti állapotába. Ez azt jelenti, hogy a már elmozdított objektumokat vissza kellene raknunk az eredeti helyükre, 
+mindent visszaalakítva a régi állapotba (rollback). De ezt azzal a mozgató konstruktorral kellene megtennünk, amelyről épp most 
+derült ki, hogy nem mindig sikeres... Így a visszahelyezgetés közben akár újabb kivételt kaphatnánk. Innentől pedig menthetetlen a 
+helyzet.</p>
+
+<img src="vektorreservefail.svg" class="kozep" style="width: 36em;">
+
+<p>A problémát a destruktív művelet elkerülésével tudjuk megoldani: nem mozgatunk, hanem másolunk. Ezt azonban nem szeretnénk,
+mert lassabb. Szerencsére nem kell lemondanunk a hatékonyságról, mert nem kell feltétlenül a másoláshoz ragaszkodnunk. Ha a
+mozgató konstruktorról tudjuk, hogy nem dobhat kivételt, akkor akár mozgathatjuk is az objektumokat, mert akkor nem lehet ilyen probléma. Ha
+viszont dobhat kivételt, csak akkor kell megelégednünk a másolással. Itt jön a képbe a <code>noexcept</code> operátor, amellyel le
+tudjuk kérdezni a fordítótól, hogy dobhat-e kivételt a mozgatás. Lényegében erről van szó:</p>
+
+<pre   ><code class="language-c">if (noexcept( T(std::move(pData_[i])) ))        /* biztonságos ez a művelet? */
+    new (&amp;newPData[i]) T(std::move(pData_[i])); /* ha igen, mozgatunk :) */
+else
+    new (&amp;newPData[i]) T(pData_[i]);            /* ha dobhat, másolunk :( */</code></pre>
+
+<p>Mindezt sokkal egyszerűbben leírhatjuk az <code>std::move_if_noexcept()</code> függvénysablonnal
+(<code>#include &lt;utility&gt;</code>). Ez a függvénysablon a paraméterét az <code>std::move</code>-hoz hasonlóan jobbérték
+referenciává konvertálja, de <em>csak akkor,</em> ha a mozgató konstruktora <code>noexcept</code> minősítővel rendelkezik.
+Amúgy a visszatérési értéke balérték marad. Ha ennek az értékét kapja a <code>T</code> konstruktora, akkor
+<code>noexcept</code>-es mozgatás esetén a mozgató konstruktor, nem <code>noexcept</code>-es mozgatás esetén a balérték
+paraméter miatt a másoló konstruktor fog hívódni:</p>
+
+<pre   ><code class="language-c">new (&amp;newPData[i]) T(std::move_if_noexcept(pData_[i]));</code></pre>
+
+<p>Így pedig tudni fogjuk, hogy ha kivételt kaptunk, az eredeti objektumokat nem mozgattuk el a helyükről, hanem csak
+lemásoltuk őket – tehát nincs más dolgunk, mint megszüntetni a másolatokat, mert az eredeti objektumok változatlanok.</p>
+
+<pre   ><code class="language-cbub">template &lt;typename T&gt;
+void MyVector&lt;T&gt;::reserve(size_t newcap) {
+    if (newcap &lt; size_)
+        return;
+
+    T *newPData = static_cast&lt;T*&gt;(::operator new(sizeof(T) * newcap)); // 1
+    size_t i;
+    try {
+        for (i = 0; i != size_; ++i)
+            new (&amp;newPData[i]) T(std::move_if_noexcept(pData_[i]));    // 2
+    } catch (...) {
+        for (size_t j = 0; j != i; ++j)
+            newPData[j].~T();
+        ::operator delete(newPData);
+        throw;
+    }
+    for (i = 0; i != size_; ++i)
+        pData_[i].~T();
+    ::operator delete(pData_);
+    capacity_ = newcap;
+    pData_ = newPData;
+}</code></pre>
+
+<p class="megjegyzes">A ciklusok kicsit sokan lettek, de az STL tartalmaz ilyesmi algoritmusokat is.
+Pl. az <code>std::uninitialized_copy</code> a placement new szintaxissal másolja az elemeket, hasonlóan a
+2-essel jelzett sorhoz. A függvény a jelenlegi formájában is megírható lenne egyszerűbben,
+de most nem az egyszerűség volt a cél, hanem hogy látszódjon, hogy alakult ki.</p>
+
+<p>A kétféle kivételt az alábbiak szerint kezeljük. Ha az új terület foglalása dobott, azt a kivételt hagyjuk továbbmenni a 
+hívónak. Ha pedig a másoló konstruktorok dobnak, akkor az új tömböt felszabadítjuk – és a problémát szintén jelezzük a hívónak, a 
+kivétel továbbdobása által. Az új tömböt felszabadíthatjuk, mert biztos, hogy másolatok voltak benne. Ezek nem lehetnek mozgatott 
+objektumok, mert ahhoz a mozgató konstruktornak kellett volna futnia a 2-essel jelzett sorban, aminek <code>noexcept</code> 
+minősítővel kellett volna rendelkeznie.</p>
+
+<p>Mit tanulhatunk ebből? Azt, hogy a mozgató konstruktoroknak <em>lehetőleg nem kellene kivételt dobniuk,</em> és ha nem dobnak, akkor
+<em>meg kell kapniuk a <code>noexcept</code> minősítőt</em> is. Különben előfordulhatnak olyan körülmények, ahol nem használhatóak, hanem
+helyettük a sokkal lassabb másoló konstruktort kell hívni.
+
+<div class="megjegyzes">
+
+<p>Amíg a mozgató konstruktor csak a régi és az új objektummal dolgozik, addig nem is szokott nehéz lenni a <code>noexcept</code>
+megvalósítás. Vegyünk példának egy sztring osztályt, amelyben az üres sztringet is tároljuk, hogy sose lehessen null pointerünk.
+Tudjuk, hogy egy elmozgatott objektummal semmit nem szabad csinálni, csak megszüntetni vagy új értéket adni neki (azaz csak a
+destruktora vagy az értékadó operátora futhat). Pontosan ezért jó ötlet null pointert hagyni benne:</p>
+
+<pre   ><code class="language-cbub">class String {
+  public:
+    String() {
+        data_ = new char[1];
+        strcpy(data_, &quot;&quot;);
+    }
+    String(String &amp;&amp; the_other) noexcept { // nem dob kivételt
+        data_ = the_other.data_;
+        the_other.data_ = nullptr;
+    }
+    char const* c_str() noexcept { // nullptr-t adhat... vagy mégsem?
+        return data_;
+    }
+
+  private:
+    char *data_;
+};</code></pre>
+
+<p>Így ennek az osztálynak adhat a <code>c_str()</code> függvénye null pointert – de ha elmozgatott objektumra hívjuk
+ezt a függvényt, az amúgy is hibának számít. Tehát ebben az esetben ez nem az osztály, hanem a hívó hibája lenne.</p>
+
+</div>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_7">
+
+<a id="7" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">7</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#7"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    <ul>
+    <li>Bjarne Stroustrup: The Design and Evolution of C++. Addison-Wesley, 1994.
+    <li>Scott Meyers: Effective C++: 55 Specific Ways to Improve Your Programs and Designs. Addison-Wesley, 2005.
+    <li><a href="http://www.parashift.com/c++-faq/ctors-can-throw.html">How can I handle a constructor that fails? </a>, Marshall Cline: C++ FAQ Lite.
+    <li><a href="http://www.parashift.com/c++-faq/dtors-shouldnt-throw.html">How can I handle a destructor that fails?</a>, Marshall Cline: C++ FAQ Lite.
+    <li>David Abrahams: <a href="http://www.boost.org/community/exception_safety.html">Lessons Learned from Specifying Exception-Safety for the C++ Standard Library</a>.
+    <li><a href="http://www.artima.com/intv/handcuffsP.html">The Trouble with Checked Exceptions: A Conversation with Anders Hejlsberg, Part II</a>
+    – Bill Venners with Bruce Eckel. (C#-ban a kivételekről.)
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

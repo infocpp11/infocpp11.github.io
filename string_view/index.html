@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Az std::string_view osztály</title>
+<meta property="og:title" content="TEST InfoC++11 :: Az std::string_view osztály">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Hány sztring osztályunk van egy projekten belül? Mennyi bosszúságot okoz ez? Hogy segíthetünk ezen?">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Hány sztring osztályunk van egy projekten belül? Mennyi bosszúságot okoz ez? Hogy segíthetünk ezen?">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Az std::string_view osztály">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Az std::string_view osztály</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.04.10.</p>
+<p class="kivonat">Hány sztring osztályunk van egy projekten belül? Mennyi bosszúságot okoz ez? Hogy segíthetünk ezen?</p>
+</div>
+
+<p>C++ tanulmányaink során elég nehéz megúszni egy sztring osztály elkészítését. Vagy többét. A sztring igazi állatorvosi ló, 
+amelyen mindenféle memóriakezelési probléma bemutatható. A helyzet az, hogy valós projektek is tele vannak egyedi fejlesztésű 
+sztring osztályokkal. </p>
+
+<img src="sztringek-mindenhol.png" class="kozep arnyek" alt="Sztringek, sztringek mindenhol">
+
+<p>A problémát az okozza, hogy maga a nyelv <em>beépített típusként</em> nem ismeri a sztringet. Létezik a karaktertömb – beépített 
+típusként –, de ez nem adható át értékként. Létezik a szabványosított sztring osztály, az <code>std::string</code> – ez meg 
+valójában csak egy osztály, amely nem igazán része a nyelvnek. Ez kényelmetlenségeket okoz, és kezdők számára érthetetlen 
+helyzeteket teremt. Hogy magyarázzuk meg ezeket a furcsa kimeneteket?</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::string h = &quot;hello&quot;;
+    
+    std::cout &lt;&lt; h + &quot;!&quot;;           // hello!
+    std::cout &lt;&lt; &quot;!&quot; + h;           // !hello
+    std::cout &lt;&lt; &quot;hello&quot; + &quot;!&quot;;     // compile error  (???!?!)
+    
+    std::cout &lt;&lt; h + '!';           // hello!
+    std::cout &lt;&lt; '!' + h;           // !hello
+    std::cout &lt;&lt; '!' + '!';         // 66  (??!?!)
+}</code></pre>
+
+<p>Ez csak a szabványos sztring volt. Hab a tortán az összes többi keretrendszer saját sztring osztálya. Bármilyen alkalmazás- vagy 
+grafikus keretrendszert használunk, nem ússzuk meg, hogy előbb-utóbb előkerüljenek ezek is: QString, wxString és a többiek.</p>
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Paraméterként átadott sztring?</a>
+                      <li><a href="index.html#2" class="">Az std::string_view osztály</a>
+                      <li><a href="index.html#3" class="">Sztringnek látszó tárgy</a>
+                      <li><a href="index.html#4" class="">Részsztringek kezelése</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Paraméterként átadott sztring?">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Paraméterként átadott sztring?<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Maradjunk most a szabványos karaktertömbnél és sztring osztálynál. A kétféle reprezentáció nemcsak kényelmetlen, hanem a 
+hatékonyságot is rontja. Tegyük fel, hogy szeretnénk átadni egy függvénynek paraméterként egy sztringet, például egy megnyitandó 
+fájl nevét.</p>
+
+<p>Hogyan tesszük ezt? Első ötletünk a megszokott <code>char const *</code> lehet: nullával lezárt karaktertömbre mutató pointer.
+Ez azoknak kellemetlen, akiknek a hívás helyén egy <code>std::string</code> objektumban van az információ:</p>
+
+<pre   ><code class="language-c">void fajlt_beolvas(char const *fajlnev) {
+    // ...
+}
+
+int main() {
+    std::string fn;
+    std::cin &gt;&gt; fn;
+    fajlt_beolvas(fn.c_str());  // :(
+}</code></pre>
+
+<p>A problémát az okozza, hogy az <code>std::string</code> osztálynak nincsen <code>char const *</code> konverziója. Ez jogos, 
+általában véve elég rossz ötlet beépített típusra implicit konverziót definiálni, mert szinte bármilyen műveletnél megtalálná a 
+beépített operátorokat a fordító. Ehelyett a sztring osztálynak <code>.c_str()</code> tagfüggvénye van, amely az objektum által 
+kezelt memóriaterületre mutató pointert ad. Viszont kényelmetlen mindig kiírni a metódushívást a paraméterátadás helyén.</p>
+
+<p>Próbálkozzunk meg akkor inkább egy <code>std::string</code> átvételével!</p>
+
+<pre   ><code class="language-c">void fajlt_beolvas(std::string const &amp; fajlnev) {
+    // ...
+}
+
+int main() {
+    fajlt_beolvas(&quot;adat.txt&quot;);  // std::string(&quot;adat.txt&quot;);
+}</code></pre>
+
+<p>Ilyenkor kisebb hatékonytalanságba futunk bele. Ha a hívónak nem sztringje van, hanem C-s karaktertömbje, akkor egy konverziót
+kell végrehajtani: meghívni az <code>std::string(char const *)</code> paraméterű konstruktorát. Bár ez megtörténik automatikusan,
+de ez a konstruktor létrehozza a sztring másolatát dinamikus memóriaterületen – ami pedig teljesen felesleges volt.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az std::string_view osztály">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Az std::string_view osztály<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A megoldást egy olyan osztály adja, amelyik:</p>
+<ul>
+    <li>Automatikusan, konverzióval létrehozható – a nyers pointerrel ellentétben.</li>
+    <li>Nem végez memóriakezelést – ahogy a nyers pointernél is ez teljesül.</li>
+</ul>
+
+<p>Vegyük észre, hogy valójában az <code>std::string</code> memóriakezelésére itt nincsen szükségünk. A függvény első változata, a 
+<code>char const *</code> paraméterű, már rámutatott erre: amíg a függvény belsejében vagyunk, és nem térünk vissza a hívóhoz, 
+addig a hívó nem is fogja kivenni a pointer alól a karaktertömböt. Ezért nincsen szükség másolatra se. Egy olyan objektum kell csak, 
+amelyik hivatkozik egy karaktertömböt a memóriában, de nem ő maga kezeli annak élettartamát.</p>
+
+<p>A keresett osztály az <code>std::string_view</code>, amelyik a C++17 óta létezik. A legegyszerűbb használatához a következőket kell
+tudni:</p>
+
+<ul>
+    <li>Eltárol egy hivatkozást egy sztringhez, de nem másolja le azt. Tudja, hogy hol van egy karaktertömb eleje és vége
+        a memóriában, de nem ő foglalja, és nem is ő szabadítja fel azt. Úgy képzelhetjük el, mint egy szöveg referenciáját
+        – erre utal a <code>view</code> szó a nevében.</li>
+    <li>Van <code>std::string_view(char const *)</code> konstruktora, tehát képes „becsomagolni” egy nullával lezárt
+        karaktertömböt.</li>
+    <li>Van <code>std::string::operator std::string_view()</code> konverzió is, tehát egy meglévő sztring objektumból is
+        létrehozható.</li>
+    <li>Egyébiránt sztringként viselkedik, pl. <code>==</code> operátorral egyenlőségre vizsgálható, <code>[]</code> operátorral
+        indexelhető stb.</li>
+</ul>
+
+<p>Ez kényelmesen és hatékonyan használható mindkét esetben:</p>
+
+<pre   ><code class="language-c">#include &lt;string_view&gt;
+
+void fajlt_beolvas(std::string_view fajlnev) {
+    // ...
+}
+
+int main() {
+    fajlt_beolvas(&quot;adat.txt&quot;);  // std::string_view(&quot;adat.txt&quot;),
+                                // de nem készül dinamikus másolat!
+    
+    std::string fn;
+    std::cin &gt;&gt; fn;
+    fajlt_beolvas(fn);          // fn.operator std::string_view(),
+                                // és automatikus a konverzió!
+}</code></pre>
+
+<p>A használatakor arra kell ügyelni, hogy a <code>string_view</code> objektum ne élje túl a karaktertömböt,
+azaz a hivatkozott sztring objektumot. Leginkább emiatt függvényparaméternek alkalmas ez a típus.</p>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Sztringnek látszó tárgy">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Sztringnek látszó tárgy<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Az <code>std::string_view</code> összehasonlító operátorokkal, iterátorokkal és egyéb tagfüggvényekkel is rendelkezik. Ezért
+célravezetőbb lehet sok helyen ezt használni sima <code>char const *</code> helyett.</p>
+
+
+<pre   ><code class="language-c">#include &lt;string_view&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    char s1[100], s2[100];
+    std::cin &gt;&gt; s1 &gt;&gt; s2;
+    
+    if (std::string_view(s1) == std::string_view(s2)) { // operator==
+        std::cout &lt;&lt; &quot;egyforma&quot; &lt;&lt; std::endl;
+    }
+    
+    int cnt = 0;
+    for (char c : std::string_view(s1))                 // iterator
+        if (c == 'x')
+            ++cnt;
+    std::cout &lt;&lt; cnt &lt;&lt; std::endl;
+}</code></pre>
+
+<p>Ezek a példák persze kicsit sántítanak, mert <code>char const *</code> konstruktorparaméter esetén a <code>string_view</code>
+kénytelen a konstruktorban meghatározni a sztring hosszát – és az összehasonlításhoz, illetve a megszámláláshoz amúgy is
+végig kellett volna menni a tömbön.</p>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Részsztringek kezelése">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Részsztringek kezelése<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Vannak olyan sztringműveletek, amelyek részsztringeket állítanak elő. Például:</p>
+
+<ul>
+    <li><code>std::string::substr(pos, len)</code> – részsztring előállítása, mint alapművelet.</li>
+    <li>Egy sztring elejéről és végéről a szóközök levágása – ezt <code>trim()</code>-nek szoktuk nevezni.</li>
+    <li>Sztring darabolása – <code>split()</code>.</li>
+</ul>
+
+<p>Ha ezekkel <code>std::string</code> objektum(oka)t állítunk elő, akkor az lassú lehet, hiszen minden egyes részsztring
+előállítása ilyenkor dinamikus memóriakezelést, tömbmásolást jelent. Viszont ha tudjuk, hogy a darabolt/vágott sztring megmarad
+a memóriában, <code>string</code>-ek helyett <code>string_view</code> objektumokat is létrehozhatunk, amelyek csak hivatkoznak
+a vágott részre.</p>
+
+<p>Pl. a <code>trim()</code> művelethez:</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+std::string_view trim(std::string_view s) {
+    /* szóközök az elején */
+    size_t begin = 0;
+    while (begin &lt; s.length() &amp;&amp; s[begin] == ' ')
+        ++begin;
+    
+    /* szóközök a végén */
+    size_t end = s.length();
+    while (end &gt; begin &amp;&amp; s[end - 1] == ' ')
+        --end;
+    
+    return s.substr(begin, end - begin);    // string_view::substr
+}
+
+int main() {
+    std::cout &lt;&lt; &quot;Írj be egy sort!\n&quot;;
+    std::string eredeti;
+    std::getline(std::cin, eredeti);
+    
+    std::string_view vagott = trim(eredeti);
+    std::cout &lt;&lt; '[' &lt;&lt; vagott &lt;&lt; ']';
+}</code></pre>
+
+<p>Hasonlóképp működhetne a <code>split()</code> is, amelyik <code>std::vector&lt;std::string_view&gt;</code>
+objektumot állítana elő.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

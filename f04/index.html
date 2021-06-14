@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: 4. hét: Tároló osztályok</title>
+<meta property="og:title" content="TEST InfoC++11 :: 4. hét: Tároló osztályok">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="TEST InfoC++11 :: 4. hét: Tároló osztályok">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="TEST InfoC++11 :: 4. hét: Tároló osztályok">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class=" h3toid" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="4. hét: Tároló osztályok">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">4. hét: Tároló osztályok</h1>
+
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Memóriakezelés</a>
+                      <li><a href="index.html#2" class="">Auto és decltype</a>
+                      <li><a href="index.html#3" class="">Iterátorokkal kapcsolatos feladatok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Memóriakezelés">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+    <a id="feladat_operator_new" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Memóriakezelés<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Osztályonkénti <code>operator new</code></h3>
+
+<p>Egy C++ program rengeteg objektumot hoz létre és töröl ki a futása közben. 
+Ezek sokszor néhány fontos osztály objektumai, pl. láncolt listák elemei, 
+üzenetek, pontok, vonalak és hasonlók. Sok apró objektumnál a foglalás és 
+felszabadítás nem túl hatékony, sőt a dinamikusan kezelt memóriaterület 
+töredezettségét is okozza. Ez azt jelenti, hogy a lefoglalt területek nem 
+egybefüggőek; rossz esetben a közöttük lévő üres hely túl kicsi ahhoz, hogy ott 
+új objektum, főleg tömb, elférjen.</p>
+
+<p>A problémán többféleképp lehet segíteni. Az egyik jól bevált megoldás az, ha a különféle osztályoknak saját <code>new</code> 
+és <code>delete</code> operátort írunk. Az eltérő típusú objektumok így különálló „készletből” kaphatnak memóriaterületet 
+(memory pool), és a foglalás is gyorsabb lehet, mivel az egyes készletek nyilvántartása egymástól független lehet. Az 
+osztályspecifikus dinamikus memóriakezeléshez nem kell mást tenni, mint a globális <code>new</code> és <code>delete</code> 
+operátorokhoz hasonló fejlécű tagfüggvényeket definiálni az osztályban. Ha létezik <code>T::operator new</code>, akkor a fordító 
+egy <code>new T</code> kifejezésnél automatikusan ezt használja a globális <code>new</code> helyett.</p>
+
+<p class="megjegyzes"> Az osztálybeli <code>operator new</code> a szokásos módon
+átveszi paraméterként a méretet: gondoljunk arra, hogy leszármazás esetén a
+leszármazott objektum más méretű lehet. A tömbökhöz való <code>new[]</code> és
+<code>delete[]</code> operátort külön kell átdefiniálni.</p>
+
+<p>Tegyük fel, hogy egy programban a <code>Gadget</code> típusú objektumok száma
+nagyon gyorsan változik, ugyanakkor tudjuk, hogy maximum 64 darab lesz belőlük. A
+feladatod az osztályhoz egy olyan <code>operator new</code> és
+<code>delete</code> párost írni, amelyik egy alkalmasan méretezett
+memóriaterületről foglalja a <code>Gadget</code> objektumokat! Ez most az
+egyszerűség kedvéért legyen majd egy <code>64*sizeof(Gadget)</code> bájt méretű
+tömb az objektumoknak, és egy <code>bool[64]</code> tömb, amely a foglaltságokat
+mutatja.</p>
+
+<p class="megjegyzes">Az igazi, gyors memóriakezelők nem pont így működnek: a
+foglaltság tömbjében lineáris keresést végezni nyilvánvalóan lassú művelet. Ez a
+feladat a technika használatát és a szintaxist hivatott bemutatni.</p>
+
+<ol class="feladatok">
+    <li>Írd meg a <code>Gadget</code> osztályt egy, hogy legyen egy <code>int</code>
+    adattagja, amely beállítható, lekérdezhető! Teszteld előbb szokványos dinamikus
+    memóriakezeléssel.
+    <li>Hozz létre egy <code>GadgetAllocator</code> osztályt, amelynek statikus változója
+    az objektumokhoz való tömb és a foglaltságok tömbje. Írj ennek az osztálynak egy
+    statikus <code>allocate()</code> és <code>free()</code> tagfüggvényt, amelyek
+    a <code>new</code> és <code>delete</code> operátorhoz hasonló fejléccel és
+    szereppel rendelkeznek! (Ha a <code>Gadget</code> osztály barát, akkor ezek akár
+    privátak is lehetnek.) Figyelj arra, hogy belül indexekkel dolgozol, de a hívónak
+    pointert kell adnod, és pointert fogsz kapni. Használd a <code>reinterpret_cast</code>-ot
+    a pointerek konverziójához!
+    <li>Írd meg a <code>Gadget</code> osztály <code>new</code> és <code>delete</code>
+    operátorát úgy, hogy a <code>GadgetAllocator</code> <code>allocate()</code> és
+    <code>free()</code> függvényeit használják!
+    <li>Teszteld így is az osztályt!
+    <li>Adj hozzá egy statikus függvényt, amely a <code>Gadget</code>-ek memóriakészletének
+    foglaltsági térképét rajzolja ki! Ellenőrizd ezzel is a működést!
+    <li>Ha még nem dob kivételt az <code>operator new</code>, alakítsd át: ha nincs több
+    <code>Gadget</code>-nek hely, dobjon <code>std::bad_alloc</code> kivételt.
+    <li>Észreveheted, hogy azt is meg tudod mondani az <code>operator delete</code> függvényben,
+    ha nem foglalt objektumot próbál a hívó felszabadítani. Dobj ekkor is kivételt!
+    <li>A foglaltsági táblázatból bármikor lehet tudni, hol van élő objektum a tömbben.
+    Írj egy függvényt, amely varázsütésre felszabadítja az összeset! Milyen hasznos dolgot
+    tud ez csinálni azon kívül, hogy szabad jelöléseket tesz a foglaltság tömbbe?
+    <li>Mi történik, ha valaki leszármazik a <code>Gadget</code> osztályból, és egy leszármazottat
+    foglal dinamikusan? Tegyél valamit ezellen!
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A memóriát <code>char[]</code> tömbből kell építeni, de <code>Gadget</code> objektumokat
+fog tartalmazni, és azokra mutató pointerekkel kell dolgozni. Ezért kell <code>reinterpret_cast&lt;Gadget*&gt;</code>-ot használni, amikor a memóriaterületen a
+<code>Gadget</code>-ek címeit ki kell számolni.</p>
+<p>Az összes <code>Gadget</code>-et felszabadító függvény meghívhatja a <code>Gadget</code>-ek
+destruktorait is.</p>
+<p>A <code>Gadget</code> osztály ha final, nem lehet már leszármazni belőle. Így nincs
+olyan veszély, hogy egy nagyobb méretű leszármazottal kel foglalkoznia az <code>allocate()</code>
+függvénynek.</p>
+<p>A két osztály deklarációi és definíciói egymásra hivatkoznak; a <code>Gadget::operator new</code>
+előre hivatkozik a <code>GadgetAllocator::allocate()</code> függvényre, a <code>GadgetAllocator</code>
+osztály definíciója pedig a <code>sizeof(Gadget)</code> értékére. Ezért nem tudjuk osztályon belül
+definiálni a függvényeket.</p>
+<pre   ><code class="language-c">#include &lt;new&gt;
+#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;vector&gt;
+
+#define DEBUG 0
+
+//
+// Sample object which will be allocated from a memory pool
+//
+class Gadget final {
+  public:
+    Gadget(int i) : i_(i) { std::cout &lt;&lt; &quot;Gadget &quot; &lt;&lt; i_ &lt;&lt; &quot; ctor\n&quot;; }
+    ~Gadget() { std::cout &lt;&lt; &quot;Gadget &quot; &lt;&lt; i_ &lt;&lt; &quot; dtor\n&quot;; }
+    
+    void * operator new(size_t size);
+    void operator delete(void *mem) noexcept;
+  private:
+    int i_;
+};
+
+
+//
+// Memory pool for Gadget objects
+//
+class GadgetAllocator {
+  public:
+    friend class Gadget;
+    static void show_allocation_map();
+    static void delete_all();
+    
+  private:
+    static void *allocate();
+    static void free(void *mem);
+    static constexpr size_t poolsize_ = 64;
+    static char pool_[sizeof(Gadget) * poolsize_];
+    static bool allocated_[poolsize_];
+};
+
+char GadgetAllocator::pool_[sizeof(Gadget) * poolsize_];
+bool GadgetAllocator::allocated_[poolsize_];
+
+
+void *GadgetAllocator::allocate() {
+    /* find first unallocated */
+    size_t i;
+    for (i = 0; i != poolsize_; ++i)
+        if (allocated_[i] == false)
+            break;
+    /* if did not break, no more memory left */
+    if (i == poolsize_) {
+#if DEBUG
+        std::cerr &lt;&lt; &quot;Cannot allocate Gadget&quot; &lt;&lt; std::endl;
+#endif
+        throw std::bad_alloc{};
+    }
+    /* set allocated flag */
+#if DEBUG
+    std::cerr &lt;&lt; &quot;Allocating Gadget at &quot; &lt;&lt; i &lt;&lt; std::endl;
+#endif
+    allocated_[i] = true;
+    return static_cast&lt;void*&gt;(reinterpret_cast&lt;Gadget*&gt;(pool_) + i);
+}
+
+
+void GadgetAllocator::free(void *mem) {
+    /* calculate index */
+    size_t i = static_cast&lt;Gadget*&gt;(mem) - reinterpret_cast&lt;Gadget*&gt;(pool_);
+    /* check if proper pointer and allocated */
+    if (i &gt;= poolsize_ || !allocated_[i]) {
+#if DEBUG
+        std::cerr &lt;&lt; &quot;Cannot deallocate &quot; &lt;&lt; mem &lt;&lt; std::endl;
+#endif
+        throw std::bad_alloc{};
+    }
+    /* reset allocated flag */
+#if DEBUG
+    std::cerr &lt;&lt; &quot;Freeing Gadget at &quot; &lt;&lt; i &lt;&lt; std::endl;
+#endif
+    allocated_[i] = false;
+}
+
+
+void GadgetAllocator::show_allocation_map() {
+    for (size_t i = 0; i != poolsize_; ++i) {
+        std::cout &lt;&lt; allocated_[i];
+        if ((i+1) % 16 == 0)
+            std::cout &lt;&lt; std::endl;
+    }
+}
+
+
+void GadgetAllocator::delete_all() {
+    for (size_t i = 0; i != poolsize_; ++i) {
+        if (allocated_[i]) {
+            reinterpret_cast&lt;Gadget*&gt;(pool_)[i].~Gadget();
+            allocated_[i] = false;
+        }
+    }
+}
+
+
+// Allocator and deallocator for Gadgets - calls GadgetAllocator's functions
+void * Gadget::operator new(size_t size) {
+    return GadgetAllocator::allocate();
+}
+
+void Gadget::operator delete(void *mem) noexcept {
+    return GadgetAllocator::free(mem);
+}
+
+
+int main() {
+    std::vector&lt;Gadget*&gt; my_gadgets;
+    
+    std::cout &lt;&lt; &quot;Allocate 10 gadgets:&quot; &lt;&lt; std::endl;
+    for (int i = 0; i &lt; 10; ++i)
+        my_gadgets.push_back(new Gadget{i});
+    GadgetAllocator::show_allocation_map();
+    
+    std::cout &lt;&lt; &quot;Delete 5 random gadgets:&quot; &lt;&lt; std::endl;
+    for (int i = 0; i &lt; 5; ++i) {
+        int del = rand() % my_gadgets.size();
+        delete my_gadgets[del];
+        my_gadgets[del] = my_gadgets.back();
+        my_gadgets.pop_back();
+    }
+    GadgetAllocator::show_allocation_map();
+    
+    std::cout &lt;&lt; &quot;2 new gadgets to empty slots:&quot; &lt;&lt; std::endl;
+    my_gadgets.push_back(new Gadget{11});
+    my_gadgets.push_back(new Gadget{12});
+    GadgetAllocator::show_allocation_map();
+    
+    std::cout &lt;&lt; &quot;Use up all remaining slots:&quot; &lt;&lt; std::endl;
+    try {
+        while (true)
+            my_gadgets.push_back(new Gadget{rand() % 100});
+    } catch (std::bad_alloc &amp;) {
+    }
+    GadgetAllocator::show_allocation_map();
+    
+    std::cout &lt;&lt; &quot;Delete all gadgets not deleted so far:&quot; &lt;&lt; std::endl;
+    GadgetAllocator::delete_all();
+    GadgetAllocator::show_allocation_map();
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+<h3>Allokátor objektumok</h3>
+
+<p>Az előbbi <code>GadgetAllocator</code> osztálynak minden adattagja statikus
+volt. Ez azt jelenti, hogy az egész programban egyetlen
+<code>GadgetAllocator</code> létezett.</p>
+
+<p>Ennek nem feltétlenül kell így lennie. Sőt nagyon jó ötlet megcsinálni azt, hogy
+több allokátor legyen. Képzeljük el az alábbi szituációt. Szükségünk van egy csapat
+<code>Gadget</code> objektumra. Néha foglalunk egy csomót, néha felszabadítunk párat,
+aztán egyszercsak már nincsen szükség a csapat egyik tagjára sem. Ebben a helyzetben
+a következőt tennénk: létrehozunk egy <code>GadgetAllocator</code> objektumot. Az
+egyes <code>Gadget</code>-eket ebben hozzuk létre. Aztán amikor már nincs szükség
+az objektumokra, csak az allokátort kell kitörölni, mert annak destruktora kitörlheti
+a megmaradt <code>Gadget</code>-eket.</p>
+
+<p>Mindezt a „placement new” szintaxis lehetővé teszi. Ugyanis az nem csak arra jó,
+hogy adott helyen hozzunk létre objektumot, hanem arra is, hogy egy osztály
+saját <code>operator new</code>-jának további paramétereket adjunk át. Az első
+paraméter ezeknél az <code>operator new</code> függvényeknél mindig a méret, utána
+pedig az összes többi paramétert megkapják:</p>
+
+<pre   ><code class="language-c">class Gadget {
+    void *operator new(size_t size);                /* 1 */
+    void *operator new(size_t size, int a, char b); /* 2 */
+};
+
+Gadget *g1 = new Gadget{};          /* 1, Gadget::operator new(sizeof(Gadget)) */
+Gadget *g2 = new (5, 'b') Gadget{}; /* 2, Gadget::operator new(sizeof(Gadget), 5, 'b'); */</code></pre>
+
+<p>Tehát az <code>operator new</code> függvény ilyen módon túlterhelhető: az első
+<code>new</code> a felső, kvázi paraméter nélküli változatot hívja, az alsó
+<code>new</code> pedig az <code>int a, char b</code> paraméterekkel rendelkezőt.</p>
+
+<p>Így könnyen megcsinálhatjuk az allokátort! A <code>new</code>-nak egyszerűen
+„placement new” szintaxissal meg kell majd adni, hogy melyik
+<code>GadgetAllocator</code> objektumtól kérje a memóriaterületet. Még azt is
+megtehetjük, hogy az allokátor nélküli esetben a beépített memóriakezelést,
+globális <code>::operator new</code>-t használjuk. Így a <code>Gadget</code> objektumok
+használója azt is eldöntheti, hogy szüksége van-e az allokátorok többlet szolgáltatásaira,
+vagy nincs.</p>
+
+<p>A <code>delete</code> operátoroknál viszont nincs ilyen túlterhelési lehetőség, abból
+csak egyféle van. Emiatt valahogyan egy <code>delete</code> operátorban tudni kell, hogy
+az a <code>Gadget</code> honnan lett foglalva: melyik allokátorból (vagy esetleg a
+közös memóriaterületről). Ezt úgy lehet legegyszerűbben megoldani, hogy a <code>Gadget</code>
+objektumokba beteszünk egy pointert, amelyik az allokátorra mutat, amelyik őt
+foglalta (vagy null pointer, ha a közös memóriaterületen van). Az egyes függvények tehát:</p>
+
+<ul>
+    <li>A „paraméter nélküli” <code>new</code>: a globális memóriaterületről foglal
+    egy <code>Gadget</code>-nek való helyet, és null pointert ír az allokátorhoz.
+    <li>A „paraméteres” <code>new</code> lát egy allokátort, és attól kér memóriaterületet.
+    <li>A <code>delete</code> operátor pedig belenéz az objektumba: ha null pointer
+    van megadva allokátornak, akkor a globális <code>delete</code> operátorral törlendő
+    a memóriaterület, ha nem null, akkor annak az allokátornak a <code>free()</code>-jét
+    kell hívni.</li>
+</ul>
+
+<p>A <code>Gadget</code> osztály rendes tagfüggvényei nem szabad ehhez a pointerhez
+nyúljanak. (A szép megoldás erre az lenne, ha egy ősből származtatjuk, ahol az
+ősnek privát adattagja ez a pointer.) Az érdekesség, hogy az <code>operator new</code>-ok
+olyan <code>Gadget</code> objektumban lévő pointer értékét állítják be, amely még
+elvileg nem létezik, mert a konstruktora nem futott le. De ez nem gond, mert a memóriaterületet
+már lefoglalják, és amikor az le van foglalva, onnantól írni is szabad oda. Ugyanez
+a helyzet a <code>Gadget</code> <code>operator delete</code>-jével: miután lefutott
+a konstruktor, csak akkor jön az <code>operator delete</code>! Így az a már nem létező
+objektum pointerét olvassa ki. De ez sem gond, mert bár a destruktor már lefutott,
+a memóriaterület még nem lett felszabadítva, azt épp a <code>delete</code> operátor
+fogja megtenni.</p>
+
+<p>Implementáld az itt elmondottakat!</p>
+
+<p class="megjegyzes">Ez a feladat is az ötletet hivatott bemutatni.</p>
+
+<ol class="feladatok">
+    <li>Tegyél egy <code>GadgetAllocator *</code> pointert a <code>Gadget</code> osztályba.
+    <li>Írd át a <code>GadgetAllocator</code> osztályt, hogy semmi se legyen benne statikus.
+    Írj neki konstruktort és destruktort: a foglaltságot jelző tömböt inicializálni kell.
+    <li>Deklaráld és definiáld a kétféle <code>operator new</code> függvényt. Az egyik
+    a globális memóriaterületről kell foglaljon (<code>::operator new</code>), a másik
+    a paraméterként kapott allokátortól kér memóriaterületet.
+    <li>Írd át az <code>operator delete</code>-et is. Ennek figyelnie kell az objektumban
+    lévő, allokátorra hivatkozó pointert. A törlendő objektumot ez <code>void *</code>-ként
+    kapja, de ez bátran átalakítható <code>Gadget *</code>-gá, mert egy <code>Gadget</code>
+    helyére mutat.
+    <li>Írd át a főprogramot, hogy hozzon az létre egy <code>GadgetAllocator</code> objektumot.
+    Mindenhol add át ezt az objektumot a <code>new</code> kifejezésekben:
+<pre   ><code class="language-c">GadgetAllocator a1;
+
+Gadget *g1 = new (a1) Gadget{5};</code></pre>
+</ol>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;new&gt;
+#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;vector&gt;
+
+#define DEBUG 0
+
+class GadgetAllocator;
+
+class Gadget final {
+  public:
+    Gadget(int i) : i_(i) { std::cout &lt;&lt; &quot;Gadget &quot; &lt;&lt; i_ &lt;&lt; &quot; ctor\n&quot;; }
+    ~Gadget() { std::cout &lt;&lt; &quot;Gadget &quot; &lt;&lt; i_ &lt;&lt; &quot; dtor\n&quot;; }
+    
+    void * operator new(size_t size);
+    void * operator new(size_t size, GadgetAllocator &amp;allocator);
+    void operator delete(void *mem) noexcept;
+  private:
+    int i_;
+    GadgetAllocator *allocator_;
+};
+
+
+//
+// Memory pool for Gadget objects
+//
+class GadgetAllocator {
+  public:
+    
+    GadgetAllocator() : allocated_{} {}
+    GadgetAllocator(GadgetAllocator const &amp;) = delete;
+    GadgetAllocator&amp; operator=(GadgetAllocator const &amp;) = delete;
+    ~GadgetAllocator() { delete_all(); }
+    void show_allocation_map();
+    void delete_all();
+
+    friend class Gadget;
+    
+  private:
+    void *allocate();
+    void free(void *mem);
+    static constexpr size_t poolsize_ = 64;
+    char pool_[sizeof(Gadget) * poolsize_];
+    bool allocated_[poolsize_];
+};
+
+void GadgetAllocator::show_allocation_map() {
+    for (size_t i = 0; i != poolsize_; ++i) {
+        std::cout &lt;&lt; allocated_[i];
+        if ((i+1) % 16 == 0)
+            std::cout &lt;&lt; std::endl;
+    }
+}
+    
+void *GadgetAllocator::allocate() {
+    /* find first unallocated */
+    size_t i;
+    for (i = 0; i != poolsize_; ++i)
+        if (allocated_[i] == false)
+            break;
+    /* if did not break, no more memory left */
+    if (i == poolsize_) {
+#if DEBUG
+        std::cerr &lt;&lt; &quot;Cannot allocate Gadget&quot; &lt;&lt; std::endl;
+#endif
+        throw std::bad_alloc{};
+    }
+    /* set allocated flag */
+#if DEBUG
+    std::cerr &lt;&lt; &quot;Allocating Gadget at &quot; &lt;&lt; i &lt;&lt; std::endl;
+#endif
+    allocated_[i] = true;
+    return static_cast&lt;void*&gt;(reinterpret_cast&lt;Gadget*&gt;(pool_) + i);
+}
+
+void GadgetAllocator::free(void *mem) {
+    /* calculate index */
+    size_t i = static_cast&lt;Gadget*&gt;(mem) - reinterpret_cast&lt;Gadget*&gt;(pool_);
+    /* check if proper pointer and allocated */
+    if (i &gt;= poolsize_ || !allocated_[i]) {
+#if DEBUG
+        std::cerr &lt;&lt; &quot;Cannot deallocate &quot; &lt;&lt; mem &lt;&lt; std::endl;
+#endif
+        throw std::bad_alloc{};
+    }
+    /* reset allocated flag */
+#if DEBUG
+    std::cerr &lt;&lt; &quot;Freeing Gadget at &quot; &lt;&lt; i &lt;&lt; std::endl;
+#endif
+    allocated_[i] = false;
+}
+
+void GadgetAllocator::delete_all() {
+    for (size_t i = 0; i != poolsize_; ++i) {
+        if (allocated_[i]) {
+            reinterpret_cast&lt;Gadget*&gt;(pool_)[i].~Gadget();
+            allocated_[i] = false;
+        }
+    }
+}
+
+
+// Allocator and deallocator for Gadgets - calls GadgetAllocator's functions
+// Default operator new: allocate from free store
+void * Gadget::operator new(size_t size) {
+    void *mem = ::operator new(size);
+    Gadget *constructed_gadget = static_cast&lt;Gadget *&gt;(mem);
+    constructed_gadget-&gt;allocator_ = nullptr;
+    return mem;
+}
+
+// Allocate from GadgetAllocator
+void * Gadget::operator new(size_t size, GadgetAllocator &amp;allocator) {
+    void *mem = allocator.allocate();
+    Gadget *constructed_gadget = static_cast&lt;Gadget *&gt;(mem);
+    constructed_gadget-&gt;allocator_ = &amp;allocator;
+    return mem;
+}
+
+// Deallocate Gadget. If allocator is null, delete from free store,
+// if not null, ask allocator to deallocate.
+void Gadget::operator delete(void *mem) noexcept {
+    Gadget const *deleted_gadget = static_cast&lt;Gadget const *&gt;(mem);
+    if (deleted_gadget-&gt;allocator_ == nullptr)
+        ::operator delete(mem);
+    else
+        deleted_gadget-&gt;allocator_-&gt;free(mem);
+}
+
+
+int main() {
+    {
+        GadgetAllocator a1;
+        
+        std::vector&lt;Gadget*&gt; my_gadgets;
+        
+        std::cout &lt;&lt; &quot;Allocate 10 gadgets:&quot; &lt;&lt; std::endl;
+        for (int i = 0; i &lt; 10; ++i)
+            my_gadgets.push_back(new (a1) Gadget{i});
+        a1.show_allocation_map();
+        
+        std::cout &lt;&lt; &quot;Delete 5 random gadgets:&quot; &lt;&lt; std::endl;
+        for (int i = 0; i &lt; 5; ++i) {
+            int del = rand() % my_gadgets.size();
+            delete my_gadgets[del];
+            my_gadgets[del] = my_gadgets.back();
+            my_gadgets.pop_back();
+        }
+        a1.show_allocation_map();
+        
+        std::cout &lt;&lt; &quot;2 new gadgets to empty slots:&quot; &lt;&lt; std::endl;
+        my_gadgets.push_back(new (a1) Gadget{11});
+        my_gadgets.push_back(new (a1) Gadget{12});
+        a1.show_allocation_map();
+        
+        std::cout &lt;&lt; &quot;Use up all remaining slots:&quot; &lt;&lt; std::endl;
+        try {
+            while (true)
+                my_gadgets.push_back(new (a1) Gadget{rand() % 100});
+        } catch (std::bad_alloc &amp;) {
+        }
+        a1.show_allocation_map();
+        
+        std::cout &lt;&lt; &quot;Exiting code block, allocator will be destructed:&quot; &lt;&lt; std::endl;
+    }
+    std::cout &lt;&lt; &quot;Allocator destructed.&quot; &lt;&lt; std::endl;
+}
+</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Auto és decltype">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+    <a id="feladat_auto_decltype" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Auto és decltype<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>decltype</h3>
+
+<p>„Írjunk függvénysablont, amely átvesz két iterátort, amelyek egy tartományt határoznak meg, és visszatér a tartományban tárolt legkisebb értékkel! Ha a tartomány üres, akkor a függvénynek kivételt kell dobnia.” Ennek a feladatnak az alábbi kód szeretne a megoldása lenni:</p>
+
+<pre   ><code class="language-c">template &lt;typename ITER&gt;
+auto find_min(ITER begin, ITER end) -&gt; decltype(*begin) {
+    if (begin == end)
+        throw &quot;ures&quot;;
+    auto min = *begin;
+    while (++begin != end)
+        if (*begin &lt; min)
+            min = *begin;
+    return min;
+}</code></pre>
+<p>A megvalósítás azonban hibás. Miért? Hogyan lehetne javítani? Ha nincs ötleted, nézd meg, mit szól hozzá a fordító!</p>
+
+
+
+
+
+<h3>Auto i{3}</h3>
+
+<p>Mi a típusa <code>auto i{3};</code> definíció esetén az <code>i</code> változónak? És az
+<code>auto i = {3};</code> esetben? Miért?</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Az előbbi <code>int</code>, az utóbbi viszont <code>std::initializer_list&lt;int&gt;</code>.
+Az egy elemű kapcsos zárójelre külön szabályok vonatkoznak, épp emiatt. Eredetileg ez el is
+volt rontva a C++11 szabványban, később javították.</p>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Iterátorokkal kapcsolatos feladatok">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Iterátorokkal kapcsolatos feladatok<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>ReverseView</h3>
+
+<p>A „range based for” ciklus be tud járni bármilyen tárolót. De csak előrefelé, pedig a legtöbb szabványos tárolónak
+van <code>reverse_iterator</code>-a is. Ezt az <code>rbegin()</code>, <code>rend()</code> tagfüggvényekkel kapjuk meg,
+és amellyel bár látszólag előrefelé megyünk (<code>it++</code>), az elemeket mégis fordított sorrendben kapjuk.</p>
+
+<p>Írj adaptert, amely segítségével a „range based for” ciklusban fordított sorrendben látjuk az elemeket! Ügyelj arra, hogy ez nem új tároló létrehozását jelenti, tehát nem másolhatók le az elemek!</p>
+
+<pre   ><code class="language-cbub">std::vector&lt;int&gt; vec = { 1, 2, 3 };
+for (auto i : make_reverse_view(vec))
+    std::cout &lt;&lt; i;                 // 3 2 1
+
+std::list&lt;int&gt; const lis = { 1, 2, 3 };
+for (auto i : make_reverse_view(lis))
+    std::cout &lt;&lt; i;
+
+int arr[3] = { 1, 2, 3 };
+for (auto i : make_reverse_view(arr))
+    std::cout &lt;&lt; i;</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;vector&gt;
+#include &lt;list&gt;
+#include &lt;iostream&gt;
+ 
+template &lt;typename C&gt;
+class ReverseView {
+    private:
+        C &amp; container;
+    public:
+        ReverseView(C &amp; container) : container(container) {}
+        
+        auto begin() const {
+            return std::rbegin(container);
+        }
+        auto end() const {
+            return std::rend(container);
+        }
+        auto rbegin() const {
+            return std::begin(container);
+        }
+        auto rend() const {
+            return std::end(container);
+        }
+};
+ 
+template &lt;typename C&gt;
+auto make_reverse_view(C &amp; container) {
+    return ReverseView&lt;C&gt;(container);
+}
+ 
+int main() {
+    std::vector&lt;int&gt; vec = { 1, 2, 3 };
+    for (auto i : make_reverse_view(vec))
+        std::cout &lt;&lt; i;                 // 3 2 1
+
+    std::list&lt;int&gt; const lis = { 1, 2, 3 };
+    for (auto i : make_reverse_view(lis))
+        std::cout &lt;&lt; i;
+
+    int arr[3] = { 1, 2, 3 };
+    for (auto i : make_reverse_view(arr))
+        std::cout &lt;&lt; i;
+}</code></pre>
+<p>A megoldás C++14-es, és igényel némi magyarázatot.</p>
+<p>A tároló tagfüggvényeinek hívása lényegében triviális; a <code>view.begin()</code>
+a tároló <code>rbegin()</code> függvényét, a <code>view.rbegin()</code> a tároló <code>begin()</code>
+függvényét hívja meg, így oda-vissza megfordul a sorrend.</p>
+<p>A megoldás <em>konstans tároló esetén is</em> működik. Ilyen esetben ugyanis a
+<code>make_reverse_view()</code> függvénysablon képes példányosodni: az <code>std::list&lt;int&gt; const</code>
+listát paraméterként átadva <code>T = std::list&lt;int&gt; const</code> lesz a sablonparaméter, ezért
+a függvény paramétere konstans referencia, és a <code>ReverseView</code> objektum is konstans
+referenciát fog tárolni. Az abból meghívott <code>begin/end</code>, illetve <code>rbegin/rend</code>
+tagfüggvényeknek pedig szokott lenni <code>const</code> overloadja (!), ami a tároló <code>const_iterator</code>
+belső típusát adja (vagy <code>const_reverse_iterator</code>-t).</p>
+<p>Így egyébként a konstans és nem konstans tároló esetén a tagfüggvények <code>auto</code> visszatérési
+értékei is hol konstans, hol nem konstans iterátorrá vezetődnek le. Ezeket C++98-ban nagyon körülményes
+lett volna megadni.</p>
+<p>Tömbre azért működik a dolog, mert az <code>std::begin()</code> és <code>std::rbegin()</code> és párjaik
+működnek tömbre is (tömb referenciáját veszik át paraméterként). Tömbökre az <code>std::begin()</code>
+talán pointert ad (az elvégre is iterátorként használható). Az <code>std::rbegin()</code> pedig bizonyára
+valamilyen segédosztályból példányosított iterátort, mert ennek a <code>++</code> operátora visszafelé kell
+lépkedjen (<code>--</code>), de ez pointerrel nem lenne megoldható.</p>
+<p>Legjobb lenne a <code>make_reverse_view</code> függvénynél <code>C &amp;&amp;</code> referenciát használni,
+de erről a <a href="../ea11/index.html#forwardingref">tananyag későbbi részében</a> lesz csak szó.</p>
+</div>
+</details>
+
+
+
+
+
+<h3>Python range()</h3>
+
+<p>A Python nyelvben könnyen lehet egy számtartományon iterálni:</p>
+
+<pre   ><code class="language-python">for i in range(0, 5):
+    print(i)</code></pre>
+
+<pre class="screenshot">
+0
+1
+2
+3
+4
+</pre>
+
+<p>A <code>for ... in</code> egy tároló bejárására való, ahogyan a C++ range based for nyelvi eleme is. A <code>range()</code> 
+függvény nagy okossága, hogy egy ún. generátor objektumot hoz létre. Vagyis nem épít fel egy tárolót, benne az összes számmal, 
+hanem igény szerint állítja elő mindig a számsor következő elemét.</p>
+
+<p>Ilyesmi a C++-ban is megvalósítható: egy olyan osztályt kell írni hozzá, amelynek iterátorai adják a számokat.
+Írj egy ilyet!</p>
+
+<pre   ><code class="language-cbub">for (auto i : range(0, 5))      // 0 1 2 3 4
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;                
+for (auto i : range(5, 0, -1))  // 5 4 3 2 1
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;                
+for (auto i : range(5))         // 0 1 2 3 4
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;                
+for (auto i : range(1, 10, 2))  // 1 3 5 7 9
+    std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+try {
+    range(1, 10, 0);            // a differencia nem lehet 0
+} catch (std::exception &amp; e) {
+    std::cerr &lt;&lt; e.what();
+}</code></pre>
+
+
+
+
+
+<h3>Iterátor adapterek</h3>
+
+<p>A range-based for ciklussal könnyű iterálni egy tárolón:</p>
+
+<pre   ><code class="language-c">std::list&lt;std::string&gt; szavak = {&quot;alma&quot;, &quot;körte&quot;, &quot;barack&quot;};
+for (auto s : szavak)
+    std::cout &lt;&lt; s &lt;&lt; std::endl;</code></pre>
+
+<p>A gond csak az, hogy egy ilyen iterálás esetén indexeket nem látunk. Az <code>s</code> változóban a sztringet megkapjuk, de
+hogy melyik sztring hányadik volt, arról nincs információnk. Hacsak nem hozunk létre és növelgetünk a ciklusban egy külön változót
+erre a célra, de az elrontja a nyelvi elem szépségét, egyszerűségét.</p>
+
+<p>A megoldást egy iterátor adapter adja, amelyik „összecsomagolja” a tárolóból vett értéket és a hozzá tartozó indexet. Pythonban
+is van ilyen, az <code>enumerate()</code> függvény használata esetén <code>tuple</code>-kben kapjuk meg az összetartozó 
+index–érték párokat:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-python">szavak = [&quot;alma&quot;, &quot;körte&quot;, &quot;barack&quot;]
+for index, ertek in enumerate(szavak):
+    print(index, ertek)</code></pre>
+</div>
+<div>
+<pre class="screenshot">
+0 alma
+1 körte
+2 barack
+</pre>
+</div>
+</div>
+
+<p>De ugyanez működik C++-ban, a Boost Ranges könyvtár segítségével is:</p>
+
+<div class="columns">
+<div>
+<pre   ><code class="language-c">using namespace boost::adaptors;
+for (auto const&amp; v : szavak | indexed(0))
+    std::cout &lt;&lt; v.index() &lt;&lt; &quot; &quot;
+              &lt;&lt; v.value() &lt;&lt; std::endl;</code></pre>
+</div>
+<div>
+<pre class="screenshot">
+0 alma
+1 körte
+2 barack
+
+</pre>
+</div>
+</div>
+
+<p>Ha szeretnénk, itt még azt is megadhatjuk az <code>indexed()</code> függvény paraméterével, hogy 1-től induljon
+a szavak számozása; az adapter által előállított indexeknek nem feltétlenül kell megegyezniük a tárolóbeli indexekkel,
+amik mellesleg a lista esetén nem is léteznek.</p>
+
+<p>A feladat: írj egy ilyen iterátor adaptert! Az adaptert választásod szerint lehessen létrehozni operátorral (mint
+a Boost-os példában a <code>|</code> operátor), vagy függvénnyel (<code>enumerate()</code> a Pythonos példában). Az elemeket
+és indexeket lehessen elérni a Boost stílusában, a <code>.value()</code> és <code>.index()</code> függvényekkel, vagy a Python 
+stílusában tedd őket egy párba (<code>std::pair</code>). Az utóbbi esetben kicsit egyszerűbb megoldáshoz jutsz majd, a használat
+pedig ilyen lesz:
+
+<pre   ><code class="language-c">std::list&lt;std::string&gt; szavak = {&quot;alma&quot;, &quot;körte&quot;, &quot;barack&quot;};
+for (auto p : enumerate(szavak, 0))
+    std::cout &lt;&lt; p.first &lt;&lt; &quot; &quot; &lt;&lt; p.second &lt;&lt; std::endl;</code></pre>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Python <code>enumerate()</code>-hez hasonló létrehozás, és az iterálás (index; érték) párokat ad:</p>
+<pre   ><code class="language-c">#include &lt;functional&gt;
+#include &lt;iostream&gt;
+#include &lt;list&gt;
+
+template &lt;typename T&gt;
+class Enumerator {
+  private:
+    T &amp; container;
+    int startidx;
+
+  public:
+    /* megjegyzi, melyik tárolóról van szó, és hányadik indexről */
+    Enumerator(T &amp; container, int startidx) : container(container), startidx(startidx) {}
+    
+    /* becsomagolja az iterátort, hozzá tartozóan egy indexszel */
+    class Iterator {
+      private:
+        using Iterator_of_T = decltype(std::begin(container));
+        Iterator_of_T it; // iterator_of&lt;container&gt;
+        int idx;
+
+      public:
+        Iterator(Iterator_of_T it, int idx = 0) : it(it), idx(idx) {}
+
+        /* minimál iterátor interfész, hogy működhessen a range-based for:
+         * léptetés, egyenlőségvizsgálat és dereferálás */
+        Iterator &amp; operator++() {
+            ++it;
+            ++idx;
+            return *this;
+        }
+        bool operator==(Iterator const &amp; rhs) const {
+            return it == rhs.it;
+        }
+        bool operator!=(Iterator const &amp; rhs) const {
+            return it != rhs.it;
+        }
+        /* ez főként ez határozza meg az interfészt a range-based for-ban.
+         * egy párt ad vissza, .first és .second érik majd el az indexet és az adatot.
+         * *it valószínűleg egy referencia, ezért a párban is referencia lesz. */
+        auto operator*() const {
+            return std::pair&lt;int, decltype(*it)&gt;(idx, *it);
+        }
+    };
+
+    Iterator begin() {
+        return Iterator(std::begin(container), startidx);
+    }
+    Iterator end() {
+        return Iterator(std::end(container));
+    }
+};
+
+template &lt;typename T&gt;
+auto enumerate(T &amp; container, int startidx) {
+    return Enumerator&lt;T&gt;(container, startidx);
+}
+
+int main() {
+    std::list&lt;std::string&gt; szavak = {&quot;alma&quot;, &quot;körte&quot;, &quot;barack&quot;};
+    for (auto p : enumerate(szavak, 1))
+        std::cout &lt;&lt; p.first &lt;&lt; &quot; &quot; &lt;&lt; p.second &lt;&lt; std::endl;
+}</code></pre>
+<p>Ugyanez <code>.index()</code> és <code>.value()</code>-képes segédobjektumokkal:</p>
+<pre   ><code class="language-c">template &lt;typename T&gt;
+class Enumerator {
+    /* ... */
+    class Iterator {
+        /* ... */
+        auto operator*() const {
+            /* a pár helyett egy segédosztály */
+            return ValueHelper(*this);
+        }
+    };
+
+    /* a segédosztály csak eltárolja a fenti iterátort, hogy aztán abból
+     * kiolvashassa az elemet és az indexet */
+    class ValueHelper {
+        private:
+            Iterator it;
+        public:
+            ValueHelper(Iterator it) : it(it) {}
+            decltype(auto) value() const {
+                return *it.it;
+            }
+            int index() const {
+                return it.idx;
+            }
+    };
+};</code></pre>
+</div>
+</details>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

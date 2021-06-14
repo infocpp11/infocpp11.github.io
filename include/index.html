@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: #include</title>
+<meta property="og:title" content="TEST InfoC++11 :: #include">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Forrásfájlok és fejlécfájlok használata.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Forrásfájlok és fejlécfájlok használata.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="#include">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">#include</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Forrásfájlok és fejlécfájlok használata.</p>
+</div>
+
+<p>Gyakran nem értett, rosszul használt eszköze a C/C++ nyelvek a modul rendszere – egészen pontosan, a nem létező modul rendszerük. Mi szükség van a fejlécfájlokra? Minek a fejlécfájlokba, mit csinál az <code>#ifndef-#define</code> páros? Mi az a <code>#pragma once</code>? Ezeket a kérdéseket tisztázza ez az írás.</p>
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Nagyobb projektek</a>
+                      <li><a href="index.html#2" class="">Hivatkozások</a>
+                      <li><a href="index.html#3" class="">A fejlécfájlok</a>
+                      <li><a href="index.html#4" class="">Modulok, előfordító</a>
+                      <li><a href="index.html#5" class="">Az include guard-ok</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Nagyobb projektek">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Nagyobb projektek<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Egy program komplexitását, értékét nem lehet a programkód méretével mérni. Egy ötven soros program lehet egy bugyuta számkitalálós játék is, míg egy másik, szintén ötven soros program lehet egy titkosítást feltörni képes algoritmus.</p>
+
+<p>A forráskód kezelhetőségét viszont már jobban tudjuk a sorok számával mérni. A Quake&nbsp;3 motorja 300&nbsp;000 soros, a Google Chrome nagyjából 6 millió kódsorból áll, a Facebook mögött kb. 60 millió sornyi programkód van (ezekről itt egy jó ábra: <a href="http://www.informationisbeautiful.net/visualizations/million-lines-of-code/">Codebases: Million lines of code</a>.)</p>
+
+<p>Ekkora programokat nem tehetünk egy fájlba, mert az fájni fog nekünk is és a gépnek is. Részrendszerekre, kisebb modulokra bontjuk a kódot, sok kis fájlt létrehozva. Így a kisebb forrásfájlokat mind lefordítva kapjuk meg a teljes, futtatható programunkat.</p>
+
+<img src="modulok.svg" style="width: 30em;" class="kozep">
+
+<p>A fordítások által a forráskódból ún. <em>object file</em> (tárgykód fájl) keletkezik, amely már gépi kódú utasításokat tartalmaz. Ezekből pedig a <em>linking</em> nevű művelet állítja elő a teljes programot. Vegyük észre, hogy ez két szempontból is nagyon előnyös:</p>
+
+<ol>
+    <li>Programozóként is egyszerűbb a sok kicsi forrásfájlt kezelni, mint egy nagy, sok százezer soros fájlon dolgozni.</li>
+    <li>Módosítás után hamarabb újrafordítható a program. Ha a <code>modul1.c</code> változott, csak azt kell újra lefordítani; mivel a <code>modul2.c</code> változatlan, a belőle keletkezett <code>modul2.o</code> is nyilvánvalóan az kell legyen. Ha egy 1&nbsp;000&nbsp;000 soros programunk van, 1000 darab 1000 soros fájlra bontva, csak 1000 sornyi kódot kell újra lefordítani.</li>
+</ol>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Hivatkozások">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Hivatkozások<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A történet azonban sokkal bonyolultabb, mert a forrásfájlokban lévő programkódok összefüggenek. Az egyik forrásfájlban megírt függvényt a másikban szeretnénk meghívni. Legyen most egy nagyon egyszerű példánk! Adjunk meg egy típust, amely egy téglalap szélességét és magasságát tárolja. Továbbá legyen egy területszámító függvényünk, és használjuk ezeket fel a főprogramban! Első körben (egyelőre még hibásan) valahogy így:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">teglalap.c</div>
+<pre   ><code class="language-c">struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t) {
+    return t.szeles * t.magas;
+}</code></pre>
+</div>
+<div>
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">int main(void) {
+    Teglalap t1;
+    t1.szeles = 3;
+    t1.magas = 5.2;
+    printf(&quot;%f&quot;, terulet(t1));
+}</code></pre>
+</div>
+</div>
+
+<p>Játsszunk el a gondolattal, hogy fordítóként kezelnünk kell a jobb oldalt látható <code>main.c</code> fájlt. Ne feledjük, azért van több forrásfájlra bontva a program, hogy azokat külön lehessen kezelni, tehát a <code>main.c</code>-t látva, <em>és csak azt látva,</em> kellene előállítani a gépi kódot tartalmazó <code>main.o</code> fájlt. Tehát ennyi információnk van:</p>
+
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">int main(void) {
+    Teglalap t1;
+    t1.szeles = 3;
+    t1.magas = 5.2;
+    printf(&quot;%f&quot;, terulet(t1));
+}</code></pre>
+
+<p>Le lehet fordítani így a programot? Nem igazán. Első dolgunk az lenne, hogy a <code>Teglalap</code> típusú <code>t1</code> változónak helyet foglalunk a memóriában. Oké, de mennyit? Azt se tudjuk, mi ez a típus, vagy hogy egyáltalán létezik-e. Már emiatt fordítási hiba keletkezne egyébként.</p>
+
+<p>Mi a helyzet az értékadásokkal? Biztos, hogy az ismeretlen <code>t1</code>-nek van <code>.szeles</code> adattagja? És ha van, annak mi a típusa? Ha pointer, akkor ez fordítási hiba. Ha egész szám, akkor oda a 3-at be kell másolni. Ha valós (amúgy most az, csak épp nem lehet tudni!), akkor a 3-as egész számot 3.0 valósként kell értelmezni. No meg aztán, mi az a <code>terulet()</code> függvény? Mi a paramétere? Ha az, ami a <code>t1</code> típusa, akkor oké – amúgy nem. És vajon mi a visszatérési érték? Honnan tudjuk, hogy mekkora helyet csináljunk a veremben a visszatérési értéknek, ha nem ismerjük a függvény fejlécét?</p>
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A fejlécfájlok">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A fejlécfájlok<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Látszik, hogy ez így nem működhet. A <code>teglalap.c</code>-be belenézni <em>nem szeretnénk.</em> Hiszen épp az a cél, hogy a <code>teglalap.c</code> forrásfájl feldolgozása nélkül tudjuk elvégezni a fordítást! Az 1000 darab 1000 soros forrásfájl példájára visszaemlékezve, ha minden kódot egyszerre akarnánk látni, ugyanott tartanánk, mint az előbb: egy-két kódsor megváltoztatása miatt újra fel kell dolgozni mind az 1&nbsp;000&nbsp;000 sort.</p>
+
+<p>Ahhoz, hogy lefordíthatóvá váljon a kód, ismernünk kellene a <code>Teglalap</code> típust és a <code>terulet()</code> függvényt. <em>Tehát nem a teljes <code>teglalap.c</code> fájlt, hanem csak egyfajta kivonatát.</em> Fontos a típus és a függvény fejléce – pillanatnyilag nem érdekes például a függvény belseje, implementációja.</p>
+
+<p>Vegyük észre, hogy ezek olyan dolgok, amik fejlesztés közben ritkábban változnak. A téglalap típus kitalálásakor rögzítve lett már, hogy milyen tulajdonságai vannak. Lehetett tudni azt is, hogy a programban szükség lesz egy téglalap területét kiszámító függvényre. Ha több programozó dolgozott a projekten, akkor előzetesen rögzítették azt, hogy ezt a függvényt hogyan fogják hívni, és milyen paraméterezése lesz.</p>
+
+<p>A <code>main.c</code> forráskód lefordításához tehát ezek az információk kellenek:</p>
+
+<pre   ><code class="language-c">struct Teglalap {           // a típus
+    double szeles, magas;
+};
+
+double terulet(Teglalap t); // a függvény fejléce</code></pre>
+
+<p>Megtehetnénk azt, hogy ezt a kódrészletet bemásoljuk a <code>main.c</code> tetejére, <em>de nem teszünk ilyet, semmilyen körülmények között,</em> mert a copypastelés ártalmas. Ha valamiből kettő másolat van, akkor az a két másolat különbözhet is... Az ezer fájlból álló projekt példájára visszatérve, ha csak 100-ban használjuk a téglalap típust, 100 helyre kell majd bemásolnunk a fenti kódrészletet. És 100 helyen átírni, ha mégis módosításra szorul, például ha kiderül, hogy kell egy <code>kerulet()</code> függvény is, vagy tárolnunk kell a téglalap színét.</p>
+
+<p>Tegyük be ezt a <em>kivonatot</em> egy külön, erre a célra létrehozott fájlba! Így születnek meg a fejlécfájlok. És természetesen legyen egy nyelvi eszköz, amellyel a fordítónak azt mondhatjuk, hogy „erre a helyre képzeld oda a fejlécfájl tartalmát”, ez pedig az <code>#include</code>.</p>
+
+<div class="sticky">teglalap.h</div>
+<pre   ><code class="language-c">struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t);</code></pre>
+<div class="columns">
+<div>
+<div class="sticky">teglalap.c</div>
+<pre   ><code class="language-c">#include &quot;teglalap.h&quot;
+
+double terulet(Teglalap t) {
+    return t.szeles * t.magas;
+}</code></pre>
+</div>
+<div>
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">#include &quot;teglalap.h&quot;
+
+int main(void) {
+    Teglalap t1;
+    t1.szeles = 3;
+    t1.magas = 5.2;
+    printf(&quot;%f&quot;, terulet(t1));
+}</code></pre>
+</div>
+</div>
+
+<p>Hasonlítsuk ezt össze az eredeti kóddal! A <code>Teglalap</code> típus definíciója eltűnt a <code>teglalap.c</code>-ből; átmozgattuk a <code>teglalap.h</code> fájlba. A <code>terulet()</code> függvénynek pedig a fejlécfájlban csak a deklarációja (prototípusa) szerepel, a törzse nem.</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Modulok, előfordító">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Modulok, előfordító<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A fenti séma alapján minden forrásfájlhoz – amelynek függvényeit, típusait más forrásfájlból használni szeretnénk – létrehozunk egy fejlécfájlt. A kettő egymáshoz is tartozik, és együtt a programunk <em>téglalap moduljához</em> tartoznak. Együtt kell őket karbantartanunk is, mert ha a típus vagy a függvényei változnak, módosítanunk kell a forrásfájlt és a hozzá tartozó fejlécfájlt is. De legalább csak ezeket, mert a módosuló fejlécfájlt minden további forrásfájl <code>#include</code>-olja, nincs ténylegesen odamásolva a kód.</p>
+
+<img src="fejlec.svg" style="width: 30em;" class="kozep">
+
+<p>A fordítási műveletet technikailag két jól elkülönülő részre bontják. A forrásfájlt előbb egy előfordító (preprocessor) kapja meg, amely az <code>#include</code> sorokat kezeli, és előállít egy olyan ideiglenes fájlt, amely a tényleges fordító bemenete lesz. Ez az ideiglenes fájl <em>már nem tartalmaz <code>#include</code>-okat,</em> hanem az <code>#include</code> sorok ebben <em>ki vannak cserélve a beszúrt fájlok tényleges tartalmával!</em></p>
+
+<div class="columns">
+<div>
+<div class="sticky">teglalap.h<br>(bemenet)</div>
+<pre   ><code class="language-c">struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t);</code></pre>
+<div class="sticky">teglalap.c<br>(bemenet)</div>
+<pre   ><code class="language-c">#include &quot;teglalap.h&quot;
+
+double terulet(Teglalap t) {
+    return t.szeles * t.magas;
+}</code></pre>
+</div>
+<div>
+<div class="sticky">teglalap.c<br>előfordítás után<br>(köztes állapot)</div>
+<pre   ><code class="language-c"># 1 &quot;teglalap.c&quot;
+# 1 &quot;teglalap.h&quot; 1
+struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t);
+# 2 &quot;teglalap.c&quot; 2
+
+double terulet(Teglalap t) {
+    return t.szeles * t.magas;
+}</code></pre>
+</div>
+</div>
+
+<p>Érdemes megfigyelni, hogy az előfordításból keletkezett köztes, ideiglenes fájlban a <code>terulet()</code> függvény deklarációja és definíciója is szerepel. Ez előnyös, mert ha elrontottuk volna, és nem egyeznek a függvényfejlécek a <code>teglalap.c</code>-ben és a <code>teglalap.h</code>-ban, itt tud szólni a fordító.</p>
+
+<div class="megjegyzes">
+<p>Látszik, hogy az előfordító egyébként jelzéseket is tesz az ideiglenes fájlba. Ezt mi nem látjuk, és nem is írhatunk  ilyen kódot. A fordítás következő fázisában azonban a fordító látja, és ebből tudja, hogy melyik eredeti fájlok összevagdosása által keletkezett az a fájl, amivel a dolgoznia kell. Erre azért van szükség, mert a hibaüzenetekben sorszám szerint hivatkozza a hibás sorokat a programozó számára. Ezekből a jelzésekből tudja visszafejteni a fordító, hogy egy esetleges hibás sor eredendően melyik fájlból származott.</p>
+</div>
+
+<p>A <code>main.c</code> fájl előfordítása során a <code>teglalap.h</code> is bemásolódik az ideiglenes fájlba, továbbá az <code>stdio.h</code> is. Ne feledjük, az kell a <code>printf()</code> miatt; az a <code>teglalap.h</code>-hoz hasonló fejlécfájl. A teljes, előfordított <code>main.c</code>-t az alábbi ábra nem mutatja meg, ugyanis (nálam) az <code>stdio.h</code> fájl 946 soros. Csak a lényeges részei:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">teglalap.h<br>(bemenet)</div>
+<pre   ><code class="language-c">struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t);</code></pre>
+<div class="sticky">main.c<br>(bemenet)</div>
+<pre   ><code class="language-c">#include &lt;stdio.h&gt;
+#include &quot;teglalap.h&quot;
+
+int main(void) {
+    Teglalap t1;
+    t1.szeles = 3;
+    t1.magas = 5.2;
+    printf(&quot;%f&quot;, terulet(t1));
+}</code></pre>
+</div>
+<div>
+<div class="sticky">main.c<br>előfordítás után<br>(köztes állapot)</div>
+<pre   ><code class="language-c"># 28 &quot;stdio.h&quot; 2 3 4
+/* ... */
+# 1 &quot;teglalap.h&quot;
+struct Teglalap {
+    double szeles, magas;
+};
+
+double terulet(Teglalap t);
+# 3 &quot;main.c&quot; 2
+
+int main(void) {
+    Teglalap t1;
+    t1.szeles = 3;
+    t1.magas = 5.2;
+    printf(&quot;%f&quot;, terulet(t1));
+}</code></pre>
+</div>
+</div>
+
+<p>Látjuk, hogy elértük a célunkat: az előfordított fájlban szerepel a <code>Teglalap</code> típus definíciója és a <code>terulet()</code> függvény deklarációja. A fordító így már tud dolgozni.</p>
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Az include guard-ok">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Az include guard-ok<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Tekintsünk most egy bonyolultabb példát. Képzeljünk el egy programot, amely komplex számokat tartalmazó mátrixokkal dolgozik!</p>
+
+<p>Ebben legalább három, jól elkülöníthető modul lesz. Az egyik a <em>komplex szám modul:</em> ez tartalmazza a komplex típust, továbbá az aritmetikai műveletek leírását: összeadást, szorzást és a többieket. A másik modul a <em>mátrix programkódja;</em> ez nagyrészt dinamikus tömbökről és hasonlókról szól. Végül pedig a harmadik a <em>főprogramunk,</em> az alkalmazás, amihez a komplex számot és a mátrixot írtuk.</p>
+
+<p>A komplex számos modul önálló. A mátrix viszont használja a komplex számot, sőt a mátrix típus definíciójához már szükségünk van rá. A főprogram pedig használja a komplex számot és a mátrixot is, ezért a főprogramot író programozó <code>#include "complex.h"</code>-t és <code>#include "matrix.h"</code>-t is ír majd a kódjába. A három fájl:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">complex.h</div>
+<pre   ><code class="language-c">struct Complex {
+    double re, im;
+};
+
+double absolute(Complex c);</code></pre>
+</div>
+<div>
+<div class="sticky">matrix.h</div>
+<pre   ><code class="language-c">#include &quot;complex.h&quot; // 3
+
+struct Matrix {
+    Complex **adat;
+    int szeles, magas;
+};</code></pre>
+</div>
+</div>
+<div class="sticky">main.c</div>
+<pre   ><code class="language-c">#include &quot;complex.h&quot; // 1
+#include &quot;matrix.h&quot;  // 2
+
+int main(void) {
+    Complex c = { 2.3, 4.5 };
+    Matrix m;
+    /* ... */
+}</code></pre>
+
+<p>Vajon milyen ideiglenes fájl pottyan ki az előfordítóból, amikor a <code>main.c</code> forrásfájlt fordítjuk? Először is, az (1)-es <code>#include "complex.h"</code> sort kicseréli a <code>complex.h</code> fájl tartalmával. Aztán a <code>matrix.h</code> (2)-es hivatkozását cseréli ki a <code>matrix.h</code> tartalmával. De az így beszúrt fájl is hivatkozza a <code>complex.h</code>-t, tehát még rekurzívan a (3)-as sor is kicserélődik a <code>complex.h</code> fájl tartalmára. Milyen fájlt kapunk így? Ezt:</p>
+
+<div class="sticky">main.c<br>előfordítás után</div>
+<pre   ><code class="language-c">struct Complex {
+    double re, im;
+};
+double absolute(Complex c);
+
+struct Complex {        // másodjára!
+    double re, im;
+};
+double absolute(Complex c);
+
+struct Matrix {
+    Complex **adat;
+    int szeles, magas;
+};
+
+int main(void) {
+    Complex c = { 2.3, 4.5 };
+    Matrix m;
+    /* ... */
+}</code></pre>
+
+<p>Márpedig ez gond! Az <code>absolute()</code> függvény kétszeri <em>deklarációja</em> belefér, de a <code>Complex</code> típus kétszeri <em>definíciója</em> nem. Egy dolgot ugyanis csak egyszer lehet definiálni, ezt előírja mind a C, mind a C++. Ez az ODR-szabály (one definition rule). Azért lehet mindent csak egyszer definiálni, mert ha valamiből kettő van, akkor azok különbözhetnek is. Márpedig ha hol így, hol úgy definiálnánk a komplex szám típust, akkor biztosan helytelen kódot generálna a fordító. Ezért az előírás számára, hogy ha ugyanannak a dolognak – típusnak, függvénynek, bárminek – egynél több definícióját látja, akkor hibaüzenettel meg kell állnia.</p>
+
+<p>Azért is gond a többszöri beillesztés, mert végtelen rekurzióhoz vezethet. Képzeljük el azt, hogy <code>A</code> modul függvényei használják <code>B</code> modul függvényeit, és <code>B</code> modul függvényei is hívják <code>A</code> modul függvényeit. Ezek szerint <code>A</code> modul <code>#include</code>-olná a <code>b.h</code>-t, illetve <code>B</code> modul is <code>#include</code>-olná <code>a.h</code>-t. Az előfordító pedig sosem állna le.</p>
+
+<p>Ezért ki kellett valamit találni, hogy a fejlécfájlok többszöri beillesztését elkerüljük. Ezt a szabvány szerint az előfordító makró eszközeivel kell megoldani, ún. <em>include guard</em>-dal. Egy <em>include guard</em> így néz ki:</p>
+
+<pre   ><code class="language-c">#ifndef VALAMI_H_INCLUDED
+#define VALAMI_H_INCLUDED
+
+/* ... */
+
+#endif</code></pre>
+
+<p>Ennek az <code>#ifndef</code>-<code>#endif</code> közötti része csak akkor kerül bele az előfordító által előállított ideiglenes fájlba, ha a <code>VALAMI_H_INCLUDED</code> előfordító makró nincs definiálva (if-not-defined). Ha bekerül, akkor viszont definiálódik a makró. Mi is történik, ha ezt a fájlt kétszer látja az előfordító egymás után?</p>
+
+<pre   ><code class="language-c">#ifndef VALAMI_H_INCLUDED   // itt még nincs definiálva a makró
+#define VALAMI_H_INCLUDED   // tehát innentől kezdve bekerül...
+
+/* ... */
+
+#endif                      // ... idáig
+
+
+#ifndef VALAMI_H_INCLUDED   // másodjára viszont definiálva van
+#define VALAMI_H_INCLUDED   // tehát innentől kezdve kimarad...
+
+/* ... */
+
+#endif                      // ... idáig</code></pre>
+
+<p>A fejlécfájlokat tehát így kell megszerkeszteni, a teljes törzsüket <em>include guard</em>-okba csomagolva:</p>
+
+<div class="columns">
+<div>
+<div class="sticky">complex.h</div>
+<pre   ><code class="language-c">#ifndef COMPLEX_H_INCLUDED
+#define COMPLEX_H_INCLUDED
+
+struct Complex {
+    double re, im;
+};
+
+double absolute(Complex c);
+/* ... */
+
+#endif</code></pre>
+</div>
+<div>
+<div class="sticky">matrix.h</div>
+<pre   ><code class="language-c">#ifndef MATRIX_H_INCLUDED
+#define MATRIX_H_INCLUDED
+
+#include &quot;complex.h&quot;
+
+struct Matrix {
+    Complex **adat;
+    int szeles, magas;
+};
+
+#endif</code></pre>
+</div>
+</div>
+
+<p>Az előfordított <code>main.c</code> fájl pedig valami ilyesmi, <code>//</code> kommenttel jelképezve a makrók segítségével kihagyott részt:</p>
+
+<div class="sticky">main.c<br>előfordítás után</div>
+<pre   ><code class="language-c">/* a complex.h-ból származó rész */
+struct Complex {
+    double re, im;
+};
+double absolute(Complex c);
+
+/* a matrix.h-ból származó rész */
+    // itt #include-olódott volna másodjára a complex.h, de kimaradt
+    // struct Complex {
+    //     double re, im;
+    // };
+    // double absolute(Complex c);
+
+struct Matrix {
+    Complex **adat;
+    int szeles, magas;
+};
+
+/* innentől pedig a main.c tartalma */
+int main(void) {
+    Complex c = { 2.3, 4.5 };
+    Matrix m;
+    /* ... */
+}</code></pre>
+
+<p>Az előzőhöz hasonló hatást érhetünk el, ha a makrómágia helyett <code>#pragma once</code>-ot írunk a fejlécfájljaink elejére. Bár ez nem szabványos, szinte nincs olyan fordító, amelyik ne ismerné fel.</p>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

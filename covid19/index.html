@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: COVID-19 infók</title>
+<meta property="og:title" content="TEST InfoC++11 :: COVID-19 infók">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Koronavírussal kapcsolatos változások a tárgyban">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Koronavírussal kapcsolatos változások a tárgyban">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="../lab10/index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="COVID-19 infók">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">COVID-19 infók</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2020.03.14.</p>
+<p class="kivonat">Koronavírussal kapcsolatos változások a tárgyban</p>
+</div>
+
+
+<blockquote>
+<p>Minden, ami itt olvasható, csak a rendkívüli oktatási rend idejére érvényes.</p>
+</blockquote>
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">BME-s központi utasítások</a>
+                      <li><a href="index.html#2" class="">A vizsgák szervezése</a>
+                      <li><a href="index.html#3" class="">A tárgyban</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="BME-s központi utasítások">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        BME-s központi utasítások<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>KB tájékoztatás (2020-05-18)</p>
+
+<ul>
+    <li>A vizsgákat, szigorlatokat (a továbbiakban együttesen: vizsgák) a Koordinációs Bizottság korábbi intézkedéseinek megfelelően – figyelemmel az Egyetemi Tanulmányi Bizottság irányelveire[1] – távolléti formában, információs rendszerek útján kell megszervezni és lebonyolítani.</li>
+</ul>
+
+<p>Dékáni utasítás (2020-05-15)</p>
+
+<ul>
+    <li> a) vizsgát, szigorlatot információs technológiák felhasználásával kell lebonyolítani;
+    <li> 1. A vizsga lebonyolításának módjáról a hallgatókat tájékoztatni kell a szorgalmi időszak végéig.
+    <li> 2. Írásbeli számonkérésen a személyazonosság direkt eszközökkel nem ellenőrizhető, [...] Elvárják a hallgatóktól, hogy ezzel a helyzettel semmilyen módon ne éljenek vissza [...]
+    <li> A vizsga értékelésének módját (a végleges vizsgapontszám számításának módját, az egyes érdemjegyek ponthatárait, félévközi eredmények esetleges beszámítását – ha szerepel ilyen a tantárgyi adatlapon) a vizsga előtt közzé kell tenni, 
+    <li> Bármely vizsga megszakadását, technikai ellehetetlenülését a hallgatónak a lehető leghamarabb, de legkésőbb 24 órán belül emailben jeleznie kell az oktatónak megfelelő indoklással
+</ul>
+
+
+<h3>2020-03-16 (kivonat)</h3>
+
+<p>A távoktatási (távolléti oktatási) munkarendben</p>
+
+<ul>
+    <li>a tanulmányi foglalkozásokat információs rendszerek alkalmazásával, a félév eredeti ütemezése szerint kell biztosítani annak érdekében, hogy az hallgatói oldalról folyamatosan követhető, feldolgozható és befogadható legyen;
+    <li>az évközi tanulmányi teljesítményértékeléseket a tavaszi félévre vonatkozó tanulmányi teljesítményértékelési terv 4–5. pont szerinti szükségszerű módosítása mellett az eredeti ütemezés szerint kell lebonyolítani; teljesítményértékelések nem vonhatók össze, nem alkalmazhatók koncentráltan;
+    <li>a hallgatók folyamatos előrehaladását segítendő, az információs rendszerek alkalmazásával biztosított oktatási programba további ellenőrzési, visszajelzési pontokat, diagnosztikus értékeléseket kell beiktatni, melyek eredménye a tanulmányi teljesítmény értékelésében (érdemjegy megállapításában) csak akkor vehető figyelembe, ha azt a hallgató sikeresen teljesítette.
+</ul>
+
+<h3>2020-03-11 (kivonat)</h3>
+
+<p>Az Egyetemen a rendes oktatási tevékenység 2020. március 12. 0:00 órától határozatlan ideig a következők szerint felfüggesztésre, illetve átszervezésre kerül:</p>
+
+<ul>
+<li>2020. március 12. (csütörtök) és 13. (péntek) rendkívüli rektori tanítási szünet;
+<li>2020. március 16-20. közötti időszak: tavaszi szünet;
+<li>2020. március 23. napjától kezdődően rendkívüli munkarendben, távoktatási módszerekkel (fejlett technológiák, információs rendszerek útján) folytatandó az oktatási tevékenység.
+</ul>
+
+<h3>2020-03-09</h3>
+
+<a href="https://www.kth.bme.hu/document/2392/original/BME_Intezkedesek_koronav%C3%ADrus_20200309.pdf">https://www.kth.bme.hu/document/2392/original/BME_Intezkedesek_koronav%C3%ADrus_20200309.pdf</a>
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A vizsgák szervezése">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        A vizsgák szervezése<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>A tárgy vizsgája egy 4 feladatból álló, 4×10 = 40 pontos dolgozat szokott lenni. A felépítéséről a <a href="https://cpp11.local/kovetelmenyek/#vizsga">követelmények</a> oldal ejt pár szót.</p>
+
+<p>Ez a jelen helyzetben tud írásbeli maradni, a különbség csak annyi lesz, hogy nem egy teremben felügyelve, hanem otthoni 
+munkában kell majd megoldani a feladatokat. A feladatok nem lexikai tudásra, hanem a tanult eszközök <em>alkalmazására</em> 
+fókuszálnak, ezért különösebb jelentősége nem volt eddig sem, hogy milyen eszközök alkalmazhatóak – az otthoni feladatmegoldásból 
+viszont következik, hogy a számonkérés nyitott könyves vizsgává változik.</p>
+
+<p>A szervezéshez a <em>tárgy weboldala</em> adott: a <em>vizsga időpontjában</em> meghirdetett feladatot a vizsga végéig (1.5 óra) 
+kell feltölteni, mint az összes eddigi laborfeladatot és nagyházit. Visszajelzést is itt adunk, illetve kérdés esetén az eredmény 
+és a feladatok megoldásai itt vagy Teamsen megbeszélhetőek.</p>
+
+<p>Készüljetek arra, hogy ez kicsit más helyzet, mint egy szokásos írásbeli vizsga. A papír sok mindent elbír, fordítóval dolgozva
+viszont hajlamos az ember leragadni egy bug miatt. A vizsga rövid ideje miatt ilyenkor érdemesebb lehet továbblépni a következő
+feladatra. A részmegoldások ugyanúgy pontot érnek, mintha papíron vizsgáznátok!</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="A tárgyban">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        A tárgyban<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<h3>Ütemterv változásai</h3>
+
+<ul>
+    <li>5. heti labor elmaradt, később lesz helye.</li>
+    <li>Március 16-20. nincs tananyag, tavaszi szünet.</li>
+    <li>Az <a href="https://cpp11.local/utemterv/">ütemterv</a> némileg átrendezve.</li>
+</ul>
+
+<h3>Oktatás</h3>
+
+<ul>
+    <li>Előadások: <strong>Teams video meeting</strong> formájában, minden héten a szokásos időpontban: <strong>kedd&nbsp;12:15</strong>. Link lentebb.</li>
+    <li>Laborok: <strong>otthoni munkában</strong>, a feladatoknál látható határidőkig (minden hét vasárnap).
+        Konzultáció Teams vagy Slack segítségével (lásd lentebb). Bármikor dolgozhattok rajta és bármikor kérdezhettek.
+        Csütörtökönként 12:15-től, a labor normál időpontjában mindenképp figyeljük a Teams és Slack csatornákat.</li>
+    <li>Nagy házi: az átszervezés nem módosítja az ütemezést.</li>
+    <li>Szorgalmik: az előre hozott tavaszi szünetben <strong>újra lehetőség nyílik</strong> a régebbi szorgalmik elkészítésére.</li>
+    <li>Vizsgaidőszakban: remélhetőleg nem módosul, de javasolt <strong>megajánlott jegyre hajtani</strong>, hogy ne kelljen
+        a vizsgával bajlódni. A szorgalmik is ezért lettek meghosszabbítva.</li>
+</ul>
+
+<p>Az otthon elkészített laborfeladatokkal kapcsolatban az elvárás az, hogy legalább annyi energiát fektess bele,
+mintha laboron lennél:</p>
+
+<ul>
+    <li><strong>8. héttől:</strong> Minden labor elején szerepel, hogy a feladatsornak mekkora a minimum része;
+        tehát legalább mekkora részét kell megoldani a labor elfogadásához. <strong>11. héttől:</strong> plágiumteszt is lesz.
+        <p class="kicsinyit bentebb">
+        <small>Deprecated: <strong>6-7. hét:</strong> Minimum másfél órát kell a feladatokkal foglalkozni. Ha láthatóan kevesebb a munka mögötte
+        (indokolatlanul hiányos a feltöltött anyag), akkor az nem teljesített labornak számít.
+        Ha ezzel nem értesz egyet, azt jelezd, és akkor számszerűsítjük az egész évfolyam számára,
+        az első hány darab feladatot kell megoldani a teljesítéshez.
+        A másfél óra érdemi munkát jelent. Nem azt jelenti, hogy akkor nézed meg először, miről
+        volt szó az előadáson; nem azt, hogy akkor telepítesz fejlesztőkörnyezetet; és nem
+        is azt, hogy akkor pótolod a Prog2 szintű C++ alapismereteket. Ezekre az előadásra és
+        a laborra felkészülésre szánt időben kell sort keríteni.
+        </p>
+        
+        </li>
+    <li>A feltöltött kódok lehetnek hibásak, befejezetlenek (lásd az előző pontot). Ugyanakkor elvárás az, hogy kérdés esetén
+        konzultálj. Ha ezt nem teszed meg, és emiatt értékelhetetlenül hibás a megoldás, az hiányzásnak számít.</li>
+    <li>Nem elfogadott megoldás javítása esetén elvárás, hogy a jelzett hibákat javítsd. Ha ezt nem teszed meg,
+        az a labor nem teljesítésének számít.</li>
+</ul>
+
+<h3>Kommunikáció</h3>
+
+<ul>
+    
+    <li><strong>Szinkron</strong>: Teams oldalon, <a href="https://teams.microsoft.com">https://teams.microsoft.com</a>. Ez a hivatalos, VIK által is támogatott csatorna.
+        Office365 regisztráció kell; lásd <a href="https://login.bme.hu/office365/">https://login.bme.hu/office365/</a>. A csoport 
+        kódja <code>wvwaleu</code> (csoportok nézett, jobb fent csatlakozás gomb), elvileg ezzel lehet csatlakozni. Ha nem, a 
+        linkje: <a href="https://teams.microsoft.com/l/team/19%3a69db4aded02c43b5844c6d35004e0f90%40thread.skype/conversations?groupId=665c71d8-0111-4aa1-b27d-fce2f2e7e2f1&tenantId=6a3548ab-7570-4271-91a8-58da00697029">kattintva</a>. A videóhoz desktop app is kell, böngésző sajnos nem elég; <a href="https://teams.microsoft.com/downloads">https://teams.microsoft.com/downloads</a>.
+        
+        <p class="megjegyzes">
+        Az Office365 accounthoz tartozik egy e-mail cím is (xy@edu.bme.hu). Ha valaki ezt nem szeretné használni, akkor is
+        tegye meg, hogy máshova átirányítja! A <a href="https://outlook.office365.com/">https://outlook.office365.com/</a> oldalon
+        bejelentkezve, jobb fent a fogaskerékre (settings) kattintva, utána alul "view all outlook settings", jön elő egy ablak.
+        Ebben van egy "Forwarding" fül, ahol megadható másik cím.
+        </p>
+        </li>
+        
+    <li><strong>Szinkron</strong>: Slack workspace, a linkre kattitva lehet regisztrálni (nem kötelező). Kérés: Display name-nek a teljes nevetek
+    írjátok be.<br>
+    <a target="_blank" href="https://join.slack.com/t/c11-group/shared_invite/zt-cp87fqpw-tFUL8km2lqux0e5QgSq7Bw">https://join.slack.com/t/c11-group/shared_invite/zt-cp87fqpw-tFUL8km2lqux0e5QgSq7Bw</a> </li>
+    <li><strong>Aszinkron</strong>: szokásos módon, a <a href="https://cpp11.local/admin#uzenetek">portálon küldött levelekkel</a>.</li>
+</ul>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

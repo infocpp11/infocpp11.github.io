@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+<meta charset="utf-8">
+<title>TEST InfoC++11 :: Sablon metaprogramozás</title>
+<meta property="og:title" content="TEST InfoC++11 :: Sablon metaprogramozás">
+<meta property="og:image" content="/modulz/logo.png">
+<meta property="og:description" content="Stratégia és típusinformációs osztályok írása.">
+<meta property="og:site_name" content="InfoC++11 – C11 és C++11 programozás">
+<meta name="description" content="Stratégia és típusinformációs osztályok írása.">
+<meta name="robots" content="noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="../modulz/favicon.ico" id="faviconhref">
+<link rel="apple-touch-icon" href="../modulz/logo_touch.png">
+<link rel="image_src" href="../modulz/logo.png"> 
+<link rel="stylesheet" href="../modulz/alap-ctrlv.css@v2.css">
+<link rel="stylesheet" href="../modulz/style/localfonts.css@v2.css">
+<script>var infoc = { onloads: [] };</script>
+<script src="../modulz/site.js@v2"></script>
+</head>
+
+<body class="" data-version="2"
+    data-halozati-hiba="Hálózati hiba a kérés teljesítése közben."
+    data-tul-nagy-keres="A fájl túl nagy!"
+    data-biztos-navigal="Biztos el szeretnél navigálni? A nem mentett változások elvesznek."
+    data-ird-be-a-keresoszot="Írd be a keresőszót!"
+    data-vissza="Vissza">
+
+<div id="muzealis-darab" style="display: none;">A böngésződ túl régi. Látogass el a <a href="https://browsehappy.com">browsehappy.com</a> oldalra!</div>
+
+<div class="bodycontent">
+
+<nav class="menubg clearfix">
+<div class="shaper">
+<div id="menu" class="menu menu-font-size">
+<a id="menu-nyito" class="menu-nyito"  role="button"><i class="hamburger"></i></a>
+<div class="menu-brand"><a href="../index/index.html">InfoC++11</a></div>
+<div id="menu-elemek" class="menu-elemek">
+<ul>
+<li class="almenu "><a>Infó</a>
+<ul>
+<li><a  href="../index/index.html">Kezdőlap</a>
+<li><a  href="../covid19/index.html">COVID-19 infók</a>
+<li><a  href="../fejlesztokornyezet/index.html">Fejlesztőkörnyezetek</a>
+<li><a  href="../valgrindwin10/index.html">Windows 10 + Valgrind</a>
+<li><a  href="../oldalterkep/index.html">Oldaltérkép</a>
+<li><a  href="../elerhetoseg/index.html">Elérhetőség</a>
+</ul>
+
+<li class="almenu "><a>Tananyag</a>
+<ul>
+<li class="almenu "><a>Előadás</a>
+<ul>
+<li><a  href="../ea01/index.html">1. hét: Bevezető</a>
+<li><a  href="../ea02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../ea03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../ea04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../ea05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../ea06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../ea07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../ea08/index.html">8. hét: Kivételek</a>
+<li><a  href="../ea09/index.html">9. hét: λ</a>
+<li><a  href="../ea10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../ea11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../ea12/index.html">12. hét: Concepts</a>
+<li><a  href="../ea13/index.html">13. hét: Többszálúság</a>
+<li><a  href="../ea14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Labor</a>
+<ul>
+<li><a  href="../lab01/index.html">1. hét: OOP tervezés, C++ frissítő</a>
+<li><a  href="../lab02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../lab03/index.html">3. hét: Erős típusok használata</a>
+<li><a  href="../lab04/index.html">4. hét: Haladó memóriakezelés</a>
+<li><a  href="../lab06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../lab07/index.html">7. hét: Objektumok élettartama</a>
+<li><a  href="../lab08/index.html">8. hét: Kivételek</a>
+<li><a  href="../lab09/index.html">9. hét: λ</a>
+<li><a  href="index.html">10. hét: Sablon metaprogramozás I.</a>
+<li><a  href="../lab11/index.html">11. hét: Sablon metaprogramozás II.</a>
+<li><a  href="../lab12/index.html">12. hét: STL</a>
+<li><a  href="../lab13/index.html">13. hét: C++ fejlesztőeszközök</a>
+<li><a  href="../lab14/index.html">14. hét: Nyelvi elemzők</a>
+</ul>
+
+<li class="almenu "><a>Feladatok</a>
+<ul>
+<li><a  href="../f00/index.html">0. hét: Összetett feladatok</a>
+<li><a  href="../f01/index.html">1. hét: C99 nyelvi elemek</a>
+<li><a  href="../f02/index.html">2. hét: C++11 osztályhierarchiák</a>
+<li><a  href="../f03/index.html">3. hét: Típusok használata</a>
+<li><a  href="../f04/index.html">4. hét: Tároló osztályok</a>
+<li><a  href="../f05/index.html">5. hét: Objektumok élettartama</a>
+<li><a  href="../f06/index.html">6. hét: Jobbérték referenciák</a>
+<li><a  href="../f07/index.html">7. hét: Objektumok memóriaképe</a>
+<li><a  href="../f08/index.html">8. hét: Kivételek</a>
+<li><a  href="../f09/index.html">9. hét: λ</a>
+<li><a  href="../f10/index.html">10. hét: Sablon metaprogramozás</a>
+<li><a  href="../f11/index.html">11. hét: Paraméterlisták és -továbbítás, ...</a>
+<li><a  href="../f12/index.html">12. hét: Concepts</a>
+</ul>
+
+<li class="almenu "><a>Prog2 emlékeztető</a>
+<ul>
+<li><a  href="../memoria/index.html">Memóriakezelés</a>
+<li><a  href="../include/index.html">#include</a>
+<li><a  href="../inline/index.html">inline</a>
+<li><a  href="../const/index.html">const</a>
+<li><a  href="../referenciak/index.html">Referenciák</a>
+<li><a  href="../ertekkonstref/index.html">Érték és konstans referencia</a>
+<li><a  href="../operatorok/index.html">Operátorok</a>
+<li><a  href="../tarolo/index.html">Tárolók</a>
+<li><a  href="../iterator/index.html">Iterátorok</a>
+<li><a  href="../orokles/index.html">Öröklés</a>
+<li><a  href="../stl/index.html">STL</a>
+<li><a  href="../castok/index.html">Cast-ok</a>
+<li><a  href="../template/index.html">Template</a>
+<li><a  href="../template-szintaxis/index.html">Template szintaxis</a>
+</ul>
+
+</ul>
+
+<li class="almenu "><a>Extrák</a>
+<ul>
+<li><a  href="../irodalom/index.html">Irodalom, blogok</a>
+<li class="almenu "><a>C</a>
+<ul>
+<li><a  href="../restrict/index.html">C99 restrict</a>
+<li><a  href="../orokles_cben/index.html">Öröklés C-ben</a>
+</ul>
+
+<li class="almenu "><a>C++ elemek, eszközök</a>
+<ul>
+<li><a  href="../cpp1417/index.html">C++14/17</a>
+<li><a  href="../void_t/index.html">void_t</a>
+<li><a  href="../string_view/index.html">std::string_view</a>
+<li><a  href="../deletesize/index.html">operator delete mérettel</a>
+<li><a  href="../clocks/index.html">Digitális rendszerek szimulációja</a>
+</ul>
+
+<li class="almenu "><a>Nyelvészet</a>
+<ul>
+<li><a  href="../szintaktika/index.html">Szintaktikai szörnyűségek</a>
+<li><a  href="../typename/index.html">Függő nevek: typename A::B</a>
+<li><a  href="../temporalis/index.html">Temporális objektumok</a>
+<li><a  href="../autoptr/index.html">Az elavult std::auto_ptr</a>
+<li><a  href="../typeidentity/index.html">Sablon függvények és paramétereik: type_identity</a>
+</ul>
+
+<li class="almenu "><a>Technikák</a>
+<ul>
+<li><a  href="../perzisztencia/index.html">Heterogén kollekció perzisztenciája</a>
+<li><a  href="../bittomb/index.html">Bittömb</a>
+<li><a  href="../property/index.html">Property</a>
+<li><a  href="../manipulatorok/index.html">I/O manipulátorok</a>
+<li><a  href="../reflexio/index.html">Reflexió C++-ban</a>
+<li><a  href="../pushback1/index.html">vector::push_back I.</a>
+<li><a  href="../pushback2/index.html">vector::push_back II.</a>
+<li><a  href="../milyentipus/index.html">Milyen típus?</a>
+</ul>
+
+<li class="almenu "><a>Kifejezésfa refaktor</a>
+<ul>
+<li><a  href="../expression1/index.html">I. rész: Memóriakezelés</a>
+<li><a  href="../expression1b/index.html">I/b. rész: Gyártófüggvények</a>
+<li><a  href="../expression2/index.html">II. rész: Adatszerkezet és tevékenységek</a>
+<li><a  href="../expression3/index.html">III. rész: Az enum-alapú Visitor</a>
+<li><a  href="../expression3b/index.html">III/b. rész: A Visitor minta más nyelvekben</a>
+</ul>
+
+</ul>
+
+</ul>
+</div>
+</div>
+</div>
+</nav>
+
+<div class="menu-font-size"><div class="menuplaceholder"></div></div>
+
+<main class="doksi">
+<div class="shaper">
+
+
+<section class="slidescreen" data-title="Sablon metaprogramozás">
+<div class="slide" id="slide_0">
+
+<a id="0" class="namer"></a>
+
+
+<div class="slidecontent">
+    <h1 class="eloadascim">Sablon metaprogramozás</h1>
+<div class="focim">
+<p class="szerzocim"><i class="szerzo"></i> Czirkos Zoltán · <i class="ido"></i> 2019.03.19.</p>
+<p class="kivonat">Stratégia és típusinformációs osztályok írása.</p>
+</div>
+
+
+
+<blockquote>
+<h3>Labor otthoni munkában</h3>
+<p>A labor teljesítéséhez legalább az első két feladatot meg kell oldani.</p>
+<p>Javaslat a munkához: sablon kódot kell írni. Számíts arra, hogy rengeteg lesz hiba esetén a hibaüzenet,
+és nem lesznek túl informatívak! Ne találgass-tippelgess... Legyél szuper figyelmes a szintaxissal kapcsolatban!</p>
+</blockquote>
+
+
+
+
+
+    
+                      <nav id="tartalom">
+          <h3>Tartalom</h3>
+          <ol>                      <li><a href="index.html#1" class="">Típusinformáció: Sztring == sZtRIng</a>
+                      <li><a href="index.html#2" class="">Stratégiák: vektor túlindexelése</a>
+                      <li><a href="index.html#3" class="">Típusinformáció: Leszármazottja-e?</a>
+                      <li><a href="index.html#4" class="">Érték vagy referencia?</a>
+                      <li><a href="index.html#5" class="">Mit csinál a függvény?</a>
+                      <li><a href="index.html#6" class="">Irodalom</a>
+                    </ol>        </nav>
+          </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Típusinformáció: Sztring == sZtRIng">
+<div class="slide" id="slide_1">
+
+<a id="1" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">1</span><span class="oldalszamafter">. </span>        Típusinformáció: Sztring == sZtRIng<a class="hlink" href="index.html#1"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+
+<p>Adott az alábbi sztring osztály, amely most az egyszerűség kedvéért nem használ dinamikus memóriakezelést:</p>
+
+<pre   ><code class="language-c">class String {
+  private:
+    char data[100];
+
+  public:
+    String() {
+        data[0] = 0;
+    }
+
+    String(char const *init) {
+        strcpy(data, init);
+    }
+    
+    bool operator==(String const &amp;rhs) {
+        String const &amp;lhs = *this;
+        size_t i;
+        for (i = 0; lhs.data[i] != 0 &amp;&amp; rhs.data[i] != 0;  ++i)
+            if (lhs.data[i] != rhs.data[i])
+                return false;
+        return lhs.data[i] == 0 &amp;&amp; rhs.data[i] == 0;
+    }
+};
+
+
+int main() {
+    String s1 = &quot;hello&quot;, s2 = &quot;HeLLo&quot;;
+    std::cout &lt;&lt; (s1 == s2);
+}</code></pre>
+
+<p>Ezen a sztring osztályon több dolgot is lehetne általánosítani. Például a karakter típusa az egybájtos <code>char</code>-on 
+túl lehetne másféle is, pl. <code>char16_t</code> vagy <code>char32_t</code> az Unicode kódolású szövegek tárolásához. Továbbá, 
+az összehasonlítást nem feltétlenül kellene az <code>==</code> operátorral végezni. Lehetne pl. úgy is, hogy figyelmen kívül 
+hagyjuk a kisbetű–nagybetű különbségeket.</p>
+
+
+<p>Ezek sablonparaméterek lehetnének. Hogy ne legyen túl sok sablonparamétere a <code>String</code> osztálynak, érdemes 
+ezeket egy külön osztályba tenni. Például a fenti viselkedés leírásához a <code>CharTraits</code> osztályban kell lennie egy 
+belső típusnak, és egy statikus függvénynek, <code>CharTraits::type</code> és <code>CharTraits::equal()</code>:</p>
+
+<pre   ><code class="language-c">struct CharTraits {
+    using Type = char;
+    
+    static bool equal(char c1, char c2) { return c1 == c2; }
+};</code></pre>
+    
+<h3>Feladatok</h3>
+
+<img src="chartraits.jpg" style="width: 16em;" class="float arnyek">
+
+<ul>
+    <li>Írd át úgy a fenti <code>String</code> osztályt, hogy a <em>sablonparamétere egy ilyen viselkedésosztály</em> legyen!
+    Használják az osztály függvényei a sablonparaméterből vett típust és az onnan vett karakterösszehasonlító függvényt!
+    Figyelj arra, hogy ehhez a <code>strcpy()</code> függvényhívást is át kell írnod, mert az csak <code>char*</code>-okon működik.
+    
+    <li>Példányosítsd az új <code>String</code> sablonod a fenti <code>CharTraits</code> osztállyal, és teszteld a működését!
+    
+    <li>Hozz létre egy olyan karakterosztályt is, amelynek karakterei érzéketlenek a kisbetű–nagybetű különbségre! Teszteld
+    ezt is!
+</ul>
+
+<p>Mi történik, ha összehasonlítasz az <code>==</code> operátorral két sztringet, amelyek karakterosztálya eltérő? Miért?</p>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Ha sablon osztályból kell egy belső típust hivatkozni, elé kell írni, hogy <code>typename</code>:</p>
+<pre   ><code class="language-c">template &lt;typename SABLONOSZTALY&gt;   // sablon kódon belül vagyunk
+void f() {
+    typename SABLONOSZTALY::BelsoTipus x;
+}</code></pre>
+<p>Ennek okairól <a href="../typename/index.html">itt olvashatsz bővebben</a>.</p>
+</div>
+</details>
+
+
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+
+
+template &lt;typename CHAR_TRAITS&gt;
+class String {
+  private:
+    using CharType = typename CHAR_TRAITS::Type;
+    CharType data[100];
+
+  public:
+    String() {
+        data[0] = 0;
+    } 
+
+    String(CharType const *init) {
+        size_t i;
+        for (i = 0; init[i] != 0; ++i)
+            data[i] = init[i];
+        data[i] = 0;
+    }
+    
+    bool operator==(String const &amp;rhs) {
+        String const &amp;lhs = *this;
+        size_t i;
+        for (i = 0; lhs.data[i] != 0 &amp;&amp; rhs.data[i] != 0;  ++i)
+            if (!CHAR_TRAITS::equal(lhs.data[i], rhs.data[i]))
+                return false;
+        return lhs.data[i] == 0 &amp;&amp; rhs.data[i] == 0;
+    }
+};
+
+
+struct CharTraits {
+    using Type = char;
+    
+    static bool equal(char c1, char c2) {
+        return c1 == c2;
+    }
+};
+
+
+struct CharTraitsCaseInsensitive: public CharTraits {
+    static bool equal(char c1, char c2) {
+        return toupper(c1) == toupper(c2);
+    }
+};
+
+
+int main() {
+    String&lt;CharTraits&gt; s1 = &quot;hello&quot;, s2 = &quot;hEllo&quot;;
+    std::cout &lt;&lt; (s1 == s2) &lt;&lt; std::endl;
+
+    String&lt;CharTraitsCaseInsensitive&gt; s3 = &quot;hello&quot;, s4 = &quot;hEllo&quot;;
+    std::cout &lt;&lt; (s3 == s4) &lt;&lt; std::endl;
+}</code></pre>
+<p>A <code>CharTraitsCaseInsensitive</code> osztály származtatható a <code>CharTraits</code> osztályból, így megörökli
+a <code>Type</code> belső típust. Ennek a származtatásnak akkor jönne ki igazán az előnye, ha több belső függvény lenne, mert
+csak egyet szeretnénk felülírni. Bár az <code>equal()</code> függvény statikus, és így nem lehet virtuális, mégis felüldefiniálható
+a leszármazásban, mert a sablonoknál fordítási időben a megfelelő típus látszik!</p>
+<p>Az eltérő viselkedésosztályból példányosított sztring objektumok nem hasonlíthatók össze, mert különböző típusúnak számítanak.
+Ez az összehasonlításnál nem is baj, amúgy sem lehet eldönteni, hogy egy kisbetű–nagybetűre érzéketlen és egy arra érzékeny sztringet
+hogyan kellene összehasonlítani.</p>
+<p>Az <code>std::basic_string</code> és az <code>std::char_traits</code> ugyanígy működnek; <code>std::string</code> ==
+<code>std::basic_string&lt;char, std::char_traits&lt;char&gt;&gt;</code>, illetve <code>std::char_traits&lt;char&gt;::char_type</code>
+és <code>std::char_traits&lt;char&gt;::eq()</code>.</p>
+</div>
+</details>
+
+
+
+<p class="megjegyzes">
+Szorgalmi feladat: Nézz utána a szabványos <code>std::basic_string</code>, <code>std::basic_ostream</code>,
+és az <code>std::char_traits</code> osztályoknak, és hasonlítsd össze őket a most megírt programoddal!
+Ez a feladat a <a href="index.html#gotw29">GotW #29</a> alapján készült.
+</p>
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Stratégiák: vektor túlindexelése">
+<div class="slide" id="slide_2">
+
+<a id="2" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">2</span><span class="oldalszamafter">. </span>        Stratégiák: vektor túlindexelése<a class="hlink" href="index.html#2"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi vektor osztály.</p>
+
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+template &lt;typename T&gt;
+class Vector {
+  private:
+    size_t size;
+    T* data;
+    
+  public:
+    explicit Vector(size_t size)
+      : size{size}
+      , data{new T[size]} {
+    }
+    Vector(Vector const &amp;) = delete; /* lusta */
+    Vector&amp; operator=(Vector const &amp;) = delete; /* lusta */
+    ~Vector() {
+        delete[] data;
+    }
+    
+    T&amp; operator[](size_t idx) {
+        return data[idx];
+    }
+};
+
+int main() {
+    Vector&lt;std::string&gt; v1(10);
+}</code></pre>
+
+<p>A vektor túlindexelésekor többféle dolog történhet:</p>
+<ul>
+    <li>Nem foglalkozik vele a vektor; a sebesség érdekében a hívóra bízza a helyes indexelést.
+    <li>Kivételt dob.
+    <li>Körkörösen visszatér a vektor elejére (pl. 100 elemű esetén <code>v[100] = v[0]</code>, <code>t[101] = t[1]</code> stb.)
+    <li>Megnyújtja a vektort akkorára, hogy helyessé váljon az indexelés.
+</ul>
+
+<p>Írd át a vektor osztályt úgy, hogy sablonparamétere legyen a túlindexelést kezelő <em>stratégia
+osztály</em> is! Érdemes elsőként a vektor indexelő operátorát átalakítani, ott látod leginkább,
+hogy mit vársz a stratégia osztálytól (milyen interfésszel kell rendelkeznie).
+A stratégiának statikus függvénye kell megkapja az ellenőrizendő indexet és az aktuális méretet
+(<code>0 &le; index &lt; méret</code>). Írd meg ilyen módon az üres stratégiát és a kivételt dobó
+stratégiát! Próbáld ki mindkettőt!</p>
+
+<p>Ha ezek készen vannak, akkor írd a vektort átméretező stratégiát is!
+Ehhez módosítani kell a stratégia paraméterezését. Annak látnia kell a vektort is, amely
+meghívja az indexelést ellenőrző függvényt – azt kell majd átméreteznie. Legegyszerűbb ezt úgy implementálni,
+hogy a stratégia osztályokon belül a statikus függvény egy sablon (nem az osztály, csak a függvény!),
+mert a különféle típusokkal és stratégiákkal példányosított vektorokat át kell tudnia venni paraméterként.</p>
+
+<p>Ügyelj arra, hogy az utóbbi feladatnál nem túl jó megoldás, ha a tényleges memóriakezelés a stratégia osztályba kerül. Annak ez 
+egyáltalán nem feladata.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A vektor paraméterként átadását legegyszerűbb úgy kezelni, ha a stratégiák ellenőrző
+függvényei sablonok. Erre azért van szükség, mert a vektorokból többféle lehet. Egy
+egyszerű implementáció:</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+
+
+template &lt;typename T, typename RangePolicy&gt;
+class Vector {
+  private:
+    size_t size;
+    T* data;
+    
+  public:
+    explicit Vector(size_t size)
+      : size{size}
+      , data{new T[size]} {
+    }
+    Vector(Vector const &amp;) = delete; /* lusta */
+    Vector&amp; operator=(Vector const &amp;) = delete; /* lusta */
+    ~Vector() {
+        delete[] data;
+    }
+    
+    T&amp; operator[](size_t idx) {
+        std::clog &lt;&lt; &quot;index &quot; &lt;&lt; idx &lt;&lt; std::endl;
+        RangePolicy::check_index(*this, idx);
+        return data[idx];
+    }
+    
+    void resize(size_t newsize) {
+        std::clog &lt;&lt; &quot;resize to &quot; &lt;&lt; newsize &lt;&lt; std::endl;
+        T* newdata = new T[newsize];
+        std::copy(data, data+std::min(size, newsize), newdata);
+        delete[] data;
+        data = newdata;
+        size = newsize;
+    }
+    size_t getsize() const {
+        return size;
+    }
+};
+
+
+struct RangePolicyDontCare {
+    template &lt;typename V&gt;
+    static void check_index(V&amp; vec, size_t idx) {
+        std::clog &lt;&lt; &quot;don't care&quot; &lt;&lt; std::endl;
+    }
+};
+
+
+struct RangePolicyThrowException {
+    template &lt;typename V&gt;
+    static void check_index(V&amp; vec, size_t idx) {
+        if (idx &gt;= vec.getsize())
+            throw std::range_error(&quot;index out of bounds&quot;);
+    }
+};
+
+struct RangePolicyResizeIfNeeded {
+    template &lt;typename V&gt;
+    static void check_index(V&amp; vec, size_t idx) {
+        if (idx &gt;= vec.getsize()) {
+            vec.resize(idx+1);
+        }
+    }
+};
+
+
+int main() {
+    Vector&lt;std::string, RangePolicyDontCare&gt; v1(10);
+    v1[100];
+    
+    try {
+        Vector&lt;std::string, RangePolicyThrowException&gt; v2(10);
+        v2[100];
+    } catch (std::exception&amp; e) {
+        std::cout &lt;&lt; e.what() &lt;&lt; std::endl;
+    }
+    
+    Vector&lt;std::string, RangePolicyResizeIfNeeded&gt; v3(10);
+    v3[100] = &quot;alma&quot;;
+    std::cout &lt;&lt; &quot;size is &quot; &lt;&lt; v3.getsize() &lt;&lt; std::endl;
+    std::cout &lt;&lt; v3[100] &lt;&lt; std::endl;
+}</code></pre>
+</div>
+</details>
+
+
+<div class="megjegyzes">
+<p>Szorgalmi feladat: implementálj olyan stratégia osztályt, egy adaptert, amelyik <em>kettő másik stratégia osztályt</em>
+vár sablonparaméterként, és az azokba foglalt tevékenységeket egymás után elvégzi! Írj olyan stratégia osztályt, amelyik
+naplózza a túlindexelést! A naplózó és az átméretező stratégiát kombináld az adapter osztállyal, és
+hozz létre így egy olyan vektort, amelyik jelzi a naplófájlban, ha átméretezésre volt szükség!</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">struct RangePolicyLog {
+    template &lt;typename V&gt;
+    static void check_index(V&amp; vec, size_t idx) {
+        if (idx &gt;= vec.getsize())
+            std::clog &lt;&lt; &quot;index out of bounds, size &quot;
+                      &lt;&lt; vec.getsize() &lt;&lt; &quot;, idx &quot; &lt;&lt; idx &lt;&lt; std::endl;
+    }
+};
+
+template &lt;typename P1, typename P2&gt;
+struct RangePolicyComposite {
+    template &lt;typename V&gt;
+    static void check_index(V&amp; vec, size_t idx) {
+        P1::check_index(vec, idx);
+        P2::check_index(vec, idx);
+    }
+};
+
+using RangePolicyLogAndResize = RangePolicyComposite&lt;RangePolicyLog, RangePolicyResizeIfNeeded&gt;;
+
+int main() {
+    Vector&lt;int, RangePolicyLogAndResize&gt; v1(10);
+    v1[100];
+}</code></pre>
+</div>
+</details>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Típusinformáció: Leszármazottja-e?">
+<div class="slide" id="slide_3">
+
+<a id="3" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">3</span><span class="oldalszamafter">. </span>        Típusinformáció: Leszármazottja-e?<a class="hlink" href="index.html#3"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Írj olyan osztálysablont, amelynek két sablonparamétere van: egy <code>BASE</code> és egy <code>DERIVED</code> típus! Legyen 
+ebben az osztályban egy statikus, fordítási idejű konstans változó, amelynek értéke <code>true</code>, ha a <code>DERIVED</code> paraméter tényleg 
+leszármazottja a <code>BASE</code>-nek, amúgy pedig <code>false</code>!</p>
+
+<pre   ><code class="language-cbub">class Base {};
+class Derived: public Base {};
+
+int main() {
+    std::cout &lt;&lt; IsDerived&lt;Base, Derived&gt;::value;    // 1
+    std::cout &lt;&lt; IsDerived&lt;Base, std::ostream&gt;::value;    // 0
+}</code></pre>
+
+<p>Ezt arra alapozva tudod megírni, hogy egy <code>DERIVED*</code> típusú mutatóval meghívva egy
+<code>BASE*</code> és <code>void*</code> típusú paraméterekkel hívható függvényt, az előbbit
+fogja választani a fordító, mert speciálisabb.</p>
+
+<details >
+<summary>Tipp</summary>
+<div>
+<p>Emlékezz vissza: tetszőleges típusú pointer előállítható egy null értékű pointer konverziójával.</p>
+</div>
+</details>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>Egy egyszerű megoldás, C++11 <code>constexpr</code> függvényekkel:</p>
+<pre   ><code class="language-c">template &lt;typename BASE, typename DERIVED&gt;
+class IsDerived {
+  private:
+    static constexpr bool is_derived_helper(BASE *) {
+        return true;
+    }
+    static constexpr bool is_derived_helper(void *) {
+        return false;
+    }
+  public:
+    static constexpr bool value = is_derived_helper(static_cast&lt;DERIVED*&gt;(nullptr));
+};</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Érték vagy referencia?">
+<div class="slide" id="slide_4">
+
+<a id="4" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">4</span><span class="oldalszamafter">. </span>        Érték vagy referencia?<a class="hlink" href="index.html#4"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Azt szoktuk mondani, hogy az érték paraméterű függvényekkel szemben a konstans referencia paraméterű
+függvényeket preferáljuk: ne másoljuk le az objektumot, ha nem muszáj, mert a felesleges másolások lassítják
+a programot. No igen, de ez csak nagyobb objektumokra igaz; az alábbi függvény éppen a referenciák miatt lassú.
+Mert ahelyett, hogy átadnánk a számok értékét (valószínűleg a processzor egy regiszterében), címeket adunk át,
+és fölösleges memóriaolvasási műveletekre kényszerítjük a gépet:</p>
+
+<pre   ><code class="language-c">int const&amp; greater(int const&amp; a, int const&amp; b) {
+    return a &gt; b ? a : b;
+}</code></pre>
+
+<p>Beépített típusok esetén az érték szerinti paraméterátadás a gyorsabb:</p>
+
+<pre   ><code class="language-c">int greater(int a, int b) {
+    return a &gt; b ? a : b;
+}</code></pre>
+
+<p>A feladat: írj két sablonfüggvényt, amelyek tetszőleges, <code>T</code> típusú objektumok közül a nagyobbikkal
+térnek vissza! Az egyik dolgozzon referenciákkal, a másik értékekkel! A <code>type_traits</code> fejlécfájl segédosztályaival
+oldd meg, hogy beépített típusokkal való példányosítás esetén az <em>utóbbi</em>, osztályokkal való példányosítás esetén
+az <em>előbbi</em> hívódjon!</p>
+
+<p class="megjegyzes">Vissza kellett olvasnod a szövegben, hogy melyik az „előbbi” és melyik az „utóbbi”? Ha az lenne
+odaírva, hogy „beépített típusoknál érték szerint, osztályoknál cím szerinti paraméterátadás legyen”, akkor nem kellett
+volna. Ugyanígy időbe telik a gépnek is egy referencia feloldása: extra memóriaművelet.</p>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<pre   ><code class="language-c">#include &lt;type_traits&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+
+template &lt;typename T,
+          typename = typename std::enable_if&lt;!std::is_class&lt;T&gt;::value&gt;::type&gt;
+T greater(T a, T b) {
+    std::cout &lt;&lt; &quot;value\n&quot;;
+    return a &gt; b ? a : b;
+}
+
+template &lt;typename T,
+          typename = typename std::enable_if&lt;std::is_class&lt;T&gt;::value&gt;::type&gt;
+T const&amp; greater(T const&amp; a, T const&amp; b) {
+    std::cout &lt;&lt; &quot;const ref\n&quot;;
+    return a &gt; b ? a : b;
+}
+
+
+int main() {
+    std::cout &lt;&lt; greater(3, 4) &lt;&lt; std::endl;
+    std::cout &lt;&lt; greater(std::string{&quot;alma&quot;}, std::string{&quot;korte&quot;}) &lt;&lt; std::endl;
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Mit csinál a függvény?">
+<div class="slide" id="slide_5">
+
+<a id="5" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">5</span><span class="oldalszamafter">. </span>        Mit csinál a függvény?<a class="hlink" href="index.html#5"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<p>Adott az alábbi kódrészlet. Ebben a feladatban ezt a függvénypárost felhasználva kell dolgozni.</p>
+
+<pre   ><code class="language-c">template &lt;typename T, decltype(std::begin(*static_cast&lt;T *&gt;(nullptr))) * = nullptr&gt;
+constexpr bool mystery_func(T const *) {
+    return true;
+}
+
+
+constexpr bool mystery_func(void const *) {
+    return false;
+}</code></pre>
+
+<h3>Feladatok</h3>
+
+<ul>
+    <li>Vajon mire jók a függvények? Hogyan kell őket használni, és mit mutat meg a visszatérési értékük?
+    
+    <li>Tedd be a függvényeket egy parametrizálható segédosztályba, amelynek statikus <code>value</code> adattagja megmondja, hogy 
+    a példányosító típusa rendelkezik-e azzal a bizonyos tulajdonsággal vagy nem, amelyet ezek a függvények tesztelnek.
+    
+    <li>Írj egy <code>print()</code> függvénysablont, amely tetszőleges típusú paramétert átvehet (konstans referenciával), és annak kiíró
+    operátorát <code>&lt;&lt;</code> használva kiírja a tartalmát az <code>std::cout</code>-ra!
+    
+    <li>Az <code>std::enable_if</code> segédosztály használatával specializáld ezt a <code>print()</code> függvénysablont
+    arra az esetre, amikor a példányosító típus rendelkezik a <code>mystery_func()</code> által tesztelt tulajdonsággal,
+    és arra, amikor nem!
+    
+    <li>Működik tömbre is az így megírt függvényed? Miért?
+    
+    <li>Mi a különbség az alábbi deklarációk között?
+<pre   ><code class="language-c">template &lt;typename T, decltype(std::begin(*static_cast&lt;T *&gt;(nullptr))) * = nullptr&gt;
+    bool mystery_func(T const *);
+
+template &lt;typename T, typename = decltype(std::begin(*static_cast&lt;T *&gt;(nullptr)))&gt;
+    bool mystery_func(T const *);
+
+template &lt;typename T, size_t = sizeof(std::begin(*static_cast&lt;T *&gt;(nullptr)))&gt;
+    bool mystery_func(T const *);</code></pre>
+</ul>
+
+<details >
+<summary>Megoldás</summary>
+<div>
+<p>A függvények azt tesztelik, hogy a nekik adott típusú objektumnak van-e iterátora, vagy nincs. Ezt a sablonfüggvény
+úgy éri el, hogy az <code>std::begin</code> függvénynek átad egy képzeletbeli objektumot. Ha az <code>std::begin()</code>
+nem paraméterezhető azzal a típussal, a SFINAE szabály miatt a deklarációt a fordító eldobja. A null értékű pointer
+dereferálásával nincs gond, mivel a <code>decltype()</code> belseje kiértékeletlen környezet. Mindez tömbre is
+működik, mert az <code>std::begin</code>-nek létezik a tömbökre specializált változata.</p>
+<p>A három deklaráció között semmilyen érdemi különbség nincs, mindegyik észrevétlen és névtelen sablonparamétert hoz
+létre, és mindegyik aktiválja a SFINAE szabályt.</p>
+<pre   ><code class="language-c">#include &lt;iostream&gt;
+#include &lt;type_traits&gt;
+
+
+template &lt;typename TYPE&gt;
+class HasIterator {
+  private:
+    template &lt;typename T, decltype(std::begin(*static_cast&lt;T *&gt;(nullptr))) * = nullptr&gt;
+    static constexpr bool has_iterator(T const *) {
+        return true;
+    }
+
+    static constexpr bool has_iterator(void const *) {
+        return false;
+    }
+  
+  public:
+    static constexpr bool value = has_iterator(static_cast&lt;TYPE *&gt;(nullptr));
+};
+
+
+template &lt;typename T, typename std::enable_if&lt;!HasIterator&lt;T&gt;::value&gt;::type * = nullptr&gt;
+void print(T const &amp; what) {
+    std::cout &lt;&lt; what;
+}
+
+
+template &lt;typename T, typename std::enable_if&lt;HasIterator&lt;T&gt;::value&gt;::type * = nullptr&gt;
+void print(T const &amp; what) {
+    std::cout &lt;&lt; &quot;{&quot;;
+    for (auto const &amp; elem : what) {
+        print(elem);
+        std::cout &lt;&lt; &quot;, &quot;;
+    }
+    std::cout &lt;&lt; &quot;}&quot;;
+}
+
+
+int main() {
+    int i = 2;
+    int a[] = { 1, 2, 3 };
+    print(i);
+    print(a);
+}</code></pre>
+</div>
+</details>
+
+
+
+
+
+
+
+
+
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+
+<section class="slidescreen" data-title="Irodalom">
+<div class="slide" id="slide_6">
+
+<a id="6" class="namer"></a>
+
+<div class="slideheader">
+    <h2 class="slidetitle">
+        <span class="oldalszam">6</span><span class="oldalszamafter">. </span>        Irodalom<a class="hlink" href="index.html#6"><i class="hlink"></i></a>
+    </h2>
+</div>
+
+<div class="slidecontent">
+    
+<ol>
+    <li id="gotw29">Herb Sutter: <a href="http://www.gotw.ca/gotw/029.htm">Strings</a> (GotW #29).
+</ol>
+    
+        </div>
+
+<div class="clear"></div>
+
+</div>
+</section>
+
+</div>
+</main>
+
+<footer role="contentinfo">
+<div class="shaper">
+<div class="footer ">
+  <a href="../index/index.html"><img src="../modulz/logo.png" class="footerlogo" alt="Logo"></a>
+<div>InfoC++11 – C11 és C++11 programozás</div>
+<div class="csakkepernyon">
+            <a href="../index/index.html">főoldal</a>
+    </div>
+<div class="csaknyomtatasban">Kérjük, az oldalak kinyomtatása előtt gondolj a környezetre.</div>
+BME EET, 2009-2020.</div>
+</div>
+</footer>
+
+</div>
+
+<nav>
+<a id="scrolltotop"></a>
+</nav>
+
+</body>
+
+</html>

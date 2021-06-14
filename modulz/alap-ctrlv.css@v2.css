@@ -1,0 +1,1687 @@
+/*
+ * { background: rgba(0, 0, 0, 0.1) !important; outline: 1px solid rgba(255, 0, 0, 0.1); }
+ */
+/* css reset */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+dl,
+dd,
+dt,
+li,
+pre,
+code,
+kbd,
+form,
+fieldset,
+blockquote,
+a,
+table,
+tr,
+td,
+th,
+thead,
+tbody,
+tfoot,
+em,
+strong,
+textarea,
+main,
+nav,
+section,
+footer,
+button,
+input,
+select {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-decoration: none;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-indent: 0;
+}
+* {
+  box-sizing: border-box;
+}
+main,
+section,
+header,
+footer,
+nav,
+article {
+  display: block;
+  /* ie11-nek kell, hogy mukodjon a shaper */
+}
+/* common */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* ez nagyon fontos!!! azert van, hogy az <img width=xyz height=xyz formaban
+   megadott kepek meretaranya ne valtozotton meg! mert css-bol is van rajuk rakva
+   sokszor width = xyz; vagy height = xyz;. es ha olyankor a masik iranyra nincs
+   rarakva az auto, akkor a html tagbol veszi az infot a bongeszo. */
+img {
+  width: auto;
+  height: auto;
+}
+/* böngésző furcsaságok workaroundjai */
+a,
+button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* ipad */
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  /* iphone marhasag - Prevent font scaling in landscape */
+}
+/* normal block level elementte alakitas */
+textarea {
+  width: 100%;
+  /* ez marhasagnak tunik, de amugy a cols attr adna meg a meretet, ami meg nagyobb hulyeseg */
+  box-sizing: border-box;
+  line-height: inherit;
+  /* chrome */
+  resize: none;
+  /* mer, na. */
+  outline: none;
+  /* ne vicceljunk */
+  overflow: auto;
+  /* ie */
+  display: block;
+  /* hogy rendes margin collapsing legyen. amugy is, miert nem block? */
+}
+html {
+  /* firefox a body-n is megenné, de ne */
+  scroll-behavior: smooth;
+}
+html {
+  font-size: 16px;
+}
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: calc(16px - 4.6px + 0.45vw);
+  }
+}
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: calc(20px);
+  }
+}
+/* nyomtatashoz */
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+  /* sticky es buborek fedje el ami alatta van */
+  .sticky,
+  .bubble,
+  .c .co1 {
+    background: white !important;
+  }
+  /* viszont minden mas atlatszo es fekete */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  nav {
+    display: none;
+  }
+}
+/* csak itt, csak ott */
+@media screen {
+  span.csakkepernyon {
+    display: inline;
+  }
+  span.csaknyomtatasban {
+    display: none;
+  }
+}
+@media print {
+  span.csakkepernyon {
+    display: none;
+  }
+  span.csaknyomtatasban {
+    display: inline;
+  }
+}
+@media screen {
+  div.csakkepernyon {
+    display: block;
+  }
+  div.csaknyomtatasban {
+    display: none;
+  }
+}
+@media print {
+  div.csakkepernyon {
+    display: none;
+  }
+  div.csaknyomtatasban {
+    display: block;
+  }
+}
+/* syntax highlight */
+.syntaxhighlighter .plain {
+  color: inherit;
+}
+.syntaxhighlighter .preprocessor {
+  color: #993399;
+}
+.syntaxhighlighter .singlecomment,
+.syntaxhighlighter .comment {
+  color: #555555;
+}
+.syntaxhighlighter .string,
+.syntaxhighlighter .number {
+  color: #006600;
+}
+.syntaxhighlighter .color1,
+.syntaxhighlighter .keyword {
+  color: #333399;
+}
+.syntaxhighlighter .color2,
+.syntaxhighlighter .function {
+  color: #117755;
+}
+.syntaxhighlighter .arrows {
+  color: #ff0000;
+  -webkit-text-stroke: 1px;
+}
+/* muzeális böngészők figyelmeztetés */
+#muzealis-darab {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+  background: #f00;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  /* ez mondjuk pont nem megy majd az őskövületeken */
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.5);
+  /* detto */
+}
+#muzealis-darab a {
+  color: inherit;
+  text-decoration: underline;
+}
+/* lexie font */
+@font-face {
+  font-family: 'LexieReadable';
+  src: url("style/lexiereadable-regular.ttf@v=4.0.3");
+  src: url("style/lexiereadable-regular.ttf@v=4.0.3") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'LexieReadable';
+  src: url("style/lexiereadable-bold.ttf@v=4.0.3");
+  src: url("style/lexiereadable-bold.ttf@v=4.0.3") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+/* icons */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("style/fontawesome-webfont.eot@v=4.0.3");
+  src: url("style/fontawesome-webfont.eot@") format("embedded-opentype"), url("style/fontawesome-webfont.woff@v=4.0.3") format("woff"), url("style/fontawesome-webfont.ttf@v=4.0.3") format("truetype"), url("style/fontawesome-webfont.svg@v=4.0.3") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* ez teszi lehetove az ikon hozzaadasat. az  <i></i> az admin portalhoz tartozik. */
+/* innentol cask egy content: 'valami' kell. */
+button:before,
+a:before,
+a:after,
+option:before,
+i:before {
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+}
+button:before,
+a:before,
+option:before {
+  margin-right: 0.3em;
+}
+/* forma */
+body {
+  font-family: 'open sans', 'droid sans', 'dejavu sans', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.4;
+  background-color: #e8e8e8;
+  background-image: url("data:image/png;base64,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");
+  color: #181818;
+}
+@media print {
+  body {
+    font-family: serif;
+    font-size: 12px;
+  }
+}
+.shaper {
+  margin: 0 0.5em;
+}
+@media screen and (min-width: 52.5em) {
+  .shaper {
+    max-width: 52em;
+    margin: 0 auto;
+  }
+  body.szeles .shaper {
+    max-width: 80em;
+    margin: 0 auto;
+  }
+}
+@media print {
+  .shaper {
+    margin: 0;
+  }
+}
+/* a menusav szinet adja */
+.menubg {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  background: #2a4367;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset, 0px 0px 8px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+.menu-dropdown .menubg {
+  position: fixed;
+}
+.menuplaceholder {
+  display: none;
+  visibility: hidden;
+}
+.menu-dropdown .menuplaceholder {
+  display: block;
+}
+.menuplaceholder:after {
+  content: " ";
+  white-space: pre-wrap;
+  display: block;
+}
+.menu-dropdown .menuplaceholder {
+  font-size: 2.5em;
+  line-height: 1.15;
+}
+.menu-accordion .menuplaceholder {
+  font-size: 1.5em;
+  line-height: 1.6;
+}
+.menu-dropdown .menu-font-size {
+  font-size: 0.9em;
+}
+.menu {
+  /* block kell, mert ezek pozicionaljak az ul-t; amugy is legyenek full szelessegben kattinthatok */
+  /* megnyitasok (mukodes) */
+  /* pozicionalasok dropdown modban - nagy kepernyonel */
+  /* pozicionalasok accordion modban. ez valoszinu touchos, ne legyen kisebb */
+  /* szövegek formázása */
+  /* tovabb nyithato menu bulletje */
+  /* animáció */
+  /* tördelés, nagybetűs */
+  /* nyilak */
+}
+.menu ul,
+.menu li {
+  margin: 0;
+  padding: 0;
+}
+.menu ul {
+  list-style-type: none;
+}
+.menu .menu-brand {
+  margin-right: 0.5em;
+  font-size: 2.5em;
+  line-height: 1.15;
+  letter-spacing: -0.1ex;
+  font-family: inherit;
+  font-weight: bold;
+}
+.menu .menu-brand a {
+  text-transform: uppercase;
+  color: #edb21b;
+}
+.menu li a {
+  display: block;
+}
+.menu ul ul {
+  display: none;
+}
+.menu li.menu-open ul {
+  display: block;
+}
+.menu li.menu-open ul ul {
+  display: none;
+}
+.menu li.menu-open li.menu-open ul {
+  display: block;
+}
+.menu-dropdown .menu .menu-brand {
+  float: left;
+}
+.menu-dropdown .menu .menu-nyito {
+  display: none;
+}
+.menu-dropdown .menu li {
+  float: left;
+  position: relative;
+}
+.menu-dropdown .menu li.jobbszel {
+  float: right;
+}
+.menu-dropdown .menu li li {
+  float: none;
+}
+.menu-dropdown .menu li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25em;
+  padding: 0.5em 0em;
+  z-index: 1001;
+  /* hogy akkor is folotte legyen, ha nagyon ossze van nyomva */
+  background: #2a4367;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1));
+  color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset, 1px 1px 6px rgba(0, 0, 0, 0.8);
+}
+.menu-dropdown .menu li.jobbszel ul {
+  right: 0;
+  left: auto;
+}
+.menu-dropdown .menu li li ul {
+  top: 0;
+  left: 100%;
+  margin-top: -0.25em;
+  margin-left: 0.25em;
+}
+.menu-dropdown .menu li a {
+  padding: 0 0.75em;
+  line-height: 2.875;
+}
+.menu-dropdown .menu li li a {
+  padding: 0 1.75em 0 0.75em;
+  line-height: 1.8;
+}
+.menu-accordion .menu .menu-nyito {
+  float: right;
+  width: 1.4em;
+  text-align: center;
+}
+.menu-accordion .menu .menu-nyito:hover {
+  background: #1f324d;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+.menu-accordion .menu .menu-brand,
+.menu-accordion .menu .menu-nyito {
+  font-size: 1.5em;
+  line-height: 1.6;
+}
+.menu-accordion .menu li a {
+  padding: 0.75em 0.5em;
+}
+.menu-accordion .menu li li {
+  margin-left: 1.5em;
+}
+.menu a {
+  color: inherit;
+}
+.menu a:hover {
+  text-decoration: none;
+}
+.menu a:focus {
+  color: #edb21b;
+  outline: none;
+}
+.menu li.menu-open > a {
+  color: #edb21b;
+}
+.menu li a:hover {
+  background: #1f324d;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+.menu li.almenu > a:after {
+  content: '‣';
+  margin-left: 0.25ex;
+}
+.menu-dropdown .menu li li.almenu > a:after {
+  position: absolute;
+  top: 0.4em;
+  right: 0.5em;
+}
+.menu-dropdown .menu {
+  transition: margin 0.3s;
+}
+.menu-dropdown .menu.menu-dropdown-hidden {
+  margin-top: -2.875em;
+}
+.menu-dropdown .menu .menu-elemek > ul > li > a {
+  text-transform: uppercase;
+}
+.menu-dropdown .menu li {
+  white-space: nowrap;
+}
+.menu-accordion .menu .menu-elemek {
+  display: none;
+}
+.menu-accordion .menu .menu-elemek.menu-elemek-lathatoak {
+  display: block;
+}
+.menu-dropdown .menu ul ul:after {
+  /* folfele */
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid rgba(42, 67, 103, 0);
+  border-right: 8px solid rgba(42, 67, 103, 0);
+  border-bottom: 12px solid #2a4367;
+  position: absolute;
+  top: -12px;
+  left: 0.6em;
+  margin-top: 1px;
+}
+.menu-dropdown .menu ul ul:before {
+  /* folfele nyil ALATT, hogy legyen kis fekete keret */
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid rgba(42, 67, 103, 0);
+  border-right: 8px solid rgba(42, 67, 103, 0);
+  border-bottom: 12px solid rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: -13px;
+  left: 0.6em;
+  margin-top: 1px;
+}
+.menu-dropdown .menu ul li.jobbszel ul:after {
+  left: auto;
+  right: 0.6em;
+}
+.menu-dropdown .menu ul li.jobbszel ul:before {
+  left: auto;
+  right: 0.6em;
+}
+.menu-dropdown .menu ul ul ul:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 8px solid rgba(42, 67, 103, 0);
+  border-bottom: 8px solid rgba(42, 67, 103, 0);
+  border-right: 12px solid #2a4367;
+  position: absolute;
+  top: 0.6em;
+  left: -19px;
+  margin-top: 0;
+  margin-left: 1px;
+}
+.menu-dropdown .menu ul ul ul:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 8px solid rgba(42, 67, 103, 0);
+  border-bottom: 8px solid rgba(42, 67, 103, 0);
+  border-right: 12px solid rgba(0, 0, 0, 0.35);
+  /* firefox vilagosabb, chrome sotetebb :P */
+  position: absolute;
+  top: 0.6em;
+  left: -20px;
+  margin-top: 0;
+  margin-left: 1px;
+}
+.footer {
+  font-size: 0.9em;
+  color: #666666;
+  padding-bottom: 1em;
+}
+.footer a {
+  color: inherit;
+  font-weight: bold;
+  transition: color 0.25s;
+}
+.footerlogo {
+  float: left;
+  height: 4.2em;
+  margin-right: 1em;
+}
+@media print {
+  .footerlogo {
+    height: 4.2em;
+  }
+}
+.bodycontent {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+@media print {
+  .bodycontent {
+    display: block;
+    /* kulonben a firefox levagja 1 oldal utan */
+  }
+}
+.doksi {
+  flex: 1;
+  margin-bottom: auto;
+}
+a#scrolltotop {
+  position: fixed;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  bottom: 0.25em;
+  right: 0.25em;
+  font-size: 2.5em;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  opacity: 0.25;
+  transition: opacity 0.225s;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+a#scrolltotop:hover {
+  opacity: 0.75;
+}
+a#scrolltotop:before {
+  content: '\f139';
+  background: none;
+  color: #181818;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+/* elso slideon */
+@media print {
+  #tartalom {
+    display: none;
+  }
+}
+#tartalom .fontos {
+  color: #cc0033;
+}
+/* a szoveg */
+.slide {
+  background: #ffffff;
+  color: #181818;
+  border: 1px solid #cccccc;
+  box-shadow: none;
+  padding: 1em;
+  margin: 2em 0;
+  position: relative;
+  border-radius: 0.25em;
+  clear: both;
+  overflow: visible;
+  /* hogy explicit meg van adva, ettől fog akkorára nőni, amekkora a tartalma */
+}
+@media screen and (min-width: 900px) {
+  .slide {
+    padding: 2em;
+  }
+}
+@media print {
+  .slide {
+    padding: 0;
+    border: none;
+  }
+}
+/* ez arra valo, hogy a cim folott megjelolje,  es oda lehessen scrollozni.
+   ha 0px a mérete, a chrome nem scrolloz oda, ezért 1px lesz. */
+.namer {
+  display: block;
+  border: 0 !important;
+  margin-top: -1px;
+  height: 1px;
+}
+/* UI */
+button,
+input,
+select,
+option,
+optgroup,
+optgroup {
+  font-family: 'open sans', 'droid sans', 'dejavu sans', sans-serif;
+  line-height: normal;
+  /* firefox !important szarja miatt */
+}
+button {
+  border: 1px solid #aaaaaa;
+  padding: 0.2em 0.25em;
+  border-radius: 2px;
+  font-family: 'open sans', 'droid sans', 'dejavu sans', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #e8e8e8;
+  color: #111111;
+  box-shadow: 1px 1px 0 #ffffff inset;
+}
+button:active,
+button.toggled {
+  background-color: #d8d8d8;
+  box-shadow: -1px -1px 0 #ffffff inset;
+  outline: none !important;
+  /* webkit */
+}
+button:focus {
+  border-color: #cc0033;
+  outline: none !important;
+  /* webkit */
+}
+/* firefox furcsa gomb rendereleset megszuntetni */
+button::-moz-focus-inner,
+input[type='button']::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+button + button {
+  margin-left: 0.25em;
+}
+/* valamiert a select 1px-szel nagyobb mindig, ezert arra nem rakunk padding 1pxet, csak az inputra. */
+input {
+  padding: 1px;
+}
+input,
+select,
+form textarea {
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  background: #fcfcfc;
+  color: #444444;
+}
+input:focus,
+select:focus,
+textarea:focus,
+option,
+optgroup {
+  background-color: #fdfdfd;
+}
+optgroup {
+  font-style: normal;
+  font-weight: normal;
+  color: #cc0033;
+}
+input:focus,
+select:focus,
+form textarea:focus {
+  border-color: #cc0033;
+  outline: none;
+  /* webkit */
+}
+input[type=checkbox],
+input[type=radio] {
+  display: inline;
+  width: auto;
+  padding: 0;
+  /* ie */
+  box-sizing: border-box;
+  /* ie */
+  vertical-align: -2px;
+}
+input[type=checkbox]:focus,
+input[type=radio]:focus,
+input[type=checkbox]:active,
+input[type=radio]:active {
+  outline: 1px solid #cc0033;
+}
+button,
+select,
+input[type=button],
+input[type=checkbox],
+input[type=radio] {
+  cursor: pointer;
+}
+/* tagolas */
+h1 {
+  margin-bottom: 1em;
+}
+p,
+blockquote,
+pre,
+textarea,
+embed,
+dl,
+ol,
+ul,
+table,
+h3,
+h4,
+details,
+iframe,
+.columns {
+  margin: 0.7em auto;
+}
+.csik {
+  margin: 1.4em auto;
+}
+li {
+  margin: 0.35em auto;
+}
+dd + dt {
+  margin-top: 0.7em;
+}
+dd {
+  margin-top: 0.35em;
+}
+pre {
+  line-height: 1.2;
+}
+body {
+  word-spacing: 0.125em;
+}
+pre,
+code {
+  word-spacing: 0;
+}
+li > ul,
+li > ol {
+  margin: 0em auto;
+}
+/* tobbszintu felsorolas */
+br.smallskip {
+  display: none;
+}
+/* doksihoz nem kell, eloadashoz igen */
+.clear {
+  clear: both;
+}
+.kozep {
+  text-align: center;
+  /* ha beleraknank vmi inlinet */
+  margin-left: auto;
+  margin-right: auto;
+}
+/* cimek */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
+}
+h1 {
+  font-size: 162%;
+}
+h2 {
+  font-size: 127%;
+}
+h3 {
+  font-size: 110%;
+}
+.focim {
+  color: #696969;
+  margin: 1.4em 0;
+  padding-bottom: 0.35em;
+  border-bottom: 1px dotted #dcdcdc;
+}
+.focim p {
+  font-size: 0.9em;
+  margin: 0;
+}
+i.szerzo:before {
+  content: '\f040';
+}
+i.ido:before {
+  content: '\f017';
+}
+i.hamburger:before {
+  content: '\f0c9';
+}
+/* LISTAK */
+ul,
+ol {
+  padding-left: 2em;
+}
+ul {
+  list-style: square;
+}
+dt {
+  padding-left: 0em;
+  font-weight: bold;
+}
+dd {
+  padding-left: 2em;
+}
+ol.betu {
+  list-style: lower-alpha;
+}
+div.columns > div {
+  margin: 0.7em auto;
+}
+@media (min-width: 800px) {
+  div.columns {
+    display: flex;
+    flex-direction: row;
+    margin: 0.7em 0;
+  }
+  div.columns > div > :first-child {
+    margin-top: 0;
+  }
+  div.columns > div > :last-child {
+    margin-bottom: 0;
+  }
+  div.columns > div {
+    flex: 1 1 0;
+    margin: 0 0.7em;
+  }
+  div.columns > div:first-child {
+    margin-left: 0;
+  }
+  div.columns > div:last-child {
+    margin-right: 0;
+  }
+  div.columns.c3070 > :first-child {
+    flex-grow: 3;
+  }
+  div.columns.c3070 > :last-child {
+    flex-grow: 7;
+  }
+  div.columns.c4060 > :first-child {
+    flex-grow: 4;
+  }
+  div.columns.c4060 > :last-child {
+    flex-grow: 6;
+  }
+  div.columns.c6040 > :first-child {
+    flex-grow: 6;
+  }
+  div.columns.c6040 > :last-child {
+    flex-grow: 4;
+  }
+  div.columns.c7030 > :first-child {
+    flex-grow: 7;
+  }
+  div.columns.c7030 > :last-child {
+    flex-grow: 3;
+  }
+  div.columns.columns-wrap {
+    flex-wrap: wrap;
+  }
+  div.columns.columns-wrap > div {
+    flex-basis: 45%;
+    margin: 0.35em;
+  }
+}
+/* monospace szoveg */
+pre,
+code,
+kbd,
+textarea,
+table.tomb,
+.mono {
+  font-family: 'consolas', 'roboto mono', 'dejavu sans mono', 'lucida console', monospace !important;
+  font-size: 0.9375em;
+}
+.handfont {
+  font-family: 'mclaren', 'comic sans', cursive !important;
+}
+code {
+  font-weight: bold;
+}
+kbd {
+  border: 1px solid #888;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0.2em;
+  padding: 0px 0.2em;
+  background: #fdfdfd;
+  background: rgba(0, 0, 0, 0.075);
+}
+code,
+kbd {
+  /* hogy a szovegbe agyazott kodreszleteket ne torje tobb sorba */
+  white-space: nowrap;
+}
+pre code {
+  font-weight: inherit;
+  font-size: inherit;
+  white-space: inherit;
+}
+/* linkek formazasa */
+a {
+  color: #0044aa;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+a[href$='.zip']:before {
+  content: '\f187';
+}
+a[href$='.c']:before,
+a[href$='.h']:before,
+a[href$='.pdf']:before,
+a[href$='.cpp']:before {
+  content: '\f0f6';
+}
+a[href$='?rss']:before {
+  content: '\f09e';
+}
+a[href^='http://']:after,
+a[href^='https://']:after {
+  content: '\f08e';
+  margin-left: 0.3em;
+}
+a[href^='http://www.facebook']:after,
+a[href^='https://www.facebook']:after {
+  display: none;
+}
+a[href^='http://www.facebook']:before,
+a[href^='https://www.facebook']:before {
+  content: '\f082';
+  margin-right: 0.3em;
+}
+.syntaxhighlighter a:after,
+.syntaxhighlighter a:before {
+  display: none;
+}
+a.noicon:after,
+.a.noicon:before {
+  display: none;
+}
+/* a boxok formazasa */
+blockquote,
+pre,
+textarea {
+  padding: 0.7em;
+  color: #181818;
+  background: #f8f8f8;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  box-shadow: none;
+}
+@media print {
+  blockquote,
+  pre,
+  textarea {
+    border: 1px solid gray !important;
+  }
+}
+/* hogy a boxban box visszakapja a kulso szint */
+blockquote pre,
+.kitolt pre,
+blockquote blockquote,
+.kitolt blockquote,
+blockquote table,
+.kitolt table {
+  background: #ffffff;
+  color: #181818;
+  border: 1px solid #cccccc;
+  box-shadow: none;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+blockquote h3 {
+  margin-top: 0;
+}
+pre,
+textarea {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: normal;
+}
+small {
+  display: block;
+}
+.screenshot {
+  border-color: #121212;
+  background-color: #2c2c2c;
+  color: #e4e4e4;
+}
+.screenshot em,
+.screenshot strong {
+  color: #ffff00;
+}
+@media print {
+  .screenshot {
+    border-color: gray;
+  }
+}
+/* szoveg */
+em {
+  color: #cc0033;
+  font-style: inherit;
+  /* ie */
+}
+strong {
+  color: #cc0033;
+}
+@media print {
+  em {
+    font-style: italic;
+  }
+  strong {
+    font-weight: bold;
+  }
+}
+/* egyebek */
+span.piros {
+  color: #f00;
+}
+sub,
+sup {
+  font-size: 0.9em;
+  line-height: 0.7;
+  /* normal fele */
+}
+.normalsizesubsup sub,
+.normalsizesubsup sup {
+  font-size: 1em;
+  line-height: 0.5;
+}
+.athuzott {
+  text-decoration: line-through !important;
+}
+.felulhuzott {
+  text-decoration: overline;
+}
+.kicsinyit {
+  font-size: 0.9em;
+}
+.sorsurit1 {
+  line-height: 1;
+}
+.sorsurit105 {
+  line-height: 1.05;
+}
+.sorsurit11 {
+  line-height: 1.1;
+}
+.sorsurit115 {
+  line-height: 1.15;
+}
+.csakeloadas {
+  display: none;
+}
+.bentebb {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.megjegyzes {
+  margin-left: 2em;
+  margin-right: 2em;
+  font-size: 0.9em;
+}
+figcaption {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+iframe {
+  display: block;
+  border: none;
+}
+/* az eloadas slideon az ilyen gombok mutatjak a popupot. */
+button[data-diapopup] {
+  display: none;
+}
+.csik {
+  border-left: 1px solid rgba(24, 24, 24, 0.2);
+  margin-left: 0.7em;
+  padding-left: 1em;
+  padding-top: 1px;
+  /* margin collapsing kikapcsolasahoz */
+  padding-bottom: 1px;
+}
+/* kep */
+img {
+  display: inline;
+  border: none;
+  margin: 0;
+  max-width: 100%;
+  -ms-interpolation-mode: bicubic;
+}
+img.kozep,
+.mindenkepkozep main img,
+video.kozep {
+  display: block;
+  margin: 1em auto;
+}
+.arnyek,
+.mindenkeparnyek main img {
+  box-shadow: 0 0.1em 0.25em rgba(0, 0, 0, 0.45);
+}
+.float {
+  float: right;
+  clear: right;
+  margin: 1em 0 1em 1em;
+  position: relative;
+  z-index: 1;
+  /* hogy legalabb foljebb legyen, ha box csuszik ala */
+}
+.float.left {
+  float: left;
+  clear: left;
+  margin: 1em 1em 1em 0;
+}
+/* TABLAZATOK */
+table {
+  border-spacing: 0;
+  empty-cells: show;
+  border-collapse: collapse;
+  border-radius: 2px;
+  background: #f8f8f8;
+  box-shadow: none;
+}
+table {
+  border: 1px solid #cccccc;
+}
+thead tr,
+tfoot tr {
+  border: 1px solid #cccccc;
+}
+thead tr,
+tfoot tr {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05));
+}
+tbody tr:nth-child(even) {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03));
+}
+tbody tr:hover,
+tfoot.hover tr:hover {
+  background: linear-gradient(to top, rgba(204, 0, 51, 0.04), rgba(204, 0, 51, 0.04));
+}
+tbody tr.tr-focus,
+tbody tr:focus-within,
+tbody tr.focus {
+  background: linear-gradient(to top, rgba(204, 0, 51, 0.075), rgba(204, 0, 51, 0.075));
+}
+td.piros,
+th.piros {
+  background: rgba(255, 64, 64, 0.35);
+}
+td.zold,
+th.zold {
+  background: rgba(0, 255, 0, 0.35);
+}
+td.kek,
+th.kek {
+  background: rgba(96, 96, 255, 0.35);
+}
+@media print {
+  table {
+    border: 1px solid gray !important;
+  }
+  tr,
+  th,
+  td {
+    border: 1px solid gray !important;
+  }
+}
+table caption {
+  caption-side: bottom;
+  padding: 0.25em;
+  font-family: 'open sans', 'droid sans', 'dejavu sans', sans-serif;
+  /* table.tomb miatt */
+}
+th,
+td {
+  padding: 0.15em 0.25em;
+  text-align: left;
+  vertical-align: middle;
+}
+@media screen and (min-width: 640px) {
+  th,
+  td {
+    padding: 0.25em 0.5em;
+  }
+}
+table.kozepre th,
+table.kozepre td {
+  text-align: center;
+}
+th {
+  font-weight: bold;
+}
+table.keret {
+  border-collapse: collapse;
+  border: 1px solid #cccccc;
+}
+table.keret th,
+table.keret td {
+  border: 1px solid #cccccc;
+}
+table.tomb {
+  border-collapse: collapse;
+  border: 1px solid #cccccc;
+}
+table.tomb tr {
+  border: none;
+}
+table.tomb tbody td {
+  text-align: center;
+  min-width: 2.5ex;
+  padding: 0.5ex;
+}
+table.tomb th,
+table.tomb td {
+  border: 1px solid #cccccc;
+}
+/* RENDEZHETO TOMB */
+div.tomb {
+  position: relative;
+  font-size: 1.5em;
+  margin: 0.5em auto;
+  z-index: 1;
+  height: 2em;
+  /* =lenti height */
+  line-height: 2em;
+  /* =height */
+}
+div.tomb > span,
+div.tomb > div {
+  text-align: center;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  /* ugyanannyi */
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  color: #181818;
+  border: 1px solid #cccccc;
+  border-color: rgba(24, 24, 24, 0.15);
+  box-shadow: none;
+  font-weight: bold;
+  transition: background-color 1s, left 0.5s, top 0.25s;
+}
+div.tomb > span {
+  display: inline-block;
+  margin-right: 0.15em;
+}
+div.tomb > div {
+  position: absolute;
+}
+div.tombcaption {
+  margin-top: 0.5em;
+  text-align: center;
+}
+.tomb .jelolt {
+  outline: 6px solid orange;
+}
+.tomb .kesz,
+.tomb .zold {
+  background-color: #6f6;
+}
+.tomb .pivot,
+.tomb .sarga {
+  background-color: #ff6;
+}
+.tomb .piros {
+  background-color: #f44;
+}
+.tomb .kek {
+  background-color: #66f;
+}
+.tomb .lila {
+  background-color: #f5f;
+}
+.tomb .narancs {
+  background-color: #fa0;
+}
+.bubble {
+  font-family: 'mclaren', 'comic sans', cursive;
+  font-weight: normal;
+  position: relative;
+  /* hogy a nyil pozicionalni tudjon */
+  padding: 0em 0.5em;
+  margin: 0 0 0 0.70em;
+  /* left */
+  background: #ee5533;
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #000;
+  /* egy kis kontraszt */
+  border-radius: 0.35em;
+}
+pre .bubble {
+  font-size: 0.9em;
+  /* hogy ne folyjon annyira rá a felette-alatta lévő sorokra */
+}
+@media print {
+  .bubble {
+    border: 1px solid gray;
+  }
+}
+.bubble.kicsinyit {
+  font-size: 0.81em;
+}
+.bubble .hidden {
+  /* azert nem displaynone, mert akkor a copypaste sem eszi */
+  font-size: 0;
+  /* hogy ne foglaljon helyet */
+  color: transparent;
+  /* hogy ne latszodjon */
+  text-shadow: none;
+  /* nehogy ez arnyekoljon */
+}
+.bubble:before {
+  content: '';
+  display: block;
+  box-shadow: none;
+  /* ha lenne a bubblenek (de amugy nincs) */
+  position: absolute;
+  top: 0.45em;
+  left: -0.6em;
+  width: 0;
+  height: 0;
+  border-top: 0.35em solid rgba(238, 85, 51, 0);
+  border-bottom: 0.35em solid rgba(238, 85, 51, 0);
+  border-right: 0.7em solid #ee5533;
+}
+@media print {
+  .bubble:before {
+    border-color: transparent gray;
+  }
+}
+/* SARGA CETLI es HIR BOX */
+.sticky {
+  position: relative;
+  float: right;
+  background: #ffff88 !important;
+  color: #000000;
+  border: none;
+  /* pre.sticky miatt */
+  border-radius: 2px;
+  box-shadow: 0 0 1.5px 0 rgba(0, 0, 0, 0.35);
+  font-family: 'mclaren', 'comic sans', cursive;
+  text-align: center;
+  z-index: 2;
+  padding: 0.5em;
+  margin: 0.5em 0 0.5em 0.5em;
+}
+.sticky.right {
+  float: right;
+}
+.sticky.left {
+  float: left;
+}
+@media screen {
+  .sticky {
+    transform: rotate(2deg);
+  }
+  .sticky:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: -0.8em;
+    height: 1.5em;
+    left: 30%;
+    right: 30%;
+    background: #f8f8f8 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAQAAAAziH6sAAAAC0lEQVQIHWMAAR4AABIADZ/sC8IAAAAASUVORK5CYII=");
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
+    border-left: 1px dotted #888;
+    border-right: 1px dotted #888;
+    opacity: 0.4;
+    transform: rotate(5deg);
+  }
+}
+@media print {
+  .sticky {
+    border: 1px solid gray;
+  }
+}
+#hirek {
+  clear: right;
+  width: 15em;
+  max-width: 40%;
+  padding: 0.7em;
+  font-family: 'open sans', 'droid sans', 'dejavu sans', sans-serif;
+  font-size: 0.9em;
+  text-align: left;
+  transform: none;
+  margin-left: 1em;
+}
+#hirek h3 {
+  margin-top: 0;
+}
+#cntdwn {
+  margin-left: 2em;
+  margin-right: 2em;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.7em;
+  padding: 1em;
+  margin-bottom: 1.4em;
+  /* altalaban #hirek kerul ala */
+  background: #2a4367;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
+  color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset, 0px 0px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+#cntdwn h3 {
+  margin-top: 0;
+}
+#cntdwn div {
+  display: inline-block;
+  margin: 0 0.2ex;
+}
+#cntdwn span {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  background-color: #222;
+  color: #eee;
+  width: 1.6em;
+  height: 1.4em;
+  line-height: 1.4em;
+  margin: 0 1px;
+  border-radius: 0.2em;
+  box-shadow: 0px -0.725em 0px rgba(255, 255, 255, 0.05) inset, 0px 0.725em 0px rgba(255, 255, 255, 0.05) inset, 0px 1px 1px rgba(0, 0, 0, 0.3);
+}
+#cntdwn.zero span {
+  background-color: #c00;
+}
+/* jelolt sor a pszeudokodos klikkelos cuccokban */
+span.sor.aktiv,
+.c span.sor.aktiv {
+  background: #fbb;
+  border-radius: 0.25em;
+}
+span.sor.aktiv:before {
+  background: transparent;
+  position: absolute;
+  color: #ee0;
+  text-shadow: 0 1px 0 #000000, 0 -1px 0 #000000, 1px 0 0 #000000, -1px 0 0 #000000;
+  content: ' \2023  ';
+}
+pre.stack {
+  transition: all ease-in 0.75s;
+}
+pre.stack.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: rotate(360deg);
+}
+pre.stack.visible {
+  visibility: visible;
+  opacity: 1;
+  transform: rotate(0deg);
+}
+/* lenyithato */
+summary {
+  font-weight: bold;
+  color: #0044aa;
+  cursor: pointer;
+}
+details > div {
+  /* .csik; */
+  border-left: 1px solid #cccccc;
+  margin-left: 0.35em;
+  padding-left: 0.7em;
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+details[open] > div {
+  animation: fadeIn 1s;
+}
+/* elony-hatrany */
+ul.elony,
+ul.hatrany {
+  list-style-type: none;
+}
+ul.elony li:before,
+ul.hatrany li:before {
+  margin-left: -1.2em;
+  width: 1.2em;
+  font-family: 'FontAwesome';
+  text-align: center;
+  display: inline-block;
+}
+ul.elony li:before {
+  content: '\f055';
+  color: green;
+}
+ul.hatrany li:before {
+  content: '\f056';
+  color: red;
+}
+/* dijak */
+.dij:before {
+  content: '\f091';
+  text-shadow: 0 0 1px #181818;
+}
+.dij.arany:before {
+  color: #FFD700;
+}
+.dij.ezust:before {
+  color: #DADADA;
+}
+.dij.bronz:before {
+  color: #CD7F32;
+}
+.dij.kulon:before {
+  color: #1E90FF;
+  content: '\f0a3';
+}
+/* grafika */
+i.like:before {
+  content: '\f087';
+}
+i.igen:before {
+  content: '\f00c';
+  color: #008000;
+}
+i.nem:before {
+  content: '\f00d';
+  color: #A52A2A;
+}
+i.lehet:before {
+  content: '\f059';
+  color: #7F7F7F;
+}
+i.tilos:before {
+  content: '\f05e';
+  color: #A52A2A;
+}
+/* h3 link */
+h3:target,
+li:target {
+  color: #cc0033;
+  font-weight: bold;
+}
+a.hlink {
+  margin-left: 0.25em;
+  color: inherit;
+}
+i.hlink {
+  opacity: 0.15;
+  transition: opacity 0.25s;
+}
+i.hlink:before {
+  content: '\f0c1';
+  vertical-align: -0.125em;
+}
+i.hlink:hover {
+  opacity: 1;
+}
+/* gombok */
+button.vissza:before {
+  content: '\f053';
+}
+h2 {
+  border-bottom: 1px solid #ccc;
+}
+div.slide:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.quote {
+  font-weight: 300;
+  font-size: 90%;
+  font-style: italic;
+}
+.quotesource {
+  font-weight: normal;
+  font-style: normal;
+  text-align: right;
+}
+.color-red {
+  color: #ff0000;
+}
+.color-blue {
+  color: #0000ff;
+}
+.csak-a-lenyeg .csakdoksi {
+  display: none !important;
+}
+.csak-a-lenyeg .csakeloadas {
+  display: block;
+}
+.csak-a-lenyeg span.csakeloadas {
+  display: inline;
+}
+.csak-a-lenyeg li.csakeloadas {
+  display: list-item;
+}
+.csak-a-lenyeg #tartalom {
+  display: none;
+}
+/* itt a consolast előre kell venni, mert csak az rendereli windowson a boxdrawing karaktereket elfogadhatóan */
+/* dejavu = linux fallback */
